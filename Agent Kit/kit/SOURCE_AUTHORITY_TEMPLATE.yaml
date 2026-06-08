@@ -1,0 +1,54 @@
+# Project Map/source_authority.yaml
+# Machine-readable authority order for project-specific claims.
+
+schema_version: "1.0"
+project_id: "<project-id>"
+last_updated: "<YYYY-MM-DD>"
+
+core_rule: "Project-specific claims must be grounded in valid project evidence. Generic model knowledge is not project evidence."
+
+authority_order:
+  - rank: 1
+    id: owner_current_instruction
+    description: "Current owner instruction in this run."
+    can_override: [project_map_memory, project_docs, legacy_requirements, prior_chat]
+  - rank: 2
+    id: opened_project_files_current_run
+    description: "Project files opened or read in the current run within approved scope."
+  - rank: 3
+    id: opened_tool_outputs_current_run
+    description: "Tool outputs, database reads, connector results, logs, or command outputs opened in the current run within approved scope."
+  - rank: 4
+    id: verified_project_map_memory
+    description: "Project Map memory with verified or owner-approved review state."
+  - rank: 5
+    id: current_project_docs
+    description: "Documentation marked current and not superseded."
+  - rank: 6
+    id: recent_verified_logs
+    description: "Recent logs or work records with evidence and timestamp."
+  - rank: 7
+    id: external_research
+    description: "External research retrieved in the current run; not project truth unless explicitly promoted."
+  - rank: 8
+    id: legacy_requirements
+    description: "Legacy specs or historical documents; treat as legacy until confirmed against current code/owner decision."
+  - rank: 9
+    id: prior_chat_uncaptured
+    description: "Prior chat not captured into Project Map; not authoritative by itself."
+
+conflict_resolution:
+  default_rule: "prefer_higher_authority_then_newer_verified"
+  if_same_rank: "prefer_newer_last_verified_at"
+  if_conflict_unresolved: "mark_conflict_and_stop"
+  never_silent_merge: true
+
+missing_authority_behavior:
+  answer_profile: "state authority is unclear and avoid unsupported project claims"
+  audit_profile: "create a source-authority repair note"
+  repair_profile: "propose an explicit authority order before editing memory"
+
+promotion_rules:
+  external_research_to_project_fact: "requires owner approval or direct project evidence"
+  hypothesis_to_fact_current: "requires valid evidence and verified/owner_approved review_state"
+  stale_to_current: "requires re-verification"

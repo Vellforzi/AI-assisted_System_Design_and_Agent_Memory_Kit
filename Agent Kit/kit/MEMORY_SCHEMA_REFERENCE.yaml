@@ -1,0 +1,231 @@
+# Agent Memory Kit schema reference v3.4.0
+# This is a reference, not a strict runtime schema. Projects may adapt it.
+
+schema_version: "3.4.0"
+
+memory_unit:
+  required_fields:
+    - id
+    - schema_version
+    - class
+    - status
+    - review_state
+    - scope
+    - title
+    - summary
+    - evidence
+    - created_at
+    - updated_at
+  recommended_fields:
+    - branch_scope
+    - last_verified_at
+    - valid_until
+    - confidence
+    - authority_rank
+    - source_authority
+    - retrieval_tags
+    - links
+    - owner_approved
+    - notes
+
+classes:
+  fact_current:
+    purpose: "Verified current project fact."
+    allowed_statuses: [current, superseded, archived]
+    default_retrieval_profiles: [answer, analyze, plan, resume, recover, fork, audit, repair]
+  fact_stale:
+    purpose: "Previously recorded fact that is no longer current or may be outdated."
+    allowed_statuses: [stale, superseded, archived]
+    default_retrieval_profiles: [audit, repair, recover]
+  accepted_decision:
+    purpose: "Owner-approved or project-accepted decision."
+    allowed_statuses: [current, superseded, archived]
+    default_retrieval_profiles: [answer, analyze, plan, resume, recover, fork, audit, repair]
+  rejected_decision:
+    purpose: "Rejected option or decision."
+    allowed_statuses: [rejected, archived]
+    default_retrieval_profiles: [analyze, plan, audit, repair]
+  constraint:
+    purpose: "Persistent project limit, rule, or boundary."
+    allowed_statuses: [current, superseded, archived]
+    default_retrieval_profiles: [answer, analyze, plan, resume, recover, fork, audit, repair]
+  risk:
+    purpose: "Known project risk or failure mode."
+    allowed_statuses: [current, mitigated, archived]
+    default_retrieval_profiles: [answer, analyze, plan, audit, repair, recover]
+  open_question:
+    purpose: "Unresolved question requiring owner input or evidence."
+    allowed_statuses: [open, answered, archived]
+    default_retrieval_profiles: [answer, analyze, plan, resume, recover, audit, repair]
+  hypothesis:
+    purpose: "Plausible but unverified project claim."
+    allowed_statuses: [candidate, rejected, promoted, archived]
+    default_retrieval_profiles: [analyze, audit, repair, plan]
+  research_output:
+    purpose: "External research note; not automatically project truth."
+    allowed_statuses: [candidate, reusable, archived]
+    default_retrieval_profiles: [analyze, plan, audit, repair]
+  procedure:
+    purpose: "Reusable project workflow or operating procedure."
+    allowed_statuses: [current, superseded, archived]
+    default_retrieval_profiles: [answer, analyze, plan, resume, recover, audit, repair]
+  side_effect_receipt:
+    purpose: "Record of completed external action to prevent duplicate side effects."
+    allowed_statuses: [completed, failed, void]
+    default_retrieval_profiles: [resume, recover, audit, repair]
+  checkpoint_note:
+    purpose: "Compact note that meaningful work reached a safe continuation point."
+    allowed_statuses: [current, superseded, archived]
+    default_retrieval_profiles: [resume, recover, audit, repair]
+  memory_delta_proposal:
+    purpose: "Owner-reviewable proposed Project Map change after significant work."
+    allowed_statuses: [candidate, rejected, promoted, archived]
+    default_retrieval_profiles: [analyze, audit, repair]
+  eval_trigger:
+    purpose: "Record or proposal that an eval should run because a trigger fired."
+    allowed_statuses: [open, completed, rejected, archived]
+    default_retrieval_profiles: [audit, repair]
+  eval_case:
+    purpose: "Reusable behavior test for the memory and agent operating contracts."
+    allowed_statuses: [current, archived]
+    default_retrieval_profiles: [audit, repair]
+  eval_result:
+    purpose: "Outcome of a specific eval-suite run."
+    allowed_statuses: [passed, partial, failed, blocked, archived]
+    default_retrieval_profiles: [audit, repair]
+  eval_trace:
+    purpose: "Short failure trace for diagnosing an eval regression."
+    allowed_statuses: [open, resolved, archived]
+    default_retrieval_profiles: [audit, repair]
+
+project_map_artifacts:
+  source_authority:
+    path: "Project Map/source_authority.yaml"
+    purpose: "Machine-readable authority order and conflict rules."
+  permissions_policy:
+    path: "Project Map/permissions_policy.yaml"
+    purpose: "Machine-readable intent, mode, scope, external research, and mutation rules."
+  retrieval_policy:
+    path: "Project Map/retrieval_policy.yaml"
+    purpose: "Machine-readable retrieval profile rules."
+  task_contract:
+    path_pattern: "Project Map/tasks/TASK-xxxx.yaml"
+    purpose: "Goal, scope, permissions, evidence, done definition, and verification recipe for longer tasks."
+  claim_ledger:
+    path: "Project Map/claim_ledger.yaml"
+    purpose: "Claim-level evidence ledger and final-answer gate."
+  handoff:
+    path_pattern: "Project Map/handoffs/HO-xxxx.yaml"
+    purpose: "Clean-slate continuation packet."
+  working_state:
+    path: "Project Map/working_state.yaml"
+    purpose: "Compact replay root."
+  eval_suite:
+    path: "Project Map/eval_suite/"
+    purpose: "Behavior tests for action intent, grounding, retrieval, memory compiler, replay, side-effect safety, significant work, and eval triggers."
+  eval_trigger_policy:
+    path: "Project Map/eval_suite/eval_trigger_policy.yaml"
+    purpose: "Rules for when smoke, category, or full eval should run."
+  eval_runs:
+    path: "Project Map/eval_runs/"
+    purpose: "Results and failure traces from manual or automated eval runs."
+  agent_instruction_entrypoint:
+    path_pattern: "AGENTS.md | .cursor/rules/*.mdc | CLAUDE.md | equivalent"
+    purpose: "Short runtime router to Project Map and safety gates."
+
+statuses:
+  current: "Valid as current project truth."
+  stale: "Not valid as current truth; may be useful for audit or repair."
+  superseded: "Replaced by another memory unit."
+  rejected: "Explicitly rejected."
+  archived: "Kept for history; not normally retrieved."
+  candidate: "Captured but not verified."
+  open: "Needs answer or owner decision."
+  answered: "Resolved."
+  mitigated: "Risk is no longer active or has a mitigation."
+  completed: "Side effect completed."
+  failed: "Side effect attempted but failed."
+  void: "Receipt invalidated."
+  passed: "Eval case passed."
+  partial: "Eval case partially passed."
+  blocked: "Eval case could not be graded."
+  resolved: "Eval trace or open issue was resolved."
+
+review_states:
+  unreviewed: "Captured but not checked."
+  owner_approved: "Owner explicitly approved."
+  verified: "Checked against valid evidence."
+  inferred: "Derived from evidence, not directly stated."
+  needs_owner: "Requires owner confirmation."
+  disputed: "Conflict exists."
+
+confidence_values: [low, medium, high]
+
+evidence_kinds:
+  - owner_statement
+  - project_file
+  - tool_output
+  - database_read
+  - log
+  - screenshot
+  - external_source
+  - memory_ref
+  - inference
+
+intent_classes:
+  - answer
+  - analyze
+  - plan
+  - retrieve_context
+  - stage
+  - apply
+  - external_research
+
+permission_modes:
+  - explain-only
+  - dry-run
+  - read-only
+  - apply
+
+eval_categories:
+  - action_intent
+  - grounding
+  - retrieval
+  - memory_compiler
+  - external_research_boundary
+  - working_state_replay
+  - side_effect_safety
+  - owner_control
+  - repository_instructions
+  - claim_ledger
+  - long_task_control
+  - readme_docs
+  - privacy_security
+  - significant_work
+  - eval_automation
+  - new_project_adoption
+  - usage_adoption
+
+retrieval_profiles:
+  - answer
+  - analyze
+  - plan
+  - resume
+  - recover
+  - fork
+  - audit
+  - repair
+
+final_answer_gate:
+  unsupported_project_fact: "forbidden"
+  stale_as_current_truth: "forbidden"
+  external_research_as_project_truth: "forbidden_without_promotion"
+  inference_without_label_when_material: "forbidden"
+  unresolved_conflict_as_fact: "forbidden"
+
+eval_result_gate:
+  critical_failure_in_action_intent: "hold_release"
+  critical_failure_in_grounding: "hold_release"
+  critical_failure_in_side_effect_safety: "hold_release"
+  repeated_high_failure: "repair_before_trusting"
+

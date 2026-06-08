@@ -1,0 +1,232 @@
+# Example memory cards — copy or adapt these structures into Project Map/memory/*.yaml
+# Keep each card small. Link by ID. Do not store secrets.
+
+schema_version: "3.3.0"
+
+facts:
+  - id: FACT-0001
+    schema_version: "3.3.0"
+    class: fact_current
+    status: current
+    review_state: verified
+    scope: project.memory
+    branch_scope: main
+    title: "Project-specific answers require project evidence"
+    summary: "The agent must not use provider-trained model knowledge as evidence for facts about this project."
+    details: null
+    created_at: "2026-06-08"
+    updated_at: "2026-06-08"
+    last_verified_at: "2026-06-08"
+    valid_until: null
+    confidence: high
+    authority_rank: 1
+    owner_approved: true
+    evidence:
+      - kind: owner_statement
+        ref: "owner instruction"
+        quote: "Project-specific answers must be based on project memory, current files, tool outputs, or owner-provided context."
+    source_authority:
+      kind: owner_statement
+      ref: "owner instruction"
+    links:
+      related: [CON-0001]
+      supersedes: []
+      superseded_by: []
+    retrieval_tags: [grounding, project_truth, evidence]
+    notes: null
+
+  - id: FACT-0002
+    schema_version: "3.3.0"
+    class: fact_stale
+    status: stale
+    review_state: verified
+    scope: api.routes
+    branch_scope: main
+    title: "Legacy route path was used before route refactor"
+    summary: "This route path was recorded historically and must not be used as current truth without re-verification."
+    details: "Kept to explain older notes and avoid repeating an obsolete assumption."
+    created_at: "2026-05-01"
+    updated_at: "2026-06-08"
+    last_verified_at: "2026-05-01"
+    valid_until: "2026-06-01"
+    confidence: medium
+    authority_rank: 5
+    owner_approved: false
+    evidence:
+      - kind: memory_ref
+        ref: "old workstream note"
+    source_authority:
+      kind: legacy_memory
+      ref: "Project Map/archive/legacy_routes.md"
+    links:
+      related: []
+      supersedes: []
+      superseded_by: [FACT-0003]
+    retrieval_tags: [api, routes, stale]
+    notes: "Allowed in audit/repair only."
+
+decisions:
+  - id: DEC-0001
+    schema_version: "3.3.0"
+    class: accepted_decision
+    status: current
+    review_state: owner_approved
+    scope: project.workflow
+    branch_scope: main
+    title: "Cursor agent performs repository edits"
+    summary: "The analysis assistant provides instructions and drafts; the Cursor agent performs repository edits when the owner approves."
+    details: null
+    created_at: "2026-06-08"
+    updated_at: "2026-06-08"
+    last_verified_at: "2026-06-08"
+    valid_until: null
+    confidence: high
+    authority_rank: 1
+    owner_approved: true
+    evidence:
+      - kind: owner_statement
+        ref: "project operating rule"
+    source_authority:
+      kind: owner_statement
+      ref: "project operating rule"
+    links:
+      related: [CON-0002]
+      supersedes: []
+      superseded_by: []
+    retrieval_tags: [workflow, cursor, permissions]
+    notes: null
+
+constraints:
+  - id: CON-0001
+    schema_version: "3.3.0"
+    class: constraint
+    status: current
+    review_state: owner_approved
+    scope: project.memory
+    branch_scope: main
+    title: "Do not promote unsupported claims"
+    summary: "Unsupported assumptions, model guesses, and raw research must not become verified long-term memory."
+    details: null
+    created_at: "2026-06-08"
+    updated_at: "2026-06-08"
+    last_verified_at: "2026-06-08"
+    valid_until: null
+    confidence: high
+    authority_rank: 1
+    owner_approved: true
+    evidence:
+      - kind: owner_statement
+        ref: "memory policy"
+    source_authority:
+      kind: owner_statement
+      ref: "memory policy"
+    links:
+      related: [FACT-0001]
+      supersedes: []
+      superseded_by: []
+    retrieval_tags: [memory_lifecycle, grounding]
+    notes: null
+
+risks:
+  - id: RISK-0001
+    schema_version: "3.3.0"
+    class: risk
+    status: current
+    review_state: verified
+    scope: project.memory
+    branch_scope: main
+    title: "Stale fact poisoning"
+    summary: "The agent may accidentally use stale memory as current truth if lifecycle fields are missing or ignored."
+    details: "Mitigation: use status, last_verified_at, valid_until, supersession links, and retrieval profiles."
+    created_at: "2026-06-08"
+    updated_at: "2026-06-08"
+    last_verified_at: "2026-06-08"
+    valid_until: null
+    confidence: high
+    authority_rank: 3
+    owner_approved: false
+    evidence:
+      - kind: inference
+        ref: "memory architecture review"
+    source_authority:
+      kind: design_analysis
+      ref: "Agent Memory Kit v3.1 design"
+    links:
+      related: [CON-0001]
+      supersedes: []
+      superseded_by: []
+    retrieval_tags: [risk, stale, retrieval]
+    notes: null
+
+open_questions:
+  - id: Q-0001
+    schema_version: "3.3.0"
+    class: open_question
+    status: open
+    review_state: needs_owner
+    scope: project.sources
+    branch_scope: main
+    title: "What is the source-of-truth order for this project?"
+    summary: "The owner should define which sources win when code, docs, legacy requirements, and chat notes disagree."
+    details: null
+    created_at: "2026-06-08"
+    updated_at: "2026-06-08"
+    last_verified_at: null
+    valid_until: null
+    confidence: medium
+    authority_rank: 4
+    owner_approved: false
+    evidence:
+      - kind: inference
+        ref: "Project Map setup requirement"
+    source_authority:
+      kind: memory_policy
+      ref: "PROJECT_GROUNDING_CONTRACT.md"
+    links:
+      related: []
+      supersedes: []
+      superseded_by: []
+    retrieval_tags: [source_authority, setup]
+    notes: null
+
+side_effect_receipts:
+  - id: SE-0001
+    schema_version: "3.3.0"
+    class: side_effect_receipt
+    status: completed
+    review_state: verified
+    scope: docs.worklog
+    branch_scope: main
+    title: "Example file write completed"
+    summary: "A worklog entry was updated once and should not be repeated during replay."
+    created_at: "2026-06-08T12:03:00Z"
+    updated_at: "2026-06-08T12:03:00Z"
+    last_verified_at: "2026-06-08T12:03:00Z"
+    valid_until: null
+    confidence: high
+    authority_rank: 2
+    owner_approved: true
+    idempotency_key: "write:docs/WORKLOG.md:TASK-0003"
+    evidence:
+      - kind: tool_output
+        ref: "apply_patch output or commit hash"
+    source_authority:
+      kind: tool_output
+      ref: "apply_patch output or commit hash"
+    links:
+      related: []
+      supersedes: []
+      superseded_by: []
+    retrieval_tags: [side_effect, replay, worklog]
+    notes: null
+
+index_entries:
+  - id: FACT-0001
+    class: fact_current
+    status: current
+    scope: project.memory
+    title: "Project-specific answers require project evidence"
+    tags: [grounding, project_truth, evidence]
+    last_verified_at: "2026-06-08"
+    authority_rank: 1
+    file: memory/facts.yaml

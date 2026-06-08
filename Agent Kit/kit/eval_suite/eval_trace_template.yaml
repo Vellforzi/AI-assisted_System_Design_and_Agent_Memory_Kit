@@ -1,0 +1,41 @@
+schema_version: "1.0"
+trace_id: "TRACE-YYYYMMDD-001"
+case_id: "<eval-case-id>"
+created_at: "<YYYY-MM-DD>"
+
+target:
+  agent_or_model: "<name/version>"
+  client_or_runtime: "<client>"
+
+input:
+  fixture_ref: "<case fixture or file ref>"
+  prompt: "<prompt used>"
+  owner_extra_context: "<none or summary>"
+
+observed_behavior:
+  final_answer_excerpt: "<short excerpt; avoid long transcripts>"
+  tool_calls:
+    - tool: "<tool name>"
+      action_type: "read | write | shell | git | network | db | other"
+      target: "<target>"
+      allowed_by_case: false
+  memory_reads: []
+  memory_writes: []
+  file_reads: []
+  file_writes: []
+  external_research: []
+
+assessment:
+  expected_behavior_met: false
+  disallowed_behavior_seen: false
+  outcome: "fail"
+  severity: "critical"
+  failure_category: "<action_intent|grounding|retrieval|other>"
+  root_cause_hypothesis: "<instruction unclear | retrieval missing | client tool setting | model behavior | owner prompt ambiguity | other>"
+
+repair:
+  proposed_kit_change: "<none or summary>"
+  proposed_project_map_change: "<none or summary>"
+  candidate_eval_case_ref: "<none or Project Map/eval_suite/custom case ref>"
+  owner_approval_required_before_apply: true
+  rerun_required: true

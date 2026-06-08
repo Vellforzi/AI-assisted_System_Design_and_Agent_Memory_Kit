@@ -1,0 +1,97 @@
+schema_version: "1.0"
+policy_id: "AMK-EVAL-TRIGGERS-v3.4.0"
+status: "starter_policy"
+
+principle: >
+  Evals do not run automatically unless the owner connects this policy to a runner,
+  IDE hook, command, CI workflow, or provider-specific eval harness. The default
+  behavior is to detect triggers and propose the appropriate eval run.
+
+automation_levels:
+  level_0_manual:
+    description: "Owner manually runs prompts and grades results."
+    recommended_for_solo_owner: true
+  level_1_agent_prompted:
+    description: "Agent reports Eval trigger: yes/no at checkpoints."
+    recommended_for_solo_owner: true
+  level_2_checklist_assisted:
+    description: "Local script creates run folder and checklist from YAML cases."
+    recommended_for_solo_owner: true
+  level_3_hook_or_ci:
+    description: "File changes trigger checklist generation or API eval run."
+    recommended_for_solo_owner: false
+  level_4_full_harness:
+    description: "Harness sends prompts to agent/model, captures traces, grades outputs."
+    recommended_for_solo_owner: false
+
+triggers:
+  instruction_file_changed:
+    examples:
+      - "AGENTS.md"
+      - ".cursor/rules/*.mdc"
+      - "CLAUDE.md"
+      - "project instructions"
+    minimum_run: "smoke"
+    categories:
+      - "action_intent"
+      - "grounding"
+      - "owner_control"
+  source_authority_changed:
+    examples:
+      - "Project Map/source_authority.yaml"
+    minimum_run: "category"
+    categories:
+      - "grounding"
+      - "repository_instructions"
+  permissions_policy_changed:
+    examples:
+      - "Project Map/permissions_policy.yaml"
+    minimum_run: "category"
+    categories:
+      - "action_intent"
+      - "side_effect_safety"
+  retrieval_policy_changed:
+    examples:
+      - "Project Map/retrieval_policy.yaml"
+    minimum_run: "category"
+    categories:
+      - "retrieval"
+      - "claim_ledger"
+  model_or_client_changed:
+    examples:
+      - "new model"
+      - "new IDE agent"
+      - "new tool permissions"
+    minimum_run: "smoke"
+    categories:
+      - "action_intent"
+      - "grounding"
+      - "retrieval"
+      - "side_effect_safety"
+  critical_failure_observed:
+    examples:
+      - "unauthorized mutation"
+      - "invented project fact"
+      - "stale fact used as current"
+      - "duplicate side effect"
+    minimum_run: "targeted_plus_new_case"
+    categories:
+      - "failure_category"
+  before_long_running_autonomy:
+    examples:
+      - "owner considers autonomous long task"
+    minimum_run: "full"
+    categories:
+      - "all"
+
+smoke_categories:
+  - "action_intent"
+  - "grounding"
+  - "retrieval"
+  - "side_effect_safety"
+  - "owner_control"
+
+repair_rule:
+  failed_eval_result: "diagnostic_signal_only"
+  agent_may: "propose specific repair"
+  agent_must_not: "modify kit, rules, Project Map, or source files without explicit owner approval"

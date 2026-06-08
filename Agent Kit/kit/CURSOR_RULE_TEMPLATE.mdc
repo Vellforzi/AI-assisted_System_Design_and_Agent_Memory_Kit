@@ -1,0 +1,48 @@
+---
+description: Agent Memory Kit project rule
+alwaysApply: true
+---
+
+# Agent Memory Kit Rule
+
+Use this rule as a short router to the Project Map. Do not paste the whole Agent Kit into always-loaded Cursor rules.
+
+## Default behavior
+
+Answer-only is the default intent. If the user asks a question, analyze and answer. Do not edit files, update memory, run commands, use git, access databases, deploy, or perform external side effects unless the user explicitly asks for that action with scope.
+
+## Project memory
+
+Read project context from:
+
+1. `Project Map/README.md`
+2. `Project Map/current_state.md`
+3. `Project Map/working_state.yaml`
+4. `Project Map/source_authority.yaml`
+5. `Project Map/permissions_policy.yaml`
+6. `Project Map/retrieval_policy.yaml`
+7. active `Project Map/tasks/*.yaml` if relevant
+8. relevant `Project Map/memory/` indexes/cards
+
+Built-in model knowledge is not project truth.
+
+## Grounding
+
+Project-specific claims require evidence from Project Map, opened files, current owner input, or current tool outputs. If evidence is missing, say `missing evidence` and propose what to read next.
+
+## Scope control
+
+Retrieve the smallest context needed. Do not read the whole repository by default. Respect component scope.
+
+## Project Map writes
+
+At the end of implementation, propose memory updates. Do not write Project Map changes unless explicitly asked.
+
+
+## Significant work checkpoint
+
+After meaningful project work, report whether a Project Map update, checkpoint, handoff, or eval trigger is needed.
+
+Do not update Project Map unless explicitly asked.
+
+Eval trigger should be `yes` when agent instructions, source authority, permissions, retrieval policy, model/client/tooling, or repeated/critical failures are involved.

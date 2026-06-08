@@ -1,0 +1,46 @@
+# Project Map/claim_ledger.yaml
+# Runtime or review artifact for checking that final project claims are supported.
+
+schema_version: "1.0"
+project_id: "<project-id>"
+task_id: "<TASK-id-or-null>"
+created_at: "<YYYY-MM-DD>"
+updated_at: "<YYYY-MM-DD>"
+
+claim_gate:
+  rule: "Every non-trivial project-specific claim must be verified, labeled as inference, marked as missing evidence, or removed before final answer."
+  unsupported_claim_final_answer: "forbidden"
+  external_research_as_project_fact: "forbidden_without_promotion"
+
+claims:
+  - id: "CLM-0001"
+    statement: "<project-specific claim>"
+    claim_type: "project_fact" # project_fact | inference | external_fact | proposal | missing_evidence | conflict
+    status: "verified" # verified | inference | missing_evidence | conflict | rejected | removed
+    evidence_refs:
+      - "<FACT-0001 or file:line or tool-output-id>"
+    source_authority_rank: 2
+    confidence: "high" # low | medium | high
+    allowed_in_final_answer: true
+    must_be_labeled: false
+    notes: ""
+
+  - id: "CLM-0002"
+    statement: "<claim that lacks evidence>"
+    claim_type: "project_fact"
+    status: "missing_evidence"
+    evidence_refs: []
+    source_authority_rank: null
+    confidence: "low"
+    allowed_in_final_answer: false
+    must_be_labeled: true
+    notes: "Use only as a missing-evidence note or owner question."
+
+final_answer_gate:
+  pass_conditions:
+    - "No project_fact claim has empty evidence_refs."
+    - "No stale or superseded fact is used as current truth."
+    - "No external research output is promoted to project fact without owner approval or project evidence."
+    - "All inferences are labeled if they affect the recommendation."
+    - "Conflicts are visible, not silently merged."
+  if_gate_fails: "revise answer or return missing evidence/conflict note"

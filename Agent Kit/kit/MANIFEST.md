@@ -1,0 +1,148 @@
+# AI-assisted System Design and Agent Memory Kit v3.4.0 — Manifest
+
+Package file: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.4.0_EN.zip`
+
+Package purpose: portable starter guide and memory operating layer for using AI agents with owner-controlled projects. Agent Memory Kit helps build a Project Map through structured, meaningful, interconnected duplication of project information supplied or verified by the owner.
+
+---
+
+## Top-level files
+
+- `README.md` — concise repository/package README.
+- `START_HERE.md` — package router and first entry point.
+- `RELEASE_NOTES_v3.4.0.md` — what changed in this release.
+- `AI-assisted System Design/README.md` — overview of the system-design methodology.
+- `AI-assisted System Design/AI-assisted System Design.md` — methodology for operating AI-readable projects.
+- `Agent Kit/README.md` — overview of Agent Memory Kit.
+- `Agent Kit/START_HERE_AGENT_KIT_PROJECT_OWNER_GUIDE.md` — main human/agent guide for the memory kit.
+
+---
+
+## Agent Kit core files
+
+- `Agent Kit/kit/README.md` — package note and file map.
+- `Agent Kit/kit/OWNER_USAGE_GUIDE.md` — day-to-day usage guide for a project owner.
+- `Agent Kit/kit/ACTION_INTENT_CONTRACT.md` — answer-only default intent and explicit-action gate.
+- `Agent Kit/kit/SIGNIFICANT_WORK_AND_CHECKPOINTS.md` — significant-work triggers, checkpoints, Project Map deltas, and eval triggers.
+- `Agent Kit/kit/PROJECT_GROUNDING_CONTRACT.md` — strict evidence contract for project-specific claims.
+- `Agent Kit/kit/PROJECT_MEMORY_OPERATING_PROTOCOL.md` — operational protocol for memory intake, grounded answers, memory updates, checkpoints, verification, and eval usage.
+- `Agent Kit/kit/PROJECT_MEMORY_STORAGE_GUIDE.md` — storage architecture: current state, working state, policies, tasks, claims, handoffs, memory cards, indexes, evals, raw sources, archive.
+- `Agent Kit/kit/PLAIN_LANGUAGE_GLOSSARY.md` — simple explanations for common terms.
+- `Agent Kit/kit/POSITIONING_AND_ALTERNATIVES.md` — comparison with provider memory, repo instruction files, memory frameworks, vector stores, and autonomous runtimes.
+
+---
+
+## Templates and schemas
+
+- `Agent Kit/kit/SOURCE_AUTHORITY_TEMPLATE.yaml` — source-authority template.
+- `Agent Kit/kit/PERMISSIONS_POLICY_TEMPLATE.yaml` — permissions and action-intent template.
+- `Agent Kit/kit/RETRIEVAL_POLICY_TEMPLATE.yaml` — retrieval policy template.
+- `Agent Kit/kit/TASK_CONTRACT_TEMPLATE.yaml` — long-running task contract template.
+- `Agent Kit/kit/CLAIM_LEDGER_TEMPLATE.yaml` — claim-ledger and final-answer gate template.
+- `Agent Kit/kit/HANDOFF_TEMPLATE.yaml` — clean-slate handoff packet template.
+- `Agent Kit/kit/MEMORY_SCHEMA_REFERENCE.yaml` — canonical schema reference for durable memory units and Project Map artifacts.
+- `Agent Kit/kit/memory_card_examples.yaml` — copyable examples for Project Map memory.
+
+---
+
+## Operating guides
+
+- `Agent Kit/kit/LONG_RUNNING_TASKS_GUIDE.md` — long-task design without consciousness simulation.
+- `Agent Kit/kit/RETRIEVAL_POLICY_PROFILES.md` — retrieval profiles for answer, analyze, plan, resume, recover, fork, audit, and repair.
+- `Agent Kit/kit/WORKING_STATE_AND_REPLAY_GUIDE.md` — compact working-state and replay protocol.
+- `Agent Kit/kit/MEMORY_COMPILER_GUIDE.md` — session note to durable memory consolidation guide.
+- `Agent Kit/kit/MEMORY_TOOL_INTERFACE_CONTRACT.md` — expected behavior for memory tool implementations.
+- `Agent Kit/kit/PROVIDER_MEMORY_AND_RUNTIME_BOUNDARY.md` — boundary between Project Map, provider memory, runtime state, and external research.
+- `Agent Kit/kit/SERVICE_RULE_PLACEMENT_GUIDE.md` — where to place rules/instructions in AI services.
+- `Agent Kit/kit/EXISTING_PROJECT_ADOPTION_GUIDE.md` — migration guide for active existing projects.
+- `Agent Kit/kit/NEW_PROJECT_ADOPTION_GUIDE.md` — setup guide for empty new projects.
+- `Agent Kit/kit/SOLO_OWNER_WORKFLOW_GUIDE.md` — high-control solo-owner workflow.
+- `Agent Kit/kit/AGENT_INSTRUCTION_FILES_GUIDE.md` — how to use AGENTS.md, Cursor rules, CLAUDE.md, and similar files.
+- `Agent Kit/kit/START_MESSAGE_TEMPLATES.md` — reusable owner prompts.
+- `Agent Kit/kit/PROJECT_WORKSPACE_LAYOUT.md` — folder layout reference.
+- `Agent Kit/kit/MANUAL_OWNER_REVIEW_CHECKLIST.md` — manual owner review checklist.
+
+---
+
+## Repository instruction templates
+
+- `Agent Kit/kit/AGENTS.md_TEMPLATE.md` — root repository instruction template.
+- `Agent Kit/kit/CURSOR_RULE_TEMPLATE.mdc` — Cursor project rule template.
+
+---
+
+## Eval files
+
+- `Agent Kit/kit/EVAL_SUITE_GUIDE.md` — eval-suite guide.
+- `Agent Kit/kit/EVAL_AUTOMATION_AND_TRIGGER_POLICY.md` — eval trigger matrix and automation levels.
+- `Agent Kit/kit/eval_suite/README.md` — eval-suite folder guide.
+- `Agent Kit/kit/eval_suite/eval_manifest.yaml` — suite metadata and pass gates.
+- `Agent Kit/kit/eval_suite/eval_trigger_policy.yaml` — portable trigger policy for eval runs.
+- `Agent Kit/kit/eval_suite/core_behavior_eval_cases.yaml` — portable core behavior cases.
+- `Agent Kit/kit/eval_suite/grader_rubric.yaml` — deterministic/model/human grading rubric.
+- `Agent Kit/kit/eval_suite/eval_run_report_template.yaml` — eval run report template.
+- `Agent Kit/kit/eval_suite/eval_trace_template.yaml` — failure trace template.
+- `Agent Kit/kit/eval_suite/failure_to_eval_case_template.yaml` — convert real failures into candidate eval cases.
+
+---
+
+## Optional tools
+
+- `Agent Kit/kit/tools/README.md` — helper script documentation.
+- `Agent Kit/kit/tools/run_eval_checklist.py` — creates a local eval run folder and Markdown checklist from YAML cases.
+
+---
+
+## Publishing and research files
+
+- `Agent Kit/kit/README_AUTHORING_GUIDE.md` — README publishing guide.
+- `Agent Kit/kit/GIT_PUBLISHING_GUIDE.md` — safe git publishing and hygiene guide.
+- `Agent Kit/kit/RESEARCH_BASIS.md` — sources and design influences for this release.
+- `Agent Kit/kit/SHA256SUMS.txt` — checksums for package files.
+
+---
+
+## Permission model
+
+- `explain-only`: explain the kit; no project file read/write.
+- `dry-run`: proposal only; no read/write permission by itself.
+- `read-only`: read only explicitly named folders/files/resources.
+- `apply`: write only explicitly confirmed, scoped changes.
+
+Permission does not imply action intent. A question remains answer-only unless the owner explicitly asks for a mutating action.
+
+---
+
+## Significant-work rule
+
+After meaningful work, the agent should decide whether a checkpoint, handoff, Project Map update proposal, or eval trigger is needed.
+
+The agent may propose these artifacts in non-apply modes. It must not write them without explicit owner approval or an approved task contract.
+
+---
+
+## Eval rule
+
+Use the eval-suite to detect regressions in action intent, grounding, retrieval, memory compilation, side-effect safety, significant-work handling, eval automation, and owner-control behavior.
+
+Evals complement manual owner review; they do not prove correctness.
+
+Evals do not run automatically unless connected to a runner, hook, command, CI workflow, or API harness.
+
+---
+
+## Execution preflight
+
+Before console, shell, server, container, CI, database, deployment, git mutation, or any external side effect, the owner must specify the target environment and approve the action. Missing environment details must not be guessed.
+
+---
+
+## Grounding preflight
+
+Before a project-specific answer, the agent must identify the valid evidence base. If required context is missing, it must not guess. It may ask a minimal clarification or propose a retrieval plan.
+
+---
+
+## Continuation rule
+
+Later sessions should restore from documented `Project Map` / working state / task contract / handoff state. Undocumented chat history is not reliable project state.

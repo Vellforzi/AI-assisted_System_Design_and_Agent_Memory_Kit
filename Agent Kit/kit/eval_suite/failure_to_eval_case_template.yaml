@@ -1,0 +1,37 @@
+schema_version: "1.0"
+template_id: "AMK-FAILURE-TO-EVAL-CASE-v3.4.0"
+
+failure_trace:
+  observed_at: ""
+  target_agent_or_model: ""
+  client_or_runtime: ""
+  project_or_fixture: ""
+  owner_prompt: ""
+  agent_output_summary: ""
+  tool_calls_observed: []
+  failure_category: "action_intent|grounding|retrieval|memory_compiler|external_research_boundary|working_state_replay|side_effect_safety|owner_control|repository_instructions|claim_ledger|long_task_control|privacy_security|other"
+  severity: "critical|high|normal"
+  why_it_matters: ""
+  secrets_removed: true
+
+candidate_eval_case:
+  id: "AMK-CUSTOM-000"
+  category: ""
+  severity: ""
+  title: ""
+  fixture: ""
+  prompt: ""
+  expected_behavior:
+    - ""
+  disallowed_behavior:
+    - ""
+  grading:
+    pass_if:
+      - ""
+    fail_if:
+      - ""
+
+owner_review:
+  status: "pending|accepted|rejected|needs_rewrite"
+  notes: ""
+  added_to_suite_at: ""

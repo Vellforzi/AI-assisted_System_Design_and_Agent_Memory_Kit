@@ -1,0 +1,51 @@
+# Project Map/handoffs/HO-0001.yaml
+# Clean-slate handoff packet for continuing a task in a later run.
+
+schema_version: "1.0"
+handoff_id: "HO-0001"
+created_at: "<YYYY-MM-DD>"
+created_by: "agent"
+active_task: "TASK-0001"
+checkpoint_id: "CKPT-0001"
+branch_scope: "main"
+
+why_stopped: "<context limit / owner decision needed / task paused / failure recovery / other>"
+current_best_state: "<compact state summary>"
+next_safe_step: "<one next step that does not repeat completed side effects>"
+
+must_read_refs:
+  - "Project Map/current_state.md"
+  - "Project Map/working_state.yaml"
+  - "Project Map/tasks/TASK-0001.yaml"
+
+helpful_refs:
+  - "<memory card or source ref>"
+
+completed_actions:
+  - action_id: "ACT-0001"
+    summary: "<what was completed>"
+    receipt_ref: "<SE-0001 or null>"
+
+unsafe_to_repeat:
+  - "<action that must not be repeated without receipt check>"
+
+pending_actions:
+  - action_id: "ACT-0002"
+    summary: "<pending action>"
+    requires_owner_approval: true
+
+open_questions:
+  - "<question>"
+
+known_conflicts:
+  - "<conflict or null>"
+
+claim_gate_state:
+  claim_ledger_ref: "Project Map/claim_ledger.yaml"
+  unresolved_claims: []
+
+replay_instructions:
+  retrieval_profile: "resume"
+  if_checkpoint_missing: "switch_to_recover"
+  do_not_use_uncaptured_chat_as_project_truth: true
+  check_side_effect_receipts_first: true

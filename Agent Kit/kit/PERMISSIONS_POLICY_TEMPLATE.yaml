@@ -1,0 +1,136 @@
+# Project Map/permissions_policy.yaml
+# Machine-readable policy for what the agent may do by default.
+
+schema_version: "1.0"
+project_id: "<project-id>"
+last_updated: "<YYYY-MM-DD>"
+
+default_intent: "answer"
+default_mode: "explain-only"
+
+intent_policy:
+  answer:
+    default_allowed: true
+    may_read_if_scope_granted: true
+    may_write: false
+    may_execute_commands: false
+    may_call_external_services: false
+    may_update_memory: false
+  analyze:
+    default_allowed: true
+    may_read_if_scope_granted: true
+    may_write: false
+    may_execute_commands: false
+    may_call_external_services: false
+    may_update_memory: false
+  plan:
+    default_allowed: true
+    may_read_if_scope_granted: true
+    may_write: false
+    may_execute_commands: false
+    may_call_external_services: false
+    may_update_memory: false
+  retrieve_context:
+    default_allowed: false
+    requires_explicit_scope: true
+    may_write: false
+  stage:
+    default_allowed: false
+    requires_explicit_request: true
+    may_write: false
+  apply:
+    default_allowed: false
+    requires_explicit_request: true
+    requires_explicit_scope: true
+    may_write: true
+  external_research:
+    default_allowed: false
+    requires_explicit_request_or_task_contract: true
+    may_establish_project_facts: false
+
+permission_modes:
+  explain-only:
+    read_project_files: false
+    read_project_map: false
+    write_project_map: false
+    write_project_files: false
+    run_commands: false
+    external_side_effects: false
+  dry-run:
+    read_project_files: false
+    read_project_map: false
+    write_project_map: false
+    write_project_files: false
+    run_commands: false
+    external_side_effects: false
+    allowed_outputs: [proposal, draft, task_spec, candidate_memory]
+  read-only:
+    read_project_files: "explicit_scope_only"
+    read_project_map: "explicit_scope_only"
+    write_project_map: false
+    write_project_files: false
+    run_commands: false
+    external_side_effects: false
+  apply:
+    read_project_files: "explicit_scope_only"
+    read_project_map: "explicit_scope_only"
+    write_project_map: "explicit_scope_only"
+    write_project_files: "explicit_scope_only"
+    run_commands: "explicit_command_approval_only"
+    external_side_effects: "separate_explicit_approval_only"
+
+mutation_requirements:
+  required_fields:
+    - explicit_action_verb
+    - explicit_target
+    - permission_mode_allows_action
+    - explicit_scope
+    - safety_preflight_passed
+  ambiguous_request_behavior: "answer_or_propose_only"
+  implicit_permission_from_question: false
+  previous_permission_carries_intent: false
+  action_after_plan_requires_separate_apply: true
+
+external_research:
+  allowed_for:
+    - libraries
+    - frameworks
+    - public_api_docs
+    - general_methods
+    - market_or_domain_background
+    - regulatory_or_public_documentation
+  forbidden_for:
+    - current_project_facts
+    - undocumented_project_state
+    - private_business_rules
+    - repository_contents_not_opened
+    - credentials_or_deployments
+
+side_effects:
+  require_owner_approval: true
+  require_idempotency_key_when_possible: true
+  require_receipt_after_completion: true
+  forbidden_without_separate_confirmation:
+    - delete
+    - deploy
+    - send_external_message
+    - commit_or_push
+    - database_write
+    - payment_or_purchase
+    - credential_change
+    - irreversible_file_operation
+
+significant_work:
+  agent_may_detect: true
+  agent_may_propose_project_map_delta: true
+  agent_may_propose_checkpoint: true
+  agent_may_propose_handoff: true
+  may_write_project_map_without_explicit_intent: false
+  tiny_question_footer_required: false
+
+eval_policy:
+  agent_may_detect_trigger: true
+  agent_may_recommend_eval_run: true
+  agent_may_create_candidate_eval_case_in_dry_run: true
+  may_run_eval_without_owner_request: false
+  may_modify_kit_or_rules_from_eval_without_owner_scope: false

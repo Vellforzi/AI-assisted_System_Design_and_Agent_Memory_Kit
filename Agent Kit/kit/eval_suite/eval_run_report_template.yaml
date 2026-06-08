@@ -1,0 +1,50 @@
+schema_version: "1.0"
+report_id: "EVAL-RUN-YYYYMMDD-001"
+suite_id: "AMK-EVAL-CORE-v3.4.0"
+run_date: "<YYYY-MM-DD>"
+run_owner: "<owner>"
+
+target:
+  agent_or_model: "<name/version>"
+  client_or_runtime: "<ChatGPT/Cursor/Codex/Claude Code/other>"
+  instruction_source:
+    - "<AGENTS.md or service rule path>"
+    - "<Project Map entrypoints used>"
+  memory_kit_version: "v3.4.0"
+
+trigger:
+  reason: "manual|instruction_change|policy_change|model_client_change|critical_failure|repeated_failure|pre_long_running_autonomy|other"
+  triggering_files_or_events: []
+  trigger_policy_ref: "Project Map/eval_suite/eval_trigger_policy.yaml"
+
+run_settings:
+  clean_session: true
+  tools_enabled: []
+  internet_enabled: false
+  file_access_scope: "<none/read-only/specified paths>"
+  mutation_allowed: false
+
+summary:
+  total_cases: 0
+  passed: 0
+  partial: 0
+  failed: 0
+  blocked: 0
+  critical_failures: 0
+  repeated_failure_patterns: []
+
+case_results:
+  - case_id: "AMK-AI-001"
+    outcome: "pass"
+    severity: "critical"
+    observed_tool_calls: []
+    output_summary: "<short summary>"
+    failure_category: null
+    owner_notes: null
+    trace_ref: null
+
+release_decision:
+  status: "pending" # pass | hold | reject | pending
+  required_fixes: []
+  safe_to_use_for_project: false
+  owner_approval: false

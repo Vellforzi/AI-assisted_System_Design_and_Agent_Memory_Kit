@@ -1,0 +1,112 @@
+# Project Map/retrieval_policy.yaml
+# Machine-readable retrieval profile policy.
+
+schema_version: "1.0"
+project_id: "<project-id>"
+last_updated: "<YYYY-MM-DD>"
+
+core_rule: "Retrieve the smallest evidence-bearing working set needed for the current intent. Do not load the whole project by default."
+
+profiles:
+  answer:
+    purpose: "Answer a project question."
+    allowed_classes: [fact_current, accepted_decision, constraint, risk, procedure, open_question]
+    blocked_as_truth: [fact_stale, hypothesis, research_output, raw_chat, unrelated_branch_fact]
+    statuses_allowed_as_truth: [current]
+    stale_handling: "suppress unless explicitly labeled as stale context"
+    raw_sources: "only_if_exact_proof_needed"
+    may_mutate: false
+    claim_gate_required: true
+
+  analyze:
+    purpose: "Review, compare, inspect, or reason without applying changes."
+    allowed_classes: [fact_current, accepted_decision, rejected_decision, constraint, risk, open_question, procedure, hypothesis, research_output]
+    blocked_as_truth: [fact_stale, unrelated_branch_fact]
+    statuses_allowed_as_truth: [current, open, candidate, reusable]
+    stale_handling: "allowed only when labeled and relevant to risk or conflict"
+    raw_sources: "allowed_if_needed_for_review"
+    may_mutate: false
+    claim_gate_required: true
+
+  plan:
+    purpose: "Prepare next steps or implementation instructions without executing."
+    allowed_classes: [fact_current, accepted_decision, constraint, risk, open_question, procedure, research_output]
+    blocked_as_truth: [fact_stale, hypothesis_as_fact, unrelated_branch_fact]
+    statuses_allowed_as_truth: [current, open, reusable]
+    raw_sources: "rare"
+    may_mutate: false
+    claim_gate_required: true
+
+  resume:
+    purpose: "Continue active work from a checkpoint."
+    mandatory_refs: [working_state, current_state, active_task_contract, active_workstream, side_effect_receipts]
+    allowed_classes: [fact_current, accepted_decision, constraint, risk, open_question, procedure, side_effect_receipt]
+    blocked_as_truth: [fact_stale, hypothesis, research_output_as_project_fact]
+    raw_sources: "only_if_checkpoint_insufficient"
+    may_mutate: false
+    receipt_check_required: true
+
+  recover:
+    purpose: "Recover after lost context, failed run, or inconsistent state."
+    mandatory_refs: [working_state, latest_handoff, side_effect_receipts]
+    allowed_classes: [fact_current, fact_stale, accepted_decision, rejected_decision, constraint, risk, open_question, procedure, side_effect_receipt]
+    stale_handling: "diagnostic_only"
+    raw_sources: "allowed_when_needed"
+    may_mutate: false
+    receipt_check_required: true
+
+  fork:
+    purpose: "Explore an alternative branch or scenario."
+    allowed_classes: [fact_current, accepted_decision, constraint, risk, open_question, procedure]
+    branch_scope: "selected_branch_plus_shared_stable_memory"
+    blocked_as_truth: [future_branch_fact, unrelated_branch_fact]
+    may_mutate: false
+    claim_gate_required: true
+
+  audit:
+    purpose: "Check correctness, evidence support, consistency, or memory quality."
+    allowed_classes: [fact_current, fact_stale, accepted_decision, rejected_decision, constraint, risk, open_question, hypothesis, research_output, procedure, side_effect_receipt, checkpoint_note, memory_delta_proposal, eval_trigger, eval_case, eval_result, eval_trace]
+    stale_handling: "allowed_and_labeled"
+    raw_sources: "allowed"
+    may_mutate: false
+    output: "findings_and_repair_plan_only"
+
+  repair:
+    purpose: "Repair Project Map memory or state after explicit apply permission."
+    allowed_classes: [fact_current, fact_stale, accepted_decision, rejected_decision, constraint, risk, open_question, hypothesis, research_output, procedure, side_effect_receipt, checkpoint_note, memory_delta_proposal, eval_trigger, eval_case, eval_result, eval_trace]
+    stale_handling: "allowed_as_repair_input"
+    raw_sources: "allowed"
+    may_mutate: "only_with_apply_mode_and_scope"
+    preserve_history: true
+
+empty_result_behavior:
+  retry_with_adjacent_tags: true
+  ask_for_scope_if_needed: true
+  never_treat_empty_as_nonexistence: true
+  final_label: "missing_evidence"
+
+token_budget:
+  order:
+    - working_state_refs
+    - current_state_summary
+    - active_task_contract
+    - index_hits
+    - concise_memory_cards
+    - selected_details
+    - raw_evidence_excerpts
+  prefer_summaries_before_full_payloads: true
+  report_truncation: true
+
+
+eval_review:
+  profiles_used: [audit, repair]
+  allowed_classes: [eval_case, eval_result, eval_trace]
+  may_mutate: "only_when_owner_explicitly_requests_eval_case_or_memory_update"
+  purpose: "Review agent behavior regressions and convert confirmed failures into new eval cases or Project Map repair tasks."
+
+
+significant_work_review:
+  profiles_used: [analyze, audit]
+  allowed_classes: [fact_current, accepted_decision, constraint, risk, open_question, procedure, checkpoint_note, memory_delta_proposal, eval_trigger, eval_case, eval_result, eval_trace]
+  may_mutate: false
+  purpose: "Decide whether recent work should produce a Project Map delta, checkpoint, handoff, or eval trigger."
