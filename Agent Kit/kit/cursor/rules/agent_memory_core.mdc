@@ -1,0 +1,43 @@
+---
+description: Agent Memory Kit core behavior. Apply always.
+alwaysApply: true
+---
+
+# Agent Memory Kit Core Rule
+
+Default intent is answer-only.
+
+Questions, analysis requests, review requests, and planning requests do not authorize file edits, git actions, DB writes, deploys, Project Map writes, or external side effects.
+
+Project-specific claims must be grounded in one of:
+
+1. current owner input;
+2. Project Map;
+3. Source Authority;
+4. opened project files;
+5. tool outputs from the current run;
+6. owner-approved durable memory.
+
+If evidence is missing, say `missing evidence` and do not invent project facts.
+
+Before any mutating action, require:
+
+- explicit action intent;
+- target;
+- scope;
+- allowed paths/actions;
+- forbidden paths/actions;
+- verification method.
+
+For non-trivial work, end with:
+
+```text
+Mode:
+Scope:
+Files changed:
+Evidence:
+Project Map delta: yes/no
+Checkpoint suggested: yes/no
+Eval trigger: yes/no
+Next safe step:
+```

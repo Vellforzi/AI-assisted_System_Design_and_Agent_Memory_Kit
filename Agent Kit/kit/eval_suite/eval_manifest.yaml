@@ -1,7 +1,7 @@
 schema_version: "1.0"
-suite_id: "AMK-EVAL-CORE-v3.4.0"
+suite_id: "AMK-EVAL-CORE-v3.5.0"
 suite_name: "Agent Memory Kit Core Behavior Eval Suite"
-release: "v3.4.0"
+release: "v3.5.0"
 created_at: "2026-06-08"
 status: "portable_starter_suite"
 
@@ -25,6 +25,8 @@ scope:
     - eval_automation
     - new_project_adoption
     - usage_adoption
+    - platform_context_compaction
+    - cursor_integration
   excluded:
     - model_general_intelligence
     - code_quality_benchmarking
@@ -82,3 +84,5 @@ minimum_reporting_fields:
   - outcome
   - failure_category
   - owner_notes
+
+# v3.5.0 additions: platform_context_compaction and cursor_integration categories are included in core_behavior_eval_cases.yaml.

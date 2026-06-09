@@ -1,8 +1,8 @@
 # START HERE — AI-assisted System Design and Agent Memory Kit
 
-Version: v3.4.0  
-Release date: 2026-06-08  
-Package: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.4.0_EN.zip`  
+Version: v3.5.0  
+Release date: 2026-06-09  
+Package: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.5.0_EN.zip`  
 Status: portable project-owner kit for AI-assisted work and grounded project memory
 
 ---
@@ -140,7 +140,7 @@ Read:
 
 ---
 
-## What changed in v3.4.0
+## What changed in v3.5.0
 
 This release strengthens the memory layer around:
 
@@ -154,4 +154,19 @@ This release strengthens the memory layer around:
 - public positioning versus alternative memory approaches;
 - simple terminology support.
 
-See `RELEASE_NOTES_v3.4.0.md` for details.
+See `RELEASE_NOTES_v3.5.0.md` for details.
+
+
+---
+
+## Cursor Integration Pack
+
+For Cursor setup, read:
+
+1. `Agent Kit/kit/CURSOR_INTEGRATION_OWNER_GUIDE.md`
+2. `Agent Kit/kit/cursor/README.md`
+3. `Agent Kit/kit/cursor/COMMAND_VOCABULARY.md`
+4. `Agent Kit/kit/cursor/rules/`
+5. `Agent Kit/kit/cursor/commands/`
+
+Start with Rules and Commands. Add Hooks and Subagents after the core workflow is stable.

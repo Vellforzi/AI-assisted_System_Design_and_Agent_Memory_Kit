@@ -139,3 +139,26 @@ Do not store:
 - generic advice;
 - external research as project truth;
 - outdated facts as current facts.
+
+
+---
+
+## Cursor short-command workflow
+
+When working in Cursor, prefer explicit commands:
+
+```text
+/answer      ask first
+/analyze     inspect and explain
+/plan        create a scoped task
+/apply       perform one scoped change
+/checkpoint  capture stage before context risk
+/handoff     prepare fresh-session transfer
+/map-apply   update Project Map from approved delta/handoff
+/recover     resume from Project Map after context risk
+/eval-smoke  check core behavior after rule/kit changes
+```
+
+If a chat is long, do not update Project Map directly from that chat. Ask for `/handoff` or `/map-delta`, then open a fresh session and use `/map-apply` with current Project Map plus the approved handoff/delta.
+
+Platform summaries are not evidence.

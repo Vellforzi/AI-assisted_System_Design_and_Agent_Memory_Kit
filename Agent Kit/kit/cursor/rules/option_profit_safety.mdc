@@ -1,0 +1,30 @@
+---
+description: Safety defaults for OPTION PROFIT-style projects with API, scraper, database, and trading-client components.
+alwaysApply: true
+---
+
+# OPTION PROFIT Safety Defaults
+
+This rule is a template. Adapt component names and paths before use.
+
+Default boundaries:
+
+- DB writes are forbidden unless explicitly approved for the exact command and environment.
+- Deploys are forbidden unless explicitly approved for the exact target.
+- Git push is forbidden unless explicitly approved.
+- Secrets must not be copied into answers, Project Map, logs, or commits.
+- `Options_MT/` changes require explicit scope and verification.
+- Product code changes require a scoped apply task and verification plan.
+- Project Map writes require `/map-apply` or explicit apply scope.
+
+Preferred component source authority template:
+
+```text
+API: routes/services/models/docs, code wins over docs.
+Scraper: scraper jobs and docs, code wins over docs.
+Database: schema SQL and models, schema wins over derived notes.
+MetaTrader: Options_MT source and mapped area docs.
+Business rules: owner-approved docs/memory; code wins for implementation behavior.
+```
+
+Do not invent routes, tables, env vars, secrets, scraper jobs, endpoints, credentials, broker behavior, or deployment state.

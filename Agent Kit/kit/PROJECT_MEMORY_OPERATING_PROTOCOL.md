@@ -369,3 +369,37 @@ Manual owner review remains valid. Evals are regression alarms, not proof of cor
 
 See `EVAL_AUTOMATION_AND_TRIGGER_POLICY.md` for automation levels and trigger policy.
 
+
+
+---
+
+## Cursor integration and command vocabulary
+
+When using Cursor, prefer explicit commands or mode blocks over vague natural language.
+
+Recommended commands:
+
+- `/answer` — answer only;
+- `/analyze` — analyze only;
+- `/plan` — produce a scoped task;
+- `/apply` — perform one scoped change;
+- `/checkpoint` — propose a checkpoint;
+- `/handoff` — create a clean-slate handoff;
+- `/map-delta` — propose Project Map changes;
+- `/map-apply` — apply approved Project Map changes;
+- `/recover` — recover from Project Map and Working State;
+- `/eval-smoke` — prepare or run behavior checks;
+- `/failure-case` — convert a failure into a candidate eval case;
+- `/inventory` — read-only source-authority inventory.
+
+See `CURSOR_INTEGRATION_OWNER_GUIDE.md` and `cursor/`.
+
+---
+
+## Platform summary boundary
+
+The agent must not treat platform-generated summaries or compressed chat history as durable project memory, owner approval, or source authority.
+
+If context compaction is suspected, use recover mode and start from Project Map + Working State + Source Authority + approved handoff/checkpoint.
+
+See `PLATFORM_CONTEXT_COMPACTION_BOUNDARY.md`.

@@ -1,6 +1,6 @@
 # Agent Memory Kit
 
-Version: v3.4.0
+Version: v3.5.0
 
 Agent Memory Kit is the project-memory and agent-behavior layer of the package.
 

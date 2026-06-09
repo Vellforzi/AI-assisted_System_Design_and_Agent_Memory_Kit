@@ -119,3 +119,28 @@ Where the AI client supports it, use:
 - separate local/private instruction files for secrets and preferences.
 
 Never rely only on a natural-language instruction to protect a dangerous system.
+
+
+---
+
+## Cursor Integration Pack
+
+For Cursor, do not put the entire kit into one always-loaded rule.
+
+Use the split integration pack:
+
+- `cursor/rules/` for short always-on rules;
+- `cursor/commands/` for explicit slash-command workflows;
+- `cursor/skills/` for reusable long procedures;
+- `cursor/subagents/` for focused read-only audits;
+- `cursor/hooks/` for optional technical guards.
+
+Install order:
+
+1. Rules.
+2. Commands.
+3. Skills.
+4. Hooks after local testing.
+5. Subagents, read-only first.
+
+See `CURSOR_INTEGRATION_OWNER_GUIDE.md`.

@@ -1,6 +1,6 @@
-# AI-assisted System Design and Agent Memory Kit v3.4.0 — Manifest
+# AI-assisted System Design and Agent Memory Kit v3.5.0 — Manifest
 
-Package file: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.4.0_EN.zip`
+Package file: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.5.0_EN.zip`
 
 Package purpose: portable starter guide and memory operating layer for using AI agents with owner-controlled projects. Agent Memory Kit helps build a Project Map through structured, meaningful, interconnected duplication of project information supplied or verified by the owner.
 
@@ -10,7 +10,7 @@ Package purpose: portable starter guide and memory operating layer for using AI 
 
 - `README.md` — concise repository/package README.
 - `START_HERE.md` — package router and first entry point.
-- `RELEASE_NOTES_v3.4.0.md` — what changed in this release.
+- `RELEASE_NOTES_v3.5.0.md` — what changed in this release.
 - `AI-assisted System Design/README.md` — overview of the system-design methodology.
 - `AI-assisted System Design/AI-assisted System Design.md` — methodology for operating AI-readable projects.
 - `Agent Kit/README.md` — overview of Agent Memory Kit.
@@ -146,3 +146,20 @@ Before a project-specific answer, the agent must identify the valid evidence bas
 ## Continuation rule
 
 Later sessions should restore from documented `Project Map` / working state / task contract / handoff state. Undocumented chat history is not reliable project state.
+
+
+---
+
+## Platform context and Cursor integration files
+
+- `Agent Kit/kit/PLATFORM_CONTEXT_COMPACTION_BOUNDARY.md` — rule that platform summaries, compressed chat history, provider memory, and personalization are non-authoritative hints.
+- `Agent Kit/kit/CURSOR_INTEGRATION_OWNER_GUIDE.md` — owner-facing guide for configuring Cursor with Rules, Commands, Skills, Subagents, and optional Hooks.
+- `Agent Kit/kit/cursor/README.md` — Cursor Integration Pack overview.
+- `Agent Kit/kit/cursor/COMMAND_VOCABULARY.md` — command-to-mode mapping and explicit mode block.
+- `Agent Kit/kit/cursor/rules/` — short always-on Cursor rule templates.
+- `Agent Kit/kit/cursor/commands/` — copy-paste command bodies for common workflows.
+- `Agent Kit/kit/cursor/skills/` — reusable procedure templates.
+- `Agent Kit/kit/cursor/subagents/` — focused read-only subagent role templates.
+- `Agent Kit/kit/cursor/hooks/` — optional hook examples and scripts.
+
+The Python scripts in `cursor/hooks/scripts/` are optional examples. Agent Memory Kit does not require Python.

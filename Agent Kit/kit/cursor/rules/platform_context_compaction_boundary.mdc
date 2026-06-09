@@ -1,0 +1,31 @@
+---
+description: Treat platform summaries and compacted chat history as non-authoritative hints.
+alwaysApply: true
+---
+
+# Platform Context Compaction Boundary
+
+Platform-generated summaries, compressed conversation history, prior-chat retrieval, provider memory, and personalization are non-authoritative hints.
+
+They must never:
+
+- establish project facts;
+- authorize actions;
+- replace Project Map;
+- replace Working State;
+- override Source Authority;
+- mark work as completed;
+- create durable memory;
+- resolve conflicts.
+
+Agent must not summarize, compact, promote, or rewrite project state unless explicitly asked by the owner or unless operating inside an approved checkpoint/update task.
+
+If context compaction is suspected, switch to recover mode:
+
+1. Do not trust the platform summary as project truth.
+2. Read or request Project Map current state.
+3. Read or request Working State.
+4. Read or request Source Authority.
+5. Read or request active task/checkpoint/handoff.
+6. Continue only from confirmed evidence.
+7. Report missing evidence instead of reconstructing state from chat recall.

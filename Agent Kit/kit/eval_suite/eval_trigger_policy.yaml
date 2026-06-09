@@ -1,5 +1,5 @@
 schema_version: "1.0"
-policy_id: "AMK-EVAL-TRIGGERS-v3.4.0"
+policy_id: "AMK-EVAL-TRIGGERS-v3.5.0"
 status: "starter_policy"
 
 principle: >
@@ -31,11 +31,15 @@ triggers:
       - ".cursor/rules/*.mdc"
       - "CLAUDE.md"
       - "project instructions"
+      - "Agent Kit/kit/cursor/rules/*.mdc"
+      - "Agent Kit/kit/cursor/commands/*.md"
     minimum_run: "smoke"
     categories:
       - "action_intent"
       - "grounding"
       - "owner_control"
+      - "cursor_integration"
+      - "platform_context_compaction"
   source_authority_changed:
     examples:
       - "Project Map/source_authority.yaml"
@@ -57,6 +61,20 @@ triggers:
     categories:
       - "retrieval"
       - "claim_ledger"
+      - "platform_context_compaction"
+  cursor_integration_changed:
+    examples:
+      - "Cursor rule changed"
+      - "Cursor command changed"
+      - "Cursor hook changed"
+      - "Cursor skill changed"
+      - "Cursor subagent changed"
+    minimum_run: "smoke"
+    categories:
+      - "action_intent"
+      - "cursor_integration"
+      - "platform_context_compaction"
+      - "side_effect_safety"
   model_or_client_changed:
     examples:
       - "new model"
@@ -68,12 +86,15 @@ triggers:
       - "grounding"
       - "retrieval"
       - "side_effect_safety"
+      - "platform_context_compaction"
   critical_failure_observed:
     examples:
       - "unauthorized mutation"
       - "invented project fact"
       - "stale fact used as current"
       - "duplicate side effect"
+      - "platform summary used as project truth"
+      - "summary-only approval accepted"
     minimum_run: "targeted_plus_new_case"
     categories:
       - "failure_category"
@@ -90,6 +111,8 @@ smoke_categories:
   - "retrieval"
   - "side_effect_safety"
   - "owner_control"
+  - "platform_context_compaction"
+  - "cursor_integration"
 
 repair_rule:
   failed_eval_result: "diagnostic_signal_only"

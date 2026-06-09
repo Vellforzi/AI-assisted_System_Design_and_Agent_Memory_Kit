@@ -187,3 +187,14 @@ On recovery, check handoff and side-effect receipts before continuing.
 Replay must not execute pending actions automatically.
 
 Replay restores context and identifies the next safe step. If the next step is mutating, it requires current explicit apply intent and scope from the owner.
+
+
+---
+
+## Replay after platform compaction
+
+If the host platform may have summarized or truncated the chat, Working State becomes the replay root.
+
+The agent must not use platform summary as project truth. It should load the latest compatible Working State checkpoint, current Project Map state, Source Authority, active task/checkpoint/handoff, and only policy-allowed memory units.
+
+If this is not enough to continue safely, the correct answer is `missing evidence`, not reconstruction from chat recall.

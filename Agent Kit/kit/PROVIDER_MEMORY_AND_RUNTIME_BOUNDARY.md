@@ -137,3 +137,16 @@ Use this label:
 ```
 
 Then either verify against Project Map / project files, ask the owner, or omit the claim.
+
+
+---
+
+## Platform context compaction
+
+Platform-generated summaries, compressed chat history, provider memory, and personalization are non-authoritative hints.
+
+They must not establish project facts, authorize actions, replace the Project Map, replace Working State, override Source Authority, mark work as completed, or create durable memory.
+
+If context compaction is suspected, recover from Project Map, Working State, Source Authority, active task/checkpoint/handoff, and policy-allowed memory units. Do not reconstruct project state from chat recall.
+
+See `PLATFORM_CONTEXT_COMPACTION_BOUNDARY.md`.

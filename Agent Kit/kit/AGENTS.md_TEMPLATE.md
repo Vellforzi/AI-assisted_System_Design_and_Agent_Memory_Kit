@@ -85,3 +85,37 @@ For implementation tasks, finish with:
 - side effects performed and receipt IDs if applicable.
 
 Do not update Project Map unless the owner explicitly asks.
+
+
+---
+
+## Platform context boundary
+
+Platform-generated summaries are non-authoritative hints.
+
+They must never establish project facts, authorize actions, replace Project Map, replace Working State, override Source Authority, mark work as completed, create durable memory, or resolve conflicts.
+
+Agent must not summarize, compact, promote, or rewrite project state unless explicitly asked by the owner or unless operating inside an approved checkpoint/update task.
+
+If context compaction is suspected, recover from Project Map, Working State, Source Authority, and the latest approved task/checkpoint/handoff.
+
+---
+
+## Command vocabulary
+
+Prefer explicit commands or mode blocks:
+
+- `/answer`
+- `/analyze`
+- `/plan`
+- `/apply`
+- `/checkpoint`
+- `/handoff`
+- `/map-delta`
+- `/map-apply`
+- `/recover`
+- `/eval-smoke`
+- `/failure-case`
+- `/inventory`
+
+No command means answer-only by default.

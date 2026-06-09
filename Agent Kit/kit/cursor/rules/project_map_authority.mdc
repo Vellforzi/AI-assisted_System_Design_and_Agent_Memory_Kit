@@ -1,0 +1,25 @@
+---
+description: Project Map and Source Authority rule. Apply always when the project uses Agent Memory Kit.
+alwaysApply: true
+---
+
+# Project Map Authority Rule
+
+The Project Map is the durable project memory. It is not chat history and not provider memory.
+
+Read order for project-specific work:
+
+1. `PROJECT_AI_BRIEF.md`, if present.
+2. `Project Map/current_state.md` and `Project Map/working_state.yaml`.
+3. `Project Map/source_authority.yaml`.
+4. `Project Map/memory/index.yaml` and only relevant memory units.
+5. Active task, checkpoint, workstream, or handoff when relevant.
+6. Scoped project files for the task.
+
+Do not load the entire project by default.
+
+When sources conflict, use `source_authority.yaml`. If the authority order is missing, ask or propose one. Do not resolve conflicts from model memory.
+
+In answer/analyze/plan modes, Project Map updates may be proposed but not written.
+
+Project Map writes require explicit `/map-apply` or an approved apply task whose scope includes the exact Project Map paths.

@@ -1,7 +1,7 @@
 # AI-assisted System Design and Agent Memory Kit
 
-Version: v3.4.0  
-Release date: 2026-06-08  
+Version: v3.5.0  
+Release date: 2026-06-09  
 Status: portable project-owner toolkit
 
 This package contains two complementary tools:
@@ -54,7 +54,7 @@ See `Agent Kit/kit/POSITIONING_AND_ALTERNATIVES.md`.
 AI-assisted System Design and Agent Memory Kit/
   README.md
   START_HERE.md
-  RELEASE_NOTES_v3.4.0.md
+  RELEASE_NOTES_v3.5.0.md
 
   AI-assisted System Design/
     README.md
@@ -82,16 +82,14 @@ AI-assisted System Design and Agent Memory Kit/
 
 ---
 
-## What v3.4.0 adds
+## What v3.5.0 adds
 
-- Explicit significant-work and checkpoint policy.
-- Eval automation and trigger policy.
-- Optional checklist-assisted eval runner script.
-- New-project adoption guide.
-- Owner day-to-day usage guide.
-- Plain-language glossary.
-- Positioning and alternatives guide for README/public publishing.
-- Extra eval cases for significant work, eval triggers, adoption, and owner-control behavior.
+- Cursor Integration Pack with Rules, Commands, Skills, Subagents, and optional Hooks examples.
+- Platform Context Compaction Boundary for treating summaries and compressed chat history as non-authoritative hints.
+- Fresh-session Project Map update workflow for long chats.
+- Command vocabulary for `/answer`, `/plan`, `/apply`, `/checkpoint`, `/handoff`, `/map-apply`, `/recover`, and eval workflows.
+- Optional hook scripts for secrets, DB writes, dangerous git commands, scope drift, and Project Map write guards.
+- Extra eval cases for platform-summary safety and Cursor integration behavior.
 
 ---
 
@@ -108,3 +106,10 @@ This package is not:
 - a license to let agents mutate files without owner intent.
 
 Use technical enforcement where possible: permissions, hooks, sandboxing, branch isolation, read-only modes, and review gates.
+
+
+---
+
+## Python is not required
+
+Agent Memory Kit is language-agnostic and file-based. Python helper scripts are optional examples only. They are included because the original owner works in Python. Replace them with another language if that fits your project better.

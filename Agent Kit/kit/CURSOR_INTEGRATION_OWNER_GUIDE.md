@@ -1,0 +1,145 @@
+# Cursor Integration Owner Guide
+
+Purpose: explain how to use Agent Memory Kit inside Cursor through Rules, Commands, Skills, Subagents, and optional Hooks.
+
+This guide is written for a project owner who wants high control, short working loops, and no hidden autonomous behavior.
+
+---
+
+## Plain-language model
+
+Use Cursor surfaces like this:
+
+| Cursor surface | What it should do | What it should not do |
+|---|---|---|
+| Rules | Always-on safety and memory rules. | Store the whole Project Map or long guides. |
+| Commands | Start a known workflow such as `/answer`, `/apply`, `/checkpoint`, or `/handoff`. | Act as vague magic words without scope. |
+| Skills | Store reusable procedures that are too long for always-on Rules. | Become uncontrolled write permissions. |
+| Subagents | Run focused read-only audits in one area. | Mutate code, git, DB, deploy, or Project Map by default. |
+| Hooks | Add technical checks around dangerous actions. | Replace owner review or project tests. |
+
+---
+
+## Recommended Cursor setup
+
+Minimum useful setup:
+
+```text
+.cursor/
+  rules/
+    agent_memory_core.mdc
+    platform_context_compaction_boundary.mdc
+    option_profit_safety.mdc
+
+Agent Kit/
+  kit/
+    cursor/
+      commands/
+      skills/
+      subagents/
+      hooks/
+```
+
+Then create or paste the command bodies into Cursor Commands:
+
+- `/answer`
+- `/analyze`
+- `/plan`
+- `/apply`
+- `/checkpoint`
+- `/handoff`
+- `/map-delta`
+- `/map-apply`
+- `/recover`
+- `/eval-smoke`
+- `/failure-case`
+- `/inventory`
+
+Do not rely on ordinary words such as "do it" or "continue" to switch modes. Use explicit commands when behavior matters.
+
+---
+
+## Practical owner workflow
+
+A safe controlled loop:
+
+```text
+/answer or /analyze
+  collect context and understand the task;
+
+/plan
+  produce a scoped task for Cursor;
+
+/apply
+  perform one bounded change;
+
+/checkpoint or /handoff
+  capture the stage before the chat becomes long;
+
+/map-apply in a fresh session
+  update Project Map from approved delta/handoff;
+
+/eval-smoke
+  check whether behavior rules still hold after rule/kit changes.
+```
+
+---
+
+## Do not overload Rules
+
+Rules should be short. A large always-loaded rule wastes context and can create instruction conflicts.
+
+Keep in Rules:
+
+- answer-only default;
+- Project Map authority;
+- Source Authority conflict rule;
+- platform-summary boundary;
+- mutation gates;
+- response footer.
+
+Keep in Skills or guides:
+
+- memory compilation procedure;
+- checkpoint procedure;
+- handoff procedure;
+- eval-case building;
+- source-authority audit;
+- adoption guides.
+
+---
+
+## Suggested response footer
+
+For non-trivial work, ask Cursor to end with:
+
+```text
+Mode:
+Scope:
+Files changed:
+Evidence:
+Project Map delta: yes/no
+Checkpoint suggested: yes/no
+Eval trigger: yes/no
+Next safe step:
+```
+
+This makes it harder for important state changes to disappear inside a long chat.
+
+---
+
+## Optional hooks
+
+Hooks are useful when the host tool supports script execution at specific points in the agent lifecycle.
+
+Use hooks to catch:
+
+- possible secrets;
+- dangerous git commands;
+- database writes;
+- edits outside allowed scope;
+- unauthorized Project Map writes.
+
+The hook scripts in `cursor/hooks/scripts/` are examples. Agent Memory Kit does not require Python. The examples are Python because the original owner works in Python and Python is convenient for portable local scripts. Replace them with shell, Node.js, PowerShell, Go, or any language that fits your environment.
+
+Always verify the current Cursor hook schema before wiring `hooks.json.example` into a real project.

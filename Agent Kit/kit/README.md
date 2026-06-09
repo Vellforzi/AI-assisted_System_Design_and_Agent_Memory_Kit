@@ -1,8 +1,8 @@
 # Agent Memory Kit Starter Package
 
-Version: v3.4.0  
-Release date: 2026-06-08  
-Package: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.4.0_EN.zip`
+Version: v3.5.0  
+Release date: 2026-06-09  
+Package: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.5.0_EN.zip`
 
 Agent Memory Kit is a portable memory operating layer for project owners who work with AI agents across long projects.
 
@@ -63,6 +63,9 @@ Evals do not run automatically unless the owner wires them to a script, hook, CI
 | File | Purpose |
 |---|---|
 | `OWNER_USAGE_GUIDE.md` | Day-to-day owner workflow and safe prompts. |
+| `PLATFORM_CONTEXT_COMPACTION_BOUNDARY.md` | Platform summaries, compacted chat history, and provider memory are non-authoritative hints, not project truth. |
+| `CURSOR_INTEGRATION_OWNER_GUIDE.md` | How to use the kit with Cursor Rules, Commands, Skills, Subagents, and Hooks. |
+| `cursor/` | Cursor Integration Pack: rules, commands, skills, read-only subagents, and optional hook examples. |
 | `ACTION_INTENT_CONTRACT.md` | Default answer-only behavior and explicit-action gate. |
 | `SIGNIFICANT_WORK_AND_CHECKPOINTS.md` | Defines meaningful work, checkpoints, Project Map delta proposals, and eval triggers. |
 | `PROJECT_GROUNDING_CONTRACT.md` | Strict evidence contract for project-specific claims. |
@@ -158,3 +161,24 @@ Use:
 Put the short runtime-core rules in service-level instructions. Keep project-specific facts in `Project Map/`.
 
 Do not put the only copy of project knowledge into ChatGPT Custom Instructions, Cursor Personal Rules, Claude Project Instructions, or another service-specific prompt.
+
+
+---
+
+## Cursor Integration Pack
+
+Use `cursor/` to install small, explicit Cursor building blocks instead of pasting the whole kit into one prompt.
+
+Recommended minimum:
+
+- Rules: core memory rule, platform context boundary, safety defaults.
+- Commands: `/answer`, `/plan`, `/apply`, `/checkpoint`, `/handoff`, `/map-apply`, `/recover`, `/eval-smoke`.
+- Hooks: start as warnings, then block secrets, DB writes, dangerous git commands, out-of-scope edits, and unauthorized Project Map writes.
+
+See `CURSOR_INTEGRATION_OWNER_GUIDE.md` and `cursor/README.md`.
+
+---
+
+## Python is not required
+
+Agent Memory Kit is language-agnostic and file-based. Python helper scripts are optional examples only. They are included because the original owner works in Python. Replace them with another language if that fits your project better.
