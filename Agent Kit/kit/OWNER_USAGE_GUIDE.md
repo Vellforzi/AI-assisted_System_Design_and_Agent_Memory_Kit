@@ -165,7 +165,7 @@ Platform summaries are not evidence.
 
 ---
 
-## v3.7 recommended local AI setup
+## v3.8 recommended local AI setup
 
 Recommended default for a solo owner:
 

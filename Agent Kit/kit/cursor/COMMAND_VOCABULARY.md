@@ -47,7 +47,7 @@ A question, review request, or analysis request does not authorize file edits, g
 
 ---
 
-## v3.7 commands
+## v3.8 commands
 
 ### `/scope-set`
 
@@ -60,3 +60,15 @@ Reset task write scope to safe defaults.
 ### `/workspace-check`
 
 Check whether the active workspace exposes Project Map, agent rules, hooks, and all relevant project components.
+
+
+## v3.8 settings and context commands
+
+- `/settings-audit` — compare Cursor settings with the owner-controlled defaults. Analyze only unless the owner explicitly asks for apply.
+- `/cursorignore-audit` — inspect `.cursorignore` and decide whether Hierarchical Cursor Ignore should be enabled.
+
+These commands do not grant permission to change IDE settings or project files by themselves.
+
+## /codexignore-audit
+
+Inspect `.codexignore` as a Codex context-boundary policy file. Do not edit without explicit apply/scope permission.

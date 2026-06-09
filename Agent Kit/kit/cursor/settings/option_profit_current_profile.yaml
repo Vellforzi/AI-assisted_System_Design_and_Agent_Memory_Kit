@@ -1,0 +1,96 @@
+profile_id: option-profit-cursor-settings-current-v3.8.0
+status: example_current_owner_profile
+notes:
+- This profile reflects a high-control setup where Cursor is active implementation
+  hands but not fully autonomous.
+- Use project evidence and owner confirmation before treating this as current for
+  any external project.
+settings:
+  agents:
+    text_size: default
+    submit_with_ctrl_enter: true
+    max_tab_count: 5
+    queue_messages: send_after_current_message
+    usage_summary: always
+    agent_autocomplete: true
+    auto_approve_mode_transitions: false
+  subagents:
+    explore_subagent_model: composer_2_5_fast
+    default_policy: read_only
+  agent_review:
+    start_on_commit: false
+    include_submodules: false
+    include_untracked_files: true
+    default_approach: quick
+  context:
+    web_search_tool: true
+    auto_accept_web_search: false
+    web_fetch_tool: true
+    hierarchical_cursor_ignore: true
+    ignore_symlinks_in_cursor_ignore_search: false
+  approvals_and_execution:
+    run_mode: auto_review
+    forbidden_default_run_mode: run_everything
+    browser_protection: true
+    mcp_tools_protection: true
+    file_deletion_protection: true
+    external_file_protection: true
+    mcp_allowlist_default: []
+    fetch_domain_allowlist_default: []
+    command_allowlist_default:
+    - cd
+    - pwd
+    - ls
+    - cat
+    - head
+    - tail
+    - dirname
+    - basename
+    - which
+    - file
+    - stat
+    - du
+    - df
+    - grep
+    - wc
+    - sort
+    - uniq
+    - cut
+    - rg
+    - echo
+    - printf
+    - date
+    - sleep
+    - whoami
+    - id
+    - uname
+    - printenv
+    - git status
+    - git diff
+    - git log
+    - git show
+    - docker ps
+    - docker images
+    - docker logs
+    - docker inspect
+    - docker compose ps
+    - docker compose logs
+    - docker compose config
+  applying_changes:
+    inline_diffs: true
+    jump_to_next_diff_on_accept: true
+    auto_format_on_agent_finish: false
+  terminal:
+    legacy_terminal_tool: false
+    toolbar_on_selection: true
+    auto_parse_links: false
+    themed_diff_backgrounds: true
+    terminal_hint: false
+    preview_box_for_terminal_ctrl_k: true
+  voice_mode:
+    submit_keywords: []
+  attribution:
+    commit_attribution: false
+    pr_attribution: false
+  git:
+    branch_prefix: cursor/

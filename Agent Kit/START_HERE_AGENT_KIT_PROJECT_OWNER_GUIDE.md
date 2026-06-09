@@ -1,8 +1,8 @@
 # START HERE — Agent Memory Kit Project Owner Guide
 
-Version: v3.7.0  
+Version: v3.8.0  
 Release date: 2026-06-09  
-Package: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.7.0_EN.zip`  
+Package: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.8.0_EN.zip`  
 Status: portable starter guide for the project owner  
 Purpose: explain how to use Agent Memory Kit to preserve project-specific knowledge, current work state, evidence, decisions, and continuity without letting the AI answer from ungrounded model memory or act without explicit instruction.
 

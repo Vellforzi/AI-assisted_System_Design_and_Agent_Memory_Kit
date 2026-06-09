@@ -146,7 +146,7 @@ Always verify the current Cursor hook schema before wiring `hooks.json.example` 
 
 ---
 
-## v3.7 workspace and scope policy
+## v3.8 workspace and scope policy
 
 For a multi-component project with one Project Map, prefer one shared workspace root.
 
@@ -175,3 +175,29 @@ New recommended commands:
 - `/scope-reset` — return the write whitelist to a safe default.
 
 See `WORKSPACE_SELECTION_GUIDE.md` and `SCOPE_CONTROL_AND_ALLOWED_SCOPE_GUIDE.md`.
+
+
+## Cursor Agent settings profile
+
+For owner-controlled work, install Rules and Commands first, then use the settings profile in:
+
+```text
+cursor/CURSOR_OWNER_CONTROLLED_DEFAULTS.md
+cursor/settings/owner_controlled_profile.yaml
+```
+
+The recommended profile treats Cursor as active implementation hands, not as an unrestricted autonomous worker.
+
+Core defaults:
+
+- `Run Everything` is not allowed as the default run mode.
+- Use Auto-review or stricter execution mode.
+- Keep Browser Protection, MCP Tools Protection, File-Deletion Protection, and External-File Protection on.
+- Keep Auto-Approve Mode Transitions off.
+- Keep Auto-Accept Web Search off.
+- Keep Usage Summary visible.
+- Keep Auto Format on Agent Finish off.
+- Enable Hierarchical Cursor Ignore only after `.cursorignore` is audited.
+
+Use `/settings-audit` when the owner wants the agent to explain or check Cursor settings.
+Use `/cursorignore-audit` before enabling Hierarchical Cursor Ignore.

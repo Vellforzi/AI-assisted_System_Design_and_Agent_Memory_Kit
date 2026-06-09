@@ -1,0 +1,60 @@
+# Agent Memory Kit codex ignore template.
+# Place at project root as .codexignore when your Codex runtime or hooks support it.
+# If native support is unavailable, treat this file as a policy artifact and mirror critical
+# patterns in hooks, scope guards, .gitignore, .cursorignore, or agent instructions.
+
+# Git internals
+.git/
+
+# OS / desktop metadata
+**/desktop.ini
+**/.DS_Store
+**/Thumbs.db
+
+# Python caches
+**/__pycache__/
+**/*.pyc
+**/.pytest_cache/
+**/.mypy_cache/
+**/.ruff_cache/
+
+# Virtual environments
+**/.venv/
+**/venv/
+**/env/
+
+# Node / frontend deps
+**/node_modules/
+**/.next/
+**/dist/
+**/build/
+
+# Logs / temp
+**/*.log
+**/logs/
+**/tmp/
+**/temp/
+
+# Local env / secrets
+**/.env
+**/.env.*
+!**/.env.example
+**/*secret*
+**/*secrets*
+**/*credential*
+**/*credentials*
+
+# Large/generated data
+**/downloads/
+**/artifacts/
+**/cache/
+
+# Keep project truth visible:
+# AGENTS.md
+# PROJECT_AI_BRIEF.md
+# Project Map/**
+# docs/**
+# db_sql/**
+# Options_api/**
+# Options_scraper/**
+# Options_MT/**

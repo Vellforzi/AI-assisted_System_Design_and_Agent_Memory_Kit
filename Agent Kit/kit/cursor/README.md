@@ -12,12 +12,20 @@ It is intentionally split into small files so the owner can install only what is
 cursor/
   README.md
   COMMAND_VOCABULARY.md
+  CURSOR_OWNER_CONTROLLED_DEFAULTS.md
 
   rules/
     agent_memory_core.mdc
     project_map_authority.mdc
     platform_context_compaction_boundary.mdc
     option_profit_safety.mdc
+
+  settings/
+    owner_controlled_profile.yaml
+    option_profit_current_profile.yaml
+
+  context/
+    .cursorignore.safe-default
 
   commands/
     answer.md
@@ -90,6 +98,8 @@ Commands:
 - `/map-apply`
 - `/recover`
 - `/eval-smoke`
+- `/settings-audit`
+- `/cursorignore-audit`
 
 Hooks:
 
@@ -104,3 +114,18 @@ Hooks:
 ## Important limitation
 
 Rules and commands guide the model. Hooks and external tooling provide stronger technical checks. Agent Memory Kit itself is a file-based operating contract; it is not a security sandbox.
+
+
+## Settings profile
+
+Use `CURSOR_OWNER_CONTROLLED_DEFAULTS.md` and `settings/owner_controlled_profile.yaml` as the default Cursor Agent settings profile.
+
+Key defaults:
+
+- Run Mode must not be `Run Everything`; use Auto-review or stricter.
+- Usage Summary should be visible, preferably Always.
+- Auto-Approve Mode Transitions should be off.
+- Auto-Accept Web Search should be off.
+- Browser, MCP, file deletion, and external-file protections should be on.
+- Auto Format on Agent Finish should be off.
+- Hierarchical Cursor Ignore should be enabled only after `.cursorignore` is verified.

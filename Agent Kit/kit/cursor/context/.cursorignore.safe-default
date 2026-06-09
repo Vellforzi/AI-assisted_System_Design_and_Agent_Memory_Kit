@@ -1,0 +1,57 @@
+# Git internals
+.git/
+
+# OS / desktop metadata
+**/desktop.ini
+**/.DS_Store
+**/Thumbs.db
+
+# Python caches
+**/__pycache__/
+**/*.pyc
+**/.pytest_cache/
+**/.mypy_cache/
+**/.ruff_cache/
+
+# Virtual environments
+**/.venv/
+**/venv/
+**/env/
+
+# Node / frontend deps
+**/node_modules/
+**/.next/
+**/dist/
+**/build/
+
+# Logs / temp
+**/*.log
+**/logs/
+**/tmp/
+**/temp/
+
+# Local env / secrets
+# Recommended default for normal coding: keep real secrets out of agent context.
+# Use .env.example, docs, or owner-provided redacted snippets instead.
+**/.env
+**/.env.*
+!**/.env.example
+**/*secret*
+**/*secrets*
+**/*credential*
+**/*credentials*
+
+# Large/generated data
+**/downloads/
+**/artifacts/
+**/cache/
+
+# Do not hide by default:
+# AGENTS.md
+# PROJECT_AI_BRIEF.md
+# Project Map/**
+# docs/**
+# db_sql/**
+# Options_api/**
+# Options_scraper/**
+# Options_MT/**

@@ -1,6 +1,6 @@
 # AI-assisted System Design — Method Guide
 
-Version: v3.7.0  
+Version: v3.8.0  
 Status: portable methodology note  
 Purpose: help a project owner run a project as an AI-readable engineering system without letting the AI become an ungrounded source of project truth.
 

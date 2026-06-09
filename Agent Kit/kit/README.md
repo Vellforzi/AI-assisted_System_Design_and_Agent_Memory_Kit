@@ -1,8 +1,8 @@
 # Agent Memory Kit Starter Package
 
-Version: v3.7.0  
+Version: v3.8.0  
 Release date: 2026-06-09  
-Package: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.7.0_EN.zip`
+Package: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.8.0_EN.zip`
 
 Agent Memory Kit is a portable memory operating layer for project owners who work with AI agents across long projects.
 
@@ -100,6 +100,10 @@ Evals do not run automatically unless the owner wires them to a script, hook, CI
 | `HOOK_REQUEST_WORKFLOW.md` | How an agent should respond when the owner asks for hooks. |
 | `HOOK_GENERATION_QUESTIONS.md` | Minimal questions to ask before generating hooks. |
 | `HOOK_PACKAGING_GUIDE.md` | How to package project-local hook bundles. |
+| `CURSOR_AGENT_SETTINGS_GUIDE.md` | Recommended Cursor Agent settings for owner-controlled work. |
+| `CURSORIGNORE_AND_CONTEXT_BOUNDARY_GUIDE.md` | How to use `.cursorignore` without hiding project truth. |
+| `cursor/CURSOR_OWNER_CONTROLLED_DEFAULTS.md` | Cursor settings profile summary. |
+| `cursor/settings/owner_controlled_profile.yaml` | Machine-readable owner-controlled Cursor settings profile. |
 
 | `EXISTING_PROJECT_ADOPTION_GUIDE.md` | How to adopt the kit in an already active project. |
 | `NEW_PROJECT_ADOPTION_GUIDE.md` | How to start an empty project with the kit. |
@@ -207,3 +211,7 @@ This release includes a Codex Integration Pack under `codex/`. It provides:
 - a Cursor + Codex workflow.
 
 Use Codex as an independent reviewer, auditor, recovery assistant, or controlled executor. Do not use Codex memory, platform summaries, or compressed chat as project truth.
+
+## v3.8.0 focus
+
+v3.8.0 adds Cursor owner-controlled settings, authoritative existing workspace handling, `.cursorignore` / `.codexignore` context-boundary templates, and desktop metadata ignore patterns for Windows/Google Drive projects.

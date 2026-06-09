@@ -76,7 +76,7 @@ That example is intentionally minimal. It does not include machine-generated plu
 
 ---
 
-## v3.7 owner-controlled default config
+## v3.8 owner-controlled default config
 
 ```toml
 model = "gpt-5.5"

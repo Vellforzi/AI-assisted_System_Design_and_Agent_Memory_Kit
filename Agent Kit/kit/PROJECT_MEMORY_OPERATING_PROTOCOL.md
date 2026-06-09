@@ -406,7 +406,7 @@ See `PLATFORM_CONTEXT_COMPACTION_BOUNDARY.md`.
 
 ---
 
-## v3.7 scope and workspace operating rules
+## v3.8 scope and workspace operating rules
 
 1. The owner should not have to manually edit scope files if an explicit agent workflow can safely update them.
 2. The agent may update scope control files only after explicit owner approval or an approved task contract.
@@ -414,3 +414,13 @@ See `PLATFORM_CONTEXT_COMPACTION_BOUNDARY.md`.
 4. A multi-component project with one Project Map should normally be opened at the shared root workspace.
 5. A component-only workspace is allowed only when the task intentionally does not require Project Map or cross-component context.
 6. Codex should default to restricted second-agent behavior: review first, mutate only under explicit scope and approval.
+
+
+## Authoritative workspace rule
+
+If Project Map, `AGENTS.md`, `current_state`, or source authority references an existing workspace file, treat it as primary. Do not replace it with a generated fallback workspace unless the owner explicitly asks.
+
+
+## Cursor settings rule
+
+For owner-controlled projects, Cursor must not default to `Run Everything`. Prefer Auto-review or stricter mode with protections on, narrow allowlists, visible usage summary, and explicit apply scope for file changes.

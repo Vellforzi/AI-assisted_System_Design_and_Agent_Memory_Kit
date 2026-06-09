@@ -17,3 +17,12 @@ A workspace is not a permission model by itself. It defines the IDE project peri
 2. Rename it, for example `OPTION_PROFIT_JOB.code-workspace`.
 3. Open it from Cursor.
 4. Keep `.cursor/`, `.codex/`, `Project Map/`, and project components under the same workspace when they belong to one project.
+
+
+## Authoritative workspace first
+
+Before creating a new `.code-workspace`, check whether the project already has one referenced by Project Map, `AGENTS.md`, `current_state`, or source authority.
+
+If an authoritative workspace exists, use it. Do not replace it with a generated generic template.
+
+Use the templates in this folder only for new projects, missing workspaces, or owner-requested fallback files.

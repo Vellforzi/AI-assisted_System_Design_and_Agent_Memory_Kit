@@ -36,7 +36,7 @@ Using Codex inside Cursor is useful because it keeps both agent surfaces in one 
 
 ---
 
-## v3.7 default role settings
+## v3.8 default role settings
 
 Recommended owner-controlled default:
 

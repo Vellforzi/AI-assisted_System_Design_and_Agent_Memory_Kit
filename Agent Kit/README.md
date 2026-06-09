@@ -1,6 +1,6 @@
 # Agent Memory Kit
 
-Version: v3.7.0
+Version: v3.8.0
 
 Agent Memory Kit is the project-memory and agent-behavior layer of the package.
 
@@ -78,3 +78,8 @@ Project Map = shared project truth
 
 Use one shared workspace root when one Project Map governs multiple components. Use task scope and permission gates for safety.
 
+
+
+## v3.8 Cursor settings and workspace authority
+
+This release adds an owner-controlled Cursor Agent settings profile, `.cursorignore` guidance, settings audit commands, and the rule that an existing authoritative workspace file must be inspected and used rather than replaced by a generated fallback.

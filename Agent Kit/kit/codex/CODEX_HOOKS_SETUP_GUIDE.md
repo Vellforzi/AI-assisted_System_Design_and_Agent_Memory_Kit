@@ -71,7 +71,7 @@ Hooks are guardrails, not a full security boundary. Keep destructive operations 
 
 ---
 
-## v3.7 hook request workflow
+## v3.8 hook request workflow
 
 When an owner asks for hooks, the agent should follow:
 

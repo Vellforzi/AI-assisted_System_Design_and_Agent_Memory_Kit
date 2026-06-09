@@ -50,7 +50,7 @@ The provided hook scripts are examples. Agent Memory Kit itself is language-agno
 
 ---
 
-## v3.7 additions
+## v3.8 additions
 
 Codex integration now includes:
 
@@ -67,3 +67,7 @@ See:
 - `../WORKSPACE_SELECTION_GUIDE.md`
 - `../AI_AGENT_ROLE_STACK_GUIDE.md`
 - `scope/README.md`
+
+## Ignore files
+
+See `ignore/` for `.codexignore` templates and the Codex ignore boundary guide. Keep `.codexignore` aligned with `.cursorignore` when Cursor and Codex operate on the same project root.

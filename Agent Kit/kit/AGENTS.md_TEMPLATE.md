@@ -137,3 +137,13 @@ For scope changes:
 If using Codex, prefer `default_permissions = ":read-only"` and do not mix it with old `sandbox_mode` settings.
 
 For a project with one Project Map and multiple components, prefer opening the shared project root as the workspace.
+
+
+## Authoritative workspace rule
+
+If Project Map, `AGENTS.md`, `current_state`, or source authority references an existing workspace file, treat it as primary. Do not replace it with a generated fallback workspace unless the owner explicitly asks.
+
+
+## Cursor settings rule
+
+For owner-controlled projects, Cursor must not default to `Run Everything`. Prefer Auto-review or stricter mode with protections on, narrow allowlists, visible usage summary, and explicit apply scope for file changes.

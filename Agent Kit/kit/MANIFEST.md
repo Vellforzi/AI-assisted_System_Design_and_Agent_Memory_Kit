@@ -1,6 +1,6 @@
-# AI-assisted System Design and Agent Memory Kit v3.7.0 — Manifest
+# AI-assisted System Design and Agent Memory Kit v3.8.0 — Manifest
 
-Package file: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.7.0_EN.zip`
+Package file: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.8.0_EN.zip`
 
 Package purpose: portable starter guide and memory operating layer for using AI agents with owner-controlled projects. Agent Memory Kit helps build a Project Map through structured, meaningful, interconnected duplication of project information supplied or verified by the owner.
 
@@ -10,7 +10,7 @@ Package purpose: portable starter guide and memory operating layer for using AI 
 
 - `README.md` — concise repository/package README.
 - `START_HERE.md` — package router and first entry point.
-- `RELEASE_NOTES_v3.7.0.md` — what changed in this release.
+- `RELEASE_NOTES_v3.8.0.md` — what changed in this release.
 - `AI-assisted System Design/README.md` — overview of the system-design methodology.
 - `AI-assisted System Design/AI-assisted System Design.md` — methodology for operating AI-readable projects.
 - `Agent Kit/README.md` — overview of Agent Memory Kit.
@@ -181,7 +181,7 @@ The Python scripts in `cursor/hooks/scripts/` are optional examples. Agent Memor
 
 ---
 
-## v3.7 scope, workspace, and role orchestration files
+## v3.8 scope, workspace, and role orchestration files
 
 - `Agent Kit/kit/SCOPE_CONTROL_AND_ALLOWED_SCOPE_GUIDE.md` — agent-managed allowed-scope workflow.
 - `Agent Kit/kit/CODEX_SANDBOX_AND_PERMISSION_PROFILES_GUIDE.md` — plain-language Codex permission and sandbox guide.
@@ -196,3 +196,25 @@ The Python scripts in `cursor/hooks/scripts/` are optional examples. Agent Memor
 - `Agent Kit/kit/cursor/commands/workspace-check.md` — command template for workspace validation.
 - `Agent Kit/kit/codex/scope/` — Codex scope templates and optional helper.
 - `Agent Kit/kit/codex/workflows/` — Codex workflow notes for scope and workspace checks.
+
+- `Agent Kit/kit/CURSOR_AGENT_SETTINGS_GUIDE.md` — recommended Cursor Agent settings for owner-controlled work.
+- `Agent Kit/kit/CURSORIGNORE_AND_CONTEXT_BOUNDARY_GUIDE.md` — `.cursorignore` and context-boundary guide.
+- `Agent Kit/kit/cursor/CURSOR_OWNER_CONTROLLED_DEFAULTS.md` — readable Cursor settings profile.
+- `Agent Kit/kit/cursor/settings/owner_controlled_profile.yaml` — machine-readable Cursor settings profile.
+- `Agent Kit/kit/cursor/settings/option_profit_current_profile.yaml` — example project-specific settings profile.
+- `Agent Kit/kit/cursor/context/.cursorignore.safe-default` — safe default `.cursorignore` template.
+- `Agent Kit/kit/cursor/commands/settings-audit.md` — Cursor settings audit command.
+- `Agent Kit/kit/cursor/commands/cursorignore-audit.md` — `.cursorignore` audit command.
+
+---
+
+## v3.8 ignore boundary additions
+
+- `Agent Kit/kit/CODEXIGNORE_AND_CONTEXT_BOUNDARY_GUIDE.md` — `.codexignore` guidance and Codex context-boundary policy.
+- `Agent Kit/kit/codex/ignore/README.md` — Codex ignore template guide.
+- `Agent Kit/kit/codex/ignore/.codexignore.safe-default` — general `.codexignore` template.
+- `Agent Kit/kit/codex/ignore/.codexignore.option-profit-default` — OPTION PROFIT `.codexignore` template.
+- `Agent Kit/kit/cursor/context/.cursorignore.option-profit-default` — OPTION PROFIT `.cursorignore` template.
+- `Agent Kit/kit/cursor/commands/codexignore-audit.md` — `.codexignore` audit command.
+
+The ignore templates include `**/desktop.ini` for Windows/Google Drive projects.

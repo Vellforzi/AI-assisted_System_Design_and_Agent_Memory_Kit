@@ -101,3 +101,20 @@ See:
 ```text
 cursor/workspaces/OPTION_PROFIT_JOB.code-workspace.example
 ```
+
+
+## Authoritative existing workspace rule
+
+If Project Map, `AGENTS.md`, `current_state`, source authority, or existing project docs reference a specific `.code-workspace` file, the agent must treat that file as the primary workspace.
+
+The agent must not replace it with a generated fallback workspace.
+
+The agent may only:
+
+- inspect it;
+- explain it;
+- compare it with a proposed template;
+- suggest a patch;
+- create a fallback workspace only if no authoritative workspace exists or the owner explicitly asks for a fallback.
+
+For existing projects, workspace generation is a last resort. Workspace audit comes first.

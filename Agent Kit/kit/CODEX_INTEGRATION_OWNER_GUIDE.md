@@ -106,7 +106,7 @@ Agent Memory Kit does not require Python. Python hook scripts are examples only.
 
 ---
 
-## v3.7 scope and workspace policy
+## v3.8 scope and workspace policy
 
 Codex should normally be configured as the restricted second agent:
 

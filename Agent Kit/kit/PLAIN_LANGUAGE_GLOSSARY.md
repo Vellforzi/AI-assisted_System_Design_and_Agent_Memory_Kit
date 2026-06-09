@@ -40,7 +40,7 @@ Purpose: explain common terms in simple language.
 
 ---
 
-## Additional v3.7 terms
+## Additional v3.8 terms
 
 ### Workspace
 

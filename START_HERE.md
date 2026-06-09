@@ -1,8 +1,8 @@
 # START HERE — AI-assisted System Design and Agent Memory Kit
 
-Version: v3.7.0  
+Version: v3.8.0  
 Release date: 2026-06-09  
-Package: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.7.0_EN.zip`  
+Package: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.8.0_EN.zip`  
 Status: portable project-owner kit for AI-assisted work and grounded project memory
 
 ---
@@ -140,7 +140,7 @@ Read:
 
 ---
 
-## What changed in v3.7.0
+## What changed in v3.8.0
 
 This release adds an operational layer for scope control, workspace selection, and multi-agent role separation:
 
@@ -152,7 +152,7 @@ This release adds an operational layer for scope control, workspace selection, a
 - default role split: Cursor implements, Codex reviews, GPT web chat researches, Project Map stores truth;
 - eval cases for scope, workspace, permissions, and role orchestration.
 
-See `RELEASE_NOTES_v3.7.0.md` for details.
+See `RELEASE_NOTES_v3.8.0.md` for details.
 
 ---
 
@@ -191,3 +191,12 @@ Cursor = primary local implementation agent
 Codex = independent review, audit, recovery, and controlled second executor
 Project Map = shared project truth between both
 ```
+
+
+## v3.8 Cursor settings and workspace authority
+
+This release adds an owner-controlled Cursor Agent settings profile, `.cursorignore` guidance, settings audit commands, and the rule that an existing authoritative workspace file must be inspected and used rather than replaced by a generated fallback.
+
+## v3.8.0 focus
+
+v3.8.0 adds Cursor owner-controlled settings, authoritative existing workspace handling, `.cursorignore` / `.codexignore` context-boundary templates, and desktop metadata ignore patterns for Windows/Google Drive projects.

@@ -1,6 +1,6 @@
 # AI-assisted System Design and Agent Memory Kit
 
-Version: v3.7.0  
+Version: v3.8.0  
 Release date: 2026-06-09  
 Status: portable project-owner toolkit
 
@@ -54,7 +54,7 @@ See `Agent Kit/kit/POSITIONING_AND_ALTERNATIVES.md`.
 AI-assisted System Design and Agent Memory Kit/
   README.md
   START_HERE.md
-  RELEASE_NOTES_v3.7.0.md
+  RELEASE_NOTES_v3.8.0.md
 
   AI-assisted System Design/
     README.md
@@ -82,8 +82,12 @@ AI-assisted System Design and Agent Memory Kit/
 
 ---
 
-## What v3.7.0 adds
+## What v3.8.0 adds
 
+- Cursor Agent settings profile for owner-controlled work.
+- Settings audit and `.cursorignore` audit command templates.
+- Authoritative existing workspace rule: inspect and use the project workspace referenced by Project Map or AGENTS.md instead of replacing it with a generated fallback.
+- `.cursorignore` context-boundary guide and safe default template.
 - Scope Control layer for agent-managed `.codex/ALLOWED_SCOPE.txt` updates.
 - `/scope-set`, `/scope-reset`, and `/workspace-check` command templates.
 - Codex sandbox and permission profile guide explaining `default_permissions`, `:read-only`, `:workspace`, and why not to mix them with old `sandbox_mode` settings.
@@ -116,3 +120,12 @@ Use technical enforcement where possible: permissions, hooks, sandboxing, branch
 ## Python is not required
 
 Agent Memory Kit is language-agnostic and file-based. Python helper scripts are optional examples only. They are included because the original owner works in Python. Replace them with another language if that fits your project better.
+
+
+## v3.8 Cursor settings and workspace authority
+
+This release adds an owner-controlled Cursor Agent settings profile, `.cursorignore` guidance, settings audit commands, and the rule that an existing authoritative workspace file must be inspected and used rather than replaced by a generated fallback.
+
+## v3.8.0 focus
+
+v3.8.0 adds Cursor owner-controlled settings, authoritative existing workspace handling, `.cursorignore` / `.codexignore` context-boundary templates, and desktop metadata ignore patterns for Windows/Google Drive projects.
