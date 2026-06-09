@@ -1,5 +1,5 @@
 schema_version: "1.0"
-template_id: "AMK-FAILURE-TO-EVAL-CASE-v3.5.0"
+template_id: "AMK-FAILURE-TO-EVAL-CASE-v3.6.0"
 
 failure_trace:
   observed_at: ""

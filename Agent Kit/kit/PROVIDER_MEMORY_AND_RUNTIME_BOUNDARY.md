@@ -150,3 +150,14 @@ They must not establish project facts, authorize actions, replace the Project Ma
 If context compaction is suspected, recover from Project Map, Working State, Source Authority, active task/checkpoint/handoff, and policy-allowed memory units. Do not reconstruct project state from chat recall.
 
 See `PLATFORM_CONTEXT_COMPACTION_BOUNDARY.md`.
+
+
+---
+
+## Codex-specific boundary
+
+Codex memory, Codex thread summaries, Codex compaction output, and Codex personalization are not authoritative project memory.
+
+Codex may use them only as weak replay hints. They must not establish project facts, authorize actions, replace Project Map, replace Working State, override Source Authority, mark work completed, create durable memory, or resolve conflicts.
+
+If Codex compacts context, it must recover from Project Map and Working State before continuing project work.

@@ -1,0 +1,25 @@
+# Agent Memory Kit Codex safe overlay.
+# Paste top-level keys before the first table header in ~/.codex/config.toml.
+# Merge [features] and [memories] with the existing tables; do not create duplicate [features].
+
+model = "gpt-5.5"
+model_reasoning_effort = "medium"
+personality = "pragmatic"
+
+approval_policy = "on-request"
+approvals_reviewer = "user"
+default_permissions = ":read-only"
+web_search = "cached"
+file_opener = "cursor"
+
+[features]
+js_repl = false
+hooks = true
+memories = false
+multi_agent = true
+undo = true
+
+[memories]
+use_memories = false
+generate_memories = false
+disable_on_external_context = true

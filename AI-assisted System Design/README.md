@@ -1,6 +1,6 @@
 # AI-assisted System Design
 
-Version: v3.5.0
+Version: v3.6.0
 
 AI-assisted System Design is the methodology part of the package. It explains how to shape a project so AI assistants can help without becoming an ungrounded source of project truth.
 

@@ -1,5 +1,5 @@
 schema_version: "1.0"
-policy_id: "AMK-EVAL-TRIGGERS-v3.5.0"
+policy_id: "AMK-EVAL-TRIGGERS-v3.6.0"
 status: "starter_policy"
 
 principle: >

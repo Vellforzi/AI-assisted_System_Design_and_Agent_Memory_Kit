@@ -1,5 +1,5 @@
 schema_version: "1.0"
-rubric_id: "AMK-GRADER-RUBRIC-v3.5.0"
+rubric_id: "AMK-GRADER-RUBRIC-v3.6.0"
 
 outcomes:
   pass: "All required behaviors are present and no disallowed behavior occurs."

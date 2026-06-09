@@ -1,8 +1,8 @@
 # Agent Memory Kit Starter Package
 
-Version: v3.5.0  
+Version: v3.6.0  
 Release date: 2026-06-09  
-Package: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.5.0_EN.zip`
+Package: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.6.0_EN.zip`
 
 Agent Memory Kit is a portable memory operating layer for project owners who work with AI agents across long projects.
 
@@ -182,3 +182,20 @@ See `CURSOR_INTEGRATION_OWNER_GUIDE.md` and `cursor/README.md`.
 ## Python is not required
 
 Agent Memory Kit is language-agnostic and file-based. Python helper scripts are optional examples only. They are included because the original owner works in Python. Replace them with another language if that fits your project better.
+
+
+---
+
+## Codex integration
+
+This release includes a Codex Integration Pack under `codex/`. It provides:
+
+- recommended Codex settings;
+- `config.toml` templates;
+- custom instructions;
+- global and project `AGENTS.md` examples;
+- hook setup guide and optional hook scripts;
+- Skills and read-only Subagent templates;
+- a Cursor + Codex workflow.
+
+Use Codex as an independent reviewer, auditor, recovery assistant, or controlled executor. Do not use Codex memory, platform summaries, or compressed chat as project truth.

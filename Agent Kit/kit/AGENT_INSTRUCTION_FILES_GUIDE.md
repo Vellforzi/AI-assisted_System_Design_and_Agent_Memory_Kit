@@ -144,3 +144,18 @@ Install order:
 5. Subagents, read-only first.
 
 See `CURSOR_INTEGRATION_OWNER_GUIDE.md`.
+
+
+---
+
+## Codex instruction files
+
+Codex should receive only a short entrypoint instruction. Do not paste the whole kit into Codex custom instructions.
+
+Use:
+
+- `codex/agents/AGENTS.global.example.md` for global personal rules;
+- `codex/agents/AGENTS.project.example.md` for project root instructions;
+- `codex/config/custom-instructions.codex.txt` for the Codex UI custom-instructions field.
+
+Codex and Cursor should share the same Project Map. Codex memory and platform summaries are not project truth.

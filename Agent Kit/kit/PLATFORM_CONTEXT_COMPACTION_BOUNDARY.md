@@ -111,3 +111,19 @@ The eval-suite should include checks that:
 - recovery after context compaction starts from Working State and Project Map;
 - a fresh session can apply a Project Map update from an approved handoff;
 - chat recall cannot become durable memory without promotion through the Memory Compiler.
+
+
+---
+
+## Codex PreCompact policy
+
+When using Codex, automatic context compaction should be treated as a checkpoint boundary.
+
+Recommended behavior:
+
+1. Block automatic compaction if no checkpoint or handoff exists.
+2. Ask the owner to create a structured checkpoint/handoff.
+3. Resume work from Project Map and Working State in a fresh or recovered session.
+4. Do not promote compressed chat history into Project Map.
+
+The optional Codex hook `pre_compact_checkpoint_guard.py` implements the first safety step by stopping auto-compaction and asking for checkpoint/handoff first.

@@ -1,6 +1,6 @@
-# AI-assisted System Design and Agent Memory Kit v3.5.0 — Manifest
+# AI-assisted System Design and Agent Memory Kit v3.6.0 — Manifest
 
-Package file: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.5.0_EN.zip`
+Package file: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.6.0_EN.zip`
 
 Package purpose: portable starter guide and memory operating layer for using AI agents with owner-controlled projects. Agent Memory Kit helps build a Project Map through structured, meaningful, interconnected duplication of project information supplied or verified by the owner.
 
@@ -10,7 +10,7 @@ Package purpose: portable starter guide and memory operating layer for using AI 
 
 - `README.md` — concise repository/package README.
 - `START_HERE.md` — package router and first entry point.
-- `RELEASE_NOTES_v3.5.0.md` — what changed in this release.
+- `RELEASE_NOTES_v3.6.0.md` — what changed in this release.
 - `AI-assisted System Design/README.md` — overview of the system-design methodology.
 - `AI-assisted System Design/AI-assisted System Design.md` — methodology for operating AI-readable projects.
 - `Agent Kit/README.md` — overview of Agent Memory Kit.
@@ -85,6 +85,21 @@ Package purpose: portable starter guide and memory operating layer for using AI 
 - `Agent Kit/kit/eval_suite/failure_to_eval_case_template.yaml` — convert real failures into candidate eval cases.
 
 ---
+
+## Codex Integration Pack
+
+- `Agent Kit/kit/CODEX_INTEGRATION_OWNER_GUIDE.md` — owner guide for using Codex with Agent Memory Kit and Cursor.
+- `Agent Kit/kit/codex/README.md` — Codex integration folder overview.
+- `Agent Kit/kit/codex/CODEX_SETTINGS_RECOMMENDATIONS.md` — recommended Codex UI and behavior settings.
+- `Agent Kit/kit/codex/CODEX_CONFIG_TOML_TEMPLATES.md` — config placement and merge guidance.
+- `Agent Kit/kit/codex/CODEX_HOOKS_SETUP_GUIDE.md` — global and project hook setup guide.
+- `Agent Kit/kit/codex/CODEX_CURSOR_WORKFLOW.md` — workflow for Cursor as implementation agent and Codex as reviewer/auditor.
+- `Agent Kit/kit/codex/CODEX_CUSTOM_INSTRUCTIONS.md` — short Codex custom instruction block.
+- `Agent Kit/kit/codex/config/` — config templates and custom-instruction text.
+- `Agent Kit/kit/codex/hooks/` — hook examples and optional scripts.
+- `Agent Kit/kit/codex/agents/` — `AGENTS.md` examples.
+- `Agent Kit/kit/codex/skills/` — Codex Skills for memory compilation, checkpointing, handoff, recovery, source authority, and eval cases.
+- `Agent Kit/kit/codex/subagents/` — read-only review subagent templates.
 
 ## Optional tools
 

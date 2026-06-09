@@ -1,8 +1,8 @@
 # START HERE — AI-assisted System Design and Agent Memory Kit
 
-Version: v3.5.0  
+Version: v3.6.0  
 Release date: 2026-06-09  
-Package: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.5.0_EN.zip`  
+Package: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.6.0_EN.zip`  
 Status: portable project-owner kit for AI-assisted work and grounded project memory
 
 ---
@@ -140,7 +140,7 @@ Read:
 
 ---
 
-## What changed in v3.5.0
+## What changed in v3.6.0
 
 This release strengthens the memory layer around:
 
@@ -154,7 +154,7 @@ This release strengthens the memory layer around:
 - public positioning versus alternative memory approaches;
 - simple terminology support.
 
-See `RELEASE_NOTES_v3.5.0.md` for details.
+See `RELEASE_NOTES_v3.6.0.md` for details.
 
 
 ---
@@ -170,3 +170,27 @@ For Cursor setup, read:
 5. `Agent Kit/kit/cursor/commands/`
 
 Start with Rules and Commands. Add Hooks and Subagents after the core workflow is stable.
+
+---
+
+## Optional IDE integrations
+
+For Cursor, read:
+
+- `Agent Kit/kit/CURSOR_INTEGRATION_OWNER_GUIDE.md`
+- `Agent Kit/kit/cursor/README.md`
+
+For Codex, read:
+
+- `Agent Kit/kit/CODEX_INTEGRATION_OWNER_GUIDE.md`
+- `Agent Kit/kit/codex/README.md`
+- `Agent Kit/kit/codex/CODEX_SETTINGS_RECOMMENDATIONS.md`
+- `Agent Kit/kit/codex/CODEX_HOOKS_SETUP_GUIDE.md`
+
+Recommended split:
+
+```text
+Cursor = primary local implementation agent
+Codex = independent review, audit, recovery, and controlled second executor
+Project Map = shared project truth between both
+```

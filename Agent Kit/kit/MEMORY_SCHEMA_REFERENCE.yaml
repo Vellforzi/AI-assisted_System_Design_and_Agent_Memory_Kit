@@ -1,4 +1,4 @@
-# Agent Memory Kit schema reference v3.5.0
+# Agent Memory Kit schema reference v3.6.0
 # This is a reference, not a strict runtime schema. Projects may adapt it.
 
 schema_version: "3.4.0"

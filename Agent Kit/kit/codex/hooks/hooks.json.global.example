@@ -1,0 +1,59 @@
+{
+  "hooks": {
+    "PreCompact": [
+      {
+        "matcher": "auto",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ~/.codex/hooks/pre_compact_checkpoint_guard.py",
+            "commandWindows": "py -3 C:\\Users\\user\\.codex\\hooks\\pre_compact_checkpoint_guard.py",
+            "timeout": 30,
+            "statusMessage": "Checking checkpoint before compaction"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ~/.codex/hooks/user_prompt_scope_guard.py",
+            "commandWindows": "py -3 C:\\Users\\user\\.codex\\hooks\\user_prompt_scope_guard.py",
+            "timeout": 30,
+            "statusMessage": "Checking action intent and scope"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash|apply_patch|Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ~/.codex/hooks/dangerous_command_guard.py",
+            "commandWindows": "py -3 C:\\Users\\user\\.codex\\hooks\\dangerous_command_guard.py",
+            "timeout": 30,
+            "statusMessage": "Checking dangerous commands"
+          },
+          {
+            "type": "command",
+            "command": "python3 ~/.codex/hooks/project_map_write_guard.py",
+            "commandWindows": "py -3 C:\\Users\\user\\.codex\\hooks\\project_map_write_guard.py",
+            "timeout": 30,
+            "statusMessage": "Checking Project Map writes"
+          },
+          {
+            "type": "command",
+            "command": "python3 ~/.codex/hooks/secret_guard.py",
+            "commandWindows": "py -3 C:\\Users\\user\\.codex\\hooks\\secret_guard.py",
+            "timeout": 30,
+            "statusMessage": "Checking secret access"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,6 +1,6 @@
 # AI-assisted System Design and Agent Memory Kit
 
-Version: v3.5.0  
+Version: v3.6.0  
 Release date: 2026-06-09  
 Status: portable project-owner toolkit
 
@@ -54,7 +54,7 @@ See `Agent Kit/kit/POSITIONING_AND_ALTERNATIVES.md`.
 AI-assisted System Design and Agent Memory Kit/
   README.md
   START_HERE.md
-  RELEASE_NOTES_v3.5.0.md
+  RELEASE_NOTES_v3.6.0.md
 
   AI-assisted System Design/
     README.md
@@ -65,7 +65,7 @@ AI-assisted System Design and Agent Memory Kit/
     START_HERE_AGENT_KIT_PROJECT_OWNER_GUIDE.md
     kit/
       README.md
-      ...contracts, templates, guides, eval suite, optional tools...
+      ...contracts, templates, guides, eval suite, Cursor integration, Codex integration, optional tools...
 ```
 
 ---
@@ -82,14 +82,15 @@ AI-assisted System Design and Agent Memory Kit/
 
 ---
 
-## What v3.5.0 adds
+## What v3.6.0 adds
 
-- Cursor Integration Pack with Rules, Commands, Skills, Subagents, and optional Hooks examples.
-- Platform Context Compaction Boundary for treating summaries and compressed chat history as non-authoritative hints.
-- Fresh-session Project Map update workflow for long chats.
-- Command vocabulary for `/answer`, `/plan`, `/apply`, `/checkpoint`, `/handoff`, `/map-apply`, `/recover`, and eval workflows.
-- Optional hook scripts for secrets, DB writes, dangerous git commands, scope drift, and Project Map write guards.
-- Extra eval cases for platform-summary safety and Cursor integration behavior.
+- Codex Integration Pack for using OpenAI Codex alongside Cursor under the same Agent Memory Kit contracts.
+- Codex `config.toml` templates for read-only default permissions, approval prompts, disabled Codex memories, hooks, and pragmatic behavior.
+- Codex hooks setup guide for `~/.codex/hooks.json` and project-local `.codex/hooks.json`.
+- Optional Codex hook scripts for pre-compaction checkpoint guard, scope guard, dangerous command guard, Project Map write guard, and secret access guard.
+- Codex custom instructions, `AGENTS.md` examples, Skills, and read-only Subagent templates.
+- A documented Cursor + Codex workflow: Cursor as primary implementation agent, Codex as independent reviewer/auditor/recovery assistant, Project Map as shared truth.
+- Stronger context-compaction handling: auto-compaction should be blocked until checkpoint/handoff exists; if compaction happened, recover from Project Map and Working State.
 
 ---
 
