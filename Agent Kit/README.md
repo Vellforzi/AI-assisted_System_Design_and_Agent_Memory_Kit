@@ -1,6 +1,6 @@
 # Agent Memory Kit
 
-Version: v3.6.0
+Version: v3.7.0
 
 Agent Memory Kit is the project-memory and agent-behavior layer of the package.
 
@@ -33,6 +33,10 @@ It helps a project owner maintain a structured Project Map containing:
 6. `kit/SIGNIFICANT_WORK_AND_CHECKPOINTS.md`
 7. `kit/EVAL_SUITE_GUIDE.md`
 8. `kit/EVAL_AUTOMATION_AND_TRIGGER_POLICY.md`
+9. `kit/SCOPE_CONTROL_AND_ALLOWED_SCOPE_GUIDE.md`
+10. `kit/WORKSPACE_SELECTION_GUIDE.md`
+11. `kit/CODEX_SANDBOX_AND_PERMISSION_PROFILES_GUIDE.md`
+12. `kit/AI_AGENT_ROLE_STACK_GUIDE.md`
 
 ---
 
@@ -59,3 +63,18 @@ Do not commit private local preferences, secrets, credentials, raw personal data
 Agent Memory Kit is useful when the owner wants a visible, editable, portable project memory rather than hidden provider memory or a loose chat summary.
 
 It is not a full agent runtime. It can later be implemented through a memory framework, vector store, knowledge graph, IDE hook, eval harness, or agent platform, but the core value is the operating contract: what counts as project truth, what may be remembered, when the agent may act, and how failures become eval cases.
+---
+
+## Cursor, Codex, and GPT role stack
+
+Recommended default:
+
+```text
+Cursor = primary implementation agent
+Codex = restricted reviewer/auditor/recovery helper
+GPT web chat = research, design, and task specs
+Project Map = shared project truth
+```
+
+Use one shared workspace root when one Project Map governs multiple components. Use task scope and permission gates for safety.
+

@@ -37,3 +37,27 @@ Purpose: explain common terms in simple language.
 | External research | Web/docs/public sources retrieved for general knowledge. Not project truth unless owner promotes it. |
 | Handoff | A short package for continuing a task in a new session. |
 | Long-running task | A task that spans many steps, sessions, or autonomous runs. It needs a task contract and checkpoints. |
+
+---
+
+## Additional v3.7 terms
+
+### Workspace
+
+The folder or workspace file the IDE opens. It defines what the agent can see as the current project area. It is not the same as permission.
+
+### Permission profile
+
+A Codex access profile such as `:read-only` or `:workspace`. It controls what local actions Codex can perform.
+
+### Sandbox
+
+A technical access boundary around tool execution. In this kit, the recommended Codex default is the built-in permission profile `:read-only`; no separate sandbox installation is needed for the basic workflow.
+
+### Allowed scope
+
+A task-level whitelist of paths an agent may write during an approved apply task. It limits an already-approved action; it does not authorize action by itself.
+
+### Scope reset
+
+Returning the allowed write scope to a safe default after a task ends.

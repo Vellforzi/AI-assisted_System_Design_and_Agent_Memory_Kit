@@ -1,0 +1,21 @@
+schema_version: "1.0"
+request_type: "scope_update"
+mode: "scope-set | scope-reset"
+owner_approved: false
+project_root: ""
+scope_file: ".codex/ALLOWED_SCOPE.txt"
+task:
+  id: ""
+  title: ""
+  purpose: ""
+allowed_write_paths: []
+forbidden:
+  - "secrets"
+  - ".git/**"
+  - "DB writes unless explicitly approved"
+  - "git push unless explicitly approved"
+  - "deploy unless explicitly approved"
+reset_after_task: true
+verification:
+  - "show final ALLOWED_SCOPE.txt"
+  - "confirm no product files changed during scope update"

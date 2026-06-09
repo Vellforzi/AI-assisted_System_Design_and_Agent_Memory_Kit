@@ -1,6 +1,6 @@
-# AI-assisted System Design and Agent Memory Kit v3.6.0 — Manifest
+# AI-assisted System Design and Agent Memory Kit v3.7.0 — Manifest
 
-Package file: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.6.0_EN.zip`
+Package file: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.7.0_EN.zip`
 
 Package purpose: portable starter guide and memory operating layer for using AI agents with owner-controlled projects. Agent Memory Kit helps build a Project Map through structured, meaningful, interconnected duplication of project information supplied or verified by the owner.
 
@@ -10,7 +10,7 @@ Package purpose: portable starter guide and memory operating layer for using AI 
 
 - `README.md` — concise repository/package README.
 - `START_HERE.md` — package router and first entry point.
-- `RELEASE_NOTES_v3.6.0.md` — what changed in this release.
+- `RELEASE_NOTES_v3.7.0.md` — what changed in this release.
 - `AI-assisted System Design/README.md` — overview of the system-design methodology.
 - `AI-assisted System Design/AI-assisted System Design.md` — methodology for operating AI-readable projects.
 - `Agent Kit/README.md` — overview of Agent Memory Kit.
@@ -178,3 +178,21 @@ Later sessions should restore from documented `Project Map` / working state / ta
 - `Agent Kit/kit/cursor/hooks/` — optional hook examples and scripts.
 
 The Python scripts in `cursor/hooks/scripts/` are optional examples. Agent Memory Kit does not require Python.
+
+---
+
+## v3.7 scope, workspace, and role orchestration files
+
+- `Agent Kit/kit/SCOPE_CONTROL_AND_ALLOWED_SCOPE_GUIDE.md` — agent-managed allowed-scope workflow.
+- `Agent Kit/kit/CODEX_SANDBOX_AND_PERMISSION_PROFILES_GUIDE.md` — plain-language Codex permission and sandbox guide.
+- `Agent Kit/kit/WORKSPACE_SELECTION_GUIDE.md` — workspace selection guidance for multi-component projects.
+- `Agent Kit/kit/AI_AGENT_ROLE_STACK_GUIDE.md` — default role split across Cursor, Codex, GPT web chat, Project Map, and owner.
+- `Agent Kit/kit/HOOK_REQUEST_WORKFLOW.md` — workflow for hook requests.
+- `Agent Kit/kit/HOOK_GENERATION_QUESTIONS.md` — minimal questions for hook generation.
+- `Agent Kit/kit/HOOK_PACKAGING_GUIDE.md` — packaging rules for project-local hook bundles.
+- `Agent Kit/kit/cursor/workspaces/` — Cursor workspace templates.
+- `Agent Kit/kit/cursor/commands/scope-set.md` — command template for setting task write scope.
+- `Agent Kit/kit/cursor/commands/scope-reset.md` — command template for resetting write scope.
+- `Agent Kit/kit/cursor/commands/workspace-check.md` — command template for workspace validation.
+- `Agent Kit/kit/codex/scope/` — Codex scope templates and optional helper.
+- `Agent Kit/kit/codex/workflows/` — Codex workflow notes for scope and workspace checks.

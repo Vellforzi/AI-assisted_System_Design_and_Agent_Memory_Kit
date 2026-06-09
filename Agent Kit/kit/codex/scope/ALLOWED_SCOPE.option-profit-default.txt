@@ -1,0 +1,14 @@
+# Safe default allowed edit scope for OPTION PROFIT.
+# Place at: JOB/.codex/ALLOWED_SCOPE.txt
+# Product code paths are intentionally commented out by default.
+
+AGENTS.md
+PROJECT_AI_BRIEF.md
+docs/**
+Project Map/**
+
+# Enable only for an explicit approved task:
+# Options_api/**
+# Options_scraper/**
+# Options_MT/**
+# db_sql/**

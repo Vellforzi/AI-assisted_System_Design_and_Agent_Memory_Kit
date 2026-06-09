@@ -1,0 +1,22 @@
+{
+  "folders": [
+    {
+      "name": "PROJECT",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "files.watcherExclude": {
+      "**/.git/objects/**": true,
+      "**/node_modules/**": true,
+      "**/.venv/**": true,
+      "**/__pycache__/**": true
+    },
+    "search.exclude": {
+      "**/.git": true,
+      "**/node_modules": true,
+      "**/.venv": true,
+      "**/__pycache__": true
+    }
+  }
+}

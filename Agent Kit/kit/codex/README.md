@@ -47,3 +47,23 @@ Codex memory, provider memory, compressed chat history, and platform summaries m
 ## Python is optional
 
 The provided hook scripts are examples. Agent Memory Kit itself is language-agnostic and does not require Python.
+
+---
+
+## v3.7 additions
+
+Codex integration now includes:
+
+- scope-control templates and helper;
+- guidance for `default_permissions` versus old `sandbox_mode` settings;
+- workspace selection guidance;
+- a default role split: Cursor implements, Codex reviews, GPT researches, Project Map stores truth;
+- hook request workflow for generating project-local hook packages.
+
+See:
+
+- `../SCOPE_CONTROL_AND_ALLOWED_SCOPE_GUIDE.md`
+- `../CODEX_SANDBOX_AND_PERMISSION_PROFILES_GUIDE.md`
+- `../WORKSPACE_SELECTION_GUIDE.md`
+- `../AI_AGENT_ROLE_STACK_GUIDE.md`
+- `scope/README.md`

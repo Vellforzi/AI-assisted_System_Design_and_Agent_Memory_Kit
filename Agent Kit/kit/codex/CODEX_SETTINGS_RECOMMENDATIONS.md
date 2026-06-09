@@ -33,3 +33,49 @@ Using Codex inside Cursor is useful because it keeps both agent surfaces in one 
 - Cursor is the primary local implementation agent.
 - Codex is a second reviewer, auditor, recovery assistant, and controlled executor.
 - Project Map is shared truth between both.
+
+---
+
+## v3.7 default role settings
+
+Recommended owner-controlled default:
+
+```toml
+model = "gpt-5.5"
+model_reasoning_effort = "medium"
+personality = "pragmatic"
+approval_policy = "on-request"
+approvals_reviewer = "user"
+default_permissions = ":read-only"
+web_search = "cached"
+file_opener = "cursor"
+
+[features]
+hooks = true
+memories = false
+multi_agent = true
+undo = true
+```
+
+This makes Codex a restricted second agent by default.
+
+Use Codex primarily for:
+
+- review;
+- audit;
+- recovery;
+- second opinion;
+- scope proposal;
+- Project Map consistency checking.
+
+Use Codex for mutations only after an explicit task contract, narrow write scope, approval, and permission boundary.
+
+## Sandbox note
+
+Do not combine `default_permissions` with older `sandbox_mode` or `[sandbox_workspace_write]` settings. Use one configuration path. For this kit, prefer permission profiles:
+
+```toml
+default_permissions = ":read-only"
+```
+
+See `CODEX_SANDBOX_AND_PERMISSION_PROFILES_GUIDE.md`.

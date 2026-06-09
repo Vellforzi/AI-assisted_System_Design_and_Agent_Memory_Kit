@@ -119,3 +119,21 @@ Prefer explicit commands or mode blocks:
 - `/inventory`
 
 No command means answer-only by default.
+
+---
+
+## Scope and workspace rules
+
+The owner should not be required to manually edit `.codex/ALLOWED_SCOPE.txt` or similar scope files when a safe agent workflow can do it.
+
+For scope changes:
+
+1. propose the exact scope;
+2. verify owner approval;
+3. update the scope file only within the approved task;
+4. do not edit product files unless a separate apply task exists;
+5. reset scope after the task.
+
+If using Codex, prefer `default_permissions = ":read-only"` and do not mix it with old `sandbox_mode` settings.
+
+For a project with one Project Map and multiple components, prefer opening the shared project root as the workspace.

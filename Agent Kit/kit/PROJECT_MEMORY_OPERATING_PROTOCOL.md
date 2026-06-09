@@ -403,3 +403,14 @@ The agent must not treat platform-generated summaries or compressed chat history
 If context compaction is suspected, use recover mode and start from Project Map + Working State + Source Authority + approved handoff/checkpoint.
 
 See `PLATFORM_CONTEXT_COMPACTION_BOUNDARY.md`.
+
+---
+
+## v3.7 scope and workspace operating rules
+
+1. The owner should not have to manually edit scope files if an explicit agent workflow can safely update them.
+2. The agent may update scope control files only after explicit owner approval or an approved task contract.
+3. Updating scope does not authorize product changes by itself.
+4. A multi-component project with one Project Map should normally be opened at the shared root workspace.
+5. A component-only workspace is allowed only when the task intentionally does not require Project Map or cross-component context.
+6. Codex should default to restricted second-agent behavior: review first, mutate only under explicit scope and approval.

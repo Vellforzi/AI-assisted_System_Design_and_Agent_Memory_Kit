@@ -1,8 +1,8 @@
 # Agent Memory Kit Starter Package
 
-Version: v3.6.0  
+Version: v3.7.0  
 Release date: 2026-06-09  
-Package: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.6.0_EN.zip`
+Package: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.7.0_EN.zip`
 
 Agent Memory Kit is a portable memory operating layer for project owners who work with AI agents across long projects.
 
@@ -93,6 +93,14 @@ Evals do not run automatically unless the owner wires them to a script, hook, CI
 | `EVAL_AUTOMATION_AND_TRIGGER_POLICY.md` | Eval automation levels, trigger matrix, and repair loop. |
 | `eval_suite/` | Core behavior eval cases, trigger policy, grader rubric, run report template, and trace template. |
 | `tools/` | Optional local helper scripts. |
+| `SCOPE_CONTROL_AND_ALLOWED_SCOPE_GUIDE.md` | How agents should manage `.codex/ALLOWED_SCOPE.txt` without forcing the owner to edit it manually. |
+| `CODEX_SANDBOX_AND_PERMISSION_PROFILES_GUIDE.md` | Plain explanation of Codex permission profiles, sandbox terminology, and safe defaults. |
+| `WORKSPACE_SELECTION_GUIDE.md` | How to choose IDE workspaces for single-root and multi-component projects. |
+| `AI_AGENT_ROLE_STACK_GUIDE.md` | Default split: Cursor implements, Codex reviews, GPT researches, Project Map stores truth. |
+| `HOOK_REQUEST_WORKFLOW.md` | How an agent should respond when the owner asks for hooks. |
+| `HOOK_GENERATION_QUESTIONS.md` | Minimal questions to ask before generating hooks. |
+| `HOOK_PACKAGING_GUIDE.md` | How to package project-local hook bundles. |
+
 | `EXISTING_PROJECT_ADOPTION_GUIDE.md` | How to adopt the kit in an already active project. |
 | `NEW_PROJECT_ADOPTION_GUIDE.md` | How to start an empty project with the kit. |
 | `SOLO_OWNER_WORKFLOW_GUIDE.md` | High-control workflow for a solo owner using local IDE agents plus research chat. |

@@ -103,3 +103,39 @@ If compaction has already happened, Codex must treat the platform-generated summ
 ## Python is optional
 
 Agent Memory Kit does not require Python. Python hook scripts are examples only. Replace them with PowerShell, shell, Node.js, Go, Rust, or any other toolchain if that is better for your environment.
+
+---
+
+## v3.7 scope and workspace policy
+
+Codex should normally be configured as the restricted second agent:
+
+```text
+Cursor = primary implementation agent
+Codex = read-only reviewer, auditor, recovery helper, and second opinion
+GPT web chat = research, design, and task specifications
+Project Map = shared project truth
+```
+
+Recommended Codex defaults:
+
+```toml
+approval_policy = "on-request"
+default_permissions = ":read-only"
+```
+
+Do not ask the owner to manually edit `.codex/ALLOWED_SCOPE.txt` when a safe agent workflow can do it. Use the scope workflow:
+
+1. propose exact write paths;
+2. request or verify explicit owner approval;
+3. update `.codex/ALLOWED_SCOPE.txt`;
+4. apply only the approved task;
+5. reset the scope afterwards.
+
+See:
+
+- `SCOPE_CONTROL_AND_ALLOWED_SCOPE_GUIDE.md`
+- `CODEX_SANDBOX_AND_PERMISSION_PROFILES_GUIDE.md`
+- `WORKSPACE_SELECTION_GUIDE.md`
+- `AI_AGENT_ROLE_STACK_GUIDE.md`
+- `codex/scope/README.md`

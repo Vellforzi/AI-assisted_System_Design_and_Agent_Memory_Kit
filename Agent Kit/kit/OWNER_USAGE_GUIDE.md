@@ -162,3 +162,28 @@ When working in Cursor, prefer explicit commands:
 If a chat is long, do not update Project Map directly from that chat. Ask for `/handoff` or `/map-delta`, then open a fresh session and use `/map-apply` with current Project Map plus the approved handoff/delta.
 
 Platform summaries are not evidence.
+
+---
+
+## v3.7 recommended local AI setup
+
+Recommended default for a solo owner:
+
+```text
+Cursor = primary local implementation agent
+Codex = restricted second agent for review/audit/recovery
+GPT web chat = research, design, and task specifications
+Project Map = shared project truth
+```
+
+Do not rely on one large chat thread as memory.
+
+Use commands:
+
+- `/workspace-check` before heavy work or after changing IDE workspace;
+- `/scope-set` before a scoped apply task;
+- `/scope-reset` after the task;
+- `/checkpoint` and `/handoff` before context pressure becomes high;
+- `/map-apply` in a clean or low-context session.
+
+The owner does not need to manually edit scope files when an approved agent workflow can update them safely.

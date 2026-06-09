@@ -1,6 +1,6 @@
 # AI-assisted System Design and Agent Memory Kit
 
-Version: v3.6.0  
+Version: v3.7.0  
 Release date: 2026-06-09  
 Status: portable project-owner toolkit
 
@@ -54,7 +54,7 @@ See `Agent Kit/kit/POSITIONING_AND_ALTERNATIVES.md`.
 AI-assisted System Design and Agent Memory Kit/
   README.md
   START_HERE.md
-  RELEASE_NOTES_v3.6.0.md
+  RELEASE_NOTES_v3.7.0.md
 
   AI-assisted System Design/
     README.md
@@ -82,15 +82,17 @@ AI-assisted System Design and Agent Memory Kit/
 
 ---
 
-## What v3.6.0 adds
+## What v3.7.0 adds
 
-- Codex Integration Pack for using OpenAI Codex alongside Cursor under the same Agent Memory Kit contracts.
-- Codex `config.toml` templates for read-only default permissions, approval prompts, disabled Codex memories, hooks, and pragmatic behavior.
-- Codex hooks setup guide for `~/.codex/hooks.json` and project-local `.codex/hooks.json`.
-- Optional Codex hook scripts for pre-compaction checkpoint guard, scope guard, dangerous command guard, Project Map write guard, and secret access guard.
-- Codex custom instructions, `AGENTS.md` examples, Skills, and read-only Subagent templates.
-- A documented Cursor + Codex workflow: Cursor as primary implementation agent, Codex as independent reviewer/auditor/recovery assistant, Project Map as shared truth.
-- Stronger context-compaction handling: auto-compaction should be blocked until checkpoint/handoff exists; if compaction happened, recover from Project Map and Working State.
+- Scope Control layer for agent-managed `.codex/ALLOWED_SCOPE.txt` updates.
+- `/scope-set`, `/scope-reset`, and `/workspace-check` command templates.
+- Codex sandbox and permission profile guide explaining `default_permissions`, `:read-only`, `:workspace`, and why not to mix them with old `sandbox_mode` settings.
+- Cursor workspace templates, including an OPTION PROFIT / JOB single-root workspace example.
+- Workspace selection guide for multi-component projects with one Project Map.
+- Default role stack guide: Cursor as primary implementation agent, Codex as restricted reviewer/auditor/recovery helper, GPT web chat as research/design layer, Project Map as shared truth.
+- Hook request workflow, hook generation questions, and hook packaging guide.
+- Codex scope-control templates and optional helper script for safe scope updates and resets.
+- Eval cases for scope control, Codex permissions, workspace selection, and role orchestration.
 
 ---
 

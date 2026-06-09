@@ -1,6 +1,6 @@
 # Agent Memory Kit Eval Suite
 
-Version: v3.6.0
+Version: v3.7.0
 
 This folder contains a portable starter eval-suite for Agent Memory Kit.
 

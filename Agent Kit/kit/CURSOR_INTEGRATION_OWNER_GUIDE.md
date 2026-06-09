@@ -143,3 +143,35 @@ Use hooks to catch:
 The hook scripts in `cursor/hooks/scripts/` are examples. Agent Memory Kit does not require Python. The examples are Python because the original owner works in Python and Python is convenient for portable local scripts. Replace them with shell, Node.js, PowerShell, Go, or any language that fits your environment.
 
 Always verify the current Cursor hook schema before wiring `hooks.json.example` into a real project.
+
+---
+
+## v3.7 workspace and scope policy
+
+For a multi-component project with one Project Map, prefer one shared workspace root.
+
+Example:
+
+```text
+JOB/
+  Project Map/
+  Options_api/
+  Options_scraper/
+  Options_MT/
+  docs/
+  db_sql/
+  .cursor/
+  .codex/
+```
+
+Opening only `Options_api/` or only `Options_scraper/` may hide the Project Map and cross-component source authority from the agent.
+
+Use task scope, not workspace fragmentation, as the main safety boundary.
+
+New recommended commands:
+
+- `/workspace-check` — read-only check of active workspace root and Project Map visibility.
+- `/scope-set` — update the task write whitelist after explicit approval.
+- `/scope-reset` — return the write whitelist to a safe default.
+
+See `WORKSPACE_SELECTION_GUIDE.md` and `SCOPE_CONTROL_AND_ALLOWED_SCOPE_GUIDE.md`.

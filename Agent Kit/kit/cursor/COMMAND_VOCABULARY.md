@@ -44,3 +44,19 @@ Expected result:
 If no command or explicit mode is given, the mode is `answer`.
 
 A question, review request, or analysis request does not authorize file edits, git actions, DB writes, deployment, Project Map writes, or external side effects.
+
+---
+
+## v3.7 commands
+
+### `/scope-set`
+
+Update task write scope after explicit owner approval. This command changes only the scope control file unless a separate apply task is provided.
+
+### `/scope-reset`
+
+Reset task write scope to safe defaults.
+
+### `/workspace-check`
+
+Check whether the active workspace exposes Project Map, agent rules, hooks, and all relevant project components.

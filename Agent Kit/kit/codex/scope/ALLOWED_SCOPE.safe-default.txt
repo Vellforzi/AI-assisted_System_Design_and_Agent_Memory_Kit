@@ -1,0 +1,7 @@
+# Safe default allowed edit scope.
+# Copy to .codex/ALLOWED_SCOPE.txt or let the agent do it through /scope-reset.
+
+AGENTS.md
+PROJECT_AI_BRIEF.md
+docs/**
+Project Map/**

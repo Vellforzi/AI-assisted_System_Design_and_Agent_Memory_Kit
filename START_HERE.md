@@ -1,8 +1,8 @@
 # START HERE — AI-assisted System Design and Agent Memory Kit
 
-Version: v3.6.0  
+Version: v3.7.0  
 Release date: 2026-06-09  
-Package: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.6.0_EN.zip`  
+Package: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.7.0_EN.zip`  
 Status: portable project-owner kit for AI-assisted work and grounded project memory
 
 ---
@@ -140,22 +140,19 @@ Read:
 
 ---
 
-## What changed in v3.6.0
+## What changed in v3.7.0
 
-This release strengthens the memory layer around:
+This release adds an operational layer for scope control, workspace selection, and multi-agent role separation:
 
-- significant-work detection;
-- checkpoint timing;
-- Project Map update proposals;
-- eval automation levels and triggers;
-- optional checklist-assisted eval runs;
-- new-project adoption;
-- owner usage prompts;
-- public positioning versus alternative memory approaches;
-- simple terminology support.
+- agent-managed `.codex/ALLOWED_SCOPE.txt` workflows;
+- `/scope-set`, `/scope-reset`, and `/workspace-check` command templates;
+- Codex permission profile and sandbox explanations;
+- Cursor workspace templates for one-root and multi-component projects;
+- hook request, generation, and packaging workflows;
+- default role split: Cursor implements, Codex reviews, GPT web chat researches, Project Map stores truth;
+- eval cases for scope, workspace, permissions, and role orchestration.
 
-See `RELEASE_NOTES_v3.6.0.md` for details.
-
+See `RELEASE_NOTES_v3.7.0.md` for details.
 
 ---
 

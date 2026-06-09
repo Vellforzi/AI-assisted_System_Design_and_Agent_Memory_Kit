@@ -68,3 +68,24 @@ Use `commandWindows` entries in `hooks.json` for Windows-specific execution.
 ## Operational boundary
 
 Hooks are guardrails, not a full security boundary. Keep destructive operations behind explicit owner approval, narrow permissions, git review, and CI.
+
+---
+
+## v3.7 hook request workflow
+
+When an owner asks for hooks, the agent should follow:
+
+- `HOOK_REQUEST_WORKFLOW.md`
+- `HOOK_GENERATION_QUESTIONS.md`
+- `HOOK_PACKAGING_GUIDE.md`
+
+The agent should generate a project-local package when enough information exists, and ask only for missing safety-critical details.
+
+For Codex, project-local hooks normally live at:
+
+```text
+<project-root>/.codex/hooks.json
+<project-root>/.codex/hooks/
+```
+
+Scope-related hooks should work with `.codex/ALLOWED_SCOPE.txt`, but the owner should not be forced to edit that file manually. Use `/scope-set` and `/scope-reset` workflows instead.
