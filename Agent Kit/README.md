@@ -63,6 +63,8 @@ Do not commit private local preferences, secrets, credentials, raw personal data
 Agent Memory Kit is useful when the owner wants a visible, editable, portable project memory rather than hidden provider memory or a loose chat summary.
 
 It is not a full agent runtime. It can later be implemented through a memory framework, vector store, knowledge graph, IDE hook, eval harness, or agent platform, but the core value is the operating contract: what counts as project truth, what may be remembered, when the agent may act, and how failures become eval cases.
+
+For a concrete repo-local memory architecture note that keeps Markdown as source of truth and uses SQLite only as a rebuildable runtime recall layer, see `kit/HYBRID_AGENT_MEMORY_SYSTEM_REFERENCE_NOTE.ru.md` (Russian).
 ---
 
 ## Cursor, Codex, and GPT role stack

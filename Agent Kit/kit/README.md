@@ -85,6 +85,7 @@ Evals do not run automatically unless the owner wires them to a script, hook, CI
 | `MEMORY_COMPILER_GUIDE.md` | Session-to-memory consolidation process. |
 | `MEMORY_TOOL_INTERFACE_CONTRACT.md` | Expected behavior for a memory tool or memory API. |
 | `PROVIDER_MEMORY_AND_RUNTIME_BOUNDARY.md` | Boundary between Project Map, provider memory, runtime state, and external research. |
+| `HYBRID_AGENT_MEMORY_SYSTEM_REFERENCE_NOTE.ru.md` | Russian reference note for a Markdown-first, SQLite-accelerated hybrid agent-memory architecture. |
 | `SERVICE_RULE_PLACEMENT_GUIDE.md` | Where to place global rules vs project-specific memory in AI services. |
 | `START_MESSAGE_TEMPLATES.md` | Reusable owner messages for safe starts and continuations. |
 | `PROJECT_WORKSPACE_LAYOUT.md` | Recommended folder roles and layout. |

@@ -53,6 +53,7 @@ Package purpose: portable starter guide and memory operating layer for using AI 
 - `Agent Kit/kit/MEMORY_COMPILER_GUIDE.md` — session note to durable memory consolidation guide.
 - `Agent Kit/kit/MEMORY_TOOL_INTERFACE_CONTRACT.md` — expected behavior for memory tool implementations.
 - `Agent Kit/kit/PROVIDER_MEMORY_AND_RUNTIME_BOUNDARY.md` — boundary between Project Map, provider memory, runtime state, and external research.
+- `Agent Kit/kit/HYBRID_AGENT_MEMORY_SYSTEM_REFERENCE_NOTE.ru.md` — Russian reference note describing a Markdown-first, SQLite-accelerated hybrid agent-memory architecture.
 - `Agent Kit/kit/SERVICE_RULE_PLACEMENT_GUIDE.md` — where to place rules/instructions in AI services.
 - `Agent Kit/kit/EXISTING_PROJECT_ADOPTION_GUIDE.md` — migration guide for active existing projects.
 - `Agent Kit/kit/NEW_PROJECT_ADOPTION_GUIDE.md` — setup guide for empty new projects.
