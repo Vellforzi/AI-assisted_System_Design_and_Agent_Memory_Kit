@@ -1,0 +1,65 @@
+---
+description: "Agent Memory Kit context advisor preflight for scoped Project Map and repo reads"
+globs:
+  - "**/*"
+alwaysApply: false
+---
+
+# Context Advisor Preflight — AMK v3.9.4
+
+Use this rule before answering or applying changes in the Option Profit / Agent Memory Kit workspace.
+
+## Default mode
+
+Start read-only unless the owner explicitly requests apply mode. Questions, analysis,
+patch construction, and planning do not imply permission to edit live files.
+
+## Read order
+
+1. `PROJECT_AI_BRIEF.md` if present.
+2. `Project Map/current_state.md` and `Project Map/working_state.yaml`.
+3. `Project Map/source_authority.yaml`.
+4. `Project Map/memory/index.yaml`, then only relevant memory units.
+5. Active workstream matching the task, if any.
+6. `docs/.agent-progress.json` active tasks and top `docs/WORKLOG.md` entry, if present.
+7. Task-scoped files only.
+
+## Eval suite authority check
+
+Before using `Project Map/eval_suite` as current eval truth, compare it with
+`Agent Kit/kit/eval_suite`:
+
+- `suite_id` must match.
+- `kit_version` must match.
+- required cases must exist.
+- required case schema fields must exist.
+- smoke categories must come from `eval_trigger_policy.yaml`.
+
+If parity fails, mark it as stale mirror in the answer/task plan and do not grade
+against it as authoritative current truth.
+
+## Live Cursor adoption check
+
+When the task concerns Cursor integration, check the live target paths explicitly:
+
+- `.cursor/rules/context_advisor_preflight.mdc`
+- `.cursor/commands/*`
+
+Do not assume the live repo adopted kit rules/commands just because they exist under
+`Agent Kit/kit/cursor_integration/`.
+
+## Model escalation
+
+The user is not expected to predict model insufficiency. Start with the lowest
+sufficient route. Escalate only after reporting a concrete trigger: validation
+failure, schema/router conflict, insufficient context window, missing model control,
+repeated scoped failure, or task reclassification to audit/repair/protocol design.
+
+Provider/model capability observations must be dated and must not be treated as
+permanent project truth.
+
+## Safety and scope
+
+Do not copy secrets into answers. Do not push, deploy, write DB state, or update
+Project Map unless the owner explicitly asks for that apply action. Release ZIP
+artifacts must not remain in the working repo after merge.

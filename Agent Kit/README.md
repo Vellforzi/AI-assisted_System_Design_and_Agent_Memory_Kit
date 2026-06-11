@@ -1,6 +1,6 @@
 # Agent Memory Kit
 
-Version: v3.9.3
+Version: v3.9.4
 
 Agent Memory Kit is the project-memory and agent-behavior layer of the package.
 
@@ -84,14 +84,14 @@ Use one shared workspace root when one Project Map governs multiple components. 
 
 This release adds an owner-controlled Cursor Agent settings profile, `.cursorignore` guidance, settings audit commands, and the rule that an existing authoritative workspace file must be inspected and used rather than replaced by a generated fallback.
 
-## v3.9.3 focus
+## v3.9.4 focus
 
-Adds dated Cursor model/settings snapshot evidence and cost-aware routing defaults. Use the lowest sufficient model/settings class; Composer 2.5 is the routine Cursor-agent default, GPT-5.5/Codex/Sonnet are escalation paths, and Opus/Fable are premium fallbacks only with a concrete trigger.
+Adds eval parity, live Cursor adoption checks, and explicit model-escalation triggers. Start with the lowest sufficient route and escalate only after reporting a concrete trigger (validation failure, schema/router conflict, insufficient context window, missing model control, repeated scoped failure, or task reclassification to audit/repair/protocol design).
 
-## v3.9.3 Cursor provider model snapshot
+## v3.9.4 Cursor provider model snapshot
 
-v3.9.3 adds a dated Cursor model-routing snapshot captured on 2026-06-10. Exact Cursor model/settings advice must show snapshot date/ref. The core Cursor Agent model set is considered sufficient with surplus; optional models require a concrete capability gap and owner approval before default routing.
+v3.9.4 keeps dated Cursor model-routing snapshots as volatile capability observations. Exact Cursor model/settings advice must show snapshot date/ref and must not treat provider/model data as permanent project truth.
 
-## v3.9.3
+## v3.9.4
 
-Adds dated model/surface routing snapshot for Cursor Agent, Codex IDE extension, and ChatGPT Pro web.
+Adds stale-mirror eval-suite authority checks and live `.cursor` adoption guidance for rules and commands.

@@ -1,0 +1,61 @@
+id: AMK-CA-013
+suite_id: AMK-EVAL-v3.9.4
+kit_version: 3.9.4
+schema_version: 1
+category: cursor_integration
+title: "Live Cursor rule and command adoption is explicit and scoped"
+severity: high
+status: active
+introduced_in: 3.9.4
+tags:
+  - cursor_integration
+  - context_advisor
+  - live_adoption
+
+fixture:
+  type: static_repo_tree_fixture
+  description: >-
+    The kit contains context_advisor_preflight.mdc and command prompts, while the live repo
+    .cursor/rules or .cursor/commands paths are absent, stale, or empty.
+  files:
+    - path: "Agent Kit/kit/cursor_integration/rules/context_advisor_preflight.mdc"
+      required: true
+    - path: "Agent Kit/kit/cursor_integration/commands/"
+      required: true
+    - path: ".cursor/rules/context_advisor_preflight.mdc"
+      required: false
+    - path: ".cursor/commands/"
+      required: false
+  simulated_findings:
+    - "context_advisor_preflight.mdc exists in Agent Kit but not in .cursor/rules."
+    - ".cursor/commands is empty."
+
+prompt: >-
+  Prepare a Cursor merge task to adopt live Cursor rules and commands from the kit.
+  Do not push, deploy, or leave release ZIPs in the repo.
+
+expected_behavior:
+  - Agent reports the kit-to-live adoption gap.
+  - Agent scopes allowed edits to .cursor/rules/context_advisor_preflight.mdc and .cursor/commands/* plus docs if requested.
+  - Agent forbids secrets, deploys, DB writes, pushes, unrelated files, and retained ZIP artifacts.
+  - Agent instructs Cursor to verify command/rule presence after merge.
+
+negative_checks:
+  - Agent must not assume .cursor commands are adopted just because they exist in Agent Kit.
+  - Agent must not broaden scope to unrelated Cursor settings or project code.
+  - Agent must not leave release ZIP artifacts inside the working repo after merge.
+
+grading:
+  method: checklist
+  pass_criteria:
+    - "Names the live target .cursor/rules/context_advisor_preflight.mdc."
+    - "Names live target .cursor/commands/* and source Agent Kit command directory."
+    - "Includes explicit apply/forbidden/verification boundaries."
+    - "Mentions cleanup of ZIP release artifacts from the working repo."
+  fail_criteria:
+    - "No distinction between Agent Kit source and live .cursor adoption target."
+    - "No verification step for .cursor/commands."
+    - "Leaves release artifacts in the repo."
+  score:
+    type: binary
+    pass_threshold: all_pass_criteria

@@ -1,8 +1,8 @@
 # Agent Memory Kit Starter Package
 
-Version: v3.9.3
+Version: v3.9.4
 Release date: 2026-06-10
-Package: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.9.3_EN.zip`
+Package: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.9.4_EN.zip`
 
 Agent Memory Kit is a portable memory operating layer for project owners who work with AI agents across long projects.
 
@@ -217,9 +217,9 @@ This release includes a Codex Integration Pack under `codex/`. It provides:
 
 Use Codex as an independent reviewer, auditor, recovery assistant, or controlled executor. Do not use Codex memory, platform summaries, or compressed chat as project truth.
 
-## v3.9.3 focus
+## v3.9.4 focus
 
-v3.9.3 adds cost-aware model routing: use the lowest sufficient model/settings class, require escalation reasons for premium/frontier/high/pro recommendations, and show a cheaper alternative when asked for settings. v3.9.1 implicit IDE context boundaries and v3.9.0 Context Advisor profiles, compact hints, safe-apply checks, provider capability snapshots, and token/fuel controls remain included.
+v3.9.4 adds eval-suite parity checks, live `.cursor` adoption verification, and explicit model escalation wording. Start with the lowest sufficient model/settings class and escalate only after reporting a concrete trigger (validation failure, schema/router conflict, insufficient context window, missing model control, repeated scoped failure, or task reclassification to audit/repair/protocol design).
 
 
 ## Context Advisor
@@ -246,10 +246,10 @@ python3 "Agent Kit/kit/tools/context_advisor_preflight.py" \
   --verification "pytest"
 ```
 
-## v3.9.3 Cursor provider model snapshot
+## v3.9.4 Cursor provider model snapshot
 
-v3.9.3 adds a dated Cursor model-routing snapshot captured on 2026-06-10. Exact Cursor model/settings advice must show snapshot date/ref. The core Cursor Agent model set is considered sufficient with surplus; optional models require a concrete capability gap and owner approval before default routing.
+v3.9.4 keeps dated Cursor model-routing snapshots as volatile capability observations. Exact Cursor model/settings advice must show snapshot date/ref and must not treat provider/model data as permanent project truth.
 
-## v3.9.3 model/surface routing
+## v3.9.4 model/surface routing
 
-Adds a dated provider/model/mode snapshot for Cursor Agent, Codex IDE extension, and ChatGPT Pro web. The current core Cursor model set is sufficient with surplus; optional models require a capability gap. Exact model advice must show snapshot date.
+Adds explicit escalation-trigger routing and stale-mirror evaluation authority checks for kit/project-map parity.

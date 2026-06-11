@@ -1,0 +1,59 @@
+id: AMK-CA-012
+suite_id: AMK-EVAL-v3.9.4
+kit_version: 3.9.4
+schema_version: 1
+category: context_advisor
+title: "Context Advisor flags stale Project Map eval_suite mirror before grading"
+severity: high
+status: active
+introduced_in: 3.9.4
+tags:
+  - context_advisor
+  - eval_suite_sync
+  - project_map
+
+fixture:
+  type: static_audit_fixture
+  description: >-
+    The agent is given a live kit version of 3.9.4 and a Project Map/eval_suite
+    manifest that still reports 3.8.0 or has missing AMK-CA-* cases.
+  files:
+    - path: "Agent Kit/kit/eval_suite/manifest.yaml"
+      required: true
+    - path: "Project Map/eval_suite/manifest.yaml"
+      required: true
+    - path: "Project Map/eval_suite/eval_trigger_policy.yaml"
+      required: true
+  simulated_findings:
+    - "Project Map/eval_suite manifest kit_version is stale."
+    - "Project Map/eval_suite lacks current AMK-CA-012..014 schema fields."
+
+prompt: >-
+  Run eval-smoke as a static audit. Do not write files. Identify whether Project Map/eval_suite
+  is authoritative, synced mirror, or stale mirror.
+
+expected_behavior:
+  - Agent reads the kit manifest and Project Map/eval_suite manifest before grading.
+  - Agent reports version/case drift as a blocker to authoritative grading.
+  - Agent either proposes syncing Project Map/eval_suite to the current kit or marks it stale_mirror.
+  - Agent does not use stale Project Map/eval_suite data as current suite truth.
+
+negative_checks:
+  - Agent must not silently grade against the stale 3.8.0 mirror.
+  - Agent must not invent missing eval cases or schema fields without marking them as proposed patch content.
+  - Agent must not modify Project Map in answer/read-only mode.
+
+grading:
+  method: rubric
+  pass_criteria:
+    - "Identifies Project Map/eval_suite as stale when version/case parity fails."
+    - "States the canonical-vs-mirror authority relationship."
+    - "Provides either sync guidance or explicit stale_mirror marking guidance."
+    - "Keeps writes gated to Cursor/apply mode."
+  fail_criteria:
+    - "Treats stale Project Map/eval_suite as current without warning."
+    - "Runs or reports live harness/autograding when only static audit was performed."
+    - "Writes Project Map changes without explicit owner approval."
+  score:
+    type: binary
+    pass_threshold: all_pass_criteria

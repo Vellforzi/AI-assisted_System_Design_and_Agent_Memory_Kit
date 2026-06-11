@@ -1,35 +1,71 @@
-# Agent Memory Kit Eval Suite
+# Agent Memory Kit eval suite — v3.9.4
 
-Version: v3.9.0
+This directory is part of the v3.9.4 micro-patch: eval parity, live Cursor
+integration adoption, and model escalation trigger wording.
 
-This folder contains a portable starter eval-suite for Agent Memory Kit.
+## Authority rule
 
-The suite checks contract behavior, not general model quality.
+`Agent Kit/kit/eval_suite` is the canonical kit eval suite. `Project Map/eval_suite`
+is allowed to be a synced mirror only when all of the following match:
 
-Primary categories:
+- `manifest.yaml:suite_id`
+- `manifest.yaml:kit_version`
+- case ids and required schema fields
+- `eval_trigger_policy.yaml:kit_version`
+- smoke categories required by `eval_trigger_policy.yaml`
 
-- action intent;
-- grounding;
-- retrieval;
-- memory compiler;
-- external research boundary;
-- long-task continuity;
-- side-effect safety;
-- owner-control workflow;
-- significant-work handling;
-- eval automation triggers;
-- new-project adoption;
-- usage/adoption behavior;
-- context advisor scope/model/settings/fuel behavior.
+If any of those drift, `Project Map/eval_suite` must be marked as `stale_mirror`
+and must not be used as authoritative current grading input.
 
-Recommended flow:
+## v3.9.4 smoke categories
 
-1. Read `eval_manifest.yaml`.
-2. Read `eval_trigger_policy.yaml` to decide whether smoke, category, or full eval should run.
-3. Run cases from `core_behavior_eval_cases.yaml`.
-4. Grade with `grader_rubric.yaml`.
-5. Store run notes using `eval_run_report_template.yaml`.
-6. For any failure, capture a trace using `eval_trace_template.yaml`.
-7. Convert repeated or critical failures using `failure_to_eval_case_template.yaml`.
+Smoke categories are not hardcoded in `run_eval_checklist.py`. They are read from
+`eval_trigger_policy.yaml`.
 
-This suite can be run manually, checklist-assisted with `tools/run_eval_checklist.py`, or later automated by a full harness.
+Required v3.9.4 categories:
+
+- `context_advisor`
+- `cursor_integration`
+- `eval_suite_sync`
+- `model_escalation`
+
+## Required case schema
+
+Every active case must include:
+
+- `id`
+- `suite_id`
+- `kit_version`
+- `schema_version`
+- `category`
+- `title`
+- `severity`
+- `fixture`
+- `grading`
+
+## Static smoke command
+
+```bash
+python "Project Map/eval_suite/run_eval_checklist.py" \
+  --root "Project Map/eval_suite" \
+  --format markdown
+```
+
+For JSON output:
+
+```bash
+python "Project Map/eval_suite/run_eval_checklist.py" \
+  --root "Project Map/eval_suite" \
+  --format json
+```
+
+## Stale mirror marker
+
+If Project Map is not synced to kit, set the manifest authority state to:
+
+```yaml
+authority:
+  project_map_authority_state: stale_mirror
+```
+
+and add a visible README notice that this directory is not authoritative.

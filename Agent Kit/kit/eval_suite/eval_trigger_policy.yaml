@@ -1,136 +1,82 @@
-schema_version: '1.0'
-policy_id: AMK-EVAL-TRIGGERS-v3.9.0
-status: starter_policy
-principle: 'Evals do not run automatically unless the owner connects this policy to
-  a runner, IDE hook, command, CI workflow, or provider-specific eval harness. The
-  default behavior is to detect triggers and propose the appropriate eval run.
+suite_id: AMK-EVAL-v3.9.4
+kit_version: 3.9.4
+policy_version: 3.9.4
+release_date: 2026-06-10
+label: "AMK v3.9.4 smoke trigger policy"
 
-  '
-automation_levels:
-  level_0_manual:
-    description: Owner manually runs prompts and grades results.
-    recommended_for_solo_owner: true
-  level_1_agent_prompted:
-    description: 'Agent reports Eval trigger: yes/no at checkpoints.'
-    recommended_for_solo_owner: true
-  level_2_checklist_assisted:
-    description: Local script creates run folder and checklist from YAML cases.
-    recommended_for_solo_owner: true
-  level_3_hook_or_ci:
-    description: File changes trigger checklist generation or API eval run.
-    recommended_for_solo_owner: false
-  level_4_full_harness:
-    description: Harness sends prompts to agent/model, captures traces, grades outputs.
-    recommended_for_solo_owner: false
-triggers:
-  instruction_file_changed:
-    examples:
-    - AGENTS.md
-    - .cursor/rules/*.mdc
-    - CLAUDE.md
-    - project instructions
-    - Agent Kit/kit/cursor/rules/*.mdc
-    - Agent Kit/kit/cursor/commands/*.md
-    minimum_run: smoke
-    categories:
-    - action_intent
-    - grounding
-    - owner_control
-    - cursor_integration
-    - platform_context_compaction
-  source_authority_changed:
-    examples:
-    - Project Map/source_authority.yaml
-    minimum_run: category
-    categories:
-    - grounding
-    - repository_instructions
-  permissions_policy_changed:
-    examples:
-    - Project Map/permissions_policy.yaml
-    minimum_run: category
-    categories:
-    - action_intent
-    - side_effect_safety
-  retrieval_policy_changed:
-    examples:
-    - Project Map/retrieval_policy.yaml
-    minimum_run: category
-    categories:
-    - retrieval
-    - claim_ledger
-    - platform_context_compaction
-    - context_advisor
-  cursor_integration_changed:
-    examples:
-    - Cursor rule changed
-    - Cursor command changed
-    - Cursor hook changed
-    - Cursor skill changed
-    - Cursor subagent changed
-    minimum_run: smoke
-    categories:
-    - action_intent
-    - cursor_integration
-    - platform_context_compaction
-    - side_effect_safety
-    - context_advisor
-  model_or_client_changed:
-    examples:
-    - new model
-    - new IDE agent
-    - new tool permissions
-    minimum_run: smoke
-    categories:
-    - action_intent
-    - grounding
-    - retrieval
-    - side_effect_safety
-    - platform_context_compaction
-    - context_advisor
-  critical_failure_observed:
-    examples:
-    - unauthorized mutation
-    - invented project fact
-    - stale fact used as current
-    - duplicate side effect
-    - platform summary used as project truth
-    - summary-only approval accepted
-    minimum_run: targeted_plus_new_case
-    categories:
-    - failure_category
-  before_long_running_autonomy:
-    examples:
-    - owner considers autonomous long task
-    minimum_run: full
-    categories:
-    - all
-  context_advisor_changed:
-    examples:
-    - CONTEXT_SCOPE_MODEL_ADVISOR.md
-    - CONTEXT_ADVISOR_TEMPLATE.yaml
-    - context_advisor/*.json
-    - context_advisor/*.ts
-    - tools/context_advisor_preflight.py
-    - cursor/rules/context_advisor_preflight.mdc
-    - cursor/commands/context-advisor.md
-    minimum_run: category
-    categories:
-    - context_advisor
-    - retrieval
-    - action_intent
-    - owner_control
-smoke_categories:
-- action_intent
-- grounding
-- retrieval
-- side_effect_safety
-- owner_control
-- platform_context_compaction
-- cursor_integration
-- context_advisor
-repair_rule:
-  failed_eval_result: diagnostic_signal_only
-  agent_may: propose specific repair
-  agent_must_not: modify kit, rules, Project Map, or source files without explicit
-    owner approval
+source_of_truth:
+  policy_file: "eval_trigger_policy.yaml"
+  runner_contract: >-
+    run_eval_checklist.py must read smoke categories from this file and must not
+    maintain an independent hardcoded smoke-category list.
+
+smoke_policy:
+  categories:
+    context_advisor:
+      required: true
+      min_cases: 1
+      rationale: "Context Advisor is now a live preflight surface and must be smoke-tested."
+    cursor_integration:
+      required: true
+      min_cases: 1
+      rationale: "Live .cursor rule/command adoption must be checked."
+    eval_suite_sync:
+      required: true
+      min_cases: 1
+      rationale: "Project Map/eval_suite must either sync to kit or be marked stale_mirror."
+    model_escalation:
+      required: true
+      min_cases: 1
+      rationale: "Model escalation must be trigger-based and not delegated to the user."
+  selection_rule: >-
+    A case is selected for smoke when case.category is present in smoke_policy.categories
+    or a case tag matches one of those categories.
+  failure_rule: >-
+    Smoke validation fails if any required category has fewer than min_cases selected cases,
+    if any selected case lacks required schema fields, or if suite_id/kit_version drift is detected.
+
+trigger_matrix:
+  on_eval_suite_manifest_change:
+    smoke_categories:
+      - eval_suite_sync
+      - context_advisor
+  on_eval_trigger_policy_change:
+    smoke_categories:
+      - eval_suite_sync
+      - context_advisor
+      - cursor_integration
+      - model_escalation
+  on_context_advisor_rule_change:
+    smoke_categories:
+      - context_advisor
+      - cursor_integration
+  on_cursor_rule_or_command_change:
+    smoke_categories:
+      - cursor_integration
+      - context_advisor
+  on_model_route_or_router_change:
+    smoke_categories:
+      - model_escalation
+      - context_advisor
+  on_project_map_eval_suite_change:
+    smoke_categories:
+      - eval_suite_sync
+      - context_advisor
+
+adoption_policy:
+  project_map_eval_suite:
+    allowed_states:
+      - synced_mirror
+      - stale_mirror
+    current_patch_state: synced_mirror
+    stale_marker_required_when_unsynced: true
+    stale_marker_fields:
+      - manifest.authority.project_map_authority_state: stale_mirror
+      - README.md stale_mirror_notice
+  live_cursor:
+    required_rule_paths:
+      - ".cursor/rules/context_advisor_preflight.mdc"
+    required_command_globs:
+      - ".cursor/commands/*"
+    rule_source_path: "Agent Kit/kit/cursor_integration/rules/context_advisor_preflight.mdc"
+    command_source_path: "Agent Kit/kit/cursor_integration/commands/"
