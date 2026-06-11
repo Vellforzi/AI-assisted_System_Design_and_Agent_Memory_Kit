@@ -1,0 +1,57 @@
+schema_version: "1.0"
+snapshot_id: "provider-capabilities-YYYY-MM-DD"
+status: "template"
+captured_at: "YYYY-MM-DDTHH:MM:SSZ"
+expires_at: "YYYY-MM-DDTHH:MM:SSZ"
+purpose: "Volatile model/provider capability snapshot for Context Advisor routing."
+
+rules:
+  - "Do not treat this snapshot as durable project truth after expiration."
+  - "Use official provider documentation or current UI evidence for refresh."
+  - "Keep project-specific claims separate from provider capability facts."
+
+source_refs:
+  - id: "SRC-1"
+    title: "Official provider docs or current UI screenshot"
+    url_or_ref: "<url or project artifact ref>"
+    captured_at: "YYYY-MM-DDTHH:MM:SSZ"
+
+surfaces:
+  - surface: "chatgpt"
+    provider: "OpenAI"
+    model_or_model_class: "frontier reasoning model"
+    supported_reasoning: ["medium", "high", "pro_or_extra_high_if_available"]
+    context_notes: "Verify current model selector and plan limits."
+    recommended_for:
+      - "architecture synthesis"
+      - "package/spec design"
+      - "external research with citations"
+  - surface: "cursor"
+    provider: "Cursor / selected model provider"
+    model_or_model_class: "auto/composer/frontier coding model"
+    supported_reasoning: ["low", "medium", "high_if_available"]
+    context_notes: "Verify current Cursor model, speed, and Max Mode settings."
+    recommended_for:
+      - "scoped repo apply"
+      - "multi-file planning"
+      - "local verification"
+  - surface: "codex_ide"
+    provider: "OpenAI Codex"
+    model_or_model_class: "selected Codex/OpenAI model"
+    supported_reasoning: ["low", "medium", "high"]
+    context_notes: "Verify current Codex approval mode, sandbox/permissions, and model."
+    recommended_for:
+      - "independent review"
+      - "local code reasoning"
+      - "controlled apply with approval"
+
+
+cost_class_notes:
+  economy: low-cost or fast/default class suitable for simple formatting/extraction.
+  standard: default class suitable for bounded edits and owner-provided fact updates.
+  premium: expensive/frontier/high/pro class; use only with concrete escalation trigger.
+
+# v3.9.3 provider/model routing snapshot note
+# Exact model availability, pricing, context windows, Fast/Max behavior, and UI control names are volatile.
+# Store captured_at, expires_at, source refs, and owner UI observations.
+# Do not make optional models part of default routing without a concrete capability gap and owner approval.

@@ -1,7 +1,7 @@
-# Agent Memory Kit schema reference v3.8.0
+# Agent Memory Kit schema reference v3.9.0
 # This is a reference, not a strict runtime schema. Projects may adapt it.
 
-schema_version: "3.4.0"
+schema_version: "3.5.0"
 
 memory_unit:
   required_fields:
@@ -97,6 +97,14 @@ classes:
     purpose: "Short failure trace for diagnosing an eval regression."
     allowed_statuses: [open, resolved, archived]
     default_retrieval_profiles: [audit, repair]
+  context_advisor_trace:
+    purpose: "Pre-hydration trace for context needs, scope sufficiency, routing, and compact user hint."
+    allowed_statuses: [current, superseded, archived]
+    default_retrieval_profiles: [resume, recover, audit, repair]
+  provider_capability_snapshot:
+    purpose: "Timestamped volatile provider/model capability snapshot for routing decisions."
+    allowed_statuses: [current, stale, archived]
+    default_retrieval_profiles: [analyze, plan, audit, repair]
 
 project_map_artifacts:
   source_authority:
@@ -108,6 +116,12 @@ project_map_artifacts:
   retrieval_policy:
     path: "Project Map/retrieval_policy.yaml"
     purpose: "Machine-readable retrieval profile rules."
+  context_advisor_policy:
+    path: "Project Map/context_advisor.yaml"
+    purpose: "Machine-readable context/scope/model/settings preflight policy."
+  provider_capabilities:
+    path: "Project Map/provider_capabilities/"
+    purpose: "Volatile provider/model capability snapshots with TTL and source refs."
   task_contract:
     path_pattern: "Project Map/tasks/TASK-xxxx.yaml"
     purpose: "Goal, scope, permissions, evidence, done definition, and verification recipe for longer tasks."
@@ -180,6 +194,7 @@ intent_classes:
   - stage
   - apply
   - external_research
+  - context_advisor
 
 permission_modes:
   - explain-only
@@ -205,6 +220,7 @@ eval_categories:
   - eval_automation
   - new_project_adoption
   - usage_adoption
+  - context_advisor
 
 retrieval_profiles:
   - answer

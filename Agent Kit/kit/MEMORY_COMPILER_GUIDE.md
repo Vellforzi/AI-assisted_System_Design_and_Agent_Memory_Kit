@@ -1,6 +1,6 @@
 # Memory Compiler Guide
 
-Status: portable guide  
+Status: portable guide
 Purpose: define how session notes, owner statements, project evidence, and tool outputs become durable Project Map memory.
 
 ---

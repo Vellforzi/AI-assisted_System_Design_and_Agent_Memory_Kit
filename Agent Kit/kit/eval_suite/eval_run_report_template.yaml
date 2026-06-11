@@ -1,6 +1,6 @@
 schema_version: "1.0"
 report_id: "EVAL-RUN-YYYYMMDD-001"
-suite_id: "AMK-EVAL-CORE-v3.8.0"
+suite_id: "AMK-EVAL-CORE-v3.9.0"
 run_date: "<YYYY-MM-DD>"
 run_owner: "<owner>"
 
@@ -10,7 +10,7 @@ target:
   instruction_source:
     - "<AGENTS.md or service rule path>"
     - "<Project Map entrypoints used>"
-  memory_kit_version: "v3.8.0"
+  memory_kit_version: "v3.9.0"
 
 trigger:
   reason: "manual|instruction_change|policy_change|model_client_change|critical_failure|repeated_failure|pre_long_running_autonomy|other"

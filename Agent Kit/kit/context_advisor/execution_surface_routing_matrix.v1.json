@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "1.0.0",
+  "matrixId": "execution-surface-routing-matrix-2026-06-10",
+  "collectedAt": "2026-06-10T00:00:00+02:00",
+  "expiresAt": "2026-07-10T00:00:00+02:00",
+  "status": "volatile_provider_snapshot",
+  "surfaces": {
+    "cursor_agent": "primary repo-local workhorse",
+    "codex_ide": "code/test/repair specialist and independent review surface",
+    "chatgpt_pro_web": "advisor/research/synthesis only; no repo mutation authority"
+  },
+  "cursorModes": {
+    "ask": "read-only explanation/analysis",
+    "plan": "reviewable plan before risky apply",
+    "agent": "bounded scoped apply",
+    "debug": "root-cause/log/test/runtime evidence mode",
+    "multitask": "parallel subagents; high fuel; independent subscopes and owner approval required"
+  },
+  "rules": [
+    "Choose surface before model.",
+    "Do not use ChatGPT Pro web for repo apply.",
+    "Do not use Multitask without independent subscopes and owner approval.",
+    "Use Codex IDE for code/test/repair loops when beneficial.",
+    "Use ChatGPT Pro web for synthesis/research/handoff only.",
+    "Auto is discouraged for controlled OPTION-PROFIT work unless owner accepts non-determinism.",
+    "Max/1M is a capacity toggle, not a quality default."
+  ]
+}

@@ -1,0 +1,314 @@
+schema_version: 1.0.4
+snapshot_id: cursor-model-capabilities-2026-06-10
+status: volatile_owner_ui_snapshot
+collected_at: '2026-06-10T00:00:00+02:00'
+expires_at: '2026-07-10T00:00:00+02:00'
+timezone: Europe/Vienna
+purpose: Dated Cursor model/settings evidence for ContextAdvisor routing. Refresh before relying on current availability,
+  pricing, context limits, or control names.
+source_authority:
+  priority:
+  - owner_observed_cursor_ui_2026_06_10
+  - official_cursor_docs_and_blog
+  - cursor_forum_staff_posts
+  warning: Provider facts are not durable project truth. Store them as volatile snapshots only.
+source_refs:
+- id: OWNER-CURSOR-UI-2026-06-10
+  type: owner_observed_ui
+  title: Owner-provided Cursor model picker settings in this session
+  captured_at: '2026-06-10T00:00:00+02:00'
+- id: CURSOR-MODELS-PRICING
+  type: official_docs
+  title: Cursor Models & Pricing
+  url_or_ref: https://cursor.com/docs/models-and-pricing
+  captured_at: '2026-06-10T00:00:00+02:00'
+- id: CURSOR-COMPOSER-2-5
+  type: official_blog
+  title: Introducing Composer 2.5
+  url_or_ref: https://cursor.com/blog/composer-2-5
+  captured_at: '2026-06-10T00:00:00+02:00'
+- id: CURSOR-PLAN-MODE
+  type: official_blog
+  title: Introducing Plan Mode
+  url_or_ref: https://cursor.com/blog/plan-mode
+  captured_at: '2026-06-10T00:00:00+02:00'
+- id: CURSOR-FORUM-MAX-MODE
+  type: forum_staff
+  title: Max Mode context/read limits and cost discussion
+  url_or_ref: https://forum.cursor.com/t/does-max-mode-provide-additional-benefits-other-than-increasing-the-context-window-length/124978
+  captured_at: '2026-06-10T00:00:00+02:00'
+models:
+- id: composer_2_5
+  display_name: Composer 2.5
+  owner_observed_controls:
+    options:
+    - fast
+    context_choices_tokens: []
+    reasoning_or_effort_choices: []
+  routing_role: routine_cursor_agent_default
+  default_for:
+  - project_map_update
+  - owner_provided_facts
+  - small_docs_or_router_edits
+  - bounded_package_apply_without_contract_conflict
+  default_settings:
+    fast: false
+    max_mode: false
+    include_ide_context: false
+    plan_mode: false
+  notes:
+  - Owner observed only Fast on/off in Cursor UI; do not invent reasoning/effort controls for this model.
+  - Fast should not be assumed cheaper. Treat Fast as latency-first unless current pricing snapshot says otherwise.
+- id: gpt_5_5
+  display_name: GPT-5.5
+  owner_observed_controls:
+    options:
+    - fast
+    context_choices_tokens:
+    - 272000
+    - 1000000
+    reasoning_or_effort_label: reasoning
+    reasoning_or_effort_choices:
+    - none
+    - low
+    - medium
+    - high
+    - extra_high
+  routing_role: frontier_reasoning_escalation
+  default_for:
+  - agent_kit_contracts
+  - context_advisor_behavior
+  - eval_or_root_router_policy
+  - cross_subsystem_root_cause_when_medium_fails
+  default_settings:
+    reasoning: medium
+    fast: false
+    context_tokens: 272000
+    max_mode: false
+  premium_settings_require_reason:
+  - reasoning_high_or_extra_high
+  - context_1m
+  - fast
+- id: codex_5_3
+  display_name: Codex 5.3
+  owner_observed_controls:
+    options:
+    - fast
+    reasoning_or_effort_label: reasoning
+    reasoning_or_effort_choices:
+    - low
+    - medium
+    - high
+    - extra_high
+  routing_role: code_test_repair_specialist
+  default_for:
+  - code_repair_loop
+  - test_driven_fix
+  - terminal_verification_heavy_task
+  - independent_code_review_after_cursor
+  default_settings:
+    reasoning: medium
+    fast: false
+  premium_settings_require_reason:
+  - reasoning_high_or_extra_high
+  - fast
+- id: sonnet_4_6
+  display_name: Sonnet 4.6
+  owner_observed_controls:
+    options:
+    - thinking
+    context_choices_tokens:
+    - 200000
+    - 1000000
+    reasoning_or_effort_label: effort
+    reasoning_or_effort_choices:
+    - low
+    - medium
+    - high
+    - max
+  routing_role: balanced_code_docs_fallback
+  default_for:
+  - bounded_refactor
+  - docs_plus_code_when_composer_uncertain
+  - medium_complexity_apply
+  default_settings:
+    effort: medium
+    thinking: false
+    context_tokens: 200000
+    max_mode: false
+  premium_settings_require_reason:
+  - effort_high_or_max
+  - context_1m
+  - thinking
+- id: opus_4_8
+  display_name: Opus 4.8
+  owner_observed_controls:
+    options:
+    - thinking
+    - fast
+    context_choices_tokens:
+    - 300000
+    - 1000000
+    reasoning_or_effort_label: effort
+    reasoning_or_effort_choices:
+    - low
+    - medium
+    - high
+    - extra_high
+    - max
+  routing_role: premium_architecture_audit_fallback
+  default_for: []
+  avoid_as_default_for:
+  - project_map_update
+  - small_docs_patch
+  - mechanical_package_merge
+  default_settings:
+    effort: medium
+    thinking: false
+    fast: false
+    context_tokens: 300000
+    max_mode: false
+  requires_escalation_reason: true
+- id: fable_5
+  display_name: Fable 5
+  owner_observed_controls:
+    options:
+    - thinking
+    context_choices_tokens:
+    - 300000
+    - 1000000
+    reasoning_or_effort_label: effort
+    reasoning_or_effort_choices:
+    - low
+    - medium
+    - high
+    - extra_high
+    - max
+  routing_role: premium_emergency_coding_agent_fallback
+  default_for: []
+  avoid_as_default_for:
+  - project_map_update
+  - small_docs_patch
+  - routine_apply
+  default_settings:
+    effort: medium
+    thinking: false
+    context_tokens: 300000
+    max_mode: false
+  requires_escalation_reason: true
+- id: auto
+  display_name: Auto
+  owner_observed_controls:
+    options: []
+  routing_role: optional_cost_efficient_non_deterministic_router
+  default_for:
+  - low_risk_exploration
+  - cheap_draft_when_repeatability_is_not_required
+  caveat: Auto may reduce owner control over exact model selection and can change provider/model routing. For OPTION-PROFIT
+    controlled work it is not a default route; use only when the owner explicitly accepts non-deterministic routing for low-risk
+    cheap exploration.
+- id: gemini_3_1_pro
+  display_name: Gemini 3.1 Pro
+  owner_observed_controls:
+    options: []
+    context_choices_tokens:
+    - 200000
+    - 1000000
+    reasoning_or_effort_choices: []
+  routing_role: optional_huge_multimodal_context_fallback
+  default_for: []
+  add_only_for:
+  - huge_context
+  - multimodal_screenshots
+  - 1m_context_gap
+  status: optional_not_default
+  requires_capability_gap: true
+- id: grok_4_3_or_grok_build
+  display_name: Grok 4.3 or Grok Build
+  owner_observed_controls:
+    options: []
+  routing_role: optional_fast_coding_experiment
+  default_for: []
+  add_only_for:
+  - fast_coding_fallback
+  - comparative_audit
+  - owner_experiment
+  status: optional_not_default
+  requires_capability_gap: true
+routing_rules:
+- task_class: project_map_update
+  default_model: composer_2_5
+  fallback_models:
+  - gpt_5_5
+  - sonnet_4_6
+  default_settings: Fast OFF, Medium/standard if model supports reasoning/effort, Max OFF, IDE Context OFF, Plan OFF
+  escalation_only_if:
+  - Project Map schema/index corruption
+  - memory conflict or stale fact repair
+  - root-router/eval/agent-behavior policy change
+- task_class: agent_kit_patch
+  default_model: composer_2_5 for mechanical merge; gpt_5_5 medium/high for behavior/schema/eval contracts
+  fallback_models:
+  - codex_5_3
+  - sonnet_4_6
+  default_settings: Plan ON for design/contract pass, then Plan OFF for accepted apply; Max OFF first
+- task_class: code_repair_loop
+  default_model: codex_5_3
+  fallback_models:
+  - gpt_5_5
+  - sonnet_4_6
+  default_settings: Medium first; High only for failing tests or multi-step root cause; Fast OFF
+- task_class: premium_audit_or_emergency
+  default_model: gpt_5_5 or sonnet_4_6 first
+  fallback_models:
+  - opus_4_8
+  - fable_5
+  default_settings: Premium models require explicit escalation trigger and cheaper alternative
+refresh_triggers:
+- Before adding/removing models from routing
+- Before using 1M context or Max Mode
+- Before recommending Fast as cost-saving or cost-expensive
+- When Cursor model picker labels/options change
+- When official Cursor pricing/model docs change
+- At least monthly for active projects
+optional_model_policy:
+  default_router_expansion: forbidden_without_capability_gap_and_owner_approval
+  required_fields:
+  - capability_gap
+  - cheaper_alternative
+  - why_core_model_insufficient
+  - owner_approval
+  current_optional_models:
+  - gemini_3_1_pro
+  - grok_4_3_or_grok_build
+surface_snapshot_ref: provider-surface-routing-2026-06-10
+related_snapshot: provider_surface_routing_snapshot_2026-06-10.yaml
+owner_observed_modes_2026_06_10:
+  cursor_modes:
+  - ask
+  - plan
+  - debug
+  - multitask
+  - agent_apply
+  codex_extension:
+    models:
+    - gpt_5_5
+    - gpt_5_4
+    - gpt_5_4_mini
+    - gpt_5_3_codex_spark
+    reasoning:
+    - low
+    - medium
+    - high
+    - extra_high
+    speed:
+    - standard
+    - fast
+    controls:
+    - plan_mode
+    - pursue_goal
+    - include_ide_context
+  chatgpt_pro_web:
+  - thinking_heavy
+  - pro_plus_heavy
+  - deep_research

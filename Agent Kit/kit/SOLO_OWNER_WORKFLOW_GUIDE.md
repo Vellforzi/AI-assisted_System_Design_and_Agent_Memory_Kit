@@ -1,6 +1,6 @@
 # Solo Owner Workflow Guide
 
-Status: practical workflow guide  
+Status: practical workflow guide
 Purpose: help one project owner use Agent Memory Kit with high control, local IDE agents, and research-focused chat assistants.
 
 ---

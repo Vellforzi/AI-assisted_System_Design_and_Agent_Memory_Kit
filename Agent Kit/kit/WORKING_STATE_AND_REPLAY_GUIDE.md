@@ -1,6 +1,6 @@
 # Working State and Replay Guide
 
-Status: portable integration guide  
+Status: portable integration guide
 Purpose: define Working State as the compact replay root for continuing or recovering long-running project work.
 
 ---
@@ -68,6 +68,11 @@ pending_actions:
 side_effect_guard:
   required: true
   receipts_to_check: [SE-0001]
+
+context_advisor:
+  latest_trace_ref: null
+  latest_context_needs_ref: null
+  provider_capability_snapshot_ref: null
 
 notes:
   compact: "Keep this file short. Put detail in workstream or memory cards."
@@ -198,3 +203,18 @@ If the host platform may have summarized or truncated the chat, Working State be
 The agent must not use platform summary as project truth. It should load the latest compatible Working State checkpoint, current Project Map state, Source Authority, active task/checkpoint/handoff, and only policy-allowed memory units.
 
 If this is not enough to continue safely, the correct answer is `missing evidence`, not reconstruction from chat recall.
+
+
+---
+
+## Context Advisor refs
+
+Working State may reference the latest Context Advisor outputs, but it should not embed full traces or provider docs.
+
+Allowed refs:
+
+- `context_advisor.latest_trace_ref`;
+- `context_advisor.latest_context_needs_ref`;
+- `context_advisor.provider_capability_snapshot_ref`.
+
+On resume/recover, use these refs as hints for what context/settings were chosen. Re-run the advisor if the task, scope, branch, or provider/model capabilities changed.

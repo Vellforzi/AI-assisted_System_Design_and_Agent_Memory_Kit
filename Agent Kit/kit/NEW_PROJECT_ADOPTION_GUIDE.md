@@ -1,6 +1,6 @@
 # New Project Adoption Guide
 
-Status: practical setup guide  
+Status: practical setup guide
 Purpose: use Agent Memory Kit when the project is empty or just starting.
 
 ---

@@ -1,6 +1,6 @@
 # Action Intent Contract
 
-Status: portable runtime-core contract  
+Status: portable runtime-core contract
 Purpose: prevent accidental execution, file changes, memory writes, tool use, or external side effects when the owner only asked a question or requested analysis.
 
 ---
@@ -173,3 +173,12 @@ I can propose the exact patch/task next, but I will not apply anything unless yo
 ```
 
 Do not ask for approval repeatedly when the user only wanted an answer. Keep the answer complete.
+
+
+---
+
+## 10. Context Advisor is not action intent
+
+Running Context Advisor, `/settings`, `/scope`, `/fuel`, or `/safe-apply` does not authorize mutation.
+
+These commands can identify missing context, recommend settings, or check whether a later apply task would be safe. They must not execute the apply task unless the owner separately gives explicit apply intent, target, scope, and verification.

@@ -1,6 +1,6 @@
 # README Authoring Guide
 
-Status: publishing guide  
+Status: publishing guide
 Purpose: keep public README files useful, concise, and aligned with Agent Memory Kit.
 
 ---

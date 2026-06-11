@@ -1,6 +1,6 @@
 # Positioning and Alternatives
 
-Status: README support document  
+Status: README support document
 Purpose: explain what Agent Memory Kit is strong at, how it differs from common memory tools, and when it is useful.
 
 ---

@@ -1,6 +1,6 @@
 # Service Rule Placement Guide
 
-Status: portable guide  
+Status: portable guide
 Purpose: help place Agent Memory Kit rules in AI services without turning service instructions into the only source of project truth.
 
 ---

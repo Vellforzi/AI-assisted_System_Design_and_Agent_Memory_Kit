@@ -1,6 +1,6 @@
 # Eval Automation and Trigger Policy
 
-Status: optional automation policy  
+Status: optional automation policy
 Purpose: define when evals should run, what can be automated, and what still requires owner approval.
 
 ---

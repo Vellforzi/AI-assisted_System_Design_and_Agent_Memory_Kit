@@ -1,6 +1,6 @@
 # Git Publishing Guide
 
-Status: publishing and repository hygiene guide  
+Status: publishing and repository hygiene guide
 Purpose: help publish Agent Memory Kit without leaking private project data or confusing toolkit files with project memory.
 
 ---

@@ -120,3 +120,15 @@ Use this as the practical default for owner-controlled work in OPTION PROFIT:
 - Commit Attribution: off by owner preference.
 - PR Attribution: off by owner preference.
 - Branch Prefix: `cursor/`.
+
+
+## Context Advisor defaults
+
+For task routing and token/fuel control:
+
+- Max Mode: off first; enable only after Context Advisor says long context is required.
+- Include IDE Context: off unless exact open files are the intended scope.
+- Plan Mode: on for multi-file planning, root-cause debug, audit, repair, or high-risk changes.
+- Speed: standard for risky or verification-heavy work.
+- Reasoning: medium for bounded edits; high for cross-subsystem, audit, repair, package/spec design.
+- Provider/model capabilities: verify from current docs/UI and store as a provider capability snapshot when relevant.

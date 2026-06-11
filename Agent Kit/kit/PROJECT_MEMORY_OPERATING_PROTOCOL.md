@@ -1,6 +1,6 @@
 # Project Memory Operating Protocol
 
-Status: portable global protocol  
+Status: portable global protocol
 Purpose: make every substantive AI answer start from the smallest useful project-memory context and end with grounded, reviewable output.
 
 ---

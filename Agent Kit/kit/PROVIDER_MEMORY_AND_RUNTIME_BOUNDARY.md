@@ -1,6 +1,6 @@
 # Provider Memory and Runtime Boundary
 
-Status: portable boundary guide  
+Status: portable boundary guide
 Purpose: prevent confusion between owner-controlled Project Map memory, provider-level personalization memory, IDE/repository instruction files, and agent runtime state.
 
 ---

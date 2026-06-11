@@ -1,6 +1,6 @@
 # Project Memory Storage Guide
 
-Status: portable guide  
+Status: portable guide
 Purpose: show how to store operational memory, long-term memory, working state, evidence, policies, task contracts, claims, handoffs, and lifecycle metadata without context inflation.
 
 ---

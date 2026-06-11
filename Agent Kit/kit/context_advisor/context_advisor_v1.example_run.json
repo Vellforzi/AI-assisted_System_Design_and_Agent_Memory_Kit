@@ -1,0 +1,207 @@
+{
+  "id": "ctx-trace-v391-example-001",
+  "createdAt": "2026-06-10T00:00:00Z",
+  "task": {
+    "id": "task-update-agent-memory-kit-implicit-ide-patch",
+    "rawUserRequest": "Record git topology facts in Project Map; use minimal scope and do not recommend expensive models without reason.",
+    "normalizedGoal": "Record owner-provided git topology facts in Project Map without over-escalating model cost.",
+    "intent": "project_map_update",
+    "mutation": "docs",
+    "risk": "high",
+    "explicitScope": [
+      {
+        "kind": "file",
+        "ref": "AI-assisted_System_Design_and_Agent_Memory_Kit_v3.8.0_EN.zip",
+        "reason": "latest attached package",
+        "required": true
+      },
+      {
+        "kind": "artifact",
+        "ref": "AK-04_context_advisor_package_2026-06-10.zip",
+        "reason": "prior delta work",
+        "required": true
+      }
+    ],
+    "requestedOutput": [
+      "updated package zip",
+      "brief report",
+      "Cursor follow-up task"
+    ],
+    "language": "ru",
+    "ownerOk": true,
+    "verificationProvided": true,
+    "notes": [
+      "Package update is performed on attached archive copy, not on owner repository.",
+      "Implicit IDE context must not expand read/apply scope without owner approval."
+    ]
+  },
+  "profile": "project_map_update",
+  "contextManifest": {
+    "id": "ctx-manifest-v391-example-001",
+    "taskId": "task-update-agent-memory-kit-package",
+    "profile": "handoff_package_update",
+    "mandatory": [
+      {
+        "contextClass": "project_map_core",
+        "reason": "Need package manifest/readme/current guide state before update.",
+        "priority": "mandatory",
+        "suggestedRefs": [],
+        "maxTokens": 2500
+      },
+      {
+        "contextClass": "source_authority",
+        "reason": "Need source authority boundary for package merge decisions.",
+        "priority": "mandatory",
+        "suggestedRefs": [],
+        "maxTokens": 1500
+      },
+      {
+        "contextClass": "memory_relevant",
+        "reason": "Need accepted design decisions from AK-03/AK-04 sources.",
+        "priority": "mandatory",
+        "suggestedRefs": [],
+        "maxTokens": 3500
+      }
+    ],
+    "recommended": [
+      {
+        "contextClass": "external_current_docs",
+        "reason": "Provider/model settings are volatile and should be snapshotted from current docs.",
+        "priority": "recommended",
+        "suggestedRefs": [],
+        "maxTokens": 2000
+      },
+      {
+        "contextClass": "provider_capability_snapshot",
+        "reason": "Routing recommendations should cite a timestamped capability snapshot.",
+        "priority": "recommended",
+        "suggestedRefs": [],
+        "maxTokens": 1000
+      }
+    ],
+    "optional": [
+      {
+        "contextClass": "screenshots_ui",
+        "reason": "User UI screenshots can inform settings hint wording.",
+        "priority": "optional",
+        "suggestedRefs": [],
+        "maxTokens": 800
+      }
+    ],
+    "forbidden": [
+      {
+        "contextClass": "secrets",
+        "reason": "Secrets are never needed for kit package drafting.",
+        "priority": "forbidden",
+        "suggestedRefs": []
+      }
+    ],
+    "likelyMissing": [],
+    "highRiskOmissions": [
+      "implicit IDE context boundary missing from portable package"
+    ],
+    "tokenBudget": {
+      "maxPromptTokens": 24000,
+      "mandatoryContextPercent": 40,
+      "codeDocsPercent": 20,
+      "stateProgressPercent": 15,
+      "testsLogsEvidencePercent": 10,
+      "instructionsOutputPercent": 15,
+      "deferredRefs": [],
+      "excludedRefs": [
+        {
+          "kind": "folder",
+          "ref": "entire unrelated project repo",
+          "reason": "Not needed for package update.",
+          "required": false
+        }
+      ],
+      "rawEscalationRequired": false
+    }
+  },
+  "sufficiency": {
+    "gate": "green",
+    "score0to100": 88,
+    "reasons": [
+      "Latest package is attached",
+      "Prior AK-04 delta is available",
+      "No secrets needed"
+    ],
+    "missingMandatory": [],
+    "overBroadRefs": [],
+    "unsafeRefs": [],
+    "recommendedAction": "proceed"
+  },
+  "routing": {
+    "surface": "chatgpt",
+    "provider": "OpenAI",
+    "modelOrModelClass": "project-approved medium/default model",
+    "reasoning": "medium",
+    "speed": "standard",
+    "contextMode": "explicit_refs_only",
+    "maxMode": "off",
+    "includeIdeContext": "off",
+    "planMode": "off",
+    "approvalMode": "read_only",
+    "rationale": [
+      "Owner supplied the facts; this is a narrow Project Map update, not schema/protocol/eval/router redesign.",
+      "Medium/standard is sufficient; premium/high/pro would require a concrete escalation trigger."
+    ],
+    "volatileSnapshotRef": "context_advisor/provider_capability_snapshot.example.yaml",
+    "costClass": "standard",
+    "capabilityNeed": "bounded",
+    "cheaperAlternative": "Composer/project default medium; low/fast only for formatting/index-only cleanup",
+    "premiumEscalationReasons": [],
+    "whyNotCheaper": []
+  },
+  "userHint": {
+    "mode": "compact",
+    "compactText": "ContextAdvisor: gate=green; missing=none; route=cursor/project-approved-medium/medium/standard; settings=Max off, IDE off, Plan off, speed standard; action=proceed.",
+    "triggerReasons": [
+      "project_map_update",
+      "cost_aware_model_routing"
+    ]
+  },
+  "hydrationDraft": {
+    "profile": "handoff_package_update",
+    "taskId": "task-update-agent-memory-kit-package",
+    "mandatoryRefs": [],
+    "optionalRefs": [],
+    "forbiddenRefs": [
+      {
+        "kind": "folder",
+        "ref": "secrets/access docs",
+        "reason": "Forbidden for package/spec update.",
+        "required": false,
+        "containsSecrets": true
+      }
+    ],
+    "tokenBudget": {
+      "maxPromptTokens": 24000,
+      "mandatoryContextPercent": 40,
+      "codeDocsPercent": 20,
+      "stateProgressPercent": 15,
+      "testsLogsEvidencePercent": 10,
+      "instructionsOutputPercent": 15,
+      "deferredRefs": [],
+      "excludedRefs": [],
+      "rawEscalationRequired": false
+    }
+  },
+  "violations": [],
+  "unresolvedQuestions": [],
+  "deterministicInputs": [
+    "attached_v3_8_package",
+    "ak04_delta",
+    "current_chat_requirements",
+    "official_provider_docs_snapshot",
+    "v3.9.0_package"
+  ],
+  "policyVersion": "1.0.3",
+  "providerModelSnapshot": {
+    "matrixRef": "context_advisor/cursor_model_routing_matrix.v1.json",
+    "snapshotRef": "context_advisor/cursor_provider_capability_snapshot_2026-06-10.yaml",
+    "collectedAt": "2026-06-10T00:00:00+02:00",
+    "volatile": true
+  }
+}

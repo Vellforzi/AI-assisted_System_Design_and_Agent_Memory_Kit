@@ -34,6 +34,11 @@ Project-specific claims require evidence from Project Map, opened files, current
 
 Retrieve the smallest context needed. Do not read the whole repository by default. Respect component scope.
 
+
+## Implicit IDE context boundary
+
+Open tabs, selections, diagnostics, terminal snippets, editor history, and workspace state are advisory only unless explicitly scoped or owner-approved. If this context reveals a needed file/path/class, report it and request approval before expanding read/apply scope. Never expand write scope silently.
+
 ## Project Map writes
 
 At the end of implementation, propose memory updates. Do not write Project Map changes unless explicitly asked.
@@ -90,3 +95,12 @@ If Project Map, `AGENTS.md`, `current_state`, or source authority references an 
 ## Cursor settings rule
 
 For owner-controlled projects, Cursor must not default to `Run Everything`. Prefer Auto-review or stricter mode with protections on, narrow allowlists, visible usage summary, and explicit apply scope for file changes.
+
+
+## Cost-aware model routing
+
+Use the lowest sufficient model/settings class. Do not recommend premium/frontier/high/pro reasoning as a generic safety default. For owner-provided facts, narrow Project Map updates, version refs, and small docs/root-router edits, default to medium/standard unless a concrete escalation trigger exists. If recommending premium/high/pro, state the trigger, cheaper alternative, and why cheaper is insufficient.
+
+## v3.9.3 dated model snapshot rule
+
+Exact Cursor model/settings advice must state the provider snapshot date/ref. Use the lowest sufficient route from the core model set first. Do not add optional models or recommend GPT-5.5 High/Extra High, Opus, Fable, Max/1M, or Fast on expensive models without a concrete escalation trigger, cheaper alternative, and why cheaper is insufficient.

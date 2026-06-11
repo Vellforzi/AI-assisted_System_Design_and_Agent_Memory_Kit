@@ -46,6 +46,87 @@ Use this profile when Cursor is the primary local implementation agent.
 | Attribution | PR Attribution | Off by default | Owner preference; not required for safety. |
 | Git | Branch Prefix | `cursor/` or project-specific prefix | Keeps agent-created branches recognizable. |
 
+
+
+## v3.9.3 dated Cursor model routing snapshot
+
+Collected at: `2026-06-10T00:00:00+02:00`. Treat this as volatile provider evidence, not durable project truth. Refresh when Cursor model picker, pricing, context choices, or docs change.
+
+Owner-observed Cursor model controls:
+
+| Model | Available controls in snapshot | Cost-aware default |
+|---|---|---|
+| Composer 2.5 | Fast on/off only | routine default; Fast off for cost-aware work |
+| Fable 5 | Thinking; 300K/1M context; effort low/medium/high/extra high/max | premium emergency fallback only |
+| Opus 4.8 | Thinking, Fast; 300K/1M context; effort low/medium/high/extra high/max | premium architecture/audit fallback only |
+| GPT-5.5 | Fast; 272K/1M context; reasoning none/low/medium/high/extra high | medium first; high/extra high only with trigger |
+| Sonnet 4.6 | Thinking; 200K/1M context; effort low/medium/high/max | balanced fallback, medium first |
+| Codex 5.3 | Fast; reasoning low/medium/high/extra high | code/test/repair specialist |
+
+Do not invent missing controls. Example: Composer 2.5 has no reasoning/effort selector in this snapshot, so the agent must not recommend “Composer 2.5 High”. It can recommend Composer 2.5 Fast OFF/ON only.
+
+Additional models are not needed for the Cursor-agent workhorse profile unless a project benchmark or failure case shows a gap.
+
+## v3.9.3 Cursor model snapshot policy
+
+Exact Cursor model advice must cite a dated provider/model snapshot. The packaged example is:
+
+```text
+Agent Kit/kit/context_advisor/cursor_provider_model_snapshot_2026-06-10.yaml
+captured_at=2026-06-10
+```
+
+As of that owner-observed snapshot, the core Cursor Agent set is enough with surplus:
+
+- Composer 2.5: default working horse for small/medium scoped Cursor Agent work.
+- GPT-5.3 Codex: code/test/repair loop executor.
+- GPT-5.5: hard reasoning escalation, not default for narrow Project Map/docs updates.
+- Sonnet 4.6: balanced review/refactor/code-analysis alternative.
+- Opus 4.8: rare hard planning or independent audit escalation.
+- Fable 5: rare long-running autonomous agentic work.
+
+Optional only:
+
+- Gemini 3.1 Pro: huge/multimodal/1M-context fallback.
+- Grok 4.3 or Grok Build: fast coding experiment/fallback.
+
+Do not add optional models to default routing without a concrete capability gap, cheaper alternative, and owner approval.
+
+When the owner asks `settings?`, include:
+
+- snapshot date;
+- model controls that matter for the chosen route;
+- cheaper sufficient alternative;
+- escalation trigger if using GPT-5.5 High/Extra High, Opus, Fable, Max/1M, Fast on expensive models, or optional models.
+
+## Cost-aware model and reasoning policy
+
+The agent must not recommend the strongest or most expensive model as a generic default. Use the lowest sufficient model/settings class for the task.
+
+Practical default ladder:
+
+| Work type | Default class |
+|---|---|
+| Formatting, extraction, grep-like checks, simple cleanup | low/fast or cheapest project default |
+| Owner-provided facts, Project Map refs, version updates, small docs/root-router edits | medium/standard |
+| Bounded implementation patch with exact scope and verification | medium/standard |
+| Cross-subsystem root-cause, schema/protocol/eval/router changes, audit/repair/recovery, production-risk work | high/standard |
+| Critical ambiguous synthesis or owner-approved maximum-quality run | extra-high/pro only with explicit reason |
+
+If the agent recommends premium/frontier/high/pro, it must report:
+
+1. the escalation trigger;
+2. the cheaper alternative;
+3. why the cheaper alternative is insufficient.
+
+A vague phrase like “for maximum safety” is not enough.
+
+## Include IDE Context boundary
+
+`Include IDE Context` is a Cursor/provider UI setting. Agent Memory Kit policy does not toggle that setting through prompt text.
+
+When implicit IDE context is present, treat open tabs, selections, diagnostics, terminal snippets, editor history, and workspace state as advisory only unless the owner explicitly scoped them. If the agent needs to use that context to expand read/apply scope, it must report the needed paths/classes and request owner approval first. File changes remain limited to approved scope.
+
 ## Run Mode policy
 
 `Run Everything` is not compatible with the owner-controlled default because it allows commands without approval, classification, or sandboxing.
@@ -80,10 +161,11 @@ When asked about Cursor settings, the agent should:
 
 1. explain the setting in plain language;
 2. state the owner-controlled default;
-3. mention the tradeoff;
-4. ask for project-specific preference only if the default is unsafe or insufficient.
+3. mention the cost/fuel and quality tradeoff;
+4. name the cheaper sufficient alternative;
+5. ask for project-specific preference only if the default is unsafe or insufficient.
 
-The agent must not tell the owner to enable maximum autonomy as a default.
+The agent must not tell the owner to enable maximum autonomy or premium models as a default.
 
 ## OPTION PROFIT finalized owner profile
 
@@ -126,3 +208,10 @@ Use this as the practical default for owner-controlled work in OPTION PROFIT:
 - Commit Attribution: off by owner preference.
 - PR Attribution: off by owner preference.
 - Branch Prefix: `cursor/`.
+
+
+## v3.9.3 Auto/Max explicit boundary
+
+Auto is not a specific model. For OPTION-PROFIT controlled work, do not recommend Auto as the default route unless the owner explicitly accepts non-deterministic provider/model routing for low-risk exploration.
+
+Max Mode is a separate Cursor-level capacity toggle for explicit models except Auto. Keep Max OFF by default; recommend 1M/Max only with context-overflow, broad-audit, large multimodal context, or explicit owner approval.

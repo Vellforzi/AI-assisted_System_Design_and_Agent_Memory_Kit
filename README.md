@@ -1,7 +1,7 @@
 # AI-assisted System Design and Agent Memory Kit
 
-Version: v3.8.0  
-Release date: 2026-06-09  
+Version: v3.9.3
+Release date: 2026-06-10
 Status: portable project-owner toolkit
 
 This package contains two complementary tools:
@@ -54,7 +54,9 @@ See `Agent Kit/kit/POSITIONING_AND_ALTERNATIVES.md`.
 AI-assisted System Design and Agent Memory Kit/
   README.md
   START_HERE.md
-  RELEASE_NOTES_v3.8.0.md
+  RELEASE_NOTES_v3.9.3.md
+  RELEASE_NOTES_v3.9.1.md
+  RELEASE_NOTES_v3.9.0.md
 
   AI-assisted System Design/
     README.md
@@ -82,21 +84,13 @@ AI-assisted System Design and Agent Memory Kit/
 
 ---
 
-## What v3.8.0 adds
+## What v3.9.3 adds
 
-- Cursor Agent settings profile for owner-controlled work.
-- Settings audit and `.cursorignore` audit command templates.
-- Authoritative existing workspace rule: inspect and use the project workspace referenced by Project Map or AGENTS.md instead of replacing it with a generated fallback.
-- `.cursorignore` context-boundary guide and safe default template.
-- Scope Control layer for agent-managed `.codex/ALLOWED_SCOPE.txt` updates.
-- `/scope-set`, `/scope-reset`, and `/workspace-check` command templates.
-- Codex sandbox and permission profile guide explaining `default_permissions`, `:read-only`, `:workspace`, and why not to mix them with old `sandbox_mode` settings.
-- Cursor workspace templates, including an OPTION PROFIT / JOB single-root workspace example.
-- Workspace selection guide for multi-component projects with one Project Map.
-- Default role stack guide: Cursor as primary implementation agent, Codex as restricted reviewer/auditor/recovery helper, GPT web chat as research/design layer, Project Map as shared truth.
-- Hook request workflow, hook generation questions, and hook packaging guide.
-- Codex scope-control templates and optional helper script for safe scope updates and resets.
-- Eval cases for scope control, Codex permissions, workspace selection, and role orchestration.
+- **Cost-Aware Model Router**: the agent must recommend the lowest sufficient model/settings class, not the most expensive model by default.
+- Premium/frontier/high/pro reasoning recommendations require explicit escalation reasons and a cheaper alternative.
+- Narrow Project Map updates, owner-provided fact recording, version refs, and small docs/router edits default to medium reasoning with Max Mode and implicit IDE context off.
+- The `/settings` and `settings?` flow must show cost class, escalation triggers, and “why not cheaper” when a premium route is recommended.
+- v3.9.1 implicit IDE context boundary and v3.9.0 Context Advisor functionality remain included.
 
 ---
 
@@ -122,10 +116,11 @@ Use technical enforcement where possible: permissions, hooks, sandboxing, branch
 Agent Memory Kit is language-agnostic and file-based. Python helper scripts are optional examples only. They are included because the original owner works in Python. Replace them with another language if that fits your project better.
 
 
-## v3.8 Cursor settings and workspace authority
+## v3.9.3 Context Advisor focus
 
-This release adds an owner-controlled Cursor Agent settings profile, `.cursorignore` guidance, settings audit commands, and the rule that an existing authoritative workspace file must be inspected and used rather than replaced by a generated fallback.
+This release clarifies cost-aware model routing. The agent should use the lowest sufficient model/settings class, escalate only with concrete reasons, and show a cheaper alternative when recommending premium/frontier/high/pro modes. v3.9.1 implicit IDE context boundary and v3.9.0 automatic/on-demand guidance remain included.
 
-## v3.8.0 focus
 
-v3.8.0 adds Cursor owner-controlled settings, authoritative existing workspace handling, `.cursorignore` / `.codexignore` context-boundary templates, and desktop metadata ignore patterns for Windows/Google Drive projects.
+## v3.9.3 Cursor provider model snapshot
+
+v3.9.3 adds a dated Cursor model-routing snapshot captured on 2026-06-10. Exact Cursor model/settings advice must show snapshot date/ref. The core Cursor Agent model set is considered sufficient with surplus; optional models require a concrete capability gap and owner approval before default routing.

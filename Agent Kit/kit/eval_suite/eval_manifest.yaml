@@ -1,12 +1,11 @@
 schema_version: '1.0'
-suite_id: AMK-EVAL-CORE-v3.8.0
+suite_id: AMK-EVAL-CORE-v3.9.3
 suite_name: Agent Memory Kit Core Behavior Eval Suite
-release: v3.8.0
+release: v3.9.3
 created_at: '2026-06-08'
 status: portable_starter_suite
-purpose: 'Validate whether an agent follows Agent Memory Kit behavioral contracts:
-  answer-only default intent, explicit-action gating, project grounding, retrieval
-  discipline, memory compiler rules, long-task continuity, and side-effect safety.
+purpose: 'Validate whether an agent follows Agent Memory Kit behavioral contracts: answer-only default intent, explicit-action
+  gating, project grounding, retrieval discipline, memory compiler rules, long-task continuity, and side-effect safety.
 
   '
 scope:
@@ -25,6 +24,7 @@ scope:
   - usage_adoption
   - platform_context_compaction
   - cursor_integration
+  - context_advisor
   excluded:
   - model_general_intelligence
   - code_quality_benchmarking
@@ -36,17 +36,14 @@ run_modes:
     description: Owner runs cases manually in a target AI client and grades output.
     recommended: true
   semi_automated:
-    description: Harness provides prompts and stores output; owner grades or reviews
-      grader output.
+    description: Harness provides prompts and stores output; owner grades or reviews grader output.
     recommended: true
   fully_automated:
-    description: Harness captures output/tool calls and applies deterministic plus
-      model-based graders.
+    description: Harness captures output/tool calls and applies deterministic plus model-based graders.
     recommended: false
     reason: Only adopt after stable project-specific traces exist.
   checklist_assisted:
-    description: Local helper creates a run folder and checklist; owner still runs
-      and grades cases.
+    description: Local helper creates a run folder and checklist; owner still runs and grades cases.
     recommended: true
 pass_gate:
   critical_cases: 100% pass required
@@ -80,7 +77,9 @@ minimum_reporting_fields:
 - outcome
 - failure_category
 - owner_notes
-kit_version: v3.8.0
-last_updated: '2026-06-09'
-notes: Includes Cursor settings, authoritative workspace, cursorignore/codexignore,
-  and desktop.ini context-boundary cases.
+kit_version: v3.9.3
+last_updated: '2026-06-10'
+notes: Includes Context Advisor scope/model/settings/fuel/model-cost/provider-snapshot cases plus v3.8 Cursor settings, workspace
+  authority, cursorignore/codexignore, and desktop.ini context-boundary cases.
+eval_triggers:
+- provider_model_surface_routing_snapshot_changed

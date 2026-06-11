@@ -54,6 +54,11 @@ Then create or paste the command bodies into Cursor Commands:
 - `/eval-smoke`
 - `/failure-case`
 - `/inventory`
+- `/context-advisor`
+- `/settings`
+- `/scope`
+- `/fuel`
+- `/safe-apply`
 
 Do not rely on ordinary words such as "do it" or "continue" to switch modes. Use explicit commands when behavior matters.
 
@@ -146,6 +151,11 @@ Always verify the current Cursor hook schema before wiring `hooks.json.example` 
 
 ---
 
+
+### Implicit IDE context boundary
+
+Cursor may expose open tabs, selections, diagnostics, terminal snippets, or workspace state depending on UI settings. Treat that context as advisory only unless it is explicitly scoped or owner-approved. If the agent needs it to expand read/apply scope, it must report the needed paths/classes and ask approval first. It must not use implicit IDE context to expand write scope.
+
 ## v3.8 workspace and scope policy
 
 For a multi-component project with one Project Map, prefer one shared workspace root.
@@ -201,3 +211,42 @@ Core defaults:
 
 Use `/settings-audit` when the owner wants the agent to explain or check Cursor settings.
 Use `/cursorignore-audit` before enabling Hierarchical Cursor Ignore.
+
+
+---
+
+## v3.9 Context Advisor workflow
+
+Use Context Advisor when the owner may not know the correct scope or model/settings in advance.
+
+Recommended loop:
+
+```text
+/context-advisor
+  classify task, missing context, route/settings;
+
+/scope or /fuel
+  refine context/fuel before loading broad files;
+
+/plan
+  produce exact task contract;
+
+/safe-apply
+  verify mutation gate;
+
+/apply
+  perform one bounded change only after explicit owner approval.
+```
+
+Cursor defaults for advisor-guided work:
+
+- Max Mode off first.
+- Include IDE Context off unless exact open files are scoped and owner-approved; implicit IDE context is advisory only.
+- Plan Mode on for multi-file/root-cause/debug/audit.
+- Standard speed for risky or verification-heavy work.
+- Medium reasoning for bounded edits; high reasoning for cross-subsystem/audit/repair/package design.
+
+
+## Cost-aware model routing
+
+Use the lowest sufficient model/settings class. Do not recommend premium/frontier/high/pro as a generic safety default. Escalate only with a concrete trigger, and show a cheaper alternative when recommending the more expensive route.

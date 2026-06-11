@@ -110,8 +110,36 @@ If the owner asks the agent to apply changes but no scope exists, the agent must
 
 The agent must not guess the target from chat memory.
 
+
+## Implicit IDE context boundary
+
+Open tabs, selections, diagnostics, terminal snippets, editor history, and workspace state are not task scope by themselves. They are advisory hints unless the owner explicitly included them in scope or approved their use during preflight.
+
+If the agent discovers a needed file/path/class through implicit IDE context, it must report the needed ref and ask the owner before expanding read or apply scope. File changes remain limited to approved scope only. Implicit IDE context must not be used to justify edits outside the owner-approved paths.
+
+A prompt phrase such as `IDE Context OFF` is a policy instruction to the agent, not a technical toggle in the IDE. The owner must still set provider/IDE UI controls separately.
+
 ## Relationship to Project Map updates
 
 Project Map writes require a separate approval gate.
 
 `ALLOWED_SCOPE.txt` may include `Project Map/**`, but that does not authorize memory updates by itself. The owner must still request `/map-apply` or provide an equivalent explicit task contract.
+
+
+---
+
+## Context Advisor relationship
+
+Context Advisor can propose the minimal read/write scope for a task, but it does not grant permission.
+
+For apply tasks, the advisor should output:
+
+```text
+Safe apply gate: green|amber|red|blocked
+Allowed scope:
+Forbidden:
+Verification:
+Next safe action:
+```
+
+If the current prompt is not an apply-capable instruction, the advisor may suggest a future scope but must not update `ALLOWED_SCOPE.txt`.

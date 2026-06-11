@@ -1,6 +1,6 @@
 # Start Message Templates
 
-Status: copyable owner prompts  
+Status: copyable owner prompts
 Purpose: give the owner safe ways to start, continue, ask, analyze, or apply work under Agent Memory Kit.
 
 ---
@@ -361,4 +361,43 @@ Failure observed:
 
 Task: create a candidate eval case using failure_to_eval_case_template.yaml.
 Do not edit files. Do not modify rules. Return the candidate case and one proposed repair target.
+```
+
+
+## 14. Context Advisor preflight
+
+```text
+Active layer: Agent Memory Kit.
+Mode: analyze.
+Intent: plan.
+Task: <one goal>.
+Current scope: <exact refs/files/folders or unknown>.
+Risk: low|medium|high|critical.
+Need: <expected output>.
+
+Run ContextAdvisor preflight first. Return compact gate/settings/scope hint only if amber/red/blocked or if settings/scope are requested. Do not read broad context, change files, run commands, or update memory.
+```
+
+## 15. On-demand settings/scope/fuel prompt
+
+```text
+settings? / scope? / fuel? / safe apply?
+Task: <one goal>.
+Current scope: <refs>.
+Mode: answer|analyze|plan|apply|audit|repair|debug.
+Risk: <level>.
+Return only the requested advisor view.
+```
+
+## 16. Safe apply gate prompt
+
+```text
+safe apply?
+Task: <one goal>.
+Allowed writes: <exact paths>.
+Forbidden: secrets, DB writes, deploy, git push, unrelated files, Project Map writes unless explicitly listed.
+Owner OK: yes/no.
+Verification: <commands/manual checks>.
+
+Check only. Do not apply.
 ```

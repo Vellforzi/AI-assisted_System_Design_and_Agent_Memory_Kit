@@ -1,8 +1,8 @@
 # Agent Memory Kit Starter Package
 
-Version: v3.8.0  
-Release date: 2026-06-09  
-Package: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.8.0_EN.zip`
+Version: v3.9.3
+Release date: 2026-06-10
+Package: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.9.3_EN.zip`
 
 Agent Memory Kit is a portable memory operating layer for project owners who work with AI agents across long projects.
 
@@ -16,7 +16,8 @@ Its purpose is structured, meaningful, interconnected duplication of owner-provi
 - accidental execution when the owner only asked a question;
 - overloading the model with irrelevant context;
 - treating generic model knowledge as project truth;
-- forgetting to convert repeated agent failures into eval cases.
+- forgetting to convert repeated agent failures into eval cases;
+- wrong scope/model/settings choices before heavy agent work.
 
 ---
 
@@ -69,6 +70,10 @@ Evals do not run automatically unless the owner wires them to a script, hook, CI
 | `ACTION_INTENT_CONTRACT.md` | Default answer-only behavior and explicit-action gate. |
 | `SIGNIFICANT_WORK_AND_CHECKPOINTS.md` | Defines meaningful work, checkpoints, Project Map delta proposals, and eval triggers. |
 | `PROJECT_GROUNDING_CONTRACT.md` | Strict evidence contract for project-specific claims. |
+| `CONTEXT_SCOPE_MODEL_ADVISOR.md` | Pre-hydration advisor for context, scope, model/settings, and token/fuel use. |
+| `CONTEXT_ADVISOR_TEMPLATE.yaml` | Machine-readable advisor policy template for projects. |
+| `PROVIDER_CAPABILITY_SNAPSHOT_TEMPLATE.yaml` | Template for volatile model/provider capability snapshots. |
+| `context_advisor/` | Profile matrix, hint policy, TypeScript contract, example run, and provider snapshot example. |
 | `PROJECT_MEMORY_OPERATING_PROTOCOL.md` | Runtime behavior for memory intake, grounded answers, memory updates, checkpoints, and eval review. |
 | `PROJECT_MEMORY_STORAGE_GUIDE.md` | File-based Project Map structure and memory lifecycle. |
 | `SOURCE_AUTHORITY_TEMPLATE.yaml` | Machine-readable source authority template. |
@@ -212,6 +217,39 @@ This release includes a Codex Integration Pack under `codex/`. It provides:
 
 Use Codex as an independent reviewer, auditor, recovery assistant, or controlled executor. Do not use Codex memory, platform summaries, or compressed chat as project truth.
 
-## v3.8.0 focus
+## v3.9.3 focus
 
-v3.8.0 adds Cursor owner-controlled settings, authoritative existing workspace handling, `.cursorignore` / `.codexignore` context-boundary templates, and desktop metadata ignore patterns for Windows/Google Drive projects.
+v3.9.3 adds cost-aware model routing: use the lowest sufficient model/settings class, require escalation reasons for premium/frontier/high/pro recommendations, and show a cheaper alternative when asked for settings. v3.9.1 implicit IDE context boundaries and v3.9.0 Context Advisor profiles, compact hints, safe-apply checks, provider capability snapshots, and token/fuel controls remain included.
+
+
+## Context Advisor
+
+Use `CONTEXT_SCOPE_MODEL_ADVISOR.md` and `context_advisor/` when a task may be under-scoped, over-scoped, or dependent on model/provider settings.
+
+Compact owner commands:
+
+```text
+settings?   explain surface/model/reasoning/speed/context choice, cost class, escalation trigger, and cheaper alternative
+scope?      list mandatory/recommended/optional/forbidden context
+fuel?       show keep/defer/drop and Max/IDE context advice
+safe apply? check mutation gate before edits
+```
+
+Optional helper:
+
+```bash
+python3 "Agent Kit/kit/tools/context_advisor_preflight.py" \
+  --intent apply \
+  --have project_map_core,source_authority,active_workstream,tests \
+  --scope "Options_api/app/routes/example.py" \
+  --owner-ok \
+  --verification "pytest"
+```
+
+## v3.9.3 Cursor provider model snapshot
+
+v3.9.3 adds a dated Cursor model-routing snapshot captured on 2026-06-10. Exact Cursor model/settings advice must show snapshot date/ref. The core Cursor Agent model set is considered sufficient with surplus; optional models require a concrete capability gap and owner approval before default routing.
+
+## v3.9.3 model/surface routing
+
+Adds a dated provider/model/mode snapshot for Cursor Agent, Codex IDE extension, and ChatGPT Pro web. The current core Cursor model set is sufficient with surplus; optional models require a capability gap. Exact model advice must show snapshot date.

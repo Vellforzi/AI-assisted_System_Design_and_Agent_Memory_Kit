@@ -1,6 +1,6 @@
-# AI-assisted System Design and Agent Memory Kit v3.8.0 — Manifest
+# AI-assisted System Design and Agent Memory Kit v3.9.3 — Manifest
 
-Package file: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.8.0_EN.zip`
+Package file: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.9.3_EN.zip`
 
 Package purpose: portable starter guide and memory operating layer for using AI agents with owner-controlled projects. Agent Memory Kit helps build a Project Map through structured, meaningful, interconnected duplication of project information supplied or verified by the owner.
 
@@ -10,7 +10,9 @@ Package purpose: portable starter guide and memory operating layer for using AI 
 
 - `README.md` — concise repository/package README.
 - `START_HERE.md` — package router and first entry point.
-- `RELEASE_NOTES_v3.8.0.md` — what changed in this release.
+- `RELEASE_NOTES_v3.9.3.md` — what changed in this patch release.
+- `RELEASE_NOTES_v3.9.1.md` — what changed in the implicit IDE context patch.
+- `RELEASE_NOTES_v3.9.0.md` — what changed in the Context Advisor release.
 - `AI-assisted System Design/README.md` — overview of the system-design methodology.
 - `AI-assisted System Design/AI-assisted System Design.md` — methodology for operating AI-readable projects.
 - `Agent Kit/README.md` — overview of Agent Memory Kit.
@@ -25,6 +27,11 @@ Package purpose: portable starter guide and memory operating layer for using AI 
 - `Agent Kit/kit/ACTION_INTENT_CONTRACT.md` — answer-only default intent and explicit-action gate.
 - `Agent Kit/kit/SIGNIFICANT_WORK_AND_CHECKPOINTS.md` — significant-work triggers, checkpoints, Project Map deltas, and eval triggers.
 - `Agent Kit/kit/PROJECT_GROUNDING_CONTRACT.md` — strict evidence contract for project-specific claims.
+- `Agent Kit/kit/CONTEXT_SCOPE_MODEL_ADVISOR.md` — pre-hydration advisor for context, scope, model/settings, and fuel.
+- `Agent Kit/kit/CURSOR_MODEL_ROUTING_SNAPSHOT.md` — dated Cursor model-routing snapshot and core/optional model policy.
+- `Agent Kit/kit/CONTEXT_ADVISOR_TEMPLATE.yaml` — project-local advisor policy template.
+- `Agent Kit/kit/PROVIDER_CAPABILITY_SNAPSHOT_TEMPLATE.yaml` — volatile provider/model capability snapshot template.
+- `Agent Kit/kit/context_advisor/` — advisor profile matrix, hint policy, TypeScript contract, example run, and provider snapshot example. v3.9.3 adds cost-aware model routing fields and profile defaults.
 - `Agent Kit/kit/PROJECT_MEMORY_OPERATING_PROTOCOL.md` — operational protocol for memory intake, grounded answers, memory updates, checkpoints, verification, and eval usage.
 - `Agent Kit/kit/PROJECT_MEMORY_STORAGE_GUIDE.md` — storage architecture: current state, working state, policies, tasks, claims, handoffs, memory cards, indexes, evals, raw sources, archive.
 - `Agent Kit/kit/PLAIN_LANGUAGE_GLOSSARY.md` — simple explanations for common terms.
@@ -68,6 +75,7 @@ Package purpose: portable starter guide and memory operating layer for using AI 
 
 - `Agent Kit/kit/AGENTS.md_TEMPLATE.md` — root repository instruction template.
 - `Agent Kit/kit/CURSOR_RULE_TEMPLATE.mdc` — Cursor project rule template.
+- `Agent Kit/kit/cursor/rules/context_advisor_preflight.mdc` — Cursor rule fragment for Context Advisor preflight.
 
 ---
 
@@ -105,6 +113,7 @@ Package purpose: portable starter guide and memory operating layer for using AI 
 
 - `Agent Kit/kit/tools/README.md` — helper script documentation.
 - `Agent Kit/kit/tools/run_eval_checklist.py` — creates a local eval run folder and Markdown checklist from YAML cases.
+- `Agent Kit/kit/tools/context_advisor_preflight.py` — optional local CLI helper for compact Context Advisor preflight output.
 
 ---
 
@@ -218,3 +227,33 @@ The Python scripts in `cursor/hooks/scripts/` are optional examples. Agent Memor
 - `Agent Kit/kit/cursor/commands/codexignore-audit.md` — `.codexignore` audit command.
 
 The ignore templates include `**/desktop.ini` for Windows/Google Drive projects.
+
+
+---
+
+## v3.9.3 cost-aware model routing additions
+
+- `Agent Kit/kit/CONTEXT_SCOPE_MODEL_ADVISOR.md` — lowest-sufficient model rule and premium escalation requirements.
+- `Agent Kit/kit/CURSOR_AGENT_SETTINGS_GUIDE.md` — model/reasoning cost ladder.
+- `Agent Kit/kit/context_advisor/context_advisor_v1.profile_matrix.json` — cost/capability fields plus `project_map_update` profile.
+- `Agent Kit/kit/context_advisor/context_advisor_v1.types.ts` — cost-aware routing contract fields.
+- `Agent Kit/kit/tools/context_advisor_preflight.py` — premium/high routing warning flags.
+- `Agent Kit/kit/eval_suite/core_behavior_eval_cases.yaml` — `AMK-CA-008` regression case.
+
+## v3.9.3 dated provider/model snapshot additions
+
+- `Agent Kit/kit/context_advisor/cursor_provider_capability_snapshot_2026-06-10.yaml` — owner-observed Cursor model controls plus source refs, collected on 2026-06-10.
+- `Agent Kit/kit/context_advisor/cursor_model_routing_matrix.v1.json` — machine-readable model routing matrix for Cursor-agent.
+- `Agent Kit/kit/cursor/commands/models.md` — owner command for model-set sufficiency and snapshot freshness.
+- `AMK-CA-009` and `AMK-CA-010` — eval cases for dated snapshots and unsupported model-control invention.
+
+### v3.9.3 model/surface routing files
+
+- `Agent Kit/kit/MODEL_SURFACE_ROUTING_SNAPSHOT.md` — dated Cursor/Codex/ChatGPT Pro model and mode routing snapshot.
+- `Agent Kit/kit/CURSOR_MODEL_ROUTING_SNAPSHOT.md` — backward-compatible Cursor routing snapshot including Auto/Max boundaries.
+- `Agent Kit/kit/context_advisor/provider_surface_routing_snapshot_2026-06-10.yaml` — machine-readable provider/surface/mode snapshot.
+- `Agent Kit/kit/context_advisor/cursor_model_routing_matrix.v1.json` — ContextAdvisor cost/model routing matrix.
+- `Agent Kit/kit/cursor/commands/ask.md`, `debug.md`, `multitask.md`, `models.md`, `settings.md` — compact commands for mode/settings routing.
+- `Agent Kit/kit/codex/workflows/model-routing.md` — Codex IDE extension routing workflow.
+
+- `Agent Kit/kit/context_advisor/execution_surface_routing_matrix.v1.json` — v3.9.3 machine-readable surface/mode routing matrix.

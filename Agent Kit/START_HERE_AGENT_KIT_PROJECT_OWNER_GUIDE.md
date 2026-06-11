@@ -1,9 +1,9 @@
 # START HERE — Agent Memory Kit Project Owner Guide
 
-Version: v3.8.0  
-Release date: 2026-06-09  
-Package: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.8.0_EN.zip`  
-Status: portable starter guide for the project owner  
+Version: v3.9.3
+Release date: 2026-06-10
+Package: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.9.3_EN.zip`
+Status: portable starter guide for the project owner
 Purpose: explain how to use Agent Memory Kit to preserve project-specific knowledge, current work state, evidence, decisions, and continuity without letting the AI answer from ungrounded model memory or act without explicit instruction.
 
 ---
@@ -308,3 +308,32 @@ The eval-suite lives in `kit/eval_suite/`. Start with `kit/EVAL_SUITE_GUIDE.md`.
 22. `kit/PROVIDER_MEMORY_AND_RUNTIME_BOUNDARY.md`
 23. `kit/memory_card_examples.yaml`
 24. `kit/START_MESSAGE_TEMPLATES.md`
+
+---
+
+## Context Advisor preflight
+
+For non-trivial tasks, the agent should first decide whether the owner-provided scope is enough.
+
+The owner does not need to know every required file in advance. The agent should identify missing context classes and return a compact hint when needed:
+
+```text
+ContextAdvisor: gate=<green|amber|red|blocked>; missing=<refs/classes>; route=<surface/model-class/reasoning>; settings=<Max/IDE/Plan/speed>; action=<proceed|ask|discovery|block>.
+```
+
+Use on demand:
+
+- `settings?` — explain model/settings choice.
+- `scope?` — list required context classes and refs.
+- `fuel?` — show keep/defer/drop token plan.
+- `safe apply?` — check mutation safety before edits.
+
+The advisor is not permission to mutate files. It is a pre-hydration and safety check.
+
+## v3.9.3 focus
+
+Adds dated Cursor model/settings snapshot evidence and cost-aware routing defaults. Use the lowest sufficient model/settings class; Composer 2.5 is the routine Cursor-agent default, GPT-5.5/Codex/Sonnet are escalation paths, and Opus/Fable are premium fallbacks only with a concrete trigger.
+
+## v3.9.3 Cursor provider model snapshot
+
+v3.9.3 adds a dated Cursor model-routing snapshot captured on 2026-06-10. Exact Cursor model/settings advice must show snapshot date/ref. The core Cursor Agent model set is considered sufficient with surplus; optional models require a concrete capability gap and owner approval before default routing.

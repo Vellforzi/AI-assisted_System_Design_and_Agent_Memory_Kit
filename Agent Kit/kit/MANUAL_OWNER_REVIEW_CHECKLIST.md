@@ -1,6 +1,6 @@
 # Manual Owner Review Checklist
 
-Status: manual review aid  
+Status: manual review aid
 Purpose: help the owner inspect whether the memory kit is working as intended. This complements the eval-suite; it does not replace human judgment.
 
 ---

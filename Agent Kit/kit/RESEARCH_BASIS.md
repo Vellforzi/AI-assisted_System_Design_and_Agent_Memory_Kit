@@ -1,6 +1,6 @@
-# Research Basis for Agent Memory Kit v3.8.0
+# Research Basis for Agent Memory Kit v3.9.0
 
-Status: design rationale  
+Status: design rationale
 Purpose: record the external engineering ideas that influenced this release.
 
 ---
@@ -58,7 +58,7 @@ Use the current versions of these sources when maintaining the kit:
 
 ## 4. Eval-suite rationale
 
-v3.8.0 adds a portable eval-suite because memory systems fail in recurring, testable ways:
+v3.9.0 adds a portable eval-suite because memory systems fail in recurring, testable ways:
 
 - unsupported project claims;
 - stale fact poisoning;
@@ -91,9 +91,9 @@ These are implementation choices for the project owner or future runtime layer.
 
 ---
 
-## 6. v3.8.0 Codex integration basis
+## 6. v3.9.0 Codex integration basis
 
-v3.8.0 adds Codex integration because Codex can operate as a second controlled agent surface over the same Project Map.
+v3.9.0 adds Codex integration because Codex can operate as a second controlled agent surface over the same Project Map.
 
 The design is based on these practical assumptions:
 
@@ -104,3 +104,21 @@ The design is based on these practical assumptions:
 - Codex Skills and Subagents are useful only when they remain scoped and governed by Project Map, Source Authority, Task Contract, and owner approval.
 
 The kit treats Codex as an execution and review surface, not as durable memory.
+
+
+---
+
+## 7. v3.9.0 Context Advisor basis
+
+v3.9.0 adds Context Advisor because scope selection and model/settings selection are themselves first-class agent tasks. The owner cannot reliably know in advance which files, memory units, logs, schemas, provider docs, screenshots, or tool settings are required.
+
+Design response:
+
+- run a pre-hydration context/scope/settings gate before expensive agent work;
+- represent missing context as typed context classes, not vague requests for "more context";
+- keep hints silent by default, compact on risk, expanded only on direct ask;
+- keep provider/model capability observations as timestamped snapshots;
+- optimize context selection before prompt wording;
+- verify advisor behavior with eval cases.
+
+This extends the existing research basis: context is finite, retrieval can fail by returning too little or too much context, tool responses should be concise by default, and action intent remains separate from permission mode.

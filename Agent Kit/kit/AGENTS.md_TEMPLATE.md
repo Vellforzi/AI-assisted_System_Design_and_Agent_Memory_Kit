@@ -139,11 +139,24 @@ If using Codex, prefer `default_permissions = ":read-only"` and do not mix it wi
 For a project with one Project Map and multiple components, prefer opening the shared project root as the workspace.
 
 
+
+## Implicit IDE context boundary
+
+Open tabs, selections, diagnostics, terminal snippets, editor history, and workspace state are advisory only unless explicitly scoped or owner-approved. If this context reveals a needed file/path/class, report it and request approval before expanding read/apply scope. Never expand write scope silently.
+
 ## Authoritative workspace rule
 
 If Project Map, `AGENTS.md`, `current_state`, or source authority references an existing workspace file, treat it as primary. Do not replace it with a generated fallback workspace unless the owner explicitly asks.
 
 
+## Cost-aware model routing rule
+
+Use the lowest sufficient model/settings class. Do not recommend premium/frontier/high/pro reasoning as a generic safety default. For owner-provided facts, narrow Project Map updates, version refs, and small docs/root-router edits, default to medium/standard unless a concrete escalation trigger exists. If recommending premium/high/pro, state the trigger, cheaper alternative, and why cheaper is insufficient.
+
 ## Cursor settings rule
 
 For owner-controlled projects, Cursor must not default to `Run Everything`. Prefer Auto-review or stricter mode with protections on, narrow allowlists, visible usage summary, and explicit apply scope for file changes.
+
+## v3.9.3 dated model snapshot rule
+
+Exact Cursor model/settings advice must state the provider snapshot date/ref. Use the lowest sufficient route from the core model set first. Do not add optional models or recommend GPT-5.5 High/Extra High, Opus, Fable, Max/1M, or Fast on expensive models without a concrete escalation trigger, cheaper alternative, and why cheaper is insufficient.

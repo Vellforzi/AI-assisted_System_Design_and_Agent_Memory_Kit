@@ -19,6 +19,7 @@ cursor/
     project_map_authority.mdc
     platform_context_compaction_boundary.mdc
     option_profit_safety.mdc
+    context_advisor_preflight.mdc
 
   settings/
     owner_controlled_profile.yaml
@@ -40,6 +41,11 @@ cursor/
     eval-smoke.md
     failure-case.md
     inventory.md
+    context-advisor.md
+    settings.md
+    scope.md
+    fuel.md
+    safe-apply.md
 
   skills/
     memory_compiler_skill.md
@@ -87,9 +93,15 @@ Rules:
 - `agent_memory_core.mdc`
 - `platform_context_compaction_boundary.mdc`
 - `option_profit_safety.mdc`
+- `context_advisor_preflight.mdc`
 
 Commands:
 
+- `/context-advisor`
+- `/settings`
+- `/scope`
+- `/fuel`
+- `/safe-apply`
 - `/answer`
 - `/plan`
 - `/apply`
@@ -129,3 +141,10 @@ Key defaults:
 - Browser, MCP, file deletion, and external-file protections should be on.
 - Auto Format on Agent Finish should be off.
 - Hierarchical Cursor Ignore should be enabled only after `.cursorignore` is verified.
+
+
+## Context Advisor
+
+Install `rules/context_advisor_preflight.mdc` when you want Cursor to warn about insufficient scope, overbroad context, wrong Max/IDE context settings, or unsafe apply gates before work starts.
+
+Use `/context-advisor`, `/settings`, `/scope`, `/fuel`, and `/safe-apply` as on-demand commands. These commands analyze only; they do not authorize mutation.

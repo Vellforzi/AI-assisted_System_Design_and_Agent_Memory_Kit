@@ -1,6 +1,6 @@
 # Long-Running Tasks Without Simulating Consciousness
 
-Status: design guide  
+Status: design guide
 Purpose: show how to support longer agent work through explicit task state, evidence, permissions, and handoff artifacts instead of trying to imitate human consciousness.
 
 ---

@@ -1,6 +1,6 @@
 # Agent Memory Kit Eval Suite
 
-Version: v3.8.0
+Version: v3.9.0
 
 This folder contains a portable starter eval-suite for Agent Memory Kit.
 
@@ -19,7 +19,8 @@ Primary categories:
 - significant-work handling;
 - eval automation triggers;
 - new-project adoption;
-- usage/adoption behavior.
+- usage/adoption behavior;
+- context advisor scope/model/settings/fuel behavior.
 
 Recommended flow:
 

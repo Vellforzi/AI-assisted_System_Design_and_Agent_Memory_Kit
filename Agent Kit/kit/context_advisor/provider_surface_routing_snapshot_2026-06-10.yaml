@@ -1,0 +1,303 @@
+schema_version: 1.0.0
+snapshot_id: provider-surface-routing-2026-06-10
+status: volatile_owner_ui_snapshot
+collected_at: '2026-06-10T00:00:00+02:00'
+expires_at: '2026-07-10T00:00:00+02:00'
+timezone: Europe/Vienna
+purpose: Dated routing evidence for Cursor, Codex IDE extension, and ChatGPT Pro web. Refresh before relying on current model
+  availability, pricing, context limits, or UI control names.
+source_authority:
+  priority:
+  - owner_observed_ui_2026_06_10
+  - official_cursor_docs_blog
+  - official_openai_docs
+  - cursor_forum_staff_or_relevant_threads
+  warning: Provider/model facts are volatile snapshots, not durable project truth.
+source_refs:
+- id: OWNER-CURSOR-UI-2026-06-10
+  type: owner_observed_ui
+  title: Owner-provided Cursor model picker and mode controls
+  captured_at: '2026-06-10T00:00:00+02:00'
+- id: OWNER-CODEX-IDE-UI-2026-06-10
+  type: owner_observed_ui
+  title: Owner-provided Codex extension model/reasoning/speed controls
+  captured_at: '2026-06-10T00:00:00+02:00'
+- id: OWNER-CHATGPT-PRO-UI-2026-06-10
+  type: owner_observed_ui
+  title: Owner-provided ChatGPT Pro web usage modes
+  captured_at: '2026-06-10T00:00:00+02:00'
+- id: CURSOR-DOCS-MODELS-2026-06-10
+  type: official_docs
+  title: Cursor docs model table / model attributes
+  url: https://cursor.com/docs.md
+  captured_at: '2026-06-10T00:00:00+02:00'
+- id: CURSOR-PLAN-MODE-2026-06-10
+  type: official_blog_docs
+  title: Cursor Plan Mode
+  url: https://cursor.com/blog/plan-mode
+  captured_at: '2026-06-10T00:00:00+02:00'
+- id: CURSOR-AGENT-BEST-PRACTICES-2026-06-10
+  type: official_blog
+  title: Cursor best practices for coding with agents
+  url: https://cursor.com/blog/agent-best-practices
+  captured_at: '2026-06-10T00:00:00+02:00'
+- id: OPENAI-CODEX-IDE-2026-06-10
+  type: official_docs
+  title: Codex IDE extension
+  url: https://developers.openai.com/codex/ide
+  captured_at: '2026-06-10T00:00:00+02:00'
+- id: OPENAI-CODEX-IDE-FEATURES-2026-06-10
+  type: official_docs
+  title: Codex IDE extension features
+  url: https://developers.openai.com/codex/ide/features
+  captured_at: '2026-06-10T00:00:00+02:00'
+- id: OPENAI-REASONING-2026-06-10
+  type: official_docs
+  title: OpenAI reasoning models / effort guidance
+  url: https://developers.openai.com/api/docs/guides/reasoning
+  captured_at: '2026-06-10T00:00:00+02:00'
+- id: OPENAI-GPT55-CHATGPT-2026-06-10
+  type: official_help
+  title: GPT-5.5 in ChatGPT
+  url: https://help.openai.com/en/articles/11909943
+  captured_at: '2026-06-10T00:00:00+02:00'
+- id: OPENAI-DEEP-RESEARCH-2026-06-10
+  type: official_help
+  title: Deep research in ChatGPT
+  url: https://help.openai.com/en/articles/10500283-deep-research-in-chatgpt
+  captured_at: '2026-06-10T00:00:00+02:00'
+sufficiency_decision:
+  current_set_sufficient_for_cursor_agent: true
+  decision: Do not add more default Cursor models now. Add optional models only for a concrete capability gap, benchmark task,
+    or owner experiment.
+  core_cursor_models:
+  - composer_2_5
+  - codex_5_3
+  - gpt_5_5
+  - sonnet_4_6
+  - opus_4_8
+  - fable_5
+  optional_not_default:
+  - gemini_3_1_pro
+  - grok_4_3_or_grok_build
+surfaces:
+  cursor_agent:
+    modes:
+      ask:
+        mutates: false
+        default_route: composer_2_5_or_medium
+        use_for:
+        - questions
+        - read_only_analysis
+        - tradeoffs
+        avoid:
+        - max_mode
+        - broad_repo_scan
+        - premium_without_trigger
+      plan:
+        mutates: false
+        default_route: composer_2_5; escalate for hard contracts
+        use_for:
+        - complex_apply
+        - debug
+        - audit
+        - root_router_changes
+        requires: owner approval before apply
+      debug:
+        mutates: only after apply approval
+        default_route: codex_5_3_medium_or_gpt_5_5_medium
+        use_for:
+        - logs
+        - tests
+        - runtime_errors
+        - root_cause
+        high_reasoning_only_if: cross_subsystem_or_ambiguous
+      multitask:
+        mutates: separate approvals per task
+        default_route: discouraged_until_scopes_are_independent
+        use_for:
+        - parallel independent work
+        requires:
+        - worktree_or_isolated_scope
+        - checkpoint
+        - fuel_warning
+      agent_apply:
+        mutates: true
+        default_route: composer_2_5_standard
+        use_for:
+        - bounded accepted edits
+        requires:
+        - explicit scope
+        - verification
+        - owner apply intent
+    models:
+      composer_2_5:
+        options:
+        - fast
+        context_choices_tokens: []
+        reasoning_or_effort: []
+        default_for:
+        - project_map_update
+        - small_docs_router_edit
+        - mechanical_merge
+        - routine_apply
+      fable_5:
+        options:
+        - thinking
+        context_choices_tokens:
+        - 300000
+        - 1000000
+        effort:
+        - low
+        - medium
+        - high
+        - extra_high
+        - max
+        default_for:
+        - rare_long_running_agentic_escalation
+      opus_4_8:
+        options:
+        - thinking
+        - fast
+        context_choices_tokens:
+        - 300000
+        - 1000000
+        effort:
+        - low
+        - medium
+        - high
+        - extra_high
+        - max
+        default_for:
+        - rare_hard_audit_planning_escalation
+      gpt_5_5:
+        options:
+        - fast
+        context_choices_tokens:
+        - 272000
+        - 1000000
+        reasoning:
+        - none
+        - low
+        - medium
+        - high
+        - extra_high
+        default_for:
+        - hard_reasoning_escalation
+        - agent_kit_contracts
+        - eval_router_policy
+      sonnet_4_6:
+        options:
+        - thinking
+        context_choices_tokens:
+        - 200000
+        - 1000000
+        effort:
+        - low
+        - medium
+        - high
+        - max
+        default_for:
+        - balanced_review_refactor_fallback
+      codex_5_3:
+        options:
+        - fast
+        context_choices_tokens: []
+        reasoning:
+        - low
+        - medium
+        - high
+        - extra_high
+        default_for:
+        - code_test_repair_loop
+        - independent_review
+    auto_policy: Not a default route for controlled OPTION-PROFIT work; use only when owner accepts non-deterministic provider
+      routing for low-risk exploration.
+    max_mode_policy: Separate capacity toggle for explicit models except Auto. Default off; use only for context overflow,
+      broad audit, large multimodal context, or owner approval.
+  codex_ide_extension:
+    models_owner_observed:
+    - gpt_5_5
+    - gpt_5_4
+    - gpt_5_4_mini
+    - gpt_5_3_codex_spark
+    reasoning_owner_observed:
+    - low
+    - medium
+    - high
+    - extra_high
+    speed_owner_observed:
+    - standard
+    - fast
+    controls_owner_observed:
+    - plan_mode
+    - pursue_goal
+    - include_ide_context
+    default_policy:
+      reasoning: medium
+      speed: standard
+      plan_mode: on_for_multi_file_debug_audit_repair
+      pursue_goal: off_by_default
+      include_ide_context: off_by_default
+    use_for:
+    - code_repair_loop
+    - terminal_verification
+    - independent_diff_review
+    - sandbox_apply
+    - cloud_offload_when_clear
+  chatgpt_pro_web:
+    modes_owner_observed:
+    - thinking_heavy
+    - pro_plus_heavy
+    - deep_research
+    use_for:
+    - architecture
+    - synthesis
+    - prompt_optimization
+    - package_design
+    - external_research_with_citations
+    not_for:
+    - direct_repo_apply
+    - unverified_project_truth
+    policy: Use for analysis/handoff; Cursor/Codex perform scoped repository actions.
+routing_rules:
+- task_class: project_map_update
+  default: cursor_agent/composer_2_5/standard
+  escalate_only_if:
+  - schema_or_index_corruption
+  - memory_conflict
+  - root_router_or_eval_behavior_change
+- task_class: agent_kit_patch
+  default: cursor_agent/composer_2_5 for mechanical merge; gpt_5_5 medium/high for behavior contracts
+  escalate_only_if:
+  - contract_conflict
+  - eval_failure
+  - router_behavior_change
+- task_class: code_repair_loop
+  default: codex_ide/codex_or_gpt_5_4_medium
+  escalate_only_if:
+  - repeated_test_failure
+  - cross_subsystem_root_cause
+  - ambiguous_runtime
+- task_class: external_provider_research
+  default: chatgpt_pro_web/deep_research_or_thinking_heavy
+  escalate_only_if:
+  - current_docs_or_forums_required
+  - dated_snapshot_refresh
+command_shortcuts:
+- /context-advisor
+- /settings
+- /models
+- /fuel
+- /scope
+- /safe-apply
+- /ask
+- /debug
+- /multitask
+refresh_triggers:
+- Cursor model picker changed
+- Cursor docs/pricing changed
+- Codex extension model list changed
+- ChatGPT model picker changed
+- model advice caused amber/incorrect route
+- owner requests refresh

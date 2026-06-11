@@ -1,0 +1,792 @@
+{
+  "version": "1.0.3",
+  "profiles": [
+    {
+      "profile": "answer_project",
+      "intents": [
+        "answer"
+      ],
+      "defaultRisk": "medium",
+      "mandatoryContextClasses": [
+        "project_map_core",
+        "source_authority",
+        "memory_relevant"
+      ],
+      "recommendedContextClasses": [
+        "active_workstream",
+        "progress_logs"
+      ],
+      "optionalContextClasses": [
+        "routes_contracts",
+        "services_logic",
+        "db_schema",
+        "screenshots_ui"
+      ],
+      "forbiddenContextClasses": [
+        "secrets"
+      ],
+      "defaultSurface": "chatgpt",
+      "fallbackSurface": "cursor",
+      "defaultProvider": "OpenAI or current project-approved provider",
+      "defaultModelOrModelClass": "frontier reasoning model or project-approved default",
+      "defaultReasoning": "medium",
+      "defaultSpeed": "standard",
+      "defaultContextMode": "explicit_refs_only",
+      "maxModeDefault": "off",
+      "includeIdeContextDefault": "off",
+      "planModeDefault": "off",
+      "blockingConditions": [
+        "secret_ref_detected"
+      ],
+      "compactHintTemplate": "Scope: Project Map/source_authority + relevant memory refs; Max off, IDE context off.",
+      "implicitIdeContextPolicy": "advisory_only",
+      "defaultCostClass": "standard",
+      "defaultCapabilityNeed": "bounded",
+      "cheaperAlternative": "cheapest project-approved default or medium reasoning",
+      "premiumRequiresExplicitReason": true,
+      "premiumEscalationTriggers": [
+        "cross_subsystem_root_cause",
+        "schema_protocol_retrieval_eval_or_router_change",
+        "production_risk_or_side_effect_safety",
+        "audit_repair_recovery_or_branch_lineage_ambiguity",
+        "stale_fact_conflict_or_missing_source_authority",
+        "owner_explicitly_requests_max_quality_after_cost_tradeoff"
+      ],
+      "modelSnapshotRequiredWhenAskedForSettings": true,
+      "providerSnapshotRef": "context_advisor/cursor_provider_model_snapshot_2026-06-10.yaml",
+      "providerSnapshotCapturedAt": "2026-06-10T00:00:00Z",
+      "modelSetPolicy": "core_models_first_optional_models_only_with_gap"
+    },
+    {
+      "profile": "analyze_project",
+      "intents": [
+        "analyze"
+      ],
+      "defaultRisk": "medium",
+      "mandatoryContextClasses": [
+        "project_map_core",
+        "source_authority",
+        "memory_relevant"
+      ],
+      "recommendedContextClasses": [
+        "active_workstream",
+        "progress_logs",
+        "tests"
+      ],
+      "optionalContextClasses": [
+        "routes_contracts",
+        "services_logic",
+        "db_schema",
+        "runtime_logs",
+        "external_current_docs"
+      ],
+      "forbiddenContextClasses": [
+        "secrets"
+      ],
+      "defaultSurface": "chatgpt",
+      "fallbackSurface": "cursor",
+      "defaultProvider": "OpenAI or current project-approved provider",
+      "defaultModelOrModelClass": "project-approved medium/default model; escalate to frontier only for complex evidence/conflict analysis",
+      "defaultReasoning": "medium",
+      "defaultSpeed": "standard",
+      "defaultContextMode": "explicit_refs_only",
+      "maxModeDefault": "off",
+      "includeIdeContextDefault": "off",
+      "planModeDefault": "off",
+      "blockingConditions": [
+        "secret_ref_detected"
+      ],
+      "compactHintTemplate": "Analyze: start medium with exact evidence refs; escalate only for conflict/cross-subsystem/protocol risk; no mutation.",
+      "implicitIdeContextPolicy": "advisory_only",
+      "defaultCostClass": "standard",
+      "defaultCapabilityNeed": "bounded",
+      "cheaperAlternative": "Composer/project default medium; escalate only if trigger exists",
+      "premiumRequiresExplicitReason": true,
+      "premiumEscalationTriggers": [
+        "cross_subsystem_root_cause",
+        "schema_protocol_retrieval_eval_or_router_change",
+        "production_risk_or_side_effect_safety",
+        "audit_repair_recovery_or_branch_lineage_ambiguity",
+        "stale_fact_conflict_or_missing_source_authority",
+        "owner_explicitly_requests_max_quality_after_cost_tradeoff"
+      ],
+      "modelSnapshotRequiredWhenAskedForSettings": true,
+      "providerSnapshotRef": "context_advisor/cursor_provider_model_snapshot_2026-06-10.yaml",
+      "providerSnapshotCapturedAt": "2026-06-10T00:00:00Z",
+      "modelSetPolicy": "core_models_first_optional_models_only_with_gap"
+    },
+    {
+      "profile": "plan_change",
+      "intents": [
+        "plan"
+      ],
+      "defaultRisk": "high",
+      "mandatoryContextClasses": [
+        "project_map_core",
+        "source_authority",
+        "active_workstream",
+        "progress_logs",
+        "memory_relevant"
+      ],
+      "recommendedContextClasses": [
+        "routes_contracts",
+        "services_logic",
+        "db_schema",
+        "tests"
+      ],
+      "optionalContextClasses": [
+        "scraper_jobs",
+        "redis_cache",
+        "mt_client",
+        "runtime_logs"
+      ],
+      "forbiddenContextClasses": [
+        "secrets"
+      ],
+      "defaultSurface": "cursor",
+      "fallbackSurface": "chatgpt",
+      "defaultProvider": "Cursor selected provider",
+      "defaultModelOrModelClass": "Composer 2.5 standard for routine plan; GPT-5.5 Medium/High only for schema/protocol/eval/router or production-risk plan",
+      "defaultReasoning": "medium",
+      "defaultSpeed": "standard",
+      "defaultContextMode": "explicit_refs_only",
+      "maxModeDefault": "off",
+      "includeIdeContextDefault": "off",
+      "planModeDefault": "on",
+      "blockingConditions": [
+        "missing_mandatory_context",
+        "branch_lineage_ambiguous",
+        "implicit_ide_context_unscoped"
+      ],
+      "compactHintTemplate": "Plan: Composer 2.5 standard first; Plan Mode ON; GPT-5.5 High only with concrete escalation trigger; Max off unless context overflow.",
+      "implicitIdeContextPolicy": "forbidden_for_scope_expansion",
+      "defaultCostClass": "standard",
+      "defaultCapabilityNeed": "bounded",
+      "cheaperAlternative": "Composer/project default medium; escalate only if trigger exists",
+      "premiumRequiresExplicitReason": true,
+      "premiumEscalationTriggers": [
+        "cross_subsystem_root_cause",
+        "schema_protocol_retrieval_eval_or_router_change",
+        "production_risk_or_side_effect_safety",
+        "audit_repair_recovery_or_branch_lineage_ambiguity",
+        "stale_fact_conflict_or_missing_source_authority",
+        "owner_explicitly_requests_max_quality_after_cost_tradeoff"
+      ],
+      "modelSnapshotRequiredWhenAskedForSettings": true,
+      "defaultCursorModelPreference": "composer_2_5",
+      "providerSnapshotRef": "context_advisor/cursor_provider_model_snapshot_2026-06-10.yaml",
+      "providerSnapshotCapturedAt": "2026-06-10T00:00:00Z",
+      "modelSetPolicy": "core_models_first_optional_models_only_with_gap"
+    },
+    {
+      "profile": "apply_change",
+      "intents": [
+        "apply"
+      ],
+      "defaultRisk": "high",
+      "mandatoryContextClasses": [
+        "project_map_core",
+        "source_authority",
+        "active_workstream",
+        "progress_logs",
+        "tests"
+      ],
+      "recommendedContextClasses": [
+        "routes_contracts",
+        "services_logic",
+        "db_schema",
+        "scraper_jobs",
+        "redis_cache",
+        "mt_client",
+        "side_effect_receipts"
+      ],
+      "optionalContextClasses": [
+        "runtime_logs",
+        "screenshots_ui",
+        "diff_refs"
+      ],
+      "forbiddenContextClasses": [
+        "secrets"
+      ],
+      "defaultSurface": "cursor",
+      "fallbackSurface": "codex_ide",
+      "defaultProvider": "Cursor selected provider or OpenAI Codex",
+      "defaultModelOrModelClass": "Composer 2.5 standard for bounded apply; GPT-5.3 Codex Medium/High for code+tests/repair loop; stronger model only with trigger",
+      "defaultReasoning": "medium",
+      "defaultSpeed": "standard",
+      "defaultContextMode": "explicit_refs_only",
+      "maxModeDefault": "off",
+      "includeIdeContextDefault": "only_exact_open_files",
+      "planModeDefault": "ask",
+      "blockingConditions": [
+        "owner_ok_missing",
+        "verification_missing",
+        "missing_mandatory_context",
+        "duplicate_side_effect_risk",
+        "implicit_ide_context_unscoped"
+      ],
+      "compactHintTemplate": "Apply gate: exact scope + verification + owner OK; Composer/Codex first; stronger route only with trigger; implicit IDE context advisory only.",
+      "implicitIdeContextPolicy": "forbidden_for_scope_expansion",
+      "defaultCostClass": "standard",
+      "defaultCapabilityNeed": "bounded",
+      "cheaperAlternative": "Composer/project default medium; escalate only if trigger exists",
+      "premiumRequiresExplicitReason": true,
+      "premiumEscalationTriggers": [
+        "cross_subsystem_root_cause",
+        "schema_protocol_retrieval_eval_or_router_change",
+        "production_risk_or_side_effect_safety",
+        "audit_repair_recovery_or_branch_lineage_ambiguity",
+        "stale_fact_conflict_or_missing_source_authority",
+        "owner_explicitly_requests_max_quality_after_cost_tradeoff"
+      ],
+      "modelSnapshotRequiredWhenAskedForSettings": true,
+      "defaultCursorModelPreference": "composer_2_5",
+      "providerSnapshotRef": "context_advisor/cursor_provider_model_snapshot_2026-06-10.yaml",
+      "providerSnapshotCapturedAt": "2026-06-10T00:00:00Z",
+      "modelSetPolicy": "core_models_first_optional_models_only_with_gap"
+    },
+    {
+      "profile": "debug_runtime",
+      "intents": [
+        "debug"
+      ],
+      "defaultRisk": "high",
+      "mandatoryContextClasses": [
+        "runtime_logs",
+        "routes_contracts",
+        "services_logic"
+      ],
+      "recommendedContextClasses": [
+        "db_schema",
+        "tests",
+        "redis_cache",
+        "scraper_jobs",
+        "project_map_core",
+        "source_authority"
+      ],
+      "optionalContextClasses": [
+        "screenshots_ui",
+        "side_effect_receipts"
+      ],
+      "forbiddenContextClasses": [
+        "secrets"
+      ],
+      "defaultSurface": "codex_ide",
+      "fallbackSurface": "cursor",
+      "defaultProvider": "OpenAI Codex or Cursor selected provider",
+      "defaultModelOrModelClass": "GPT-5.3 Codex Medium/High or Composer 2.5; premium only for cross-subsystem or production-risk root cause",
+      "defaultReasoning": "high",
+      "defaultSpeed": "standard",
+      "defaultContextMode": "explicit_refs_only",
+      "maxModeDefault": "off",
+      "includeIdeContextDefault": "only_exact_open_files",
+      "planModeDefault": "on",
+      "blockingConditions": [
+        "missing_mandatory_context",
+        "secret_ref_detected",
+        "implicit_ide_context_unscoped"
+      ],
+      "compactHintTemplate": "Debug: include error/log + affected route/service/schema/tests; root-cause plan before patch.",
+      "implicitIdeContextPolicy": "forbidden_for_scope_expansion",
+      "defaultCostClass": "standard",
+      "defaultCapabilityNeed": "complex",
+      "cheaperAlternative": "Codex 5.3 Medium or Composer 2.5 standard before GPT-5.5/Opus/Fable",
+      "premiumRequiresExplicitReason": true,
+      "premiumEscalationTriggers": [
+        "cross_subsystem_root_cause",
+        "schema_protocol_retrieval_eval_or_router_change",
+        "production_risk_or_side_effect_safety",
+        "audit_repair_recovery_or_branch_lineage_ambiguity",
+        "stale_fact_conflict_or_missing_source_authority",
+        "owner_explicitly_requests_max_quality_after_cost_tradeoff"
+      ],
+      "modelSnapshotRequiredWhenAskedForSettings": true,
+      "providerSnapshotRef": "context_advisor/cursor_provider_model_snapshot_2026-06-10.yaml",
+      "providerSnapshotCapturedAt": "2026-06-10T00:00:00Z",
+      "modelSetPolicy": "core_models_first_optional_models_only_with_gap"
+    },
+    {
+      "profile": "audit_contract",
+      "intents": [
+        "audit"
+      ],
+      "defaultRisk": "high",
+      "mandatoryContextClasses": [
+        "project_map_core",
+        "source_authority",
+        "memory_relevant"
+      ],
+      "recommendedContextClasses": [
+        "routes_contracts",
+        "services_logic",
+        "db_schema",
+        "progress_logs",
+        "tests",
+        "diff_refs"
+      ],
+      "optionalContextClasses": [
+        "runtime_logs",
+        "external_current_docs",
+        "side_effect_receipts"
+      ],
+      "forbiddenContextClasses": [
+        "secrets"
+      ],
+      "defaultSurface": "chatgpt",
+      "fallbackSurface": "cursor",
+      "defaultProvider": "OpenAI or current project-approved provider",
+      "defaultModelOrModelClass": "audit-capable model; premium only for contract/schema/eval/security-critical audit",
+      "defaultReasoning": "high",
+      "defaultSpeed": "standard",
+      "defaultContextMode": "explicit_refs_only",
+      "maxModeDefault": "auto",
+      "includeIdeContextDefault": "off",
+      "planModeDefault": "off",
+      "blockingConditions": [
+        "secret_ref_detected",
+        "branch_lineage_ambiguous",
+        "implicit_ide_context_unscoped"
+      ],
+      "compactHintTemplate": "Audit: use exact refs and source authority; premium only with concrete audit complexity trigger.",
+      "implicitIdeContextPolicy": "forbidden_for_scope_expansion",
+      "defaultCostClass": "standard",
+      "defaultCapabilityNeed": "complex",
+      "cheaperAlternative": "Sonnet 4.6 or GPT-5.5 Medium before Opus/Fable/extra-high",
+      "premiumRequiresExplicitReason": true,
+      "premiumEscalationTriggers": [
+        "cross_subsystem_root_cause",
+        "schema_protocol_retrieval_eval_or_router_change",
+        "production_risk_or_side_effect_safety",
+        "audit_repair_recovery_or_branch_lineage_ambiguity",
+        "stale_fact_conflict_or_missing_source_authority",
+        "owner_explicitly_requests_max_quality_after_cost_tradeoff"
+      ],
+      "modelSnapshotRequiredWhenAskedForSettings": true,
+      "providerSnapshotRef": "context_advisor/cursor_provider_model_snapshot_2026-06-10.yaml",
+      "providerSnapshotCapturedAt": "2026-06-10T00:00:00Z",
+      "modelSetPolicy": "core_models_first_optional_models_only_with_gap"
+    },
+    {
+      "profile": "repair_state",
+      "intents": [
+        "repair"
+      ],
+      "defaultRisk": "critical",
+      "mandatoryContextClasses": [
+        "project_map_core",
+        "source_authority",
+        "memory_relevant",
+        "progress_logs"
+      ],
+      "recommendedContextClasses": [
+        "active_workstream",
+        "runtime_logs",
+        "side_effect_receipts"
+      ],
+      "optionalContextClasses": [
+        "external_current_docs"
+      ],
+      "forbiddenContextClasses": [
+        "secrets"
+      ],
+      "defaultSurface": "chatgpt",
+      "fallbackSurface": "cursor",
+      "defaultProvider": "OpenAI or current project-approved provider",
+      "defaultModelOrModelClass": "high reasoning first; extra_high/pro only for critical ambiguous recovery or owner-approved maximum-quality run",
+      "defaultReasoning": "extra_high",
+      "defaultSpeed": "standard",
+      "defaultContextMode": "explicit_refs_only",
+      "maxModeDefault": "off",
+      "includeIdeContextDefault": "off",
+      "planModeDefault": "off",
+      "blockingConditions": [
+        "branch_lineage_ambiguous",
+        "duplicate_side_effect_risk",
+        "owner_ok_missing",
+        "implicit_ide_context_unscoped"
+      ],
+      "compactHintTemplate": "Repair: stale facts may load only as repair input; Project Map writes require owner ask.",
+      "implicitIdeContextPolicy": "forbidden_for_scope_expansion",
+      "defaultCostClass": "premium",
+      "defaultCapabilityNeed": "critical",
+      "cheaperAlternative": "high reasoning before extra_high/pro unless recovery is ambiguous or critical",
+      "premiumRequiresExplicitReason": true,
+      "premiumEscalationTriggers": [
+        "cross_subsystem_root_cause",
+        "schema_protocol_retrieval_eval_or_router_change",
+        "production_risk_or_side_effect_safety",
+        "audit_repair_recovery_or_branch_lineage_ambiguity",
+        "stale_fact_conflict_or_missing_source_authority",
+        "owner_explicitly_requests_max_quality_after_cost_tradeoff"
+      ],
+      "modelSnapshotRequiredWhenAskedForSettings": true,
+      "providerSnapshotRef": "context_advisor/cursor_provider_model_snapshot_2026-06-10.yaml",
+      "providerSnapshotCapturedAt": "2026-06-10T00:00:00Z",
+      "modelSetPolicy": "core_models_first_optional_models_only_with_gap"
+    },
+    {
+      "profile": "recover_context",
+      "intents": [
+        "recover"
+      ],
+      "defaultRisk": "high",
+      "mandatoryContextClasses": [
+        "project_map_core",
+        "active_workstream",
+        "memory_relevant",
+        "side_effect_receipts"
+      ],
+      "recommendedContextClasses": [
+        "progress_logs",
+        "source_authority",
+        "runtime_logs"
+      ],
+      "optionalContextClasses": [
+        "external_current_docs"
+      ],
+      "forbiddenContextClasses": [
+        "secrets"
+      ],
+      "defaultSurface": "cursor",
+      "fallbackSurface": "codex_ide",
+      "defaultProvider": "Cursor selected provider or OpenAI Codex",
+      "defaultModelOrModelClass": "Composer 2.5 or Codex 5.3 Medium/High; premium only for ambiguous recovery or branch-lineage risk",
+      "defaultReasoning": "high",
+      "defaultSpeed": "standard",
+      "defaultContextMode": "explicit_refs_only",
+      "maxModeDefault": "off",
+      "includeIdeContextDefault": "off",
+      "planModeDefault": "on",
+      "blockingConditions": [
+        "missing_mandatory_context",
+        "duplicate_side_effect_risk",
+        "implicit_ide_context_unscoped"
+      ],
+      "compactHintTemplate": "Recover: load Working State/checkpoint/handoff/receipts first; no mutation without fresh apply intent.",
+      "implicitIdeContextPolicy": "forbidden_for_scope_expansion",
+      "defaultCostClass": "standard",
+      "defaultCapabilityNeed": "complex",
+      "cheaperAlternative": "medium reasoning first if scope is narrow and evidence is complete",
+      "premiumRequiresExplicitReason": true,
+      "premiumEscalationTriggers": [
+        "cross_subsystem_root_cause",
+        "schema_protocol_retrieval_eval_or_router_change",
+        "production_risk_or_side_effect_safety",
+        "audit_repair_recovery_or_branch_lineage_ambiguity",
+        "stale_fact_conflict_or_missing_source_authority",
+        "owner_explicitly_requests_max_quality_after_cost_tradeoff"
+      ],
+      "modelSnapshotRequiredWhenAskedForSettings": true,
+      "providerSnapshotRef": "context_advisor/cursor_provider_model_snapshot_2026-06-10.yaml",
+      "providerSnapshotCapturedAt": "2026-06-10T00:00:00Z",
+      "modelSetPolicy": "core_models_first_optional_models_only_with_gap"
+    },
+    {
+      "profile": "resume_task",
+      "intents": [
+        "resume"
+      ],
+      "defaultRisk": "medium",
+      "mandatoryContextClasses": [
+        "project_map_core",
+        "active_workstream",
+        "memory_relevant",
+        "side_effect_receipts"
+      ],
+      "recommendedContextClasses": [
+        "source_authority",
+        "progress_logs"
+      ],
+      "optionalContextClasses": [
+        "tests",
+        "runtime_logs"
+      ],
+      "forbiddenContextClasses": [
+        "secrets"
+      ],
+      "defaultSurface": "cursor",
+      "fallbackSurface": "chatgpt",
+      "defaultProvider": "Cursor selected provider",
+      "defaultModelOrModelClass": "project-approved default; escalate only if checkpoint incomplete",
+      "defaultReasoning": "medium",
+      "defaultSpeed": "standard",
+      "defaultContextMode": "explicit_refs_only",
+      "maxModeDefault": "off",
+      "includeIdeContextDefault": "off",
+      "planModeDefault": "ask",
+      "blockingConditions": [
+        "missing_mandatory_context",
+        "duplicate_side_effect_risk",
+        "implicit_ide_context_unscoped"
+      ],
+      "compactHintTemplate": "Resume: Working State/checkpoint/mandatory refs first; do not reconstruct from chat memory.",
+      "implicitIdeContextPolicy": "forbidden_for_scope_expansion",
+      "defaultCostClass": "standard",
+      "defaultCapabilityNeed": "bounded",
+      "cheaperAlternative": "Composer/project default medium; escalate only if trigger exists",
+      "premiumRequiresExplicitReason": true,
+      "premiumEscalationTriggers": [
+        "cross_subsystem_root_cause",
+        "schema_protocol_retrieval_eval_or_router_change",
+        "production_risk_or_side_effect_safety",
+        "audit_repair_recovery_or_branch_lineage_ambiguity",
+        "stale_fact_conflict_or_missing_source_authority",
+        "owner_explicitly_requests_max_quality_after_cost_tradeoff"
+      ],
+      "modelSnapshotRequiredWhenAskedForSettings": true,
+      "providerSnapshotRef": "context_advisor/cursor_provider_model_snapshot_2026-06-10.yaml",
+      "providerSnapshotCapturedAt": "2026-06-10T00:00:00Z",
+      "modelSetPolicy": "core_models_first_optional_models_only_with_gap"
+    },
+    {
+      "profile": "research_external",
+      "intents": [
+        "research"
+      ],
+      "defaultRisk": "medium",
+      "mandatoryContextClasses": [
+        "external_current_docs"
+      ],
+      "recommendedContextClasses": [
+        "project_map_core",
+        "source_authority",
+        "provider_capability_snapshot"
+      ],
+      "optionalContextClasses": [
+        "screenshots_ui"
+      ],
+      "forbiddenContextClasses": [
+        "secrets"
+      ],
+      "defaultSurface": "web",
+      "fallbackSurface": "deep_research",
+      "defaultProvider": "web-capable provider",
+      "defaultModelOrModelClass": "research-capable model",
+      "defaultReasoning": "high",
+      "defaultSpeed": "standard",
+      "defaultContextMode": "explicit_refs_only",
+      "maxModeDefault": "off",
+      "includeIdeContextDefault": "off",
+      "planModeDefault": "off",
+      "blockingConditions": [
+        "secret_ref_detected"
+      ],
+      "compactHintTemplate": "Research: external docs stay research_output until promoted by project evidence or owner decision.",
+      "implicitIdeContextPolicy": "advisory_only",
+      "defaultCostClass": "standard",
+      "defaultCapabilityNeed": "bounded",
+      "cheaperAlternative": "standard research-capable model with current sources",
+      "premiumRequiresExplicitReason": true,
+      "premiumEscalationTriggers": [
+        "cross_subsystem_root_cause",
+        "schema_protocol_retrieval_eval_or_router_change",
+        "production_risk_or_side_effect_safety",
+        "audit_repair_recovery_or_branch_lineage_ambiguity",
+        "stale_fact_conflict_or_missing_source_authority",
+        "owner_explicitly_requests_max_quality_after_cost_tradeoff"
+      ],
+      "modelSnapshotRequiredWhenAskedForSettings": true,
+      "providerSnapshotRef": "context_advisor/cursor_provider_model_snapshot_2026-06-10.yaml",
+      "providerSnapshotCapturedAt": "2026-06-10T00:00:00Z",
+      "modelSetPolicy": "core_models_first_optional_models_only_with_gap"
+    },
+    {
+      "profile": "prompt_token_optimize",
+      "intents": [
+        "prompt_optimize"
+      ],
+      "defaultRisk": "low",
+      "mandatoryContextClasses": [],
+      "recommendedContextClasses": [
+        "screenshots_ui",
+        "provider_capability_snapshot"
+      ],
+      "optionalContextClasses": [
+        "project_map_core",
+        "external_current_docs"
+      ],
+      "forbiddenContextClasses": [
+        "secrets"
+      ],
+      "defaultSurface": "chatgpt",
+      "fallbackSurface": "cursor",
+      "defaultProvider": "OpenAI or current project-approved provider",
+      "defaultModelOrModelClass": "reasoning model for synthesis; smaller model for simple rewriting",
+      "defaultReasoning": "medium",
+      "defaultSpeed": "standard",
+      "defaultContextMode": "explicit_refs_only",
+      "maxModeDefault": "off",
+      "includeIdeContextDefault": "off",
+      "planModeDefault": "off",
+      "blockingConditions": [
+        "secret_ref_detected"
+      ],
+      "compactHintTemplate": "OPT: optimize context first, wording second; ask settings?/scope?/fuel? for expanded advice.",
+      "implicitIdeContextPolicy": "advisory_only",
+      "defaultCostClass": "standard",
+      "defaultCapabilityNeed": "bounded",
+      "cheaperAlternative": "cheapest project-approved default or medium reasoning",
+      "premiumRequiresExplicitReason": true,
+      "premiumEscalationTriggers": [
+        "cross_subsystem_root_cause",
+        "schema_protocol_retrieval_eval_or_router_change",
+        "production_risk_or_side_effect_safety",
+        "audit_repair_recovery_or_branch_lineage_ambiguity",
+        "stale_fact_conflict_or_missing_source_authority",
+        "owner_explicitly_requests_max_quality_after_cost_tradeoff"
+      ],
+      "modelSnapshotRequiredWhenAskedForSettings": true,
+      "providerSnapshotRef": "context_advisor/cursor_provider_model_snapshot_2026-06-10.yaml",
+      "providerSnapshotCapturedAt": "2026-06-10T00:00:00Z",
+      "modelSetPolicy": "core_models_first_optional_models_only_with_gap"
+    },
+    {
+      "profile": "handoff_package_update",
+      "intents": [
+        "handoff_package_update"
+      ],
+      "defaultRisk": "high",
+      "mandatoryContextClasses": [
+        "project_map_core",
+        "source_authority",
+        "memory_relevant"
+      ],
+      "recommendedContextClasses": [
+        "external_current_docs",
+        "progress_logs",
+        "provider_capability_snapshot"
+      ],
+      "optionalContextClasses": [
+        "screenshots_ui"
+      ],
+      "forbiddenContextClasses": [
+        "secrets"
+      ],
+      "defaultSurface": "chatgpt",
+      "fallbackSurface": "cursor",
+      "defaultProvider": "OpenAI or current project-approved provider",
+      "defaultModelOrModelClass": "Composer 2.5 or GPT-5.5 Medium for mechanical package update; GPT-5.5 High only for behavior/schema/router/eval contract changes",
+      "defaultReasoning": "medium",
+      "defaultSpeed": "standard",
+      "defaultContextMode": "explicit_refs_only",
+      "maxModeDefault": "off",
+      "includeIdeContextDefault": "off",
+      "planModeDefault": "off",
+      "blockingConditions": [
+        "missing_mandatory_context",
+        "secret_ref_detected",
+        "implicit_ide_context_unscoped"
+      ],
+      "compactHintTemplate": "Package update: medium for mechanical merge/version/checksum; high only with behavior/schema/router/eval contract changes.",
+      "implicitIdeContextPolicy": "forbidden_for_scope_expansion",
+      "defaultCostClass": "standard",
+      "defaultCapabilityNeed": "complex",
+      "cheaperAlternative": "Composer/project default medium for mechanical merge; high only for behavior/schema/router/eval changes",
+      "premiumRequiresExplicitReason": true,
+      "premiumEscalationTriggers": [
+        "cross_subsystem_root_cause",
+        "schema_protocol_retrieval_eval_or_router_change",
+        "production_risk_or_side_effect_safety",
+        "audit_repair_recovery_or_branch_lineage_ambiguity",
+        "stale_fact_conflict_or_missing_source_authority",
+        "owner_explicitly_requests_max_quality_after_cost_tradeoff"
+      ],
+      "modelSnapshotRequiredWhenAskedForSettings": true,
+      "defaultCursorModelPreference": "composer_2_5",
+      "providerSnapshotRef": "context_advisor/cursor_provider_model_snapshot_2026-06-10.yaml",
+      "providerSnapshotCapturedAt": "2026-06-10T00:00:00Z",
+      "modelSetPolicy": "core_models_first_optional_models_only_with_gap"
+    },
+    {
+      "profile": "project_map_update",
+      "intents": [
+        "project_map_update"
+      ],
+      "defaultRisk": "medium",
+      "mandatoryContextClasses": [
+        "project_map_core",
+        "source_authority",
+        "memory_relevant"
+      ],
+      "recommendedContextClasses": [
+        "progress_logs",
+        "active_workstream"
+      ],
+      "optionalContextClasses": [
+        "diff_refs"
+      ],
+      "forbiddenContextClasses": [
+        "secrets"
+      ],
+      "defaultSurface": "cursor",
+      "fallbackSurface": "chatgpt",
+      "defaultProvider": "Cursor selected provider or project-approved default",
+      "defaultModelOrModelClass": "Composer 2.5 standard or project-approved medium; avoid GPT-5.5 High/Opus/Fable unless policy/schema/router/eval behavior changes",
+      "defaultReasoning": "medium",
+      "defaultSpeed": "standard",
+      "defaultContextMode": "explicit_refs_only",
+      "maxModeDefault": "off",
+      "includeIdeContextDefault": "off",
+      "planModeDefault": "off",
+      "blockingConditions": [
+        "owner_ok_missing",
+        "missing_mandatory_context",
+        "secret_ref_detected",
+        "implicit_ide_context_unscoped"
+      ],
+      "compactHintTemplate": "Project Map update: Composer 2.5 standard/medium first, Max off, IDE context off; premium/high only with schema/policy conflict trigger.",
+      "implicitIdeContextPolicy": "forbidden_for_scope_expansion",
+      "defaultCostClass": "standard",
+      "defaultCapabilityNeed": "bounded",
+      "cheaperAlternative": "Composer 2.5 standard/Fast OFF; low/fast only for formatting/index-only cleanup",
+      "premiumRequiresExplicitReason": true,
+      "premiumEscalationTriggers": [
+        "cross_subsystem_root_cause",
+        "schema_protocol_retrieval_eval_or_router_change",
+        "production_risk_or_side_effect_safety",
+        "audit_repair_recovery_or_branch_lineage_ambiguity",
+        "stale_fact_conflict_or_missing_source_authority",
+        "owner_explicitly_requests_max_quality_after_cost_tradeoff"
+      ],
+      "modelSnapshotRequiredWhenAskedForSettings": true,
+      "defaultCursorModelPreference": "composer_2_5",
+      "providerSnapshotRef": "context_advisor/cursor_provider_model_snapshot_2026-06-10.yaml",
+      "providerSnapshotCapturedAt": "2026-06-10T00:00:00Z",
+      "modelSetPolicy": "core_models_first_optional_models_only_with_gap"
+    }
+  ],
+  "providerModelSnapshotPolicy": {
+    "currentSnapshotRef": "context_advisor/cursor_provider_capability_snapshot_2026-06-10.yaml",
+    "routingMatrixRef": "context_advisor/cursor_model_routing_matrix.v1.json",
+    "collectedAt": "2026-06-10",
+    "expiresAfterDays": 30,
+    "factsAreVolatile": true,
+    "refreshBefore": [
+      "model/pricing/context-window decision",
+      "premium/frontier/high/pro route",
+      "Cursor model picker changes",
+      "new project bootstrap",
+      "monthly release refresh"
+    ]
+  },
+  "providerSnapshotPolicy": {
+    "requiresCapturedAtForExactModelAdvice": true,
+    "snapshotTtlDays": 7,
+    "currentExampleRef": "context_advisor/cursor_provider_model_snapshot_2026-06-10.yaml",
+    "exactCursorModelAdviceMustShowSnapshotDate": true,
+    "coreModelSetSufficient": true,
+    "optionalModelsRequireCapabilityGapAndOwnerApproval": true
+  },
+  "coreCursorModelSet": [
+    "composer_2_5",
+    "gpt_5_3_codex",
+    "gpt_5_5",
+    "sonnet_4_6",
+    "opus_4_8",
+    "fable_5"
+  ],
+  "optionalCursorModels": [
+    "gemini_3_1_pro",
+    "grok_4_3_or_grok_build"
+  ]
+}

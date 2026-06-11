@@ -1,6 +1,6 @@
 # Eval Suite Guide
 
-Status: portable validation layer  
+Status: portable validation layer
 Purpose: help the owner test whether an agent follows Agent Memory Kit contracts before trusting it with real project work.
 
 ---

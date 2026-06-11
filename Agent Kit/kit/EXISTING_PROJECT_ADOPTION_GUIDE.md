@@ -1,6 +1,6 @@
 # Existing Project Adoption Guide
 
-Status: practical migration guide  
+Status: practical migration guide
 Purpose: install Agent Memory Kit into an already active project without freezing development or forcing autonomous long-running agents.
 
 ---

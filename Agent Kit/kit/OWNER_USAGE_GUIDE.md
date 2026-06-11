@@ -1,6 +1,6 @@
 # Owner Usage Guide
 
-Status: practical user guide  
+Status: practical user guide
 Purpose: explain how a project owner should use Agent Memory Kit day to day.
 
 ---

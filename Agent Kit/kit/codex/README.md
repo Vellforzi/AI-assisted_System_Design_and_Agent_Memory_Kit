@@ -71,3 +71,7 @@ See:
 ## Ignore files
 
 See `ignore/` for `.codexignore` templates and the Codex ignore boundary guide. Keep `.codexignore` aligned with `.cursorignore` when Cursor and Codex operate on the same project root.
+
+## v3.9.3 model-routing note
+
+For Codex IDE extension settings, see `workflows/model-routing.md`. Use medium reasoning and standard speed by default; keep Pursue Goal and Include IDE Context off unless the owner explicitly approves the scope and stop condition.

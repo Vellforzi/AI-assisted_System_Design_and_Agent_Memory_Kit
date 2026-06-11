@@ -1,0 +1,70 @@
+---
+description: Context Advisor preflight for scope, model, context, and settings.
+alwaysApply: false
+---
+
+# Context Advisor preflight
+
+Before non-trivial work, run a compact preflight:
+
+1. Classify intent: answer, analyze, plan, apply, audit, repair, recover, resume, debug, research, prompt_optimize, project_map_update, or handoff_package_update.
+2. Estimate required context classes from `CONTEXT_SCOPE_MODEL_ADVISOR.md` or the project-local advisor policy.
+3. Read only the allowed Project Map entrypoints, active task/workstream, relevant memory refs, and explicitly scoped files.
+4. Treat open tabs, selections, diagnostics, terminal snippets, editor history, and workspace state as advisory only unless explicitly scoped or owner-approved.
+5. If implicit IDE context is needed to expand read/apply scope, report the needed paths/classes and ask owner approval first. Never expand write scope silently.
+6. If scope is insufficient, do not guess. Return a compact `ContextAdvisor` hint with gate and missing classes/refs.
+7. For apply tasks, require exact paths, allowed/forbidden list, verification, and owner/gate when product code, DB, deploy, git, or Project Map writes are involved.
+8. Prefer refs over payloads. Do not load the whole repo by default.
+9. Exclude secrets and access files from prompts and answers.
+10. Treat external/model/provider docs as volatile snapshots, not durable project facts.
+11. Use the lowest sufficient model/settings class. Do not recommend premium/frontier/high/pro merely for maximum power; state the escalation trigger and cheaper alternative first.
+
+Compact output for amber/red/blocked tasks:
+
+```text
+ContextAdvisor: gate=<green|amber|red|blocked>; missing=<refs/classes>; route=<surface/model-class/reasoning/cost>; settings=<Max/IDE/Plan/speed>; action=<proceed|ask|discovery|block>.
+```
+
+Defaults:
+
+- Max Mode: off unless preflight proves long context is required.
+- Include IDE Context: off unless open files are exactly scoped and owner-approved; implicit IDE context is advisory only.
+- Plan Mode: on for multi-file/multi-subsystem planning and root-cause debug.
+- Speed: standard for risky or verification-heavy work.
+- Reasoning: medium for bounded local edits, Project Map updates, version refs, and small router/docs edits; high only for concrete escalation triggers such as cross-subsystem, audit, repair, schema/protocol/eval/router behavior changes, production-risk, or side-effect safety.
+- Model cost: lowest sufficient class first; premium/high/pro requires an escalation reason and cheaper alternative.
+
+Direct user commands:
+
+- `settings?` or `/settings` — explain model/settings choice.
+- `scope?` or `/scope` — list needed context.
+- `fuel?` or `/fuel` — show token/fuel budget.
+- `safe apply?` or `/safe-apply` — run mutation gate check.
+
+## v3.9.3 model snapshot boundary
+
+When recommending Cursor models/settings, use the dated provider snapshot if present:
+`Agent Kit/kit/context_advisor/cursor_provider_capability_snapshot_2026-06-10.yaml`.
+
+Show `collected_at=2026-06-10` for concrete model controls. Do not invent controls not in the snapshot. Do not add more models to the routing set unless the current set fails a concrete task class, the owner requests benchmarking, or provider changes require a refresh.
+
+## v3.9.3 dated model snapshot rule
+
+Exact Cursor model/settings advice must state the provider snapshot date/ref. Use the lowest sufficient route from the core model set first. Do not add optional models or recommend GPT-5.5 High/Extra High, Opus, Fable, Max/1M, or Fast on expensive models without a concrete escalation trigger, cheaper alternative, and why cheaper is insufficient.
+
+
+## v3.9.3 Auto/Max explicit boundary
+
+Auto is not a specific model. For OPTION-PROFIT controlled work, do not recommend Auto as the default route unless the owner explicitly accepts non-deterministic provider/model routing for low-risk exploration.
+
+Max Mode is a separate Cursor-level capacity toggle for explicit models except Auto. Keep Max OFF by default; recommend 1M/Max only with context-overflow, broad-audit, large multimodal context, or explicit owner approval.
+
+## v3.9.3 model/mode routing rule
+
+When recommending model/settings, use the dated provider snapshot. Do not recommend the strongest model by default.
+
+- Cursor Agent: core set is sufficient; Composer 2.5 first for routine work.
+- Auto: not default for controlled OPTION-PROFIT work.
+- Max/1M: capacity only; off unless context-overflow/broad-audit/owner approval.
+- Ask: read-only. Plan: pre-apply. Debug: evidence-first. Multitask: only independent scoped tasks.
+- Codex extension and ChatGPT Pro web controls are separate surfaces; do not mix their settings with Cursor Agent settings.

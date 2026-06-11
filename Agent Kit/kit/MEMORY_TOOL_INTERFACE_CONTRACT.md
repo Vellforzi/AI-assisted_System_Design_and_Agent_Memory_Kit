@@ -1,6 +1,6 @@
 # Memory Tool Interface Contract
 
-Status: implementation-facing guidance  
+Status: implementation-facing guidance
 Purpose: define how a memory tool, file-backed memory helper, MCP server, database API, or IDE extension should expose Project Map memory to agents.
 
 ---
@@ -43,6 +43,8 @@ It should help the agent:
 | `memory.create_handoff` | Create a clean-slate continuation packet. |
 | `memory.receipt_check` | Check side-effect receipts before repeating actions. |
 | `memory.record_receipt` | Record completed external side effect. |
+| `memory.advise_context` | Run pre-hydration Context Advisor: classify task, estimate context needs, gate scope sufficiency, and recommend surface/settings. |
+| `memory.read_provider_capabilities` | Read a timestamped provider capability snapshot for volatile model/settings decisions. |
 
 These are conceptual operations. Implementations may use different names.
 
@@ -226,3 +228,43 @@ A failed claim check should block final project assertions, not block a missing-
 For actions outside memory retrieval, the tool should support receipts or idempotency keys.
 
 Before replaying or recovering a task, the agent should call receipt check if available.
+
+
+---
+
+## 11. Context Advisor operation
+
+A memory tool may expose `memory.advise_context` before `memory.hydrate`.
+
+Input should include:
+
+```yaml
+task: "<owner request>"
+intent: answer|analyze|plan|apply|audit|repair|recover|resume|debug|research
+mode: explain-only|dry-run|read-only|apply
+current_scope_refs: []
+known_context_classes: []
+mutation_kind: none|docs|code|memory|db|deploy|git|external
+owner_ok: false
+verification_provided: false
+```
+
+Output should include:
+
+```yaml
+gate: green|amber|red|blocked
+missing_mandatory_context: []
+over_broad_refs: []
+unsafe_refs: []
+routing_recommendation:
+  surface: cursor|codex_ide|chatgpt|web
+  model_or_model_class: "<volatile; from snapshot if needed>"
+  reasoning: medium|high|extra_high|provider_default
+  speed: standard|fast|provider_default
+  max_mode: on|off|auto
+  include_ide_context: on|off|only_exact_open_files
+compact_hint: "ContextAdvisor: ..."
+hydration_request_draft: {}
+```
+
+The operation must not read secrets, load whole-project payloads by default, or treat provider capability snapshots as durable project facts.

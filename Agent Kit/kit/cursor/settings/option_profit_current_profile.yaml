@@ -1,4 +1,4 @@
-profile_id: option-profit-cursor-settings-current-v3.8.0
+profile_id: option-profit-cursor-settings-current-v3.9.0
 status: example_current_owner_profile
 notes:
 - This profile reflects a high-control setup where Cursor is active implementation
@@ -94,3 +94,20 @@ settings:
     pr_attribution: false
   git:
     branch_prefix: cursor/
+context_advisor:
+  preflight_default: silent_for_green_compact_for_amber_red_blocked
+  max_mode_default: off_first
+  include_ide_context_default: off_unless_exact_open_files_scoped
+  plan_mode_default: on_for_multi_file_debug_audit_repair_high_risk
+  speed_default: standard_for_risky_or_verification_heavy_work
+  reasoning_default: medium_bounded_edits_high_cross_subsystem_audit_repair_protocol_design
+  on_demand_commands:
+  - context-advisor
+  - settings
+  - scope
+  - fuel
+  - safe-apply
+  provider_capability_facts: volatile_snapshot_required_when_model_or_pricing_or_context_claim_matters
+agent_obligations:
+- Run Context Advisor before non-trivial or under-scoped work.
+- Do not enable Max Mode or broad IDE context unless Context Advisor justifies it.

@@ -1,7 +1,23 @@
 # Retrieval Policy Profiles
 
-Status: portable policy guide  
+Status: portable policy guide
 Purpose: define how an agent should hydrate project memory for different task types without loading too much, missing required context, using stale facts as current truth, or executing work when the owner only asked for an answer.
+
+---
+
+## 0. Context Advisor preflight
+
+Before retrieval/hydration for non-trivial work, run Context Advisor if scope, settings, or risk are unclear.
+
+Context Advisor decides:
+
+- whether the current scope is sufficient;
+- which context classes are mandatory, recommended, optional, or forbidden;
+- whether a read-only discovery step is safer than immediate work;
+- which surface/model class/reasoning/speed/context mode should be used;
+- whether provider capability snapshots are needed.
+
+Retrieval Policy still controls what is actually loaded. Context Advisor prepares the hydration request and compact user hint.
 
 ---
 

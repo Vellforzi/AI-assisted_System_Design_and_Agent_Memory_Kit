@@ -1,6 +1,6 @@
 # Project Workspace Layout
 
-Status: portable reference  
+Status: portable reference
 Purpose: define role separation between the tool, project memory, and project materials.
 
 ---

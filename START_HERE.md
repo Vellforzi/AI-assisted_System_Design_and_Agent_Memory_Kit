@@ -1,8 +1,8 @@
 # START HERE — AI-assisted System Design and Agent Memory Kit
 
-Version: v3.8.0  
-Release date: 2026-06-09  
-Package: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.8.0_EN.zip`  
+Version: v3.9.3
+Release date: 2026-06-10
+Package: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.9.3_EN.zip`
 Status: portable project-owner kit for AI-assisted work and grounded project memory
 
 ---
@@ -59,6 +59,16 @@ Goal: <one goal for this session>.
 If the user has not chosen a layer, the agent should infer the smallest safe layer from the request. If inference is unsafe, ask one minimal clarification.
 
 Answer-only is the default intent. Do not execute, write, update memory, run commands, or call external services unless the owner explicitly asked for that action.
+
+### Context Advisor preflight
+
+For non-trivial work, the agent should also run a compact Context Advisor preflight before heavy retrieval or execution:
+
+```text
+ContextAdvisor: gate=<green|amber|red|blocked>; missing=<refs/classes>; route=<surface/model-class/reasoning>; settings=<Max/IDE/Plan/speed>; action=<proceed|ask|discovery|block>.
+```
+
+The hint stays silent for simple green tasks. It appears automatically when scope is risky, insufficient, overbroad, or when model/settings choices matter. The owner can ask for details with `settings?`, `scope?`, `fuel?`, `why?`, or `safe apply?`.
 
 ---
 
@@ -140,19 +150,30 @@ Read:
 
 ---
 
-## What changed in v3.8.0
+## What changed in v3.9.3
 
-This release adds an operational layer for scope control, workspace selection, and multi-agent role separation:
+This micro-patch adds a cost-aware model routing guard to Context Advisor.
 
-- agent-managed `.codex/ALLOWED_SCOPE.txt` workflows;
-- `/scope-set`, `/scope-reset`, and `/workspace-check` command templates;
-- Codex permission profile and sandbox explanations;
-- Cursor workspace templates for one-root and multi-component projects;
-- hook request, generation, and packaging workflows;
-- default role split: Cursor implements, Codex reviews, GPT web chat researches, Project Map stores truth;
-- eval cases for scope, workspace, permissions, and role orchestration.
+The agent must recommend the **lowest sufficient model/settings class** for the task. It must not default to premium/frontier/high/pro modes merely because they are stronger. If it recommends a premium route, it must state the escalation trigger and a cheaper alternative.
 
-See `RELEASE_NOTES_v3.8.0.md` for details.
+Typical defaults:
+
+- low/fast: formatting, extraction, grep-like checks, simple cleanup;
+- medium/standard: owner-provided facts, narrow Project Map updates, version refs, small docs/root-router edits;
+- high/standard: cross-subsystem debugging, schema/protocol/eval/router changes, production-risk work, audit/repair/recovery, side-effect safety;
+- extra-high/pro: rare critical synthesis, ambiguous recovery, or high-cost decisions with owner-approved need.
+
+Owner-facing commands and prompts:
+
+- `settings?` / `/settings` — explain where to run, which model/settings class to use, cost class, escalation trigger, and cheaper alternative;
+- `scope?` / `/scope` — list mandatory/recommended/optional/forbidden context;
+- `fuel?` / `/fuel` — show keep/defer/drop token plan and Max/IDE context advice;
+- `safe apply?` / `/safe-apply` — check mutation gate before edits;
+- `/context-advisor` — run the full compact preflight.
+
+v3.9.1 implicit IDE context boundary, v3.9.0 Context Advisor, and v3.8.0 scope/control integration remain included.
+
+See `RELEASE_NOTES_v3.9.3.md`, `RELEASE_NOTES_v3.9.1.md`, and `RELEASE_NOTES_v3.9.0.md` for details.
 
 ---
 
@@ -193,10 +214,14 @@ Project Map = shared project truth between both
 ```
 
 
-## v3.8 Cursor settings and workspace authority
+## v3.9 Context Advisor and v3.8 Cursor settings
 
-This release adds an owner-controlled Cursor Agent settings profile, `.cursorignore` guidance, settings audit commands, and the rule that an existing authoritative workspace file must be inspected and used rather than replaced by a generated fallback.
+This release includes Context Advisor preflight and on-demand hints for scope/model/settings/fuel, now with cost-aware model routing. It also keeps the v3.8 owner-controlled Cursor Agent settings profile, `.cursorignore` guidance, settings audit commands, and authoritative workspace rule.
 
-## v3.8.0 focus
+## v3.9.0 focus
 
-v3.8.0 adds Cursor owner-controlled settings, authoritative existing workspace handling, `.cursorignore` / `.codexignore` context-boundary templates, and desktop metadata ignore patterns for Windows/Google Drive projects.
+v3.9.0 adds Context Advisor profiles, compact hints, safe-apply checks, provider capability snapshots, and token/fuel controls. v3.8.0 Cursor settings and workspace authority remain included.
+
+## v3.9.3 Cursor provider model snapshot
+
+v3.9.3 adds a dated Cursor model-routing snapshot captured on 2026-06-10. Exact Cursor model/settings advice must show snapshot date/ref. The core Cursor Agent model set is considered sufficient with surplus; optional models require a concrete capability gap and owner approval before default routing.

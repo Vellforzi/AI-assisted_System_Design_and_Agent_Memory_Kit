@@ -1,6 +1,6 @@
 # Project Grounding Contract
 
-Status: portable runtime-core contract  
+Status: portable runtime-core contract
 Purpose: prevent project-specific hallucination by forcing every project claim to be grounded in owner-approved or retrieved project evidence.
 
 ---

@@ -139,3 +139,23 @@ See:
 - `WORKSPACE_SELECTION_GUIDE.md`
 - `AI_AGENT_ROLE_STACK_GUIDE.md`
 - `codex/scope/README.md`
+
+
+---
+
+## v3.9 Context Advisor workflow
+
+Codex can use the same Context Advisor gate as Cursor. Use `codex/workflows/context-advisor.md` for a read-only preflight before review, audit, recovery, or controlled apply.
+
+Default policy:
+
+- use `:read-only` or equivalent conservative permission first;
+- use open files, selections, and `@file` refs only when they are exact scope;
+- keep higher reasoning for root-cause debug, audit, repair, or cross-subsystem analysis;
+- do not rely on compacted chat or Codex memory as Project Map truth;
+- do not apply until owner intent, allowed scope, and verification are explicit.
+
+
+## Cost-aware model routing
+
+Use the lowest sufficient model/settings class. Do not recommend premium/frontier/high/pro as a generic safety default. Escalate only with a concrete trigger, and show a cheaper alternative when recommending the more expensive route.

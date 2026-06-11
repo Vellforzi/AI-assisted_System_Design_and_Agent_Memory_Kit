@@ -1,6 +1,6 @@
 # Significant Work and Checkpoint Policy
 
-Status: runtime-core policy  
+Status: runtime-core policy
 Purpose: define when work is important enough to produce a Project Map update proposal, a handoff, an eval trigger, or a checkpoint note.
 
 ---

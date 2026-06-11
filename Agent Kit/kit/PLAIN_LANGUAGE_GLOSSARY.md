@@ -1,6 +1,6 @@
 # Plain-Language Glossary
 
-Status: reader support document  
+Status: reader support document
 Purpose: explain common terms in simple language.
 
 ---
@@ -61,3 +61,13 @@ A task-level whitelist of paths an agent may write during an approved apply task
 ### Scope reset
 
 Returning the allowed write scope to a safe default after a task ends.
+
+
+### Context Advisor
+A preflight check that helps decide whether the task has enough context, whether the scope is too broad, where to run the task, and which model/settings to use. It is advisory by default and does not grant permission to mutate files.
+
+### Fuel plan
+A compact token/usage plan: what context to keep, defer, or drop; whether Max Mode or IDE context is justified; and whether raw evidence escalation is needed.
+
+### Provider capability snapshot
+A timestamped record of model/provider capabilities such as context window, reasoning settings, speed modes, approval modes, or pricing notes. It expires and must be refreshed from current docs or UI.

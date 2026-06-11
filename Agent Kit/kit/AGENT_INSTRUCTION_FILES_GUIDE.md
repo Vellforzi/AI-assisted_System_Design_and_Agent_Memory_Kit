@@ -1,6 +1,6 @@
 # Agent Instruction Files Guide
 
-Status: implementation-facing guide  
+Status: implementation-facing guide
 Purpose: explain how to connect Agent Memory Kit to repository-aware AI tools without overloading their context windows.
 
 ---
