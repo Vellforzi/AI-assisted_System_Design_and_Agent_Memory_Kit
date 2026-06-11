@@ -4,7 +4,7 @@ status: "starter_policy"
 
 principle: >
   Evals do not run automatically unless the owner connects this policy to a runner,
-  IDE hook, command, CI workflow, or provider-specific eval harness. The default
+  command, CI workflow, or provider-specific eval harness. The default
   behavior is to detect triggers and propose the appropriate eval run.
 
 automation_levels:
@@ -17,7 +17,7 @@ automation_levels:
   level_2_checklist_assisted:
     description: "Local script creates run folder and checklist from YAML cases."
     recommended_for_solo_owner: true
-  level_3_hook_or_ci:
+  level_3_ci:
     description: "File changes trigger checklist generation or API eval run."
     recommended_for_solo_owner: false
   level_4_full_harness:
@@ -66,7 +66,7 @@ triggers:
     examples:
       - "Cursor rule changed"
       - "Cursor command changed"
-      - "Cursor hook changed"
+      - "automation config changed"
       - "Cursor skill changed"
       - "Cursor subagent changed"
     minimum_run: "smoke"

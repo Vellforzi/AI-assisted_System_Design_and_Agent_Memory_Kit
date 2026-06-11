@@ -1,0 +1,35 @@
+# docs/project_map/working_state.yaml
+# Compact replay root for fresh sessions. This is not a planning document.
+
+schema_version: "1.0"
+package_profile: "secondary_memory_governance"
+project_id: "ai-stock-analyst-class"
+last_updated: "2026-06-11"
+
+current_priority: "owner-only sandbox execution-readiness"
+current_operational_entrypoint: "docs/NEXT_STEPS.md"
+current_status_pack: "docs/context_packs/current_status.md"
+project_map_mode: "secondary_memory"
+
+next_recommended_action:
+  source: "docs/NEXT_STEPS.md"
+  summary: "LRG-006/ESP-004 broker unknown-state timeout proposal or deterministic scenario-coverage aggregation."
+
+known_drift:
+  - path: "docs/project_map/current_map.md"
+    issue: "Some open questions are broader than current NEXT_STEPS."
+
+session_start_minimum_refs:
+  - "AGENTS.md"
+  - "docs/project_map/source_authority.yaml"
+  - "docs/project_map/permissions_policy.yaml"
+  - "docs/project_map/retrieval_policy.yaml"
+  - "docs/project_map/working_state.yaml"
+
+must_preserve_boundaries:
+  - "owner-only sandbox scope"
+  - "public Telegram MVP remains deferred unless operational docs say otherwise"
+  - "no AI execution decision loop"
+  - "no live/personal-account behavior from sandbox evidence"
+  - "no broker/account mutation without explicit gated review"
+  - "deterministic evidence/logging boundaries"

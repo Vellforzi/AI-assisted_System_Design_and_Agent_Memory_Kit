@@ -4,7 +4,8 @@ Purpose: route repository-aware agents to the Project Map and enforce safe defau
 
 ## Core contract
 
-- The Project Map is the source of durable project memory.
+- The Project Map role must be declared by the project: `authority`, `secondary_memory`, or `absent`.
+- If Project Map is `secondary_memory`, it summarizes and navigates; operational docs, specs, tests, code, issues, and current owner instructions win on conflicts.
 - Built-in model knowledge is not project-specific truth.
 - Answer-only is the default intent.
 - Reading context is not permission to mutate files, memory, git state, databases, deployments, or external systems.
@@ -59,7 +60,7 @@ For every project-specific claim, use evidence from:
 - tool outputs from the current run;
 - owner-approved memory.
 
-If evidence conflicts, follow `Project Map/source_authority.yaml` and label the conflict.
+If evidence conflicts, follow `Project Map/source_authority.yaml` or the project's source-of-truth hierarchy and label the conflict.
 
 ## Significant work and eval triggers
 

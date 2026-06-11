@@ -24,13 +24,17 @@ Its purpose is structured, meaningful, interconnected duplication of owner-provi
 
 ### 1. Grounding
 
-For project-specific claims, the agent must use only:
+For project-specific claims, the agent must use only sources allowed by the
+project's `source_authority.yaml` or equivalent source-of-truth hierarchy:
 
 1. current user input;
-2. Project Map memory;
+2. Project Map memory only in its declared authority role;
 3. project files or tool outputs opened in the current run;
 4. external sources explicitly retrieved in the current run and valid for the claim type;
 5. owner-approved durable memory.
+
+If Project Map is `secondary_memory`, it summarizes and navigates; operational
+docs, code, tests, specs, issues, and current owner instructions win.
 
 If evidence is missing, the agent must not guess.
 
@@ -54,7 +58,7 @@ It must not apply memory or rule changes unless the owner explicitly asks.
 
 Evals are behavior checks, not intelligence tests. They help detect regressions in action intent, grounding, retrieval, memory compilation, side-effect safety, and owner control.
 
-Evals do not run automatically unless the owner wires them to a script, hook, CI job, API harness, or agent runtime.
+Evals do not run automatically unless the owner wires them to a script, CI job, API harness, or agent runtime.
 
 ---
 
@@ -63,9 +67,10 @@ Evals do not run automatically unless the owner wires them to a script, hook, CI
 | File | Purpose |
 |---|---|
 | `OWNER_USAGE_GUIDE.md` | Day-to-day owner workflow and safe prompts. |
+| `secondary_memory_governance/` | Baseline reusable overlay for existing repo-centric projects where Project Map is secondary memory and operational docs win. |
 | `PLATFORM_CONTEXT_COMPACTION_BOUNDARY.md` | Platform summaries, compacted chat history, and provider memory are non-authoritative hints, not project truth. |
-| `CURSOR_INTEGRATION_OWNER_GUIDE.md` | How to use the kit with Cursor Rules, Commands, Skills, Subagents, and Hooks. |
-| `cursor/` | Cursor Integration Pack: rules, commands, skills, read-only subagents, and optional hook examples. |
+| `CURSOR_INTEGRATION_OWNER_GUIDE.md` | How to use the kit with Cursor Rules, Commands, Skills, and Subagents. |
+| `cursor/` | Cursor Integration Pack: rules, commands, skills, and read-only subagents. |
 | `ACTION_INTENT_CONTRACT.md` | Default answer-only behavior and explicit-action gate. |
 | `SIGNIFICANT_WORK_AND_CHECKPOINTS.md` | Defines meaningful work, checkpoints, Project Map delta proposals, and eval triggers. |
 | `PROJECT_GROUNDING_CONTRACT.md` | Strict evidence contract for project-specific claims. |
@@ -85,7 +90,6 @@ Evals do not run automatically unless the owner wires them to a script, hook, CI
 | `MEMORY_COMPILER_GUIDE.md` | Session-to-memory consolidation process. |
 | `MEMORY_TOOL_INTERFACE_CONTRACT.md` | Expected behavior for a memory tool or memory API. |
 | `PROVIDER_MEMORY_AND_RUNTIME_BOUNDARY.md` | Boundary between Project Map, provider memory, runtime state, and external research. |
-| `HYBRID_AGENT_MEMORY_SYSTEM_REFERENCE_NOTE.ru.md` | Russian reference note for a Markdown-first, SQLite-accelerated hybrid agent-memory architecture. |
 | `SERVICE_RULE_PLACEMENT_GUIDE.md` | Where to place global rules vs project-specific memory in AI services. |
 | `START_MESSAGE_TEMPLATES.md` | Reusable owner messages for safe starts and continuations. |
 | `PROJECT_WORKSPACE_LAYOUT.md` | Recommended folder roles and layout. |
@@ -97,16 +101,14 @@ Evals do not run automatically unless the owner wires them to a script, hook, CI
 | `SCOPE_CONTROL_AND_ALLOWED_SCOPE_GUIDE.md` | How agents should manage `.codex/ALLOWED_SCOPE.txt` without forcing the owner to edit it manually. |
 | `CODEX_SANDBOX_AND_PERMISSION_PROFILES_GUIDE.md` | Plain explanation of Codex permission profiles, sandbox terminology, and safe defaults. |
 | `WORKSPACE_SELECTION_GUIDE.md` | How to choose IDE workspaces for single-root and multi-component projects. |
-| `AI_AGENT_ROLE_STACK_GUIDE.md` | Default split: Cursor implements, Codex reviews, GPT researches, Project Map stores truth. |
-| `HOOK_REQUEST_WORKFLOW.md` | How an agent should respond when the owner asks for hooks. |
-| `HOOK_GENERATION_QUESTIONS.md` | Minimal questions to ask before generating hooks. |
-| `HOOK_PACKAGING_GUIDE.md` | How to package project-local hook bundles. |
+| `AI_AGENT_ROLE_STACK_GUIDE.md` | Role profiles for Cursor, Codex, GPT, single-agent implementer mode, and Project Map authority modes. |
 | `CURSOR_AGENT_SETTINGS_GUIDE.md` | Recommended Cursor Agent settings for owner-controlled work. |
 | `CURSORIGNORE_AND_CONTEXT_BOUNDARY_GUIDE.md` | How to use `.cursorignore` without hiding project truth. |
 | `cursor/CURSOR_OWNER_CONTROLLED_DEFAULTS.md` | Cursor settings profile summary. |
 | `cursor/settings/owner_controlled_profile.yaml` | Machine-readable owner-controlled Cursor settings profile. |
 
-| `EXISTING_PROJECT_ADOPTION_GUIDE.md` | How to adopt the kit in an already active project. |
+| `EXISTING_PROJECT_ADOPTION_GUIDE.md` | How to add the secondary-memory governance overlay to an already active project. |
+| `MATURE_EXISTING_PROJECT_ADOPTION_PROFILE.md` | Reference profile for mature projects; prefer `secondary_memory_governance/` as the concrete baseline package. |
 | `NEW_PROJECT_ADOPTION_GUIDE.md` | How to start an empty project with the kit. |
 | `SOLO_OWNER_WORKFLOW_GUIDE.md` | High-control workflow for a solo owner using local IDE agents plus research chat. |
 | `AGENT_INSTRUCTION_FILES_GUIDE.md` | How to connect the kit to AGENTS.md, Cursor rules, CLAUDE.md, and similar files. |
@@ -157,7 +159,16 @@ For command execution, the owner must also provide OS, shell/runtime, tools, sta
 
 A later work session should continue from documented Project Map state, not from undocumented chat memory.
 
-Use:
+For the `secondary_memory_governance` baseline in existing repo-centric projects,
+start from operational docs plus:
+
+1. `docs/project_map/working_state.yaml`
+2. `docs/project_map/source_authority.yaml`
+3. `docs/project_map/permissions_policy.yaml`
+4. `docs/project_map/retrieval_policy.yaml`
+
+Use the fuller flow below only when the project has explicitly adopted a full
+Project Map, task, handoff, or durable-memory profile:
 
 1. `Project Map/current_state.md`
 2. `Project Map/working_state.yaml`
@@ -186,7 +197,6 @@ Recommended minimum:
 
 - Rules: core memory rule, platform context boundary, safety defaults.
 - Commands: `/answer`, `/plan`, `/apply`, `/checkpoint`, `/handoff`, `/map-apply`, `/recover`, `/eval-smoke`.
-- Hooks: start as warnings, then block secrets, DB writes, dangerous git commands, out-of-scope edits, and unauthorized Project Map writes.
 
 See `CURSOR_INTEGRATION_OWNER_GUIDE.md` and `cursor/README.md`.
 
@@ -207,7 +217,6 @@ This release includes a Codex Integration Pack under `codex/`. It provides:
 - `config.toml` templates;
 - custom instructions;
 - global and project `AGENTS.md` examples;
-- hook setup guide and optional hook scripts;
 - Skills and read-only Subagent templates;
 - a Cursor + Codex workflow.
 

@@ -63,7 +63,6 @@ Key defaults:
 - Browser Protection: on.
 - File-Deletion Protection: on.
 - External-File Protection: on.
-- MCP Tools Protection: on where available.
 - Auto Format on Agent Finish: off.
 - Include Untracked Files in Agent Review: on.
 - Include Submodules in Agent Review: off unless `.gitmodules` exists.
@@ -91,6 +90,6 @@ Do not hide Project Map, AGENTS.md, source authority, docs, or active component 
 
 ## Known boundary
 
-Cursor settings, Codex settings, and ignore files are not substitutes for Project Map, task contracts, source authority, hooks, git review, or owner approval.
+Cursor settings, Codex settings, and ignore files are not substitutes for Project Map, task contracts, source authority, git review, or owner approval.
 
-Agent Memory Kit remains file-based and language-agnostic. Optional Python helper scripts are examples only.
+Agent Memory Kit remains file-based and language-agnostic.

@@ -18,12 +18,13 @@ Manual editing is allowed as an emergency fallback, but the normal workflow is:
 
 Scope control is not permission by itself. It is a technical whitelist that supports an approved task contract.
 
+If no runtime, wrapper, or agent client actually reads and enforces the scope file, the scope file is advisory. It is still useful as a policy artifact and review checklist, but the agent must not describe it as filesystem protection.
+
 ## Required distinction
 
 - `Task Contract`: what the owner asked the agent to do.
 - `Allowed Scope`: what file paths the agent may write during that task.
 - `Permission Profile`: what the tool runtime can technically read or write.
-- `Hooks`: deterministic checks that warn or block risky behavior.
 
 All four layers should agree before mutation.
 

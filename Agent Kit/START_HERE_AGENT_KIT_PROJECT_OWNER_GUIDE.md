@@ -40,7 +40,9 @@ Main rule: the agent does nothing merely because it seems logical. It helps with
 
 ## 1. What Agent Memory Kit is
 
-Agent Memory Kit is a portable set of instructions, templates, and schemas for building external project memory.
+Agent Memory Kit is a portable set of instructions, templates, and schemas for building external project memory and governance.
+
+For existing repo-centric projects that already have useful operational docs, start with `kit/secondary_memory_governance/`. It adds source authority, permission policy, retrieval policy, working state, context hygiene, and manual smoke cases without replacing `AGENTS.md` or installing runtime memory.
 
 It helps maintain:
 
@@ -104,7 +106,20 @@ For long tasks, think of Agent Memory Kit as a project case-management system, n
   Project Files/
 ```
 
-Recommended `Project Map` internals:
+For a mature existing project with strong operational docs, the recommended secondary-memory overlay is smaller:
+
+```text
+docs/project_map/
+  README.md
+  source_authority.yaml
+  permissions_policy.yaml
+  retrieval_policy.yaml
+  working_state.yaml
+  eval_suite/
+    manual_smoke_cases.yaml
+```
+
+Recommended full `Project Map` internals, only when the project lacks existing operational docs or explicitly needs a larger memory system:
 
 ```text
 Project Map/
@@ -183,11 +198,14 @@ The agent must not read the entire Project Map or repository by default.
 Every project-specific claim must be one of:
 
 - directly supported by current user input;
-- directly supported by Project Map memory;
+- directly supported by Project Map memory in its declared authority role;
 - directly supported by opened project files or tool outputs;
 - directly supported by an external source retrieved in this run and valid for the claim type;
 - explicitly labeled as an inference;
 - explicitly labeled as missing evidence.
+
+If Project Map is `secondary_memory`, it is navigation/context; operational docs,
+code, tests, specs, issues, and current owner instructions win.
 
 The agent should use clear markers when needed:
 
@@ -263,11 +281,13 @@ This release includes a portable eval-suite. Use it as a regression screen, not 
 
 Run or manually simulate the eval cases when you:
 
-- install the kit in a new project;
+- install the kit in a project;
 - change service-level instructions;
 - change Cursor or IDE rules;
 - change the Project Map schema;
 - notice an agent failure and want to preserve it as a test.
+
+For existing repo-centric projects, start with `kit/secondary_memory_governance/manual_smoke_cases.yaml` before adopting a full eval harness.
 
 Use `kit/MANUAL_OWNER_REVIEW_CHECKLIST.md` for human judgment after eval results. The checklist should assess whether the agent:
 
@@ -285,26 +305,18 @@ The eval-suite lives in `kit/eval_suite/`. Start with `kit/EVAL_SUITE_GUIDE.md`.
 ## 12. Recommended reading order
 
 1. `kit/README.md`
-2. `kit/ACTION_INTENT_CONTRACT.md`
-3. `kit/PROJECT_GROUNDING_CONTRACT.md`
-4. `kit/PROJECT_MEMORY_OPERATING_PROTOCOL.md`
-5. `kit/PROJECT_MEMORY_STORAGE_GUIDE.md`
-6. `kit/SOURCE_AUTHORITY_TEMPLATE.yaml`
-7. `kit/PERMISSIONS_POLICY_TEMPLATE.yaml`
-8. `kit/RETRIEVAL_POLICY_TEMPLATE.yaml`
-9. `kit/EVAL_SUITE_GUIDE.md`
-10. `kit/eval_suite/README.md`
-11. `kit/TASK_CONTRACT_TEMPLATE.yaml`
-12. `kit/CLAIM_LEDGER_TEMPLATE.yaml`
-13. `kit/HANDOFF_TEMPLATE.yaml`
-14. `kit/LONG_RUNNING_TASKS_GUIDE.md`
-15. `kit/EXISTING_PROJECT_ADOPTION_GUIDE.md`
-16. `kit/SOLO_OWNER_WORKFLOW_GUIDE.md`
-17. `kit/AGENT_INSTRUCTION_FILES_GUIDE.md`
-18. `kit/RETRIEVAL_POLICY_PROFILES.md`
-19. `kit/WORKING_STATE_AND_REPLAY_GUIDE.md`
-20. `kit/MEMORY_COMPILER_GUIDE.md`
-21. `kit/MEMORY_TOOL_INTERFACE_CONTRACT.md`
-22. `kit/PROVIDER_MEMORY_AND_RUNTIME_BOUNDARY.md`
-23. `kit/memory_card_examples.yaml`
-24. `kit/START_MESSAGE_TEMPLATES.md`
+2. `kit/EXISTING_PROJECT_ADOPTION_GUIDE.md`
+3. `kit/secondary_memory_governance/README.md`
+4. `kit/secondary_memory_governance/source_authority.yaml`
+5. `kit/secondary_memory_governance/permissions_policy.yaml`
+6. `kit/secondary_memory_governance/retrieval_policy.yaml`
+7. `kit/secondary_memory_governance/working_state.yaml`
+8. `kit/secondary_memory_governance/manual_smoke_cases.yaml`
+9. `kit/ACTION_INTENT_CONTRACT.md`
+10. `kit/PROJECT_GROUNDING_CONTRACT.md`
+11. `kit/PROJECT_MEMORY_OPERATING_PROTOCOL.md`
+12. `kit/EVAL_SUITE_GUIDE.md`
+13. `kit/eval_suite/README.md`
+14. `kit/AGENT_INSTRUCTION_FILES_GUIDE.md`
+15. `kit/PROVIDER_MEMORY_AND_RUNTIME_BOUNDARY.md`
+16. `kit/START_MESSAGE_TEMPLATES.md`

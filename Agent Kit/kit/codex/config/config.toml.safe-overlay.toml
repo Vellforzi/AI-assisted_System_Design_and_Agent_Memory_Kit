@@ -16,7 +16,6 @@ file_opener = "cursor"
 
 [features]
 js_repl = false
-hooks = true
 memories = false
 multi_agent = true
 undo = true

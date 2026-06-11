@@ -76,7 +76,7 @@ For coding agents, place a short repository-level instruction file near the proj
 - `CLAUDE.md`;
 - service-specific project rules.
 
-Keep these files short. They should point to the Project Map and summarize the invariant operating rules. They should not duplicate the full Project Map or the full Agent Kit.
+Keep these files short. They should point to the Project Map and summarize the invariant operating rules. They should not duplicate complete Project Map content or the full Agent Kit.
 
 Recommended contents:
 

@@ -32,7 +32,7 @@ Using Codex inside Cursor is useful because it keeps both agent surfaces in one 
 
 - Cursor is the primary local implementation agent.
 - Codex is a second reviewer, auditor, recovery assistant, and controlled executor.
-- Project Map is shared truth between both.
+- Project Map is shared memory/navigation between both; truth authority follows `source_authority`.
 
 ---
 
@@ -51,7 +51,6 @@ web_search = "cached"
 file_opener = "cursor"
 
 [features]
-hooks = true
 memories = false
 multi_agent = true
 undo = true

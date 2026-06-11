@@ -98,7 +98,6 @@ v3.8.0 adds Codex integration because Codex can operate as a second controlled a
 The design is based on these practical assumptions:
 
 - Codex configuration can be managed through `config.toml`.
-- Codex hooks can be loaded from user-level or project-level hook files.
 - Codex permission profiles should start from least privilege, usually read-only.
 - Codex compaction is a recoverability boundary, not a memory-authority event.
 - Codex Skills and Subagents are useful only when they remain scoped and governed by Project Map, Source Authority, Task Contract, and owner approval.

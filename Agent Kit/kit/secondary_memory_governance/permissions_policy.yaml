@@ -1,0 +1,83 @@
+# docs/project_map/permissions_policy.yaml
+# Behavioral policy for action intent and mutation gates.
+
+schema_version: "1.0"
+package_profile: "secondary_memory_governance"
+project_id: "ai-stock-analyst-class"
+last_updated: "2026-06-11"
+
+default_intent: "answer"
+role_profile: "single-agent-local-implementer"
+
+runtime_capability:
+  filesystem_enforcement: "advisory"
+  approval_prompts: "unavailable"
+  scope_file: "absent"
+  note: "Policy describes expected behavior; it does not technically block filesystem access."
+
+coding_agent_read_only_exploration:
+  allowed: true
+  allowed_actions:
+    - "list relevant files"
+    - "read scoped docs/source/tests"
+    - "search with rg or equivalent"
+    - "inspect git status and git diff"
+    - "discover verification commands"
+  does_not_allow:
+    - "file writes"
+    - "durable memory updates"
+    - "external service calls"
+    - "database writes"
+    - "broker/account mutations"
+    - "commit/push/deploy"
+
+intents:
+  answer:
+    may_read_scoped_context: true
+    may_write: false
+    may_update_memory: false
+  analyze:
+    may_read_scoped_context: true
+    may_write: false
+    may_update_memory: false
+  review:
+    may_read_scoped_context: true
+    may_write: false
+    may_update_memory: false
+  plan:
+    may_read_scoped_context: true
+    may_write: false
+    may_update_memory: false
+  apply:
+    requires_explicit_user_request: true
+    requires_scope: true
+    may_write_within_scope: true
+  memory_update:
+    requires_explicit_user_request_or_approved_delta: true
+  external_research:
+    requires_explicit_user_request_or_current_info_need: true
+    may_establish_project_fact_without_review: false
+
+mutation_gates:
+  file_writes: "requires apply intent and explicit target scope"
+  project_map_updates: "requires explicit memory_update intent or approved delta"
+  policy_yaml_updates: "requires explicit governance scope"
+  durable_memory_creation: "requires explicit memory_update intent"
+  external_research: "requires explicit request or current-info need"
+  commit_push_deploy: "requires separate explicit request"
+  database_writes: "requires separate explicit gated scope"
+  broker_or_account_mutation: "requires separate explicit gated scope"
+  credential_or_runtime_artifact_mutation: "requires separate explicit gated scope"
+
+policy_enforcement_labels:
+  enforced: "runtime, wrapper, sandbox, permission profile, or service can technically block the action"
+  advisory: "policy records expected behavior but does not block the action by itself"
+  unknown: "agent has not verified whether enforcement exists"
+  absent: "no mechanism is present"
+
+capability_notes:
+  codexignore: ".codexignore is context hygiene, not a security boundary."
+  cursorignore: ".cursorignore is context hygiene, not a security boundary."
+  permissions_policy: "permissions_policy.yaml is behavioral policy unless runtime enforces it."
+  allowed_scope: "ALLOWED_SCOPE.txt is advisory unless wrapper or runtime checks respect it."
+  broad_filesystem_access: "Broad local filesystem access must be reported as broad access."

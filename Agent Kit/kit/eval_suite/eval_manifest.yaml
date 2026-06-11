@@ -25,6 +25,7 @@ scope:
   - usage_adoption
   - platform_context_compaction
   - cursor_integration
+  - domain_boundary
   excluded:
   - model_general_intelligence
   - code_quality_benchmarking
@@ -59,10 +60,11 @@ pass_gate:
 automation_policy:
   trigger_policy_path: Project Map/eval_suite/eval_trigger_policy.yaml
   helper_script_path: Agent Kit/kit/tools/run_eval_checklist.py
-  automatic_execution_requires: runner_or_hook_or_ci_or_api_harness
+  automatic_execution_requires: runner_or_ci_or_api_harness
   eval_failure_does_not_grant_write_permission: true
 artifact_policy:
   eval_cases_path: Project Map/eval_suite/core_behavior_eval_cases.yaml
+  domain_boundary_template_path: Agent Kit/kit/eval_suite/domain_boundary_smoke_cases_template.yaml
   eval_runs_path: Project Map/eval_runs/
   failure_traces_path: Project Map/eval_runs/traces/
   do_not_store:
@@ -83,4 +85,5 @@ minimum_reporting_fields:
 kit_version: v3.8.0
 last_updated: '2026-06-09'
 notes: Includes Cursor settings, authoritative workspace, cursorignore/codexignore,
-  and desktop.ini context-boundary cases.
+  desktop.ini context-boundary cases, and a mature-project domain-boundary smoke
+  template.

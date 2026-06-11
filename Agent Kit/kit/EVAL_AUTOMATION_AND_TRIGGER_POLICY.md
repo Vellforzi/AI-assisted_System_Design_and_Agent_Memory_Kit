@@ -9,7 +9,7 @@ Purpose: define when evals should run, what can be automated, and what still req
 
 An eval-suite does not run by magic.
 
-This kit is file-first and provider-neutral. It can define eval cases, triggers, checklists, reports, and optional helper scripts. Actual automatic execution requires a runner, IDE hook, command, CI job, API harness, or provider-specific integration.
+This kit is file-first and provider-neutral. It can define eval cases, triggers, checklists, reports, and optional helper scripts. Actual automatic execution requires a runner, command, CI job, API harness, or provider-specific integration.
 
 The safe default is:
 
@@ -26,7 +26,7 @@ Agent notices eval trigger -> agent proposes eval run -> owner runs or approves 
 | 0 | Manual | owner manually copies cases into the target AI client and grades them | yes |
 | 1 | Agent-prompted | agent states `Eval trigger: yes/no` at checkpoint | yes |
 | 2 | Checklist-assisted | a local script creates a run folder and checklist from YAML cases | yes |
-| 3 | Hook/CI-triggered | file changes trigger an eval checklist or API run | later |
+| 3 | CI-triggered | file changes trigger an eval checklist or API run | later |
 | 4 | Full harness | prompts are sent to a model/agent, traces captured, graders run automatically | later |
 
 For high-control solo work, use levels 1-2 first. Do not jump to level 4 until the Project Map and instruction files are stable.

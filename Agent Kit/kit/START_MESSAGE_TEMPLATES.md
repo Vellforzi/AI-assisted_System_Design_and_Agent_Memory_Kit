@@ -271,13 +271,46 @@ Intent: plan.
 Scope: the project is already active at <path>. Components: <list>.
 
 Task: propose the safest adoption plan for installing Agent Memory Kit into this existing project without changing product code.
-Use EXISTING_PROJECT_ADOPTION_GUIDE.md.
+Use EXISTING_PROJECT_ADOPTION_GUIDE.md. If the project already has strong docs or AI instructions, also use MATURE_EXISTING_PROJECT_ADOPTION_PROFILE.md.
 Return:
-1. proposed Project Map layout;
-2. first read-only inventory pass;
-3. source-authority file draft;
-4. minimal AGENTS.md / Cursor rule draft;
-5. eval smoke-test plan.
+1. recommended secondary-memory governance overlay;
+2. current source-of-truth hierarchy if discoverable;
+3. confirmation that Project Map remains secondary memory unless `source_authority` says otherwise;
+4. first read-only inventory pass;
+5. source-authority and permission-policy draft scope;
+6. minimal AGENTS.md / Cursor rule patch only if needed;
+7. eval smoke-test plan.
+Do not write files.
+```
+
+---
+
+## 13.1 Mature existing project thin adoption
+
+```text
+Active layer: Agent Memory Kit.
+Project: <name>.
+Mode: dry-run.
+Intent: plan.
+Scope: read only the existing repo instructions, source-of-truth docs, current status docs, Project Map/docs layer, and ignore/config files.
+
+Task: strengthen this already working project with Agent Memory Kit ideas without replacing its current system.
+Use MATURE_EXISTING_PROJECT_ADOPTION_PROFILE.md.
+Answer the six-question intake:
+1. current source-of-truth hierarchy;
+2. Project Map authority mode;
+3. normal read-only exploration for the coding agent;
+4. actions requiring explicit apply scope or owner approval;
+5. files/data that must stay out of routine agent context;
+6. top domain-specific agent failure modes.
+
+Return only a thin adoption slice:
+- policy YAML files to add or adapt;
+- ignore files to add or adapt;
+- small instruction-file patch if needed;
+- 5-10 manual smoke eval cases.
+
+Do not propose full memory/task/handoff layout, runtime memory/tooling, or role-stack changes unless a concrete repeated problem requires them.
 Do not write files.
 ```
 
@@ -296,7 +329,7 @@ Task: run a manual smoke evaluation against the core behavior eval cases.
 Focus on:
 - answer-only default intent;
 - project grounding;
-- retrieval profile selection;
+- retrieval policy compliance;
 - stale fact suppression;
 - no provider-memory-as-project-truth;
 - no mutation without explicit apply intent.

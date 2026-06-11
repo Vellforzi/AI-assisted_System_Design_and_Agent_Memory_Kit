@@ -10,7 +10,7 @@ It may edit files only when the owner explicitly gives an apply task with scope 
 
 Codex is the restricted reviewer/auditor/recovery helper.
 GPT web chat is for research, architecture, analysis, and task specs.
-Project Map is the shared project truth.
+Project Map is the shared memory boundary; it is source of truth only when the project's authority policy says so.
 
 ## Defaults
 
@@ -45,10 +45,8 @@ approvals_and_execution:
   run_mode: auto_review_or_stricter
   forbidden_default_run_mode: run_everything
   browser_protection: true
-  mcp_tools_protection: true
   file_deletion_protection: true
   external_file_protection: true
-  mcp_allowlist_default: []
   fetch_domain_allowlist_default: []
 
 applying_changes:
@@ -77,7 +75,7 @@ git:
 
 ## Safety note
 
-These settings reduce accidental execution. They do not replace task contracts, source authority, Project Map, hooks, git review, or owner approval.
+These settings reduce accidental execution. They do not replace task contracts, source authority, Project Map, git review, or owner approval.
 
 ## OPTION PROFIT finalized owner profile
 
@@ -103,9 +101,7 @@ Use this as the practical default for owner-controlled work in OPTION PROFIT:
 - Browser Protection: on.
 - File-Deletion Protection: on.
 - External-File Protection: on.
-- MCP Tools Protection: on when available.
 - Command allowlist: read-only commands only by default.
-- MCP allowlist: empty by default.
 - Fetch domain allowlist: empty by default.
 - Inline Diffs: on.
 - Jump to Next Diff on Accept: on.

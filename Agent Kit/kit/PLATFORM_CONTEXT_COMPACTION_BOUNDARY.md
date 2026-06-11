@@ -126,4 +126,4 @@ Recommended behavior:
 3. Resume work from Project Map and Working State in a fresh or recovered session.
 4. Do not promote compressed chat history into Project Map.
 
-The optional Codex hook `pre_compact_checkpoint_guard.py` implements the first safety step by stopping auto-compaction and asking for checkpoint/handoff first.
+The first safety step is to stop before auto-compaction and ask for checkpoint/handoff first.

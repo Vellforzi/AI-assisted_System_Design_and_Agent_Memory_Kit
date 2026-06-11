@@ -4,7 +4,7 @@ Use these templates to open a project with the right project boundary.
 
 For a multi-component project with one Project Map, prefer opening the shared project root as the workspace.
 
-A workspace is not a permission model by itself. It defines the IDE project perimeter. Still use task contracts, rules, hooks, and scope guards.
+A workspace is not a permission model by itself. It defines the IDE project perimeter. Still use task contracts, rules, and scope guards.
 
 ## Templates
 

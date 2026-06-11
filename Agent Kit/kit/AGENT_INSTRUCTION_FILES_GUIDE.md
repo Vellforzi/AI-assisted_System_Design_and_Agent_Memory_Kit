@@ -75,7 +75,7 @@ Large evergreen protocols should live in `Agent Kit/kit/` and be opened only whe
 
 The root instruction file should contain these rules:
 
-1. The Project Map is the source of project memory.
+1. The Project Map role is declared by the project: source-of-truth layer, secondary owner-memory/navigation layer, or absent.
 2. Built-in model knowledge is not project truth.
 3. Answer-only is the default intent.
 4. No file, git, shell, DB, deploy, memory, or external side effect without explicit owner action request.
@@ -85,6 +85,7 @@ The root instruction file should contain these rules:
 8. For multi-step tasks, use task contracts and handoffs.
 9. At the end of significant work, propose Project Map updates, checkpoints, handoffs, or eval triggers; do not apply them unless asked.
 10. Eval failures do not grant repair permission; rule/template changes still require explicit owner scope.
+11. If Project Map is secondary memory, it must not override operational docs, specs, tests, code, issues, or current owner instructions.
 
 ---
 
@@ -112,7 +113,6 @@ Where the AI client supports it, use:
 - read-only modes;
 - permission prompts;
 - denied commands;
-- tool hooks;
 - sandboxing;
 - branch isolation;
 - pre-commit review;
@@ -133,14 +133,12 @@ Use the split integration pack:
 - `cursor/commands/` for explicit slash-command workflows;
 - `cursor/skills/` for reusable long procedures;
 - `cursor/subagents/` for focused read-only audits;
-- `cursor/hooks/` for optional technical guards.
 
 Install order:
 
 1. Rules.
 2. Commands.
 3. Skills.
-4. Hooks after local testing.
 5. Subagents, read-only first.
 
 See `CURSOR_INTEGRATION_OWNER_GUIDE.md`.

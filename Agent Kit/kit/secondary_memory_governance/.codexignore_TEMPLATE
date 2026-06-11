@@ -1,0 +1,27 @@
+# Context hygiene only. This is not a security boundary.
+
+.git/
+.venv/
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.env
+.env.*
+data/
+logs/
+artifacts/
+*.log
+*.sqlite
+*.db
+*.pem
+*.key
+desktop.ini
+
+# Keep visible:
+# AGENTS.md
+# docs/
+# src/
+# tests/
+# owner_only_sandbox/
+# .codex/

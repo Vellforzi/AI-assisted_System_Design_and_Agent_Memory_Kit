@@ -40,7 +40,7 @@ Its purpose is to help the owner and AI agents avoid project errors caused by:
 - silently overwriting important project meaning;
 - forgetting to add eval cases for repeated failures.
 
-For project-specific claims, the model is only an execution engine. The valid project context comes from the owner, the Project Map, project files, tool outputs, and sources explicitly retrieved in the current run.
+For project-specific claims, the model is only an execution engine. The valid project context comes from the owner, project operational docs, the Project Map according to its declared authority mode, project files, tool outputs, and sources explicitly retrieved in the current run.
 
 ---
 
@@ -64,12 +64,16 @@ Answer-only is the default intent. Do not execute, write, update memory, run com
 
 ## Non-negotiable grounding rule
 
-For any project-specific answer, the agent may use only:
+For any project-specific answer, the agent may use only sources allowed by the
+project's `source_authority.yaml` or equivalent source-of-truth hierarchy:
 
 1. the current user message;
-2. Project Map memory;
+2. Project Map memory only in its declared authority role;
 3. project files or tool outputs opened in the current run;
 4. external sources explicitly retrieved in the current run and valid for the claim type.
+
+If Project Map is `secondary_memory`, it summarizes and navigates; operational
+docs, code, tests, specs, issues, and current owner instructions win.
 
 If the evidence is missing, the agent must say so. It must not fill project gaps with provider-trained model knowledge.
 
@@ -107,20 +111,31 @@ Read:
 11. `Agent Kit/kit/EVAL_AUTOMATION_AND_TRIGGER_POLICY.md`
 12. `Agent Kit/kit/PLAIN_LANGUAGE_GLOSSARY.md`
 
+For existing repo-centric projects that already have operational docs, use the
+secondary-memory governance overlay first:
+
+1. `Agent Kit/kit/EXISTING_PROJECT_ADOPTION_GUIDE.md`
+2. `Agent Kit/kit/secondary_memory_governance/README.md`
+3. `Agent Kit/kit/secondary_memory_governance/source_authority.yaml`
+4. `Agent Kit/kit/secondary_memory_governance/permissions_policy.yaml`
+5. `Agent Kit/kit/secondary_memory_governance/retrieval_policy.yaml`
+6. `Agent Kit/kit/secondary_memory_governance/working_state.yaml`
+7. `Agent Kit/kit/secondary_memory_governance/manual_smoke_cases.yaml`
+
 ---
 
-## Existing project versus new project
+## Existing Repo-Centric Project
 
-For an existing project with code and docs:
+For an existing project with code, docs, and project-specific agent instructions:
 
 1. read `Agent Kit/kit/EXISTING_PROJECT_ADOPTION_GUIDE.md`;
-2. create a minimal Project Map;
-3. run read-only inventory;
-4. define source authority;
-5. seed memory from verified facts only;
-6. run eval smoke before trusting the setup.
+2. use `Agent Kit/kit/secondary_memory_governance/` as the baseline package;
+3. preserve the existing `AGENTS.md` and operational docs;
+4. add policy YAML, working state, ignore hygiene, and manual smoke cases only;
+5. treat Project Map as secondary memory unless the project's authority policy says otherwise;
+6. do not add runtime memory, task trees, handoff trees, or a replacement `AGENTS.md` unless explicitly requested later.
 
-For a new empty project:
+For a new empty project that lacks operational docs:
 
 1. read `Agent Kit/kit/NEW_PROJECT_ADOPTION_GUIDE.md`;
 2. create Project Map before implementation;
@@ -148,8 +163,7 @@ This release adds an operational layer for scope control, workspace selection, a
 - `/scope-set`, `/scope-reset`, and `/workspace-check` command templates;
 - Codex permission profile and sandbox explanations;
 - Cursor workspace templates for one-root and multi-component projects;
-- hook request, generation, and packaging workflows;
-- default role split: Cursor implements, Codex reviews, GPT web chat researches, Project Map stores truth;
+- default role split: Cursor implements, Codex reviews, GPT web chat researches, Project Map stores memory or truth according to source authority;
 - eval cases for scope, workspace, permissions, and role orchestration.
 
 See `RELEASE_NOTES_v3.8.0.md` for details.
@@ -166,7 +180,7 @@ For Cursor setup, read:
 4. `Agent Kit/kit/cursor/rules/`
 5. `Agent Kit/kit/cursor/commands/`
 
-Start with Rules and Commands. Add Hooks and Subagents after the core workflow is stable.
+Start with Rules and Commands. Add Subagents after the core workflow is stable.
 
 ---
 
@@ -182,16 +196,14 @@ For Codex, read:
 - `Agent Kit/kit/CODEX_INTEGRATION_OWNER_GUIDE.md`
 - `Agent Kit/kit/codex/README.md`
 - `Agent Kit/kit/codex/CODEX_SETTINGS_RECOMMENDATIONS.md`
-- `Agent Kit/kit/codex/CODEX_HOOKS_SETUP_GUIDE.md`
 
 Recommended split:
 
 ```text
 Cursor = primary local implementation agent
 Codex = independent review, audit, recovery, and controlled second executor
-Project Map = shared project truth between both
+Project Map = shared memory boundary; source of truth only when the project's authority policy says so
 ```
-
 
 ## v3.8 Cursor settings and workspace authority
 

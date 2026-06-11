@@ -4,7 +4,7 @@ Use this command to audit Cursor settings against Agent Memory Kit owner-control
 
 ## Intent
 
-Analyze only. Do not change IDE settings, files, Project Map, hooks, or code unless the owner separately asks for apply.
+Analyze only. Do not change IDE settings, files, Project Map, or code unless the owner separately asks for apply.
 
 ## Agent procedure
 
@@ -19,15 +19,14 @@ Analyze only. Do not change IDE settings, files, Project Map, hooks, or code unl
    - Run Mode = Run Everything;
    - Auto-Approve Mode Transitions enabled;
    - Auto-Accept Web Search enabled;
-   - MCP protection disabled;
    - Browser protection disabled;
    - File deletion protection disabled;
    - External file protection disabled;
-   - broad command/MCP/fetch allowlists;
+   - broad command/fetch allowlists;
    - Usage Summary hidden;
    - Auto Format on Agent Finish enabled.
 5. Give concrete recommended settings.
-6. Do not imply that UI settings replace task contracts, source authority, hooks, or owner approval.
+6. Do not imply that UI settings replace task contracts, source authority, or owner approval.
 
 ## Output
 

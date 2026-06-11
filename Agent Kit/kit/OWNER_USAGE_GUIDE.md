@@ -173,7 +173,7 @@ Recommended default for a solo owner:
 Cursor = primary local implementation agent
 Codex = restricted second agent for review/audit/recovery
 GPT web chat = research, design, and task specifications
-Project Map = shared project truth
+Project Map = shared memory boundary; source of truth only when the project's authority policy says so
 ```
 
 Do not rely on one large chat thread as memory.

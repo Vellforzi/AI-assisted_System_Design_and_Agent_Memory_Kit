@@ -12,7 +12,7 @@ Use it to keep noisy, generated, local, or sensitive files out of routine agent 
 
 Do not treat `.codexignore` as a guaranteed security mechanism.
 
-Native support may vary by Codex runtime/version. If the active Codex runtime does not read `.codexignore` directly, the file is still useful as a policy artifact, but enforcement must come from hooks, permission profiles, scope guards, `.cursorignore`, `.gitignore`, or explicit agent instructions.
+Native support may vary by Codex runtime/version. If the active Codex runtime does not read `.codexignore` directly, the file is still useful as a policy artifact, but enforcement must come from permission profiles, scope guards, `.cursorignore`, `.gitignore`, or explicit agent instructions.
 
 ## Keep project truth visible
 
@@ -84,5 +84,5 @@ When the owner asks for `.codexignore` help, the agent must:
 3. check whether `.cursorignore` exists and should be mirrored;
 4. avoid hiding Project Map, instructions, source authority, docs, or active components;
 5. include `**/desktop.ini` for Windows/Drive projects;
-6. explain that ignore files reduce context noise but do not replace permissions, hooks, or owner approval;
+6. explain that ignore files reduce context noise but do not replace permissions or owner approval;
 7. propose a patch or create the file only under explicit apply/scope permission.

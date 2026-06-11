@@ -27,6 +27,8 @@ The agent should operate from:
 
 The kit turns project context into structured, inspectable memory so that future sessions can restore the right context without relying on fragile chat history, hidden provider memory, or generic model guesses.
 
+For existing repo-centric projects that already have strong operational docs, the default install is a secondary-memory governance overlay: Project Map summarizes and navigates, while operational docs, code, tests, specs, issues, and current owner instructions remain authoritative.
+
 ---
 
 ## What makes this different
@@ -75,10 +77,10 @@ AI-assisted System Design and Agent Memory Kit/
 1. Read `START_HERE.md`.
 2. Read `AI-assisted System Design/README.md` if you are setting up a project workflow.
 3. Read `Agent Kit/README.md` if you are setting up project memory.
-4. For an existing project, read `Agent Kit/kit/EXISTING_PROJECT_ADOPTION_GUIDE.md`.
-5. For a new empty project, read `Agent Kit/kit/NEW_PROJECT_ADOPTION_GUIDE.md`.
-6. Copy the needed templates from `Agent Kit/kit/` into your project's `Project Map/`.
-7. Add only a short agent-instruction entrypoint to your coding tool, such as `AGENTS.md` or Cursor rules. Do not paste the whole kit into one always-loaded prompt.
+4. For an existing repo-centric project, read `Agent Kit/kit/EXISTING_PROJECT_ADOPTION_GUIDE.md` and use `Agent Kit/kit/secondary_memory_governance/` as the baseline package.
+5. Copy only the needed overlay files into the project's `docs/project_map/` or equivalent docs layer.
+6. Add only the short `AGENTS_SNIPPET.md` rules to the existing project-specific instruction file. Do not replace `AGENTS.md` with a generic template.
+7. Use `Agent Kit/kit/NEW_PROJECT_ADOPTION_GUIDE.md` only for an empty project that lacks operational docs.
 
 ---
 
@@ -93,8 +95,7 @@ AI-assisted System Design and Agent Memory Kit/
 - Codex sandbox and permission profile guide explaining `default_permissions`, `:read-only`, `:workspace`, and why not to mix them with old `sandbox_mode` settings.
 - Cursor workspace templates, including an OPTION PROFIT / JOB single-root workspace example.
 - Workspace selection guide for multi-component projects with one Project Map.
-- Default role stack guide: Cursor as primary implementation agent, Codex as restricted reviewer/auditor/recovery helper, GPT web chat as research/design layer, Project Map as shared truth.
-- Hook request workflow, hook generation questions, and hook packaging guide.
+- Default role stack guide: Cursor as primary implementation agent, Codex as restricted reviewer/auditor/recovery helper, GPT web chat as research/design layer, Project Map as shared memory/navigation; truth role follows `source_authority`, and for existing repo-centric projects it is secondary.
 - Codex scope-control templates and optional helper script for safe scope updates and resets.
 - Eval cases for scope control, Codex permissions, workspace selection, and role orchestration.
 
@@ -112,7 +113,7 @@ This package is not:
 - a place to store secrets;
 - a license to let agents mutate files without owner intent.
 
-Use technical enforcement where possible: permissions, hooks, sandboxing, branch isolation, read-only modes, and review gates.
+Use technical enforcement where possible: permissions, sandboxing, read-only modes, and review gates.
 
 
 ---

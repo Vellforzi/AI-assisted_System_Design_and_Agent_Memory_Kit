@@ -4,7 +4,7 @@ roles:
   cursor: primary implementation agent with explicit apply scope
   codex: restricted reviewer, auditor, recovery helper, second opinion
   gpt_web: research, design, architecture, task specs
-  project_map: shared project truth
+  project_map: shared memory boundary; truth role follows source authority
   owner: final authority and approval gate
 settings:
   agents:
@@ -33,10 +33,8 @@ settings:
     run_mode: auto_review
     forbidden_default_run_mode: run_everything
     browser_protection: true
-    mcp_tools_protection: true
     file_deletion_protection: true
     external_file_protection: true
-    mcp_allowlist_default: []
     fetch_domain_allowlist_default: []
     command_allowlist_default:
     - cd
@@ -98,6 +96,5 @@ settings:
 agent_obligations:
 - Warn if Run Mode is Run Everything.
 - Warn if Auto-Approve Mode Transitions is enabled for owner-controlled projects.
-- Warn if MCP allowlist permits automatic database writes.
 - Treat web research as external context, not project truth.
 - Do not use these settings as permission to mutate files without explicit apply scope.

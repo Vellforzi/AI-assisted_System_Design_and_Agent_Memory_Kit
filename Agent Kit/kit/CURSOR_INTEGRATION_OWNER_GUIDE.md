@@ -1,6 +1,6 @@
 # Cursor Integration Owner Guide
 
-Purpose: explain how to use Agent Memory Kit inside Cursor through Rules, Commands, Skills, Subagents, and optional Hooks.
+Purpose: explain how to use Agent Memory Kit inside Cursor through Rules, Commands, Skills, and Subagents.
 
 This guide is written for a project owner who wants high control, short working loops, and no hidden autonomous behavior.
 
@@ -16,7 +16,6 @@ Use Cursor surfaces like this:
 | Commands | Start a known workflow such as `/answer`, `/apply`, `/checkpoint`, or `/handoff`. | Act as vague magic words without scope. |
 | Skills | Store reusable procedures that are too long for always-on Rules. | Become uncontrolled write permissions. |
 | Subagents | Run focused read-only audits in one area. | Mutate code, git, DB, deploy, or Project Map by default. |
-| Hooks | Add technical checks around dangerous actions. | Replace owner review or project tests. |
 
 ---
 
@@ -37,7 +36,6 @@ Agent Kit/
       commands/
       skills/
       subagents/
-      hooks/
 ```
 
 Then create or paste the command bodies into Cursor Commands:
@@ -128,24 +126,6 @@ This makes it harder for important state changes to disappear inside a long chat
 
 ---
 
-## Optional hooks
-
-Hooks are useful when the host tool supports script execution at specific points in the agent lifecycle.
-
-Use hooks to catch:
-
-- possible secrets;
-- dangerous git commands;
-- database writes;
-- edits outside allowed scope;
-- unauthorized Project Map writes.
-
-The hook scripts in `cursor/hooks/scripts/` are examples. Agent Memory Kit does not require Python. The examples are Python because the original owner works in Python and Python is convenient for portable local scripts. Replace them with shell, Node.js, PowerShell, Go, or any language that fits your environment.
-
-Always verify the current Cursor hook schema before wiring `hooks.json.example` into a real project.
-
----
-
 ## v3.8 workspace and scope policy
 
 For a multi-component project with one Project Map, prefer one shared workspace root.
@@ -192,7 +172,7 @@ Core defaults:
 
 - `Run Everything` is not allowed as the default run mode.
 - Use Auto-review or stricter execution mode.
-- Keep Browser Protection, MCP Tools Protection, File-Deletion Protection, and External-File Protection on.
+- Keep Browser Protection, File-Deletion Protection, and External-File Protection on.
 - Keep Auto-Approve Mode Transitions off.
 - Keep Auto-Accept Web Search off.
 - Keep Usage Summary visible.

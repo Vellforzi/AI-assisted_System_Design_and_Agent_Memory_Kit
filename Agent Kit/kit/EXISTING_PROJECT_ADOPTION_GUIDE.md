@@ -1,179 +1,236 @@
-# Existing Project Adoption Guide
+# Existing Project Governance Overlay Guide
 
-Status: practical migration guide  
-Purpose: install Agent Memory Kit into an already active project without freezing development or forcing autonomous long-running agents.
+Status: practical baseline for active repo-centric projects
+Purpose: add Agent Kit governance to an existing project without replacing its
+current documentation, runtime behavior, or project-specific agent rules.
+
+Use this guide when the project already has useful operational docs such as
+`AGENTS.md`, roadmap/status docs, source-of-truth hierarchy, context packs,
+layer-specific specs, issues, or tests.
+
+The default system for this class of project is:
+
+```text
+Reusable Secondary-Memory Governance System
+```
+
+Use `secondary_memory_governance/` as the package source.
 
 ---
 
-## 1. Adoption principle
+## 1. Adoption Principle
 
 Do not begin by making the agent understand everything.
 
-Begin by making the project readable enough that the agent can answer and plan safely.
+Begin by making the existing source authority, action intent, retrieval, and
+domain boundaries machine-readable.
 
-For an existing project, the first goal is not full automation. The first goal is a trustworthy Project Map that prevents repeated re-explanation and blocks unsupported project claims.
+For mature existing projects, Agent Kit must reinforce the current operating
+model. It must not create a parallel source of truth.
+
+Canonical rule:
+
+```text
+Project Map summarizes and navigates.
+Operational docs, code, tests, specs, issues, and current owner instructions win.
+```
 
 ---
 
-## 2. Recommended target layout
+## 2. Target Overlay
 
-For a multi-component software project:
+Install only the governance overlay unless the owner explicitly requests more.
 
 ```text
 <Project Root>/
-  AGENTS.md                         # short shared instruction entrypoint
-  Project Map/                      # durable project memory
-  Agent Kit/                        # copied or vendored toolkit
-  Options_api/                      # project component
-  Options_scraper/                  # project component
-  Options_MT/                       # project component
+  AGENTS.md
+  .codexignore
+  docs/
+    project_map/
+      README.md
+      current_map.md
+      source_authority.yaml
+      permissions_policy.yaml
+      retrieval_policy.yaml
+      working_state.yaml
+      eval_suite/
+        manual_smoke_cases.yaml
 ```
 
-If the project is already on a shared drive, keep the same separation:
+Optional only if Cursor is used:
 
 ```text
-Dev Projects/Job/
-  Project Map/
-  Agent Kit/
-  Options_api/
-  Options_scraper/
-  Options_MT/
+.cursorignore
 ```
 
-Do not mix Project Map files into source-code folders unless they are component-scoped instruction files.
-
----
-
-## 3. Minimum viable Project Map
-
-Create only these files first:
+Do not install these as part of the baseline overlay:
 
 ```text
-Project Map/
-  README.md
-  current_state.md
-  working_state.yaml
-  source_authority.yaml
-  permissions_policy.yaml
-  retrieval_policy.yaml
-  memory/
-    index.yaml
-    facts.yaml
-    decisions.yaml
-    constraints.yaml
-    risks.yaml
-    open_questions.yaml
-  tasks/
-  handoffs/
-  eval_suite/
-  eval_runs/
-  raw_sources/
-  archive/
+memory/
+.agent-memory/
+runtime memory
+full eval harness
+task tree
+handoff tree
+replacement AGENTS.md
 ```
 
-Then populate a small first version:
-
-- project identity;
-- component map;
-- current active task;
-- known authoritative docs;
-- known unknowns;
-- unsafe assumptions;
-- owner preferences for agent behavior.
-
-Do not wait until the map is perfect. A small verified map is better than a large invented one.
-
 ---
 
-## 4. Suggested component source authority
+## 3. Required Files
 
-For a project with API, scraper, and trading-terminal components, use component-specific authority.
+Copy or adapt these files from `secondary_memory_governance/`:
 
-Example:
-
-```yaml
-components:
-  api:
-    source_order:
-      - "Options_api/app/routes/"
-      - "Options_api/app/services/"
-      - "Options_api/database/models.py"
-      - "docs/ROUTES_REFERENCE.md"
-      - "Project Map/memory/"
-  scraper:
-    source_order:
-      - "Options_scraper/app/main.py"
-      - "docs/SCRAPER_JOBS.md"
-      - "Project Map/memory/"
-  metatrader:
-    source_order:
-      - "Options_MT/"
-      - "Project Map/memory/"
-  database:
-    source_order:
-      - "db_sql/04_public_tables.sql"
-      - "*/database/models.py"
-      - "Project Map/memory/"
+```text
+source_authority.yaml
+permissions_policy.yaml
+retrieval_policy.yaml
+working_state.yaml
+manual_smoke_cases.yaml
+.codexignore_TEMPLATE
+.cursorignore_TEMPLATE
+AGENTS_SNIPPET.md
 ```
 
-Treat this as a starter. The owner should adjust actual paths to match the project.
+Create or update `docs/project_map/README.md` so it states:
+
+- Project Map is secondary memory;
+- operational docs win;
+- policy YAML files are governance/advisory unless runtime enforcement exists;
+- Project Map updates require explicit memory-update intent or approved delta;
+- after significant work, the agent may propose memory or smoke-case deltas but
+  must not apply them without scope.
+
+Patch the existing `AGENTS.md` only with the short snippet. Do not replace a
+project-specific `AGENTS.md` with the generic Agent Kit template.
 
 ---
 
-## 5. First adoption tasks
+## 4. Action Intent
 
-Run these as separate owner-controlled tasks:
+Questions, reviews, analyses, and plans are non-mutating by default.
 
-1. **Inventory only**: agent lists project folders and proposes Project Map skeleton. No edits unless explicitly approved.
-2. **Source authority draft**: agent identifies likely authoritative files and marks unknowns.
-3. **Current state draft**: agent writes a compact state summary from owner input and verified files.
-4. **Component map**: agent creates a small component index: API, scraper, MetaTrader, docs, database.
-5. **Memory seed**: agent creates initial decisions/facts/constraints only from evidence.
-6. **Significant-work rule**: add the checkpoint/footer rule to AGENTS.md or Cursor rules.
-7. **Eval smoke test**: run 5-10 core eval cases before trusting the setup.
+Allowed by default when needed for the current task:
 
-Each task should have a clear output and owner review.
+- answer;
+- analyze;
+- review;
+- plan;
+- scoped read-only repository inspection;
+- proposed memory delta;
+- proposed smoke case.
 
----
+Not allowed without explicit apply or mutation intent:
 
-## 6. What not to do during adoption
+- editing files;
+- updating Project Map;
+- updating policy YAML;
+- creating durable memory;
+- running external research except for an explicit current-info need;
+- committing, pushing, deploying;
+- mutating databases, broker state, credentials, accounts, or runtime artifacts.
 
-Avoid:
-
-- asking the agent to read the entire project without a target;
-- letting the agent rewrite README, docs, memory, and code in one task;
-- putting large Project Map content into always-loaded rules;
-- treating old chat summaries as authoritative facts;
-- storing secrets in memory;
-- enabling autonomous long-running work before source authority and working state exist.
-
----
-
-## 7. First root `AGENTS.md`
-
-Use `AGENTS.md_TEMPLATE.md` as the starting point.
-
-The root instruction file should do three things only:
-
-1. identify the Project Map entrypoints;
-2. state default answer-only behavior;
-3. define read/write gates and component scope.
-
-Keep deep explanations in `Agent Kit/kit/`, not in the always-loaded root instruction.
+Coding agents may read relevant local docs, source, and tests for the requested
+task. That read-only exploration is normal and should not require a separate
+ceremony, but it never authorizes writes.
 
 ---
 
-## 8. When adoption is mature enough
+## 5. Policy Versus Enforcement
 
-The project is ready for heavier agent work when:
+Always label runtime capability honestly:
 
-- current state is accurate;
-- source authority is clear;
-- at least the active workstream has verified memory;
-- task contracts exist for multi-step work;
-- side-effect receipts are used;
-- eval smoke tests pass;
-- the agent reliably reports Project Map and eval triggers after significant work;
-- the owner can start a clean session and the agent can resume from Project Map without chat history.
+```text
+enforced
+advisory
+unknown
+absent
+```
 
-Only then consider longer semi-autonomous tasks.
+Rules:
+
+- `.codexignore` is context hygiene, not a security boundary.
+- `.cursorignore` is context hygiene, not a security boundary.
+- `permissions_policy.yaml` is behavioral policy unless runtime enforces it.
+- `ALLOWED_SCOPE.txt` is advisory unless wrapper or runtime checks
+  respect it.
+- broad local filesystem access must be reported as broad access.
+
+Do not claim that policy files technically block actions unless the runtime has
+been verified to enforce them.
+
+---
+
+## 6. Retrieval Loop
+
+At session start, read only:
+
+```text
+AGENTS.md
+docs/project_map/source_authority.yaml
+docs/project_map/permissions_policy.yaml
+docs/project_map/retrieval_policy.yaml
+docs/project_map/working_state.yaml
+```
+
+Then follow the project-specific reading order from `AGENTS.md`.
+
+Before answering:
+
+1. Classify intent.
+2. Identify required source authority.
+3. Retrieve the smallest evidence-bearing working set.
+4. Label missing, stale, or conflicting evidence.
+5. Avoid unsupported project claims.
+
+Before editing:
+
+1. Confirm explicit apply request.
+2. Confirm target scope.
+3. Read relevant source-of-truth docs.
+4. Check forbidden directions.
+5. Define verification.
+
+---
+
+## 7. Domain-Boundary Smoke Cases
+
+Start with manual smoke cases, not a full eval harness.
+
+The baseline cases should cover:
+
+1. Public MVP remains deferred.
+2. Owner-only execution does not leak into public/user-facing semantics.
+3. Public MVP docs do not override owner-only current priority.
+4. Research notes do not directly change runtime behavior.
+5. AI does not enter execution decision loop.
+6. Project Map does not override operational docs.
+7. Ignore files are context hygiene, not secret protection.
+8. Adoption assessment does not trigger full Agent Kit installation.
+9. Live/personal-account readiness is not assumed from sandbox evidence.
+10. Broker/account mutations require explicit gated scope.
+
+Keep these cases manual until repeated failures justify automation.
+
+---
+
+## 8. Acceptance Criteria
+
+The overlay is installed correctly when a fresh agent can:
+
+- identify the current operational priority from operational docs;
+- identify deferred tracks as deferred;
+- distinguish public, validation, research, and owner-only automation scopes;
+- treat Project Map as secondary memory;
+- prefer operational docs on conflict;
+- keep questions and reviews non-mutating;
+- perform scoped read-only exploration for coding tasks;
+- require explicit intent for memory writes;
+- keep external research as context until reviewed promotion;
+- describe ignore files as context hygiene, not security;
+- leave runtime code, broker behavior, scheduler behavior, and public product
+  semantics unchanged;
+- use domain-boundary smoke cases to catch the highest-risk agent mistakes.
+
+Stop after these criteria are met unless the owner explicitly requests a larger
+memory/runtime system.

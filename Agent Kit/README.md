@@ -27,16 +27,13 @@ It helps a project owner maintain a structured Project Map containing:
 
 1. `START_HERE_AGENT_KIT_PROJECT_OWNER_GUIDE.md`
 2. `kit/README.md`
-3. `kit/OWNER_USAGE_GUIDE.md`
-4. `kit/PROJECT_MEMORY_STORAGE_GUIDE.md`
-5. `kit/ACTION_INTENT_CONTRACT.md`
-6. `kit/SIGNIFICANT_WORK_AND_CHECKPOINTS.md`
-7. `kit/EVAL_SUITE_GUIDE.md`
-8. `kit/EVAL_AUTOMATION_AND_TRIGGER_POLICY.md`
-9. `kit/SCOPE_CONTROL_AND_ALLOWED_SCOPE_GUIDE.md`
-10. `kit/WORKSPACE_SELECTION_GUIDE.md`
-11. `kit/CODEX_SANDBOX_AND_PERMISSION_PROFILES_GUIDE.md`
-12. `kit/AI_AGENT_ROLE_STACK_GUIDE.md`
+3. `kit/EXISTING_PROJECT_ADOPTION_GUIDE.md`
+4. `kit/secondary_memory_governance/README.md` for existing projects that already have strong operational docs and should be reinforced rather than replaced.
+5. `kit/OWNER_USAGE_GUIDE.md`
+6. `kit/ACTION_INTENT_CONTRACT.md`
+7. `kit/PROJECT_GROUNDING_CONTRACT.md`
+8. `kit/EVAL_SUITE_GUIDE.md`
+9. `kit/EVAL_AUTOMATION_AND_TRIGGER_POLICY.md`
 
 ---
 
@@ -50,9 +47,13 @@ After meaningful work, the agent may propose a Project Map delta and identify wh
 
 ## Use in a repository
 
-Use `kit/AGENT_INSTRUCTION_FILES_GUIDE.md` and `kit/AGENTS.md_TEMPLATE.md` to create a short root instruction file for repository-aware coding agents.
+Use `kit/secondary_memory_governance/AGENTS_SNIPPET.md` when a mature existing project already has a project-specific `AGENTS.md`.
+
+Use `kit/AGENT_INSTRUCTION_FILES_GUIDE.md` and `kit/AGENTS.md_TEMPLATE.md` only when the project does not already have a suitable root instruction file.
 
 Use `kit/CURSOR_RULE_TEMPLATE.mdc` for Cursor projects.
+
+For mature existing projects, patch the existing instruction file and add the secondary-memory governance overlay instead of replacing the project's current source-of-truth system.
 
 Do not commit private local preferences, secrets, credentials, raw personal data, or provider-specific session dumps.
 
@@ -62,9 +63,9 @@ Do not commit private local preferences, secrets, credentials, raw personal data
 
 Agent Memory Kit is useful when the owner wants a visible, editable, portable project memory rather than hidden provider memory or a loose chat summary.
 
-It is not a full agent runtime. It can later be implemented through a memory framework, vector store, knowledge graph, IDE hook, eval harness, or agent platform, but the core value is the operating contract: what counts as project truth, what may be remembered, when the agent may act, and how failures become eval cases.
+It is not a full agent runtime. The core value is the operating contract: what counts as project truth, what may be remembered, when the agent may act, and how failures become eval cases.
 
-For a concrete repo-local memory architecture note that keeps Markdown as source of truth and uses SQLite only as a rebuildable runtime recall layer, see `kit/HYBRID_AGENT_MEMORY_SYSTEM_REFERENCE_NOTE.ru.md` (Russian).
+For existing repo-centric projects, start with `kit/secondary_memory_governance/`.
 ---
 
 ## Cursor, Codex, and GPT role stack
@@ -75,7 +76,7 @@ Recommended default:
 Cursor = primary implementation agent
 Codex = restricted reviewer/auditor/recovery helper
 GPT web chat = research, design, and task specs
-Project Map = shared project truth
+Project Map = shared memory boundary, or source of truth only when the project's authority policy says so
 ```
 
 Use one shared workspace root when one Project Map governs multiple components. Use task scope and permission gates for safety.

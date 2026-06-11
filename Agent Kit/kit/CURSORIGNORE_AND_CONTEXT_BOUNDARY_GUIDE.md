@@ -56,7 +56,7 @@ Secret patterns are useful, but they can also hide evidence from audits.
 For owner-controlled projects, choose one of two modes:
 
 1. **Ignore secret files for normal agent work.** This is safer for routine coding.
-2. **Do not hide secret patterns in `.cursorignore`; instead protect them through rules, hooks, and allowlists.** This is better when the agent must audit repository hygiene without reading actual secret values.
+2. **Do not hide secret patterns in `.cursorignore`; instead protect them through rules, permissions, and allowlists.** This is better when the agent must audit repository hygiene without reading actual secret values.
 
 Never ask the agent to copy secrets into chat or Project Map.
 

@@ -17,10 +17,10 @@ For Agent Memory Kit, the suite does not measure general intelligence. It measur
 - missing-evidence behavior;
 - stale fact suppression;
 - source authority handling;
-- retrieval profile selection;
+- retrieval policy compliance;
 - external research boundary;
 - memory compiler discipline;
-- task and handoff continuity;
+- working-state continuity;
 - side-effect safety;
 - no hidden mutation during analysis.
 
@@ -85,7 +85,7 @@ Project Map/eval_runs/
 
 Not by default.
 
-This kit contains eval cases, rubrics, reports, trigger policy, and an optional checklist helper. It does not automatically run a model or IDE agent unless the owner connects it to a runner, hook, CI job, API eval harness, or agent runtime.
+This kit contains eval cases, rubrics, reports, trigger policy, and an optional checklist helper. It does not automatically run a model or IDE agent unless the owner connects it to a runner, CI job, API eval harness, or agent runtime.
 
 The recommended solo-owner default is:
 

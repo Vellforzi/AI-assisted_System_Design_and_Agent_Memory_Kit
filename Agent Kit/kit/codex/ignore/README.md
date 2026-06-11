@@ -4,9 +4,9 @@ This directory contains optional `.codexignore` templates for projects that use 
 
 ## Boundary
 
-`.codexignore` is a context-hygiene and project-policy artifact. Native support may vary by Codex runtime/version. If the runtime does not read `.codexignore` directly, use the same patterns through hooks, scope guards, `.cursorignore`, `.gitignore`, or project instructions.
+`.codexignore` is a context-hygiene and project-policy artifact. Native support may vary by Codex runtime/version. If the runtime does not read `.codexignore` directly, use the same patterns through scope guards, `.cursorignore`, `.gitignore`, or project instructions.
 
-Do not rely on ignore files as a security boundary. Secrets must also be protected by rules, hooks, permissions, git hygiene, and owner review.
+Do not rely on ignore files as a security boundary. Secrets must also be protected by rules, permissions, git hygiene, and owner review.
 
 ## Recommended project root files
 

@@ -8,6 +8,29 @@ last_updated: "<YYYY-MM-DD>"
 default_intent: "answer"
 default_mode: "explain-only"
 
+runtime_capability:
+  filesystem_enforcement: "unknown" # enforced | advisory | unknown
+  approval_prompts: "unknown" # enforced | advisory | unavailable | unknown
+  scope_file: "unknown" # enforced | advisory | absent | unknown
+  note: "Policy files describe expected behavior. They are not filesystem enforcement unless the active runtime, wrapper, or permission profile actually enforces them."
+
+coding_agent_read_only_exploration:
+  allowed_when_scope_granted: true
+  purpose: "Answer, analyze, review, plan, or implement a scoped task from current project evidence."
+  examples:
+    - "list relevant files"
+    - "read scoped docs and source files"
+    - "search with rg or equivalent"
+    - "inspect git status or git diff"
+    - "discover test or build commands"
+  does_not_authorize:
+    - "file writes"
+    - "durable memory updates"
+    - "destructive commands"
+    - "external service calls"
+    - "database writes"
+    - "deploy, commit, push, or message sending"
+
 intent_policy:
   answer:
     default_allowed: true

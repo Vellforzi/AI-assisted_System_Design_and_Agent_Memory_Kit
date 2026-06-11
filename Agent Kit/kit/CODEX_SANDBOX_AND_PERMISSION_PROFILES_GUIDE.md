@@ -27,6 +27,18 @@ default_permissions = ":read-only"
 
 This makes Codex a read-only reviewer by default. It can inspect and analyze the project, but changing files should require an explicit owner-approved task and a temporary write-capable workflow.
 
+## Capability check first
+
+Before claiming a workflow is protected, identify the active runtime capability profile:
+
+```text
+permission profile: read-only / workspace-write / danger-full-access / unknown
+approval prompts: available / unavailable / unknown
+scope file enforcement: enforced / advisory / absent / unknown
+```
+
+If the environment has broad write access or no approval prompts, report that scope files and policy YAML are advisory unless wrapper or runtime checks enforce them.
+
 ## Built-in profiles
 
 Common built-in profiles:
@@ -59,7 +71,7 @@ The agent should answer:
 2. set `default_permissions = ":read-only"` in `~/.codex/config.toml`;
 3. ensure `sandbox_mode` and `[sandbox_workspace_write]` are not present unless intentionally using the older configuration path;
 4. restart Codex;
-5. use hooks and `ALLOWED_SCOPE.txt` for task-level guardrails;
+5. use `ALLOWED_SCOPE.txt` or equivalent wrapper checks for task-level guardrails;
 6. use a write-capable profile only for explicit scoped apply tasks.
 
 ## How this helps Agent Memory Kit
@@ -69,11 +81,10 @@ Agent Memory Kit is a behavior and memory contract. Permission profiles are a te
 Recommended stack:
 
 ```text
-Project Map = project truth
+Project Map = project memory/truth according to source authority
 Task Contract = permission boundary
 Codex default_permissions = local access boundary
 ALLOWED_SCOPE.txt = task write whitelist
-Hooks = deterministic risk checks
 Owner approval = final authority
 ```
 

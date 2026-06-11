@@ -59,7 +59,7 @@ Reset task write scope to safe defaults.
 
 ### `/workspace-check`
 
-Check whether the active workspace exposes Project Map, agent rules, hooks, and all relevant project components.
+Check whether the active workspace exposes Project Map, agent rules, and all relevant project components.
 
 
 ## v3.8 settings and context commands

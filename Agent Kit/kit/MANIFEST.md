@@ -32,6 +32,20 @@ Package purpose: portable starter guide and memory operating layer for using AI 
 
 ---
 
+## Secondary-memory governance baseline
+
+- `Agent Kit/kit/secondary_memory_governance/README.md` - reusable baseline overlay for existing repo-centric projects.
+- `Agent Kit/kit/secondary_memory_governance/source_authority.yaml` - source authority policy where Project Map is secondary memory and operational docs win.
+- `Agent Kit/kit/secondary_memory_governance/permissions_policy.yaml` - action-intent, scoped read-only exploration, mutation gates, and enforcement labels.
+- `Agent Kit/kit/secondary_memory_governance/retrieval_policy.yaml` - smallest evidence-bearing retrieval policy for secondary memory.
+- `Agent Kit/kit/secondary_memory_governance/working_state.yaml` - compact replay root for fresh sessions.
+- `Agent Kit/kit/secondary_memory_governance/manual_smoke_cases.yaml` - manual domain-boundary smoke cases for ai-stock-analyst-class projects.
+- `Agent Kit/kit/secondary_memory_governance/.codexignore_TEMPLATE` - Codex context-hygiene template, not a security boundary.
+- `Agent Kit/kit/secondary_memory_governance/.cursorignore_TEMPLATE` - optional Cursor context-hygiene template, not a security boundary.
+- `Agent Kit/kit/secondary_memory_governance/AGENTS_SNIPPET.md` - short snippet for existing project-specific `AGENTS.md`.
+
+---
+
 ## Templates and schemas
 
 - `Agent Kit/kit/SOURCE_AUTHORITY_TEMPLATE.yaml` — source-authority template.
@@ -53,9 +67,9 @@ Package purpose: portable starter guide and memory operating layer for using AI 
 - `Agent Kit/kit/MEMORY_COMPILER_GUIDE.md` — session note to durable memory consolidation guide.
 - `Agent Kit/kit/MEMORY_TOOL_INTERFACE_CONTRACT.md` — expected behavior for memory tool implementations.
 - `Agent Kit/kit/PROVIDER_MEMORY_AND_RUNTIME_BOUNDARY.md` — boundary between Project Map, provider memory, runtime state, and external research.
-- `Agent Kit/kit/HYBRID_AGENT_MEMORY_SYSTEM_REFERENCE_NOTE.ru.md` — Russian reference note describing a Markdown-first, SQLite-accelerated hybrid agent-memory architecture.
 - `Agent Kit/kit/SERVICE_RULE_PLACEMENT_GUIDE.md` — where to place rules/instructions in AI services.
-- `Agent Kit/kit/EXISTING_PROJECT_ADOPTION_GUIDE.md` — migration guide for active existing projects.
+- `Agent Kit/kit/EXISTING_PROJECT_ADOPTION_GUIDE.md` — baseline guide for adding the secondary-memory governance overlay to active existing projects.
+- `Agent Kit/kit/MATURE_EXISTING_PROJECT_ADOPTION_PROFILE.md` — reference profile for strengthening mature projects; concrete baseline package is `secondary_memory_governance/`.
 - `Agent Kit/kit/NEW_PROJECT_ADOPTION_GUIDE.md` — setup guide for empty new projects.
 - `Agent Kit/kit/SOLO_OWNER_WORKFLOW_GUIDE.md` — high-control solo-owner workflow.
 - `Agent Kit/kit/AGENT_INSTRUCTION_FILES_GUIDE.md` — how to use AGENTS.md, Cursor rules, CLAUDE.md, and similar files.
@@ -80,6 +94,7 @@ Package purpose: portable starter guide and memory operating layer for using AI 
 - `Agent Kit/kit/eval_suite/eval_manifest.yaml` — suite metadata and pass gates.
 - `Agent Kit/kit/eval_suite/eval_trigger_policy.yaml` — portable trigger policy for eval runs.
 - `Agent Kit/kit/eval_suite/core_behavior_eval_cases.yaml` — portable core behavior cases.
+- `Agent Kit/kit/eval_suite/domain_boundary_smoke_cases_template.yaml` — copyable mature-project template for domain-specific boundary smoke cases.
 - `Agent Kit/kit/eval_suite/grader_rubric.yaml` — deterministic/model/human grading rubric.
 - `Agent Kit/kit/eval_suite/eval_run_report_template.yaml` — eval run report template.
 - `Agent Kit/kit/eval_suite/eval_trace_template.yaml` — failure trace template.
@@ -93,11 +108,9 @@ Package purpose: portable starter guide and memory operating layer for using AI 
 - `Agent Kit/kit/codex/README.md` — Codex integration folder overview.
 - `Agent Kit/kit/codex/CODEX_SETTINGS_RECOMMENDATIONS.md` — recommended Codex UI and behavior settings.
 - `Agent Kit/kit/codex/CODEX_CONFIG_TOML_TEMPLATES.md` — config placement and merge guidance.
-- `Agent Kit/kit/codex/CODEX_HOOKS_SETUP_GUIDE.md` — global and project hook setup guide.
 - `Agent Kit/kit/codex/CODEX_CURSOR_WORKFLOW.md` — workflow for Cursor as implementation agent and Codex as reviewer/auditor.
 - `Agent Kit/kit/codex/CODEX_CUSTOM_INSTRUCTIONS.md` — short Codex custom instruction block.
 - `Agent Kit/kit/codex/config/` — config templates and custom-instruction text.
-- `Agent Kit/kit/codex/hooks/` — hook examples and optional scripts.
 - `Agent Kit/kit/codex/agents/` — `AGENTS.md` examples.
 - `Agent Kit/kit/codex/skills/` — Codex Skills for memory compilation, checkpointing, handoff, recovery, source authority, and eval cases.
 - `Agent Kit/kit/codex/subagents/` — read-only review subagent templates.
@@ -143,7 +156,7 @@ Use the eval-suite to detect regressions in action intent, grounding, retrieval,
 
 Evals complement manual owner review; they do not prove correctness.
 
-Evals do not run automatically unless connected to a runner, hook, command, CI workflow, or API harness.
+Evals do not run automatically unless connected to a runner, command, CI workflow, or API harness.
 
 ---
 
@@ -169,17 +182,13 @@ Later sessions should restore from documented `Project Map` / working state / ta
 ## Platform context and Cursor integration files
 
 - `Agent Kit/kit/PLATFORM_CONTEXT_COMPACTION_BOUNDARY.md` — rule that platform summaries, compressed chat history, provider memory, and personalization are non-authoritative hints.
-- `Agent Kit/kit/CURSOR_INTEGRATION_OWNER_GUIDE.md` — owner-facing guide for configuring Cursor with Rules, Commands, Skills, Subagents, and optional Hooks.
+- `Agent Kit/kit/CURSOR_INTEGRATION_OWNER_GUIDE.md` — owner-facing guide for configuring Cursor with Rules, Commands, Skills, and Subagents.
 - `Agent Kit/kit/cursor/README.md` — Cursor Integration Pack overview.
 - `Agent Kit/kit/cursor/COMMAND_VOCABULARY.md` — command-to-mode mapping and explicit mode block.
 - `Agent Kit/kit/cursor/rules/` — short always-on Cursor rule templates.
 - `Agent Kit/kit/cursor/commands/` — copy-paste command bodies for common workflows.
 - `Agent Kit/kit/cursor/skills/` — reusable procedure templates.
 - `Agent Kit/kit/cursor/subagents/` — focused read-only subagent role templates.
-- `Agent Kit/kit/cursor/hooks/` — optional hook examples and scripts.
-
-The Python scripts in `cursor/hooks/scripts/` are optional examples. Agent Memory Kit does not require Python.
-
 ---
 
 ## v3.8 scope, workspace, and role orchestration files
@@ -188,9 +197,6 @@ The Python scripts in `cursor/hooks/scripts/` are optional examples. Agent Memor
 - `Agent Kit/kit/CODEX_SANDBOX_AND_PERMISSION_PROFILES_GUIDE.md` — plain-language Codex permission and sandbox guide.
 - `Agent Kit/kit/WORKSPACE_SELECTION_GUIDE.md` — workspace selection guidance for multi-component projects.
 - `Agent Kit/kit/AI_AGENT_ROLE_STACK_GUIDE.md` — default role split across Cursor, Codex, GPT web chat, Project Map, and owner.
-- `Agent Kit/kit/HOOK_REQUEST_WORKFLOW.md` — workflow for hook requests.
-- `Agent Kit/kit/HOOK_GENERATION_QUESTIONS.md` — minimal questions for hook generation.
-- `Agent Kit/kit/HOOK_PACKAGING_GUIDE.md` — packaging rules for project-local hook bundles.
 - `Agent Kit/kit/cursor/workspaces/` — Cursor workspace templates.
 - `Agent Kit/kit/cursor/commands/scope-set.md` — command template for setting task write scope.
 - `Agent Kit/kit/cursor/commands/scope-reset.md` — command template for resetting write scope.

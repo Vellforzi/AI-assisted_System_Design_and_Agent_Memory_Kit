@@ -106,6 +106,8 @@ For a grounded project answer, the agent may perform the smallest read-only cont
 
 Read-only intake must not become implementation.
 
+For coding agents, scoped local read-only repository inspection is allowed when needed to answer, review, plan, or implement the user's task. Examples include reading relevant files, using search, inspecting `git status` or `git diff`, and discovering verification commands. This does not imply permission to write files, update memory, call external services, run destructive commands, publish, deploy, modify data stores, commit, push, or send messages.
+
 ---
 
 ## 6. External research gate

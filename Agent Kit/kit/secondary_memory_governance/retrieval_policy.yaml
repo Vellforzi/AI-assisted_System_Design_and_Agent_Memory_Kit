@@ -1,0 +1,66 @@
+# docs/project_map/retrieval_policy.yaml
+# Retrieval policy for a secondary-memory Project Map.
+
+schema_version: "1.0"
+package_profile: "secondary_memory_governance"
+project_id: "ai-stock-analyst-class"
+last_updated: "2026-06-11"
+
+core_rule: "Retrieve the smallest evidence-bearing working set needed."
+project_map_mode: "secondary_memory"
+secondary_memory_rule: "Read operational source-of-truth before relying on Project Map."
+whole_repo_by_default: false
+stale_project_map_behavior: "label as stale/context; do not use as truth"
+external_research_behavior: "context only until promoted by reviewed source-of-truth update"
+
+session_start_entrypoints:
+  - "AGENTS.md"
+  - "docs/project_map/source_authority.yaml"
+  - "docs/project_map/permissions_policy.yaml"
+  - "docs/project_map/retrieval_policy.yaml"
+  - "docs/project_map/working_state.yaml"
+
+task_type_entrypoints:
+  owner_only_execution_work:
+    required:
+      - "AGENTS.md"
+      - "docs/NEXT_STEPS.md"
+      - "docs/context_packs/current_status.md"
+      - "docs/source_of_truth_hierarchy.md"
+      - "docs/context_packs/owner_only_autotrade_research_for_codex.md"
+      - "docs/owner_only_open_questions_triage.md"
+      - "selected layer-specific specs"
+  public_mvp_or_user_facing_work:
+    required:
+      - "AGENTS.md"
+      - "docs/source_of_truth_hierarchy.md"
+      - "docs/context_packs/current_status.md"
+      - "current public/product specs if active"
+    guard: "verify the public MVP is not deferred before planning or editing"
+  research_or_external_context:
+    required:
+      - "AGENTS.md"
+      - "docs/source_of_truth_hierarchy.md"
+      - "current research gate or decision doc"
+    guard: "research output remains context until reviewed source-of-truth update"
+  project_map_update:
+    required:
+      - "AGENTS.md"
+      - "docs/project_map/source_authority.yaml"
+      - "docs/project_map/permissions_policy.yaml"
+      - "docs/project_map/retrieval_policy.yaml"
+      - "operational docs affected by the proposed delta"
+    guard: "do not update Project Map without explicit memory_update/apply scope"
+
+retrieval_limits:
+  prefer_indexes_and_entrypoints: true
+  avoid_whole_project_map_by_default: true
+  avoid_whole_repo_by_default: true
+  read_raw_logs_only_when_in_scope: true
+  do_not_read_secret_bearing_artifacts: true
+
+missing_evidence_behavior:
+  answer: "say what evidence is missing and answer only within confirmed facts"
+  analyze: "label assumptions and identify files needed"
+  plan: "produce a bounded plan with evidence gaps"
+  apply: "stop before editing unless the missing evidence can be retrieved within scope"

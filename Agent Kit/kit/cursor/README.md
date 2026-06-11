@@ -57,15 +57,6 @@ cursor/
     docs_drift_auditor.md
     memory_auditor.md
 
-  hooks/
-    README.md
-    hooks.json.example
-    scripts/
-      block_secrets.py
-      block_db_writes.py
-      block_git_danger.py
-      scope_guard.py
-      project_map_write_guard.py
 ```
 
 ---
@@ -75,8 +66,7 @@ cursor/
 1. Install only the core Rules first.
 2. Add Commands for common workflows.
 3. Add Skills for longer procedures.
-4. Add Hooks only after testing them locally.
-5. Add Subagents later, preferably read-only first.
+4. Add Subagents later, preferably read-only first.
 
 ---
 
@@ -101,19 +91,9 @@ Commands:
 - `/settings-audit`
 - `/cursorignore-audit`
 
-Hooks:
-
-- secret scan;
-- git danger guard;
-- DB write guard;
-- scope guard;
-- Project Map write guard.
-
----
-
 ## Important limitation
 
-Rules and commands guide the model. Hooks and external tooling provide stronger technical checks. Agent Memory Kit itself is a file-based operating contract; it is not a security sandbox.
+Rules and commands guide the model. Agent Memory Kit itself is a file-based operating contract; it is not a security sandbox.
 
 
 ## Settings profile
@@ -126,6 +106,6 @@ Key defaults:
 - Usage Summary should be visible, preferably Always.
 - Auto-Approve Mode Transitions should be off.
 - Auto-Accept Web Search should be off.
-- Browser, MCP, file deletion, and external-file protections should be on.
+- Browser, file deletion, and external-file protections should be on.
 - Auto Format on Agent Finish should be off.
 - Hierarchical Cursor Ignore should be enabled only after `.cursorignore` is verified.

@@ -27,6 +27,20 @@ For project-specific claims, the agent may use only:
 
 Everything else is not project evidence.
 
+## 2.1 Project Map authority mode
+
+Project Map is not always the highest project authority.
+
+Each project should declare one of these modes in `source_authority.yaml`, `AGENTS.md`, or an equivalent source hierarchy:
+
+| Mode | Meaning |
+|---|---|
+| `authority` | Project Map is the durable source-of-truth layer for current project memory. |
+| `secondary_memory` | Project Map summarizes, navigates, and preserves owner-memory context; operational docs, specs, tests, code, issues, and current owner instructions win on conflicts. |
+| `absent` | The project has no Project Map; use current owner input and opened project evidence only. |
+
+If Project Map is `secondary_memory`, agents must not use it to override operational docs or runtime specifications. They should report drift and follow the higher-authority source.
+
 ---
 
 ## 3. Allowed use of general model knowledge

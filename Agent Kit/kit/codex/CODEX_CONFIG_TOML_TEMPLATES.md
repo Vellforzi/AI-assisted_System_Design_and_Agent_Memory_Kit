@@ -14,7 +14,7 @@ C:\Users\<user>\.codex\config.toml
 
 ## Important TOML placement rule
 
-Top-level settings must appear before the first table header such as `[features]` or `[mcp_servers.node_repl]`.
+Top-level settings must appear before the first table header such as `[features]`.
 
 Do not paste top-level keys at the bottom of the file after `[desktop]`; then they become part of the `[desktop]` table.
 
@@ -39,7 +39,6 @@ Use one `[features]` table only.
 ```toml
 [features]
 js_repl = false
-hooks = true
 memories = false
 multi_agent = true
 undo = true
@@ -62,7 +61,7 @@ See:
 codex/config/config.toml.safe-overlay.toml
 ```
 
-Use it to patch an existing Codex config without deleting auto-generated marketplace, plugin, MCP, or desktop sections.
+Use it to patch an existing Codex config without deleting auto-generated marketplace, plugin, or desktop sections.
 
 ## Full minimal example
 
@@ -94,7 +93,6 @@ enabled = true
 
 [features]
 js_repl = false
-hooks = true
 memories = false
 multi_agent = true
 undo = true

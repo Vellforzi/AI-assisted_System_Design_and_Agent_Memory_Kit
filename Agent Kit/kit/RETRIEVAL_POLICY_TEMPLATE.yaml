@@ -7,6 +7,15 @@ last_updated: "<YYYY-MM-DD>"
 
 core_rule: "Retrieve the smallest evidence-bearing working set needed for the current intent. Do not load the whole project by default."
 
+project_map_mode: "authority" # authority | secondary_memory | absent
+
+secondary_memory_rule: "If project_map_mode is secondary_memory, retrieve operational source-of-truth entrypoints before Project Map memory for implementation, runtime, safety, or roadmap claims."
+
+operational_entrypoints:
+  - "<AGENTS.md or equivalent>"
+  - "<current roadmap/status doc>"
+  - "<source-of-truth hierarchy doc>"
+
 profiles:
   answer:
     purpose: "Answer a project question."

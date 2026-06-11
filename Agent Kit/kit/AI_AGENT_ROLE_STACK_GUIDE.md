@@ -1,18 +1,35 @@
 # AI Agent Role Stack Guide
 
-This guide defines the default owner-controlled multi-agent setup.
+This guide defines owner-controlled agent role profiles.
 
 ## Default role stack
 
-The recommended default is:
+The recommended multi-agent default is:
 
 ```text
 Cursor = primary active working hands
 Codex = restricted second hands and reviewer
 GPT web chat = research, design, architecture, and task specifications
-Project Map = shared project truth
+Project Map = shared memory boundary; truth role follows source authority
 Owner = final authority
 ```
+
+This is not mandatory for every project. A mature solo project may use Codex or another local coding agent as the primary implementer when the task has explicit intent, scope, and verification.
+
+Do not downgrade a working local coding agent into reviewer-only mode unless that role split solves a real risk.
+
+---
+
+## Supported role profiles
+
+| Profile | Use when | Allowed behavior |
+|---|---|---|
+| `single-agent-local-implementer` | One local coding agent is the practical primary worker. | Read, edit, and verify inside explicit task scope. |
+| `codex-reviewer` | Codex is used as independent audit or recovery surface. | Read-only review by default; propose patches and scope. |
+| `cursor-implements-codex-reviews` | Cursor is primary implementer and Codex is second opinion. | Cursor applies scoped changes; Codex reviews diff and memory drift. |
+| `research-only-agent` | The task is external/domain research or architecture comparison. | No repository mutation; research output is not project truth until promoted. |
+
+Role profile does not create action intent. Permission policy, source authority, and current owner instruction still apply.
 
 ## Cursor role
 
@@ -30,7 +47,7 @@ Cursor should have strong project rules and task scope gates.
 
 ## Codex role
 
-Codex is the second controlled agent inside or near the IDE.
+Codex can be the second controlled agent inside or near the IDE.
 
 Default Codex role:
 
@@ -41,7 +58,7 @@ Default Codex role:
 - recover from context risk;
 - propose patches and scopes.
 
-Codex should not be the first broad mutating agent. It may apply changes only under an explicit task contract, narrow scope, approval, and permission guardrails.
+Codex should not be the first broad mutating agent. In the `single-agent-local-implementer` profile it may apply changes, but only under an explicit task contract, narrow scope, approval, and permission guardrails.
 
 Recommended default:
 
@@ -65,9 +82,9 @@ Do not use provider chat memory as project truth. Promote reusable findings into
 
 ## Project Map role
 
-Project Map is the durable project memory and source-of-truth layer.
+Project Map is the durable project memory layer.
 
-All agents should treat it as the shared memory boundary.
+All agents should treat it as the shared memory boundary. If the project declares Project Map as secondary memory, operational docs, specs, tests, code, issues, and current owner instructions remain authoritative.
 
 ## Why this split works
 
@@ -79,7 +96,7 @@ It also prevents a reviewer from having the same assumptions as the implementer:
 Cursor implements.
 Codex reviews.
 GPT researches.
-Project Map stores truth.
+Project Map stores memory, and stores truth only when the project's source authority assigns that role.
 Owner approves.
 ```
 

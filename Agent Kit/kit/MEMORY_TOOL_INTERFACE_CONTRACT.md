@@ -1,7 +1,7 @@
 # Memory Tool Interface Contract
 
 Status: implementation-facing guidance  
-Purpose: define how a memory tool, file-backed memory helper, MCP server, database API, or IDE extension should expose Project Map memory to agents.
+Purpose: define how a file-backed memory helper, project API, or IDE extension should expose Project Map memory to agents.
 
 ---
 

@@ -37,7 +37,22 @@ The agent should usually load:
 
 ---
 
-## 2. Recommended layout
+## 2. Storage profiles
+
+Choose the storage profile before creating folders.
+
+| Profile | Use when | Required first files |
+|---|---|---|
+| Full Project Map | The project needs a durable memory and task-continuity layer. | `README.md`, `current_state.md`, `working_state.yaml`, policy YAML files, memory index. |
+| Mature thin overlay | The project already has strong operational docs and source authority. | Policy YAML files, optional `working_state.yaml`, ignore files, manual smoke evals. |
+
+For mature thin overlay, Project Map may be secondary memory. Do not create full `memory/`, `tasks/`, `handoffs/`, `raw_sources/`, or runtime folders until they solve a named continuity or retrieval problem.
+
+See `MATURE_EXISTING_PROJECT_ADOPTION_PROFILE.md` for the lightweight path.
+
+---
+
+## 3. Full Project Map layout
 
 ```text
 Project Map/
@@ -115,7 +130,7 @@ This layout is a recommendation, not a mandatory filesystem contract. The owner 
 
 ---
 
-## 3. Entrypoints
+## 4. Entrypoints
 
 ### `README.md`
 
@@ -178,7 +193,7 @@ Run reports and failure traces from manual or automated eval runs. Keep these co
 
 ---
 
-## 4. Long-task artifacts
+## 5. Long-task artifacts
 
 ### `tasks/TASK-xxxx.yaml`
 
@@ -215,7 +230,7 @@ A handoff should include:
 
 ---
 
-## 5. Long-term memory classes
+## 6. Long-term memory classes
 
 Recommended memory classes:
 
@@ -238,7 +253,7 @@ Recommended memory classes:
 
 ---
 
-## 6. Canonical memory unit fields
+## 7. Canonical memory unit fields
 
 A durable memory unit should contain:
 
@@ -276,7 +291,7 @@ owner_approved: false
 
 ---
 
-## 7. Index design
+## 8. Index design
 
 `memory/index.yaml` should be compact and retrieval-oriented.
 
@@ -295,7 +310,7 @@ It should not duplicate full cards. It should include:
 
 ---
 
-## 8. Raw sources
+## 9. Raw sources
 
 Raw sources are evidence, not memory by themselves.
 
@@ -312,7 +327,7 @@ Do not put raw source dumps into normal answer context unless required.
 
 ---
 
-## 9. Stale and superseded memory
+## 10. Stale and superseded memory
 
 When a new fact replaces an old fact, do not delete the old fact. Mark it as stale or superseded and link both units.
 
@@ -320,7 +335,7 @@ Stale memory can be useful for audit and repair, but it must not appear as curre
 
 ---
 
-## 10. Policy file priority
+## 11. Policy file priority
 
 When present, the agent should read policy files before deep retrieval:
 

@@ -1,0 +1,65 @@
+# docs/project_map/source_authority.yaml
+# Machine-readable authority policy for a secondary-memory Project Map.
+
+schema_version: "1.0"
+package_profile: "secondary_memory_governance"
+project_id: "ai-stock-analyst-class"
+last_updated: "2026-06-11"
+
+project_map_mode: "secondary_memory"
+
+operational_truth_roots:
+  - "AGENTS.md"
+  - "docs/NEXT_STEPS.md"
+  - "docs/context_packs/current_status.md"
+  - "docs/source_of_truth_hierarchy.md"
+  - "docs/implementation_decomposition.md"
+  - "docs/context_packs/owner_only_autotrade_research_for_codex.md"
+  - "docs/owner_only_open_questions_triage.md"
+  - "docs/owner_only_sandbox_execution_lab.md"
+  - "relevant layer-specific specs"
+
+project_map_rule: "Project Map summarizes and navigates; operational docs win."
+external_research_to_project_fact: "requires reviewed source-of-truth update"
+conflict_behavior: "mark conflict; prefer operational truth; do not merge silently"
+
+authority_order:
+  - rank: 1
+    id: "current_owner_instruction"
+    description: "Current owner instruction in this run."
+  - rank: 2
+    id: "operational_truth_roots"
+    description: "Current project-specific operational docs and specs."
+  - rank: 3
+    id: "opened_code_tests_and_tool_outputs"
+    description: "Code, tests, command output, logs, or local artifacts opened in the current scoped run."
+  - rank: 4
+    id: "issues_or_reviewed_work_items"
+    description: "Current issues, reviewed tasks, or accepted work items when present."
+  - rank: 5
+    id: "project_map_secondary_memory"
+    description: "Navigation, owner memory, summaries, risks, open questions, and handoff hints."
+  - rank: 6
+    id: "external_research"
+    description: "External research retrieved in the current run; context only until promoted."
+  - rank: 7
+    id: "prior_chat_or_unreviewed_notes"
+    description: "Non-authoritative hints unless promoted through reviewed project docs."
+
+missing_authority_behavior:
+  answer: "state missing evidence; do not invent project facts"
+  analyze: "label assumptions and identify the source needed"
+  plan: "plan only against confirmed authority or explicitly marked assumptions"
+  apply: "stop and request or retrieve the missing source-of-truth before editing"
+
+promotion_rules:
+  external_research_to_project_fact: "requires reviewed source-of-truth update"
+  project_map_delta_to_truth: "requires owner approval and operational source update when it changes project truth"
+  stale_project_map_to_current: "requires verification against operational truth"
+
+forbidden_interpretations:
+  - "Project Map is not a runtime spec."
+  - "Project Map is not broker or execution policy."
+  - "Project Map is not a public product source of truth."
+  - "Project Map does not replace docs/NEXT_STEPS.md."
+  - "Project Map does not replace layer-specific specs."

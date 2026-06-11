@@ -22,7 +22,7 @@ Codex:
   narrow apply tasks only with explicit scope and approval.
 
 Project Map:
-  the shared project truth for both Cursor and Codex.
+  the shared memory boundary for both Cursor and Codex; source of truth only when the project's authority policy says so.
 ```
 
 ## Core rule
@@ -30,7 +30,7 @@ Project Map:
 Codex must follow the same memory boundary as any other agent:
 
 ```text
-Project Map = project truth
+Project Map = project memory/truth according to source authority
 Working State = recovery root
 Source Authority = conflict resolver
 Task Contract = permission boundary
@@ -46,7 +46,6 @@ Start Codex in a conservative posture:
 - Read-only default permissions.
 - Approval prompts enabled.
 - Codex memories disabled for project truth.
-- Hooks enabled.
 - Context window usage visible.
 - Follow-ups queued, not steering by default.
 - Detached code review for serious review.
@@ -54,12 +53,10 @@ Start Codex in a conservative posture:
 ## Minimal setup sequence
 
 1. Configure `~/.codex/config.toml` using the templates in `codex/config/`.
-2. Add a project-level `.codex/hooks.json` if you want repository-local hooks.
-3. Add hook scripts under `<repo>/.codex/hooks/`.
-4. Add project `AGENTS.md` at the repository root.
-5. Keep Project Map in the repository or workspace root.
-6. Restart Codex after changing global config.
-7. Run a small read-only audit first.
+2. Add project `AGENTS.md` at the repository root.
+3. Keep Project Map in the repository or workspace root.
+4. Restart Codex after changing global config.
+5. Run a small read-only audit first.
 
 ## When to use Codex
 
@@ -84,7 +81,7 @@ Avoid using Codex for:
 
 ## Context compaction rule
 
-If Codex is about to compact the conversation, it should stop and ask for a checkpoint or handoff first. The optional `pre_compact_checkpoint_guard.py` hook implements that behavior for auto-compaction.
+If Codex is about to compact the conversation, it should stop and ask for a checkpoint or handoff first.
 
 If compaction has already happened, Codex must treat the platform-generated summary as a weak hint only and recover from Project Map and Working State.
 
@@ -100,12 +97,6 @@ If compaction has already happened, Codex must treat the platform-generated summ
 7. Run eval smoke if behavior rules or repeated failures changed.
 ```
 
-## Python is optional
-
-Agent Memory Kit does not require Python. Python hook scripts are examples only. Replace them with PowerShell, shell, Node.js, Go, Rust, or any other toolchain if that is better for your environment.
-
----
-
 ## v3.8 scope and workspace policy
 
 Codex should normally be configured as the restricted second agent:
@@ -114,7 +105,7 @@ Codex should normally be configured as the restricted second agent:
 Cursor = primary implementation agent
 Codex = read-only reviewer, auditor, recovery helper, and second opinion
 GPT web chat = research, design, and task specifications
-Project Map = shared project truth
+Project Map = shared memory boundary; source of truth only when the project's authority policy says so
 ```
 
 Recommended Codex defaults:

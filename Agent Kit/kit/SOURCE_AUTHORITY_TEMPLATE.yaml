@@ -7,6 +7,14 @@ last_updated: "<YYYY-MM-DD>"
 
 core_rule: "Project-specific claims must be grounded in valid project evidence. Generic model knowledge is not project evidence."
 
+project_map_mode: "authority" # authority | secondary_memory | absent
+project_map_rule: "If project_map_mode is secondary_memory, Project Map summarizes and navigates; operational docs, specs, tests, code, issues, and current owner instructions remain authoritative."
+
+operational_truth_roots:
+  - "<AGENTS.md or equivalent>"
+  - "<docs/source_of_truth_hierarchy.md or equivalent>"
+  - "<current roadmap/status/spec docs>"
+
 authority_order:
   - rank: 1
     id: owner_current_instruction
@@ -19,11 +27,11 @@ authority_order:
     id: opened_tool_outputs_current_run
     description: "Tool outputs, database reads, connector results, logs, or command outputs opened in the current run within approved scope."
   - rank: 4
-    id: verified_project_map_memory
-    description: "Project Map memory with verified or owner-approved review state."
-  - rank: 5
     id: current_project_docs
     description: "Documentation marked current and not superseded."
+  - rank: 5
+    id: verified_project_map_memory
+    description: "Project Map memory with verified or owner-approved review state. If project_map_mode is secondary_memory, use it as navigation or context unless an operational source confirms the claim."
   - rank: 6
     id: recent_verified_logs
     description: "Recent logs or work records with evidence and timestamp."
@@ -39,6 +47,7 @@ authority_order:
 
 conflict_resolution:
   default_rule: "prefer_higher_authority_then_newer_verified"
+  project_map_secondary_rule: "If Project Map conflicts with operational_truth_roots, operational truth wins and the drift must be reported."
   if_same_rank: "prefer_newer_last_verified_at"
   if_conflict_unresolved: "mark_conflict_and_stop"
   never_silent_merge: true

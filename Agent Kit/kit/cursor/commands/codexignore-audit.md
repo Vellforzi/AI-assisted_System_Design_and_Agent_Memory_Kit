@@ -8,7 +8,7 @@ Rules:
 
 - Do not edit files unless the owner explicitly switches to apply mode.
 - Treat `.codexignore` as a context hygiene/policy artifact, not a security boundary.
-- If native Codex support is unknown, say so and recommend hooks/scope guards for enforcement.
+- If native Codex support is unknown, say so and recommend explicit scope review for enforcement.
 - Keep Project Map, AGENTS.md, source authority, docs, and active components visible.
 - Include `**/desktop.ini` for Windows or Google Drive projects.
 - Mirror `.cursorignore` where appropriate.

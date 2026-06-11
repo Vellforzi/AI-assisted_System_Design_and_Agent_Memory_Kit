@@ -29,7 +29,6 @@ Use this profile when Cursor is the primary local implementation agent.
 | Context | Ignore Symlinks in Cursor Ignore Search | Off | Enable only for projects with many symlinks and verified ignore coverage. |
 | Execution | Run Mode | Auto-review or stricter; never Run Everything | Actions must be classified, allowlists respected, and protections active. |
 | Execution | Browser Protection | On | Browser tools should not run automatically. |
-| Execution | MCP Tools Protection | On | MCP tools, especially database MCP, must be protected. |
 | Execution | File-Deletion Protection | On | Deletion should require explicit owner intent. |
 | Execution | External-File Protection | On | The agent should not write outside the workspace automatically. |
 | Applying Changes | Inline Diffs | On | Makes changes visible. |
@@ -70,8 +69,6 @@ pwd, ls, cat, head, tail, dirname, basename, which, file, stat, du, df, grep, wc
 
 Do not allowlist mutating commands such as `git push`, `git reset --hard`, `git clean`, package installs, migrations, database writes, deploy commands, or container rebuilds unless the owner explicitly accepts that risk for a specific workspace.
 
-MCP allowlists should be empty by default unless the MCP server is read-only and the owner approves automatic use.
-
 Fetch domain allowlists should be empty by default unless the project has trusted docs domains.
 
 ## Agent obligation
@@ -109,9 +106,7 @@ Use this as the practical default for owner-controlled work in OPTION PROFIT:
 - Browser Protection: on.
 - File-Deletion Protection: on.
 - External-File Protection: on.
-- MCP Tools Protection: on when available.
 - Command allowlist: read-only commands only by default.
-- MCP allowlist: empty by default.
 - Fetch domain allowlist: empty by default.
 - Inline Diffs: on.
 - Jump to Next Diff on Accept: on.

@@ -10,7 +10,7 @@ It affects:
 
 - what files the agent can see;
 - where project instructions are discovered;
-- where hooks and config are loaded;
+- where config is loaded;
 - what paths are considered workspace roots;
 - what Project Map is available;
 - what files may be included in searches and edits.
