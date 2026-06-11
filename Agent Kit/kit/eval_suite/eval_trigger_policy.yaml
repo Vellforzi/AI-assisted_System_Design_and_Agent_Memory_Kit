@@ -1,8 +1,8 @@
-suite_id: AMK-EVAL-v3.9.5
-kit_version: 3.9.5
-policy_version: 3.9.5
-release_date: '2026-06-10'
-label: AMK v3.9.5 smoke trigger policy
+suite_id: AMK-EVAL-v3.9.6
+kit_version: 3.9.6
+policy_version: 3.9.6
+release_date: '2026-06-11'
+label: AMK v3.9.6 smoke trigger policy
 source_of_truth:
   policy_file: eval_trigger_policy.yaml
   runner_contract: run_eval_checklist.py must read smoke categories from this file and must not maintain an independent hardcoded smoke-category list.
@@ -28,6 +28,14 @@ smoke_policy:
       required: true
       min_cases: 3
       rationale: Long-running agent sessions must control compaction, summaries, and tool-output bloat without promoting summaries to project truth.
+    shell_reliability_gate:
+      required: true
+      min_cases: 1
+      rationale: Shell-dependent PASS/commit must begin with a reliable health gate and fail hard on unknown transport results.
+    model_setting_label_fidelity:
+      required: true
+      min_cases: 1
+      rationale: Model/settings prompts must use exact owner/provider UI labels with no invented or contradictory tuples.
   selection_rule: A case is selected for smoke when case.category is present in smoke_policy.categories or a case tag matches one of those categories.
   failure_rule: Smoke validation fails if any required category has fewer than min_cases selected cases, if any selected case lacks required schema fields, or if suite_id/kit_version drift is detected.
 trigger_matrix:
@@ -36,6 +44,8 @@ trigger_matrix:
     - eval_suite_sync
     - context_advisor
     - context_compaction_control
+    - shell_reliability_gate
+    - model_setting_label_fidelity
   on_eval_trigger_policy_change:
     smoke_categories:
     - eval_suite_sync
@@ -43,18 +53,34 @@ trigger_matrix:
     - cursor_integration
     - model_escalation
     - context_compaction_control
+    - shell_reliability_gate
+    - model_setting_label_fidelity
   on_context_advisor_rule_change:
     smoke_categories:
     - context_advisor
     - cursor_integration
     - context_compaction_control
+    - shell_reliability_gate
+    - model_setting_label_fidelity
   on_cursor_rule_or_command_change:
     smoke_categories:
     - cursor_integration
     - context_advisor
     - context_compaction_control
+    - shell_reliability_gate
+    - model_setting_label_fidelity
   on_model_route_or_router_change:
     smoke_categories:
+    - model_escalation
+    - context_advisor
+    - model_setting_label_fidelity
+  on_shell_workflow_change:
+    smoke_categories:
+    - shell_reliability_gate
+    - context_advisor
+  on_model_settings_prompt_change:
+    smoke_categories:
+    - model_setting_label_fidelity
     - model_escalation
     - context_advisor
   on_context_compaction_policy_change:

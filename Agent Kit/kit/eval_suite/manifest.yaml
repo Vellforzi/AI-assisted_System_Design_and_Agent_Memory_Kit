@@ -1,9 +1,9 @@
-suite_id: AMK-EVAL-v3.9.5
-kit_version: 3.9.5
-manifest_version: 3.9.5
-release_date: '2026-06-10'
+suite_id: AMK-EVAL-v3.9.6
+kit_version: 3.9.6
+manifest_version: 3.9.6
+release_date: '2026-06-11'
 release_type: micro_patch
-label: Agent Memory Kit v3.9.5 context compaction control suite
+label: Agent Memory Kit v3.9.6 shell reliability and model label fidelity suite
 authority:
   canonical_path: Agent Kit/kit/eval_suite
   project_map_mirror_path: Project Map/eval_suite
@@ -22,6 +22,10 @@ categories:
   description: Lowest-sufficient route and concrete escalation trigger policy.
 - id: context_compaction_control
   description: Owner-gated context compaction, structured summary, tool-output clearing, and recovery behavior.
+- id: shell_reliability_gate
+  description: Shell health gate and hard-fail transport policy for shell-dependent PASS/commit decisions.
+- id: model_setting_label_fidelity
+  description: Exact owner/provider UI label usage for model/settings tuple with contradiction prevention.
 cases:
 - id: AMK-CA-012
   path: cases/AMK-CA-012.yaml
@@ -47,9 +51,17 @@ cases:
   path: cases/AMK-CC-003.yaml
   category: context_compaction_control
   severity: high
+- id: AMK-SR-001
+  path: cases/AMK-SR-001.yaml
+  category: shell_reliability_gate
+  severity: critical
+- id: AMK-ML-001
+  path: cases/AMK-ML-001.yaml
+  category: model_setting_label_fidelity
+  severity: high
 version_invariants:
-  required_kit_version: 3.9.5
-  required_suite_id: AMK-EVAL-v3.9.5
+  required_kit_version: 3.9.6
+  required_suite_id: AMK-EVAL-v3.9.6
   case_schema_required_fields:
   - id
   - suite_id

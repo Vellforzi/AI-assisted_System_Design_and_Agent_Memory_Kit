@@ -2,7 +2,7 @@
 """
 Agent Memory Kit eval smoke checklist runner.
 
-v3.9.5 invariant: smoke categories are read from eval_trigger_policy.yaml.
+v3.9.6 invariant: smoke categories are read from eval_trigger_policy.yaml.
 The script must not maintain a separate hardcoded category list.
 """
 from __future__ import annotations

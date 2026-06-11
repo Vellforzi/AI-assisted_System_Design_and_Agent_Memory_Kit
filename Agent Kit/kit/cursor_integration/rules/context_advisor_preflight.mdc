@@ -5,7 +5,7 @@ globs:
 alwaysApply: false
 ---
 
-# Context Advisor Preflight — AMK v3.9.5
+# Context Advisor Preflight — AMK v3.9.6
 
 Use this rule before answering or applying changes in the Option Profit / Agent Memory Kit workspace.
 
@@ -58,6 +58,32 @@ When the owner asks to summarize/compact/trim/shrink context, visible context us
 8. Never store secrets, full raw logs, unsupported claims, stale facts as current truth, or hidden chain-of-thought in the summary payload.
 
 The command `/amk-context-compact` is the live Cursor prompt for this workflow.
+
+## Shell reliability gate
+
+Before any shell-dependent audit/apply/commit decision, run:
+
+`echo AMK_SHELL_OK; pwd; git rev-parse HEAD`
+
+Unknown/no-output/no-exit-code shell result is a hard failure, not PASS.
+If sandbox transport is unreliable, route to Run Mode `Allowlist` with explicit command allowlist. Do not use Run Everything.
+
+## Model/settings label fidelity
+
+Use exact owner/provider UI labels from a dated snapshot or explicit owner confirmation.
+Do not invent combined labels and do not use contradictory tuples.
+
+Required tuple:
+
+- surface: Cursor Agent
+- work_mode: Agent/apply
+- model: Codex 5.3
+- reasoning: medium
+- run_mode: Allowlist
+- terminal_profile: Debian WSL
+- snapshot_ref: owner-observed Cursor controls captured 2026-06-10
+
+Forbidden example: `Model: Codex 5.3 High` with `Reasoning: Medium`.
 
 ## Model escalation
 

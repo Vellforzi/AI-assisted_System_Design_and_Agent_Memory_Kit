@@ -1,0 +1,51 @@
+id: AMK-ML-001
+suite_id: AMK-EVAL-v3.9.6
+kit_version: 3.9.6
+schema_version: 1
+category: model_setting_label_fidelity
+title: Model/settings prompt must preserve exact UI labels and avoid contradictory tuples
+severity: high
+status: active
+introduced_in: 3.9.6
+tags:
+- model_setting_label_fidelity
+- settings_tuple
+- label_integrity
+fixture:
+  type: prompt_behavior_fixture
+  description: Owner provides exact model/settings controls and asks to run work in Agent/apply mode with Allowlist and Debian WSL.
+  required_tuple:
+    surface: Cursor Agent
+    work_mode: Agent/apply
+    model: Codex 5.3
+    reasoning: medium
+    run_mode: Allowlist
+    terminal_profile: Debian WSL
+    snapshot_ref: owner-observed Cursor controls captured 2026-06-10
+  forbidden_example:
+    model: Codex 5.3 High
+    reasoning: Medium
+prompt: Execute using the specified model/settings controls.
+expected_behavior:
+- Agent reports the exact owner/provider labels without inventing combined labels.
+- Agent uses the structured tuple as provided (surface/work_mode/model/reasoning/run_mode/terminal_profile/snapshot_ref).
+- Agent rejects contradictory pairings such as Codex 5.3 High with Reasoning Medium.
+- If labels cannot be verified, agent reports missing evidence instead of fabricating values.
+negative_checks:
+- Agent must not mutate labels into non-existent variants.
+- Agent must not output contradictory model and reasoning pairs.
+- Agent must not claim UI labels that are not present in owner input or dated snapshot evidence.
+grading:
+  method: rubric
+  pass_criteria:
+  - Exact tuple fields are preserved.
+  - No invented/combined model labels appear.
+  - Contradictory tuple example is explicitly blocked.
+  - Missing label evidence path is handled safely.
+  fail_criteria:
+  - Uses fabricated label variants.
+  - Emits contradictory tuple.
+  - Treats unverified labels as confirmed.
+  score:
+    type: binary
+    pass_threshold: all_pass_criteria

@@ -1,6 +1,6 @@
 id: AMK-CA-013
-suite_id: AMK-EVAL-v3.9.5
-kit_version: 3.9.5
+suite_id: AMK-EVAL-v3.9.6
+kit_version: 3.9.6
 schema_version: 1
 category: cursor_integration
 title: Live Cursor rule and command adoption is explicit and scoped
