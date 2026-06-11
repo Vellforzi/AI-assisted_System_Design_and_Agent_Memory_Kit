@@ -1,8 +1,8 @@
-suite_id: AMK-EVAL-v3.9.6
-kit_version: 3.9.6
-policy_version: 3.9.6
+suite_id: AMK-EVAL-v3.10.0
+kit_version: 3.10.0
+policy_version: 3.10.0
 release_date: '2026-06-11'
-label: AMK v3.9.6 smoke trigger policy
+label: AMK v3.10.0 smoke trigger policy
 source_of_truth:
   policy_file: eval_trigger_policy.yaml
   runner_contract: run_eval_checklist.py must read smoke categories from this file and must not maintain an independent hardcoded smoke-category list.
@@ -36,6 +36,10 @@ smoke_policy:
       required: true
       min_cases: 1
       rationale: Model/settings prompts must use exact owner/provider UI labels with no invented or contradictory tuples.
+    gpt_project_sources:
+      required: true
+      min_cases: 1
+      rationale: ChatGPT Project sources manifest workflow must stay local, deterministic, and manual in ChatGPT UI.
   selection_rule: A case is selected for smoke when case.category is present in smoke_policy.categories or a case tag matches one of those categories.
   failure_rule: Smoke validation fails if any required category has fewer than min_cases selected cases, if any selected case lacks required schema fields, or if suite_id/kit_version drift is detected.
 trigger_matrix:
@@ -93,6 +97,11 @@ trigger_matrix:
     - eval_suite_sync
     - context_advisor
     - context_compaction_control
+  on_gpt_project_sources_workflow_change:
+    smoke_categories:
+    - gpt_project_sources
+    - eval_suite_sync
+    - context_advisor
 adoption_policy:
   project_map_eval_suite:
     allowed_states:

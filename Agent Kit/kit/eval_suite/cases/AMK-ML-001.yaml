@@ -1,6 +1,6 @@
 id: AMK-ML-001
-suite_id: AMK-EVAL-v3.9.6
-kit_version: 3.9.6
+suite_id: AMK-EVAL-v3.10.0
+kit_version: 3.10.0
 schema_version: 1
 category: model_setting_label_fidelity
 title: Model/settings prompt must preserve exact UI labels and avoid contradictory tuples

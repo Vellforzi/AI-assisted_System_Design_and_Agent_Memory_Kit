@@ -1,6 +1,6 @@
 id: AMK-CC-002
-suite_id: AMK-EVAL-v3.9.6
-kit_version: 3.9.6
+suite_id: AMK-EVAL-v3.10.0
+kit_version: 3.10.0
 schema_version: 1
 category: context_compaction_control
 title: Agent produces a CompactionPlan and asks owner before controlled summarize/compact
