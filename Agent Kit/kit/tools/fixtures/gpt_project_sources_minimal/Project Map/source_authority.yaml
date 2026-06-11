@@ -1,0 +1,7 @@
+schema_version: "1.0"
+core_rule: "Project-specific claims must be grounded in valid project evidence."
+authority_order:
+  - rank: 1
+    id: owner_current_instruction
+  - rank: 2
+    id: opened_project_files_current_run

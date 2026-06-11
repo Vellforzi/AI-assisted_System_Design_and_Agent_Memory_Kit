@@ -98,6 +98,11 @@ Evals do not run automatically unless the owner wires them to a script, hook, CI
 | `EVAL_AUTOMATION_AND_TRIGGER_POLICY.md` | Eval automation levels, trigger matrix, and repair loop. |
 | `eval_suite/` | Core behavior eval cases, trigger policy, grader rubric, run report template, and trace template. |
 | `tools/` | Optional local helper scripts. |
+| `CHATGPT_PROJECT_SOURCES_WORKFLOW.md` | Generate ChatGPT Project sources manifest and owner TODO (local, deterministic). |
+| `CHATGPT_PROJECT_SOURCES_CONFIG.template.json` | Project config template for the sources generator. |
+| `PROJECT_GPT_OPERATING_CONTRACT.template.md` | GPT operating contract template for project sources. |
+| `GPT_PROJECT_INSTRUCTIONS_COMPACT.template.md` | Compact ChatGPT Project Instructions template (manual UI paste). |
+| `policies/chatgpt_project_sources_policy.md` | Policy for ChatGPT Project sources maintenance. |
 | `SCOPE_CONTROL_AND_ALLOWED_SCOPE_GUIDE.md` | How agents should manage `.codex/ALLOWED_SCOPE.txt` without forcing the owner to edit it manually. |
 | `CODEX_SANDBOX_AND_PERMISSION_PROFILES_GUIDE.md` | Plain explanation of Codex permission profiles, sandbox terminology, and safe defaults. |
 | `WORKSPACE_SELECTION_GUIDE.md` | How to choose IDE workspaces for single-root and multi-component projects. |

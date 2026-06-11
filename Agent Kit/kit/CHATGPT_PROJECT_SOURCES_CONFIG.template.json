@@ -1,0 +1,87 @@
+{
+  "schema_version": "1.0",
+  "description": "Copy to project root as CHATGPT_PROJECT_SOURCES.config.json and customize paths.",
+  "project_root": ".",
+  "output_dir": "Project Map/gpt",
+  "operating_contract_path": "PROJECT_GPT_OPERATING_CONTRACT.md",
+  "project_brief_path": "PROJECT_AI_BRIEF.md",
+  "instructions_compact_path": "Project Map/gpt/GPT_PROJECT_INSTRUCTIONS_COMPACT.md",
+  "worklog_path": "docs/WORKLOG.md",
+  "context_pack_inputs": [
+    "Project Map/current_state.md",
+    "Project Map/working_state.yaml",
+    "Project Map/source_authority.yaml",
+    "Project Map/memory/index.yaml",
+    "docs/WORKLOG.md"
+  ],
+  "memory_index_path": "Project Map/memory/index.yaml",
+  "current_state_path": "Project Map/current_state.md",
+  "working_state_path": "Project Map/working_state.yaml",
+  "source_authority_path": "Project Map/source_authority.yaml",
+  "checkpoint_heading": "## Checkpoint",
+  "repo_routing_boundary": "Separate package repository from project mirror. Scoped product remotes receive product code only unless owner explicitly widens scope.",
+  "required_sources": [
+    {
+      "path": "PROJECT_GPT_OPERATING_CONTRACT.md",
+      "purpose": "GPT operating contract and role boundaries"
+    },
+    {
+      "path": "PROJECT_AI_BRIEF.md",
+      "purpose": "Compact router brief for ChatGPT project sources"
+    },
+    {
+      "path": "Project Map/gpt/GPT_CONTEXT_PACK.md",
+      "purpose": "Generated AMK context pack for GPT"
+    },
+    {
+      "path": "Project Map/current_state.md",
+      "purpose": "Current project state snapshot"
+    },
+    {
+      "path": "Project Map/working_state.yaml",
+      "purpose": "Working state: task, workstreams, blockers"
+    },
+    {
+      "path": "Project Map/source_authority.yaml",
+      "purpose": "Source authority hierarchy"
+    },
+    {
+      "path": "Project Map/memory/index.yaml",
+      "purpose": "Memory unit index"
+    }
+  ],
+  "optional_sources": [
+    {
+      "path": "Project Map/memory/facts.yaml",
+      "purpose": "Granular current facts"
+    },
+    {
+      "path": "Project Map/memory/decisions.yaml",
+      "purpose": "Granular accepted decisions"
+    },
+    {
+      "path": "Project Map/memory/constraints.yaml",
+      "purpose": "Granular constraints"
+    },
+    {
+      "path": "Project Map/memory/risks.yaml",
+      "purpose": "Granular risks"
+    },
+    {
+      "path": "Project Map/memory/open_questions.yaml",
+      "purpose": "Open questions"
+    },
+    {
+      "path": "docs/WORKLOG.md",
+      "purpose": "Session journal (pack uses top entry only)"
+    },
+    {
+      "path": "Project Map/retrieval_policy.yaml",
+      "purpose": "Retrieval policy for agents"
+    },
+    {
+      "path": "Project Map/permissions_policy.yaml",
+      "purpose": "Permissions and side-effect policy"
+    }
+  ]
+}

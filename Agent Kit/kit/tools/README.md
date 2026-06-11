@@ -50,6 +50,31 @@ python3 Agent\ Kit/kit/tools/context_advisor_preflight.py \
 
 Use `--fast-mode`, `--large-context`, `--optional-model`, and `--optional-model-gap` to test routing warnings.
 
+## `generate_chatgpt_project_sources.py`
+
+Generates a local ChatGPT Project sources manifest, deterministic context pack, and owner TODO.
+
+- Config-driven (`CHATGPT_PROJECT_SOURCES.config.json` in the project)
+- Stdlib only; no network; no ChatGPT UI automation
+- Default minimal required sources; `--include-optional` for granular files
+- See `CHATGPT_PROJECT_SOURCES_WORKFLOW.md`
+
+Example (project):
+
+```bash
+python "Agent Kit/kit/tools/generate_chatgpt_project_sources.py" \
+  --config CHATGPT_PROJECT_SOURCES.config.json \
+  --write --check
+```
+
+Package fixture self-test:
+
+```bash
+python "Agent Kit/kit/tools/generate_chatgpt_project_sources.py" \
+  --config "Agent Kit/kit/tools/fixtures/gpt_project_sources_minimal/config.json" \
+  --write --check
+```
+
 
 ### v3.9.3 surface/mode preflight flags
 

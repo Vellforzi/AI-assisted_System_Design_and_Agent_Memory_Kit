@@ -1,0 +1,13 @@
+schema_version: "1.0"
+last_updated: "2026-06-11"
+replay_root:
+  checkpoint_id: PM-FIXTURE-001
+  kit_version: "3.9.6"
+  map_schema_version: "3.4.0"
+current_task:
+  id: TASK-FIXTURE-001
+  summary: "Fixture task for generator self-test"
+active_workstreams:
+  - id: WS-FIXTURE-001
+    status: active
+    path: Project Map/workstreams/WS-FIXTURE-001.md

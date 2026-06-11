@@ -1,0 +1,26 @@
+schema_version: 1.0.0
+entries:
+  - id: CF-001
+    class: fact_current
+    status: current
+    title: Fixture fact
+    last_verified_at: '2026-06-11'
+    source_file: facts.yaml
+  - id: DEC-001
+    class: accepted_decision
+    status: current
+    title: Fixture decision
+    last_verified_at: '2026-06-11'
+    source_file: decisions.yaml
+  - id: CN-001
+    class: constraint
+    status: current
+    title: Fixture constraint
+    last_verified_at: '2026-06-11'
+    source_file: constraints.yaml
+  - id: RK-001
+    class: risk
+    status: current
+    title: Fixture risk
+    last_verified_at: '2026-06-11'
+    source_file: risks.yaml

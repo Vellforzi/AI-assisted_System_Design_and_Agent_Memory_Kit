@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "project_root": ".",
+  "output_dir": "Project Map/gpt",
+  "operating_contract_path": "PROJECT_GPT_OPERATING_CONTRACT.md",
+  "project_brief_path": "PROJECT_AI_BRIEF.md",
+  "instructions_compact_path": "Project Map/gpt/GPT_PROJECT_INSTRUCTIONS_COMPACT.md",
+  "worklog_path": "docs/WORKLOG.md",
+  "context_pack_inputs": [
+    "Project Map/current_state.md",
+    "Project Map/working_state.yaml",
+    "Project Map/source_authority.yaml",
+    "Project Map/memory/index.yaml",
+    "docs/WORKLOG.md"
+  ],
+  "memory_index_path": "Project Map/memory/index.yaml",
+  "current_state_path": "Project Map/current_state.md",
+  "working_state_path": "Project Map/working_state.yaml",
+  "source_authority_path": "Project Map/source_authority.yaml",
+  "checkpoint_heading": "## Checkpoint",
+  "repo_routing_boundary": "Package repository holds kit source; project mirror holds integrated project files.",
+  "required_sources": [
+    {"path": "PROJECT_GPT_OPERATING_CONTRACT.md", "purpose": "GPT operating contract"},
+    {"path": "PROJECT_AI_BRIEF.md", "purpose": "Project router brief"},
+    {"path": "Project Map/gpt/GPT_CONTEXT_PACK.md", "purpose": "Generated context pack"},
+    {"path": "Project Map/current_state.md", "purpose": "Current state"},
+    {"path": "Project Map/working_state.yaml", "purpose": "Working state"},
+    {"path": "Project Map/source_authority.yaml", "purpose": "Source authority"},
+    {"path": "Project Map/memory/index.yaml", "purpose": "Memory index"}
+  ],
+  "optional_sources": []
+}

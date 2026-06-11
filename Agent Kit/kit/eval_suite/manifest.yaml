@@ -26,6 +26,8 @@ categories:
   description: Shell health gate and hard-fail transport policy for shell-dependent PASS/commit decisions.
 - id: model_setting_label_fidelity
   description: Exact owner/provider UI label usage for model/settings tuple with contradiction prevention.
+- id: gpt_project_sources
+  description: Local deterministic ChatGPT Project sources manifest workflow without UI automation.
 cases:
 - id: AMK-CA-012
   path: cases/AMK-CA-012.yaml
@@ -58,6 +60,10 @@ cases:
 - id: AMK-ML-001
   path: cases/AMK-ML-001.yaml
   category: model_setting_label_fidelity
+  severity: high
+- id: AMK-GPS-001
+  path: cases/AMK-GPS-001.yaml
+  category: gpt_project_sources
   severity: high
 version_invariants:
   required_kit_version: 3.9.6
