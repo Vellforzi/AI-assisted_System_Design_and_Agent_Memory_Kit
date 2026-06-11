@@ -1,18 +1,17 @@
 ---
-description: "Agent Memory Kit context advisor preflight for scoped Project Map and repo reads"
+description: "Agent Memory Kit context advisor preflight for scoped Project Map/repo reads and context compaction control"
 globs:
   - "**/*"
 alwaysApply: false
 ---
 
-# Context Advisor Preflight — AMK v3.9.4
+# Context Advisor Preflight — AMK v3.9.5
 
 Use this rule before answering or applying changes in the Option Profit / Agent Memory Kit workspace.
 
 ## Default mode
 
-Start read-only unless the owner explicitly requests apply mode. Questions, analysis,
-patch construction, and planning do not imply permission to edit live files.
+Start read-only unless the owner explicitly requests apply mode. Questions, analysis, patch construction, planning, and compaction discussion do not imply permission to edit live files or Project Map.
 
 ## Read order
 
@@ -26,8 +25,7 @@ patch construction, and planning do not imply permission to edit live files.
 
 ## Eval suite authority check
 
-Before using `Project Map/eval_suite` as current eval truth, compare it with
-`Agent Kit/kit/eval_suite`:
+Before using `Project Map/eval_suite` as current eval truth, compare it with `Agent Kit/kit/eval_suite`:
 
 - `suite_id` must match.
 - `kit_version` must match.
@@ -35,8 +33,7 @@ Before using `Project Map/eval_suite` as current eval truth, compare it with
 - required case schema fields must exist.
 - smoke categories must come from `eval_trigger_policy.yaml`.
 
-If parity fails, mark it as stale mirror in the answer/task plan and do not grade
-against it as authoritative current truth.
+If parity fails, mark it as stale mirror in the answer/task plan and do not grade against it as authoritative current truth.
 
 ## Live Cursor adoption check
 
@@ -45,21 +42,29 @@ When the task concerns Cursor integration, check the live target paths explicitl
 - `.cursor/rules/context_advisor_preflight.mdc`
 - `.cursor/commands/*`
 
-Do not assume the live repo adopted kit rules/commands just because they exist under
-`Agent Kit/kit/cursor_integration/`.
+Do not assume the live repo adopted kit rules/commands just because they exist under `Agent Kit/kit/cursor_integration/`.
+
+## Context compaction control
+
+When the owner asks to summarize/compact/trim/shrink context, visible context usage decreases unexpectedly, the session is long, or old tool outputs dominate context:
+
+1. Treat platform summaries and compressed chat history as non-authoritative hints.
+2. Do not use summary-only data to establish project facts, approvals, completed actions, or durable memory.
+3. Produce a `context_compaction_plan` before summarizing or compacting replay-critical project state.
+4. The plan must list `trigger`, `keep`, `drop_or_do_not_reinclude`, `evidence_refs`, `missing_evidence`, `owner_approval_required`, and `post_compaction_recovery`.
+5. Ask owner approval before agent-created summary/compact/checkpoint unless already inside an approved checkpoint/update task.
+6. Prefer clearing/excluding old re-fetchable tool outputs before whole-transcript compaction.
+7. Preserve Working State refs, source authority, accepted decisions with evidence, validation summaries, side-effect receipts, unsafe-to-repeat actions, and the next safe step.
+8. Never store secrets, full raw logs, unsupported claims, stale facts as current truth, or hidden chain-of-thought in the summary payload.
+
+The command `/amk-context-compact` is the live Cursor prompt for this workflow.
 
 ## Model escalation
 
-The user is not expected to predict model insufficiency. Start with the lowest
-sufficient route. Escalate only after reporting a concrete trigger: validation
-failure, schema/router conflict, insufficient context window, missing model control,
-repeated scoped failure, or task reclassification to audit/repair/protocol design.
+The user is not expected to predict model insufficiency. Start with the lowest sufficient route. Escalate only after reporting a concrete trigger: validation failure, schema/router conflict, insufficient context window, missing model control, repeated scoped failure, or task reclassification to audit/repair/protocol design.
 
-Provider/model capability observations must be dated and must not be treated as
-permanent project truth.
+Provider/model capability observations must be dated and must not be treated as permanent project truth.
 
 ## Safety and scope
 
-Do not copy secrets into answers. Do not push, deploy, write DB state, or update
-Project Map unless the owner explicitly asks for that apply action. Release ZIP
-artifacts must not remain in the working repo after merge.
+Do not copy secrets into answers. Do not push, deploy, write DB state, or update Project Map unless the owner explicitly asks for that apply action. Release ZIP artifacts must not remain in the working repo after merge.

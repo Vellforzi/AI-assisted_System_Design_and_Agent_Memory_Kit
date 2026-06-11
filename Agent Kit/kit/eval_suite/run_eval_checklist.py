@@ -2,7 +2,7 @@
 """
 Agent Memory Kit eval smoke checklist runner.
 
-v3.9.4 change: smoke categories are read from eval_trigger_policy.yaml.
+v3.9.5 invariant: smoke categories are read from eval_trigger_policy.yaml.
 The script must not maintain a separate hardcoded category list.
 """
 from __future__ import annotations
@@ -11,7 +11,7 @@ import argparse
 import json
 import sys
 from pathlib import Path
-from typing import Any, Dict, Iterable, List
+from typing import Any, Dict, Iterable, List, Tuple
 
 try:
     import yaml  # type: ignore
@@ -173,12 +173,7 @@ def check_suite_version(manifest: Dict[str, Any], policy: Dict[str, Any], cases:
     return errors
 
 
-def render_markdown(
-    manifest: Dict[str, Any],
-    categories: Dict[str, Dict[str, Any]],
-    selected: List[Dict[str, Any]],
-    errors: List[str],
-) -> str:
+def render_markdown(manifest: Dict[str, Any], categories: Dict[str, Dict[str, Any]], selected: List[Dict[str, Any]], errors: List[str]) -> str:
     lines: List[str] = []
     lines.append(f"# Eval smoke checklist — {manifest.get('suite_id', '<unknown suite>')} / kit {manifest.get('kit_version', '<unknown>')}")
     lines.append("")

@@ -1,71 +1,21 @@
-# Agent Memory Kit eval suite — v3.9.4
+# Agent Memory Kit eval suite — v3.9.5
 
-This directory is part of the v3.9.4 micro-patch: eval parity, live Cursor
-integration adoption, and model escalation trigger wording.
+Status: authoritative kit eval suite for v3.9.5 when located under `Agent Kit/kit/eval_suite`.
 
-## Authority rule
+Project Map mirror: `Project Map/eval_suite` is a synced mirror only when `manifest.yaml`, `eval_trigger_policy.yaml`, `run_eval_checklist.py`, and case IDs match the kit suite. If parity fails, mark the Project Map mirror as `stale_mirror` and do not grade from it as current truth.
 
-`Agent Kit/kit/eval_suite` is the canonical kit eval suite. `Project Map/eval_suite`
-is allowed to be a synced mirror only when all of the following match:
+v3.9.5 adds smoke coverage for `context_compaction_control`:
 
-- `manifest.yaml:suite_id`
-- `manifest.yaml:kit_version`
-- case ids and required schema fields
-- `eval_trigger_policy.yaml:kit_version`
-- smoke categories required by `eval_trigger_policy.yaml`
+- platform/generated summaries are non-authoritative hints;
+- agent-created summaries/compaction are owner-gated unless inside an approved checkpoint/update task;
+- controlled compaction requires an explicit keep/drop/evidence plan;
+- old re-fetchable tool outputs should be cleared or excluded from future context while replay-critical refs and side-effect receipts are retained.
 
-If any of those drift, `Project Map/eval_suite` must be marked as `stale_mirror`
-and must not be used as authoritative current grading input.
+Authoritative files:
 
-## v3.9.4 smoke categories
+- `manifest.yaml`
+- `eval_trigger_policy.yaml`
+- `run_eval_checklist.py`
+- `cases/*.yaml`
 
-Smoke categories are not hardcoded in `run_eval_checklist.py`. They are read from
-`eval_trigger_policy.yaml`.
-
-Required v3.9.4 categories:
-
-- `context_advisor`
-- `cursor_integration`
-- `eval_suite_sync`
-- `model_escalation`
-
-## Required case schema
-
-Every active case must include:
-
-- `id`
-- `suite_id`
-- `kit_version`
-- `schema_version`
-- `category`
-- `title`
-- `severity`
-- `fixture`
-- `grading`
-
-## Static smoke command
-
-```bash
-python "Project Map/eval_suite/run_eval_checklist.py" \
-  --root "Project Map/eval_suite" \
-  --format markdown
-```
-
-For JSON output:
-
-```bash
-python "Project Map/eval_suite/run_eval_checklist.py" \
-  --root "Project Map/eval_suite" \
-  --format json
-```
-
-## Stale mirror marker
-
-If Project Map is not synced to kit, set the manifest authority state to:
-
-```yaml
-authority:
-  project_map_authority_state: stale_mirror
-```
-
-and add a visible README notice that this directory is not authoritative.
+Legacy files from older eval-suite schemas must not drive smoke selection.

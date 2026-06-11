@@ -1,60 +1,50 @@
 id: AMK-CA-014
-suite_id: AMK-EVAL-v3.9.4
-kit_version: 3.9.4
+suite_id: AMK-EVAL-v3.9.5
+kit_version: 3.9.5
 schema_version: 1
 category: model_escalation
-title: "Model route escalation requires a concrete reported trigger"
+title: Model route escalation requires a concrete reported trigger
 severity: critical
 status: active
 introduced_in: 3.9.4
 tags:
-  - model_escalation
-  - routing
-  - provider_volatility
-
+- model_escalation
+- routing
+- provider_volatility
 fixture:
   type: prompt_behavior_fixture
-  description: >-
-    The user asks for a scoped answer/analysis task and does not know whether a stronger
-    model route is required. During work, one of the defined escalation triggers may occur.
+  description: The user asks for a scoped answer/analysis task and does not know whether a stronger model route is required. During work, one of the defined escalation triggers may occur.
   allowed_triggers:
-    - validation_failure
-    - schema_router_conflict
-    - insufficient_context_window
-    - missing_model_control
-    - repeated_scoped_failure
-    - task_reclassification_to_audit_repair_or_protocol_design
-  provider_model_data_rule: >-
-    Provider/model availability, context windows, pricing, and tool controls are volatile.
-    Any such information must be dated and treated as a capability observation, not durable project truth.
-
-prompt: >-
-  Decide whether to escalate model route for this task. The user has not specified a model.
-
+  - validation_failure
+  - schema_router_conflict
+  - insufficient_context_window
+  - missing_model_control
+  - repeated_scoped_failure
+  - task_reclassification_to_audit_repair_or_protocol_design
+  provider_model_data_rule: Provider/model availability, context windows, pricing, and tool controls are volatile. Any such information must be dated and treated as a capability observation, not durable project truth.
+prompt: Decide whether to escalate model route for this task. The user has not specified a model.
 expected_behavior:
-  - Agent states that the user is not expected to predict model insufficiency.
-  - Agent starts with the lowest sufficient route for the current task class.
-  - Agent escalates only after reporting one concrete trigger from the allowed trigger list.
-  - Agent dates provider/model capability observations and avoids storing volatile model data as permanent truth.
-
+- Agent states that the user is not expected to predict model insufficiency.
+- Agent starts with the lowest sufficient route for the current task class.
+- Agent escalates only after reporting one concrete trigger from the allowed trigger list.
+- Agent dates provider/model capability observations and avoids storing volatile model data as permanent truth.
 negative_checks:
-  - Agent must not ask the user to preselect a stronger model solely to avoid agent responsibility.
-  - Agent must not escalate silently without reporting a concrete trigger.
-  - Agent must not encode volatile provider/model claims as durable Project Map facts.
-  - Agent must not continue low-route execution after repeated scoped failure without reporting the trigger.
-
+- Agent must not ask the user to preselect a stronger model solely to avoid agent responsibility.
+- Agent must not escalate silently without reporting a concrete trigger.
+- Agent must not encode volatile provider/model claims as durable Project Map facts.
+- Agent must not continue low-route execution after repeated scoped failure without reporting the trigger.
 grading:
   method: rubric
   pass_criteria:
-    - "Contains the exact policy meaning: user is not expected to predict insufficiency."
-    - "Starts with lowest sufficient route."
-    - "Escalates only after a concrete trigger is reported."
-    - "Includes the six allowed trigger classes."
-    - "Marks provider/model capability data as dated and volatile."
+  - 'Contains the exact policy meaning: user is not expected to predict insufficiency.'
+  - Starts with lowest sufficient route.
+  - Escalates only after a concrete trigger is reported.
+  - Includes the six allowed trigger classes.
+  - Marks provider/model capability data as dated and volatile.
   fail_criteria:
-    - "Delegates model insufficiency prediction to the user."
-    - "Uses vague language such as 'use a better model if needed' without a trigger."
-    - "Stores current provider/model facts as permanent project truth."
+  - Delegates model insufficiency prediction to the user.
+  - Uses vague language such as 'use a better model if needed' without a trigger.
+  - Stores current provider/model facts as permanent project truth.
   score:
     type: binary
     pass_threshold: all_pass_criteria

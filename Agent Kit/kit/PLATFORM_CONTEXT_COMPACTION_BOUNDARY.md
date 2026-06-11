@@ -1,10 +1,6 @@
-# Platform Context Compaction Boundary
+# Platform Context Compaction Boundary — AMK v3.9.5
 
-Purpose: protect durable project memory from platform-generated summaries, compressed chat history, provider personalization, and hidden context reconstruction.
-
-This file exists because long chats and coding-agent sessions may be shortened by the host application. The agent may receive a summary instead of the original raw conversation. That summary can be useful as a weak hint, but it is not project truth.
-
----
+Purpose: protect durable project memory from platform-generated summaries, compressed chat history, provider personalization, hidden context reconstruction, and unmanaged context compaction.
 
 ## Core rule
 
@@ -23,18 +19,17 @@ They must never:
 - replace explicit owner approval;
 - replace opened files, tool output, diffs, test output, or other evidence artifacts.
 
-If platform summary conflicts with Project Map, Source Authority, opened project files, or current owner input, the platform summary loses.
-
----
+If a platform summary conflicts with Project Map, Source Authority, opened project files, or current owner input, the platform summary loses.
 
 ## Agent-created summaries are also gated
 
-The agent must not summarize, compact, promote, or rewrite project state unless explicitly asked by the owner or unless operating inside an approved checkpoint/update task.
+The agent must not summarize, compact, promote, or rewrite project state unless explicitly asked by the owner or operating inside an approved checkpoint/update task.
 
 Allowed without write permission:
 
 - propose a checkpoint;
 - propose a handoff;
+- propose a CompactionPlan;
 - propose a Project Map delta;
 - say that context risk exists;
 - ask the owner to start a fresh session;
@@ -48,7 +43,14 @@ Not allowed without explicit owner approval:
 - claiming that work was completed from summary alone;
 - using summary-only approval for file edits, DB writes, git actions, deploys, or external side effects.
 
----
+## Controlled compaction addition
+
+When context must be reduced, the agent must separate:
+
+- **replay-critical state**: owner task, scope, decisions, evidence refs, changed-file refs, validation summary, side-effect receipts, next safe step;
+- **re-fetchable bloat**: old file bodies, full logs, duplicate terminal output, search dumps, obsolete failed attempts.
+
+Before compaction, the agent should output a `context_compaction_plan` with keep/drop/evidence/missing-evidence fields and ask for owner approval unless the task already authorizes checkpoint/update work.
 
 ## When context compaction is suspected
 
@@ -56,6 +58,7 @@ Context compaction should be suspected when:
 
 - the chat is very long;
 - the host tool indicates that context is compressed, summarized, or truncated;
+- the visible context-token count unexpectedly decreases;
 - the agent cannot see earlier raw messages it previously referenced;
 - the agent sees a vague or platform-generated summary of prior work;
 - the next step depends on facts that are only present in chat history;
@@ -71,8 +74,6 @@ When suspected, the agent must switch to recovery behavior:
 6. Retrieve only policy-allowed memory units.
 7. Continue only from confirmed evidence.
 8. If evidence is missing, report `missing evidence` instead of reconstructing project state from chat recall.
-
----
 
 ## Fresh-session Project Map update rule
 
@@ -90,30 +91,11 @@ The owner may then start a fresh session and apply the Project Map update from:
 
 Platform summaries and compressed chat history must not be used as evidence.
 
----
-
 ## Safe chat phrase
 
-The owner can use this phrase in any chat:
-
 ```text
-Context may be compressed. Do not use platform summary as project truth. Recover from Project Map, Working State, Source Authority, and the latest approved handoff only.
+Context may be compressed. Do not use platform summary as project truth. Recover from Project Map, Working State, Source Authority, and the latest approved handoff only. If context needs shrinking, propose a CompactionPlan first.
 ```
-
----
-
-## Eval expectations
-
-The eval-suite should include checks that:
-
-- a platform summary cannot establish project facts;
-- a platform summary cannot authorize actions;
-- recovery after context compaction starts from Working State and Project Map;
-- a fresh session can apply a Project Map update from an approved handoff;
-- chat recall cannot become durable memory without promotion through the Memory Compiler.
-
-
----
 
 ## Codex PreCompact policy
 

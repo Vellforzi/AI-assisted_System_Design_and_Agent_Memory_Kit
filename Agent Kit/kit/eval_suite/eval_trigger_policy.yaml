@@ -1,82 +1,86 @@
-suite_id: AMK-EVAL-v3.9.4
-kit_version: 3.9.4
-policy_version: 3.9.4
-release_date: 2026-06-10
-label: "AMK v3.9.4 smoke trigger policy"
-
+suite_id: AMK-EVAL-v3.9.5
+kit_version: 3.9.5
+policy_version: 3.9.5
+release_date: '2026-06-10'
+label: AMK v3.9.5 smoke trigger policy
 source_of_truth:
-  policy_file: "eval_trigger_policy.yaml"
-  runner_contract: >-
-    run_eval_checklist.py must read smoke categories from this file and must not
-    maintain an independent hardcoded smoke-category list.
-
+  policy_file: eval_trigger_policy.yaml
+  runner_contract: run_eval_checklist.py must read smoke categories from this file and must not maintain an independent hardcoded smoke-category list.
 smoke_policy:
   categories:
     context_advisor:
       required: true
       min_cases: 1
-      rationale: "Context Advisor is now a live preflight surface and must be smoke-tested."
+      rationale: Context Advisor is a live preflight surface and must be smoke-tested.
     cursor_integration:
       required: true
       min_cases: 1
-      rationale: "Live .cursor rule/command adoption must be checked."
+      rationale: Live .cursor rule/command adoption must be checked.
     eval_suite_sync:
       required: true
       min_cases: 1
-      rationale: "Project Map/eval_suite must either sync to kit or be marked stale_mirror."
+      rationale: Project Map/eval_suite must either sync to kit or be marked stale_mirror.
     model_escalation:
       required: true
       min_cases: 1
-      rationale: "Model escalation must be trigger-based and not delegated to the user."
-  selection_rule: >-
-    A case is selected for smoke when case.category is present in smoke_policy.categories
-    or a case tag matches one of those categories.
-  failure_rule: >-
-    Smoke validation fails if any required category has fewer than min_cases selected cases,
-    if any selected case lacks required schema fields, or if suite_id/kit_version drift is detected.
-
+      rationale: Model escalation must be trigger-based and not delegated to the user.
+    context_compaction_control:
+      required: true
+      min_cases: 3
+      rationale: Long-running agent sessions must control compaction, summaries, and tool-output bloat without promoting summaries to project truth.
+  selection_rule: A case is selected for smoke when case.category is present in smoke_policy.categories or a case tag matches one of those categories.
+  failure_rule: Smoke validation fails if any required category has fewer than min_cases selected cases, if any selected case lacks required schema fields, or if suite_id/kit_version drift is detected.
 trigger_matrix:
   on_eval_suite_manifest_change:
     smoke_categories:
-      - eval_suite_sync
-      - context_advisor
+    - eval_suite_sync
+    - context_advisor
+    - context_compaction_control
   on_eval_trigger_policy_change:
     smoke_categories:
-      - eval_suite_sync
-      - context_advisor
-      - cursor_integration
-      - model_escalation
+    - eval_suite_sync
+    - context_advisor
+    - cursor_integration
+    - model_escalation
+    - context_compaction_control
   on_context_advisor_rule_change:
     smoke_categories:
-      - context_advisor
-      - cursor_integration
+    - context_advisor
+    - cursor_integration
+    - context_compaction_control
   on_cursor_rule_or_command_change:
     smoke_categories:
-      - cursor_integration
-      - context_advisor
+    - cursor_integration
+    - context_advisor
+    - context_compaction_control
   on_model_route_or_router_change:
     smoke_categories:
-      - model_escalation
-      - context_advisor
+    - model_escalation
+    - context_advisor
+  on_context_compaction_policy_change:
+    smoke_categories:
+    - context_compaction_control
+    - context_advisor
+    - eval_suite_sync
   on_project_map_eval_suite_change:
     smoke_categories:
-      - eval_suite_sync
-      - context_advisor
-
+    - eval_suite_sync
+    - context_advisor
+    - context_compaction_control
 adoption_policy:
   project_map_eval_suite:
     allowed_states:
-      - synced_mirror
-      - stale_mirror
+    - synced_mirror
+    - stale_mirror
     current_patch_state: synced_mirror
     stale_marker_required_when_unsynced: true
     stale_marker_fields:
-      - manifest.authority.project_map_authority_state: stale_mirror
-      - README.md stale_mirror_notice
+    - 'manifest.authority.project_map_authority_state: stale_mirror'
+    - README.md stale_mirror_notice
   live_cursor:
     required_rule_paths:
-      - ".cursor/rules/context_advisor_preflight.mdc"
+    - .cursor/rules/context_advisor_preflight.mdc
     required_command_globs:
-      - ".cursor/commands/*"
-    rule_source_path: "Agent Kit/kit/cursor_integration/rules/context_advisor_preflight.mdc"
-    command_source_path: "Agent Kit/kit/cursor_integration/commands/"
+    - .cursor/commands/*
+    rule_source_path: Agent Kit/kit/cursor_integration/rules/context_advisor_preflight.mdc
+    command_source_path: Agent Kit/kit/cursor_integration/commands/

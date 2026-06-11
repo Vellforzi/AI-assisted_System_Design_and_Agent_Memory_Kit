@@ -1,57 +1,62 @@
-suite_id: AMK-EVAL-v3.9.4
-kit_version: 3.9.4
-manifest_version: 3.9.4
-release_date: 2026-06-10
+suite_id: AMK-EVAL-v3.9.5
+kit_version: 3.9.5
+manifest_version: 3.9.5
+release_date: '2026-06-10'
 release_type: micro_patch
-label: "Agent Memory Kit v3.9.4 eval suite"
-
+label: Agent Memory Kit v3.9.5 context compaction control suite
 authority:
-  canonical_path: "Agent Kit/kit/eval_suite"
-  project_map_mirror_path: "Project Map/eval_suite"
+  canonical_path: Agent Kit/kit/eval_suite
+  project_map_mirror_path: Project Map/eval_suite
   project_map_authority_state: synced_mirror
-  stale_mirror_rule: >-
-    Project Map/eval_suite may be used as current only when its manifest suite_id,
-    kit_version, and case ids match the canonical Agent Kit/kit/eval_suite manifest.
-    If not matched, mark Project Map/eval_suite as stale_mirror and do not use it
-    as authoritative grading input.
-
-smoke_policy_path: "eval_trigger_policy.yaml"
-checklist_runner: "run_eval_checklist.py"
-
+  stale_mirror_rule: Project Map/eval_suite may be used as current only when its manifest suite_id, kit_version, and case ids match the canonical Agent Kit/kit/eval_suite manifest. If not matched, mark Project Map/eval_suite as stale_mirror and do not use it as authoritative grading input.
+smoke_policy_path: eval_trigger_policy.yaml
+checklist_runner: run_eval_checklist.py
 categories:
-  - id: context_advisor
-    description: "Context Advisor preflight/read-order behavior and stale mirror detection."
-  - id: cursor_integration
-    description: "Live Cursor rule/command adoption checks for .cursor/rules and .cursor/commands."
-  - id: eval_suite_sync
-    description: "Parity between Agent Kit/kit/eval_suite and Project Map/eval_suite mirrors."
-  - id: model_escalation
-    description: "Lowest-sufficient route and concrete escalation trigger policy."
-
+- id: context_advisor
+  description: Context Advisor preflight/read-order behavior and stale mirror detection.
+- id: cursor_integration
+  description: Live Cursor rule/command adoption checks for .cursor/rules and .cursor/commands.
+- id: eval_suite_sync
+  description: Parity between Agent Kit/kit/eval_suite and Project Map/eval_suite mirrors.
+- id: model_escalation
+  description: Lowest-sufficient route and concrete escalation trigger policy.
+- id: context_compaction_control
+  description: Owner-gated context compaction, structured summary, tool-output clearing, and recovery behavior.
 cases:
-  - id: AMK-CA-012
-    path: cases/AMK-CA-012.yaml
-    category: context_advisor
-    severity: high
-  - id: AMK-CA-013
-    path: cases/AMK-CA-013.yaml
-    category: cursor_integration
-    severity: high
-  - id: AMK-CA-014
-    path: cases/AMK-CA-014.yaml
-    category: model_escalation
-    severity: critical
-
+- id: AMK-CA-012
+  path: cases/AMK-CA-012.yaml
+  category: context_advisor
+  severity: high
+- id: AMK-CA-013
+  path: cases/AMK-CA-013.yaml
+  category: cursor_integration
+  severity: high
+- id: AMK-CA-014
+  path: cases/AMK-CA-014.yaml
+  category: model_escalation
+  severity: critical
+- id: AMK-CC-001
+  path: cases/AMK-CC-001.yaml
+  category: context_compaction_control
+  severity: critical
+- id: AMK-CC-002
+  path: cases/AMK-CC-002.yaml
+  category: context_compaction_control
+  severity: high
+- id: AMK-CC-003
+  path: cases/AMK-CC-003.yaml
+  category: context_compaction_control
+  severity: high
 version_invariants:
-  required_kit_version: 3.9.4
-  required_suite_id: AMK-EVAL-v3.9.4
+  required_kit_version: 3.9.5
+  required_suite_id: AMK-EVAL-v3.9.5
   case_schema_required_fields:
-    - id
-    - suite_id
-    - kit_version
-    - schema_version
-    - category
-    - title
-    - severity
-    - fixture
-    - grading
+  - id
+  - suite_id
+  - kit_version
+  - schema_version
+  - category
+  - title
+  - severity
+  - fixture
+  - grading

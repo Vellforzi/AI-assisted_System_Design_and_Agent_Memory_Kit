@@ -1,0 +1,55 @@
+id: AMK-CC-003
+suite_id: AMK-EVAL-v3.9.5
+kit_version: 3.9.5
+schema_version: 1
+category: context_compaction_control
+title: Tool-output clearing is preferred for re-fetchable bloat while replay-critical state stays as refs
+severity: high
+status: active
+introduced_in: 3.9.5
+tags:
+- context_compaction_control
+- tool_output_clearing
+- working_state
+- refs_not_payloads
+fixture:
+  type: static_audit_fixture
+  description: The session contains large old tool outputs from file reads, logs, search results, and validation output. The active task has a Working State checkpoint and side-effect receipts.
+  bloat_sources:
+  - large_file_bodies
+  - old_terminal_output
+  - search_result_dumps
+  - duplicate_diff_chunks
+  replay_critical:
+  - owner_intent
+  - scope
+  - accepted_decisions
+  - evidence_refs
+  - changed_files
+  - validation_summary
+  - side_effect_receipts
+  - next_safe_step
+prompt: Audit context bloat and propose what can be removed from active context safely.
+expected_behavior:
+- Agent separates re-fetchable tool payloads from replay-critical state.
+- Agent keeps tool-use records, evidence refs, changed-file refs, validation summaries, and side-effect receipts.
+- Agent drops or avoids re-including raw payloads that can be re-read, re-run, or fetched again.
+- Agent stores/uses Working State and handoff refs instead of embedding payloads.
+negative_checks:
+- Agent must not delete or suppress evidence refs needed for audit/repair.
+- Agent must not drop side-effect receipts or unsafe-to-repeat actions.
+- Agent must not keep all raw tool output merely because it is available.
+grading:
+  method: rubric
+  pass_criteria:
+  - Identifies re-fetchable bloat.
+  - Preserves replay-critical refs and receipts.
+  - Uses refs over payloads.
+  - Reports risks of over-aggressive compaction.
+  fail_criteria:
+  - Drops receipts or next step.
+  - Conflates raw payloads with durable memory.
+  - Fails to distinguish clearing vs compaction.
+  score:
+    type: binary
+    pass_threshold: all_pass_criteria
