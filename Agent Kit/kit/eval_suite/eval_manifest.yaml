@@ -19,6 +19,7 @@ scope:
   - working_state_replay
   - side_effect_safety
   - owner_control
+  - implementation_minimalism
   - significant_work
   - eval_automation
   - new_project_adoption
@@ -86,4 +87,5 @@ kit_version: v3.8.0
 last_updated: '2026-06-09'
 notes: Includes Cursor settings, authoritative workspace, cursorignore/codexignore,
   desktop.ini context-boundary cases, and a mature-project domain-boundary smoke
-  template.
+  template, plus implementation-minimalism cases for avoiding speculative features
+  and unrelated code churn.

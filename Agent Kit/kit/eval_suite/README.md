@@ -16,6 +16,7 @@ Primary categories:
 - long-task continuity;
 - side-effect safety;
 - owner-control workflow;
+- implementation minimalism;
 - significant-work handling;
 - eval automation triggers;
 - new-project adoption;

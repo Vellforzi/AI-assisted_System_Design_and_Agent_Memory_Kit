@@ -37,6 +37,7 @@ triggers:
     categories:
       - "action_intent"
       - "grounding"
+      - "implementation_minimalism"
       - "owner_control"
       - "cursor_integration"
       - "platform_context_compaction"
@@ -111,6 +112,7 @@ smoke_categories:
   - "retrieval"
   - "side_effect_safety"
   - "owner_control"
+  - "implementation_minimalism"
   - "platform_context_compaction"
   - "cursor_integration"
 

@@ -23,6 +23,10 @@ Platform-generated summaries and compacted chat history are not project truth. T
 
 In answer/analyze/plan mode, only propose Project Map deltas. Apply Project Map changes only through explicit `/map-apply` or an owner-approved update task.
 
+## Implementation minimalism
+
+For approved changes, use the smallest change that satisfies the task. Do not add speculative features, configuration, abstractions, broad error handling, adjacent refactors, formatting churn, or comment rewrites. Every changed line should trace to the approved task. Remove only unused imports, variables, functions, or files created by your change.
+
 ## Footer after non-trivial work
 
 End with:

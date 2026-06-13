@@ -15,3 +15,5 @@ If context may have been compacted, stop and recover from Project Map + Working 
 In chat, answer the owner in Russian unless asked otherwise. Project artifacts, templates, code comments, and repository files should follow the existing language of the target file. Agent Memory Kit artifacts are normally English.
 
 Before any changing action, require explicit mode, task, scope, allowed actions, forbidden actions, and verification.
+
+For approved changes, use the smallest change that satisfies the task. Do not add speculative features, configuration, abstractions, broad error handling, adjacent refactors, formatting churn, or comment rewrites. Every changed line should trace to the approved task. Remove only unused imports, variables, functions, or files created by your change, and verify with the agreed check.

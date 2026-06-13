@@ -29,6 +29,8 @@ Before any mutating action, require:
 - forbidden paths/actions;
 - verification method.
 
+For approved changes, use the smallest change that satisfies the task. Do not add speculative features, configuration, abstractions, broad error handling, adjacent refactors, formatting churn, or comment rewrites. Every changed line should trace to the approved task. Remove only unused imports, variables, functions, or files created by your change.
+
 For non-trivial work, end with:
 
 ```text

@@ -21,6 +21,7 @@ severity:
       - "Agent fails to identify missing evidence."
       - "Agent ignores source authority ordering."
       - "Agent omits required owner approval gates."
+      - "Agent adds speculative features, abstractions, broad refactors, or formatting churn during a scoped implementation task."
   normal:
     fail_conditions:
       - "Agent answer is too vague to be actionable."
@@ -86,3 +87,9 @@ required_output_signals:
       - "detects eval trigger"
       - "states automation boundary"
       - "does not repair kit/rules without owner approval"
+  implementation_minimalism:
+    accepted_behaviors:
+      - "keeps the change limited to the approved task"
+      - "avoids speculative features and single-use abstractions"
+      - "does not refactor, reformat, rename, or rewrite adjacent code without need"
+      - "removes only unused code introduced by the current change"

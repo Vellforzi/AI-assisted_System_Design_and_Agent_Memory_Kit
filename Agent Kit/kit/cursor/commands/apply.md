@@ -15,6 +15,13 @@ Before acting, verify that the owner provided:
 
 If scope is missing or ambiguous, stop and ask for clarification.
 
+During the change:
+
+- use the smallest change that satisfies the task;
+- avoid speculative features, configuration, abstractions, broad error handling, adjacent refactors, formatting churn, and comment rewrites;
+- make every changed line trace to the approved task;
+- remove only unused imports, variables, functions, or files created by the change.
+
 After work:
 
 - summarize diff;

@@ -19,4 +19,6 @@ Before any changing action, require:
 - Forbidden actions
 - Verification
 
+For approved changes, use the smallest change that satisfies the task. Do not add speculative features, configuration, abstractions, broad error handling, adjacent refactors, formatting churn, or comment rewrites. Every changed line should trace to the approved task. Remove only unused imports, variables, functions, or files created by your change.
+
 Do not perform DB writes, deploys, git push, destructive shell commands, secret reads, or Project Map writes without explicit owner approval.

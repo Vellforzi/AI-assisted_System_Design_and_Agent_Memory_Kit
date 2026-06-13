@@ -37,6 +37,16 @@ Classify each owner request before acting:
 
 If the owner asks a question, remain in `answer` or `analyze` mode.
 
+## Implementation minimalism
+
+When mutation is explicitly approved, use the smallest change that satisfies the task.
+
+- Do not add speculative features, configuration, abstractions, or broad error handling.
+- Do not refactor, reformat, rename, or rewrite adjacent code/comments unless required for the task.
+- Match the existing local style even if a different style would be preferable.
+- Remove only unused imports, variables, functions, or files created by the current change.
+- Every changed line should trace to the approved task and agreed verification.
+
 ## Forbidden without explicit owner approval
 
 - Editing files.
