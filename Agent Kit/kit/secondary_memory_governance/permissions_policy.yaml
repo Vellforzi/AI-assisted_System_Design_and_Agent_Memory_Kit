@@ -4,7 +4,7 @@
 schema_version: "1.0"
 package_profile: "secondary_memory_governance"
 project_id: "ai-stock-analyst-class"
-last_updated: "2026-06-11"
+last_updated: "2026-06-13"
 
 default_intent: "answer"
 role_profile: "single-agent-local-implementer"
@@ -48,14 +48,24 @@ intents:
     may_read_scoped_context: true
     may_write: false
     may_update_memory: false
+  implement:
+    alias_for: "apply"
+    requires_explicit_user_request: true
+    requires_scope: true
+    may_write_within_scope: true
   apply:
     requires_explicit_user_request: true
     requires_scope: true
     may_write_within_scope: true
   memory_update:
     requires_explicit_user_request_or_approved_delta: true
+    requires_evidence_refs: true
+    default_new_state: "candidate"
   external_research:
     requires_explicit_user_request_or_current_info_need: true
+    may_establish_project_fact_without_review: false
+  research:
+    alias_for: "external_research"
     may_establish_project_fact_without_review: false
 
 mutation_gates:
@@ -68,6 +78,29 @@ mutation_gates:
   database_writes: "requires separate explicit gated scope"
   broker_or_account_mutation: "requires separate explicit gated scope"
   credential_or_runtime_artifact_mutation: "requires separate explicit gated scope"
+  side_effect_receipts: "required after meaningful file, durable memory, external system, deployment, broker/account, or database mutation"
+
+read_only_prompt_rule:
+  analysis_review_or_planning: "allows read-only exploration only"
+  does_not_allow:
+    - "file writes"
+    - "durable memory writes"
+    - "database writes"
+    - "broker/account mutations"
+    - "deployments"
+    - "external side effects"
+
+side_effect_receipt_required_fields:
+  - operation
+  - actor
+  - timestamp
+  - scope
+  - files_or_resources_changed
+  - command_or_tool_used
+  - result
+  - verification
+  - rollback_or_recovery_note
+  - sensitivity
 
 policy_enforcement_labels:
   enforced: "runtime, wrapper, sandbox, permission profile, or service can technically block the action"

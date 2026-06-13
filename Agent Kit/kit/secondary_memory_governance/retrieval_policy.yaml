@@ -4,20 +4,32 @@
 schema_version: "1.0"
 package_profile: "secondary_memory_governance"
 project_id: "ai-stock-analyst-class"
-last_updated: "2026-06-11"
+last_updated: "2026-06-13"
 
 core_rule: "Retrieve the smallest evidence-bearing working set needed."
+scoring_rule: "Apply hard gates before scoring. Similarity scores never override source authority, stale suppression, scope, branch, permission, security, privacy, or owner-decision boundaries."
+scoring_policy_ref: "docs/project_map/retrieval_scoring_policy.yaml"
 project_map_mode: "secondary_memory"
 secondary_memory_rule: "Read operational source-of-truth before relying on Project Map."
 whole_repo_by_default: false
 stale_project_map_behavior: "label as stale/context; do not use as truth"
 external_research_behavior: "context only until promoted by reviewed source-of-truth update"
 
+hard_gates_before_scoring:
+  - profile
+  - allowed_memory_classes
+  - allowed_lifecycle_states
+  - branch_or_scope_boundary
+  - source_authority_boundary
+  - permission_boundary
+  - security_or_privacy_boundary
+
 session_start_entrypoints:
   - "AGENTS.md"
   - "docs/project_map/source_authority.yaml"
   - "docs/project_map/permissions_policy.yaml"
   - "docs/project_map/retrieval_policy.yaml"
+  - "docs/project_map/retrieval_scoring_policy.yaml"
   - "docs/project_map/working_state.yaml"
 
 task_type_entrypoints:
@@ -58,6 +70,36 @@ retrieval_limits:
   avoid_whole_repo_by_default: true
   read_raw_logs_only_when_in_scope: true
   do_not_read_secret_bearing_artifacts: true
+  compact_tool_outputs_by_default: true
+
+profile_status_rules:
+  answer:
+    allowed_as_truth: [current]
+    hard_exclude: [stale, superseded, rejected, archived]
+  analyze:
+    allowed_as_truth: [current, open]
+    stale_handling: "diagnostic_only_when_labeled"
+  plan:
+    allowed_as_truth: [current, open]
+    hard_exclude: [stale, superseded, rejected, archived]
+  resume:
+    mandatory_refs: [working_state, current_state, active_task_contract]
+    allowed_as_truth: [current, open]
+    hard_exclude: [stale, superseded, rejected, archived]
+  audit:
+    allow_stale_as_diagnostic: true
+    diagnostic_label_required: true
+  repair:
+    allow_stale_as_repair_input: true
+    diagnostic_label_required: true
+
+retrieval_result_requirements:
+  include_status: true
+  include_review_state: true
+  include_authority_rank: true
+  include_evidence_refs: true
+  include_freshness: true
+  include_truncation_metadata: true
 
 missing_evidence_behavior:
   answer: "say what evidence is missing and answer only within confirmed facts"

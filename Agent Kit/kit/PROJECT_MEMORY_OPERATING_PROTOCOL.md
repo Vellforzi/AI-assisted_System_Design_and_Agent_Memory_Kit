@@ -75,17 +75,22 @@ Before a substantive project answer:
    - `Project Map/source_authority.yaml`
    - `Project Map/permissions_policy.yaml`
    - `Project Map/retrieval_policy.yaml`
+   - `Project Map/retrieval_scoring_policy.yaml`
 3. Load operational entrypoints first:
    - `Project Map/current_state.md`
    - `Project Map/working_state.yaml`
    - active `Project Map/tasks/TASK-xxxx.yaml` if known
    - active workstream file if known.
 4. Use the memory index to find relevant long-term units.
-5. Load only the memory cards needed for the task.
-6. Escalate to raw sources only when proof, conflict resolution, audit, repair, or exact quotation requires it.
-7. Narrow the answer to the current task.
+5. Apply hard gates before scoring: profile, allowed classes, lifecycle states, branch/scope, source authority, permissions, security/privacy, and owner decisions.
+6. Score and select only after the gates pass.
+7. Load only the memory cards needed for the task.
+8. Escalate to raw sources only when proof, conflict resolution, audit, repair, or exact quotation requires it.
+9. Narrow the answer to the current task.
 
 Do not read the whole repository, whole Drive, whole Project Map, or whole chat by default.
+
+A high similarity score, entity match, or embedding result is never source authority. It may help choose among already-allowed candidates, but it must not bypass stale suppression, source authority, scope, branch, permissions, privacy, or explicit owner decisions.
 
 ---
 
@@ -213,6 +218,17 @@ Recommended fields:
 - `source_authority`
 - `retrieval_tags`
 
+Candidate-first rule:
+
+- new durable memory starts as `candidate` or `staged` unless an explicit reviewed promotion rule applies;
+- old facts are not silently overwritten;
+- stale, superseded, rejected, and archived records are not current truth in `answer`, `plan`, or `resume`;
+- `audit` and `repair` may use stale records only with a diagnostic label.
+
+Episodic memory is evidence and replay material, not current truth. Promotion from an episode into a durable fact, decision, constraint, or lesson requires evidence and review.
+
+Tool-use lessons are candidate lessons, not project facts. Store them when a tool failure, owner correction, test failure, or eval failure is reusable and evidence-backed.
+
 ---
 
 ## 11. Source authority
@@ -245,6 +261,24 @@ A stale fact is not deleted. It is preserved for:
 - explaining why a prior decision changed.
 
 But it must not be used as current project truth in `answer`, `analyze`, `plan`, or `resume` profiles unless explicitly labeled as stale.
+
+If a stale note conflicts with an operational source-of-truth document, the operational source wins. The agent should report the drift and propose a memory repair instead of following the stale note.
+
+### Tool-output compaction
+
+Long tool outputs must not be copied into always-loaded memory. Store a compact reference with:
+
+- ID and timestamp;
+- source tool and sanitized command or operation;
+- scope;
+- retained full-output reference, if any;
+- short excerpt summary and relevant ranges;
+- byte count;
+- retention policy;
+- sensitivity;
+- linked task.
+
+Raw output is not current truth. Durable memory should store only sanitized excerpts, never secrets, tokens, private account IDs, raw broker/account payloads, or raw private user data.
 
 ---
 

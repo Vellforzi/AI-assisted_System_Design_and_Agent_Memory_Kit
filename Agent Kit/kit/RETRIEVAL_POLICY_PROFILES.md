@@ -15,14 +15,36 @@ Default order:
 2. Action Intent Contract and Permissions Policy;
 3. Source Authority;
 4. Retrieval Policy;
-5. Working State;
-6. current state;
-7. active task contract;
-8. active workstream;
-9. memory index;
-10. relevant memory cards;
-11. project files or tool outputs if in scope;
-12. raw sources only when required.
+5. Retrieval Scoring Policy if available;
+6. Working State;
+7. current state;
+8. active task contract;
+9. active workstream;
+10. memory index;
+11. hard gates before scoring;
+12. relevant memory cards;
+13. project files or tool outputs if in scope;
+14. raw sources only when required.
+
+Hard gates run before relevance scoring:
+
+```text
+profile
+-> allowed memory classes
+-> allowed lifecycle states
+-> branch/scope boundary
+-> source authority boundary
+-> permission boundary
+-> security/privacy boundary
+-> scoring
+-> dynamic top-k
+-> compact context bundle
+```
+
+A high score must not bypass source authority, stale suppression, branch or
+project scope, permissions, privacy, security rules, or explicit owner decisions.
+Retrieval results should include lifecycle status, review state, authority,
+evidence refs, freshness, and truncation metadata.
 
 ---
 

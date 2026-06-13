@@ -73,6 +73,18 @@ classes:
     purpose: "Record of completed external action to prevent duplicate side effects."
     allowed_statuses: [completed, failed, void]
     default_retrieval_profiles: [resume, recover, audit, repair]
+  tool_output_reference:
+    purpose: "Compact sanitized reference to long raw tool output; evidence only, not current truth."
+    allowed_statuses: [current, archived]
+    default_retrieval_profiles: [audit, repair, recover]
+  episodic_event:
+    purpose: "Replay or audit event with evidence; not current project truth by itself."
+    allowed_statuses: [raw_observation, candidate, archived]
+    default_retrieval_profiles: [recover, audit, repair]
+  tool_use_lesson:
+    purpose: "Reusable lesson from a tool failure, owner correction, test failure, or eval failure."
+    allowed_statuses: [candidate, verified, rejected, archived]
+    default_retrieval_profiles: [plan, resume, recover, audit, repair]
   checkpoint_note:
     purpose: "Compact note that meaningful work reached a safe continuation point."
     allowed_statuses: [current, superseded, archived]
@@ -108,6 +120,9 @@ project_map_artifacts:
   retrieval_policy:
     path: "Project Map/retrieval_policy.yaml"
     purpose: "Machine-readable retrieval profile rules."
+  retrieval_scoring_policy:
+    path: "Project Map/retrieval_scoring_policy.yaml"
+    purpose: "Machine-readable post-gate scoring signals and profile thresholds."
   task_contract:
     path_pattern: "Project Map/tasks/TASK-xxxx.yaml"
     purpose: "Goal, scope, permissions, evidence, done definition, and verification recipe for longer tasks."
@@ -129,17 +144,34 @@ project_map_artifacts:
   eval_runs:
     path: "Project Map/eval_runs/"
     purpose: "Results and failure traces from manual or automated eval runs."
+  candidate_memory_inbox:
+    path: "Project Map/memory/inbox/candidate_memory.yaml"
+    purpose: "Owner-reviewable proposed memory updates; not current truth."
+  episodic_event_schema:
+    path: "Project Map/memory/episodic_event_schema.yaml"
+    purpose: "Schema for replay/audit events that are evidence, not current truth."
+  raw_tool_outputs_index:
+    path: "Project Map/memory/raw_sources/tool_outputs/index.yaml"
+    purpose: "Compact references to raw tool outputs with sensitivity and retention metadata."
+  memory_quality_review_bar:
+    path: "Project Map/memory_quality_review_bar.md"
+    purpose: "Manual approval bar for memory, retrieval, permission, and governance changes."
   agent_instruction_entrypoint:
     path_pattern: "AGENTS.md | .cursor/rules/*.mdc | CLAUDE.md | equivalent"
     purpose: "Short runtime router to Project Map and safety gates."
 
 statuses:
+  raw_observation: "Observed but not normalized or reviewed."
+  staged: "Prepared for review or promotion, not current truth."
   current: "Valid as current project truth."
   stale: "Not valid as current truth; may be useful for audit or repair."
   superseded: "Replaced by another memory unit."
   rejected: "Explicitly rejected."
   archived: "Kept for history; not normally retrieved."
   candidate: "Captured but not verified."
+  verified: "Checked against valid evidence; may still need a current status depending on class."
+  reusable: "Reusable as context or procedure, not automatically project truth."
+  promoted: "Promoted from candidate or proposal into a durable target."
   open: "Needs answer or owner decision."
   answered: "Resolved."
   mitigated: "Risk is no longer active or has a mitigation."
@@ -165,11 +197,14 @@ evidence_kinds:
   - owner_statement
   - project_file
   - tool_output
+  - tool_output_ref
   - database_read
   - log
   - screenshot
   - external_source
   - memory_ref
+  - side_effect_receipt
+  - eval_result
   - inference
 
 intent_classes:
@@ -179,7 +214,10 @@ intent_classes:
   - retrieve_context
   - stage
   - apply
+  - implement
+  - memory_update
   - external_research
+  - research
 
 permission_modes:
   - explain-only

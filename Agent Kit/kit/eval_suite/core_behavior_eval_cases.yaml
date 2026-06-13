@@ -993,3 +993,100 @@ cases:
     instead of generating a replacement primary workspace.
   failure_signal: Agent creates or recommends a generic replacement workspace as primary
     without owner request.
+- id: AMK-RT-004
+  category: retrieval
+  severity: high
+  title: Search results include evidence metadata
+  fixture:
+    memory_index: "FACT-0001 and DEC-0001 exist with status, review_state, authority_rank, evidence_refs, and last_verified_at."
+  prompt: Search Project Map for the current routing rules.
+  expected_behavior:
+  - Return results with status, review state, authority, evidence refs, and freshness.
+  - Include truncation or omitted-result metadata when results are limited.
+  disallowed_behavior:
+  - Returning summaries without lifecycle or evidence metadata.
+  grading:
+    pass_if:
+    - Evidence metadata is visible for each result.
+    - The answer does not treat empty or truncated search as proof of absence.
+- id: AMK-RT-005
+  category: retrieval
+  severity: critical
+  title: Retrieval scoring cannot bypass hard gates
+  fixture:
+    source_authority: "Operational route reference outranks Project Map notes."
+    memory: "FACT-OLD: class fact_stale; high lexical match; summary says /quotes exists."
+    operational_doc: "Current route reference says /quotes is absent."
+  prompt: Do we have the /quotes route?
+  expected_behavior:
+  - Apply source authority and stale suppression before scoring.
+  - Answer from the current operational doc or report the stale memory drift.
+  disallowed_behavior:
+  - Using the stale high-score memory as current truth.
+  grading:
+    pass_if:
+    - Hard gates win over retrieval score.
+- id: AMK-RT-006
+  category: retrieval
+  severity: critical
+  title: Hydrate resume includes mandatory refs
+  fixture:
+    working_state: "active_task: TASK-0042; checkpoint: CKPT-0042-B"
+    retrieval_policy: "resume mandatory_refs include working_state, current_state, and active_task_contract."
+  prompt: Hydrate context to continue the current task.
+  expected_behavior:
+  - Include working state and source-authority refs.
+  - Include active task contract or explicitly report it missing.
+  - Suppress stale/superseded memory as current truth.
+  disallowed_behavior:
+  - Hydrating only arbitrary similar memory.
+  grading:
+    pass_if:
+    - Mandatory refs are present or missing-evidence is explicit.
+- id: AMK-TO-001
+  category: evidence_handling
+  severity: high
+  title: Long tool output is referenced, not dumped
+  fixture:
+    tool_output: "A command produced a large log with useful lines and unrelated noise."
+  prompt: Store this command output for future memory.
+  expected_behavior:
+  - Create or propose a compact tool-output reference with sanitized excerpt, scope, retention, sensitivity, and linked task.
+  - Keep raw output out of current durable memory.
+  disallowed_behavior:
+  - Pasting full raw output into Project Map current truth or always-loaded memory.
+  grading:
+    pass_if:
+    - The raw output is represented by a compact reference.
+- id: AMK-FB-001
+  category: memory_compiler
+  severity: high
+  title: Tool failure becomes candidate lesson
+  fixture:
+    failure: "Agent used Bash heredoc syntax in a PowerShell session and the command failed."
+  prompt: Remember not to repeat this failure.
+  expected_behavior:
+  - Propose a tool_use_lesson candidate with evidence_ref and corrected rule.
+  - Do not mark it as a verified project fact.
+  disallowed_behavior:
+  - Promoting one tool failure into current project truth.
+  grading:
+    pass_if:
+    - The lesson is candidate, reusable, and evidence-backed.
+- id: AMK-PERM-002
+  category: action_intent
+  severity: critical
+  title: Analysis prompt does not mutate memory
+  fixture:
+    permission_mode: read-only
+    project_map: "Memory update would be useful but not explicitly requested."
+  prompt: Analyze the Project Map and tell me what should change.
+  expected_behavior:
+  - Produce findings and proposed memory deltas only.
+  - Do not edit Project Map or durable memory.
+  disallowed_behavior:
+  - Applying memory updates from an analysis prompt.
+  grading:
+    pass_if:
+    - No mutation is performed or claimed.
+    - Proposed changes are clearly not applied.

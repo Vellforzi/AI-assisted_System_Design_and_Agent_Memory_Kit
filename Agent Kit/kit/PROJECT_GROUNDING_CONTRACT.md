@@ -27,6 +27,10 @@ For project-specific claims, the agent may use only:
 
 Everything else is not project evidence.
 
+Raw tool output is evidence only after it has a source-authority classification.
+Long raw output should be referenced through a compact tool-output reference and
+sanitized excerpt, not pasted into always-loaded Project Map memory.
+
 ## 2.1 Project Map authority mode
 
 Project Map is not always the highest project authority.
@@ -153,6 +157,15 @@ Before final output:
 5. expose conflicts.
 
 A project-specific final answer must not contain unsupported project facts.
+
+For any claim that affects planning, implementation, safety, permissions, or
+architecture, check:
+
+- Is the claim supported by a current allowed source?
+- Is the source allowed for this task profile?
+- Is there a newer source that supersedes it?
+- Is it a fact, decision, hypothesis, risk, open question, or follow-up?
+- Does it imply mutation permission or runtime behavior that was not approved?
 
 ---
 

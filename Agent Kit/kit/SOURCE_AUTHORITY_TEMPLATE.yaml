@@ -6,6 +6,7 @@ project_id: "<project-id>"
 last_updated: "<YYYY-MM-DD>"
 
 core_rule: "Project-specific claims must be grounded in valid project evidence. Generic model knowledge is not project evidence."
+claim_evidence_rule: "Every project claim that affects planning, implementation, safety, permissions, or architecture must have an evidence reference."
 
 project_map_mode: "authority" # authority | secondary_memory | absent
 project_map_rule: "If project_map_mode is secondary_memory, Project Map summarizes and navigates; operational docs, specs, tests, code, issues, and current owner instructions remain authoritative."
@@ -45,6 +46,15 @@ authority_order:
     id: prior_chat_uncaptured
     description: "Prior chat not captured into Project Map; not authoritative by itself."
 
+non_authoritative_by_default:
+  - "model guesses"
+  - "raw chat history"
+  - "provider memory"
+  - "external research"
+  - "stale Project Map notes"
+  - "unreviewed candidate memory"
+  - "raw tool output without source authority classification"
+
 conflict_resolution:
   default_rule: "prefer_higher_authority_then_newer_verified"
   project_map_secondary_rule: "If Project Map conflicts with operational_truth_roots, operational truth wins and the drift must be reported."
@@ -61,3 +71,12 @@ promotion_rules:
   external_research_to_project_fact: "requires owner approval or direct project evidence"
   hypothesis_to_fact_current: "requires valid evidence and verified/owner_approved review_state"
   stale_to_current: "requires re-verification"
+  raw_tool_output_to_project_fact: "requires compact reference, source authority classification, and review"
+  candidate_memory_to_current: "requires evidence and verified or owner-approved review state"
+
+claim_check_questions:
+  - "Is the claim supported by a current allowed source?"
+  - "Is the source allowed for this task profile?"
+  - "Is there a newer source that supersedes this claim?"
+  - "Is the statement a fact, decision, hypothesis, risk, open question, or follow-up?"
+  - "Does the statement imply mutation permission or runtime behavior that was not approved?"

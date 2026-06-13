@@ -79,6 +79,7 @@ Evals do not run automatically unless the owner wires them to a script, CI job, 
 | `SOURCE_AUTHORITY_TEMPLATE.yaml` | Machine-readable source authority template. |
 | `PERMISSIONS_POLICY_TEMPLATE.yaml` | Machine-readable permission and action-intent policy template. |
 | `RETRIEVAL_POLICY_TEMPLATE.yaml` | Machine-readable retrieval profile template. |
+| `RETRIEVAL_SCORING_POLICY_TEMPLATE.yaml` | Machine-readable hard-gated retrieval scoring template. |
 | `TASK_CONTRACT_TEMPLATE.yaml` | Long-task contract template. |
 | `CLAIM_LEDGER_TEMPLATE.yaml` | Claim support and final-answer gate template. |
 | `HANDOFF_TEMPLATE.yaml` | Clean-slate handoff packet template. |
@@ -166,6 +167,8 @@ start from operational docs plus:
 2. `docs/project_map/source_authority.yaml`
 3. `docs/project_map/permissions_policy.yaml`
 4. `docs/project_map/retrieval_policy.yaml`
+5. `docs/project_map/retrieval_scoring_policy.yaml`
+6. `docs/project_map/memory_lifecycle_policy.yaml`
 
 Use the fuller flow below only when the project has explicitly adopted a full
 Project Map, task, handoff, or durable-memory profile:

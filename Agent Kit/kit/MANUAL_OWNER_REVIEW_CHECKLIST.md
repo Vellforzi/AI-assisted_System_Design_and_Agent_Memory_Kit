@@ -69,6 +69,9 @@ Check memory updates.
 - Are unresolved items stored as open questions?
 - Are confidence and last_verified_at fields present where useful?
 - Did the agent propose memory updates instead of silently writing them when write intent was absent?
+- Did new durable memory start as candidate or staged unless promotion was explicitly evidenced or owner-approved?
+- Did tool-use lessons stay candidate lessons instead of becoming project facts?
+- Did episodic events remain evidence/replay material rather than current truth?
 
 ---
 
@@ -141,4 +144,39 @@ After changing the kit, Project Map, agent instruction files, model, or client s
 - add a new eval case when a real project failure repeats.
 
 Manual review should focus on project-specific nuance. Eval cases should catch regressions that are easy to forget.
+
+---
+
+## 11. Memory-quality approval bar
+
+Do not approve a memory, rule, schema, retrieval, or permission change if it:
+
+- weakens source authority;
+- allows stale memory to become current truth in normal answer, plan, or resume profiles;
+- stores external research as a project fact without evidence and promotion;
+- broadens apply or mutation permission through vague wording;
+- adds a memory class without lifecycle or status rules;
+- increases always-loaded context instead of using index, search, or hydration;
+- duplicates operational docs into Project Map as competing truth;
+- adds silent durable auto-capture;
+- omits evidence refs for material claims;
+- stores secrets, raw private data, raw broker/account payloads, or tokens;
+- treats embeddings, similarity score, or entity links as source of truth.
+
+Expected review output:
+
+```text
+Findings:
+- Critical:
+- High:
+- Medium:
+Source authority impact:
+Retrieval impact:
+Lifecycle/staleness impact:
+Permission/action-intent impact:
+Evidence/claim-check impact:
+Eval trigger:
+Required repair:
+Approval decision:
+```
 

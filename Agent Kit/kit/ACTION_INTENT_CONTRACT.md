@@ -42,7 +42,10 @@ Example: if the owner says "apply mode is available" but asks "Is this safe?", t
 | `retrieve_context` | Read or summarize specified memory/files | Read-only context summary | Mutation, durable memory writes |
 | `stage` | Draft or propose changes without applying | Patch/spec/draft/candidate memory | Writing to project state unless separately approved |
 | `apply` | Explicit write/edit/update/apply instruction with target and scope | Mutating action inside the approved scope | Scope expansion, irreversible actions without separate approval |
+| `implement` | Explicit implementation request with target and scope | Same as `apply`; mutating action inside approved scope | Durable memory updates unless separately scoped |
+| `memory_update` | Explicit request to update durable memory or Project Map | Candidate/staged memory update or approved promotion | Product/runtime changes, unscoped promotion |
 | `external_research` | Explicit request or pre-approved research need | Retrieved external facts with citations/source notes | Using external research as project truth |
+| `research` | External research request | Same as `external_research` | Using research as project truth without promotion |
 
 When intent is ambiguous, choose the less capable intent.
 
@@ -148,6 +151,10 @@ Durable memory write requires one of:
 - owner approves a proposed memory delta.
 
 Without explicit memory-write intent, the agent may propose a memory delta, but must not apply it.
+
+New durable memory should start as `candidate` or `staged` unless the request
+explicitly includes promotion and the evidence/source-authority rules are met.
+Implementation intent does not automatically grant memory-update intent.
 
 ---
 

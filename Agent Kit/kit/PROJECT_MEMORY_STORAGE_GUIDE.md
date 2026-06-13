@@ -62,6 +62,7 @@ Project Map/
   source_authority.yaml
   permissions_policy.yaml
   retrieval_policy.yaml
+  retrieval_scoring_policy.yaml
   claim_ledger.yaml
 
   eval_suite/
@@ -89,19 +90,22 @@ Project Map/
 
   memory/
     index.yaml
+    entities.yaml
     decisions.yaml
     facts.yaml
     constraints.yaml
     risks.yaml
     open_questions.yaml
+    tool_use_lessons.yaml
+    episodic_event_schema.yaml
+    episodes/
+      2026-06-08.jsonl
     cards/
       DEC-0001.yaml
       FACT-0001.yaml
 
-  inbox/
-    owner_requests.md
-    raw_observations.md
-    candidate_memory.yaml
+    inbox/
+      candidate_memory.yaml
 
   session_notes/
     2026-06-08-session.md
@@ -112,6 +116,7 @@ Project Map/
     screenshots/
     files/
     tool_outputs/
+      index.yaml
 
   side_effects/
     receipts.yaml
@@ -178,6 +183,10 @@ Machine-readable permission and intent policy. Use `PERMISSIONS_POLICY_TEMPLATE.
 ### `retrieval_policy.yaml`
 
 Machine-readable profile rules for context hydration. Use `RETRIEVAL_POLICY_TEMPLATE.yaml` as a starter.
+
+### `retrieval_scoring_policy.yaml`
+
+Machine-readable relevance scoring rules. Hard gates must run before scoring, and scores must not override source authority, stale suppression, scope, branch, permission, privacy, or owner-decision boundaries. Use `RETRIEVAL_SCORING_POLICY_TEMPLATE.yaml` as a starter.
 
 ### `claim_ledger.yaml`
 
@@ -247,6 +256,9 @@ Recommended memory classes:
 | `research_output` | External research note, not automatically project truth. |
 | `procedure` | Reusable project workflow. |
 | `side_effect_receipt` | Record of external action already taken. |
+| `tool_output_reference` | Compact reference to long raw tool output; evidence only. |
+| `episodic_event` | Replay or audit event; not current truth by itself. |
+| `tool_use_lesson` | Candidate reusable lesson from tool, test, owner, or eval feedback. |
 | `eval_case` | Reusable behavior test for the agent/memory system. |
 | `eval_result` | Outcome of a specific test run. |
 | `eval_trace` | Short failure trace used to diagnose an eval regression. |
@@ -325,6 +337,10 @@ Keep raw sources when they are needed for:
 
 Do not put raw source dumps into normal answer context unless required.
 
+Long tool outputs should be stored as compact references, not pasted into always-loaded memory. A tool-output reference should include an ID, timestamp, tool or command, scope, sanitized excerpt, full output reference if retained, byte count, retention policy, sensitivity, and linked task.
+
+Do not store secrets, tokens, private account IDs, raw broker payloads, or raw private user data. If output is sensitive, store only a digest or summary and state the limitation.
+
 ---
 
 ## 10. Stale and superseded memory
@@ -332,6 +348,10 @@ Do not put raw source dumps into normal answer context unless required.
 When a new fact replaces an old fact, do not delete the old fact. Mark it as stale or superseded and link both units.
 
 Stale memory can be useful for audit and repair, but it must not appear as current truth in normal answer context.
+
+New durable memory should normally enter as `candidate` or `staged`. Promote it to `current` only after evidence, source-authority classification, and verified or owner-approved review state.
+
+Episodic memory is replay and audit material. It can support promotion, but it does not directly define project behavior.
 
 ---
 

@@ -38,8 +38,12 @@ Package purpose: portable starter guide and memory operating layer for using AI 
 - `Agent Kit/kit/secondary_memory_governance/source_authority.yaml` - source authority policy where Project Map is secondary memory and operational docs win.
 - `Agent Kit/kit/secondary_memory_governance/permissions_policy.yaml` - action-intent, scoped read-only exploration, mutation gates, and enforcement labels.
 - `Agent Kit/kit/secondary_memory_governance/retrieval_policy.yaml` - smallest evidence-bearing retrieval policy for secondary memory.
+- `Agent Kit/kit/secondary_memory_governance/retrieval_scoring_policy.yaml` - hard-gated retrieval scoring policy for secondary memory.
+- `Agent Kit/kit/secondary_memory_governance/memory_lifecycle_policy.yaml` - candidate-first lifecycle, stale suppression, episodic event, and tool-use lesson rules.
+- `Agent Kit/kit/secondary_memory_governance/tool_output_reference_template.yaml` - compact reference template for long tool outputs.
 - `Agent Kit/kit/secondary_memory_governance/working_state.yaml` - compact replay root for fresh sessions.
 - `Agent Kit/kit/secondary_memory_governance/manual_smoke_cases.yaml` - manual domain-boundary smoke cases for ai-stock-analyst-class projects.
+- `Agent Kit/kit/secondary_memory_governance/memory_quality_review_bar.md` - review bar for memory, retrieval, permission, and governance changes.
 - `Agent Kit/kit/secondary_memory_governance/.codexignore_TEMPLATE` - Codex context-hygiene template, not a security boundary.
 - `Agent Kit/kit/secondary_memory_governance/.cursorignore_TEMPLATE` - optional Cursor context-hygiene template, not a security boundary.
 - `Agent Kit/kit/secondary_memory_governance/AGENTS_SNIPPET.md` - short snippet for existing project-specific `AGENTS.md`.
@@ -51,6 +55,7 @@ Package purpose: portable starter guide and memory operating layer for using AI 
 - `Agent Kit/kit/SOURCE_AUTHORITY_TEMPLATE.yaml` — source-authority template.
 - `Agent Kit/kit/PERMISSIONS_POLICY_TEMPLATE.yaml` — permissions and action-intent template.
 - `Agent Kit/kit/RETRIEVAL_POLICY_TEMPLATE.yaml` — retrieval policy template.
+- `Agent Kit/kit/RETRIEVAL_SCORING_POLICY_TEMPLATE.yaml` — retrieval scoring policy template with hard gates before scoring.
 - `Agent Kit/kit/TASK_CONTRACT_TEMPLATE.yaml` — long-running task contract template.
 - `Agent Kit/kit/CLAIM_LEDGER_TEMPLATE.yaml` — claim-ledger and final-answer gate template.
 - `Agent Kit/kit/HANDOFF_TEMPLATE.yaml` — clean-slate handoff packet template.

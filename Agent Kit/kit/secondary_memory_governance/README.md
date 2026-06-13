@@ -25,7 +25,11 @@ docs/project_map/
   source_authority.yaml
   permissions_policy.yaml
   retrieval_policy.yaml
+  retrieval_scoring_policy.yaml
+  memory_lifecycle_policy.yaml
+  tool_output_reference_template.yaml
   working_state.yaml
+  memory_quality_review_bar.md
   eval_suite/
     manual_smoke_cases.yaml
 
@@ -70,12 +74,39 @@ replacement AGENTS.md
 - prevents whole-repo loading by default;
 - labels stale Project Map content as context, not truth.
 
+`retrieval_scoring_policy.yaml`
+
+- requires hard gates before scoring;
+- prevents similarity or entity matches from overriding source authority;
+- requires result metadata such as status, evidence refs, authority, freshness,
+  and truncation state.
+
+`memory_lifecycle_policy.yaml`
+
+- defines candidate-first durable memory lifecycle rules;
+- blocks stale, superseded, rejected, and archived records from normal current
+  truth profiles;
+- defines candidate inbox, episodic event, and tool-use lesson rules.
+
+`tool_output_reference_template.yaml`
+
+- stores compact references to long tool outputs;
+- keeps raw output out of always-loaded memory;
+- requires sensitivity and retention metadata.
+
 `working_state.yaml`
 
 - gives fresh sessions a compact replay root;
 - points to current operational entrypoints;
 - records drift markers;
 - must not become a planning document.
+
+`memory_quality_review_bar.md`
+
+- gives reviewers a strict bar for memory, retrieval, permission, and governance
+  changes;
+- prevents silent auto-capture, weak source authority, stale truth leakage, and
+  evidence-free project claims.
 
 `manual_smoke_cases.yaml`
 
@@ -111,9 +142,11 @@ Before answering:
 
 1. Classify intent.
 2. Identify source authority.
-3. Retrieve the smallest evidence-bearing working set.
-4. Label missing, stale, or conflicting evidence.
-5. Avoid unsupported project claims.
+3. Apply retrieval hard gates before scoring.
+4. Retrieve the smallest evidence-bearing working set.
+5. Label missing, stale, or conflicting evidence.
+6. Claim-check material project assertions.
+7. Avoid unsupported project claims.
 
 Before editing:
 
@@ -126,6 +159,10 @@ Before editing:
 After significant work, the agent may propose a Project Map delta, working-state
 update, smoke case, or source-authority repair note. It must not apply those
 memory or governance updates unless the task explicitly includes them.
+
+For memory proposals, use candidate-first behavior. Do not silently promote a
+tool result, chat fragment, external research note, or model inference into
+current durable memory.
 
 ## ai-stock-analyst-Class Defaults
 

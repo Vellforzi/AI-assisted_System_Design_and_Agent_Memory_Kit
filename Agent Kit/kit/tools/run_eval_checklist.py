@@ -39,13 +39,13 @@ def _load_with_yaml(path: Path) -> List[Dict[str, Any]] | None:
 
 
 def _extract_block_value(block: str, key: str) -> str:
-    m = re.search(rf"^\s{{4}}{re.escape(key)}:\s*\"?(.*?)\"?\s*$", block, re.M)
+    m = re.search(rf"^\s*(?:-\s*)?{re.escape(key)}:\s*\"?(.*?)\"?\s*$", block, re.M)
     return m.group(1).strip() if m else ""
 
 
 def _fallback_parse(path: Path) -> List[Dict[str, Any]]:
     text = path.read_text(encoding="utf-8")
-    starts = [m.start() for m in re.finditer(r"^\s{2}- id:\s*", text, flags=re.M)]
+    starts = [m.start() for m in re.finditer(r"^\s*- id:\s*", text, flags=re.M)]
     cases: List[Dict[str, Any]] = []
     for i, start in enumerate(starts):
         end = starts[i + 1] if i + 1 < len(starts) else len(text)

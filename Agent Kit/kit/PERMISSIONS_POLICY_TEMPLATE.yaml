@@ -53,6 +53,12 @@ intent_policy:
     may_execute_commands: false
     may_call_external_services: false
     may_update_memory: false
+  implement:
+    alias_for: "apply"
+    default_allowed: false
+    requires_explicit_request: true
+    requires_explicit_scope: true
+    may_write: true
   retrieve_context:
     default_allowed: false
     requires_explicit_scope: true
@@ -66,9 +72,18 @@ intent_policy:
     requires_explicit_request: true
     requires_explicit_scope: true
     may_write: true
+  memory_update:
+    default_allowed: false
+    requires_explicit_request_or_approved_delta: true
+    requires_evidence_refs: true
+    default_new_state: "candidate"
+    may_write_project_map: true
   external_research:
     default_allowed: false
     requires_explicit_request_or_task_contract: true
+    may_establish_project_facts: false
+  research:
+    alias_for: "external_research"
     may_establish_project_facts: false
 
 permission_modes:
@@ -114,6 +129,16 @@ mutation_requirements:
   previous_permission_carries_intent: false
   action_after_plan_requires_separate_apply: true
 
+read_only_prompt_rule:
+  analysis_review_or_planning: "allows read-only exploration only"
+  does_not_allow:
+    - "file writes"
+    - "durable memory writes"
+    - "database writes"
+    - "external service mutations"
+    - "deployments"
+    - "commit or push"
+
 external_research:
   allowed_for:
     - libraries
@@ -133,6 +158,17 @@ side_effects:
   require_owner_approval: true
   require_idempotency_key_when_possible: true
   require_receipt_after_completion: true
+  receipt_required_fields:
+    - operation
+    - actor
+    - timestamp
+    - scope
+    - files_or_resources_changed
+    - command_or_tool_used
+    - result
+    - verification
+    - rollback_or_recovery_note
+    - sensitivity
   forbidden_without_separate_confirmation:
     - delete
     - deploy

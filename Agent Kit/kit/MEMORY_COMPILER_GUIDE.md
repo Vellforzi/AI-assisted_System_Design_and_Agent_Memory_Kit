@@ -32,6 +32,8 @@ During the active task, capture only compact notes:
 - blockers;
 - side-effect receipts;
 - candidate memory;
+- compact tool-output references;
+- episodic events marked as not current truth;
 - links to evidence.
 
 Do not try to perfectly consolidate everything while executing the task.
@@ -68,6 +70,8 @@ Do not promote:
 - unsupported assumptions;
 - generic advice;
 - raw research as project fact;
+- raw tool output as project truth;
+- episodic events as current behavior;
 - temporary task chatter;
 - secrets or credentials;
 - model guesses.
@@ -81,6 +85,7 @@ candidates:
   - id: CAND-0001
     captured_at: "2026-06-08T12:00:00Z"
     proposed_class: accepted_decision
+    lifecycle_state: candidate
     scope: project.memory
     title: "Use Project Map as source of project truth"
     summary: "The owner wants project-specific answers to be grounded in Project Map and project evidence, not model memory."
@@ -90,6 +95,11 @@ candidates:
     evidence:
       - kind: owner_statement
         ref: "current chat"
+    source_authority_level: owner_current_instruction
+    sensitivity: normal
+    reason_for_capture: "Owner decision affects future agent behavior."
+    suggested_promotion_target: "memory/decisions.yaml"
+    owner_approval_required: false
     proposed_action: promote
     requires_owner_confirmation: false
 ```
@@ -125,7 +135,29 @@ Never silently overwrite a durable fact.
 
 ---
 
-## 7. Research-output handling
+## 7. Tool-output compaction
+
+Long tool outputs are evidence references, not durable memory by themselves.
+
+Store a compact reference with:
+
+- ID and timestamp;
+- source tool and sanitized command or operation;
+- scope;
+- full-output reference if retained;
+- short excerpt summary and relevant ranges;
+- byte count;
+- retention policy;
+- sensitivity;
+- linked task.
+
+Do not copy full raw outputs into always-loaded memory or `current` facts. Store
+sanitized excerpts only. Do not store secrets, tokens, private account IDs, raw
+broker/account payloads, or raw private user data.
+
+---
+
+## 8. Research-output handling
 
 Research output can be useful, but it is not automatically project truth.
 
@@ -141,7 +173,36 @@ Possible destinations:
 
 ---
 
-## 8. Manual consolidation prompt
+## 9. Tool-use lesson handling
+
+Reusable lessons from tool failures, owner corrections, test failures, and eval
+failures should be captured as candidate lessons.
+
+```yaml
+id: TUL-0001
+class: tool_use_lesson
+status: candidate
+summary: "The previous command used shell syntax that is invalid in PowerShell."
+feedback:
+  source: tool_error
+  valence: corrective
+  evidence_ref: "tool_output:TO-0002"
+reflection:
+  failure_signature: "PowerShell rejected Bash heredoc syntax."
+  critique: "Do not use Bash heredoc syntax in PowerShell sessions."
+  corrected_rule: "Use PowerShell here-string piped to the target command."
+applies_when:
+  - "running inline scripts in PowerShell"
+do_not_repeat:
+  - "python - <<'PY'"
+```
+
+Tool-use lessons are not project facts. Promote only reusable and evidence-backed
+lessons after review.
+
+---
+
+## 10. Manual consolidation prompt
 
 ```text
 Mode: dry-run or apply.

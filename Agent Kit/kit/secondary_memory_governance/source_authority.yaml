@@ -4,7 +4,7 @@
 schema_version: "1.0"
 package_profile: "secondary_memory_governance"
 project_id: "ai-stock-analyst-class"
-last_updated: "2026-06-11"
+last_updated: "2026-06-13"
 
 project_map_mode: "secondary_memory"
 
@@ -22,6 +22,7 @@ operational_truth_roots:
 project_map_rule: "Project Map summarizes and navigates; operational docs win."
 external_research_to_project_fact: "requires reviewed source-of-truth update"
 conflict_behavior: "mark conflict; prefer operational truth; do not merge silently"
+claim_evidence_rule: "Every project claim that affects planning, implementation, safety, permissions, or architecture must have an evidence reference."
 
 authority_order:
   - rank: 1
@@ -46,6 +47,15 @@ authority_order:
     id: "prior_chat_or_unreviewed_notes"
     description: "Non-authoritative hints unless promoted through reviewed project docs."
 
+non_authoritative_by_default:
+  - "model guesses"
+  - "raw chat history"
+  - "provider memory"
+  - "external research"
+  - "stale Project Map notes"
+  - "unreviewed candidate memory"
+  - "raw tool output without source authority classification"
+
 missing_authority_behavior:
   answer: "state missing evidence; do not invent project facts"
   analyze: "label assumptions and identify the source needed"
@@ -56,6 +66,8 @@ promotion_rules:
   external_research_to_project_fact: "requires reviewed source-of-truth update"
   project_map_delta_to_truth: "requires owner approval and operational source update when it changes project truth"
   stale_project_map_to_current: "requires verification against operational truth"
+  raw_tool_output_to_project_fact: "requires compact reference, source authority classification, and review"
+  candidate_memory_to_current: "requires evidence and verified or owner-approved review state"
 
 forbidden_interpretations:
   - "Project Map is not a runtime spec."
@@ -63,3 +75,13 @@ forbidden_interpretations:
   - "Project Map is not a public product source of truth."
   - "Project Map does not replace docs/NEXT_STEPS.md."
   - "Project Map does not replace layer-specific specs."
+  - "A high retrieval score is not source authority."
+  - "External research is not project truth without promotion."
+  - "Provider memory is not project truth."
+
+claim_check_questions:
+  - "Is the claim supported by a current allowed source?"
+  - "Is the source allowed for this task profile?"
+  - "Is there a newer source that supersedes this claim?"
+  - "Is the statement a fact, decision, hypothesis, risk, open question, or follow-up?"
+  - "Does the statement imply mutation permission or runtime behavior that was not approved?"

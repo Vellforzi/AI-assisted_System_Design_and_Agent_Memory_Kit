@@ -1,0 +1,81 @@
+# Project Map/retrieval_scoring_policy.yaml
+# Machine-readable scoring policy. Scores run only after retrieval hard gates.
+
+schema_version: "1.0"
+project_id: "<project-id>"
+last_updated: "<YYYY-MM-DD>"
+
+core_rule: "Score only after retrieval hard gates. Scores cannot override source authority, stale suppression, scope boundaries, branch boundaries, privacy rules, or permissions."
+
+hard_gates_before_scoring:
+  - profile_allows_memory_class
+  - profile_allows_lifecycle_status
+  - branch_or_scope_boundary
+  - source_authority_boundary
+  - permission_boundary
+  - security_or_privacy_boundary
+  - explicit_owner_decision_boundary
+
+signals:
+  lexical_match:
+    enabled: true
+    weight: 0.30
+    fields: [title, summary, retrieval_tags, scope, evidence_refs]
+  entity_match:
+    enabled: true
+    weight: 0.20
+    fields: [entities, links, retrieval_tags]
+  authority_rank:
+    enabled: true
+    weight: 0.20
+    lower_rank_is_stronger: true
+  freshness:
+    enabled: true
+    weight: 0.15
+    fields: [last_verified_at, valid_until, temporal_kind]
+  semantic_similarity:
+    enabled: false
+    weight: 0.15
+    note: "Optional index or cache only. It is not a source of truth."
+
+profile_overrides:
+  answer:
+    min_score: 0.62
+    max_results: 8
+    hard_exclude_statuses: [stale, superseded, rejected, archived]
+  analyze:
+    min_score: 0.50
+    max_results: 12
+  plan:
+    min_score: 0.55
+    max_results: 10
+    hard_exclude_statuses: [stale, superseded, rejected, archived]
+  resume:
+    min_score: 0.50
+    max_results: 12
+    mandatory_refs: [working_state, current_state, active_task_contract]
+    hard_exclude_statuses: [stale, superseded, rejected, archived]
+  audit:
+    min_score: 0.35
+    max_results: 20
+    allow_stale_as_diagnostic: true
+  repair:
+    min_score: 0.35
+    max_results: 20
+    allow_stale_as_repair_input: true
+
+dynamic_top_k:
+  enabled: true
+  min_k: 3
+  max_k: 12
+  include_within_top_score_delta: 0.12
+  stop_on_score_gap_gt: 0.18
+
+result_requirements:
+  include_status: true
+  include_review_state: true
+  include_authority_rank: true
+  include_evidence_refs: true
+  include_freshness: true
+  include_truncation_metadata: true
+

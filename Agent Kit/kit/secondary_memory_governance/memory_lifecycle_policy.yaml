@@ -1,0 +1,104 @@
+# docs/project_map/memory_lifecycle_policy.yaml
+# Lifecycle policy for secondary-memory Project Map records.
+
+schema_version: "1.0"
+package_profile: "secondary_memory_governance"
+project_id: "ai-stock-analyst-class"
+last_updated: "2026-06-13"
+
+core_rule: "Durable memory is secondary memory. It helps retrieval and audit; it does not define current project truth without valid source authority."
+
+lifecycle_flow:
+  - raw_observation
+  - candidate
+  - staged
+  - verified
+  - owner_approved
+  - current
+  - stale
+  - superseded
+  - rejected
+  - archived
+
+write_rules:
+  append_only_preferred: true
+  silently_overwrite_old_facts: false
+  default_new_durable_state: candidate
+  current_requires:
+    - valid_evidence_ref
+    - source_authority_level
+    - verified_or_owner_approved_review_state
+  memory_update_scope_required: true
+
+stale_suppression:
+  normal_profiles: [answer, plan, resume]
+  hard_exclude_statuses: [stale, superseded, rejected, archived]
+  diagnostic_profiles: [audit, repair]
+  diagnostic_label_required: true
+  rule: "Stale, superseded, rejected, and archived records must not be used as current truth in normal profiles."
+
+candidate_inbox:
+  recommended_path: "docs/project_map/memory/inbox/candidate_memory.yaml"
+  rule: "candidate first, current only after approval or explicit evidence rule"
+  required_fields:
+    - id
+    - proposed_class
+    - summary
+    - evidence_refs
+    - source_authority_level
+    - lifecycle_state
+    - sensitivity
+    - reason_for_capture
+    - suggested_promotion_target
+    - owner_approval_required
+  allowed_proposed_classes:
+    - fact
+    - decision
+    - constraint
+    - risk
+    - open_question
+    - follow_up
+    - tool_use_lesson
+
+episodic_memory:
+  recommended_schema_path: "docs/project_map/memory/episodic_event_schema.yaml"
+  recommended_event_path_pattern: "docs/project_map/memory/episodes/YYYY-MM-DD.jsonl"
+  rule: "Episodic events are evidence and replay material, not current truth."
+  promotion_requires:
+    - evidence_ref
+    - review
+    - explicit durable target
+  required_fields:
+    - id
+    - event_type
+    - observed_at
+    - actor
+    - summary
+    - evidence_ref
+  allowed_event_types:
+    - user_instruction
+    - agent_observation
+    - tool_result
+    - tool_error
+    - file_change_observed
+    - side_effect_attempted
+    - side_effect_completed
+    - test_failure
+    - eval_failure
+    - owner_correction
+
+tool_use_lessons:
+  rule: "Reusable lessons from tool failures, owner corrections, test failures, and eval failures stay candidate until evidence-backed and reviewable."
+  not_project_fact: true
+  default_status: candidate
+  retrieve_for_profiles: [plan, resume, recover, audit, repair]
+  required_fields:
+    - id
+    - class
+    - status
+    - summary
+    - feedback
+    - reflection
+    - applies_when
+    - do_not_repeat
+

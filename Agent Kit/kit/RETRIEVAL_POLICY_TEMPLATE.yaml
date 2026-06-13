@@ -6,6 +6,8 @@ project_id: "<project-id>"
 last_updated: "<YYYY-MM-DD>"
 
 core_rule: "Retrieve the smallest evidence-bearing working set needed for the current intent. Do not load the whole project by default."
+scoring_rule: "Apply hard gates before relevance scoring. Scores cannot override source authority, stale suppression, scope boundaries, branch boundaries, permissions, privacy, or explicit owner decisions."
+scoring_policy_ref: "Project Map/retrieval_scoring_policy.yaml"
 
 project_map_mode: "authority" # authority | secondary_memory | absent
 
@@ -15,6 +17,16 @@ operational_entrypoints:
   - "<AGENTS.md or equivalent>"
   - "<current roadmap/status doc>"
   - "<source-of-truth hierarchy doc>"
+
+hard_gates_before_scoring:
+  - profile
+  - allowed_memory_classes
+  - allowed_lifecycle_states
+  - branch_or_scope_boundary
+  - source_authority_boundary
+  - permission_boundary
+  - security_or_privacy_boundary
+  - explicit_owner_decision_boundary
 
 profiles:
   answer:
@@ -51,6 +63,8 @@ profiles:
     mandatory_refs: [working_state, current_state, active_task_contract, active_workstream, side_effect_receipts]
     allowed_classes: [fact_current, accepted_decision, constraint, risk, open_question, procedure, side_effect_receipt]
     blocked_as_truth: [fact_stale, hypothesis, research_output_as_project_fact]
+    statuses_allowed_as_truth: [current, open]
+    hard_exclude_statuses: [stale, superseded, rejected, archived]
     raw_sources: "only_if_checkpoint_insufficient"
     may_mutate: false
     receipt_check_required: true
@@ -93,6 +107,22 @@ empty_result_behavior:
   ask_for_scope_if_needed: true
   never_treat_empty_as_nonexistence: true
   final_label: "missing_evidence"
+
+retrieval_limits:
+  prefer_indexes_and_entrypoints: true
+  avoid_whole_project_map_by_default: true
+  avoid_whole_repo_by_default: true
+  read_raw_logs_only_when_in_scope: true
+  do_not_read_secret_bearing_artifacts: true
+  compact_tool_outputs_by_default: true
+
+retrieval_result_requirements:
+  include_status: true
+  include_review_state: true
+  include_authority_rank: true
+  include_evidence_refs: true
+  include_freshness: true
+  include_truncation_metadata: true
 
 token_budget:
   order:
