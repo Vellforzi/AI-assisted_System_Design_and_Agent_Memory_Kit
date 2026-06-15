@@ -3,82 +3,152 @@
 
 schema_version: "1.0"
 package_profile: "secondary_memory_governance"
-project_id: "ai-stock-analyst-class"
-last_updated: "2026-06-13"
+project_id: "<project-id>"
+last_updated: "<YYYY-MM-DD>"
 
 default_intent: "answer"
-role_profile: "single-agent-local-implementer"
+default_mode: "explain-only"
 
 runtime_capability:
-  filesystem_enforcement: "advisory"
-  approval_prompts: "unavailable"
-  scope_file: "absent"
-  note: "Policy describes expected behavior; it does not technically block filesystem access."
+  filesystem_enforcement: "unknown" # enforced | advisory | unknown
+  approval_prompts: "unknown" # enforced | advisory | unavailable | unknown
+  scope_file: "unknown" # enforced | advisory | absent | unknown
+  note: "Policy files describe expected behavior. They are not filesystem enforcement unless the active runtime, wrapper, or permission profile actually enforces them."
 
 coding_agent_read_only_exploration:
-  allowed: true
-  allowed_actions:
+  allowed_when_scope_granted: true
+  purpose: "Answer, analyze, review, plan, or implement a scoped task from current project evidence."
+  examples:
     - "list relevant files"
-    - "read scoped docs/source/tests"
+    - "read scoped docs and source files"
     - "search with rg or equivalent"
-    - "inspect git status and git diff"
-    - "discover verification commands"
-  does_not_allow:
+    - "inspect git status or git diff"
+    - "discover test or build commands"
+  does_not_authorize:
     - "file writes"
     - "durable memory updates"
+    - "destructive commands"
     - "external service calls"
     - "database writes"
-    - "broker/account mutations"
-    - "commit/push/deploy"
+    - "deploy, commit, push, or message sending"
+    - "account, payment, credential, runtime, or external-system mutation"
 
-intents:
+intent_policy:
   answer:
-    may_read_scoped_context: true
+    default_allowed: true
+    may_read_if_scope_granted: true
     may_write: false
+    may_execute_commands: false
+    may_call_external_services: false
     may_update_memory: false
   analyze:
-    may_read_scoped_context: true
+    default_allowed: true
+    may_read_if_scope_granted: true
     may_write: false
+    may_execute_commands: false
+    may_call_external_services: false
     may_update_memory: false
   review:
-    may_read_scoped_context: true
+    default_allowed: true
+    may_read_if_scope_granted: true
     may_write: false
+    may_execute_commands: false
+    may_call_external_services: false
     may_update_memory: false
   plan:
-    may_read_scoped_context: true
+    default_allowed: true
+    may_read_if_scope_granted: true
     may_write: false
+    may_execute_commands: false
+    may_call_external_services: false
     may_update_memory: false
   implement:
     alias_for: "apply"
-    requires_explicit_user_request: true
-    requires_scope: true
-    may_write_within_scope: true
+    default_allowed: false
+    requires_explicit_request: true
+    requires_explicit_scope: true
+    may_write: true
+  retrieve_context:
+    default_allowed: false
+    requires_explicit_scope: true
+    may_write: false
+  stage:
+    default_allowed: false
+    requires_explicit_request: true
+    may_write: false
   apply:
-    requires_explicit_user_request: true
-    requires_scope: true
-    may_write_within_scope: true
+    default_allowed: false
+    requires_explicit_request: true
+    requires_explicit_scope: true
+    may_write: true
   memory_update:
-    requires_explicit_user_request_or_approved_delta: true
+    default_allowed: false
+    requires_explicit_request_or_approved_delta: true
     requires_evidence_refs: true
     default_new_state: "candidate"
+    may_write_project_map: true
   external_research:
-    requires_explicit_user_request_or_current_info_need: true
-    may_establish_project_fact_without_review: false
+    default_allowed: false
+    requires_explicit_request_or_task_contract: true
+    may_establish_project_facts: false
   research:
     alias_for: "external_research"
-    may_establish_project_fact_without_review: false
+    may_establish_project_facts: false
+
+permission_modes:
+  explain-only:
+    read_project_files: false
+    read_project_map: false
+    write_project_map: false
+    write_project_files: false
+    run_commands: false
+    external_side_effects: false
+  dry-run:
+    read_project_files: false
+    read_project_map: false
+    write_project_map: false
+    write_project_files: false
+    run_commands: false
+    external_side_effects: false
+    allowed_outputs: [proposal, draft, task_spec, candidate_memory]
+  read-only:
+    read_project_files: "explicit_scope_only"
+    read_project_map: "explicit_scope_only"
+    write_project_map: false
+    write_project_files: false
+    run_commands: false
+    external_side_effects: false
+  apply:
+    read_project_files: "explicit_scope_only"
+    read_project_map: "explicit_scope_only"
+    write_project_map: "explicit_scope_only"
+    write_project_files: "explicit_scope_only"
+    run_commands: "explicit_command_approval_only"
+    external_side_effects: "separate_explicit_approval_only"
+
+mutation_requirements:
+  required_fields:
+    - explicit_action_verb
+    - explicit_target
+    - permission_mode_allows_action
+    - explicit_scope
+    - safety_preflight_passed
+  ambiguous_request_behavior: "answer_or_propose_only"
+  implicit_permission_from_question: false
+  previous_permission_carries_intent: false
+  action_after_plan_requires_separate_apply: true
 
 mutation_gates:
   file_writes: "requires apply intent and explicit target scope"
   project_map_updates: "requires explicit memory_update intent or approved delta"
   policy_yaml_updates: "requires explicit governance scope"
   durable_memory_creation: "requires explicit memory_update intent"
-  external_research: "requires explicit request or current-info need"
+  external_research: "requires explicit request or task-contract scope"
   commit_push_deploy: "requires separate explicit request"
   database_writes: "requires separate explicit gated scope"
-  broker_or_account_mutation: "requires separate explicit gated scope"
+  account_payment_or_external_system_mutation: "requires separate explicit gated scope"
   credential_or_runtime_artifact_mutation: "requires separate explicit gated scope"
-  side_effect_receipts: "required after meaningful file, durable memory, external system, deployment, broker/account, or database mutation"
+  side_effect_receipts: "required after meaningful file, durable memory, external system, deployment, database, account, payment, credential, or runtime mutation"
 
 read_only_prompt_rule:
   analysis_review_or_planning: "allows read-only exploration only"
@@ -86,21 +156,65 @@ read_only_prompt_rule:
     - "file writes"
     - "durable memory writes"
     - "database writes"
-    - "broker/account mutations"
+    - "external service mutations"
     - "deployments"
-    - "external side effects"
+    - "commit or push"
 
-side_effect_receipt_required_fields:
-  - operation
-  - actor
-  - timestamp
-  - scope
-  - files_or_resources_changed
-  - command_or_tool_used
-  - result
-  - verification
-  - rollback_or_recovery_note
-  - sensitivity
+external_research:
+  allowed_for:
+    - libraries
+    - frameworks
+    - public_api_docs
+    - general_methods
+    - market_or_domain_background
+    - regulatory_or_public_documentation
+  forbidden_for:
+    - current_project_facts
+    - undocumented_project_state
+    - private_business_rules
+    - repository_contents_not_opened
+    - credentials_or_deployments
+
+side_effects:
+  require_owner_approval: true
+  require_idempotency_key_when_possible: true
+  require_receipt_after_completion: true
+  receipt_required_fields:
+    - operation
+    - actor
+    - timestamp
+    - scope
+    - files_or_resources_changed
+    - command_or_tool_used
+    - result
+    - verification
+    - rollback_or_recovery_note
+    - sensitivity
+  forbidden_without_separate_confirmation:
+    - delete
+    - deploy
+    - send_external_message
+    - commit_or_push
+    - database_write
+    - payment_or_purchase
+    - credential_change
+    - external_account_change
+    - irreversible_file_operation
+
+significant_work:
+  agent_may_detect: true
+  agent_may_propose_project_map_delta: true
+  agent_may_propose_checkpoint: true
+  agent_may_propose_handoff: true
+  may_write_project_map_without_explicit_intent: false
+  tiny_question_footer_required: false
+
+eval_policy:
+  agent_may_detect_trigger: true
+  agent_may_recommend_eval_run: true
+  agent_may_create_candidate_eval_case_in_dry_run: true
+  may_run_eval_without_owner_request: false
+  may_modify_kit_or_rules_from_eval_without_owner_scope: false
 
 policy_enforcement_labels:
   enforced: "runtime, wrapper, sandbox, permission profile, or service can technically block the action"

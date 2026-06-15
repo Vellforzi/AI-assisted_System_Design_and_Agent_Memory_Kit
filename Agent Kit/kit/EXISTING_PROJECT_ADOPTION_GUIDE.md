@@ -128,7 +128,8 @@ Not allowed without explicit apply or mutation intent:
 - creating durable memory;
 - running external research except for an explicit current-info need;
 - committing, pushing, deploying;
-- mutating databases, broker state, credentials, accounts, or runtime artifacts.
+- mutating databases, external-system state, credentials, accounts, or runtime
+  artifacts.
 
 Coding agents may read relevant local docs, source, and tests for the requested
 task. That read-only exploration is normal and should not require a separate
@@ -199,16 +200,16 @@ Start with manual smoke cases, not a full eval harness.
 
 The baseline cases should cover:
 
-1. Public MVP remains deferred.
-2. Owner-only execution does not leak into public/user-facing semantics.
-3. Public MVP docs do not override owner-only current priority.
+1. Project Map does not override operational docs.
+2. Private or internal context does not become public/user-facing truth.
+3. Current status wins over deferred work.
 4. Research notes do not directly change runtime behavior.
-5. AI does not enter execution decision loop.
-6. Project Map does not override operational docs.
-7. Ignore files are context hygiene, not secret protection.
-8. Adoption assessment does not trigger full Agent Kit installation.
-9. Live/personal-account readiness is not assumed from sandbox evidence.
-10. Broker/account mutations require explicit gated scope.
+5. Unapproved autonomous decision behavior is not introduced.
+6. Ignore files are context hygiene, not secret protection.
+7. Adoption assessment does not trigger full Agent Kit installation.
+8. Experimental evidence is not production readiness.
+9. External-system mutations require explicit gated scope.
+10. Stale Project Map memory cannot override current source-of-truth docs.
 
 Keep these cases manual until repeated failures justify automation.
 
@@ -220,7 +221,8 @@ The overlay is installed correctly when a fresh agent can:
 
 - identify the current operational priority from operational docs;
 - identify deferred tracks as deferred;
-- distinguish public, validation, research, and owner-only automation scopes;
+- distinguish public, private/internal, validation, research, and experimental
+  scopes;
 - treat Project Map as secondary memory;
 - prefer operational docs on conflict;
 - keep questions and reviews non-mutating;
@@ -228,8 +230,8 @@ The overlay is installed correctly when a fresh agent can:
 - require explicit intent for memory writes;
 - keep external research as context until reviewed promotion;
 - describe ignore files as context hygiene, not security;
-- leave runtime code, broker behavior, scheduler behavior, and public product
-  semantics unchanged;
+- leave runtime code, external-system behavior, scheduler behavior, and public
+  product semantics unchanged;
 - use domain-boundary smoke cases to catch the highest-risk agent mistakes.
 
 Stop after these criteria are met unless the owner explicitly requests a larger

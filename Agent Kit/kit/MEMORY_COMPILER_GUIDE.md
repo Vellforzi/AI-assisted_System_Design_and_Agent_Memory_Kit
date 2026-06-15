@@ -153,7 +153,7 @@ Store a compact reference with:
 
 Do not copy full raw outputs into always-loaded memory or `current` facts. Store
 sanitized excerpts only. Do not store secrets, tokens, private account IDs, raw
-broker/account payloads, or raw private user data.
+external-system/account payloads, or raw private user data.
 
 ---
 

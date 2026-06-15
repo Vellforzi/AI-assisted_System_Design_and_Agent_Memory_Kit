@@ -3,8 +3,8 @@
 
 schema_version: "1.0"
 package_profile: "secondary_memory_governance"
-project_id: "ai-stock-analyst-class"
-last_updated: "2026-06-13"
+project_id: "<project-id>"
+last_updated: "<YYYY-MM-DD>"
 
 core_rule: "Durable memory is secondary memory. It helps retrieval and audit; it does not define current project truth without valid source authority."
 
@@ -58,7 +58,14 @@ candidate_inbox:
     - risk
     - open_question
     - follow_up
+    - procedure
     - tool_use_lesson
+    - checkpoint_note
+    - memory_delta_proposal
+    - eval_trigger
+    - eval_case
+    - eval_result
+    - eval_trace
 
 episodic_memory:
   recommended_schema_path: "docs/project_map/memory/episodic_event_schema.yaml"
@@ -102,3 +109,13 @@ tool_use_lessons:
     - applies_when
     - do_not_repeat
 
+side_effect_receipts:
+  rule: "Side-effect receipts are evidence for what happened, not blanket permission to repeat or extend the action."
+  required_for:
+    - file_mutation
+    - durable_memory_mutation
+    - external_system_mutation
+    - database_mutation
+    - deployment
+    - credential_or_runtime_change
+  retrieve_for_profiles: [resume, recover, audit, repair]

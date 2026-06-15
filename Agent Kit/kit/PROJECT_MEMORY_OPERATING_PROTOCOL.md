@@ -278,7 +278,7 @@ Long tool outputs must not be copied into always-loaded memory. Store a compact 
 - sensitivity;
 - linked task.
 
-Raw output is not current truth. Durable memory should store only sanitized excerpts, never secrets, tokens, private account IDs, raw broker/account payloads, or raw private user data.
+Raw output is not current truth. Durable memory should store only sanitized excerpts, never secrets, tokens, private account IDs, raw external-system/account payloads, or raw private user data.
 
 ---
 

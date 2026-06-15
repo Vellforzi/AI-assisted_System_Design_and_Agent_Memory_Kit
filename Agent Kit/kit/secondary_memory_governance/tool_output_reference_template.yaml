@@ -3,8 +3,8 @@
 
 schema_version: "1.0"
 package_profile: "secondary_memory_governance"
-project_id: "ai-stock-analyst-class"
-last_updated: "2026-06-13"
+project_id: "<project-id>"
+last_updated: "<YYYY-MM-DD>"
 
 core_rule: "Long raw tool outputs are evidence references, not always-loaded Project Map current truth."
 
@@ -27,11 +27,13 @@ tool_output_reference:
 rules:
   raw_output_not_current_truth: true
   store_sanitized_excerpts_in_memory: true
+  require_source_authority_classification: true
+  require_truncation_metadata_when_excerpted: true
   do_not_store:
     - secrets
     - tokens
+    - credentials
     - private_account_ids
-    - raw_broker_payloads
+    - raw_external_system_payloads
     - raw_user_private_data
   sensitive_output_behavior: "Store only digest or summary and state the limitation."
-

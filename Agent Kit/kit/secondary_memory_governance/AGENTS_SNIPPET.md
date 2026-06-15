@@ -20,8 +20,8 @@ branch, permission, security, privacy, or owner-decision boundaries.
 Question, analyze, review, and plan requests do not authorize mutation.
 Scoped read-only repository exploration is allowed when needed for the current
 coding task, but it does not authorize file writes, durable memory updates,
-external service calls, database writes, broker/account mutations, commits,
-pushes, or deploys.
+external service calls, database writes, account/payment/credential or
+external-system mutations, commits, pushes, or deploys.
 
 Project Map updates require explicit memory-update intent or an approved delta.
 New durable memory starts as candidate or staged unless evidence and owner or

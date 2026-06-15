@@ -42,7 +42,8 @@ Package purpose: portable starter guide and memory operating layer for using AI 
 - `Agent Kit/kit/secondary_memory_governance/memory_lifecycle_policy.yaml` - candidate-first lifecycle, stale suppression, episodic event, and tool-use lesson rules.
 - `Agent Kit/kit/secondary_memory_governance/tool_output_reference_template.yaml` - compact reference template for long tool outputs.
 - `Agent Kit/kit/secondary_memory_governance/working_state.yaml` - compact replay root for fresh sessions.
-- `Agent Kit/kit/secondary_memory_governance/manual_smoke_cases.yaml` - manual domain-boundary smoke cases for ai-stock-analyst-class projects.
+- `Agent Kit/kit/secondary_memory_governance/manual_smoke_cases.yaml` - manual portable governance smoke cases for secondary-memory overlays.
+- `Agent Kit/kit/secondary_memory_governance/PASS_3_VERIFICATION_RECEIPT.md` - verification receipt that concrete adopter profiles are not bundled in the reusable overlay.
 - `Agent Kit/kit/secondary_memory_governance/memory_quality_review_bar.md` - review bar for memory, retrieval, permission, and governance changes.
 - `Agent Kit/kit/secondary_memory_governance/.codexignore_TEMPLATE` - Codex context-hygiene template, not a security boundary.
 - `Agent Kit/kit/secondary_memory_governance/.cursorignore_TEMPLATE` - optional Cursor context-hygiene template, not a security boundary.

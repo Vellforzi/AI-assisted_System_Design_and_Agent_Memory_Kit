@@ -160,7 +160,7 @@ Do not approve a memory, rule, schema, retrieval, or permission change if it:
 - duplicates operational docs into Project Map as competing truth;
 - adds silent durable auto-capture;
 - omits evidence refs for material claims;
-- stores secrets, raw private data, raw broker/account payloads, or tokens;
+- stores secrets, raw private data, raw external-system/account payloads, or tokens;
 - treats embeddings, similarity score, or entity links as source of truth.
 
 Expected review output:

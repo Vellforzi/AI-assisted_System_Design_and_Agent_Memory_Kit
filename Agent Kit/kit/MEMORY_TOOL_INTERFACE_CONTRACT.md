@@ -294,4 +294,4 @@ sensitivity: "normal"
 linked_task: "TASK-0001"
 ```
 
-Do not store secrets, tokens, private account IDs, raw broker/account payloads, or raw private user data. If output is sensitive, store only a digest or summary and state the limitation.
+Do not store secrets, tokens, private account IDs, raw external-system/account payloads, or raw private user data. If output is sensitive, store only a digest or summary and state the limitation.

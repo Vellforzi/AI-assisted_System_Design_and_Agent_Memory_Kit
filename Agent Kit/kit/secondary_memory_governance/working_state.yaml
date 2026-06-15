@@ -3,33 +3,33 @@
 
 schema_version: "1.0"
 package_profile: "secondary_memory_governance"
-project_id: "ai-stock-analyst-class"
-last_updated: "2026-06-11"
+project_id: "<project-id>"
+last_updated: "<YYYY-MM-DD>"
 
-current_priority: "owner-only sandbox execution-readiness"
-current_operational_entrypoint: "docs/NEXT_STEPS.md"
-current_status_pack: "docs/context_packs/current_status.md"
 project_map_mode: "secondary_memory"
 
+current_priority: "<current-priority-or-none>"
+current_operational_entrypoint: "<current-roadmap-status-or-task-entrypoint>"
+current_status_pack: "<current-status-pack-or-null>"
+
 next_recommended_action:
-  source: "docs/NEXT_STEPS.md"
-  summary: "LRG-006/ESP-004 broker unknown-state timeout proposal or deterministic scenario-coverage aggregation."
+  source: "<current-source-of-truth-ref>"
+  summary: "<short-next-action-or-null>"
 
 known_drift:
-  - path: "docs/project_map/current_map.md"
-    issue: "Some open questions are broader than current NEXT_STEPS."
+  - path: "<project-map-file-or-null>"
+    issue: "<known-drift-summary-or-none>"
 
 session_start_minimum_refs:
-  - "AGENTS.md"
+  - "<AGENTS.md or equivalent>"
   - "docs/project_map/source_authority.yaml"
   - "docs/project_map/permissions_policy.yaml"
   - "docs/project_map/retrieval_policy.yaml"
   - "docs/project_map/working_state.yaml"
 
 must_preserve_boundaries:
-  - "owner-only sandbox scope"
-  - "public Telegram MVP remains deferred unless operational docs say otherwise"
-  - "no AI execution decision loop"
-  - "no live/personal-account behavior from sandbox evidence"
-  - "no broker/account mutation without explicit gated review"
-  - "deterministic evidence/logging boundaries"
+  - "Project Map remains secondary memory unless source_authority.yaml says otherwise."
+  - "Operational docs, code, tests, specs, issues, and current owner instructions win on conflicts."
+  - "Private, experimental, or internal context must not become public/user-facing truth without reviewed authority."
+  - "No mutation occurs without explicit intent, target, scope, and allowed permission mode."
+  - "External research remains context until promoted through valid source authority."

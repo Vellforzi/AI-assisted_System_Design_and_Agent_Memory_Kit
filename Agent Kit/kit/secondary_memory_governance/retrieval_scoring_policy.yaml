@@ -3,16 +3,16 @@
 
 schema_version: "1.0"
 package_profile: "secondary_memory_governance"
-project_id: "ai-stock-analyst-class"
-last_updated: "2026-06-13"
+project_id: "<project-id>"
+last_updated: "<YYYY-MM-DD>"
 
-core_rule: "Score only after retrieval hard gates. Scores cannot override operational source authority, stale suppression, scope boundaries, branch boundaries, privacy rules, or permissions."
+core_rule: "Score only after retrieval hard gates. Scores cannot override source authority, stale suppression, scope boundaries, branch boundaries, privacy rules, permissions, or explicit owner decisions."
 
 hard_gates_before_scoring:
   - profile_allows_memory_class
   - profile_allows_lifecycle_status
   - branch_or_scope_boundary
-  - operational_source_authority_boundary
+  - source_authority_boundary
   - permission_boundary
   - security_or_privacy_boundary
   - explicit_owner_decision_boundary
@@ -79,4 +79,3 @@ result_requirements:
   include_evidence_refs: true
   include_freshness: true
   include_truncation_metadata: true
-

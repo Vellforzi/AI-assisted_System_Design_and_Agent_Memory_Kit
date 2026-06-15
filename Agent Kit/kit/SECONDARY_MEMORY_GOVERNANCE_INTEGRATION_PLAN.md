@@ -23,28 +23,29 @@ The kit now has two related layers:
 
 The canonical templates are already mostly generic and use placeholders such as
 `<project-id>`. The remaining integration problem is that the secondary-memory
-overlay still contains `ai-stock-analyst-class` defaults and domain-specific
-rules in files that are described as reusable baseline files.
+overlay still contains concrete adopter defaults and domain-specific rules in
+files that are described as reusable baseline files.
 
 Main risk:
 
-- adopters may copy the reusable overlay and accidentally inherit
-  `ai-stock-analyst-class` runtime assumptions, paths, smoke cases, and
-  boundaries.
+- adopters may copy the reusable overlay and accidentally inherit concrete
+  adopter runtime assumptions, paths, smoke cases, and boundaries.
 
 ## Objective
 
 Align the reusable secondary-memory governance overlay with the generic
-canonical templates while preserving the concrete `ai-stock-analyst-class`
-profile as an example.
+canonical templates. Concrete adopter-specific project context must
+not be added to this package as a built-in profile; it belongs in the downstream
+project or in an external/private fixture set.
 
 The final state should provide:
 
 - generic reusable governance templates;
 - a generic secondary-memory overlay derived from the templates;
-- separate example/profile data for `ai-stock-analyst-class`;
+- no bundled concrete adopter runtime profile in the reusable kit;
 - aligned schema, examples, lifecycle, retrieval, task, claim, and handoff data;
-- generic eval/smoke cases separated from domain-boundary example cases;
+- generic eval/smoke cases that adopters can copy and extend in their own
+  projects;
 - optional helper tooling only after the data model is stable.
 
 ## Non-Goals
@@ -100,7 +101,8 @@ Then read implementation data:
 Record:
 
 - canonical fields present in templates but missing from overlay files;
-- overlay fields that are domain-specific and must move to an example/profile;
+- overlay fields that are domain-specific and must be removed or replaced with
+  placeholders;
 - schema entries present in `MEMORY_SCHEMA_REFERENCE.yaml` but missing examples;
 - examples that still use older schema versions;
 - eval cases that are generic;
@@ -110,7 +112,7 @@ Record:
 Suggested search:
 
 ```powershell
-rg -n "ai-stock|owner-only|broker|Telegram|autotrade|LRG|NEXT_STEPS|sandbox execution|OPTION PROFIT|option-profit" .
+rg -n "<known-adopter-specific-marker>|<private-product-track>|<external-system-name>|<runtime-specific-path>" .
 ```
 
 Exit criteria:
@@ -129,7 +131,8 @@ Declare this ownership model in the relevant README files:
   policy templates;
 - `secondary_memory_governance/` is a ready-to-copy overlay profile for mature
   existing projects where Project Map is secondary memory;
-- example/profile folders contain concrete adopter data;
+- example/profile folders, if added later, contain only generic copyable
+  examples, not private adopter runtime assumptions;
 - project-specific copied files must replace placeholders and must not be
   treated as universal kit defaults.
 
@@ -165,8 +168,7 @@ new independent rules:
 
 Required changes:
 
-- replace `project_id: "ai-stock-analyst-class"` with placeholder or template
-  value;
+- replace concrete `project_id` values with placeholder or template value;
 - replace concrete operational docs with placeholder examples;
 - preserve `project_map_mode: "secondary_memory"` for this overlay profile;
 - preserve answer-only default, explicit action gates, scoped read-only
@@ -179,41 +181,36 @@ Required changes:
 
 Exit criteria:
 
-- generic overlay files have no `ai-stock`, `Telegram`, `broker`, `autotrade`,
-  `LRG`, `NEXT_STEPS`, or sandbox-execution project paths;
+- generic overlay files have no adopter-specific product names, external-system
+  names, runtime paths, current priorities, or project-only smoke cases;
 - overlay policy semantics match the canonical templates;
 - differences from canonical templates are deliberate and explained as
   secondary-memory profile differences.
 
-## Pass 3: Extract Concrete Example/Profile Data
+## Pass 3: Remove Concrete Adopter Data From The Kit
 
-Purpose: preserve useful `ai-stock-analyst-class` evidence without making it a
-global default.
+Purpose: make sure concrete adopter data is not included in the reusable kit.
 
-Create:
+Do not create a bundled profile for a concrete external system, messaging
+surface, test environment, or other adopter-specific project. If a downstream
+project uses this kit as its test consumer, keep that project's concrete source
+authority, smoke cases, runtime paths, and boundaries in that downstream project
+repository or a separate private fixture set.
 
-```text
-Agent Kit/kit/secondary_memory_governance/examples/ai-stock-analyst-class/
-```
+Update or verify:
 
-Move or copy concrete data there:
-
-- source authority example;
-- permissions policy example with broker/account mutation language;
-- retrieval policy example with owner-only/public-MVP task entrypoints;
-- working state example;
-- ai-stock domain-boundary smoke cases;
-- any notes that mention Telegram, owner-only execution, broker/account,
-  `docs/NEXT_STEPS.md`, LRG/ESP work, or sandbox execution.
-
-Keep generic files in `secondary_memory_governance/` free of adopter-specific
-state.
+- no `secondary_memory_governance/examples/<concrete-project>/` folder is added;
+- generic files in `secondary_memory_governance/` stay free of adopter-specific
+  state;
+- README text tells adopters to create their own project-local profiles if
+  needed;
+- any retained examples use placeholders and portable domains only.
 
 Exit criteria:
 
-- ai-stock-specific behavior is still available as an example;
-- generic overlay does not leak ai-stock runtime assumptions;
-- README explains that examples are not defaults.
+- the reusable kit does not contain concrete adopter runtime assumptions;
+- generic overlay does not leak downstream-project state;
+- README explains that concrete project profiles are outside the reusable kit.
 
 ## Pass 4: Update Adoption Workflow Data
 
@@ -286,8 +283,8 @@ Exit criteria:
 
 ## Pass 6: Split Generic Eval Data From Domain Examples
 
-Purpose: keep portable behavior tests separate from adopter-specific smoke
-cases.
+Purpose: keep portable behavior tests generic and make adopter-specific smoke
+cases a downstream-project responsibility.
 
 Use these as portable sources:
 
@@ -302,12 +299,12 @@ Use these as portable sources:
 Required changes:
 
 - keep generic governance cases in the reusable overlay;
-- move ai-stock-specific domain cases to the example/profile directory;
+- do not add concrete adopter-specific domain cases to this package;
 - ensure the core suite includes claim ledger, task contract, handoff,
   retrieval hard gates, tool-output references, stale suppression, permission
   boundaries, eval-trigger behavior, and significant-work behavior;
-- ensure `run_eval_checklist.py` can generate checklists from the updated generic
-  and profile-specific suite files;
+- ensure `run_eval_checklist.py` can generate checklists from the updated
+  generic suite files;
 - update eval manifest paths if files move.
 
 Core generic smoke cases should include:
@@ -325,10 +322,11 @@ Core generic smoke cases should include:
 
 Exit criteria:
 
-- generic evals can run without ai-stock project knowledge;
-- ai-stock profile evals still validate that concrete adoption profile;
+- generic evals can run without downstream-project knowledge;
+- downstream projects may keep their own concrete profile evals outside this
+  reusable kit;
 - eval trigger policy references the correct files;
-- checklist generation works for both generic and profile-specific suites.
+- checklist generation works for generic suite files.
 
 ## Pass 7: Integrate Review Rules Into Agent Workflows
 
@@ -412,13 +410,13 @@ Exit criteria:
 Run after each pass:
 
 ```powershell
-rg -n "ai-stock|owner-only|broker|Telegram|autotrade|LRG|NEXT_STEPS|sandbox execution|OPTION PROFIT|option-profit" "Agent Kit/kit/secondary_memory_governance"
+rg -n "<known-adopter-specific-marker>|<private-product-track>|<external-system-name>|<runtime-specific-path>" "Agent Kit/kit/secondary_memory_governance"
 ```
 
 Expected result:
 
 - generic baseline has no matches;
-- matches are allowed only under `examples/` or `profiles/`.
+- matches are not expected in this reusable kit.
 
 Check template/overlay drift:
 
@@ -440,15 +438,14 @@ python "Agent Kit/kit/tools/run_eval_checklist.py" --help
 Then run the supported checklist command for:
 
 - generic core behavior cases;
-- generic secondary-memory smoke cases;
-- ai-stock example/profile smoke cases, if retained.
+- generic secondary-memory smoke cases.
 
 Before final release, verify:
 
 - root README and START_HERE mention the updated adoption path;
 - manifest lists moved or newly added files;
 - release notes explain the canonical-template and overlay-profile split;
-- examples do not override the generic baseline;
+- examples do not introduce concrete adopter runtime assumptions;
 - schema versions and example versions are consistent or documented;
 - no generated runtime state or adopter-specific private data is included.
 
@@ -457,7 +454,7 @@ Before final release, verify:
 Use a patch release for documentation/data alignment:
 
 ```text
-v3.8.1: canonical template alignment, generic overlay cleanup, and example/profile split
+v3.8.1: canonical template alignment and generic overlay cleanup
 ```
 
 Use a minor release only if helper tooling or agent workflow behavior changes:
@@ -472,10 +469,10 @@ The integration is complete when:
 
 - canonical templates are clearly identified as generic source templates;
 - secondary-memory overlay files are reusable without domain leakage;
-- concrete adopter examples are clearly separated;
+- concrete adopter runtime profiles are not bundled into the reusable kit;
 - schema, examples, lifecycle, retrieval, task contracts, claim ledgers, and
   handoffs agree;
-- smoke/eval data is split into generic and example-specific layers;
+- smoke/eval data remains generic in the reusable kit;
 - Codex and Cursor workflows reference the same review and permission model;
 - optional tooling, if added, is read-only by default and owner-controlled;
 - manifest and release notes reflect the final file layout.

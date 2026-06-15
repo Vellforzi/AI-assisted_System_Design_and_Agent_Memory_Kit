@@ -110,7 +110,7 @@ replacement AGENTS.md
 
 `manual_smoke_cases.yaml`
 
-- protects against domain-boundary agent failures;
+- protects against portable governance and domain-boundary agent failures;
 - stays lightweight and manual;
 - tests agent behavior rather than runtime code.
 
@@ -164,18 +164,24 @@ For memory proposals, use candidate-first behavior. Do not silently promote a
 tool result, chat fragment, external research note, or model inference into
 current durable memory.
 
-## ai-stock-analyst-Class Defaults
+## Project-Local Profiles
 
-For `ai-stock-analyst`-class projects:
+Concrete adopter data belongs in the adopting project, not in this reusable kit.
+Project-local profiles can be useful as fixtures for that project, but they
+must not become portable baseline defaults.
+
+This directory intentionally has no `examples/` or `profiles/` subtree for a
+concrete project. Keep downstream project ids, runtime paths, current
+priorities, private boundaries, and project-only smoke cases outside this
+package.
+
+When creating a project-local profile:
 
 - keep project-specific `AGENTS.md`;
 - keep operational docs as truth;
-- install Project Map policy as secondary memory;
-- allow scoped read-only exploration for coding work;
-- do not install runtime memory yet;
-- do not change runtime code, broker behavior, scheduler behavior, database
-  state, or public product semantics as part of this overlay.
-
-The included YAML files use `ai-stock-analyst` as the concrete verification
-consumer. Adapt paths only when the target project uses different operational
-docs with the same authority role.
+- install Project Map policy as secondary memory unless the target project
+  explicitly chooses another authority mode;
+- replace all project ids, paths, current priorities, domain boundaries, and
+  smoke cases;
+- do not copy project-specific runtime assumptions into unrelated projects or
+  back into this reusable kit.

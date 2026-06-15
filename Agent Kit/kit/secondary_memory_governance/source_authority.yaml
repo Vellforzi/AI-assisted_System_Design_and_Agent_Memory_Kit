@@ -3,49 +3,51 @@
 
 schema_version: "1.0"
 package_profile: "secondary_memory_governance"
-project_id: "ai-stock-analyst-class"
-last_updated: "2026-06-13"
+project_id: "<project-id>"
+last_updated: "<YYYY-MM-DD>"
+
+core_rule: "Project-specific claims must be grounded in valid project evidence. Generic model knowledge is not project evidence."
+claim_evidence_rule: "Every project claim that affects planning, implementation, safety, permissions, or architecture must have an evidence reference."
 
 project_map_mode: "secondary_memory"
+project_map_rule: "Project Map summarizes and navigates. Operational docs, code, tests, specs, issues, and current owner instructions win on conflicts."
 
 operational_truth_roots:
-  - "AGENTS.md"
-  - "docs/NEXT_STEPS.md"
-  - "docs/context_packs/current_status.md"
-  - "docs/source_of_truth_hierarchy.md"
-  - "docs/implementation_decomposition.md"
-  - "docs/context_packs/owner_only_autotrade_research_for_codex.md"
-  - "docs/owner_only_open_questions_triage.md"
-  - "docs/owner_only_sandbox_execution_lab.md"
-  - "relevant layer-specific specs"
-
-project_map_rule: "Project Map summarizes and navigates; operational docs win."
-external_research_to_project_fact: "requires reviewed source-of-truth update"
-conflict_behavior: "mark conflict; prefer operational truth; do not merge silently"
-claim_evidence_rule: "Every project claim that affects planning, implementation, safety, permissions, or architecture must have an evidence reference."
+  - "<AGENTS.md or equivalent>"
+  - "<source-of-truth hierarchy doc>"
+  - "<current roadmap/status/spec docs>"
+  - "<current implementation docs>"
+  - "<relevant code, tests, issues, or review artifacts>"
 
 authority_order:
   - rank: 1
-    id: "current_owner_instruction"
+    id: owner_current_instruction
     description: "Current owner instruction in this run."
+    can_override: [project_map_memory, project_docs, legacy_requirements, prior_chat]
   - rank: 2
-    id: "operational_truth_roots"
-    description: "Current project-specific operational docs and specs."
+    id: opened_project_files_current_run
+    description: "Project files opened or read in the current run within approved scope."
   - rank: 3
-    id: "opened_code_tests_and_tool_outputs"
-    description: "Code, tests, command output, logs, or local artifacts opened in the current scoped run."
+    id: opened_tool_outputs_current_run
+    description: "Tool outputs, logs, connector results, command outputs, or local artifacts opened in the current run within approved scope."
   - rank: 4
-    id: "issues_or_reviewed_work_items"
-    description: "Current issues, reviewed tasks, or accepted work items when present."
+    id: current_project_docs
+    description: "Documentation marked current and not superseded."
   - rank: 5
-    id: "project_map_secondary_memory"
-    description: "Navigation, owner memory, summaries, risks, open questions, and handoff hints."
+    id: current_code_tests_and_issues
+    description: "Current code, tests, issues, and reviewed work items when relevant to the claim."
   - rank: 6
-    id: "external_research"
-    description: "External research retrieved in the current run; context only until promoted."
+    id: verified_project_map_memory
+    description: "Project Map memory with verified or owner-approved review state. In this overlay it is secondary memory and must be confirmed by operational sources for implementation, runtime, safety, roadmap, or permission claims."
   - rank: 7
-    id: "prior_chat_or_unreviewed_notes"
-    description: "Non-authoritative hints unless promoted through reviewed project docs."
+    id: external_research
+    description: "External research retrieved in the current run; context only until promoted through valid project evidence or owner approval."
+  - rank: 8
+    id: legacy_requirements
+    description: "Legacy specs or historical documents; treat as legacy until confirmed against current code, docs, or owner decision."
+  - rank: 9
+    id: prior_chat_uncaptured
+    description: "Prior chat not captured into Project Map; not authoritative by itself."
 
 non_authoritative_by_default:
   - "model guesses"
@@ -56,28 +58,36 @@ non_authoritative_by_default:
   - "unreviewed candidate memory"
   - "raw tool output without source authority classification"
 
+conflict_resolution:
+  default_rule: "prefer_higher_authority_then_newer_verified"
+  project_map_secondary_rule: "If Project Map conflicts with operational_truth_roots, operational truth wins and the drift must be reported."
+  if_same_rank: "prefer_newer_last_verified_at"
+  if_conflict_unresolved: "mark_conflict_and_stop"
+  never_silent_merge: true
+
 missing_authority_behavior:
-  answer: "state missing evidence; do not invent project facts"
-  analyze: "label assumptions and identify the source needed"
-  plan: "plan only against confirmed authority or explicitly marked assumptions"
-  apply: "stop and request or retrieve the missing source-of-truth before editing"
+  answer_profile: "state missing or unclear authority and avoid unsupported project claims"
+  analyze_profile: "label assumptions and identify the source needed"
+  plan_profile: "plan only against confirmed authority or explicitly marked assumptions"
+  apply_profile: "stop and request or retrieve the missing source-of-truth before editing"
+  audit_profile: "create a source-authority repair note"
+  repair_profile: "propose an explicit authority repair before editing memory"
 
 promotion_rules:
-  external_research_to_project_fact: "requires reviewed source-of-truth update"
+  external_research_to_project_fact: "requires owner approval or direct project evidence"
+  hypothesis_to_fact_current: "requires valid evidence and verified or owner-approved review_state"
   project_map_delta_to_truth: "requires owner approval and operational source update when it changes project truth"
-  stale_project_map_to_current: "requires verification against operational truth"
+  stale_to_current: "requires re-verification"
   raw_tool_output_to_project_fact: "requires compact reference, source authority classification, and review"
   candidate_memory_to_current: "requires evidence and verified or owner-approved review state"
 
 forbidden_interpretations:
   - "Project Map is not a runtime spec."
-  - "Project Map is not broker or execution policy."
-  - "Project Map is not a public product source of truth."
-  - "Project Map does not replace docs/NEXT_STEPS.md."
-  - "Project Map does not replace layer-specific specs."
+  - "Project Map does not replace operational docs, specs, code, tests, issues, or current owner instructions."
   - "A high retrieval score is not source authority."
   - "External research is not project truth without promotion."
   - "Provider memory is not project truth."
+  - "Permission policy text is not technical enforcement unless the active runtime enforces it."
 
 claim_check_questions:
   - "Is the claim supported by a current allowed source?"

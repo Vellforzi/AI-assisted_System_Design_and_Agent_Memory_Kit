@@ -339,7 +339,7 @@ Do not put raw source dumps into normal answer context unless required.
 
 Long tool outputs should be stored as compact references, not pasted into always-loaded memory. A tool-output reference should include an ID, timestamp, tool or command, scope, sanitized excerpt, full output reference if retained, byte count, retention policy, sensitivity, and linked task.
 
-Do not store secrets, tokens, private account IDs, raw broker payloads, or raw private user data. If output is sensitive, store only a digest or summary and state the limitation.
+Do not store secrets, tokens, private account IDs, raw external-system payloads, or raw private user data. If output is sensitive, store only a digest or summary and state the limitation.
 
 ---
 

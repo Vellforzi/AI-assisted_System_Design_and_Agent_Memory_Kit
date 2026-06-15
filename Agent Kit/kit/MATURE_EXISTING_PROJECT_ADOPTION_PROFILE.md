@@ -3,11 +3,10 @@
 Status: lightweight adoption profile
 Purpose: strengthen an already AI-readable project without replacing its existing documentation, workflow, or source-of-truth system.
 
-Reference-only note: this file is not the baseline package for
-ai-stock-analyst-class projects. Use `secondary_memory_governance/` for the
-single reusable system where Project Map is secondary memory and operational
-docs win. The authority modes and role profiles below are for other projects
-that explicitly need them.
+Reference-only note: this file is not the baseline package. Use
+`secondary_memory_governance/` for the single reusable system where Project Map
+is secondary memory and operational docs win. The authority modes and role
+profiles below are for projects that explicitly need a different shape.
 
 ---
 
@@ -114,7 +113,8 @@ For a mature project, the first useful slice is usually:
 6. Add 5-10 manual smoke eval cases for the project's real boundary failures.
 7. Add a short rule to the existing `AGENTS.md` or tool rule only if it is missing.
 
-This slice should not change product code, runtime behavior, deployment, broker/API behavior, database state, or user-facing semantics.
+This slice should not change product code, runtime behavior, deployment,
+external API behavior, database state, or user-facing semantics.
 
 ---
 
@@ -137,7 +137,8 @@ This does not imply permission to:
 - run destructive commands;
 - call external services;
 - publish, deploy, commit, push, or send messages;
-- modify databases, broker accounts, credentials, or local artifacts outside scope.
+- modify databases, external accounts, credentials, or local artifacts outside
+  scope.
 
 ---
 
