@@ -6,7 +6,7 @@ Scope: `Agent Kit/kit/secondary_memory_governance/` and reusable adoption guidan
 
 ## Result
 
-The reusable secondary-memory governance overlay contains no bundled concrete
+The reusable repo-centric context governance baseline contains no bundled concrete
 adopter profile, example project folder, adopter-specific runtime profile, or
 downstream-project smoke cases.
 

@@ -67,7 +67,7 @@ Evals do not run automatically unless the owner wires them to a script, CI job, 
 | File | Purpose |
 |---|---|
 | `OWNER_USAGE_GUIDE.md` | Day-to-day owner workflow and safe prompts. |
-| `secondary_memory_governance/` | Baseline reusable overlay for existing repo-centric projects where Project Map is secondary memory and operational docs win. |
+| `secondary_memory_governance/` | Single stockanalyst-style baseline for repo-centric projects: secondary Project Map, operational source authority, context index, receipts, smoke checks, and documentation harnesses. |
 | `PLATFORM_CONTEXT_COMPACTION_BOUNDARY.md` | Platform summaries, compacted chat history, and provider memory are non-authoritative hints, not project truth. |
 | `CURSOR_INTEGRATION_OWNER_GUIDE.md` | How to use the kit with Cursor Rules, Commands, Skills, and Subagents. |
 | `cursor/` | Cursor Integration Pack: rules, commands, skills, and read-only subagents. |
@@ -108,7 +108,7 @@ Evals do not run automatically unless the owner wires them to a script, CI job, 
 | `cursor/CURSOR_OWNER_CONTROLLED_DEFAULTS.md` | Cursor settings profile summary. |
 | `cursor/settings/owner_controlled_profile.yaml` | Machine-readable owner-controlled Cursor settings profile. |
 
-| `EXISTING_PROJECT_ADOPTION_GUIDE.md` | How to add the secondary-memory governance overlay to an already active project. |
+| `EXISTING_PROJECT_ADOPTION_GUIDE.md` | How to add the stockanalyst-style repo-centric context governance baseline to an already active project. |
 | `MATURE_EXISTING_PROJECT_ADOPTION_PROFILE.md` | Reference profile for mature projects; prefer `secondary_memory_governance/` as the concrete baseline package. |
 | `NEW_PROJECT_ADOPTION_GUIDE.md` | How to start an empty project with the kit. |
 | `SOLO_OWNER_WORKFLOW_GUIDE.md` | High-control workflow for a solo owner using local IDE agents plus research chat. |
@@ -140,6 +140,34 @@ python3 "Agent Kit/kit/tools/run_eval_checklist.py" \
 
 ---
 
+## Repo-centric context governance
+
+For repo-centric projects, use `secondary_memory_governance/` as the single
+baseline behavior. It reproduces the stockanalyst-style workflow without
+copying adopter-specific domain rules.
+
+The baseline includes:
+
+- `docs/project_map/context_index.yaml` task-profile routing;
+- bounded read-set selection;
+- retrieval receipts;
+- API-agent context bundle shape;
+- context-selection smoke cases;
+- report-only documentation harness checks.
+
+The reference scripts live in `tools/` and are copied into the target project
+as `scripts/ai_context_helper.py` and `scripts/documentation_harness.py`:
+
+```bash
+python3 "Agent Kit/kit/tools/context_governance_helper.py" --root "<Project Root>" read-set --profile startup --format json
+python3 "Agent Kit/kit/tools/documentation_harness.py" --root "<Project Root>" --format json
+```
+
+Agent Memory Kit remains file-based. The helper scripts are local read-only
+reference implementations, not runtime memory or security enforcement.
+
+---
+
 ## How to start
 
 The owner provides:
@@ -163,12 +191,18 @@ A later work session should continue from documented Project Map state, not from
 For the `secondary_memory_governance` baseline in existing repo-centric projects,
 start from operational docs plus:
 
-1. `docs/project_map/working_state.yaml`
-2. `docs/project_map/source_authority.yaml`
-3. `docs/project_map/permissions_policy.yaml`
-4. `docs/project_map/retrieval_policy.yaml`
-5. `docs/project_map/retrieval_scoring_policy.yaml`
-6. `docs/project_map/memory_lifecycle_policy.yaml`
+1. `AGENTS.md`
+2. `docs/NEXT_STEPS.md`
+3. `docs/source_of_truth_hierarchy.md`
+4. `docs/context_packs/current_status.md`
+5. `docs/context_governance_rules.md` when context routing, docs lifecycle, or memory promotion is in scope
+6. `docs/project_map/context_index.yaml`
+7. `docs/project_map/source_authority.yaml`
+8. `docs/project_map/permissions_policy.yaml`
+9. `docs/project_map/retrieval_policy.yaml`
+10. `docs/project_map/retrieval_scoring_policy.yaml`
+11. `docs/project_map/memory_lifecycle_policy.yaml`
+12. `docs/project_map/working_state.yaml`
 
 Use the fuller flow below only when the project has explicitly adopted a full
 Project Map, task, handoff, or durable-memory profile:

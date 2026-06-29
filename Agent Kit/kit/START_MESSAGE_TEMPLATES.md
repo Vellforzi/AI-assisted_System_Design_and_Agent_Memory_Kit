@@ -273,13 +273,13 @@ Scope: the project is already active at <path>. Components: <list>.
 Task: propose the safest adoption plan for installing Agent Memory Kit into this existing project without changing product code.
 Use EXISTING_PROJECT_ADOPTION_GUIDE.md. If the project already has strong docs or AI instructions, also use MATURE_EXISTING_PROJECT_ADOPTION_PROFILE.md.
 Return:
-1. recommended secondary-memory governance overlay;
+1. recommended repo-centric context governance baseline;
 2. current source-of-truth hierarchy if discoverable;
 3. confirmation that Project Map remains secondary memory unless `source_authority` says otherwise;
 4. first read-only inventory pass;
-5. source-authority and permission-policy draft scope;
+5. context-index, source-authority, and permission-policy draft scope;
 6. minimal AGENTS.md / Cursor rule patch only if needed;
-7. eval smoke-test plan.
+7. context-selection and governance smoke-test plan.
 Do not write files.
 ```
 

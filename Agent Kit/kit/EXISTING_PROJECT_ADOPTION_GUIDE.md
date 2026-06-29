@@ -1,4 +1,4 @@
-# Existing Project Governance Overlay Guide
+# Existing Project Context Governance Guide
 
 Status: practical baseline for active repo-centric projects
 Purpose: add Agent Kit governance to an existing project without replacing its
@@ -8,10 +8,10 @@ Use this guide when the project already has useful operational docs such as
 `AGENTS.md`, roadmap/status docs, source-of-truth hierarchy, context packs,
 layer-specific specs, issues, or tests.
 
-The default system for this class of project is:
+The default system for this class of project is one stockanalyst-style behavior:
 
 ```text
-Reusable Secondary-Memory Governance System
+Repo-Centric Context Governance Baseline
 ```
 
 Use `secondary_memory_governance/` as the package source.
@@ -37,24 +37,47 @@ Operational docs, code, tests, specs, issues, and current owner instructions win
 
 ---
 
-## 2. Target Overlay
+## 2. Target Baseline
 
-Install only the governance overlay unless the owner explicitly requests more.
+Install the repo-centric context governance baseline. It keeps Project Map as
+secondary memory while making context routing, receipts, and documentation
+checks reproducible.
 
 ```text
 <Project Root>/
   AGENTS.md
   .codexignore
   docs/
+    NEXT_STEPS.md
+    source_of_truth_hierarchy.md
+    context_governance_rules.md
+    context_packs/
+      current_status.md
+    research/
+      README.md
+    validation/
+      README.md
     project_map/
       README.md
+      context_index.yaml
       current_map.md
       source_authority.yaml
       permissions_policy.yaml
       retrieval_policy.yaml
+      retrieval_scoring_policy.yaml
+      memory_lifecycle_policy.yaml
+      tool_output_reference_template.yaml
       working_state.yaml
+      memory_quality_review_bar.md
       eval_suite/
         manual_smoke_cases.yaml
+        context_selection_smoke_cases.yaml
+    rules/
+      ai_development_rules.md
+      codex_prompt_rules.md
+  scripts/
+    ai_context_helper.py
+    documentation_harness.py
 ```
 
 Optional only if Cursor is used:
@@ -63,15 +86,17 @@ Optional only if Cursor is used:
 .cursorignore
 ```
 
-Do not install these as part of the baseline overlay:
+Do not install these as part of the baseline:
 
 ```text
 memory/
 .agent-memory/
 runtime memory
-full eval harness
 task tree
 handoff tree
+vector DB
+MCP server
+background capture
 replacement AGENTS.md
 ```
 
@@ -82,17 +107,41 @@ replacement AGENTS.md
 Copy or adapt these files from `secondary_memory_governance/`:
 
 ```text
+AGENTS_SNIPPET.md
+next_steps_template.md
+current_status_template.md
+source_of_truth_hierarchy_template.md
+context_governance_rules_template.md
+project_map_readme_template.md
+context_index.yaml
+context_selection_smoke_cases.yaml
 source_authority.yaml
 permissions_policy.yaml
 retrieval_policy.yaml
+retrieval_scoring_policy.yaml
+memory_lifecycle_policy.yaml
+tool_output_reference_template.yaml
 working_state.yaml
+current_map_template.md
+memory_quality_review_bar.md
 manual_smoke_cases.yaml
+ai_development_rules_template.md
+codex_prompt_rules_template.md
+research_readme_template.md
+validation_readme_template.md
 .codexignore_TEMPLATE
 .cursorignore_TEMPLATE
-AGENTS_SNIPPET.md
 ```
 
-Create or update `docs/project_map/README.md` so it states:
+Copy reference tools from `tools/`:
+
+```text
+tools/context_governance_helper.py -> scripts/ai_context_helper.py
+tools/documentation_harness.py -> scripts/documentation_harness.py
+```
+
+Create or update `docs/project_map/README.md` from
+`project_map_readme_template.md` so it states:
 
 - Project Map is secondary memory;
 - operational docs win;
@@ -217,7 +266,7 @@ Keep these cases manual until repeated failures justify automation.
 
 ## 8. Acceptance Criteria
 
-The overlay is installed correctly when a fresh agent can:
+The baseline is installed correctly when a fresh agent can:
 
 - identify the current operational priority from operational docs;
 - identify deferred tracks as deferred;
@@ -234,5 +283,18 @@ The overlay is installed correctly when a fresh agent can:
   product semantics unchanged;
 - use domain-boundary smoke cases to catch the highest-risk agent mistakes.
 
-Stop after these criteria are met unless the owner explicitly requests a larger
-memory/runtime system.
+Run these local checks before considering adoption complete:
+
+```bash
+python scripts/ai_context_helper.py read-set --profile startup --format json
+python scripts/ai_context_helper.py smoke-check --format json
+python scripts/documentation_harness.py --format json
+```
+
+These checks reproduce the stockanalyst-style behavior: bounded context,
+trigger-only secondary sources, high-risk exclusions, retrieval receipts,
+read-only API-agent context shape, and report-only documentation governance.
+
+Stop after these criteria are met unless the owner explicitly requests runtime
+memory, task trees, handoff trees, vector databases, MCP servers, background
+capture, or other heavier infrastructure.

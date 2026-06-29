@@ -1,6 +1,10 @@
 # Memory-Quality Review Bar
 
 Status: reusable review checklist
+Last aligned: <YYYY-MM-DD>
+Audience: owner, reviewers, AI/Codex sessions
+Runtime impact: none
+Authority: secondary governance review checklist; operational docs and current owner instructions win
 Purpose: block memory, retrieval, permission, and governance changes that weaken owner control or source authority.
 
 Do not approve a memory, rule, schema, retrieval, or permission change if it:

@@ -2,7 +2,8 @@
 
 Status: staged implementation plan
 Updated for: v3.8.0 rules with canonical policy templates, task contracts,
-claim ledgers, handoffs, eval triggers, and secondary-memory governance overlay.
+claim ledgers, handoffs, eval triggers, and the repo-centric context governance
+baseline.
 
 This plan is intentionally split into several passes. The repository contains
 many interdependent guides, YAML policies, examples, skills, eval cases, and
@@ -11,29 +12,29 @@ produce a small, reviewable diff and a verification receipt.
 
 ## Current Finding
 
-The kit now has two related layers:
+The kit now has two related sets of reusable artifacts:
 
 1. Generic canonical templates in `Agent Kit/kit/`:
    `SOURCE_AUTHORITY_TEMPLATE.yaml`, `PERMISSIONS_POLICY_TEMPLATE.yaml`,
    `RETRIEVAL_POLICY_TEMPLATE.yaml`, `RETRIEVAL_SCORING_POLICY_TEMPLATE.yaml`,
    `TASK_CONTRACT_TEMPLATE.yaml`, `CLAIM_LEDGER_TEMPLATE.yaml`, and
    `HANDOFF_TEMPLATE.yaml`.
-2. A concrete secondary-memory overlay in
+2. A repo-centric context governance baseline in
    `Agent Kit/kit/secondary_memory_governance/`.
 
 The canonical templates are already mostly generic and use placeholders such as
-`<project-id>`. The remaining integration problem is that the secondary-memory
-overlay still contains concrete adopter defaults and domain-specific rules in
-files that are described as reusable baseline files.
+`<project-id>`. The integration problem addressed by this plan was preventing
+the reusable baseline from accumulating concrete adopter defaults and
+domain-specific rules.
 
 Main risk:
 
-- adopters may copy the reusable overlay and accidentally inherit concrete
+- adopters may copy the reusable baseline and accidentally inherit concrete
   adopter runtime assumptions, paths, smoke cases, and boundaries.
 
 ## Objective
 
-Align the reusable secondary-memory governance overlay with the generic
+Align the reusable repo-centric context governance baseline with the generic
 canonical templates. Concrete adopter-specific project context must
 not be added to this package as a built-in profile; it belongs in the downstream
 project or in an external/private fixture set.
@@ -41,7 +42,7 @@ project or in an external/private fixture set.
 The final state should provide:
 
 - generic reusable governance templates;
-- a generic secondary-memory overlay derived from the templates;
+- a generic repo-centric context governance baseline derived from the templates;
 - no bundled concrete adopter runtime profile in the reusable kit;
 - aligned schema, examples, lifecycle, retrieval, task, claim, and handoff data;
 - generic eval/smoke cases that adopters can copy and extend in their own
@@ -468,7 +469,7 @@ v3.9.0: optional memory helper tooling and integrated review workflows
 The integration is complete when:
 
 - canonical templates are clearly identified as generic source templates;
-- secondary-memory overlay files are reusable without domain leakage;
+- repo-centric baseline files are reusable without domain leakage;
 - concrete adopter runtime profiles are not bundled into the reusable kit;
 - schema, examples, lifecycle, retrieval, task contracts, claim ledgers, and
   handoffs agree;

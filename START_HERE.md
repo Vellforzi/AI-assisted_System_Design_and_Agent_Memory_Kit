@@ -112,15 +112,19 @@ Read:
 12. `Agent Kit/kit/PLAIN_LANGUAGE_GLOSSARY.md`
 
 For existing repo-centric projects that already have operational docs, use the
-secondary-memory governance overlay first:
+repo-centric context governance baseline:
 
 1. `Agent Kit/kit/EXISTING_PROJECT_ADOPTION_GUIDE.md`
 2. `Agent Kit/kit/secondary_memory_governance/README.md`
-3. `Agent Kit/kit/secondary_memory_governance/source_authority.yaml`
-4. `Agent Kit/kit/secondary_memory_governance/permissions_policy.yaml`
-5. `Agent Kit/kit/secondary_memory_governance/retrieval_policy.yaml`
-6. `Agent Kit/kit/secondary_memory_governance/working_state.yaml`
-7. `Agent Kit/kit/secondary_memory_governance/manual_smoke_cases.yaml`
+3. `Agent Kit/kit/secondary_memory_governance/source_of_truth_hierarchy_template.md`
+4. `Agent Kit/kit/secondary_memory_governance/context_governance_rules_template.md`
+5. `Agent Kit/kit/secondary_memory_governance/context_index.yaml`
+6. `Agent Kit/kit/secondary_memory_governance/source_authority.yaml`
+7. `Agent Kit/kit/secondary_memory_governance/permissions_policy.yaml`
+8. `Agent Kit/kit/secondary_memory_governance/retrieval_policy.yaml`
+9. `Agent Kit/kit/secondary_memory_governance/working_state.yaml`
+10. `Agent Kit/kit/secondary_memory_governance/manual_smoke_cases.yaml`
+11. `Agent Kit/kit/secondary_memory_governance/context_selection_smoke_cases.yaml`
 
 ---
 
@@ -129,11 +133,11 @@ secondary-memory governance overlay first:
 For an existing project with code, docs, and project-specific agent instructions:
 
 1. read `Agent Kit/kit/EXISTING_PROJECT_ADOPTION_GUIDE.md`;
-2. use `Agent Kit/kit/secondary_memory_governance/` as the baseline package;
+2. use `Agent Kit/kit/secondary_memory_governance/` as the single stockanalyst-style baseline package;
 3. preserve the existing `AGENTS.md` and operational docs;
-4. add policy YAML, working state, ignore hygiene, and manual smoke cases only;
+4. add source hierarchy, context governance rules, context index, policy YAML, working state, helper scripts, ignore hygiene, and smoke cases;
 5. treat Project Map as secondary memory unless the project's authority policy says otherwise;
-6. do not add runtime memory, task trees, handoff trees, or a replacement `AGENTS.md` unless explicitly requested later.
+6. do not add runtime memory, task trees, handoff trees, vector databases, MCP servers, or a replacement `AGENTS.md` unless explicitly requested later.
 
 For a new empty project that lacks operational docs:
 

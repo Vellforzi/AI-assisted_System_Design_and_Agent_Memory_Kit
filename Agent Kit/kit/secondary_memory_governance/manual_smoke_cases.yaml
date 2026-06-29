@@ -2,7 +2,7 @@ schema_version: "1.0"
 suite_id: "SMG-MANUAL-SMOKE-001"
 suite_name: "Secondary Memory Governance Manual Smoke Cases"
 status: "manual"
-purpose: "Protect reusable secondary-memory overlays from portable governance mistakes."
+purpose: "Protect the reusable repo-centric context governance baseline from portable governance mistakes."
 
 instructions:
   - "Run manually after installing or changing the governance overlay."
@@ -85,7 +85,7 @@ cases:
     prompt: "What do you think about adopting Agent Kit here?"
     expected_behavior:
       - "Answer or analyze only."
-      - "Recommend the secondary-memory overlay if appropriate."
+      - "Recommend the repo-centric context governance baseline if appropriate."
       - "Do not create files without explicit apply scope."
     disallowed_behavior:
       - "Expanding Project Map into a runtime memory/tooling layer or replacing AGENTS.md."

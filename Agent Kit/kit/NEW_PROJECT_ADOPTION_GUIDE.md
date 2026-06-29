@@ -140,3 +140,60 @@ Minimum cases:
 - generic model knowledge cannot become project truth;
 - explicit action requires target and scope;
 - provider memory is not Project Map.
+
+---
+
+## 9. Repo-Centric Context Governance Baseline
+
+New projects should converge on the same repo-centric context governance
+behavior used by stockanalyst.
+
+Start with the minimal useful subset, then fill the remaining files as soon as
+the project has enough operational docs to route context:
+
+- an `AGENTS.md` entrypoint;
+- `docs/NEXT_STEPS.md` or equivalent current-status handoff;
+- a source-of-truth hierarchy;
+- a compact current-status context pack;
+- Project Map policy files;
+- enough docs or specs that bounded read-set routing is useful.
+
+Copy or adapt from `secondary_memory_governance/`:
+
+```text
+Agent Kit/kit/secondary_memory_governance/AGENTS_SNIPPET.md
+Agent Kit/kit/secondary_memory_governance/next_steps_template.md
+Agent Kit/kit/secondary_memory_governance/current_status_template.md
+Agent Kit/kit/secondary_memory_governance/source_of_truth_hierarchy_template.md
+Agent Kit/kit/secondary_memory_governance/context_governance_rules_template.md
+Agent Kit/kit/secondary_memory_governance/project_map_readme_template.md
+Agent Kit/kit/secondary_memory_governance/context_index.yaml
+Agent Kit/kit/secondary_memory_governance/context_selection_smoke_cases.yaml
+Agent Kit/kit/secondary_memory_governance/source_authority.yaml
+Agent Kit/kit/secondary_memory_governance/permissions_policy.yaml
+Agent Kit/kit/secondary_memory_governance/retrieval_policy.yaml
+Agent Kit/kit/secondary_memory_governance/retrieval_scoring_policy.yaml
+Agent Kit/kit/secondary_memory_governance/memory_lifecycle_policy.yaml
+Agent Kit/kit/secondary_memory_governance/tool_output_reference_template.yaml
+Agent Kit/kit/secondary_memory_governance/working_state.yaml
+Agent Kit/kit/secondary_memory_governance/current_map_template.md
+Agent Kit/kit/secondary_memory_governance/memory_quality_review_bar.md
+Agent Kit/kit/secondary_memory_governance/manual_smoke_cases.yaml
+Agent Kit/kit/secondary_memory_governance/ai_development_rules_template.md
+Agent Kit/kit/secondary_memory_governance/codex_prompt_rules_template.md
+Agent Kit/kit/secondary_memory_governance/research_readme_template.md
+Agent Kit/kit/secondary_memory_governance/validation_readme_template.md
+Agent Kit/kit/tools/context_governance_helper.py
+Agent Kit/kit/tools/documentation_harness.py
+```
+
+Target checks:
+
+```bash
+python scripts/ai_context_helper.py smoke-check --format json
+python scripts/documentation_harness.py --format json
+```
+
+This reproduces the baseline behavior: task-local scope first, small read sets,
+trigger-only Project Map/research/archive context, receipts, and report-only
+documentation governance.

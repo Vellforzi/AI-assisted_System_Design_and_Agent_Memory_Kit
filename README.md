@@ -27,7 +27,7 @@ The agent should operate from:
 
 The kit turns project context into structured, inspectable memory so that future sessions can restore the right context without relying on fragile chat history, hidden provider memory, or generic model guesses.
 
-For existing repo-centric projects that already have strong operational docs, the default install is a secondary-memory governance overlay: Project Map summarizes and navigates, while operational docs, code, tests, specs, issues, and current owner instructions remain authoritative.
+For existing repo-centric projects, the default install is the stockanalyst-style `secondary_memory_governance/` baseline: Project Map summarizes and navigates, operational docs/code/tests/specs/issues/current owner instructions remain authoritative, and context routing is made reproducible through a context index, receipts, smoke checks, and report-only documentation harnesses.
 
 ---
 
@@ -77,8 +77,8 @@ AI-assisted System Design and Agent Memory Kit/
 1. Read `START_HERE.md`.
 2. Read `AI-assisted System Design/README.md` if you are setting up a project workflow.
 3. Read `Agent Kit/README.md` if you are setting up project memory.
-4. For an existing repo-centric project, read `Agent Kit/kit/EXISTING_PROJECT_ADOPTION_GUIDE.md` and use `Agent Kit/kit/secondary_memory_governance/` as the baseline package.
-5. Copy only the needed overlay files into the project's `docs/project_map/` or equivalent docs layer.
+4. For an existing repo-centric project, read `Agent Kit/kit/EXISTING_PROJECT_ADOPTION_GUIDE.md` and use `Agent Kit/kit/secondary_memory_governance/` as the single stockanalyst-style baseline package.
+5. Copy the baseline files into the project's operational docs, `docs/project_map/`, and `scripts/` locations.
 6. Add only the short `AGENTS_SNIPPET.md` rules to the existing project-specific instruction file. Do not replace `AGENTS.md` with a generic template.
 7. Use `Agent Kit/kit/NEW_PROJECT_ADOPTION_GUIDE.md` only for an empty project that lacks operational docs.
 

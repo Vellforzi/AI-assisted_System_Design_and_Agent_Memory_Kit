@@ -34,7 +34,19 @@ Package purpose: portable starter guide and memory operating layer for using AI 
 
 ## Secondary-memory governance baseline
 
-- `Agent Kit/kit/secondary_memory_governance/README.md` - reusable baseline overlay for existing repo-centric projects.
+- `Agent Kit/kit/secondary_memory_governance/README.md` - single stockanalyst-style repo-centric context governance baseline for existing projects.
+- `Agent Kit/kit/secondary_memory_governance/AGENTS_SNIPPET.md` - project `AGENTS.md` snippet for task-local scope, startup read order, skipped context, mutation rules, and reporting.
+- `Agent Kit/kit/secondary_memory_governance/next_steps_template.md` - active task navigation template for `docs/NEXT_STEPS.md`.
+- `Agent Kit/kit/secondary_memory_governance/current_status_template.md` - compact current-status context pack template for fresh sessions.
+- `Agent Kit/kit/secondary_memory_governance/source_of_truth_hierarchy_template.md` - operational source-of-truth hierarchy template.
+- `Agent Kit/kit/secondary_memory_governance/context_governance_rules_template.md` - task-local scope, minimal retrieval, docs lifecycle, and session-context promotion template.
+- `Agent Kit/kit/secondary_memory_governance/project_map_readme_template.md` - secondary Project Map entrypoint template.
+- `Agent Kit/kit/secondary_memory_governance/context_index.yaml` - machine-readable context index template for task-profile read sets.
+- `Agent Kit/kit/secondary_memory_governance/context_selection_smoke_cases.yaml` - copyable smoke-case suite for context-selection checks.
+- `Agent Kit/kit/secondary_memory_governance/codex_prompt_rules_template.md` - bounded Codex prompt contract template with receipt requirements.
+- `Agent Kit/kit/secondary_memory_governance/ai_development_rules_template.md` - AI workflow rule template for scoped reads, mutation gates, and conflict handling.
+- `Agent Kit/kit/secondary_memory_governance/research_readme_template.md` - research navigation template that keeps research as evidence/context until promotion.
+- `Agent Kit/kit/secondary_memory_governance/validation_readme_template.md` - validation navigation template for checks and evidence boundaries.
 - `Agent Kit/kit/secondary_memory_governance/source_authority.yaml` - source authority policy where Project Map is secondary memory and operational docs win.
 - `Agent Kit/kit/secondary_memory_governance/permissions_policy.yaml` - action-intent, scoped read-only exploration, mutation gates, and enforcement labels.
 - `Agent Kit/kit/secondary_memory_governance/retrieval_policy.yaml` - smallest evidence-bearing retrieval policy for secondary memory.
@@ -42,12 +54,12 @@ Package purpose: portable starter guide and memory operating layer for using AI 
 - `Agent Kit/kit/secondary_memory_governance/memory_lifecycle_policy.yaml` - candidate-first lifecycle, stale suppression, episodic event, and tool-use lesson rules.
 - `Agent Kit/kit/secondary_memory_governance/tool_output_reference_template.yaml` - compact reference template for long tool outputs.
 - `Agent Kit/kit/secondary_memory_governance/working_state.yaml` - compact replay root for fresh sessions.
-- `Agent Kit/kit/secondary_memory_governance/manual_smoke_cases.yaml` - manual portable governance smoke cases for secondary-memory overlays.
+- `Agent Kit/kit/secondary_memory_governance/current_map_template.md` - secondary owner-memory map template.
+- `Agent Kit/kit/secondary_memory_governance/manual_smoke_cases.yaml` - manual portable governance smoke cases for the repo-centric baseline.
 - `Agent Kit/kit/secondary_memory_governance/PASS_3_VERIFICATION_RECEIPT.md` - verification receipt that concrete adopter profiles are not bundled in the reusable overlay.
 - `Agent Kit/kit/secondary_memory_governance/memory_quality_review_bar.md` - review bar for memory, retrieval, permission, and governance changes.
 - `Agent Kit/kit/secondary_memory_governance/.codexignore_TEMPLATE` - Codex context-hygiene template, not a security boundary.
 - `Agent Kit/kit/secondary_memory_governance/.cursorignore_TEMPLATE` - optional Cursor context-hygiene template, not a security boundary.
-- `Agent Kit/kit/secondary_memory_governance/AGENTS_SNIPPET.md` - short snippet for existing project-specific `AGENTS.md`.
 
 ---
 
@@ -74,7 +86,7 @@ Package purpose: portable starter guide and memory operating layer for using AI 
 - `Agent Kit/kit/MEMORY_TOOL_INTERFACE_CONTRACT.md` — expected behavior for memory tool implementations.
 - `Agent Kit/kit/PROVIDER_MEMORY_AND_RUNTIME_BOUNDARY.md` — boundary between Project Map, provider memory, runtime state, and external research.
 - `Agent Kit/kit/SERVICE_RULE_PLACEMENT_GUIDE.md` — where to place rules/instructions in AI services.
-- `Agent Kit/kit/EXISTING_PROJECT_ADOPTION_GUIDE.md` — baseline guide for adding the secondary-memory governance overlay to active existing projects.
+- `Agent Kit/kit/EXISTING_PROJECT_ADOPTION_GUIDE.md` — baseline guide for adding the repo-centric context governance baseline to active existing projects.
 - `Agent Kit/kit/MATURE_EXISTING_PROJECT_ADOPTION_PROFILE.md` — reference profile for strengthening mature projects; concrete baseline package is `secondary_memory_governance/`.
 - `Agent Kit/kit/NEW_PROJECT_ADOPTION_GUIDE.md` — setup guide for empty new projects.
 - `Agent Kit/kit/SOLO_OWNER_WORKFLOW_GUIDE.md` — high-control solo-owner workflow.
@@ -125,6 +137,8 @@ Package purpose: portable starter guide and memory operating layer for using AI 
 
 - `Agent Kit/kit/tools/README.md` — helper script documentation.
 - `Agent Kit/kit/tools/run_eval_checklist.py` — creates a local eval run folder and Markdown checklist from YAML cases.
+- `Agent Kit/kit/tools/context_governance_helper.py` - read-only reference helper for context-index read sets, receipts, API-agent context bundles, and context smoke checks.
+- `Agent Kit/kit/tools/documentation_harness.py` - report-only documentation harness for metadata, reachability, and lower-authority reference checks.
 
 ---
 
