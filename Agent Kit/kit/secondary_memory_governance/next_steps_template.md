@@ -12,6 +12,12 @@ Authority: current task navigation; subordinate to current owner instructions
 
 - <one active priority>
 
+## Current Next Step
+
+- <one scoped next safe action>
+- Evidence/read-set refs: <paths or none>
+- Related roadmap/status/spec entrypoint: <path or none>
+
 ## Explicit Non-Goals
 
 - <known out-of-scope item>

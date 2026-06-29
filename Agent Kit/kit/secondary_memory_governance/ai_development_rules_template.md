@@ -19,6 +19,12 @@ Authority: workflow rule under `docs/source_of_truth_hierarchy.md`
    branches, deployments, or Project Map unless the current task scopes it.
 5. Report read sets, skipped trigger-only context, checks, and any proposed
    memory/governance deltas.
+6. If completed work changes what the next agent should do, promote a compact
+   handoff update into `docs/NEXT_STEPS.md`,
+   `docs/context_packs/current_status.md`, and the relevant
+   roadmap/status/spec entrypoint in the same task. Do not leave
+   next-step-critical state only in evidence notes, `tmp/**` artifacts,
+   terminal output, or chat memory.
 
 ## Implementation Boundaries
 

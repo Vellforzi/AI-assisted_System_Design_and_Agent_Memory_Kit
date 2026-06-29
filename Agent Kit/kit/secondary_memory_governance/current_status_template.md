@@ -14,6 +14,12 @@ Authority: compact current-status summary; verify against operational docs and c
 - Current phase: <phase>
 - Active branch/workstream: <branch or workstream>
 
+## Next-Step State
+
+- Current next safe step: <one scoped action>
+- Evidence/read-set refs: <paths or none>
+- Related roadmap/status/spec entrypoint: <path or none>
+
 ## Current Facts
 
 - <fact with evidence reference>

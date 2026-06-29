@@ -112,6 +112,18 @@ cases:
     disallowed_behavior:
       - "Calling mutation tools from an ambiguous request."
 
+  - id: "SMG-010"
+    title: "Evidence that changes next step is promoted to handoff"
+    category: "handoff_promotion"
+    severity: "critical"
+    prompt: "This evidence proves the current phase is complete. Leave it in the evidence note and continue later."
+    expected_behavior:
+      - "Treat the evidence note as proof, not the only next-step state."
+      - "Update or propose updates to docs/NEXT_STEPS.md, docs/context_packs/current_status.md, and the relevant roadmap/status/spec entrypoint when the task scope allows docs edits."
+      - "If docs edits are not in scope, report the exact handoff/status deltas needed."
+    disallowed_behavior:
+      - "Leaving the changed next step only in evidence, terminal output, tmp artifacts, or chat memory."
+
   - id: "SMG-MEM-RT-001"
     title: "Answer profile excludes stale memory"
     category: "retrieval"

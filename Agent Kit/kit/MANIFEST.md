@@ -35,19 +35,19 @@ Package purpose: portable starter guide and memory operating layer for using AI 
 ## Secondary-memory governance baseline
 
 - `Agent Kit/kit/secondary_memory_governance/README.md` - single repo-centric secondary-memory governance baseline for existing projects.
-- `Agent Kit/kit/secondary_memory_governance/AGENTS_SNIPPET.md` - project `AGENTS.md` snippet for task-local scope, startup read order, skipped context, mutation rules, and reporting.
-- `Agent Kit/kit/secondary_memory_governance/next_steps_template.md` - active task navigation template for `docs/NEXT_STEPS.md`.
-- `Agent Kit/kit/secondary_memory_governance/current_status_template.md` - compact current-status context pack template for fresh sessions.
-- `Agent Kit/kit/secondary_memory_governance/source_of_truth_hierarchy_template.md` - operational source-of-truth hierarchy template.
-- `Agent Kit/kit/secondary_memory_governance/context_governance_rules_template.md` - task-local scope, minimal retrieval, docs lifecycle, and session-context promotion template.
+- `Agent Kit/kit/secondary_memory_governance/AGENTS_SNIPPET.md` - project `AGENTS.md` snippet for task-local scope, startup read order, skipped context, mutation rules, next-step promotion, and reporting.
+- `Agent Kit/kit/secondary_memory_governance/next_steps_template.md` - active task navigation template for `docs/NEXT_STEPS.md`, including current next safe step and evidence/read-set refs.
+- `Agent Kit/kit/secondary_memory_governance/current_status_template.md` - compact current-status and next-step context pack template for fresh sessions.
+- `Agent Kit/kit/secondary_memory_governance/source_of_truth_hierarchy_template.md` - operational source-of-truth hierarchy template with evidence boundary and next-step promotion rules.
+- `Agent Kit/kit/secondary_memory_governance/context_governance_rules_template.md` - task-local scope, minimal retrieval, docs lifecycle, session-context promotion, and next-step impact promotion template.
 - `Agent Kit/kit/secondary_memory_governance/project_map_readme_template.md` - secondary Project Map entrypoint template.
 - `Agent Kit/kit/secondary_memory_governance/context_index.yaml` - machine-readable context index template for task-profile read sets.
 - `Agent Kit/kit/secondary_memory_governance/context_selection_smoke_cases.yaml` - copyable smoke-case suite for context-selection checks.
-- `Agent Kit/kit/secondary_memory_governance/codex_prompt_rules_template.md` - bounded Codex prompt contract template with receipt requirements.
-- `Agent Kit/kit/secondary_memory_governance/ai_development_rules_template.md` - AI workflow rule template for scoped reads, mutation gates, and conflict handling.
+- `Agent Kit/kit/secondary_memory_governance/codex_prompt_rules_template.md` - bounded Codex prompt contract template with receipt and handoff update requirements.
+- `Agent Kit/kit/secondary_memory_governance/ai_development_rules_template.md` - AI workflow rule template for scoped reads, mutation gates, conflict handling, and next-step promotion.
 - `Agent Kit/kit/secondary_memory_governance/research_readme_template.md` - research navigation template that keeps research as evidence/context until promotion.
 - `Agent Kit/kit/secondary_memory_governance/validation_readme_template.md` - validation navigation template for checks and evidence boundaries.
-- `Agent Kit/kit/secondary_memory_governance/source_authority.yaml` - source authority policy where Project Map is secondary memory and operational docs win.
+- `Agent Kit/kit/secondary_memory_governance/source_authority.yaml` - source authority policy where Project Map is secondary memory, operational docs win, and next-step-critical evidence must be promoted.
 - `Agent Kit/kit/secondary_memory_governance/permissions_policy.yaml` - action-intent, scoped read-only exploration, mutation gates, and enforcement labels.
 - `Agent Kit/kit/secondary_memory_governance/retrieval_policy.yaml` - smallest evidence-bearing retrieval policy for secondary memory.
 - `Agent Kit/kit/secondary_memory_governance/retrieval_scoring_policy.yaml` - hard-gated retrieval scoring policy for secondary memory.

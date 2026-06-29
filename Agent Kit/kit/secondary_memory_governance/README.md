@@ -1,6 +1,10 @@
 # Repo-Centric Context Governance Baseline
 
 Status: reusable baseline package
+Last aligned: <YYYY-MM-DD>
+Audience: owners, AI/Codex sessions, maintainers
+Runtime impact: none; reusable documentation and context-governance baseline
+Authority: package navigation and adoption guide; subordinate to installed project source-of-truth docs
 Purpose: reproduce repo-centric secondary-memory AI working behavior in any
 repo-centric project without copying adopter-specific domain facts.
 
@@ -104,13 +108,15 @@ background capture
 
 - template for `docs/NEXT_STEPS.md`;
 - records the active priority, explicit non-goals, startup handoff, open
-  questions, and next checks.
+  questions, current next safe step, evidence/read-set refs, and next checks.
 
 `current_status_template.md`
 
 - template for `docs/context_packs/current_status.md`;
 - gives fresh sessions a compact operational status summary without becoming
   higher authority than current owner instructions, code, or specs.
+- carries compact next-step state when completed work changes what a future
+  session should do next.
 
 `source_of_truth_hierarchy_template.md`
 
@@ -122,11 +128,12 @@ background capture
 
 - template for `docs/context_governance_rules.md`;
 - defines task-local scope gate, minimal retrieval discipline, docs lifecycle,
-  link lifecycle, session-context promotion, and Project Map boundaries.
+  link lifecycle, session-context promotion, next-step impact promotion, and
+  Project Map boundaries.
 
 `context_index.yaml`
 
-- template for `docs/project_map/context_index.yaml`;
+- secondary template for `docs/project_map/context_index.yaml`;
 - routes agents to conservative P0/P1 read sets by task profile;
 - marks trigger-only and high-risk context;
 - does not grant source authority or mutation permission.
@@ -287,6 +294,12 @@ After significant work, the agent may propose a Project Map delta,
 working-state update, smoke case, or source-authority repair note. It must not
 apply those memory or governance updates unless the task explicitly includes
 them.
+
+If significant work changes what a fresh agent should do next, the agent must
+promote the compact state into the primary handoff/status layer in the same
+task: `docs/NEXT_STEPS.md`, `docs/context_packs/current_status.md`, and the
+relevant roadmap/status/spec entrypoint. Evidence remains the proof base, not
+the only carrier of next-step state.
 
 ---
 

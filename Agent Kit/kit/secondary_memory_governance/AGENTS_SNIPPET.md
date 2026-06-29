@@ -1,5 +1,11 @@
 ## Repo-Centric Context Governance Baseline
 
+Status: Active repository agent guidance snippet
+Last aligned: <YYYY-MM-DD>
+Audience: AI/Codex sessions and maintainers
+Runtime impact: none; governs agent context selection and handoff behavior only
+Authority: agent bootstrap guidance; subordinate to current owner instructions and repository source-of-truth docs
+
 This project uses `docs/project_map/` as secondary memory and navigation.
 Operational docs, code, tests, specs, issues, and current owner instructions win
 over Project Map on conflicts.
@@ -83,6 +89,12 @@ New durable memory starts as candidate or staged unless evidence and owner or
 review rules explicitly promote it. Stale, superseded, rejected, and archived
 records are not current truth in normal answer, plan, or resume profiles.
 Ignore files are context hygiene only, not secret protection.
+
+If completed work changes what a future agent should do next, update the primary
+handoff/status docs in the same scoped task: `docs/NEXT_STEPS.md`,
+`docs/context_packs/current_status.md`, and the relevant roadmap/status/spec
+entrypoint. Evidence notes remain proof; they must not be the only carrier of
+next-step-critical state.
 
 ### Reporting
 

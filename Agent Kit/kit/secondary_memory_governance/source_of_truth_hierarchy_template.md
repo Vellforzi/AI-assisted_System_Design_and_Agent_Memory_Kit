@@ -115,6 +115,12 @@ Research and knowledge files are context, evidence, hypotheses, or accepted
 syntheses. They are not implementation authority until promoted into a Tier 1
 or Tier 3 source through reviewed scope.
 
+Evidence can prove why a state changed, but it is not the primary carrier for
+what a fresh agent should do next. When evidence changes the active next step,
+current phase, required read set, or roadmap/spec direction, promote the compact
+state into `docs/NEXT_STEPS.md`, `docs/context_packs/current_status.md`, and
+the relevant roadmap/status/spec entrypoint in the same scoped task.
+
 ### Tier 5 - Project Map
 
 Project Map preserves owner memory, navigation metadata, working state, risks,
@@ -158,4 +164,5 @@ When source authority, priority, or active boundaries change:
 1. update the canonical operational doc;
 2. update the closest navigation index;
 3. update compact current status when handoff context changed;
-4. report Project Map drift unless memory-update scope is explicit.
+4. update `docs/NEXT_STEPS.md` when the next safe action changed;
+5. report Project Map drift unless memory-update scope is explicit.

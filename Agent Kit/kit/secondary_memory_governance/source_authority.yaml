@@ -77,6 +77,7 @@ promotion_rules:
   external_research_to_project_fact: "requires owner approval or direct project evidence"
   hypothesis_to_fact_current: "requires valid evidence and verified or owner-approved review_state"
   project_map_delta_to_truth: "requires owner approval and operational source update when it changes project truth"
+  next_step_critical_evidence: "if evidence changes what a future agent should do next, promote compact state to docs/NEXT_STEPS.md, docs/context_packs/current_status.md, and the relevant roadmap/status/spec entrypoint in the same scoped task"
   stale_to_current: "requires re-verification"
   raw_tool_output_to_project_fact: "requires compact reference, source authority classification, and review"
   candidate_memory_to_current: "requires evidence and verified or owner-approved review state"

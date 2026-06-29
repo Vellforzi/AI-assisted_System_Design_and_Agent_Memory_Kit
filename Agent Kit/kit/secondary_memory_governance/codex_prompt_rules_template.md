@@ -47,6 +47,8 @@ Every non-trivial Codex task should include:
 16. Tests/checks
 17. Retrieval receipt requirement
 18. Report-back requirements
+19. Handoff update requirement when the task can change what a future session
+    should do next
 
 ---
 
@@ -125,6 +127,11 @@ Skip by default:
 - Do not read or write high-risk artifacts unless explicitly scoped.
 - Add or update tests if logic changes.
 - Update docs if behavior, architecture, or workflow changes.
+- If the result changes the next safe step, current phase, required read set, or
+  roadmap/spec direction, update `docs/NEXT_STEPS.md`,
+  `docs/context_packs/current_status.md`, and the relevant
+  roadmap/status/spec entrypoint instead of leaving that state only in evidence,
+  terminal output, or chat memory.
 
 ## Expected output
 
@@ -150,7 +157,8 @@ If the helper is not used, provide the same receipt manually.
 
 Report task-local scope, selected read set, skipped context, changed files,
 summary, checks run, assumptions, risks, and confirmation that forbidden scope
-was not expanded.
+was not expanded. If next-step state changed, report which handoff/status or
+roadmap/spec entrypoint was updated.
 ````
 
 ---

@@ -149,7 +149,17 @@ Promotion requires:
    external-system payloads;
 5. authority label;
 6. inbound link if a new doc is created;
-7. no scope expansion from tests, replay, sandbox evidence, or docs cleanup.
+7. no scope expansion from tests, replay, sandbox evidence, or docs cleanup;
+8. next-step impact check: if the result changes what a future agent should do
+   next, update `docs/NEXT_STEPS.md`,
+   `docs/context_packs/current_status.md`, and the relevant
+   roadmap/status/spec entrypoint in the same reviewed docs-governance or
+   implementation scope.
+
+Evidence records are the proof base. They are not the only durable carrier for
+next-step-critical state. Do not leave the current next action, completed phase,
+required read set, or roadmap/spec direction only in evidence notes, raw tool
+output, temporary artifacts, or chat memory.
 
 Never promote raw secrets, tokens, private identifiers, raw logs, or external
 payloads into durable memory.

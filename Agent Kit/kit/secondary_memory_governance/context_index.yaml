@@ -107,7 +107,7 @@ entries:
     layer: "governance"
     task_profiles: [startup, docs_governance, planning, implementation, validation]
     default_retrieval_mode: "startup_required"
-    canonical_purpose: "Defines current active priority, task order, deferred tracks, and explicit non-goals."
+    canonical_purpose: "Defines current active priority, next safe step, task order, deferred tracks, evidence/read-set refs, and explicit non-goals."
     mutation_boundary: "Update for task-order or current-priority changes; does not override explicit task-local scope."
 
   - path: "docs/source_of_truth_hierarchy.md"
@@ -127,7 +127,7 @@ entries:
     layer: "context_pack"
     task_profiles: [startup, docs_governance, planning, implementation, validation, research]
     default_retrieval_mode: "startup_required"
-    canonical_purpose: "Compact current-status handoff for active priority, deferred tracks, validation state, and repository risks."
+    canonical_purpose: "Compact current-status handoff for active priority, next-step state, deferred tracks, validation state, and repository risks."
     mutation_boundary: "Summary only; does not override deeper source-of-truth docs."
 
   - path: "docs/context_governance_rules.md"
@@ -137,7 +137,7 @@ entries:
     layer: "governance"
     task_profiles: [docs_governance, context_governance, project_map_governance, review, planning, api_agent_design]
     default_retrieval_mode: "task_triggered"
-    canonical_purpose: "Defines task-local scope gate, minimal retrieval discipline, docs lifecycle, link lifecycle, and session-context promotion rules."
+    canonical_purpose: "Defines task-local scope gate, minimal retrieval discipline, docs lifecycle, link lifecycle, session-context promotion, and next-step impact promotion rules."
     mutation_boundary: "Governance only; no runtime, Project Map memory, external-system, database, commit, push, deployment, or product scope expansion."
 
   - path: "docs/rules/ai_development_rules.md"
