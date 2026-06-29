@@ -66,6 +66,10 @@ Agent Memory Kit is useful when the owner wants a visible, editable, portable pr
 It is not a full agent runtime. The core value is the operating contract: what counts as project truth, what may be remembered, when the agent may act, and how failures become eval cases.
 
 For existing repo-centric projects, start with `kit/secondary_memory_governance/`.
+
+Optional tool-specific modules live in `kit/optional_integrations/`. Add them
+only after the core baseline works and only when the target project uses the
+matching surface.
 ---
 
 ## Cursor, Codex, and GPT role stack

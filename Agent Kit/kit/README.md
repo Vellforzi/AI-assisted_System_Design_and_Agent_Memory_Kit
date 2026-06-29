@@ -67,7 +67,8 @@ Evals do not run automatically unless the owner wires them to a script, CI job, 
 | File | Purpose |
 |---|---|
 | `OWNER_USAGE_GUIDE.md` | Day-to-day owner workflow and safe prompts. |
-| `secondary_memory_governance/` | Single stockanalyst-style baseline for repo-centric projects: secondary Project Map, operational source authority, context index, receipts, smoke checks, and documentation harnesses. |
+| `secondary_memory_governance/` | Single repo-centric secondary-memory governance baseline: secondary Project Map, operational source authority, context index, receipts, smoke checks, and documentation harnesses. |
+| `optional_integrations/` | Optional modules for ChatGPT Project sources, cost/model routing, and Cursor settings. They do not change core behavior. |
 | `PLATFORM_CONTEXT_COMPACTION_BOUNDARY.md` | Platform summaries, compacted chat history, and provider memory are non-authoritative hints, not project truth. |
 | `CURSOR_INTEGRATION_OWNER_GUIDE.md` | How to use the kit with Cursor Rules, Commands, Skills, and Subagents. |
 | `cursor/` | Cursor Integration Pack: rules, commands, skills, and read-only subagents. |
@@ -108,7 +109,7 @@ Evals do not run automatically unless the owner wires them to a script, CI job, 
 | `cursor/CURSOR_OWNER_CONTROLLED_DEFAULTS.md` | Cursor settings profile summary. |
 | `cursor/settings/owner_controlled_profile.yaml` | Machine-readable owner-controlled Cursor settings profile. |
 
-| `EXISTING_PROJECT_ADOPTION_GUIDE.md` | How to add the stockanalyst-style repo-centric context governance baseline to an already active project. |
+| `EXISTING_PROJECT_ADOPTION_GUIDE.md` | How to add the repo-centric secondary-memory governance baseline to an already active project. |
 | `MATURE_EXISTING_PROJECT_ADOPTION_PROFILE.md` | Reference profile for mature projects; prefer `secondary_memory_governance/` as the concrete baseline package. |
 | `NEW_PROJECT_ADOPTION_GUIDE.md` | How to start an empty project with the kit. |
 | `SOLO_OWNER_WORKFLOW_GUIDE.md` | High-control workflow for a solo owner using local IDE agents plus research chat. |
@@ -143,7 +144,7 @@ python3 "Agent Kit/kit/tools/run_eval_checklist.py" \
 ## Repo-centric context governance
 
 For repo-centric projects, use `secondary_memory_governance/` as the single
-baseline behavior. It reproduces the stockanalyst-style workflow without
+baseline behavior. It reproduces a standalone repo-centric workflow without
 copying adopter-specific domain rules.
 
 The baseline includes:
@@ -165,6 +166,22 @@ python3 "Agent Kit/kit/tools/documentation_harness.py" --root "<Project Root>" -
 
 Agent Memory Kit remains file-based. The helper scripts are local read-only
 reference implementations, not runtime memory or security enforcement.
+
+---
+
+## Optional integrations
+
+Install these only after the core baseline is working:
+
+- `optional_integrations/chatgpt_project_sources/` - local generator for
+  ChatGPT Project source manifests, context packs, and owner TODOs.
+- `optional_integrations/cost_model_routing/` - advisory guide for choosing the
+  lowest sufficient model/settings class.
+- `optional_integrations/cursor_settings/` - Cursor settings integration that
+  points to `CURSOR_AGENT_SETTINGS_GUIDE.md`.
+
+These modules are intentionally outside `secondary_memory_governance/`. They
+must not become required startup context.
 
 ---
 

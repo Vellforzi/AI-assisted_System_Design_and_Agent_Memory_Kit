@@ -2,7 +2,7 @@
 
 This folder contains helper scripts. They are optional for the general kit, but
 the repo-centric context governance baseline uses the context helper and
-documentation harness when a project wants stockanalyst-style local checks.
+documentation harness when a project wants repo-centric secondary-memory local checks.
 
 ## `run_eval_checklist.py`
 
@@ -85,3 +85,15 @@ python3 "Agent Kit/kit/tools/documentation_harness.py" \
 
 The harness is report-only. It does not edit docs, Project Map, runtime code,
 data artifacts, external systems, commits, pushes, or deployments.
+
+## Optional integration tools
+
+The ChatGPT Project sources generator is intentionally outside this `tools/`
+folder:
+
+```text
+Agent Kit/kit/optional_integrations/chatgpt_project_sources/generate_chatgpt_project_sources.py
+```
+
+It is an export workflow for owners who use ChatGPT Project, not part of the
+core repo-centric governance helper set.

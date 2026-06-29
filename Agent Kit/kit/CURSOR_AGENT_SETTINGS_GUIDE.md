@@ -82,9 +82,10 @@ When asked about Cursor settings, the agent should:
 
 The agent must not tell the owner to enable maximum autonomy as a default.
 
-## OPTION PROFIT finalized owner profile
+## Portable Owner-Controlled Profile
 
-Use this as the practical default for owner-controlled work in OPTION PROFIT:
+Use this as the practical default for owner-controlled work unless the target
+project records a narrower policy:
 
 - Submit with Ctrl + Enter: on.
 - Max Tab Count: 5.
@@ -120,4 +121,4 @@ Use this as the practical default for owner-controlled work in OPTION PROFIT:
 - Voice submit keywords: empty unless the owner intentionally uses voice mode.
 - Commit Attribution: off by owner preference.
 - PR Attribution: off by owner preference.
-- Branch Prefix: `cursor/`.
+- Branch Prefix: `cursor/` or the target project's agreed prefix.

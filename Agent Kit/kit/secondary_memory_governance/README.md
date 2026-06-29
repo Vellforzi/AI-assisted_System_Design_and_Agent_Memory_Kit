@@ -1,7 +1,7 @@
 # Repo-Centric Context Governance Baseline
 
 Status: reusable baseline package
-Purpose: reproduce the stockanalyst-style AI working behavior in any
+Purpose: reproduce repo-centric secondary-memory AI working behavior in any
 repo-centric project without copying adopter-specific domain facts.
 
 This package is the default Agent Memory Kit behavior for existing projects
@@ -28,7 +28,7 @@ The baseline combines:
   raw external-system payloads.
 
 This is one behavior, not two modes. Projects may simplify pieces only when
-they deliberately do not need stockanalyst-style reproducibility.
+they deliberately do not need repo-centric reproducibility.
 
 ---
 

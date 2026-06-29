@@ -27,7 +27,7 @@ The agent should operate from:
 
 The kit turns project context into structured, inspectable memory so that future sessions can restore the right context without relying on fragile chat history, hidden provider memory, or generic model guesses.
 
-For existing repo-centric projects, the default install is the stockanalyst-style `secondary_memory_governance/` baseline: Project Map summarizes and navigates, operational docs/code/tests/specs/issues/current owner instructions remain authoritative, and context routing is made reproducible through a context index, receipts, smoke checks, and report-only documentation harnesses.
+For existing repo-centric projects, the default install is the `secondary_memory_governance/` baseline: Project Map summarizes and navigates, operational docs/code/tests/specs/issues/current owner instructions remain authoritative, and context routing is made reproducible through a context index, receipts, smoke checks, and report-only documentation harnesses. Optional integrations add ChatGPT Project source export, cost/model routing guidance, and Cursor settings guidance without changing the core behavior.
 
 ---
 
@@ -67,7 +67,7 @@ AI-assisted System Design and Agent Memory Kit/
     START_HERE_AGENT_KIT_PROJECT_OWNER_GUIDE.md
     kit/
       README.md
-      ...contracts, templates, guides, eval suite, Cursor integration, Codex integration, optional tools...
+      ...contracts, templates, guides, eval suite, Cursor integration, Codex integration, optional integrations, optional tools...
 ```
 
 ---
@@ -77,10 +77,11 @@ AI-assisted System Design and Agent Memory Kit/
 1. Read `START_HERE.md`.
 2. Read `AI-assisted System Design/README.md` if you are setting up a project workflow.
 3. Read `Agent Kit/README.md` if you are setting up project memory.
-4. For an existing repo-centric project, read `Agent Kit/kit/EXISTING_PROJECT_ADOPTION_GUIDE.md` and use `Agent Kit/kit/secondary_memory_governance/` as the single stockanalyst-style baseline package.
+4. For an existing repo-centric project, read `Agent Kit/kit/EXISTING_PROJECT_ADOPTION_GUIDE.md` and use `Agent Kit/kit/secondary_memory_governance/` as the single baseline package.
 5. Copy the baseline files into the project's operational docs, `docs/project_map/`, and `scripts/` locations.
 6. Add only the short `AGENTS_SNIPPET.md` rules to the existing project-specific instruction file. Do not replace `AGENTS.md` with a generic template.
 7. Use `Agent Kit/kit/NEW_PROJECT_ADOPTION_GUIDE.md` only for an empty project that lacks operational docs.
+8. Add modules from `Agent Kit/kit/optional_integrations/` only when the project actually uses ChatGPT Project, cost/model routing guidance, or Cursor settings.
 
 ---
 

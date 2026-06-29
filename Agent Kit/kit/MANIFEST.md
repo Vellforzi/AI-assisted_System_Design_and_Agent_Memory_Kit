@@ -34,7 +34,7 @@ Package purpose: portable starter guide and memory operating layer for using AI 
 
 ## Secondary-memory governance baseline
 
-- `Agent Kit/kit/secondary_memory_governance/README.md` - single stockanalyst-style repo-centric context governance baseline for existing projects.
+- `Agent Kit/kit/secondary_memory_governance/README.md` - single repo-centric secondary-memory governance baseline for existing projects.
 - `Agent Kit/kit/secondary_memory_governance/AGENTS_SNIPPET.md` - project `AGENTS.md` snippet for task-local scope, startup read order, skipped context, mutation rules, and reporting.
 - `Agent Kit/kit/secondary_memory_governance/next_steps_template.md` - active task navigation template for `docs/NEXT_STEPS.md`.
 - `Agent Kit/kit/secondary_memory_governance/current_status_template.md` - compact current-status context pack template for fresh sessions.
@@ -60,6 +60,21 @@ Package purpose: portable starter guide and memory operating layer for using AI 
 - `Agent Kit/kit/secondary_memory_governance/memory_quality_review_bar.md` - review bar for memory, retrieval, permission, and governance changes.
 - `Agent Kit/kit/secondary_memory_governance/.codexignore_TEMPLATE` - Codex context-hygiene template, not a security boundary.
 - `Agent Kit/kit/secondary_memory_governance/.cursorignore_TEMPLATE` - optional Cursor context-hygiene template, not a security boundary.
+
+---
+
+## Optional integrations
+
+- `Agent Kit/kit/optional_integrations/README.md` - index for optional modules that sit outside the core governance baseline.
+- `Agent Kit/kit/optional_integrations/chatgpt_project_sources/README.md` - local ChatGPT Project source export workflow.
+- `Agent Kit/kit/optional_integrations/chatgpt_project_sources/generate_chatgpt_project_sources.py` - stdlib generator for context packs, source manifests, TODOs, and checksums.
+- `Agent Kit/kit/optional_integrations/chatgpt_project_sources/CHATGPT_PROJECT_SOURCES.config.template.json` - project config template for the generator.
+- `Agent Kit/kit/optional_integrations/chatgpt_project_sources/PROJECT_AI_BRIEF.template.md` - compact project brief source template.
+- `Agent Kit/kit/optional_integrations/chatgpt_project_sources/PROJECT_GPT_OPERATING_CONTRACT.template.md` - ChatGPT Project read-only operating contract template.
+- `Agent Kit/kit/optional_integrations/chatgpt_project_sources/GPT_PROJECT_INSTRUCTIONS_COMPACT.template.md` - compact ChatGPT Project Instructions source template.
+- `Agent Kit/kit/optional_integrations/chatgpt_project_sources/chatgpt_project_sources_policy.md` - safety and manifest policy for ChatGPT Project sources.
+- `Agent Kit/kit/optional_integrations/cost_model_routing/README.md` - optional cost/model routing guide.
+- `Agent Kit/kit/optional_integrations/cursor_settings/README.md` - optional Cursor settings integration guide.
 
 ---
 
@@ -139,6 +154,10 @@ Package purpose: portable starter guide and memory operating layer for using AI 
 - `Agent Kit/kit/tools/run_eval_checklist.py` — creates a local eval run folder and Markdown checklist from YAML cases.
 - `Agent Kit/kit/tools/context_governance_helper.py` - read-only reference helper for context-index read sets, receipts, API-agent context bundles, and context smoke checks.
 - `Agent Kit/kit/tools/documentation_harness.py` - report-only documentation harness for metadata, reachability, and lower-authority reference checks.
+
+ChatGPT Project source generation lives under
+`Agent Kit/kit/optional_integrations/chatgpt_project_sources/` because it is an
+export workflow, not a core local helper.
 
 ---
 

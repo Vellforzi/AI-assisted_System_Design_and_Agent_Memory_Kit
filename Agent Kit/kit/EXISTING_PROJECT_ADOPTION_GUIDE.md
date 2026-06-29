@@ -8,7 +8,7 @@ Use this guide when the project already has useful operational docs such as
 `AGENTS.md`, roadmap/status docs, source-of-truth hierarchy, context packs,
 layer-specific specs, issues, or tests.
 
-The default system for this class of project is one stockanalyst-style behavior:
+The default system for this class of project is one repo-centric secondary-memory governance behavior:
 
 ```text
 Repo-Centric Context Governance Baseline
@@ -291,10 +291,25 @@ python scripts/ai_context_helper.py smoke-check --format json
 python scripts/documentation_harness.py --format json
 ```
 
-These checks reproduce the stockanalyst-style behavior: bounded context,
+These checks reproduce the standalone repo-centric behavior: bounded context,
 trigger-only secondary sources, high-risk exclusions, retrieval receipts,
 read-only API-agent context shape, and report-only documentation governance.
 
 Stop after these criteria are met unless the owner explicitly requests runtime
 memory, task trees, handoff trees, vector databases, MCP servers, background
 capture, or other heavier infrastructure.
+
+---
+
+## 9. Optional Integrations
+
+Use optional integrations only after the core baseline passes.
+
+| Need | Module |
+|---|---|
+| ChatGPT Project should receive a small, reproducible source set | `optional_integrations/chatgpt_project_sources/` |
+| Owner wants cost/model/reasoning guidance | `optional_integrations/cost_model_routing/` |
+| Cursor is the local implementation surface | `optional_integrations/cursor_settings/` |
+
+These modules must not become required startup context. They are project-tool
+adapters around the core baseline.

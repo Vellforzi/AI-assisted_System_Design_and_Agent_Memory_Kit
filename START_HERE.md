@@ -133,11 +133,13 @@ repo-centric context governance baseline:
 For an existing project with code, docs, and project-specific agent instructions:
 
 1. read `Agent Kit/kit/EXISTING_PROJECT_ADOPTION_GUIDE.md`;
-2. use `Agent Kit/kit/secondary_memory_governance/` as the single stockanalyst-style baseline package;
+2. use `Agent Kit/kit/secondary_memory_governance/` as the single baseline package;
 3. preserve the existing `AGENTS.md` and operational docs;
 4. add source hierarchy, context governance rules, context index, policy YAML, working state, helper scripts, ignore hygiene, and smoke cases;
 5. treat Project Map as secondary memory unless the project's authority policy says otherwise;
 6. do not add runtime memory, task trees, handoff trees, vector databases, MCP servers, or a replacement `AGENTS.md` unless explicitly requested later.
+7. add `Agent Kit/kit/optional_integrations/` modules only when the project uses
+   ChatGPT Project sources, cost/model routing guidance, or Cursor settings.
 
 For a new empty project that lacks operational docs:
 

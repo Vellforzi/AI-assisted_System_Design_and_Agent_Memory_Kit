@@ -146,7 +146,7 @@ Minimum cases:
 ## 9. Repo-Centric Context Governance Baseline
 
 New projects should converge on the same repo-centric context governance
-behavior used by stockanalyst.
+repo-centric secondary-memory governance behavior.
 
 Start with the minimal useful subset, then fill the remaining files as soon as
 the project has enough operational docs to route context:
@@ -197,3 +197,12 @@ python scripts/documentation_harness.py --format json
 This reproduces the baseline behavior: task-local scope first, small read sets,
 trigger-only Project Map/research/archive context, receipts, and report-only
 documentation governance.
+
+Optional integrations after the baseline passes:
+
+- `optional_integrations/chatgpt_project_sources/` if the project uses ChatGPT
+  Project sources.
+- `optional_integrations/cost_model_routing/` if the owner wants explicit
+  model/cost tradeoff guidance.
+- `optional_integrations/cursor_settings/` if Cursor is the local implementation
+  surface.
