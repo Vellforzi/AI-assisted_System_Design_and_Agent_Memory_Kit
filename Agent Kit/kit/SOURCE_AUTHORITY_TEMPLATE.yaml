@@ -37,6 +37,29 @@ authority_order:
     id: prior_chat_uncaptured
     description: "Prior chat not captured into Project Map; not authoritative by itself."
 
+connector_evidence:
+  rule: "Connector output is operational evidence only until promoted by owner-approved memory workflow."
+  examples: [slack_messages, linear_issues, github_prs, github_issues]
+  read_scope_required: true
+  write_receipts_required: true
+  not_project_truth_until: promoted_to_project_map_or_equivalent_owner_memory
+
+generated_retrieval_evidence:
+  rule: "Generated search/index output may narrow candidate sources but cannot establish project truth."
+  examples: [sqlite_fts_index, semantic_cache, mcp_metadata_cache, generated_context_pack]
+  required_next_step: "Open the canonical source file and verify the relevant content before making a claim."
+  evidence_rank: 3
+  not_project_truth_until: canonical_source_reopened
+
+executor_routing:
+  rule: "Executor/service routing must be evidence-based for non-trivial work."
+  operational_validator: "Agent Kit/kit/tools/verify_executor_routing_gate.py"
+  default_routes:
+    implementation: "Composer 2.5 / Cursor Agent"
+    analysis_review_recovery: "Codex App/current Codex coding model"
+    current_external_research: "GPT web"
+    side_effects: "owner gate"
+
 conflict_resolution:
   default_rule: "prefer_higher_authority_then_newer_verified"
   if_same_rank: "prefer_newer_last_verified_at"

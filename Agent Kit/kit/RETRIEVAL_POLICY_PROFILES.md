@@ -21,6 +21,20 @@ Retrieval Policy still controls what is actually loaded. Context Advisor prepare
 
 ---
 
+## 0.5 Generated retrieval evidence
+
+Generated search or index output is retrieval evidence only. It may help narrow a
+candidate source set, but it does not prove a project fact.
+
+Before answering, reviewing, planning, or applying based on a generated hit, the
+agent must reopen the canonical source file and verify the relevant line range
+or section.
+
+Examples include SQLite/FTS indexes, semantic search caches, MCP metadata
+caches, generated context packs, and ranked snippets.
+
+---
+
 ## 1. Core retrieval rule
 
 Retrieve the smallest set of high-signal context that can satisfy the current intent with grounded output.

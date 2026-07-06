@@ -130,11 +130,21 @@ When the advisor recommends premium/frontier/high/pro, it must include:
 If no escalation trigger is present, the route should downgrade to medium/standard or ask the owner before using the more expensive setting.
 
 
-### 3.8 Dated Cursor model snapshot
+### 3.8 Dated provider/model snapshots
+
+Provider model names, prices, context limits, and UI controls are volatile.
+Owner-facing settings advice must use either current owner/provider evidence or a
+dated snapshot that is explicitly identified as dated. A dated example is useful
+for understanding the policy, but it is not a current recommendation.
+
+The historical snapshot below was captured on 2026-06-10. Do not treat its model
+labels as current without refresh.
+
+### 3.9 Historical Cursor model snapshot example
 
 When the owner asks which Cursor model/settings to use, the advisor must rely on a dated provider snapshot, not memory. The v3.9.3 snapshot was collected on **2026-06-10** from owner-observed Cursor UI plus Cursor docs/blog/forum sources.
 
-Current working set for Cursor-agent in OPTION PROFIT-style projects:
+Historical working set in the captured example:
 
 | Model | Snapshot controls | Default role | Default rule |
 |---|---|---|---|
@@ -154,7 +164,7 @@ Do not add more models to the routing set merely because they are available. Add
 
 If recommending 1M context, Max Mode, Fast, premium models, high/extra/max effort, or high/extra-high reasoning, the advisor must show the escalation trigger and cheaper sufficient alternative.
 
-### 3.7 Dated provider/model snapshot
+### 3.10 Dated provider/model snapshot
 
 Exact Cursor model advice must name the provider snapshot date or say that the snapshot is missing/stale.
 
@@ -324,7 +334,7 @@ Return compact gate/settings/scope hint only if amber/red/blocked or if settings
 
 ## v3.9.3 Auto/Max explicit boundary
 
-Auto is not a specific model. For OPTION-PROFIT controlled work, do not recommend Auto as the default route unless the owner explicitly accepts non-deterministic provider/model routing for low-risk exploration.
+Auto is not a specific model. For owner-controlled project work, do not recommend Auto as the default route unless the owner explicitly accepts non-deterministic provider/model routing for low-risk exploration.
 
 Max Mode is a separate Cursor-level capacity toggle for explicit models except Auto. Keep Max OFF by default; recommend 1M/Max only with context-overflow, broad-audit, large multimodal context, or explicit owner approval.
 

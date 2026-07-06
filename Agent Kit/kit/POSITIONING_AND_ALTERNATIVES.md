@@ -120,7 +120,30 @@ The kit is weaker when:
 
 ---
 
-## 10. Non-goals
+## 10. Third-party overlays and generated indexes
+
+Agent Memory Kit can coexist with local search indexes, MCP gateways, vector
+stores, knowledge graphs, or agent runtimes. Treat these as optional overlays.
+
+An overlay may reduce retrieval noise, bridge to a local read-only tool, or keep
+heavy metadata out of the initial prompt. It still does not replace Project Map,
+source authority, owner approval, or canonical file readback.
+
+Safe overlay pattern:
+
+- task-local or project-local install, not global by default;
+- explicit owner approval and rollback path;
+- no secret indexing unless separately approved;
+- read-only default for external systems and databases;
+- generated/cache output recorded as operational evidence, not durable truth;
+- canonical source re-read before project claims or apply decisions.
+
+Avoid naming a package/version as currently recommended unless you have current
+source evidence for that package and the owner has approved that scope.
+
+---
+
+## 11. Non-goals
 
 Agent Memory Kit does not claim to:
 

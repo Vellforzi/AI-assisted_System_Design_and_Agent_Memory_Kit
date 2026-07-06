@@ -8,6 +8,9 @@ Agent prompts must match real provider/UI controls. Invented or mixed labels cre
 
 Use exact owner/provider UI labels from a dated snapshot or explicit owner confirmation.
 
+Treat dated snapshots as evidence about the capture date only. They are not
+current provider facts unless refreshed or reconfirmed by the owner.
+
 Do not:
 
 - invent combined labels;

@@ -106,6 +106,48 @@ external_research:
     - repository_contents_not_opened
     - credentials_or_deployments
 
+connectors:
+  default: forbidden
+  read_requires_explicit_scope: true
+  write_requires_explicit_task_allowed: true
+  receipt_required_on_write: true
+  draft_first_outbound_default: true
+  systems:
+    - slack
+    - linear
+    - github
+  scope_must_name:
+    - system_or_workspace
+    - exact_channel_repo_project_issue_thread_file_or_query
+    - time_window_when_history_matters
+    - purpose
+  write_receipt_fields:
+    - system
+    - action
+    - target
+    - returned_url_or_id_or_timestamp
+    - short_summary_without_secrets
+
+executor_routing:
+  required_for:
+    - non_trivial_bootstrap_prompts
+    - non_trivial_task_contracts
+    - task_blocks
+    - owner_facing_model_or_service_recommendations
+  required_fields:
+    - recommended_executor
+    - confidence
+    - why_this_executor
+    - why_not_default_executor
+    - evidence_used
+    - escalation_trigger
+    - stop_or_owner_gate
+  default_routes:
+    implementation: Composer 2.5 / Cursor Agent
+    analysis_review_recovery: Codex App/current Codex coding model
+    current_external_research: GPT web
+    side_effects_and_ambiguous_scope: owner
+
 side_effects:
   require_owner_approval: true
   require_idempotency_key_when_possible: true

@@ -167,9 +167,10 @@ When asked about Cursor settings, the agent should:
 
 The agent must not tell the owner to enable maximum autonomy or premium models as a default.
 
-## OPTION PROFIT finalized owner profile
+## Example owner-controlled profile
 
-Use this as the practical default for owner-controlled work in OPTION PROFIT:
+The following profile is a synthetic example of an owner-controlled Cursor setup.
+Treat project-specific profiles as local examples, not package defaults:
 
 - Submit with Ctrl + Enter: on.
 - Max Tab Count: 5.
@@ -212,6 +213,8 @@ Use this as the practical default for owner-controlled work in OPTION PROFIT:
 
 ## v3.9.3 Auto/Max explicit boundary
 
-Auto is not a specific model. For OPTION-PROFIT controlled work, do not recommend Auto as the default route unless the owner explicitly accepts non-deterministic provider/model routing for low-risk exploration.
+Auto is not a specific model. For owner-controlled work, do not recommend Auto
+as the default route unless the owner explicitly accepts non-deterministic
+provider/model routing for low-risk exploration.
 
 Max Mode is a separate Cursor-level capacity toggle for explicit models except Auto. Keep Max OFF by default; recommend 1M/Max only with context-overflow, broad-audit, large multimodal context, or explicit owner approval.

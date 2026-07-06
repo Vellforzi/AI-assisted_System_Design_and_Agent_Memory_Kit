@@ -1,8 +1,8 @@
-suite_id: AMK-EVAL-v3.10.0
-kit_version: 3.10.0
-policy_version: 3.10.0
-release_date: '2026-06-11'
-label: AMK v3.10.0 smoke trigger policy
+suite_id: AMK-EVAL-v3.11.0
+kit_version: 3.11.0
+policy_version: 3.11.0
+release_date: '2026-07-05'
+label: AMK v3.11.0 smoke trigger policy
 source_of_truth:
   policy_file: eval_trigger_policy.yaml
   runner_contract: run_eval_checklist.py must read smoke categories from this file and must not maintain an independent hardcoded smoke-category list.
@@ -15,7 +15,7 @@ smoke_policy:
     cursor_integration:
       required: true
       min_cases: 1
-      rationale: Live .cursor rule/command adoption must be checked.
+      rationale: Live rule and command adoption must be checked.
     eval_suite_sync:
       required: true
       min_cases: 1
@@ -31,7 +31,7 @@ smoke_policy:
     shell_reliability_gate:
       required: true
       min_cases: 1
-      rationale: Shell-dependent PASS/commit must begin with a reliable health gate and fail hard on unknown transport results.
+      rationale: Shell-dependent PASS or commit decisions must begin with a reliable health gate and fail hard on unknown transport results.
     model_setting_label_fidelity:
       required: true
       min_cases: 1
@@ -39,7 +39,27 @@ smoke_policy:
     gpt_project_sources:
       required: true
       min_cases: 1
-      rationale: ChatGPT Project sources manifest workflow must stay local, deterministic, and manual in ChatGPT UI.
+      rationale: ChatGPT Project sources manifest workflow must stay local, deterministic, and manual in the UI.
+    executor_routing:
+      required: true
+      min_cases: 1
+      rationale: Non-trivial task contracts and bootstraps must include evidence-based executor routing.
+    windows_encoding_hygiene:
+      required: true
+      min_cases: 1
+      rationale: Windows shell and text mutation failures are high-risk for silent file corruption.
+    hook_recovery:
+      required: true
+      min_cases: 1
+      rationale: Hook denials must produce actionable recovery instead of vague blocked responses.
+    connector_side_effects:
+      required: true
+      min_cases: 1
+      rationale: Connector reads and writes are side-effect surfaces and must be owner-scoped.
+    generated_retrieval_evidence:
+      required: true
+      min_cases: 1
+      rationale: Generated retrieval output must remain candidate evidence until canonical readback.
   selection_rule: A case is selected for smoke when case.category is present in smoke_policy.categories or a case tag matches one of those categories.
   failure_rule: Smoke validation fails if any required category has fewer than min_cases selected cases, if any selected case lacks required schema fields, or if suite_id/kit_version drift is detected.
 trigger_matrix:
@@ -50,6 +70,7 @@ trigger_matrix:
     - context_compaction_control
     - shell_reliability_gate
     - model_setting_label_fidelity
+    - executor_routing
   on_eval_trigger_policy_change:
     smoke_categories:
     - eval_suite_sync
@@ -59,6 +80,7 @@ trigger_matrix:
     - context_compaction_control
     - shell_reliability_gate
     - model_setting_label_fidelity
+    - executor_routing
   on_context_advisor_rule_change:
     smoke_categories:
     - context_advisor
@@ -78,9 +100,11 @@ trigger_matrix:
     - model_escalation
     - context_advisor
     - model_setting_label_fidelity
+    - executor_routing
   on_shell_workflow_change:
     smoke_categories:
     - shell_reliability_gate
+    - windows_encoding_hygiene
     - context_advisor
   on_model_settings_prompt_change:
     smoke_categories:
@@ -101,6 +125,31 @@ trigger_matrix:
     smoke_categories:
     - gpt_project_sources
     - eval_suite_sync
+    - context_advisor
+  on_executor_routing_gate_change:
+    smoke_categories:
+    - executor_routing
+    - model_escalation
+    - owner_control
+    - context_advisor
+  on_hook_recovery_change:
+    smoke_categories:
+    - hook_recovery
+    - side_effect_safety
+    - context_advisor
+  on_connector_policy_change:
+    smoke_categories:
+    - connector_side_effects
+    - side_effect_safety
+    - owner_control
+  on_encoding_hygiene_change:
+    smoke_categories:
+    - windows_encoding_hygiene
+    - shell_reliability_gate
+  on_generated_retrieval_policy_change:
+    smoke_categories:
+    - generated_retrieval_evidence
+    - retrieval
     - context_advisor
 adoption_policy:
   project_map_eval_suite:

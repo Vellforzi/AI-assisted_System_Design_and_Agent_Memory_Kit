@@ -9,6 +9,9 @@ Purpose: route repository-aware agents to the Project Map and enforce safe defau
 - Answer-only is the default intent.
 - Reading context is not permission to mutate files, memory, git state, databases, deployments, or external systems.
 - If project evidence is missing, say so. Do not invent project facts.
+- Non-trivial task contracts, bootstraps, task blocks, and model/service recommendations require an Executor Routing Gate.
+- Encoding-sensitive or UI-visible text edits require byte-safe tooling and readback verification.
+- Blocking hooks should return actionable recovery fields, and agents should follow them.
 
 ## Read order for project questions
 
@@ -36,6 +39,25 @@ Classify each owner request before acting:
 
 If the owner asks a question, remain in `answer` or `analyze` mode.
 
+## Executor Routing Gate
+
+For non-trivial work, include this block before task instructions:
+
+```yaml
+Executor Routing Gate:
+  recommended_executor: Composer 2.5 / Cursor Agent | Codex App/current Codex coding model | GPT web | owner
+  confidence: high | medium | low
+  why_this_executor: <task-class reason>
+  why_not_default_executor: <why the normal route is or is not sufficient>
+  evidence_used:
+    - <opened file, policy, task contract, owner input, or current tool output>
+  escalation_trigger: <condition that stops or reroutes work>
+  stop_or_owner_gate: <where the executor stops and asks the owner>
+```
+
+Do not claim generic service superiority or hardcode volatile model labels as
+current defaults. Use dated snapshots or current owner/provider evidence.
+
 ## Forbidden without explicit owner approval
 
 - Editing files.
@@ -48,6 +70,37 @@ If the owner asks a question, remain in `answer` or `analyze` mode.
 - Accessing secrets.
 - Browsing external web sources for project truth.
 - Reading the whole repository or whole Project Map by default.
+
+## Windows / encoding / shell hygiene
+
+For repository edits, use patch/editor tooling. Do not write files through shell
+redirection or shell write cmdlets.
+
+For non-ASCII or UI-visible text mutations:
+
+- use explicit encoding;
+- read the file or rendered output back;
+- verify intended text is present;
+- verify replacement markers such as `????` and `U+FFFD` are absent;
+- record a caveat and require owner/browser smoke if rendered UI cannot be
+  checked directly.
+
+If a command fails because of shell parser behavior, quoting, path splitting,
+unsupported options, or encoding, classify it as `command_harness_error`, not as
+a project/test failure.
+
+## Hook recovery
+
+When a hook blocks an action, use recovery fields when present:
+
+- `violation_code` / `violationCode`
+- `why_blocked` / `whyBlocked`
+- `required_next_response` / `requiredNextResponse`
+- `allowed_next_actions` / `allowedNextActions`
+- `forbidden_next_actions` / `forbiddenNextActions`
+- `playbook`
+
+State what happened, what will not be done, and the exact allowed next action.
 
 ## Project-specific grounding
 

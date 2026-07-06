@@ -4,6 +4,31 @@ Package file: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.9.3_EN.zip`
 
 Package purpose: portable starter guide and memory operating layer for using AI agents with owner-controlled projects. Agent Memory Kit helps build a Project Map through structured, meaningful, interconnected duplication of project information supplied or verified by the owner.
 
+Current working-tree version: `v3.11.0`. No release ZIP or publication asset has
+been created by this working tree. Older package-file lines are retained as
+historical manifest entries.
+
+## v3.11.0 release extraction supplement
+
+v3.11.0 adds the following public-safe Agent Memory Kit material:
+
+- `Agent Kit/kit/CHANGELOG_v3.11.0.md` - package release notes for the working-tree implementation.
+- `Agent Kit/kit/EXECUTOR_ROUTING_GATE.md` - provider-neutral executor routing gate contract.
+- `Agent Kit/kit/tools/verify_executor_routing_gate.py` - reusable validator for task contracts and bootstrap prompts.
+- `Agent Kit/kit/WINDOWS_ENCODING_AND_SHELL_HYGIENE.md` - byte-safe Windows shell and text mutation guide.
+- `Agent Kit/kit/HOOK_RECOVERY_PLAYBOOK.md` - hook denial recovery payload and owner-response playbook.
+- `Agent Kit/kit/CODEX_CONNECTOR_POLICY.md` - connector side-effect boundary and draft-first outbound policy.
+- `Agent Kit/kit/GENERATED_RETRIEVAL_EVIDENCE_GUIDE.md` - generated retrieval output as candidate evidence only.
+- `Agent Kit/kit/eval_suite/cases/AMK-ERG-001.yaml` - Executor Routing Gate eval case.
+- `Agent Kit/kit/eval_suite/cases/AMK-WIN-001.yaml` - Windows encoding and shell hygiene eval case.
+- `Agent Kit/kit/eval_suite/cases/AMK-HR-001.yaml` - hook recovery and read-only semantics eval case.
+- `Agent Kit/kit/eval_suite/cases/AMK-CONN-001.yaml` - connector side-effect policy eval case.
+- `Agent Kit/kit/eval_suite/cases/AMK-GRE-001.yaml` - generated retrieval evidence eval case.
+
+Updated v3.11.0 integration surfaces include task/owner templates, permission,
+source-authority and retrieval templates, Codex integration guidance, model
+snapshot wording, hook scripts, eval metadata, and checksums.
+
 ---
 
 ## Top-level files

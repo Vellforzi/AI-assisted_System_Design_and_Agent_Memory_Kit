@@ -9,6 +9,16 @@ created_at: "<YYYY-MM-DD>"
 updated_at: "<YYYY-MM-DD>"
 owner: "<owner/user>"
 
+executor_routing_gate:
+  recommended_executor: "<Composer 2.5 / Cursor Agent | Codex App/current Codex coding model | GPT web | owner>"
+  confidence: "<high | medium | low>"
+  why_this_executor: "<task-class reason and evidence>"
+  why_not_default_executor: "<why the normal route is or is not sufficient>"
+  evidence_used:
+    - "<opened file, policy, contract, owner input, or current tool output>"
+  escalation_trigger: "<condition that stops or reroutes the task>"
+  stop_or_owner_gate: "<where the executor stops and asks the owner>"
+
 intent: "plan" # answer | analyze | plan | retrieve_context | stage | apply
 permission_mode: "read-only" # explain-only | dry-run | read-only | apply
 scope:
@@ -72,6 +82,7 @@ done_definition:
   - "Open questions and next steps are explicit."
 
 verification_recipe:
+  - "Check Executor Routing Gate completeness for non-trivial contracts/bootstrap prompts."
   - "Check intent and permission mode."
   - "Check source authority and conflicts."
   - "Check claim ledger or final claim support."

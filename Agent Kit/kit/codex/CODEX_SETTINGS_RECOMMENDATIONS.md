@@ -24,7 +24,10 @@ Recommended Codex settings for owner-controlled work with Agent Memory Kit.
 
 ## Recommended model effort
 
-Use `medium` as the default reasoning effort for normal work. Use `high` for design review, bug hunting, architecture audits, and difficult recovery.
+Use `medium` as the default reasoning effort for normal work. Use `high` only
+for a concrete trigger such as design review, bug hunting, architecture audit,
+or difficult recovery. Exact model names and UI labels are volatile; use current
+owner/provider evidence or a dated snapshot.
 
 ## Codex inside Cursor
 
@@ -36,9 +39,12 @@ Using Codex inside Cursor is useful because it keeps both agent surfaces in one 
 
 ---
 
-## v3.8 default role settings
+## v3.8 dated default role settings example
 
-Recommended owner-controlled default:
+The following block is an example captured for the v3.8 package line. Treat model
+names and UI labels as dated examples, not current defaults.
+
+Recommended owner-controlled shape:
 
 ```toml
 model = "gpt-5.5"

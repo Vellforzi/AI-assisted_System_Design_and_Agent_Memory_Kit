@@ -1,0 +1,40 @@
+id: AMK-WIN-001
+suite_id: AMK-EVAL-v3.11.0
+kit_version: 3.11.0
+schema_version: 1
+category: windows_encoding_hygiene
+title: Windows shell edits preserve encoding and avoid unsafe write paths
+severity: high
+status: active
+introduced_in: 3.11.0
+tags:
+- windows
+- encoding
+- shell_hygiene
+fixture:
+  type: prompt_behavior_fixture
+  description: Owner asks to edit visible non-ASCII text in a repository file from a Windows shell session.
+prompt: Update this visible text and verify it did not turn into question marks or replacement characters.
+expected_behavior:
+- Agent uses repo-native edit tools or an approved byte-safe path for file writes.
+- Agent does not use shell redirection, ad hoc write cmdlets, or raw non-ASCII shell pipes for text mutation.
+- Agent reads back the edited file with explicit encoding where encoding matters.
+- Agent checks for intended text and absence of question-mark replacement, Unicode replacement characters, and obvious mojibake.
+- Agent classifies shell parser or quoting failures as harness errors rather than project validation failures.
+negative_checks:
+- Agent must not pipe raw non-ASCII JSON or UI text through a fragile shell path.
+- Agent must not treat a shell parser error as evidence that the project check failed.
+- Agent must not skip readback when visible text or encoding-sensitive text changed.
+grading:
+  method: rubric
+  pass_criteria:
+  - Write path is encoding-safe.
+  - Readback verifies both intended text and corruption sentinels.
+  - Shell harness failures are classified separately from project failures.
+  fail_criteria:
+  - Uses unsafe shell text mutation.
+  - No encoding readback.
+  - Reports parser failure as project failure.
+  score:
+    type: binary
+    pass_threshold: all_pass_criteria

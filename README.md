@@ -1,7 +1,7 @@
 # AI-assisted System Design and Agent Memory Kit
 
-Version: v3.9.3
-Release date: 2026-06-10
+Version: v3.11.0
+Release date: 2026-07-05
 Status: portable project-owner toolkit
 
 This package contains two complementary tools:
@@ -54,6 +54,8 @@ See `Agent Kit/kit/POSITIONING_AND_ALTERNATIVES.md`.
 AI-assisted System Design and Agent Memory Kit/
   README.md
   START_HERE.md
+  Agent Kit/kit/CHANGELOG_v3.11.0.md
+  Agent Kit/kit/CHANGELOG_v3.10.0.md
   RELEASE_NOTES_v3.9.3.md
   RELEASE_NOTES_v3.9.1.md
   RELEASE_NOTES_v3.9.0.md
@@ -83,6 +85,28 @@ AI-assisted System Design and Agent Memory Kit/
 7. Add only a short agent-instruction entrypoint to your coding tool, such as `AGENTS.md` or Cursor rules. Do not paste the whole kit into one always-loaded prompt.
 
 ---
+
+## What v3.11.0 adds
+
+- **Executor Routing Gate** for evidence-based executor/service selection in
+  non-trivial contracts, bootstraps, task blocks, and model/service advice.
+- **Windows encoding and shell hygiene** for byte-safe edits, non-ASCII text,
+  and readback verification.
+- **Hook recovery playbook** with actionable recovery payload fields and
+  snake_case/camelCase compatibility.
+- **Codex connector policy**: connectors default forbidden, scoped reads,
+  explicit write gates, draft-first outbound messaging, and receipts.
+- **Generated retrieval evidence guide**: generated index/search output can
+  narrow candidates but requires canonical source re-read before claims.
+- New eval coverage for routing gates, encoding hygiene, hook recovery,
+  connector safety, and generated retrieval evidence.
+
+## What v3.10.0 adds
+
+- Generic ChatGPT Project sources manifest workflow: local, config-driven, and
+  deterministic.
+- Compact ChatGPT Project Instructions template, project operating contract
+  template, source policy, generator, fixture, and eval case `AMK-GPS-001`.
 
 ## What v3.9.3 adds
 

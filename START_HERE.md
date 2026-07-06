@@ -1,8 +1,8 @@
 # START HERE — AI-assisted System Design and Agent Memory Kit
 
-Version: v3.9.3
-Release date: 2026-06-10
-Package: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.9.3_EN.zip`
+Version: v3.11.0
+Release date: 2026-07-05
+Package: working tree package; release asset not created by this implementation
 Status: portable project-owner kit for AI-assisted work and grounded project memory
 
 ---
@@ -116,6 +116,11 @@ Read:
 10. `Agent Kit/kit/EVAL_SUITE_GUIDE.md`
 11. `Agent Kit/kit/EVAL_AUTOMATION_AND_TRIGGER_POLICY.md`
 12. `Agent Kit/kit/PLAIN_LANGUAGE_GLOSSARY.md`
+13. `Agent Kit/kit/EXECUTOR_ROUTING_GATE.md`
+14. `Agent Kit/kit/WINDOWS_ENCODING_AND_SHELL_HYGIENE.md`
+15. `Agent Kit/kit/HOOK_RECOVERY_PLAYBOOK.md`
+16. `Agent Kit/kit/CODEX_CONNECTOR_POLICY.md`
+17. `Agent Kit/kit/GENERATED_RETRIEVAL_EVIDENCE_GUIDE.md`
 
 ---
 
@@ -149,6 +154,24 @@ Read:
 3. the project's own `AGENTS.md`, `PROJECT_AI_BRIEF.md`, repository docs, or equivalent if the user explicitly grants read access.
 
 ---
+
+## What changed in v3.11.0
+
+This release adds operational hardening for package use in real projects:
+
+- Executor Routing Gate with reusable validator.
+- Connector side-effect policy and draft-first outbound workflow.
+- Hook recovery payload contract.
+- Windows encoding/shell hygiene.
+- Generated retrieval evidence guide.
+- Eval cases for the new safety surfaces.
+
+See `Agent Kit/kit/CHANGELOG_v3.11.0.md`.
+
+## What changed in v3.10.0
+
+v3.10.0 added the generic ChatGPT Project sources manifest workflow. See
+`Agent Kit/kit/CHANGELOG_v3.10.0.md`.
 
 ## What changed in v3.9.3
 

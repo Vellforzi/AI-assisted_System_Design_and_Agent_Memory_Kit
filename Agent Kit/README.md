@@ -1,6 +1,6 @@
 # Agent Memory Kit
 
-Version: v3.9.4
+Version: v3.11.0
 
 Agent Memory Kit is the project-memory and agent-behavior layer of the package.
 
@@ -37,6 +37,11 @@ It helps a project owner maintain a structured Project Map containing:
 10. `kit/WORKSPACE_SELECTION_GUIDE.md`
 11. `kit/CODEX_SANDBOX_AND_PERMISSION_PROFILES_GUIDE.md`
 12. `kit/AI_AGENT_ROLE_STACK_GUIDE.md`
+13. `kit/EXECUTOR_ROUTING_GATE.md`
+14. `kit/WINDOWS_ENCODING_AND_SHELL_HYGIENE.md`
+15. `kit/HOOK_RECOVERY_PLAYBOOK.md`
+16. `kit/CODEX_CONNECTOR_POLICY.md`
+17. `kit/GENERATED_RETRIEVAL_EVIDENCE_GUIDE.md`
 
 ---
 
@@ -83,6 +88,22 @@ Use one shared workspace root when one Project Map governs multiple components. 
 ## v3.8 Cursor settings and workspace authority
 
 This release adds an owner-controlled Cursor Agent settings profile, `.cursorignore` guidance, settings audit commands, and the rule that an existing authoritative workspace file must be inspected and used rather than replaced by a generated fallback.
+
+## v3.11.0 focus
+
+Adds generic operational hardening:
+
+- Executor Routing Gate and validator.
+- Windows encoding and shell hygiene.
+- Hook recovery payload compatibility.
+- Connector side-effect policy.
+- Generated retrieval evidence boundary.
+- Eval coverage for these behaviors.
+
+## v3.10.0 focus
+
+Adds the local deterministic ChatGPT Project sources manifest workflow and
+`AMK-GPS-001`.
 
 ## v3.9.4 focus
 

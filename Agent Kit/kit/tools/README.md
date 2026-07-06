@@ -2,20 +2,62 @@
 
 This folder contains optional helper scripts. They are not required to use the kit.
 
-## `run_eval_checklist.py`
+## `verify_executor_routing_gate.py`
 
-Creates a local eval run folder and Markdown checklist from `eval_suite/core_behavior_eval_cases.yaml`.
-
-It does not call a model API and does not grade automatically. It helps the owner start and record a manual or semi-automated eval run.
+Checks non-trivial task contracts and bootstrap artifacts for a complete
+Executor Routing Gate.
 
 Example:
 
 ```bash
-python3 "Agent Kit/kit/tools/run_eval_checklist.py" \
-  --suite "Project Map/eval_suite/core_behavior_eval_cases.yaml" \
+python "Agent Kit/kit/tools/verify_executor_routing_gate.py" \
+  --path "agent-tools/tasks/example/TASK-contract.md" --json
+```
+
+## `run_eval_checklist.py`
+
+Creates a local eval run folder and Markdown checklist from the v3.11.0 manifest
+suite or a legacy embedded cases YAML file.
+
+Requires Python with PyYAML available.
+
+Smoke mode reads required categories from `eval_suite/eval_trigger_policy.yaml`
+and validates each required category's `min_cases` count. It must not maintain a
+separate hardcoded smoke-category list.
+
+Legacy embedded suites use the historical smoke categories plus critical cases
+unless `--policy` is supplied explicitly.
+
+Examples:
+
+```bash
+python "Agent Kit/kit/tools/run_eval_checklist.py" \
+  --suite "Agent Kit/kit/eval_suite/manifest.yaml" \
   --out "Project Map/eval_runs" \
   --mode smoke
 ```
+
+Validate smoke policy without writing a checklist:
+
+```bash
+python "Agent Kit/kit/tools/run_eval_checklist.py" \
+  --suite "Agent Kit/kit/eval_suite/manifest.yaml" \
+  --out "Project Map/eval_runs" \
+  --mode smoke \
+  --validate-only \
+  --format json
+```
+
+Legacy embedded suite example:
+
+```bash
+python3 "Agent Kit/kit/tools/run_eval_checklist.py" \
+  --suite "Agent Kit/kit/eval_suite/core_behavior_eval_cases.yaml" \
+  --out "Project Map/eval_runs" \
+  --mode smoke
+```
+
+It does not call a model API and does not grade automatically. It helps the owner start and record a manual or semi-automated eval run.
 
 
 ## `context_advisor_preflight.py`

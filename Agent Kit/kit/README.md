@@ -1,8 +1,8 @@
 # Agent Memory Kit Starter Package
 
-Version: v3.9.4
-Release date: 2026-06-10
-Package: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.9.4_EN.zip`
+Version: v3.11.0
+Release date: 2026-07-05
+Package: working tree package; release asset not created by this implementation
 
 Agent Memory Kit is a portable memory operating layer for project owners who work with AI agents across long projects.
 
@@ -80,6 +80,11 @@ Evals do not run automatically unless the owner wires them to a script, hook, CI
 | `PERMISSIONS_POLICY_TEMPLATE.yaml` | Machine-readable permission and action-intent policy template. |
 | `RETRIEVAL_POLICY_TEMPLATE.yaml` | Machine-readable retrieval profile template. |
 | `TASK_CONTRACT_TEMPLATE.yaml` | Long-task contract template. |
+| `EXECUTOR_ROUTING_GATE.md` | Evidence-based executor/service routing gate for non-trivial contracts and bootstraps. |
+| `WINDOWS_ENCODING_AND_SHELL_HYGIENE.md` | Byte-safe file mutation and readback guide for Windows and non-ASCII text. |
+| `HOOK_RECOVERY_PLAYBOOK.md` | Generic recovery field contract for blocking hooks. |
+| `CODEX_CONNECTOR_POLICY.md` | Connector read/write scope, draft-first outbound workflow, and receipt policy. |
+| `GENERATED_RETRIEVAL_EVIDENCE_GUIDE.md` | Generated search/index output boundary and canonical re-read rule. |
 | `CLAIM_LEDGER_TEMPLATE.yaml` | Claim support and final-answer gate template. |
 | `HANDOFF_TEMPLATE.yaml` | Clean-slate handoff packet template. |
 | `LONG_RUNNING_TASKS_GUIDE.md` | Design guide for long tasks without simulating consciousness. |
@@ -98,6 +103,7 @@ Evals do not run automatically unless the owner wires them to a script, hook, CI
 | `EVAL_AUTOMATION_AND_TRIGGER_POLICY.md` | Eval automation levels, trigger matrix, and repair loop. |
 | `eval_suite/` | Core behavior eval cases, trigger policy, grader rubric, run report template, and trace template. |
 | `tools/` | Optional local helper scripts. |
+| `tools/verify_executor_routing_gate.py` | Validates Executor Routing Gate blocks in task contracts/bootstrap artifacts. |
 | `CHATGPT_PROJECT_SOURCES_WORKFLOW.md` | Generate ChatGPT Project sources manifest and owner TODO (local, deterministic). |
 | `CHATGPT_PROJECT_SOURCES_CONFIG.template.json` | Project config template for the sources generator. |
 | `PROJECT_GPT_OPERATING_CONTRACT.template.md` | GPT operating contract template for project sources. |
@@ -134,6 +140,10 @@ Evals do not run automatically unless the owner wires them to a script, hook, CI
 Use `EVAL_SUITE_GUIDE.md`, `EVAL_AUTOMATION_AND_TRIGGER_POLICY.md`, and `eval_suite/` to check whether an agent actually follows the kit.
 
 The suite is intentionally small and failure-mode based. It is designed for manual or semi-automated use by a project owner. It should be copied into `Project Map/eval_suite/` when a project starts using the kit.
+
+v3.11.0 adds eval cases for executor routing gates, Windows encoding hygiene,
+hook recovery payloads, connector side-effect policy, and generated retrieval
+evidence.
 
 Optional checklist helper:
 

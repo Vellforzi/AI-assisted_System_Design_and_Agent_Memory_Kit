@@ -7,6 +7,12 @@ last_updated: "<YYYY-MM-DD>"
 
 core_rule: "Retrieve the smallest evidence-bearing working set needed for the current intent. Do not load the whole project by default."
 
+generated_retrieval_evidence:
+  allowed_as: "rank_3_retrieval_evidence"
+  rule: "Generated search/index output can suggest candidate files only. Re-open canonical sources before claims or apply decisions."
+  required_metadata: [canonical_path, line_range_or_section, generated_at, source_allowlist_or_denylist]
+  forbidden_as_truth_without_readback: true
+
 profiles:
   answer:
     purpose: "Answer a project question."

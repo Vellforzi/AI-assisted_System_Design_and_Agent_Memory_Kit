@@ -217,6 +217,7 @@ Scope: <Project Map files and project docs allowed>.
 
 Task: prepare a copy-pasteable task for the implementation agent.
 The task must include:
+- Executor Routing Gate with recommended executor, confidence, evidence, escalation trigger, and stop/owner gate;
 - goal;
 - exact files/paths;
 - constraints;
@@ -227,6 +228,22 @@ The task must include:
 - memory/docs update expected after completion.
 Do not invent commands, paths, or facts not present in the allowed evidence.
 Do not implement it here.
+```
+
+### Executor Routing Gate block
+
+Use this block before non-trivial task instructions:
+
+```text
+Executor Routing Gate:
+  recommended_executor: Composer 2.5 / Cursor Agent | Codex App/current Codex coding model | GPT web | owner
+  confidence: high | medium | low
+  why_this_executor: <task-class reason>
+  why_not_default_executor: <why the default route is or is not sufficient>
+  evidence_used:
+    - <opened file, owner input, task contract, policy, or current tool output>
+  escalation_trigger: <condition that stops or reroutes work>
+  stop_or_owner_gate: <where the executor stops for owner review>
 ```
 
 ---

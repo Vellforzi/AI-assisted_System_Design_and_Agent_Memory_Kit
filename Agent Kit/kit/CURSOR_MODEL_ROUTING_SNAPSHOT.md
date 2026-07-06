@@ -9,7 +9,9 @@ This file is intentionally dated. It is **not** permanent project truth. Refresh
 
 ## Core decision
 
-The current owner-observed model set is sufficient with surplus for the Cursor-agent working-horse workflow:
+The owner-observed model set below was sufficient with surplus for the sampled
+Cursor-agent working-horse workflow on the capture date. Treat it as a dated
+example, not a current default:
 
 | Surface | Core route | Default use |
 |---|---|---|
@@ -47,7 +49,10 @@ Do not add more models to the default router unless a concrete capability gap ap
 
 ## Auto and Max Mode boundary
 
-Auto is not a model. It is a provider/router mode. For OPTION-PROFIT controlled work, Auto is **not** a default route because the exact provider/model may change and reproducibility is weaker. Use Auto only when the owner explicitly accepts non-deterministic routing for low-risk cheap exploration.
+Auto is not a model. It is a provider/router mode. For owner-controlled work,
+Auto should not be the default route when reproducibility matters because the
+exact provider/model may change. Use Auto only when the owner explicitly accepts
+non-deterministic routing for low-risk exploration.
 
 Max Mode is a separate Cursor-level context/capacity toggle for explicit models except Auto. It is not a quality setting and must stay OFF by default. Enable 1M/Max only for context overflow, broad audit, large multimodal context, or explicit owner approval.
 

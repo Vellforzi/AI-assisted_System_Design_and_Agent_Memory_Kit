@@ -1,9 +1,9 @@
-suite_id: AMK-EVAL-v3.10.0
-kit_version: 3.10.0
-manifest_version: 3.10.0
-release_date: '2026-06-11'
+suite_id: AMK-EVAL-v3.11.0
+kit_version: 3.11.0
+manifest_version: 3.11.0
+release_date: '2026-07-05'
 release_type: minor_feature
-label: Agent Memory Kit v3.10.0 ChatGPT Project sources manifest workflow suite
+label: Agent Memory Kit v3.11.0 executor routing, connector, hook, shell, and retrieval suite
 authority:
   canonical_path: Agent Kit/kit/eval_suite
   project_map_mirror_path: Project Map/eval_suite
@@ -28,7 +28,21 @@ categories:
   description: Exact owner/provider UI label usage for model/settings tuple with contradiction prevention.
 - id: gpt_project_sources
   description: Local deterministic ChatGPT Project sources manifest workflow without UI automation.
+- id: executor_routing
+  description: Evidence-based executor routing gate for non-trivial task contracts and bootstraps.
+- id: windows_encoding_hygiene
+  description: Windows-safe shell, quoting, encoding, and readback behavior.
+- id: hook_recovery
+  description: Hook denial payload handling and answer/analyze read-only semantics.
+- id: connector_side_effects
+  description: Connector read/write separation, draft-first outbound behavior, and receipt gates.
+- id: generated_retrieval_evidence
+  description: Generated search/index/cache output as candidate evidence requiring canonical source readback.
 cases:
+- id: AMK-ESS-001
+  path: cases/AMK-ESS-001.yaml
+  category: eval_suite_sync
+  severity: high
 - id: AMK-CA-012
   path: cases/AMK-CA-012.yaml
   category: context_advisor
@@ -65,9 +79,31 @@ cases:
   path: cases/AMK-GPS-001.yaml
   category: gpt_project_sources
   severity: high
+- id: AMK-ERG-001
+  path: cases/AMK-ERG-001.yaml
+  category: executor_routing
+  severity: critical
+- id: AMK-WIN-001
+  path: cases/AMK-WIN-001.yaml
+  category: windows_encoding_hygiene
+  severity: high
+- id: AMK-HR-001
+  path: cases/AMK-HR-001.yaml
+  category: hook_recovery
+  severity: high
+- id: AMK-CONN-001
+  path: cases/AMK-CONN-001.yaml
+  category: connector_side_effects
+  severity: critical
+- id: AMK-GRE-001
+  path: cases/AMK-GRE-001.yaml
+  category: generated_retrieval_evidence
+  severity: high
 version_invariants:
-  required_kit_version: 3.10.0
-  required_suite_id: AMK-EVAL-v3.10.0
+  required_kit_version: 3.11.0
+  required_suite_id: AMK-EVAL-v3.11.0
+  inherited_case_metadata_note: Older case files may keep their introduced suite_id and kit_version until a separate eval metadata normalization task is approved. The checklist runner must not fail smoke validation solely because an inherited case file reports an older suite_id or kit_version when this note is present.
+  runner_metadata_rule: validate required schema fields on every listed case; compare manifest kit_version and suite_id only against eval_trigger_policy.yaml; skip per-case suite_id/kit_version equality checks when inherited_case_metadata_note is set.
   case_schema_required_fields:
   - id
   - suite_id

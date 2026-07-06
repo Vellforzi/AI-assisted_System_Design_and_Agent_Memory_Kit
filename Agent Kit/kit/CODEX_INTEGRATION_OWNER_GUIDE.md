@@ -4,6 +4,15 @@ This guide explains how to use Codex alongside Cursor under Agent Memory Kit.
 
 Codex is not a replacement for Project Map. Codex is another agent surface that can read the same owner-controlled project memory and follow the same action-intent and source-authority contracts.
 
+For connector-aware work, also read `CODEX_CONNECTOR_POLICY.md`. Connectors are
+default-forbidden, reads require exact scope, writes require explicit Allowed
+scope and receipts, and outbound messages should be draft-first unless the owner
+approves a send/update/delete action in the current task.
+
+For task handoffs, include an Executor Routing Gate. Use
+`EXECUTOR_ROUTING_GATE.md` and validate non-trivial contracts with
+`tools/verify_executor_routing_gate.py`.
+
 ## Recommended role split
 
 ```text
