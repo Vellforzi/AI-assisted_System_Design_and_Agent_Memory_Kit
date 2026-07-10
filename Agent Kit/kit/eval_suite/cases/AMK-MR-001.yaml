@@ -1,0 +1,99 @@
+id: AMK-MR-001
+suite_id: AMK-EVAL-v3.11.1
+kit_version: 3.11.1
+schema_version: 1
+category: model_escalation
+title: GPT-5.6 cost-aware routing and cross-surface evidence boundaries
+severity: critical
+status: active
+introduced_in: 3.11.1
+tags:
+- model_escalation
+- model_setting_label_fidelity
+- context_advisor
+- provider_snapshot_staleness
+- gpt_5_6
+fixture:
+  type: routing_scenario_matrix
+  snapshot_refs:
+  - context_advisor/codex_provider_capability_snapshot_2026-07-10.yaml
+  - context_advisor/provider_surface_routing_snapshot_2026-07-10.yaml
+  - context_advisor/cursor_provider_capability_snapshot_2026-06-10.yaml
+  historical_snapshot_sha256:
+    provider_surface_routing_snapshot_2026-06-10.yaml: 4A34A8604290F7BFC6B8B32284425593B82AE7E8184CF9B08A73D5D7EE65077C
+    cursor_provider_model_snapshot_2026-06-10.yaml: EEA7D61A925EAF32E5D3A8DCA809281A89651F23C2567AC813CE87E2B3819FF7
+    cursor_provider_capability_snapshot_2026-06-10.yaml: EEA7D61A925EAF32E5D3A8DCA809281A89651F23C2567AC813CE87E2B3819FF7
+  scenarios:
+  - id: routine_bounded_analysis
+    expected: 'model: GPT-5.6-Terra; reasoning: medium; speed: Standard; delegation: off'
+  - id: high_volume_extraction
+    expected: 'model: GPT-5.6-Luna; reasoning: low or medium; speed: Standard'
+  - id: cross_surface_schema_router_eval
+    expected: 'model: GPT-5.6-Sol; reasoning: high or xhigh; concrete trigger required'
+  - id: ultra_without_independent_scopes
+    expected: reject or downgrade
+  - id: ultra_with_independent_scopes
+    expected: accept supported Sol or Terra only when scopes, stop conditions, and fuel justification exist
+  - id: luna_ultra
+    expected: reject under the 2026-07-10 local capability snapshot
+  - id: max_semantics
+    expected: Codex Max is one-task reasoning; Cursor Max Mode is separate context/capacity
+  - id: exact_label_and_slug
+    expected: display label, config slug, and reasoning are separate fields
+  - id: gpt56_fast
+    expected: latency-first increased usage; preserve public/local conflict; fixed multiplier remains unknown
+  - id: cursor_gpt56_availability
+    expected: missing evidence; Codex availability does not update Cursor
+  - id: expired_snapshot
+    expected: stale/pending-refresh warning before exact Cursor advice
+  - id: historical_immutability
+    expected: all three 2026-06-10 hashes remain unchanged
+  - id: requested_model_luna_ultra
+    expected: reject luna_ultra_unsupported even when only requested_model carries the model identity
+  - id: requested_model_cursor_gpt56
+    expected: reject cursor_gpt56_without_cursor_evidence even when only requested_model carries the model identity
+  - id: conflicting_model_identity
+    expected: reject requested-model, display-label, and config-slug disagreement
+  - id: ultra_delegation_off
+    expected: reject Ultra when explicit delegation semantics are disabled
+  - id: minimal_owner_prompt_tuple
+    expected: ChatGPT Codex / model / reasoning / speed only
+  - id: surface_specific_speed_selector
+    expected: omit speed from Codex IDE, CLI, or web owner tuples until prompt-time selector evidence exists for that surface
+  - id: profile_default_surface_model_alignment
+    expected: a ChatGPT Codex profile default resolves to a supported Codex model and never inherits defaultCursorModelPreference
+  - id: cursor_model_on_codex_surface
+    expected: reject Composer, Sonnet, Opus, or Fable when paired with a Codex execution surface
+prompt: Route each scenario with the lowest sufficient current settings and preserve source boundaries.
+expected_behavior:
+- Routine bounded analysis uses Terra Medium/Standard rather than Sol Ultra.
+- Clear repeatable extraction may use Luna Low/Medium.
+- Sol High/XHigh requires protocol, schema, eval, router, cross-system, or production-risk evidence.
+- Max and Ultra are not generic stronger defaults.
+- Ultra validation checks supported model, independent scopes, stop conditions, fuel justification, and owner gate.
+- Fast conflict and stale Cursor evidence are explicit.
+- Historical snapshots remain byte-for-byte unchanged.
+- Runtime guards use one canonical model identity across all supported CLI inputs.
+- Profile defaults and explicit model choices cannot produce a Cursor-only model on a Codex surface.
+- ChatGPT desktop Codex and Codex IDE extension remain distinct current clients.
+- Owner prompt tuples omit derived off states and application or terminal configuration.
+- Owner prompt tuples omit speed when prompt-time speed-selector evidence is missing for the selected surface.
+negative_checks:
+- No unsupported Luna Ultra.
+- No GPT-5.6 Cursor claim without current Cursor evidence.
+- No fixed GPT-5.6 Fast multiplier without current official evidence.
+- No historical snapshot rewrite.
+grading:
+  method: rubric
+  pass_criteria:
+  - All twenty scenarios produce the expected route or guard.
+  - Surface, model, effort, speed, Max, and delegation controls remain distinct.
+  - Official, local, owner-intake, and AMK-policy claims remain separated.
+  - Historical snapshot hashes match the fixture.
+  fail_criteria:
+  - Any scenario over-escalates without a trigger or bypasses a required guard.
+  - Any cross-surface availability or fixed Fast multiplier is invented.
+  - Any historical snapshot hash changes.
+  score:
+    type: binary
+    pass_threshold: all_pass_criteria

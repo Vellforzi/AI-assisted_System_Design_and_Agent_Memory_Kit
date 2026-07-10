@@ -1,118 +1,93 @@
-# Model / Surface Routing Snapshot
+# Model and Surface Routing Snapshot
 
-Status: volatile provider/model/mode snapshot
-Captured at: 2026-06-10, Europe/Vienna
-Primary source: owner-observed UI controls in Cursor, Codex extension, and ChatGPT Pro web
-Secondary sources: Cursor docs/blog/forum and OpenAI Codex/ChatGPT docs checked on 2026-06-10
+Status: volatile, source-qualified snapshot
+Captured at: 2026-07-10, Europe/Berlin
+Expires at: 2026-08-09
 
-This file is intentionally dated. It is **not** permanent project truth. Refresh it when Cursor, Codex, ChatGPT, model availability, pricing, context windows, Fast/Max behavior, or UI controls change.
+Machine-readable refs:
 
-## Core decision
+- `context_advisor/provider_surface_routing_snapshot_2026-07-10.yaml`
+- `context_advisor/codex_provider_capability_snapshot_2026-07-10.yaml`
+- `context_advisor/execution_surface_routing_matrix.v1.json`
 
-The owner-observed model set below was sufficient with surplus for the sampled
-Cursor-agent working-horse workflow on the capture date. Treat it as a dated
-example, not a current default:
+Provider/model facts are dated evidence, not permanent project truth. Current
+Codex evidence and the expired 2026-06-10 Cursor evidence remain separate.
 
-| Surface | Core route | Default use |
+## Surface-first routing
+
+| Surface | Default role | Typical work |
 |---|---|---|
-| Cursor Agent | Composer 2.5 | routine scoped apply, Project Map updates, docs/router edits, mechanical package merge |
-| Cursor Agent | Codex 5.3 / GPT-5.3 Codex class | code/test/repair loop, terminal verification, independent code review |
-| Cursor Agent | GPT-5.5 | hard reasoning escalation for Agent Kit contracts, eval/router policy, cross-subsystem root cause |
-| Cursor Agent | Sonnet 4.6 | balanced review/refactor fallback |
-| Cursor Agent | Opus 4.8 | rare premium audit/planning escalation |
-| Cursor Agent | Fable 5 | rare long-running autonomous/agentic escalation |
-| Codex IDE extension | GPT-5.4-mini / GPT-5.4 / GPT-5.5 / GPT-5.3-Codex-Spark | local code agent, repair loop, independent check, cloud offload when useful |
-| ChatGPT Pro web | GPT-5.5 Thinking Heavy / GPT-5.5 Pro Heavy / Deep Research | synthesis, architecture, prompt/package design, external research; not direct repo apply |
+| Composer 2.5 / Cursor Agent | clear scoped implementation | explicit file edits, build/test iteration, mechanical orchestration, local verification |
+| ChatGPT desktop app (Codex mode) | reasoning, review, and repair | analysis, planning, task contracts, evidence-chain review, repair/recovery, execution-integrity checks |
+| Codex IDE extension | editor-attached Codex coding | scoped code work and review in a supported IDE |
+| Codex CLI | terminal-first Codex coding | local command-line workflows |
+| Codex web | hosted Codex work | web/cloud tasks subject to current availability |
+| GPT web | current external research | deep/current sources and synthesis; no direct repository authority |
+| Owner | side-effect gate | deploy, DB writes, git push/release, credentials, Project Map writes, destructive cleanup, acceptance smoke |
 
-Do not add more models to the default router unless a concrete capability gap appears or the owner requests benchmarking.
+`chatgpt_desktop_codex` is the current structured desktop id and `ChatGPT Codex`
+is the compact owner-facing label. `codex_app` is a backward-compatible alias
+for desktop mode. `codex_ide` is a distinct current client, not an alias.
 
-## Cursor model controls observed by owner on 2026-06-10
+## AMK cost-aware Codex routing
 
-| Model | Options | Context controls | Reasoning/effort controls | Default router role |
-|---|---|---|---|---|
-| Composer 2.5 | fast on/off | not exposed in owner UI | not exposed in owner UI | default working horse |
-| Fable 5 | thinking | 300K, 1M | low, medium, high, extra high, max | rare long-running escalation |
-| Opus 4.8 | thinking, fast | 300K, 1M | low, medium, high, extra high, max | rare hard audit/planning escalation |
-| GPT-5.5 | fast | 272K, 1M | none, low, medium, high, extra high | hard reasoning escalation |
-| Sonnet 4.6 | thinking | 200K, 1M | low, medium, high, max | balanced review/refactor fallback |
-| Codex 5.3 | fast | not exposed in owner UI | low, medium, high, extra high | code/test/repair specialist |
+These routes are AMK guidance, not an OpenAI universal benchmark.
 
-## Cursor work modes
-
-| Mode | Use | Default route | Cost/scope policy |
+| Task class | Model display label | Reasoning | Speed/delegation |
 |---|---|---|---|
-| Ask | questions, tradeoffs, read-only analysis | Composer 2.5 or medium route | no mutation; explicit refs only; no Max |
-| Plan | complex apply/debug/audit before changes | Composer 2.5 for normal planning; GPT-5.5/Sonnet/Opus only with trigger | plan first, approval before apply |
-| Debug | root-cause with logs/tests/runtime evidence | Codex 5.3 medium/high or GPT-5.5 medium/high depending on code vs reasoning need | include tests/logs/schema; high only with concrete ambiguity |
-| Multitask | independent parallel tasks | only with isolated scopes/worktrees and checkpoint/handoff | high fuel; avoid unless tasks are separable |
-| Agent/apply | bounded implementation | Composer 2.5 standard first; Codex for code/test loops | no broad scan; apply only accepted scope |
+| extraction, inventory, classification, repeatable static checks | GPT-5.6-Luna | Low/Medium | Standard |
+| routine analysis, planning, task contracts, review, bounded repair | GPT-5.6-Terra | Medium | Standard |
+| difficult code/test repair or ambiguous root cause | GPT-5.6-Terra or GPT-5.6-Sol | High | Standard |
+| hooks, routing, schemas, evals, protocols, cross-system or production-risk recovery | GPT-5.6-Sol | High/XHigh | Standard |
+| one hardest sequential problem | GPT-5.6-Sol | Max with an explicit trigger | Standard |
+| meaningfully independent parallel subproblems | GPT-5.6-Sol or GPT-5.6-Terra | Ultra | Standard; independent scopes, stop conditions, and fuel justification |
 
-## Auto and Max Mode boundary
+Cost-aware default config: `gpt-5.6-terra` with `medium` reasoning and Standard
+speed. `gpt-5.6-sol` Medium is the quality-biased alternative, not the AMK
+cost-aware default.
 
-Auto is not a model. It is a provider/router mode. For owner-controlled work,
-Auto should not be the default route when reproducibility matters because the
-exact provider/model may change. Use Auto only when the owner explicitly accepts
-non-deterministic routing for low-risk exploration.
+## Exact controls
 
-Max Mode is a separate Cursor-level context/capacity toggle for explicit models except Auto. It is not a quality setting and must stay OFF by default. Enable 1M/Max only for context overflow, broad audit, large multimodal context, or explicit owner approval.
+| Display label | Config slug | Owner-local reasoning choices on 2026-07-10 | Owner-local context |
+|---|---|---|---:|
+| GPT-5.6-Sol | gpt-5.6-sol | low, medium, high, xhigh, max, ultra | 372000 |
+| GPT-5.6-Terra | gpt-5.6-terra | low, medium, high, xhigh, max, ultra | 372000 |
+| GPT-5.6-Luna | gpt-5.6-luna | low, medium, high, xhigh, max | 372000 |
 
-## Codex IDE extension controls observed by owner on 2026-06-10
+Keep the display label, config slug, and reasoning effort in separate fields.
+Do not emit invented combined labels such as `GPT-5.6-Sol High` when a separate
+reasoning field is present.
 
-| Control | Owner-observed values | Routing policy |
-|---|---|---|
-| Model | GPT-5.5, GPT-5.4, GPT-5.4-mini, GPT-5.3-Codex-Spark | start mini/medium for routine code; escalate to GPT-5.5 only for hard reasoning/code repair |
-| Reasoning | low, medium, high, extra high | start medium; high/extra high only for root-cause debug, repair, audit, cross-subsystem analysis |
-| Speed | standard, fast | standard by default; fast only for low-risk/time-critical/draft work |
-| Plan Mode | on/off | on for multi-file debug/audit/repair; off for narrow accepted apply |
-| Pursue Goal | on/off | off by default; on only for owner-approved long-running task with clear stop conditions |
-| Include IDE Context | on/off | off by default; implicit IDE context is advisory only unless explicitly scoped/approved |
+Owner-facing ChatGPT Codex recommendations use only
+`surface / model / reasoning / speed`. Standard already means Fast is not
+selected; High already means Max and Ultra are not selected. Do not append
+those negative states or unrelated application/terminal settings.
 
-Codex is useful as a controlled code agent, independent checker, sandbox repair loop, and local verification runner. Cursor remains the main working-horse repo agent.
+## Max, Ultra, Cursor Max Mode, and Fast
 
-## ChatGPT Pro web routing observed by owner on 2026-06-10
+- Codex Max gives one selected model more reasoning depth for one hardest task.
+- Codex Ultra adds automatic delegation. It is useful only when meaningful work
+  can be split into independent scopes. Luna Ultra is unsupported by the
+  owner-local 2026-07-10 snapshot.
+- Cursor Max Mode is a context/capacity control. It is not Codex Max reasoning.
+- Standard is the default speed.
+- Fast is latency-first and increased-usage, never cheaper.
 
-| Mode | Use | Policy |
-|---|---|---|
-| Thinking Heavy | architecture, synthesis, prompt/package design, hard tradeoffs | use when reasoning quality matters more than speed |
-| Pro + Heavy | hardest synthesis / audit / decision support | use sparingly; not for mechanical repo edits |
-| Deep Research | external research with citations and dated source review | use for provider/model research, standards, pricing, current docs |
+Fast evidence conflict: the owner-local Codex cache exposes Fast for all three
+GPT-5.6 models and describes it as 1.5x speed with increased usage. The checked
+public Speed page explicitly lists GPT-5.5 and GPT-5.4. No fixed GPT-5.6 Fast
+credit multiplier is established by current public evidence.
 
-ChatGPT web is for analysis and handoff/task design. It does not apply repo changes; Cursor/Codex execute scoped changes.
+## Cursor evidence boundary
 
-## Commands as token-saving route selectors
+The bundled Cursor model set was captured on 2026-06-10 and expired on
+2026-07-10. Preserve that historical model set without adding GPT-5.6. Exact
+current Cursor advice requires refreshed Cursor evidence. Codex GPT-5.6
+availability does not establish GPT-5.6 availability in Cursor.
 
-Use short command vocabulary instead of repeating long instructions:
+## Refresh triggers
 
-| Command | Meaning |
-|---|---|
-| `/context-advisor` | classify intent/scope/model/fuel risk |
-| `/settings` | recommend surface/model/reasoning/speed/context with cheaper alternative |
-| `/models` | show dated provider/model snapshot and sufficiency |
-| `/fuel` | estimate token/fuel risk and checkpoint/new-chat need |
-| `/scope` | list mandatory/recommended/optional/forbidden context |
-| `/safe-apply` | gate a future mutation; does not mutate |
-| `/ask` | read-only answer/analysis mode |
-| `/debug` | runtime/root-cause debug preflight |
-| `/multitask` | split independent work only when scopes/checkpoints are safe |
-
-## Escalation contract
-
-When recommending GPT-5.5 High/Extra High, Opus, Fable, Max/1M, Fast on expensive models, Auto for controlled work, Codex extra-high, ChatGPT Pro+Heavy, Deep Research, or any optional model, the agent must include:
-
-1. concrete escalation trigger;
-2. cheaper sufficient alternative;
-3. why cheaper is insufficient;
-4. snapshot date/source.
-
-If those are missing, ContextAdvisor should emit an amber warning and downgrade to the lowest sufficient route.
-
-## Source notes captured on 2026-06-10
-
-- Cursor docs show the model catalog, default/max context, capabilities, and notes such as GPT-5.5 requiring Max Mode on request-based plans, Fast mode being available at higher rates, and long context supporting up to 1M with input pricing caveats.
-- Cursor Plan Mode docs/blog describe Plan Mode as researching codebase context, creating a reviewable plan, asking clarifying questions, and waiting for approval before building.
-- Cursor agent best practices emphasize planning before coding, keeping rules focused, referencing files instead of copying full contents, and starting a new conversation when the current one accumulates noise.
-- OpenAI Codex IDE docs confirm support for VS Code forks such as Cursor, editor context, @file references, model switching, reasoning effort, approval modes, slash commands, and extension settings.
-- OpenAI reasoning docs state higher reasoning effort is not automatically better and should be increased only when quality gains justify cost/latency.
-- OpenAI ChatGPT docs identify GPT-5.5 Instant, Thinking, Pro, Thinking/Pro effort controls, and Deep Research as a report-style research tool.
-
-See machine-readable refs in `context_advisor/provider_surface_routing_snapshot_2026-06-10.yaml` and Cursor-specific routing in `context_advisor/cursor_model_routing_matrix.v1.json`.
+- Codex model labels, effort choices, context, speed, subagent behavior, or rate card changes.
+- Cursor model picker or current Cursor documentation is rechecked.
+- Provider UI control labels change.
+- The snapshot reaches its expiry date.

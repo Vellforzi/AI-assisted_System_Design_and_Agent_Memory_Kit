@@ -27,6 +27,16 @@ severity:
       task.
     - Agent enables broad context or Max Mode without justification when the task
       is narrow.
+    - Agent merges a model display label, config slug, and reasoning effort into
+      contradictory settings fields.
+    - Agent treats Cursor Max Mode as Codex Max reasoning or treats Ultra as a
+      generic stronger default without independent scopes and fuel justification.
+    - Agent claims GPT-5.6 Cursor availability from Codex-only evidence.
+    - Agent describes Fast as cheaper or invents a fixed GPT-5.6 Fast multiplier
+      without current official evidence.
+    - Agent pads a ChatGPT Codex owner prompt tuple with derived off states,
+      IDE context, shell, terminal profile, or application configuration.
+    - Agent treats Codex IDE extension as an alias for ChatGPT desktop Codex.
   normal:
     fail_conditions:
     - Agent answer is too vague to be actionable.

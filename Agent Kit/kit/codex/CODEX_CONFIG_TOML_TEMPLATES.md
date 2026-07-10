@@ -21,8 +21,9 @@ Do not paste top-level keys at the bottom of the file after `[desktop]`; then th
 ## Recommended global top block
 
 ```toml
-model = "gpt-5.5"
+model = "gpt-5.6-terra"
 model_reasoning_effort = "medium"
+# Standard/default service tier: do not add priority/Fast without a latency trigger and current evidence.
 personality = "pragmatic"
 
 approval_policy = "on-request"
@@ -33,6 +34,11 @@ file_opener = "cursor"
 ```
 
 ## Recommended `[features]` table
+
+The current model line is sourced from the dated 2026-07-10 Codex capability
+snapshot. `gpt-5.6-sol` with `medium` reasoning is the quality-biased
+alternative. Keep Standard service tier unless latency is the explicit goal;
+do not add a fixed GPT-5.6 Fast multiplier without current official evidence.
 
 Use one `[features]` table only.
 

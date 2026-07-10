@@ -45,7 +45,7 @@ For non-trivial work, include this block before task instructions:
 
 ```yaml
 Executor Routing Gate:
-  recommended_executor: Composer 2.5 / Cursor Agent | Codex App/current Codex coding model | GPT web | owner
+  recommended_executor: Composer 2.5 / Cursor Agent | ChatGPT Codex/current Codex coding model | GPT web | owner
   confidence: high | medium | low
   why_this_executor: <task-class reason>
   why_not_default_executor: <why the normal route is or is not sufficient>
@@ -210,6 +210,16 @@ Use the lowest sufficient model/settings class. Do not recommend premium/frontie
 
 For owner-controlled projects, Cursor must not default to `Run Everything`. Prefer Auto-review or stricter mode with protections on, narrow allowlists, visible usage summary, and explicit apply scope for file changes.
 
-## v3.9.3 dated model snapshot rule
+## v3.11.1 model and surface snapshot rule
 
-Exact Cursor model/settings advice must state the provider snapshot date/ref. Use the lowest sufficient route from the core model set first. Do not add optional models or recommend GPT-5.5 High/Extra High, Opus, Fable, Max/1M, or Fast on expensive models without a concrete escalation trigger, cheaper alternative, and why cheaper is insufficient.
+Exact model/settings advice must state the surface and dated snapshot ref. The
+2026-07-10 Codex snapshot routes Luna Low/Medium for clear repeatable extraction,
+Terra Medium/Standard for routine reasoning, and Sol High/XHigh for
+protocol/cross-system risk. Max is one hardest sequential task; Ultra is
+delegation and requires independent scopes, stop conditions, and fuel
+justification. Keep Cursor Max Mode separate from Codex Max reasoning.
+
+The bundled 2026-06-10 Cursor snapshot is expired. Do not infer GPT-5.6 Cursor
+availability from Codex evidence. Standard is the speed default; Fast is
+latency-first/increased-usage and has no established fixed GPT-5.6 public credit
+multiplier in the 2026-07-10 evidence.

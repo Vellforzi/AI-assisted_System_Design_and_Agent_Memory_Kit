@@ -20,7 +20,7 @@ used, when to escalate, and where the owner gate is.
 
 ```yaml
 Executor Routing Gate:
-  recommended_executor: Composer 2.5 / Cursor Agent | Codex App/current Codex coding model | GPT web | owner
+  recommended_executor: Composer 2.5 / Cursor Agent | ChatGPT Codex/current Codex coding model | GPT web | owner
   confidence: high | medium | low
   why_this_executor: <task-class reason>
   why_not_default_executor: <why the normal route is not enough, or why this is the normal route>
@@ -34,7 +34,7 @@ Executor Routing Gate:
 
 - Composer 2.5 / Cursor Agent: scoped mechanical implementation, exact write
   scope, local build/test iteration, and package file edits.
-- Codex App/current Codex coding model: analysis, planning, contract authoring,
+- ChatGPT Codex/current Codex coding model: analysis, planning, contract authoring,
   review, execution-integrity checks, evidence-chain recovery, and repair loops.
 - GPT web: current external research, official documentation lookup, and
   source-cited synthesis that is not project truth until promoted.
@@ -42,7 +42,9 @@ Executor Routing Gate:
   cleanup, external send/post actions, and ambiguous side-effect scope.
 
 These defaults are task-class guidance, not claims that one service is generally
-better.
+better. Composer is not the only implementation route: recommend ChatGPT Codex
+or both executors when current task evidence shows equal or better fit for a
+bounded implementation/repair loop.
 
 ## Prohibited Claims
 

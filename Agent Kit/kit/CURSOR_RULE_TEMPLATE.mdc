@@ -101,6 +101,16 @@ For owner-controlled projects, Cursor must not default to `Run Everything`. Pref
 
 Use the lowest sufficient model/settings class. Do not recommend premium/frontier/high/pro reasoning as a generic safety default. For owner-provided facts, narrow Project Map updates, version refs, and small docs/root-router edits, default to medium/standard unless a concrete escalation trigger exists. If recommending premium/high/pro, state the trigger, cheaper alternative, and why cheaper is insufficient.
 
-## v3.9.3 dated model snapshot rule
+## v3.11.1 model and surface snapshot rule
 
-Exact Cursor model/settings advice must state the provider snapshot date/ref. Use the lowest sufficient route from the core model set first. Do not add optional models or recommend GPT-5.5 High/Extra High, Opus, Fable, Max/1M, or Fast on expensive models without a concrete escalation trigger, cheaper alternative, and why cheaper is insufficient.
+Exact model/settings advice must state the surface and dated snapshot ref.
+Cursor/Composer is a strong executor for clear scoped implementation. ChatGPT
+Codex uses the dated GPT-5.6 routing snapshot for analysis, planning, review,
+repair/recovery, and evidence-supported bounded execution. Recommend the best
+executor or two comparable executors instead of treating Composer as the only
+implementation route. Owner-facing ChatGPT Codex tuples contain only surface,
+model, reasoning, and speed; full structured policy fields remain separate.
+
+The bundled 2026-06-10 Cursor snapshot is expired. Do not infer GPT-5.6 Cursor
+availability from Codex evidence. Standard is the default speed. Fast is
+latency-first/increased-usage; no fixed GPT-5.6 multiplier is established.

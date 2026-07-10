@@ -117,9 +117,12 @@ A premium/frontier/high/pro route is allowed only when at least one concrete esc
 
 For routine work, prefer cheaper settings:
 
-- low/fast: formatting, extraction, grep-like inspection, simple cleanup;
-- medium/standard: owner-provided facts, narrow Project Map updates, version refs, small docs/root-router edits, bounded one-file changes;
-- high/standard: only when the task has a concrete escalation trigger.
+- GPT-5.6-Luna with Low/Medium reasoning and Standard speed: clear extraction, inventory, classification, and repeatable static checks;
+- GPT-5.6-Terra with Medium reasoning and Standard speed: routine analysis, planning, task contracts, review, and bounded repair;
+- GPT-5.6-Terra or GPT-5.6-Sol with High reasoning and Standard speed: only when difficult repair or ambiguous root cause is present;
+- GPT-5.6-Sol with High/XHigh reasoning and Standard speed: hooks, routing, schemas, evals, protocols, or cross-system/production-risk recovery.
+
+Fast is latency-first and increased-usage, not a cheaper substitute for Standard.
 
 When the advisor recommends premium/frontier/high/pro, it must include:
 
@@ -140,7 +143,25 @@ for understanding the policy, but it is not a current recommendation.
 The historical snapshot below was captured on 2026-06-10. Do not treat its model
 labels as current without refresh.
 
-### 3.9 Historical Cursor model snapshot example
+### 3.9 Current Codex GPT-5.6 snapshot
+
+The source-qualified Codex snapshot was captured on **2026-07-10**:
+
+- `context_advisor/codex_provider_capability_snapshot_2026-07-10.yaml`
+- `context_advisor/provider_surface_routing_snapshot_2026-07-10.yaml`
+
+AMK routing uses Terra Medium/Standard for routine analysis and contract work,
+Luna Low/Medium for clear repeatable extraction, and Sol High/XHigh only for
+protocol or cross-system risk. Sol Max is one hardest sequential problem.
+Sol/Terra Ultra is delegation and requires independent scopes, stop conditions,
+and fuel justification. Luna Ultra is unsupported by the local snapshot.
+
+Keep full structured controls separate, but keep owner-facing prompt tuples
+surface-specific and minimal. The current desktop id is
+`chatgpt_desktop_codex`; `codex_app` is its compatibility alias. `codex_ide`
+is the distinct current Codex IDE extension.
+
+### 3.10 Historical Cursor model snapshot example
 
 When the owner asks which Cursor model/settings to use, the advisor must rely on a dated provider snapshot, not memory. The v3.9.3 snapshot was collected on **2026-06-10** from owner-observed Cursor UI plus Cursor docs/blog/forum sources.
 
@@ -164,13 +185,13 @@ Do not add more models to the routing set merely because they are available. Add
 
 If recommending 1M context, Max Mode, Fast, premium models, high/extra/max effort, or high/extra-high reasoning, the advisor must show the escalation trigger and cheaper sufficient alternative.
 
-### 3.10 Dated provider/model snapshot
+### 3.11 Historical Cursor snapshot boundary
 
 Exact Cursor model advice must name the provider snapshot date or say that the snapshot is missing/stale.
 
 The v3.9.3 example snapshot is `context_advisor/cursor_provider_model_snapshot_2026-06-10.yaml`, captured on 2026-06-10. It records owner-observed Cursor UI controls plus Cursor docs/forum refs. It is a volatile operational snapshot, not permanent project truth.
 
-For the current snapshot, the core Cursor Agent set is already sufficient with surplus:
+For the historical 2026-06-10 snapshot, the Cursor Agent set was sufficient with surplus on its capture date:
 
 - Composer 2.5 — default working horse;
 - GPT-5.3 Codex — code/test/repair executor;
@@ -179,14 +200,17 @@ For the current snapshot, the core Cursor Agent set is already sufficient with s
 - Opus 4.8 — rare hard planning/audit escalation;
 - Fable 5 — rare long-running autonomous agentic escalation.
 
-Optional models such as Gemini 3.1 Pro or Grok 4.3/Grok Build should not enter default routing unless the agent reports the capability gap, cheaper alternative, and owner approval.
+That Cursor snapshot expired on 2026-07-10. Preserve its model list unchanged,
+report it as stale/pending refresh, and do not infer GPT-5.6 Cursor availability
+from current Codex evidence. Optional models should not enter default routing
+without current evidence, a capability gap, a cheaper alternative, and owner approval.
 
 ### 3.8 User-facing hints must be compact
 
 Default hint format:
 
 ```text
-ContextAdvisor: gate=<green|amber|red|blocked>; missing=<classes/refs>; route=<surface/model-class/reasoning/cost>; settings=<Max/IDE/Plan/speed>; action=<proceed|ask|discovery|block>.
+ContextAdvisor: gate=<green|amber|red|blocked>; missing=<classes/refs>; route=<surface/model-class/reasoning/cost>; settings=<CursorMax/CodexMax/delegation/IDE/Plan/speed>; action=<proceed|ask|discovery|block>.
 ```
 
 Expanded reasoning appears only on direct ask: `settings?`, `scope?`, `fuel?`, `why?`, or `safe apply?`.
@@ -235,13 +259,13 @@ The advisor recommends a surface, not a guarantee.
 
 | Task type | Default surface | Model/settings class |
 |---|---|---|
-| Project answer | ChatGPT or Cursor read-only | medium reasoning, explicit refs only; cheap/default model unless evidence is complex. |
-| Architecture/spec/memory-kit design | ChatGPT | high reasoning only for schema/protocol/eval/router changes; otherwise medium synthesis first. |
-| Bounded repo patch | Cursor | medium reasoning, standard speed, exact scope, Max off first. |
-| Multi-file root-cause debug | Cursor or Codex IDE | high reasoning, plan first, logs/tests/schema included. |
-| Independent diff review | Codex IDE or Cursor subagent | read-only, medium/high reasoning, exact diff refs. |
-| External current docs research | ChatGPT/web-capable surface | current citations, external facts not project truth. |
-| Package/handoff update | ChatGPT for synthesis, Cursor for merge/apply | Composer 2.5/GPT-5.5 Medium for mechanical merge/version/checksum; high only for behavior/schema/router/eval contract changes. |
+| Project answer | ChatGPT Codex; Cursor read-only is an alternative after current Cursor evidence is checked | ChatGPT Codex: GPT-5.6-Terra with Medium reasoning and Standard speed; Luna only for clear extraction. Do not project this model tuple onto Cursor. |
+| Architecture/spec/memory-kit design | ChatGPT Codex | Terra Medium first; Sol High/XHigh for schema/protocol/eval/router changes. |
+| Bounded repo patch | Cursor Agent or ChatGPT Codex, selected by task fit | Composer 2.5 or another current evidence-supported Cursor route for mechanical apply; ChatGPT Codex Terra Medium/Standard for reasoning-heavy repair. Refresh Cursor evidence before exact current Cursor settings. |
+| Multi-file root-cause debug | ChatGPT Codex; Cursor Agent remains a valid executor-loop alternative | ChatGPT Codex: Terra High or Sol High, plan first, logs/tests/schema included. Cursor exact model/settings require current Cursor evidence. |
+| Independent diff review | ChatGPT Codex; Cursor read-only reviewer is an alternative after current Cursor evidence is checked | ChatGPT Codex: Terra Medium/High with exact diff refs. Do not reuse that tuple as a Cursor claim. |
+| External current docs research | GPT web | current citations, external facts not project truth. |
+| Package/handoff update | Cursor for mechanical apply; ChatGPT Codex for protocol reasoning | Composer 2.5 for merge/version/checksum; Sol High for behavior/schema/router/eval/protocol changes. |
 
 ---
 
@@ -254,6 +278,8 @@ The advisor recommends a surface, not a guarantee.
 | Plan Mode | Off for direct answers; on for complex apply/debug/audit. | the task touches multiple files/subsystems or has uncertain root cause. |
 | Speed | Standard | use fast only for low-risk draft/exploration where quality cost is acceptable. |
 | Reasoning | Medium | high only for concrete escalation triggers: cross-subsystem, schema/protocol/eval/router changes, audit, repair, recovery, production-risk, side-effect safety. |
+| Codex Max | Off | one hardest sequential problem with an explicit depth-over-usage trigger. |
+| Codex Ultra delegation | Off | independent scopes, per-scope stop conditions, fuel justification, and supported Sol/Terra evidence. |
 | External research | Off unless requested or needed for volatile external facts. | model/provider/library/regulatory facts may have changed. |
 
 ---
@@ -282,7 +308,7 @@ Working State may store refs to advisor outputs:
 context_advisor:
   latest_trace_ref: "Project Map/runtime/context_advisor/CTX-0007.json"
   latest_context_needs_ref: "Project Map/runtime/context_advisor/CTX-0007.context_needs.json"
-  provider_capability_snapshot_ref: "Project Map/provider_capabilities/openai_cursor_codex_2026-06-10.yaml"
+  provider_capability_snapshot_ref: "Project Map/provider_capabilities/provider_surface_routing_2026-07-10.yaml"
 ```
 
 Do not store full traces, large inventories, raw logs, or provider docs in Working State. Store refs.
@@ -338,28 +364,27 @@ Auto is not a specific model. For owner-controlled project work, do not recommen
 
 Max Mode is a separate Cursor-level capacity toggle for explicit models except Auto. Keep Max OFF by default; recommend 1M/Max only with context-overflow, broad-audit, large multimodal context, or explicit owner approval.
 
-## v3.9.3 dated surface/model routing snapshot
+## v3.11.1 dated surface/model routing snapshot
 
-For exact model/mode advice, ContextAdvisor must use a dated provider snapshot. The bundled snapshot was collected on 2026-06-10, Europe/Vienna, from owner-observed UI plus official Cursor/OpenAI sources.
+For exact model/mode advice, ContextAdvisor uses the 2026-07-10 provider-surface
+and Codex capability snapshots. Generic service routing remains separate from
+exact model routing:
 
-Current working-horse decision: the owner-observed set is sufficient with surplus for Cursor Agent work. Do not add models to the default router merely because Cursor exposes them.
+- Cursor Agent / Composer 2.5: strong clear scoped implementation workhorse.
+- ChatGPT desktop app (Codex mode): analysis, planning, task contracts, independent review,
+  evidence-chain verification, and repair/recovery.
+- GPT web: deep/current external research; no direct repository authority.
 
-Surface split:
+The current Codex family is GPT-5.6-Sol, GPT-5.6-Terra, and GPT-5.6-Luna.
+Standard is the default speed. Max is single-task reasoning. Ultra is delegation
+for independent scopes. Cursor Max Mode remains a separate capacity control.
 
-- Cursor Agent = main repository working horse.
-- Codex IDE extension = code/test/repair specialist and independent checker.
-- ChatGPT Pro web = synthesis, architecture, prompt/package design, and Deep Research; no direct repo apply.
+The local cache exposes GPT-5.6 Fast, while the checked public Speed page names
+GPT-5.5 and GPT-5.4; no fixed GPT-5.6 Fast credit multiplier is asserted. The
+2026-06-10 Cursor snapshot is expired, so current GPT-5.6 Cursor availability is
+missing evidence.
 
-Cursor modes:
-
-- Ask: read-only answer/analyze.
-- Plan: complex apply/debug/audit before mutation.
-- Debug: root-cause analysis with logs/tests/schema.
-- Multitask: only independent child tasks with separate scopes/checkpoints; high fuel risk.
-- Agent/apply: bounded accepted edits.
-
-Codex extension controls observed by owner: GPT-5.5, GPT-5.4, GPT-5.4-mini, GPT-5.3-Codex-Spark; reasoning low/medium/high/extra high; standard/fast; Plan Mode; Pursue Goal; Include IDE Context.
-
-ChatGPT Pro web controls observed by owner: Thinking Heavy, Pro + Heavy, Deep Research.
-
-Auto is not a default route for controlled work. Max Mode is a separate capacity toggle for explicit Cursor models except Auto. Both require explicit justification or owner acceptance.
+When recommending ChatGPT Codex prompt-time choices, output only
+`ChatGPT Codex / model / reasoning / speed`. Do not append Fast/Max/Ultra off,
+IDE context, shell, terminal profile, or application configuration. Recommend
+Composer, Codex, or both when task evidence shows comparable executor fit.

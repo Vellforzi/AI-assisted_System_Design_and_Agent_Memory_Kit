@@ -9,10 +9,10 @@ Required context classes usually include affected files, runtime logs, tests, co
 
 Routing policy:
 
-- Start with Composer 2.5 or Codex/Cursor medium route when the issue is bounded.
-- Use Codex 5.3 medium/high for code/test/repair loops and terminal verification.
-- Use GPT-5.5 high or Opus/Sonnet only when root cause is cross-subsystem, ambiguous, or cheaper route failed.
+- Start with Composer 2.5 for clear scoped implementation or GPT-5.6-Terra with Medium reasoning for bounded analysis.
+- Use ChatGPT Codex with GPT-5.6-Terra / High / Standard for difficult code/test repair and terminal verification when it is the best executor for the evidence chain.
+- Use model GPT-5.6-Sol with High reasoning only when root cause is cross-system, ambiguous, production-risk, or the cheaper route failed.
 - Plan Mode ON for multi-file or cross-subsystem debugging.
-- Max/1M OFF unless logs/docs/context exceed normal context and owner approves.
+- Cursor Max/1M remains a capacity control and stays off unless context exceeds the normal window. Codex Max is separate single-task reasoning and also requires an explicit hardest-problem trigger.
 
 Return gate, missing evidence, likely root-cause hypotheses, proposed narrow repair scope, verification commands, and route recommendation.

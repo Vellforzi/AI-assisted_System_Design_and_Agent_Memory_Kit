@@ -94,11 +94,14 @@ Inspect `.codexignore` as a Codex context-boundary policy file. Do not edit with
 
 These commands do not grant permission to read beyond scope or mutate files.
 
-## v3.9.3 model snapshot vocabulary
+## v3.11.1 model snapshot vocabulary
 
-- `settings?` must show provider snapshot date/ref when giving exact Cursor model settings.
-- `which model?` should choose from the core Cursor set first: Composer 2.5, GPT-5.3 Codex, GPT-5.5, Sonnet 4.6, Opus 4.8, Fable 5.
-- Optional models such as Gemini 3.1 Pro or Grok 4.3/Grok Build require a capability gap and owner approval before entering default routing.
+- `settings?` must show surface plus provider snapshot date/ref for exact settings.
+- For Cursor, the bundled 2026-06-10 model set is historical/stale; refresh before exact current advice and do not add GPT-5.6 from Codex evidence.
+- For ChatGPT desktop Codex, use the 2026-07-10 Sol/Terra/Luna snapshot: Luna for clear repeatable extraction, Terra Medium for routine reasoning, Sol High/XHigh for protocol/cross-system risk. Keep Codex IDE extension, CLI, and web as distinct clients.
+- Max is one hardest sequential task. Ultra is delegation and requires independent scopes, stop conditions, and fuel justification.
+- Cursor Max Mode is context/capacity, not Codex Max reasoning.
+- Standard is the default speed. Fast is increased-usage and has no established fixed GPT-5.6 public multiplier.
 
 ## v3.9.3 surface/mode routing vocabulary
 

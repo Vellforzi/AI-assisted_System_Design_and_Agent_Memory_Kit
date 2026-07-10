@@ -35,8 +35,9 @@ surfaces:
       - "scoped repo apply"
       - "multi-file planning"
       - "local verification"
-  - surface: "codex_ide"
+  - surface: "chatgpt_desktop_codex"
     provider: "OpenAI Codex"
+    display_label: "ChatGPT desktop app (Codex mode)"
     model_or_model_class: "selected Codex/OpenAI model"
     supported_reasoning: ["low", "medium", "high"]
     context_notes: "Verify current Codex approval mode, sandbox/permissions, and model."
@@ -44,6 +45,10 @@ surfaces:
       - "independent review"
       - "local code reasoning"
       - "controlled apply with approval"
+  - surface: "codex_ide"
+    provider: "OpenAI Codex"
+    display_label: "Codex IDE extension"
+    relation_to_desktop: "distinct current client; not an alias"
 
 
 cost_class_notes:

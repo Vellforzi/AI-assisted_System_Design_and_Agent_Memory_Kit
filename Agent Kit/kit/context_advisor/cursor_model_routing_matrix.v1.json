@@ -4,7 +4,9 @@
   "collectedAt": "2026-06-10T00:00:00+02:00",
   "expiresAt": "2026-07-10T00:00:00+02:00",
   "timezone": "Europe/Vienna",
-  "status": "volatile_provider_snapshot",
+  "status": "expired_pending_refresh",
+  "staleReason": "The 2026-06-10 Cursor snapshot expired on 2026-07-10. Preserve its model set as historical evidence and do not add GPT-5.6 without current Cursor evidence.",
+  "currentCodexSnapshotRef": "context_advisor/codex_provider_capability_snapshot_2026-07-10.yaml",
   "evidenceRefs": [
     {
       "id": "OWNER-CURSOR-UI-2026-06-10",
@@ -33,6 +35,8 @@
     }
   ],
   "globalRules": [
+    "This Cursor model set is historical and expired; exact current Cursor advice requires refreshed Cursor evidence.",
+    "Codex GPT-5.6 availability does not establish GPT-5.6 availability in Cursor.",
     "Use the lowest sufficient model/settings class first.",
     "Do not add more models to the working set unless the current set fails a concrete task class or owner requests benchmarking.",
     "Premium/frontier/high/pro/1M/Fast recommendations require escalation trigger, cheaper alternative, and why cheaper is insufficient.",

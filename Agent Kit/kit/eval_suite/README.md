@@ -1,10 +1,15 @@
-# Agent Memory Kit Eval Suite - v3.11.0
+# Agent Memory Kit Eval Suite - v3.11.1 Candidate
 
-Status: authoritative kit eval suite for v3.11.0 when located under
+Status: authoritative working-tree candidate eval suite for v3.11.1 when located under
 `Agent Kit/kit/eval_suite`.
 
+This is not release proof. v3.11.1 adds `AMK-ML-002` and `AMK-MR-001` for
+GPT-5.6 exact labels/slugs, cost-aware Luna/Terra/Sol routing, Max/Ultra/Cursor
+Max separation, Fast source conflict, stale Cursor evidence, cross-surface
+availability, and historical snapshot immutability.
+
 Project Map mirror: `Project Map/eval_suite` is a synced mirror only when
-`manifest.yaml`, `eval_trigger_policy.yaml`, `run_eval_checklist.py`, and case
+`manifest.yaml`, `eval_trigger_policy.yaml`, `../tools/run_eval_checklist.py`, and case
 IDs match the kit suite. If parity fails, mark the Project Map mirror as
 `stale_mirror` and do not grade from it as current truth.
 
@@ -46,9 +51,12 @@ Authoritative files:
 - `../tools/run_eval_checklist.py`
 - `cases/*.yaml`
 
+The same-directory `eval_suite/run_eval_checklist.py` is a legacy compatibility
+helper and is not the manifest-selected v3.11.1 validator.
+
 Smoke selection contract:
 
-- `run_eval_checklist.py` reads `smoke_policy.categories` from
+- `../tools/run_eval_checklist.py` reads `smoke_policy.categories` from
   `eval_trigger_policy.yaml`. It must not keep an independent hardcoded
   smoke-category list.
 - A case counts toward a required category when `case.category` matches or a

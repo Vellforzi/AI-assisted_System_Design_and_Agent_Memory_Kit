@@ -4,9 +4,22 @@ Package file: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.9.3_EN.zip`
 
 Package purpose: portable starter guide and memory operating layer for using AI agents with owner-controlled projects. Agent Memory Kit helps build a Project Map through structured, meaningful, interconnected duplication of project information supplied or verified by the owner.
 
-Current working-tree version: `v3.11.0`. No release ZIP or publication asset has
+Current working-tree version: `v3.11.1` unreleased candidate. No release ZIP or publication asset has
 been created by this working tree. Older package-file lines are retained as
 historical manifest entries.
+
+## v3.11.1 unreleased GPT-5.6 routing supplement
+
+- `Agent Kit/kit/CHANGELOG_v3.11.1.md` - candidate change record; not release proof.
+- `Agent Kit/kit/context_advisor/codex_provider_capability_snapshot_2026-07-10.yaml` - source-qualified Codex GPT-5.6 evidence.
+- `Agent Kit/kit/context_advisor/provider_surface_routing_snapshot_2026-07-10.yaml` - current generic surface and Codex model routing.
+- `Agent Kit/kit/eval_suite/cases/AMK-ML-002.yaml` - GPT-5.6 exact-label/control fidelity case.
+- `Agent Kit/kit/eval_suite/cases/AMK-MR-001.yaml` - GPT-5.6 task routing, Max/Ultra, Fast, stale-evidence, and surface-boundary case.
+
+Current guidance/runtime surfaces listed below are updated for ChatGPT desktop
+Codex plus distinct Codex IDE/CLI/web clients, Luna/Terra/Sol routing, explicit
+delegation, minimal owner prompt tuples, and stale Cursor evidence. All
+2026-06-10 snapshots and versioned historical examples remain unchanged.
 
 ## v3.11.0 release extraction supplement
 
@@ -272,13 +285,13 @@ The ignore templates include `**/desktop.ini` for Windows/Google Drive projects.
 - `Agent Kit/kit/cursor/commands/models.md` — owner command for model-set sufficiency and snapshot freshness.
 - `AMK-CA-009` and `AMK-CA-010` — eval cases for dated snapshots and unsupported model-control invention.
 
-### v3.9.3 model/surface routing files
+### Current and historical model/surface routing files
 
-- `Agent Kit/kit/MODEL_SURFACE_ROUTING_SNAPSHOT.md` — dated Cursor/Codex/ChatGPT Pro model and mode routing snapshot.
-- `Agent Kit/kit/CURSOR_MODEL_ROUTING_SNAPSHOT.md` — backward-compatible Cursor routing snapshot including Auto/Max boundaries.
-- `Agent Kit/kit/context_advisor/provider_surface_routing_snapshot_2026-06-10.yaml` — machine-readable provider/surface/mode snapshot.
-- `Agent Kit/kit/context_advisor/cursor_model_routing_matrix.v1.json` — ContextAdvisor cost/model routing matrix.
+- `Agent Kit/kit/MODEL_SURFACE_ROUTING_SNAPSHOT.md` — current surface-first GPT-5.6 Codex routing summary.
+- `Agent Kit/kit/CURSOR_MODEL_ROUTING_SNAPSHOT.md` — historical 2026-06-10 Cursor routing snapshot including Auto/Max boundaries.
+- `Agent Kit/kit/context_advisor/provider_surface_routing_snapshot_2026-06-10.yaml` — immutable historical provider/surface/mode snapshot.
+- `Agent Kit/kit/context_advisor/cursor_model_routing_matrix.v1.json` — expired historical Cursor cost/model matrix pending refresh.
 - `Agent Kit/kit/cursor/commands/ask.md`, `debug.md`, `multitask.md`, `models.md`, `settings.md` — compact commands for mode/settings routing.
-- `Agent Kit/kit/codex/workflows/model-routing.md` — Codex IDE extension routing workflow.
+- `Agent Kit/kit/codex/workflows/model-routing.md` — current ChatGPT desktop Codex prompt-time routing and distinct Codex client workflow.
 
 - `Agent Kit/kit/context_advisor/execution_surface_routing_matrix.v1.json` — v3.9.3 machine-readable surface/mode routing matrix.

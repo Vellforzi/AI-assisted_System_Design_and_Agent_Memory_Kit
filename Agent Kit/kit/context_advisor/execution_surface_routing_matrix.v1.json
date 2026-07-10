@@ -1,28 +1,187 @@
 {
-  "schemaVersion": "1.0.0",
-  "matrixId": "execution-surface-routing-matrix-2026-06-10",
-  "collectedAt": "2026-06-10T00:00:00+02:00",
-  "expiresAt": "2026-07-10T00:00:00+02:00",
-  "status": "volatile_provider_snapshot",
+  "schemaVersion": "1.1.0",
+  "matrixId": "execution-surface-routing-matrix-2026-07-10",
+  "collectedAt": "2026-07-10T12:28:20+02:00",
+  "expiresAt": "2026-08-09T12:28:20+02:00",
+  "status": "source_qualified_current_with_cursor_gap",
+  "snapshotRefs": {
+    "codexCapabilities": "context_advisor/codex_provider_capability_snapshot_2026-07-10.yaml",
+    "providerSurfaces": "context_advisor/provider_surface_routing_snapshot_2026-07-10.yaml",
+    "cursorCapabilitiesHistorical": "context_advisor/cursor_provider_capability_snapshot_2026-06-10.yaml"
+  },
   "surfaces": {
-    "cursor_agent": "primary repo-local workhorse",
-    "codex_ide": "code/test/repair specialist and independent review surface",
-    "chatgpt_pro_web": "advisor/research/synthesis only; no repo mutation authority"
+    "cursor_agent": {
+      "role": "strong executor for clear scoped implementation and local verification",
+      "providerEvidenceState": "expired_pending_refresh",
+      "gpt56Availability": "missing_evidence",
+      "ownerPromptTupleFields": [
+        "surface",
+        "model"
+      ]
+    },
+    "chatgpt_desktop_codex": {
+      "displayLabel": "ChatGPT desktop app (Codex mode)",
+      "ownerFacingShortLabel": "ChatGPT Codex",
+      "role": "analysis, planning, contract design, review, evidence verification, repair, and failed-executor recovery",
+      "providerEvidenceState": "current_for_owner_environment_with_public_docs",
+      "aliases": [
+        "codex_app",
+        "chatgpt_codex"
+      ],
+      "ownerPromptTupleFields": [
+        "surface",
+        "model",
+        "reasoning",
+        "speed"
+      ]
+    },
+    "codex_app": {
+      "deprecatedAliasFor": "chatgpt_desktop_codex",
+      "providerEvidenceState": "backward_compatible_alias"
+    },
+    "codex_ide": {
+      "displayLabel": "Codex IDE extension",
+      "role": "editor-attached Codex coding",
+      "providerEvidenceState": "current_public_documentation",
+      "ownerPromptTupleFields": [
+        "surface",
+        "model",
+        "reasoning"
+      ],
+      "speedSelectorEvidence": "missing"
+    },
+    "codex_cli": {
+      "displayLabel": "Codex CLI",
+      "role": "terminal-first Codex coding",
+      "providerEvidenceState": "current_public_documentation",
+      "ownerPromptTupleFields": [
+        "surface",
+        "model",
+        "reasoning"
+      ],
+      "speedSelectorEvidence": "missing"
+    },
+    "codex_web": {
+      "displayLabel": "Codex web",
+      "role": "hosted Codex tasks",
+      "providerEvidenceState": "current_public_documentation",
+      "ownerPromptTupleFields": [
+        "surface",
+        "model",
+        "reasoning"
+      ],
+      "speedSelectorEvidence": "missing"
+    },
+    "gpt_web": {
+      "role": "deep and current external research when repository evidence is insufficient",
+      "authority": "advisory_read_only",
+      "ownerPromptTupleFields": [
+        "surface",
+        "model"
+      ]
+    },
+    "chatgpt_pro_web": {
+      "deprecatedAliasFor": "gpt_web",
+      "providerEvidenceState": "backward_compatible_alias"
+    }
+  },
+  "genericExecutorRules": [
+    "Choose the execution surface before the exact model.",
+    "Use Cursor Agent / Composer 2.5 as a strong baseline for clear scoped implementation, but recommend ChatGPT Codex or both when task evidence shows equal or better executor fit.",
+    "Use ChatGPT desktop app in Codex mode for analysis, planning, task contracts, independent review, evidence-chain verification, and repair/recovery when local desktop execution is appropriate.",
+    "Treat Codex IDE extension, Codex CLI, and Codex web as distinct clients, not aliases for desktop Codex mode.",
+    "Use GPT web for current external research; external facts are not project truth without valid promotion.",
+    "Require an owner gate for deploy, DB writes, git push/release, credentials, Project Map writes, destructive cleanup, acceptance smoke, or ambiguous side effects."
+  ],
+  "codexModels": {
+    "gpt_5_6_sol": {
+      "displayLabel": "GPT-5.6-Sol",
+      "configSlug": "gpt-5.6-sol",
+      "reasoning": [
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max",
+        "ultra"
+      ],
+      "defaultFor": [
+        "hooks_routing_schemas_evals_protocols",
+        "cross_system_or_production_risk_recovery"
+      ],
+      "ultraDelegationSupported": true
+    },
+    "gpt_5_6_terra": {
+      "displayLabel": "GPT-5.6-Terra",
+      "configSlug": "gpt-5.6-terra",
+      "reasoning": [
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max",
+        "ultra"
+      ],
+      "defaultFor": [
+        "routine_analysis_planning_contract_review_bounded_repair"
+      ],
+      "ultraDelegationSupported": true
+    },
+    "gpt_5_6_luna": {
+      "displayLabel": "GPT-5.6-Luna",
+      "configSlug": "gpt-5.6-luna",
+      "reasoning": [
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
+      "defaultFor": [
+        "extraction_inventory_classification_repeatable_static_checks"
+      ],
+      "ultraDelegationSupported": false
+    }
+  },
+  "codexDefaults": {
+    "surface": "chatgpt_desktop_codex",
+    "surfaceDisplayLabel": "ChatGPT Codex",
+    "modelDisplayLabel": "GPT-5.6-Terra",
+    "modelConfigSlug": "gpt-5.6-terra",
+    "reasoningEffort": "medium",
+    "speed": "standard",
+    "delegation": "off",
+    "includeIdeContext": "off",
+    "planMode": "off_unless_planning_is_the_task",
+    "ownerPromptTupleFields": [
+      "surface",
+      "model",
+      "reasoning",
+      "speed"
+    ]
+  },
+  "controlBoundaries": {
+    "codexMax": "single-model reasoning depth for one hardest sequential problem",
+    "codexUltra": "automatic delegation for meaningfully independent subproblems",
+    "cursorMaxMode": "Cursor context/capacity control; not Codex reasoning",
+    "fast": "latency-first increased usage; never describe as cheaper",
+    "gpt56FastFixedCreditMultiplier": null,
+    "fastEvidenceConflict": "Owner-local cache exposes GPT-5.6 Fast; checked public Speed documentation explicitly names GPT-5.5 and GPT-5.4."
   },
   "cursorModes": {
     "ask": "read-only explanation/analysis",
     "plan": "reviewable plan before risky apply",
     "agent": "bounded scoped apply",
     "debug": "root-cause/log/test/runtime evidence mode",
-    "multitask": "parallel subagents; high fuel; independent subscopes and owner approval required"
+    "multitask": "parallel independent scopes with stop conditions and fuel warning"
   },
   "rules": [
-    "Choose surface before model.",
-    "Do not use ChatGPT Pro web for repo apply.",
-    "Do not use Multitask without independent subscopes and owner approval.",
-    "Use Codex IDE for code/test/repair loops when beneficial.",
-    "Use ChatGPT Pro web for synthesis/research/handoff only.",
-    "Auto is discouraged for controlled OPTION-PROFIT work unless owner accepts non-determinism.",
-    "Max/1M is a capacity toggle, not a quality default."
+    "Standard speed is the default.",
+    "Ultra requires independent scopes, per-scope stop conditions, and fuel justification.",
+    "Luna Ultra is unsupported by the 2026-07-10 owner-local capability snapshot.",
+    "Do not combine a model label and reasoning effort into an invented label.",
+    "Do not infer GPT-5.6 Cursor availability from Codex evidence.",
+    "Do not use a stale provider snapshot as current exact-settings evidence.",
+    "Owner-facing ChatGPT Codex recommendations contain only surface, model, reasoning effort, and speed; derived off states and application configuration stay out of the prompt tuple."
   ]
 }

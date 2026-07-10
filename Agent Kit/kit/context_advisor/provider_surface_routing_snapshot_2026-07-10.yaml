@@ -1,0 +1,221 @@
+schema_version: 1.1.0
+snapshot_id: provider-surface-routing-2026-07-10
+status: source_qualified_current_with_cursor_gap
+collected_at: '2026-07-10T12:28:20+02:00'
+expires_at: '2026-08-09T12:28:20+02:00'
+timezone: Europe/Berlin
+purpose: >-
+  Dated surface-first and model-second AMK routing. Generic executor roles remain
+  separate from volatile model capability evidence.
+
+snapshot_refs:
+  codex_capabilities: context_advisor/codex_provider_capability_snapshot_2026-07-10.yaml
+  cursor_capabilities_historical: context_advisor/cursor_provider_capability_snapshot_2026-06-10.yaml
+  cursor_routing_matrix: context_advisor/cursor_model_routing_matrix.v1.json
+
+evidence_state:
+  codex_gpt56:
+    status: current_for_owner_environment_with_public_docs
+    checked_at: '2026-07-10'
+  cursor_models:
+    status: expired_pending_refresh
+    snapshot_date: '2026-06-10'
+    rule: Do not infer GPT-5.6 availability in Cursor from Codex evidence.
+  external_research:
+    status: use_current_sources
+    rule: External facts do not become project truth without valid promotion.
+
+generic_executor_routing:
+  cursor_agent:
+    default_role: strong_clear_scoped_implementation_executor
+    owner_prompt_tuple_fields:
+    - surface
+    - model
+    preferred_for:
+    - explicit_write_scope
+    - file_edits
+    - build_test_iteration
+    - mechanical_repo_orchestration
+    - local_verification
+    routing_rule: Compare current task fit and recommend ChatGPT Codex or both executors when it is equal or better for the implementation/repair loop.
+  chatgpt_desktop_codex:
+    display_label: ChatGPT desktop app (Codex mode)
+    owner_facing_short_label: ChatGPT Codex
+    default_role: reasoning_review_and_repair
+    preferred_for:
+    - analysis
+    - planning
+    - task_contract_authoring
+    - independent_review
+    - evidence_chain_verification
+    - execution_integrity_checks
+    - code_test_repair_loops
+    - failed_executor_recovery
+    - owner_gate_extraction
+    backward_compatible_aliases:
+    - codex_app
+    - chatgpt_codex
+    owner_prompt_tuple_fields:
+    - surface
+    - model
+    - reasoning
+    - speed
+  codex_ide:
+    display_label: Codex IDE extension
+    default_role: editor_attached_codex_coding
+    owner_prompt_tuple_fields:
+    - surface
+    - model
+    - reasoning
+    speed_selector_evidence: missing
+  codex_cli:
+    display_label: Codex CLI
+    default_role: terminal_first_codex_coding
+    owner_prompt_tuple_fields:
+    - surface
+    - model
+    - reasoning
+    speed_selector_evidence: missing
+  codex_web:
+    display_label: Codex web
+    default_role: hosted_codex_tasks
+    owner_prompt_tuple_fields:
+    - surface
+    - model
+    - reasoning
+    speed_selector_evidence: missing
+  gpt_web:
+    default_role: deep_current_external_research
+    authority: advisory_read_only
+    owner_prompt_tuple_fields:
+    - surface
+    - model
+  owner:
+    required_for:
+    - deploy
+    - hosting_upload
+    - database_write
+    - git_push_or_release
+    - credentials
+    - project_map_write
+    - destructive_cleanup
+    - acceptance_smoke
+    - ambiguous_side_effect_scope
+
+codex_model_routing:
+- task_class:
+  - extraction
+  - inventory
+  - classification
+  - repeatable_static_checks
+  default_model_label: GPT-5.6-Luna
+  default_model_slug: gpt-5.6-luna
+  reasoning:
+  - low
+  - medium
+  speed: standard
+  delegation: off
+- task_class:
+  - routine_analysis
+  - planning
+  - task_contract_work
+  - review
+  - bounded_repair
+  default_model_label: GPT-5.6-Terra
+  default_model_slug: gpt-5.6-terra
+  reasoning:
+  - medium
+  speed: standard
+  delegation: off
+- task_class:
+  - difficult_code_or_test_repair
+  - ambiguous_root_cause
+  default_routes:
+  - model_label: GPT-5.6-Terra
+    model_slug: gpt-5.6-terra
+    reasoning: high
+  - model_label: GPT-5.6-Sol
+    model_slug: gpt-5.6-sol
+    reasoning: high
+  speed: standard
+  delegation: off
+- task_class:
+  - hooks
+  - routing
+  - schemas
+  - evals
+  - protocols
+  - cross_system_or_production_risk_recovery
+  default_model_label: GPT-5.6-Sol
+  default_model_slug: gpt-5.6-sol
+  reasoning:
+  - high
+  - xhigh
+  speed: standard
+  delegation: off
+- task_class:
+  - one_hardest_sequential_problem
+  default_model_label: GPT-5.6-Sol
+  default_model_slug: gpt-5.6-sol
+  reasoning:
+  - max
+  speed: standard
+  delegation: off
+  requires:
+  - explicit_hardest_problem_trigger
+- task_class:
+  - meaningfully_independent_parallel_subproblems
+  supported_model_labels:
+  - GPT-5.6-Sol
+  - GPT-5.6-Terra
+  reasoning:
+  - ultra
+  speed: standard
+  delegation: proactive
+  requires:
+  - independent_scopes
+  - per_scope_stop_conditions
+  - fuel_justification
+
+default_codex_tuple:
+  surface: chatgpt_desktop_codex
+  surface_display_label: ChatGPT Codex
+  work_mode: owner_scoped
+  model: GPT-5.6-Terra
+  model_slug: gpt-5.6-terra
+  reasoning_effort: medium
+  speed: standard
+  cursor_max_mode: off
+  codex_delegation: off
+  include_ide_context: off
+  plan_mode: off_unless_planning_is_the_task
+  snapshot_ref: context_advisor/codex_provider_capability_snapshot_2026-07-10.yaml
+  owner_prompt_tuple_fields:
+  - surface
+  - model
+  - reasoning
+  - speed
+
+quality_biased_alternative:
+  model: GPT-5.6-Sol
+  model_slug: gpt-5.6-sol
+  reasoning_effort: medium
+  use_when: Extra quality or polish matters enough to justify Sol over the AMK cost-aware Terra default.
+
+control_boundaries:
+- Exact display label and config slug are separate from reasoning effort.
+- Cursor Max Mode is context/capacity semantics; Codex Max is single-task reasoning depth.
+- Ultra is delegation semantics, not a generic stronger default.
+- Luna Ultra is unsupported by the 2026-07-10 local capability snapshot.
+- Standard is the default speed.
+- Fast is latency-first and increased-usage, never cheaper.
+- No fixed GPT-5.6 Fast credit multiplier is established by current public evidence.
+- GPT-5.6 Codex availability does not establish GPT-5.6 Cursor availability.
+- ChatGPT desktop Codex, Codex IDE extension, Codex CLI, and Codex web are distinct clients.
+- Owner-facing ChatGPT Codex recommendations omit derived off states, IDE context, shell, terminal profile, and application configuration.
+
+refresh_triggers:
+- Cursor model picker or current Cursor documentation is rechecked.
+- Codex model labels, effort choices, speed support, or rate card changes.
+- Provider UI changes control labels.
+- This snapshot reaches expires_at.

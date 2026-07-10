@@ -1,45 +1,38 @@
 {
-  "id": "ctx-trace-v391-example-001",
-  "createdAt": "2026-06-10T00:00:00Z",
+  "id": "ctx-trace-v3111-example-001",
+  "createdAt": "2026-07-10T12:28:20+02:00",
   "task": {
-    "id": "task-update-agent-memory-kit-implicit-ide-patch",
-    "rawUserRequest": "Record git topology facts in Project Map; use minimal scope and do not recommend expensive models without reason.",
-    "normalizedGoal": "Record owner-provided git topology facts in Project Map without over-escalating model cost.",
-    "intent": "project_map_update",
-    "mutation": "docs",
-    "risk": "high",
+    "id": "task-review-bounded-contract",
+    "rawUserRequest": "Review a bounded task contract from explicit repository evidence and recommend the lowest sufficient current Codex route.",
+    "normalizedGoal": "Review a bounded contract without mutation and return source-qualified routing advice.",
+    "intent": "analyze",
+    "mutation": "none",
+    "risk": "medium",
     "explicitScope": [
       {
         "kind": "file",
-        "ref": "AI-assisted_System_Design_and_Agent_Memory_Kit_v3.8.0_EN.zip",
-        "reason": "latest attached package",
-        "required": true
-      },
-      {
-        "kind": "artifact",
-        "ref": "AK-04_context_advisor_package_2026-06-10.zip",
-        "reason": "prior delta work",
+        "ref": "agent-tools/tasks/example/TASK-contract.md",
+        "reason": "owner-scoped review target",
         "required": true
       }
     ],
     "requestedOutput": [
-      "updated package zip",
-      "brief report",
-      "Cursor follow-up task"
+      "bounded contract review",
+      "structured current model/settings tuple"
     ],
     "language": "ru",
-    "ownerOk": true,
+    "ownerOk": false,
     "verificationProvided": true,
     "notes": [
-      "Package update is performed on attached archive copy, not on owner repository.",
-      "Implicit IDE context must not expand read/apply scope without owner approval."
+      "Exact model labels, config slugs, reasoning effort, speed, and delegation remain separate fields.",
+      "Cursor availability is not inferred from Codex evidence."
     ]
   },
-  "profile": "project_map_update",
+  "profile": "analyze_project",
   "contextManifest": {
-    "id": "ctx-manifest-v391-example-001",
-    "taskId": "task-update-agent-memory-kit-package",
-    "profile": "handoff_package_update",
+    "id": "ctx-manifest-v3111-example-001",
+    "taskId": "task-review-bounded-contract",
+    "profile": "analyze_project",
     "mandatory": [
       {
         "contextClass": "project_map_core",
@@ -121,11 +114,11 @@
   },
   "sufficiency": {
     "gate": "green",
-    "score0to100": 88,
+    "score0to100": 90,
     "reasons": [
-      "Latest package is attached",
-      "Prior AK-04 delta is available",
-      "No secrets needed"
+      "Owner supplied an exact review target",
+      "Current surface and Codex capability snapshots are available",
+      "No mutation or secrets are needed"
     ],
     "missingMandatory": [],
     "overBroadRefs": [],
@@ -133,32 +126,47 @@
     "recommendedAction": "proceed"
   },
   "routing": {
-    "surface": "chatgpt",
+    "surface": "chatgpt_desktop_codex",
     "provider": "OpenAI",
-    "modelOrModelClass": "project-approved medium/default model",
+    "modelOrModelClass": "GPT-5.6-Terra",
+    "modelDisplayLabel": "GPT-5.6-Terra",
+    "modelConfigSlug": "gpt-5.6-terra",
     "reasoning": "medium",
     "speed": "standard",
+    "delegation": "off",
     "contextMode": "explicit_refs_only",
     "maxMode": "off",
+    "cursorMaxMode": "not_applicable",
+    "codexMaxReasoning": "off",
     "includeIdeContext": "off",
     "planMode": "off",
     "approvalMode": "read_only",
     "rationale": [
-      "Owner supplied the facts; this is a narrow Project Map update, not schema/protocol/eval/router redesign.",
-      "Medium/standard is sufficient; premium/high/pro would require a concrete escalation trigger."
+      "Routine bounded analysis maps to the AMK cost-aware Terra Medium/Standard route.",
+      "Sol High/XHigh, Max, and Ultra have no concrete trigger for this task."
     ],
-    "volatileSnapshotRef": "context_advisor/provider_capability_snapshot.example.yaml",
+    "volatileSnapshotRef": "context_advisor/provider_surface_routing_snapshot_2026-07-10.yaml",
+    "providerSnapshotCapturedAt": "2026-07-10T12:28:20+02:00",
+    "modelControlsRef": "context_advisor/codex_provider_capability_snapshot_2026-07-10.yaml",
     "costClass": "standard",
     "capabilityNeed": "bounded",
-    "cheaperAlternative": "Composer/project default medium; low/fast only for formatting/index-only cleanup",
+    "cheaperAlternative": "GPT-5.6-Luna with Medium reasoning only if the task is reclassified as clear extraction/classification",
     "premiumEscalationReasons": [],
-    "whyNotCheaper": []
+    "whyNotCheaper": [
+      "The task requires contract reasoning rather than repeatable extraction."
+    ],
+    "ownerPromptTuple": {
+      "surface": "ChatGPT Codex",
+      "model": "GPT-5.6-Terra",
+      "reasoning": "Medium",
+      "speed": "Standard"
+    }
   },
   "userHint": {
     "mode": "compact",
-    "compactText": "ContextAdvisor: gate=green; missing=none; route=cursor/project-approved-medium/medium/standard; settings=Max off, IDE off, Plan off, speed standard; action=proceed.",
+    "compactText": "ContextAdvisor: gate=green; missing=none; route=ChatGPT Codex / GPT-5.6-Terra / Medium / Standard; action=proceed.",
     "triggerReasons": [
-      "project_map_update",
+      "bounded_contract_review",
       "cost_aware_model_routing"
     ]
   },
@@ -191,17 +199,16 @@
   "violations": [],
   "unresolvedQuestions": [],
   "deterministicInputs": [
-    "attached_v3_8_package",
-    "ak04_delta",
-    "current_chat_requirements",
-    "official_provider_docs_snapshot",
-    "v3.9.0_package"
+    "owner_scoped_contract",
+    "provider_surface_routing_snapshot_2026-07-10",
+    "codex_provider_capability_snapshot_2026-07-10"
   ],
-  "policyVersion": "1.0.3",
+  "policyVersion": "1.1.0",
   "providerModelSnapshot": {
-    "matrixRef": "context_advisor/cursor_model_routing_matrix.v1.json",
-    "snapshotRef": "context_advisor/cursor_provider_capability_snapshot_2026-06-10.yaml",
-    "collectedAt": "2026-06-10T00:00:00+02:00",
+    "surfaceMatrixRef": "context_advisor/execution_surface_routing_matrix.v1.json",
+    "snapshotRef": "context_advisor/codex_provider_capability_snapshot_2026-07-10.yaml",
+    "collectedAt": "2026-07-10T12:28:20+02:00",
+    "cursorSnapshotStatus": "expired_pending_refresh",
     "volatile": true
   }
 }

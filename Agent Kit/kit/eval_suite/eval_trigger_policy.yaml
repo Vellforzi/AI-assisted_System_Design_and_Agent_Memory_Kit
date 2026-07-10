@@ -1,8 +1,8 @@
-suite_id: AMK-EVAL-v3.11.0
-kit_version: 3.11.0
-policy_version: 3.11.0
-release_date: '2026-07-05'
-label: AMK v3.11.0 smoke trigger policy
+suite_id: AMK-EVAL-v3.11.1
+kit_version: 3.11.1
+policy_version: 3.11.1
+release_date: '2026-07-10'
+label: AMK v3.11.1 unreleased GPT-5.6 routing smoke policy
 source_of_truth:
   policy_file: eval_trigger_policy.yaml
   runner_contract: run_eval_checklist.py must read smoke categories from this file and must not maintain an independent hardcoded smoke-category list.
@@ -22,7 +22,7 @@ smoke_policy:
       rationale: Project Map/eval_suite must either sync to kit or be marked stale_mirror.
     model_escalation:
       required: true
-      min_cases: 1
+      min_cases: 2
       rationale: Model escalation must be trigger-based and not delegated to the user.
     context_compaction_control:
       required: true
@@ -34,7 +34,7 @@ smoke_policy:
       rationale: Shell-dependent PASS or commit decisions must begin with a reliable health gate and fail hard on unknown transport results.
     model_setting_label_fidelity:
       required: true
-      min_cases: 1
+      min_cases: 2
       rationale: Model/settings prompts must use exact owner/provider UI labels with no invented or contradictory tuples.
     gpt_project_sources:
       required: true
@@ -111,6 +111,12 @@ trigger_matrix:
     - model_setting_label_fidelity
     - model_escalation
     - context_advisor
+  on_provider_model_snapshot_change:
+    smoke_categories:
+    - model_escalation
+    - model_setting_label_fidelity
+    - context_advisor
+    - executor_routing
   on_context_compaction_policy_change:
     smoke_categories:
     - context_compaction_control

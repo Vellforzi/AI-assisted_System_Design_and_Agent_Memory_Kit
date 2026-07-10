@@ -1,11 +1,16 @@
 # Cursor / Codex / ChatGPT Model Routing Snapshot
 
-Status: volatile provider/model/mode snapshot
+Status: expired historical provider/model/mode snapshot; pending Cursor refresh
 Captured at: 2026-06-10, Europe/Vienna
 Primary source: owner-observed UI controls in Cursor, Codex extension, and ChatGPT Pro web
 Secondary sources: Cursor docs/blog/forum and OpenAI Codex/ChatGPT docs checked on 2026-06-10
 
 This file is intentionally dated. It is **not** permanent project truth. Refresh it when Cursor, Codex, ChatGPT, model availability, pricing, context windows, Fast/Max behavior, or UI controls change.
+
+The snapshot expired on 2026-07-10. Preserve the Cursor model set below as
+historical evidence. Current Codex GPT-5.6 evidence does not establish GPT-5.6
+availability in Cursor. Use `MODEL_SURFACE_ROUTING_SNAPSHOT.md` for the current
+surface-first policy and refresh Cursor evidence before exact Cursor advice.
 
 ## Core decision
 

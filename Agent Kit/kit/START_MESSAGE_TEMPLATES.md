@@ -236,7 +236,7 @@ Use this block before non-trivial task instructions:
 
 ```text
 Executor Routing Gate:
-  recommended_executor: Composer 2.5 / Cursor Agent | Codex App/current Codex coding model | GPT web | owner
+  recommended_executor: Composer 2.5 / Cursor Agent | ChatGPT Codex/current Codex coding model | GPT web | owner
   confidence: high | medium | low
   why_this_executor: <task-class reason>
   why_not_default_executor: <why the default route is or is not sufficient>

@@ -1,8 +1,8 @@
 # AI-assisted System Design and Agent Memory Kit
 
-Version: v3.11.0
-Release date: 2026-07-05
-Status: portable project-owner toolkit
+Version: v3.11.1
+Release date: unreleased candidate prepared 2026-07-10
+Status: portable project-owner toolkit; working tree is not a published release
 
 This package contains two complementary tools:
 
@@ -54,6 +54,7 @@ See `Agent Kit/kit/POSITIONING_AND_ALTERNATIVES.md`.
 AI-assisted System Design and Agent Memory Kit/
   README.md
   START_HERE.md
+  Agent Kit/kit/CHANGELOG_v3.11.1.md
   Agent Kit/kit/CHANGELOG_v3.11.0.md
   Agent Kit/kit/CHANGELOG_v3.10.0.md
   RELEASE_NOTES_v3.9.3.md
@@ -85,6 +86,18 @@ AI-assisted System Design and Agent Memory Kit/
 7. Add only a short agent-instruction entrypoint to your coding tool, such as `AGENTS.md` or Cursor rules. Do not paste the whole kit into one always-loaded prompt.
 
 ---
+
+## What the unreleased v3.11.1 candidate adds
+
+- Source-qualified GPT-5.6 Sol/Terra/Luna Codex capability and surface-routing snapshots dated 2026-07-10.
+- Cost-aware Luna/Terra/Sol task routing with exact display-label/config-slug separation.
+- Explicit Codex Max versus Ultra delegation semantics and Cursor Max Mode separation.
+- GPT-5.6 Fast public-doc/local-cache conflict handling without an invented fixed multiplier.
+- `ChatGPT desktop app (Codex mode)` as the current desktop surface, with Codex IDE extension, CLI, and web kept as distinct clients; `codex_app` remains only a compatibility id.
+- Behavioral eval coverage for routing, label fidelity, stale evidence, Ultra guards, and cross-surface availability boundaries.
+
+This is an unreleased working-tree candidate. No tag, ZIP, publication, or
+release asset is implied.
 
 ## What v3.11.0 adds
 

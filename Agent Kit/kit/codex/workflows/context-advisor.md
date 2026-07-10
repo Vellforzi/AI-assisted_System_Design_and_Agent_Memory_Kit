@@ -26,7 +26,7 @@ Codex behavior:
 Compact output:
 
 ```text
-ContextAdvisor: gate=<green|amber|red|blocked>; missing=<refs/classes>; route=codex_ide/<model-class>/<reasoning>; settings=<approval/permissions/context>; action=<proceed|ask|discovery|block>.
+ContextAdvisor: gate=<green|amber|red|blocked>; missing=<refs/classes>; route=ChatGPT Codex / <model> / <reasoning> / <speed>; action=<proceed|ask|discovery|block>.
 ```
 
 
@@ -38,4 +38,7 @@ Use the lowest sufficient model/settings class. Do not recommend premium/frontie
 
 For Cursor/Codex model-routing advice, use dated volatile provider snapshots. The bundled v3.9.3 Cursor snapshot was collected on 2026-06-10. Refresh before relying on current model availability, pricing, context windows, or UI control names.
 
-See `model-routing.md` for dated Codex extension model/reasoning/speed guidance.
+The current desktop client is `ChatGPT desktop app (Codex mode)`. Codex IDE
+extension, Codex CLI, and Codex web are distinct clients. See
+`model-routing.md` for dated model/reasoning/speed guidance and keep
+application settings out of the owner prompt tuple unless explicitly requested.

@@ -1,8 +1,10 @@
 # Codex Integration Pack
 
-This folder contains templates for using Codex with Agent Memory Kit.
+This folder contains templates for using Codex clients with Agent Memory Kit.
 
-The pack assumes Codex is used as a controlled second agent surface inside or alongside Cursor, not as an uncontrolled autonomous runtime.
+The current ChatGPT desktop app combines Chat, Work, and Codex. Codex desktop
+mode, Codex IDE extension, Codex CLI, and Codex web remain distinct clients.
+The pack treats each as a controlled agent surface alongside Cursor.
 
 ## Contents
 
@@ -74,4 +76,7 @@ See `ignore/` for `.codexignore` templates and the Codex ignore boundary guide. 
 
 ## v3.9.3 model-routing note
 
-For Codex IDE extension settings, see `workflows/model-routing.md`. Use medium reasoning and standard speed by default; keep Pursue Goal and Include IDE Context off unless the owner explicitly approves the scope and stop condition.
+For current ChatGPT desktop Codex prompt choices and distinct Codex client
+boundaries, see `workflows/model-routing.md`. Prompt recommendations contain
+only surface, model, reasoning, and speed; app configuration is documented
+separately.

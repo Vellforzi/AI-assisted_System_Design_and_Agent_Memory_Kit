@@ -9,8 +9,29 @@ Files:
 - `context_advisor_v1.hint_policy.json` — compact/expanded/blocking hint rules.
 - `context_advisor_v1.example_run.json` — example trace for an under-scoped package update.
 - `provider_capability_snapshot.example.yaml` — example of volatile model/provider capability evidence.
+- `codex_provider_capability_snapshot_2026-07-10.yaml` — source-qualified GPT-5.6 Codex capability evidence.
+- `provider_surface_routing_snapshot_2026-07-10.yaml` — current surface-first AMK routing and evidence-state split.
 - `cursor_provider_capability_snapshot_2026-06-10.yaml` — dated Cursor UI/docs/forum snapshot for model controls and routing.
 - `cursor_model_routing_matrix.v1.json` — machine-readable Cursor model routing matrix.
+
+The 2026-06-10 Cursor snapshots are historical and expired. Keep their model
+set unchanged until current Cursor evidence is available. Codex GPT-5.6 evidence
+must not be used to claim GPT-5.6 availability in Cursor.
+
+## v3.11.1 GPT-5.6 routing
+
+The current Codex snapshot keeps full structured evidence separate while the
+owner-facing ChatGPT Codex tuple contains only surface, model, reasoning, and
+speed. ChatGPT desktop Codex, Codex IDE extension, CLI, and web are distinct
+clients. The AMK
+cost-aware default is GPT-5.6-Terra with Medium reasoning and Standard speed. Use Luna Low/Medium for
+clear repeatable extraction, Sol High/XHigh for protocol or cross-system risk,
+Sol Max for one hardest sequential problem, and Sol/Terra Ultra only for
+meaningfully independent scopes with stop conditions and fuel justification.
+
+Fast remains latency-first and increased-usage. The owner-local cache exposes
+GPT-5.6 Fast, while the checked public Speed page names GPT-5.5 and GPT-5.4;
+no fixed GPT-5.6 Fast credit multiplier is asserted.
 
 Use these as templates. Project-specific copies should live under `Project Map/` or the project runtime layer, not inside always-loaded prompts.
 

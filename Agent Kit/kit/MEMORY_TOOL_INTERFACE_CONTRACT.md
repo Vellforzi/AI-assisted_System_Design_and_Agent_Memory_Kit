@@ -257,14 +257,20 @@ missing_mandatory_context: []
 over_broad_refs: []
 unsafe_refs: []
 routing_recommendation:
-  surface: cursor|codex_ide|chatgpt|web
+  surface: cursor_agent|chatgpt_desktop_codex|codex_ide|codex_cli|codex_web|gpt_web
+  surface_display_label: "<current exact client label>"
   model_or_model_class: "<volatile; from snapshot if needed>"
   reasoning: medium|high|extra_high|provider_default
   speed: standard|fast|provider_default
   max_mode: on|off|auto
   include_ide_context: on|off|only_exact_open_files
+  owner_prompt_tuple:
+    surface: "<owner-facing surface label>"
+    model: "<exact model display label>"
+    reasoning: "<selected reasoning effort>"
+    speed: "<selected speed when exposed>"
 compact_hint: "ContextAdvisor: ..."
 hydration_request_draft: {}
 ```
 
-The operation must not read secrets, load whole-project payloads by default, or treat provider capability snapshots as durable project facts.
+The operation must not read secrets, load whole-project payloads by default, or treat provider capability snapshots as durable project facts. It must not pad the owner prompt tuple with derived off states, IDE context, shell, terminal profile, or application configuration unless the owner asked for those settings.

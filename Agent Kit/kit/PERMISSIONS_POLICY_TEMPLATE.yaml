@@ -144,7 +144,7 @@ executor_routing:
     - stop_or_owner_gate
   default_routes:
     implementation: Composer 2.5 / Cursor Agent
-    analysis_review_recovery: Codex App/current Codex coding model
+    analysis_review_recovery: ChatGPT Codex/current Codex coding model
     current_external_research: GPT web
     side_effects_and_ambiguous_scope: owner
 

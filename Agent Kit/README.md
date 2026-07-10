@@ -1,6 +1,6 @@
 # Agent Memory Kit
 
-Version: v3.11.0
+Version: v3.11.1 (unreleased candidate)
 
 Agent Memory Kit is the project-memory and agent-behavior layer of the package.
 
@@ -75,8 +75,8 @@ It is not a full agent runtime. It can later be implemented through a memory fra
 Recommended default:
 
 ```text
-Cursor = primary implementation agent
-Codex = restricted reviewer/auditor/recovery helper
+Cursor/Composer = strong scoped implementation executor; ChatGPT Codex may also execute when task evidence makes it the best or an equally good route
+ChatGPT Codex = ChatGPT desktop app in Codex mode for analysis, planning, task contracts, review, evidence verification, and controlled repair/recovery
 GPT web chat = research, design, and task specs
 Project Map = shared project truth
 ```
@@ -88,6 +88,14 @@ Use one shared workspace root when one Project Map governs multiple components. 
 ## v3.8 Cursor settings and workspace authority
 
 This release adds an owner-controlled Cursor Agent settings profile, `.cursorignore` guidance, settings audit commands, and the rule that an existing authoritative workspace file must be inspected and used rather than replaced by a generated fallback.
+
+## v3.11.1 candidate focus
+
+Adds source-qualified GPT-5.6 Codex routing with Luna/Terra/Sol task classes,
+Max/Ultra/Cursor-Max separation, Fast evidence-conflict handling, current
+ChatGPT desktop Codex plus distinct IDE/CLI/web surface naming, stale Cursor
+evidence guards, and routing/label behavior evals. This working tree is not a
+published release.
 
 ## v3.11.0 focus
 

@@ -1,0 +1,231 @@
+schema_version: 1.0.0
+snapshot_id: codex-provider-capability-2026-07-10
+status: source_qualified_current_for_owner_environment
+collected_at: '2026-07-10T12:28:20+02:00'
+expires_at: '2026-08-09T12:28:20+02:00'
+timezone: Europe/Berlin
+purpose: >-
+  Dated Codex GPT-5.6 capability evidence. Public documentation, owner-local
+  capability evidence, owner intake, and AMK routing policy remain separate.
+
+source_classes:
+  official_public_documentation:
+    authority: public_product_claims
+    refs:
+    - id: OPENAI-GPT56-ANNOUNCEMENT-2026-07-10
+      type: official_openai_announcement
+      title: Previewing GPT-5.6 Sol
+      url: https://openai.com/index/previewing-gpt-5-6-sol/
+      checked_at: '2026-07-10'
+      supports:
+      - Sol is the flagship model, Terra is balanced for everyday work, and Luna is fast and affordable.
+      - Terra is described as competitive with GPT-5.5 at 2x lower price.
+      - Max increases single-task reasoning depth and Ultra uses subagents.
+      - Public API token prices for Sol, Terra, and Luna.
+    - id: OPENAI-CODEX-MODELS-2026-07-10
+      type: official_openai_documentation
+      title: Models for Codex
+      url: https://learn.chatgpt.com/docs/models
+      checked_at: '2026-07-10'
+      supports:
+      - Config slugs gpt-5.6-sol, gpt-5.6-terra, and gpt-5.6-luna.
+      - Sol for complex open-ended work, Terra for everyday work, and Luna for clear repeatable work.
+      - Max is deeper single-task reasoning; Ultra is parallel work through subagents.
+      - Most tasks do not need Max or Ultra.
+    - id: OPENAI-CODEX-SUBAGENTS-2026-07-10
+      type: official_openai_documentation
+      title: Codex subagents
+      url: https://learn.chatgpt.com/docs/agent-configuration/subagents
+      checked_at: '2026-07-10'
+      supports:
+      - Codex delegates independent work when explicitly requested or when applicable project or skill instructions request it.
+      - Ultra can proactively delegate suitable independent work.
+    - id: OPENAI-CODEX-SPEED-2026-07-10
+      type: official_openai_documentation
+      title: Codex speed
+      url: https://learn.chatgpt.com/docs/agent-configuration/speed
+      checked_at: '2026-07-10'
+      supports:
+      - Fast is latency-first and consumes credits faster than Standard.
+      - The checked public page explicitly lists GPT-5.5 and GPT-5.4, not GPT-5.6.
+    - id: OPENAI-CODEX-RATE-CARD-2026-07-10
+      type: official_openai_help
+      title: Codex rate card
+      url: https://help.openai.com/en/articles/20001106-codex-rate-card-2
+      checked_at: '2026-07-10'
+      supports:
+      - GPT-5.6 Sol credit rates are 125 input, 12.5 cached input, and 750 output per 1M tokens.
+      - GPT-5.6 Terra credit rates are 62.5 input, 6.25 cached input, and 375 output per 1M tokens.
+      - GPT-5.6 Luna credit rates are 25 input, 2.5 cached input, and 150 output per 1M tokens.
+    - id: OPENAI-CHATGPT-DESKTOP-CODEX-INTEGRATION-2026-07-09
+      type: official_openai_release_notes
+      title: ChatGPT release notes - Chat, Work, and Codex together
+      url: https://help.openai.com/en/articles/6825453-chatgpt-app-features
+      checked_at: '2026-07-10'
+      supports:
+      - The new ChatGPT desktop app combines Chat, Work, and Codex in one app.
+      - Codex is the software-development mode in the ChatGPT desktop app.
+    - id: OPENAI-CODEX-CHATGPT-CLIENTS-2026-07-10
+      type: official_openai_help
+      title: Using Codex with your ChatGPT plan
+      url: https://help.openai.com/en/articles/11369540-using-codex-with-chatgpt
+      checked_at: '2026-07-10'
+      supports:
+      - Current Codex clients include ChatGPT desktop app in Codex mode, Codex CLI, Codex IDE extension, and Codex web.
+      - Codex IDE extension is a distinct current client, not an alias for desktop Codex mode.
+  owner_local_capability_evidence:
+    authority: current_owner_environment_only
+    refs:
+    - id: OWNER-CODEX-MODELS-CACHE-2026-07-10
+      type: generated_local_capability_cache
+      path: ~/.codex/models_cache.json
+      fetched_at: '2026-07-10T10:28:20.278885800Z'
+      supports:
+      - Exact display labels and config slugs recorded below.
+      - Per-model reasoning choices, 372000-token context, Fast tier, and multi-agent version recorded below.
+      limitations:
+      - Does not establish universal public availability.
+      - Does not establish a fixed GPT-5.6 Fast credit multiplier.
+  owner_intake:
+    authority: intake_seed_only
+    refs:
+    - id: OWNER-GPT56-ROUTING-ANSWER-2026-07-10
+      type: owner_provided_agent_answer
+      checked_at: '2026-07-10'
+      role: Claims were verified against official or local evidence before adoption.
+      not_authoritative_for: public_product_claims
+
+models:
+  gpt_5_6_sol:
+    display_label: GPT-5.6-Sol
+    config_slug: gpt-5.6-sol
+    official_public_role: flagship_for_complex_open_ended_work
+    local_description: Latest frontier agentic coding model.
+    local_default_reasoning: low
+    local_supported_reasoning:
+    - low
+    - medium
+    - high
+    - xhigh
+    - max
+    - ultra
+    local_context_tokens: 372000
+    local_multi_agent_version: v2
+    local_fast:
+      supported: true
+      tier_id: priority
+      display_name: Fast
+      description: 1.5x speed, increased usage
+    public_credit_rate_per_1m_tokens:
+      input: 125
+      cached_input: 12.5
+      output: 750
+  gpt_5_6_terra:
+    display_label: GPT-5.6-Terra
+    config_slug: gpt-5.6-terra
+    official_public_role: balanced_everyday_workhorse
+    local_description: Balanced agentic coding model for everyday work.
+    local_default_reasoning: medium
+    local_supported_reasoning:
+    - low
+    - medium
+    - high
+    - xhigh
+    - max
+    - ultra
+    local_context_tokens: 372000
+    local_multi_agent_version: v2
+    local_fast:
+      supported: true
+      tier_id: priority
+      display_name: Fast
+      description: 1.5x speed, increased usage
+    public_credit_rate_per_1m_tokens:
+      input: 62.5
+      cached_input: 6.25
+      output: 375
+  gpt_5_6_luna:
+    display_label: GPT-5.6-Luna
+    config_slug: gpt-5.6-luna
+    official_public_role: clear_repeatable_high_volume_work
+    local_description: Fast and affordable agentic coding model.
+    local_default_reasoning: medium
+    local_supported_reasoning:
+    - low
+    - medium
+    - high
+    - xhigh
+    - max
+    local_context_tokens: 372000
+    local_multi_agent_version: v1
+    local_fast:
+      supported: true
+      tier_id: priority
+      display_name: Fast
+      description: 1.5x speed, increased usage
+    public_credit_rate_per_1m_tokens:
+      input: 25
+      cached_input: 2.5
+      output: 150
+
+control_semantics:
+  clients:
+    chatgpt_desktop_codex:
+      display_label: ChatGPT desktop app (Codex mode)
+      owner_facing_short_label: ChatGPT Codex
+      owner_prompt_tuple_fields:
+      - surface
+      - model
+      - reasoning
+      - speed
+      compatibility_aliases:
+      - codex_app
+      - chatgpt_codex
+    codex_ide:
+      display_label: Codex IDE extension
+      distinct_client: true
+      speed_selector_evidence: missing
+    codex_cli:
+      display_label: Codex CLI
+      distinct_client: true
+      speed_selector_evidence: missing
+    codex_web:
+      display_label: Codex web
+      distinct_client: true
+      speed_selector_evidence: missing
+  max:
+    meaning: maximum_reasoning_depth_for_one_selected_model_and_task
+    delegation: false
+  ultra:
+    meaning: maximum_reasoning_with_automatic_task_delegation
+    delegation: proactive_when_independent_subscopes_materially_help
+    supported_models_local:
+    - gpt-5.6-sol
+    - gpt-5.6-terra
+    unsupported_models_local:
+    - gpt-5.6-luna
+  speed:
+    default: standard
+    fast_policy: latency_first_increased_usage_never_describe_as_cheaper
+    source_conflict:
+      local_cache: GPT-5.6 Sol, Terra, and Luna expose Fast in this owner environment.
+      public_speed_page: The checked page explicitly names GPT-5.5 and GPT-5.4 only.
+      fixed_gpt56_credit_multiplier: null
+      decision: Preserve the conflict and do not invent a universal Fast multiplier.
+
+amk_policy_decisions:
+- Use the lowest sufficient model and effort.
+- Luna Low/Medium is the default for clear extraction, inventory, classification, and repeatable static checks.
+- Terra Medium/Standard is the default for routine analysis, planning, contract work, review, and bounded repair.
+- Terra High or Sol High is appropriate for difficult repair or ambiguous root cause.
+- Sol High/XHigh is appropriate for hooks, routing, schemas, evals, protocols, and cross-system or production-risk recovery.
+- Sol Max requires one hardest sequential problem and an explicit trigger.
+- Sol/Terra Ultra requires meaningfully independent subscopes, stop conditions, and fuel justification.
+- These routes are AMK guidance, not an OpenAI universal benchmark.
+- Owner-facing ChatGPT Codex recommendations show only the selectable prompt tuple: surface, model, reasoning effort, and speed.
+
+refresh_triggers:
+- Public Codex model, speed, subagent, or rate-card documentation changes.
+- Local Codex model cache changes labels, slugs, effort choices, context, or Fast support.
+- Owner asks for current Cursor availability or pricing.
+- This snapshot reaches expires_at.

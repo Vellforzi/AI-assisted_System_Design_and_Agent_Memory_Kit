@@ -22,7 +22,7 @@ Before non-trivial work, run a compact preflight:
 Compact output for amber/red/blocked tasks:
 
 ```text
-ContextAdvisor: gate=<green|amber|red|blocked>; missing=<refs/classes>; route=<surface/model-class/reasoning/cost>; settings=<Max/IDE/Plan/speed>; action=<proceed|ask|discovery|block>.
+ContextAdvisor: gate=<green|amber|red|blocked>; missing=<refs/classes>; route=<surface/model-class/reasoning/cost>; settings=<CursorMax/CodexMax/delegation/IDE/Plan/speed>; action=<proceed|ask|discovery|block>.
 ```
 
 Defaults:
@@ -41,16 +41,20 @@ Direct user commands:
 - `fuel?` or `/fuel` — show token/fuel budget.
 - `safe apply?` or `/safe-apply` — run mutation gate check.
 
-## v3.9.3 model snapshot boundary
+## v3.11.1 model snapshot boundary
 
-When recommending Cursor models/settings, use the dated provider snapshot if present:
-`Agent Kit/kit/context_advisor/cursor_provider_capability_snapshot_2026-06-10.yaml`.
+Use `provider_surface_routing_snapshot_2026-07-10.yaml` and
+`codex_provider_capability_snapshot_2026-07-10.yaml` for current Codex/surface
+routing. The bundled 2026-06-10 Cursor snapshot is expired; preserve its model
+set as historical and refresh Cursor evidence before exact current advice.
 
-Show `collected_at=2026-06-10` for concrete model controls. Do not invent controls not in the snapshot. Do not add more models to the routing set unless the current set fails a concrete task class, the owner requests benchmarking, or provider changes require a refresh.
+## Current Codex routing rule
 
-## v3.9.3 dated model snapshot rule
-
-Exact Cursor model/settings advice must state the provider snapshot date/ref. Use the lowest sufficient route from the core model set first. Do not add optional models or recommend GPT-5.5 High/Extra High, Opus, Fable, Max/1M, or Fast on expensive models without a concrete escalation trigger, cheaper alternative, and why cheaper is insufficient.
+Route Luna Low/Medium to clear repeatable extraction, Terra Medium/Standard to
+routine reasoning, Terra/Sol High to difficult repair, and Sol High/XHigh to
+protocol/cross-system risk. Sol Max is one hardest sequential task. Sol/Terra
+Ultra requires independent scopes, stop conditions, and fuel justification;
+Luna Ultra is unsupported by the dated local snapshot.
 
 
 ## v3.9.3 Auto/Max explicit boundary
@@ -63,8 +67,9 @@ Max Mode is a separate Cursor-level capacity toggle for explicit models except A
 
 When recommending model/settings, use the dated provider snapshot. Do not recommend the strongest model by default.
 
-- Cursor Agent: core set is sufficient; Composer 2.5 first for routine work.
+- Cursor Agent: Composer 2.5 remains the generic default for clear scoped implementation, but exact current model controls require refreshed Cursor evidence.
 - Auto: not default for controlled OPTION-PROFIT work.
 - Max/1M: capacity only; off unless context-overflow/broad-audit/owner approval.
 - Ask: read-only. Plan: pre-apply. Debug: evidence-first. Multitask: only independent scoped tasks.
-- Codex extension and ChatGPT Pro web controls are separate surfaces; do not mix their settings with Cursor Agent settings.
+- ChatGPT desktop Codex, Codex IDE extension, Codex CLI, Codex web, GPT web, and Cursor Agent are distinct surfaces. Cursor Max Mode is capacity; Codex Max and Ultra are alternative reasoning-effort choices. Owner-facing ChatGPT Codex tuples contain only surface, model, reasoning, and speed.
+- Standard is the default speed. Fast is latency-first/increased-usage; no fixed GPT-5.6 public multiplier is established.

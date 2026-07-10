@@ -7,7 +7,8 @@ Mutations: forbidden
 
 Rules:
 
-- Use `context_advisor/cursor_provider_capability_snapshot_2026-06-10.yaml`, `context_advisor/provider_surface_routing_snapshot_2026-06-10.yaml`, and `context_advisor/cursor_model_routing_matrix.v1.json` when available.
+- Use `context_advisor/provider_surface_routing_snapshot_2026-07-10.yaml` and `context_advisor/codex_provider_capability_snapshot_2026-07-10.yaml` for current Codex/surface routing.
+- Treat `context_advisor/cursor_provider_capability_snapshot_2026-06-10.yaml` and `context_advisor/cursor_model_routing_matrix.v1.json` as expired Cursor evidence pending refresh.
 - Always show `collected_at` and warn that provider/model facts are volatile.
 - Do not add new models merely because they exist in the provider picker.
 - Recommend adding a model only if the current set fails a concrete task class, the owner requests benchmarking, or current provider changes justify a refresh.
@@ -37,6 +38,6 @@ Max Mode is a separate Cursor-level capacity toggle for explicit models except A
 
 The command must answer three questions:
 
-1. Is the Cursor-agent core model set sufficient? Default answer for 2026-06-10 snapshot: yes, with surplus.
-2. Should more models be added? Default: no, unless a concrete capability gap or benchmark need appears.
-3. Which surface should run the task: Cursor Agent, Codex IDE extension, or ChatGPT Pro web?
+1. Is current evidence available for the requested surface? Codex: yes as dated 2026-07-10; Cursor: stale/pending refresh.
+2. Should GPT-5.6 be added to Cursor? Missing evidence; Codex availability is not proof.
+3. Which surface should run the task: Cursor Agent, ChatGPT desktop Codex, Codex IDE/CLI/web, GPT web, or owner gate?

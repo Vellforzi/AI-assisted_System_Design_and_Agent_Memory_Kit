@@ -1,5 +1,5 @@
 {
-  "version": "1.0.3",
+  "version": "1.1.0",
   "profiles": [
     {
       "profile": "answer_project",
@@ -25,10 +25,10 @@
       "forbiddenContextClasses": [
         "secrets"
       ],
-      "defaultSurface": "chatgpt",
+      "defaultSurface": "chatgpt_desktop_codex",
       "fallbackSurface": "cursor",
-      "defaultProvider": "OpenAI or current project-approved provider",
-      "defaultModelOrModelClass": "frontier reasoning model or project-approved default",
+      "defaultProvider": "OpenAI Codex or current project-approved provider",
+      "defaultModelOrModelClass": "GPT-5.6-Terra with Medium reasoning and Standard speed for substantive project answers; GPT-5.6-Luna with Low/Medium reasoning only for clear extraction or classification",
       "defaultReasoning": "medium",
       "defaultSpeed": "standard",
       "defaultContextMode": "explicit_refs_only",
@@ -38,11 +38,11 @@
       "blockingConditions": [
         "secret_ref_detected"
       ],
-      "compactHintTemplate": "Scope: Project Map/source_authority + relevant memory refs; Max off, IDE context off.",
+      "compactHintTemplate": "Answer: ChatGPT Codex / Terra / Medium / Standard for substantive reasoning; Luna only for clear extraction; explicit refs; no mutation.",
       "implicitIdeContextPolicy": "advisory_only",
       "defaultCostClass": "standard",
       "defaultCapabilityNeed": "bounded",
-      "cheaperAlternative": "cheapest project-approved default or medium reasoning",
+      "cheaperAlternative": "GPT-5.6-Luna with Medium reasoning for clear extraction/classification; Terra Medium for substantive project reasoning",
       "premiumRequiresExplicitReason": true,
       "premiumEscalationTriggers": [
         "cross_subsystem_root_cause",
@@ -53,9 +53,10 @@
         "owner_explicitly_requests_max_quality_after_cost_tradeoff"
       ],
       "modelSnapshotRequiredWhenAskedForSettings": true,
-      "providerSnapshotRef": "context_advisor/cursor_provider_model_snapshot_2026-06-10.yaml",
-      "providerSnapshotCapturedAt": "2026-06-10T00:00:00Z",
-      "modelSetPolicy": "core_models_first_optional_models_only_with_gap"
+      "providerSnapshotRef": "context_advisor/provider_surface_routing_snapshot_2026-07-10.yaml",
+      "providerSnapshotCapturedAt": "2026-07-10T12:28:20+02:00",
+      "modelSetPolicy": "core_models_first_optional_models_only_with_gap",
+      "defaultDelegation": "off"
     },
     {
       "profile": "analyze_project",
@@ -83,10 +84,10 @@
       "forbiddenContextClasses": [
         "secrets"
       ],
-      "defaultSurface": "chatgpt",
+      "defaultSurface": "chatgpt_desktop_codex",
       "fallbackSurface": "cursor",
-      "defaultProvider": "OpenAI or current project-approved provider",
-      "defaultModelOrModelClass": "project-approved medium/default model; escalate to frontier only for complex evidence/conflict analysis",
+      "defaultProvider": "OpenAI Codex or current project-approved provider",
+      "defaultModelOrModelClass": "GPT-5.6-Terra with Medium reasoning and Standard speed; GPT-5.6-Sol with High reasoning only for concrete cross-system, schema, protocol, eval, or recovery risk",
       "defaultReasoning": "medium",
       "defaultSpeed": "standard",
       "defaultContextMode": "explicit_refs_only",
@@ -96,11 +97,11 @@
       "blockingConditions": [
         "secret_ref_detected"
       ],
-      "compactHintTemplate": "Analyze: start medium with exact evidence refs; escalate only for conflict/cross-subsystem/protocol risk; no mutation.",
+      "compactHintTemplate": "Analyze: Terra Medium/Standard with exact evidence; Sol High only for a concrete protocol/cross-system trigger; no mutation.",
       "implicitIdeContextPolicy": "advisory_only",
       "defaultCostClass": "standard",
       "defaultCapabilityNeed": "bounded",
-      "cheaperAlternative": "Composer/project default medium; escalate only if trigger exists",
+      "cheaperAlternative": "GPT-5.6-Luna with Medium reasoning only when the work is clear extraction/classification rather than analysis",
       "premiumRequiresExplicitReason": true,
       "premiumEscalationTriggers": [
         "cross_subsystem_root_cause",
@@ -111,9 +112,10 @@
         "owner_explicitly_requests_max_quality_after_cost_tradeoff"
       ],
       "modelSnapshotRequiredWhenAskedForSettings": true,
-      "providerSnapshotRef": "context_advisor/cursor_provider_model_snapshot_2026-06-10.yaml",
-      "providerSnapshotCapturedAt": "2026-06-10T00:00:00Z",
-      "modelSetPolicy": "core_models_first_optional_models_only_with_gap"
+      "providerSnapshotRef": "context_advisor/provider_surface_routing_snapshot_2026-07-10.yaml",
+      "providerSnapshotCapturedAt": "2026-07-10T12:28:20+02:00",
+      "modelSetPolicy": "core_models_first_optional_models_only_with_gap",
+      "defaultDelegation": "off"
     },
     {
       "profile": "plan_change",
@@ -143,10 +145,10 @@
       "forbiddenContextClasses": [
         "secrets"
       ],
-      "defaultSurface": "cursor",
-      "fallbackSurface": "chatgpt",
-      "defaultProvider": "Cursor selected provider",
-      "defaultModelOrModelClass": "Composer 2.5 standard for routine plan; GPT-5.5 Medium/High only for schema/protocol/eval/router or production-risk plan",
+      "defaultSurface": "chatgpt_desktop_codex",
+      "fallbackSurface": "cursor",
+      "defaultProvider": "OpenAI Codex or Cursor selected provider",
+      "defaultModelOrModelClass": "GPT-5.6-Terra with Medium reasoning and Standard speed for routine planning; GPT-5.6-Sol with High reasoning for schema/protocol/eval/router or production-risk plans",
       "defaultReasoning": "medium",
       "defaultSpeed": "standard",
       "defaultContextMode": "explicit_refs_only",
@@ -158,11 +160,11 @@
         "branch_lineage_ambiguous",
         "implicit_ide_context_unscoped"
       ],
-      "compactHintTemplate": "Plan: Composer 2.5 standard first; Plan Mode ON; GPT-5.5 High only with concrete escalation trigger; Max off unless context overflow.",
+      "compactHintTemplate": "Plan: ChatGPT Codex / Terra / Medium / Standard first; Sol / High only with a schema/protocol/eval/router trigger.",
       "implicitIdeContextPolicy": "forbidden_for_scope_expansion",
       "defaultCostClass": "standard",
       "defaultCapabilityNeed": "bounded",
-      "cheaperAlternative": "Composer/project default medium; escalate only if trigger exists",
+      "cheaperAlternative": "Terra Medium/Standard before Sol High; Luna only for mechanical decomposition",
       "premiumRequiresExplicitReason": true,
       "premiumEscalationTriggers": [
         "cross_subsystem_root_cause",
@@ -174,9 +176,10 @@
       ],
       "modelSnapshotRequiredWhenAskedForSettings": true,
       "defaultCursorModelPreference": "composer_2_5",
-      "providerSnapshotRef": "context_advisor/cursor_provider_model_snapshot_2026-06-10.yaml",
-      "providerSnapshotCapturedAt": "2026-06-10T00:00:00Z",
-      "modelSetPolicy": "core_models_first_optional_models_only_with_gap"
+      "providerSnapshotRef": "context_advisor/provider_surface_routing_snapshot_2026-07-10.yaml",
+      "providerSnapshotCapturedAt": "2026-07-10T12:28:20+02:00",
+      "modelSetPolicy": "core_models_first_optional_models_only_with_gap",
+      "defaultDelegation": "off"
     },
     {
       "profile": "apply_change",
@@ -209,9 +212,9 @@
         "secrets"
       ],
       "defaultSurface": "cursor",
-      "fallbackSurface": "codex_ide",
+      "fallbackSurface": "chatgpt_desktop_codex",
       "defaultProvider": "Cursor selected provider or OpenAI Codex",
-      "defaultModelOrModelClass": "Composer 2.5 standard for bounded apply; GPT-5.3 Codex Medium/High for code+tests/repair loop; stronger model only with trigger",
+      "defaultModelOrModelClass": "Composer 2.5 for clear scoped implementation; GPT-5.6-Terra with High reasoning or GPT-5.6-Sol with High reasoning for difficult repair/recovery",
       "defaultReasoning": "medium",
       "defaultSpeed": "standard",
       "defaultContextMode": "explicit_refs_only",
@@ -225,11 +228,11 @@
         "duplicate_side_effect_risk",
         "implicit_ide_context_unscoped"
       ],
-      "compactHintTemplate": "Apply gate: exact scope + verification + owner OK; Composer/Codex first; stronger route only with trigger; implicit IDE context advisory only.",
+      "compactHintTemplate": "Apply: Cursor/Composer for clear scoped edits; ChatGPT Codex Terra/Sol for repair/recovery; exact scope, owner OK, and verification.",
       "implicitIdeContextPolicy": "forbidden_for_scope_expansion",
       "defaultCostClass": "standard",
       "defaultCapabilityNeed": "bounded",
-      "cheaperAlternative": "Composer/project default medium; escalate only if trigger exists",
+      "cheaperAlternative": "Composer 2.5 for mechanical apply; Terra Medium for bounded reasoning before Sol",
       "premiumRequiresExplicitReason": true,
       "premiumEscalationTriggers": [
         "cross_subsystem_root_cause",
@@ -241,9 +244,10 @@
       ],
       "modelSnapshotRequiredWhenAskedForSettings": true,
       "defaultCursorModelPreference": "composer_2_5",
-      "providerSnapshotRef": "context_advisor/cursor_provider_model_snapshot_2026-06-10.yaml",
-      "providerSnapshotCapturedAt": "2026-06-10T00:00:00Z",
-      "modelSetPolicy": "core_models_first_optional_models_only_with_gap"
+      "providerSnapshotRef": "context_advisor/provider_surface_routing_snapshot_2026-07-10.yaml",
+      "providerSnapshotCapturedAt": "2026-07-10T12:28:20+02:00",
+      "modelSetPolicy": "core_models_first_optional_models_only_with_gap",
+      "defaultDelegation": "off"
     },
     {
       "profile": "debug_runtime",
@@ -271,10 +275,10 @@
       "forbiddenContextClasses": [
         "secrets"
       ],
-      "defaultSurface": "codex_ide",
+      "defaultSurface": "chatgpt_desktop_codex",
       "fallbackSurface": "cursor",
       "defaultProvider": "OpenAI Codex or Cursor selected provider",
-      "defaultModelOrModelClass": "GPT-5.3 Codex Medium/High or Composer 2.5; premium only for cross-subsystem or production-risk root cause",
+      "defaultModelOrModelClass": "GPT-5.6-Terra with High reasoning and Standard speed for difficult repair; GPT-5.6-Sol with High reasoning for ambiguous cross-system or production-risk root cause",
       "defaultReasoning": "high",
       "defaultSpeed": "standard",
       "defaultContextMode": "explicit_refs_only",
@@ -286,11 +290,11 @@
         "secret_ref_detected",
         "implicit_ide_context_unscoped"
       ],
-      "compactHintTemplate": "Debug: include error/log + affected route/service/schema/tests; root-cause plan before patch.",
+      "compactHintTemplate": "Debug: ChatGPT Codex / Terra / High / Standard first; Sol / High only for ambiguous cross-system or production-risk root cause; include logs/tests/schema.",
       "implicitIdeContextPolicy": "forbidden_for_scope_expansion",
       "defaultCostClass": "standard",
       "defaultCapabilityNeed": "complex",
-      "cheaperAlternative": "Codex 5.3 Medium or Composer 2.5 standard before GPT-5.5/Opus/Fable",
+      "cheaperAlternative": "Terra Medium for bounded diagnosis before Terra High or Sol High",
       "premiumRequiresExplicitReason": true,
       "premiumEscalationTriggers": [
         "cross_subsystem_root_cause",
@@ -301,9 +305,10 @@
         "owner_explicitly_requests_max_quality_after_cost_tradeoff"
       ],
       "modelSnapshotRequiredWhenAskedForSettings": true,
-      "providerSnapshotRef": "context_advisor/cursor_provider_model_snapshot_2026-06-10.yaml",
-      "providerSnapshotCapturedAt": "2026-06-10T00:00:00Z",
-      "modelSetPolicy": "core_models_first_optional_models_only_with_gap"
+      "providerSnapshotRef": "context_advisor/provider_surface_routing_snapshot_2026-07-10.yaml",
+      "providerSnapshotCapturedAt": "2026-07-10T12:28:20+02:00",
+      "modelSetPolicy": "core_models_first_optional_models_only_with_gap",
+      "defaultDelegation": "off"
     },
     {
       "profile": "audit_contract",
@@ -332,11 +337,11 @@
       "forbiddenContextClasses": [
         "secrets"
       ],
-      "defaultSurface": "chatgpt",
+      "defaultSurface": "chatgpt_desktop_codex",
       "fallbackSurface": "cursor",
-      "defaultProvider": "OpenAI or current project-approved provider",
-      "defaultModelOrModelClass": "audit-capable model; premium only for contract/schema/eval/security-critical audit",
-      "defaultReasoning": "high",
+      "defaultProvider": "OpenAI Codex or current project-approved provider",
+      "defaultModelOrModelClass": "GPT-5.6-Terra with Medium reasoning and Standard speed for routine review; GPT-5.6-Sol with High/XHigh reasoning for schema, protocol, eval, router, or security-critical audit",
+      "defaultReasoning": "medium",
       "defaultSpeed": "standard",
       "defaultContextMode": "explicit_refs_only",
       "maxModeDefault": "auto",
@@ -347,11 +352,11 @@
         "branch_lineage_ambiguous",
         "implicit_ide_context_unscoped"
       ],
-      "compactHintTemplate": "Audit: use exact refs and source authority; premium only with concrete audit complexity trigger.",
+      "compactHintTemplate": "Audit: Terra Medium for routine review; Sol High/XHigh only for schema/protocol/eval/router/security risk; exact refs.",
       "implicitIdeContextPolicy": "forbidden_for_scope_expansion",
       "defaultCostClass": "standard",
       "defaultCapabilityNeed": "complex",
-      "cheaperAlternative": "Sonnet 4.6 or GPT-5.5 Medium before Opus/Fable/extra-high",
+      "cheaperAlternative": "Terra Medium before Sol High/XHigh unless the audit trigger is already present",
       "premiumRequiresExplicitReason": true,
       "premiumEscalationTriggers": [
         "cross_subsystem_root_cause",
@@ -362,9 +367,10 @@
         "owner_explicitly_requests_max_quality_after_cost_tradeoff"
       ],
       "modelSnapshotRequiredWhenAskedForSettings": true,
-      "providerSnapshotRef": "context_advisor/cursor_provider_model_snapshot_2026-06-10.yaml",
-      "providerSnapshotCapturedAt": "2026-06-10T00:00:00Z",
-      "modelSetPolicy": "core_models_first_optional_models_only_with_gap"
+      "providerSnapshotRef": "context_advisor/provider_surface_routing_snapshot_2026-07-10.yaml",
+      "providerSnapshotCapturedAt": "2026-07-10T12:28:20+02:00",
+      "modelSetPolicy": "core_models_first_optional_models_only_with_gap",
+      "defaultDelegation": "off"
     },
     {
       "profile": "repair_state",
@@ -389,11 +395,11 @@
       "forbiddenContextClasses": [
         "secrets"
       ],
-      "defaultSurface": "chatgpt",
+      "defaultSurface": "chatgpt_desktop_codex",
       "fallbackSurface": "cursor",
-      "defaultProvider": "OpenAI or current project-approved provider",
-      "defaultModelOrModelClass": "high reasoning first; extra_high/pro only for critical ambiguous recovery or owner-approved maximum-quality run",
-      "defaultReasoning": "extra_high",
+      "defaultProvider": "OpenAI Codex or current project-approved provider",
+      "defaultModelOrModelClass": "GPT-5.6-Terra with High reasoning and Standard speed for bounded repair; GPT-5.6-Sol with High/XHigh reasoning for ambiguous protocol, cross-system, or production-risk recovery",
+      "defaultReasoning": "high",
       "defaultSpeed": "standard",
       "defaultContextMode": "explicit_refs_only",
       "maxModeDefault": "off",
@@ -405,11 +411,11 @@
         "owner_ok_missing",
         "implicit_ide_context_unscoped"
       ],
-      "compactHintTemplate": "Repair: stale facts may load only as repair input; Project Map writes require owner ask.",
+      "compactHintTemplate": "Repair: Terra High for bounded repair; Sol High/XHigh only for ambiguous protocol/cross-system risk; Project Map writes need owner approval.",
       "implicitIdeContextPolicy": "forbidden_for_scope_expansion",
-      "defaultCostClass": "premium",
+      "defaultCostClass": "standard",
       "defaultCapabilityNeed": "critical",
-      "cheaperAlternative": "high reasoning before extra_high/pro unless recovery is ambiguous or critical",
+      "cheaperAlternative": "Terra Medium for bounded repair with complete evidence before High or Sol",
       "premiumRequiresExplicitReason": true,
       "premiumEscalationTriggers": [
         "cross_subsystem_root_cause",
@@ -420,9 +426,10 @@
         "owner_explicitly_requests_max_quality_after_cost_tradeoff"
       ],
       "modelSnapshotRequiredWhenAskedForSettings": true,
-      "providerSnapshotRef": "context_advisor/cursor_provider_model_snapshot_2026-06-10.yaml",
-      "providerSnapshotCapturedAt": "2026-06-10T00:00:00Z",
-      "modelSetPolicy": "core_models_first_optional_models_only_with_gap"
+      "providerSnapshotRef": "context_advisor/provider_surface_routing_snapshot_2026-07-10.yaml",
+      "providerSnapshotCapturedAt": "2026-07-10T12:28:20+02:00",
+      "modelSetPolicy": "core_models_first_optional_models_only_with_gap",
+      "defaultDelegation": "off"
     },
     {
       "profile": "recover_context",
@@ -447,11 +454,11 @@
       "forbiddenContextClasses": [
         "secrets"
       ],
-      "defaultSurface": "cursor",
-      "fallbackSurface": "codex_ide",
-      "defaultProvider": "Cursor selected provider or OpenAI Codex",
-      "defaultModelOrModelClass": "Composer 2.5 or Codex 5.3 Medium/High; premium only for ambiguous recovery or branch-lineage risk",
-      "defaultReasoning": "high",
+      "defaultSurface": "chatgpt_desktop_codex",
+      "fallbackSurface": "cursor",
+      "defaultProvider": "OpenAI Codex or Cursor selected provider",
+      "defaultModelOrModelClass": "GPT-5.6-Terra with Medium reasoning and Standard speed for evidence recovery; GPT-5.6-Sol with High reasoning only for branch-lineage, protocol, or source-authority conflict",
+      "defaultReasoning": "medium",
       "defaultSpeed": "standard",
       "defaultContextMode": "explicit_refs_only",
       "maxModeDefault": "off",
@@ -462,11 +469,11 @@
         "duplicate_side_effect_risk",
         "implicit_ide_context_unscoped"
       ],
-      "compactHintTemplate": "Recover: load Working State/checkpoint/handoff/receipts first; no mutation without fresh apply intent.",
+      "compactHintTemplate": "Recover: ChatGPT Codex / Terra / Medium / Standard; load Working State/checkpoint/handoff first; Sol only for lineage/source conflict; no mutation.",
       "implicitIdeContextPolicy": "forbidden_for_scope_expansion",
       "defaultCostClass": "standard",
       "defaultCapabilityNeed": "complex",
-      "cheaperAlternative": "medium reasoning first if scope is narrow and evidence is complete",
+      "cheaperAlternative": "Terra Medium before Sol High when recovery refs are complete",
       "premiumRequiresExplicitReason": true,
       "premiumEscalationTriggers": [
         "cross_subsystem_root_cause",
@@ -477,9 +484,10 @@
         "owner_explicitly_requests_max_quality_after_cost_tradeoff"
       ],
       "modelSnapshotRequiredWhenAskedForSettings": true,
-      "providerSnapshotRef": "context_advisor/cursor_provider_model_snapshot_2026-06-10.yaml",
-      "providerSnapshotCapturedAt": "2026-06-10T00:00:00Z",
-      "modelSetPolicy": "core_models_first_optional_models_only_with_gap"
+      "providerSnapshotRef": "context_advisor/provider_surface_routing_snapshot_2026-07-10.yaml",
+      "providerSnapshotCapturedAt": "2026-07-10T12:28:20+02:00",
+      "modelSetPolicy": "core_models_first_optional_models_only_with_gap",
+      "defaultDelegation": "off"
     },
     {
       "profile": "resume_task",
@@ -505,9 +513,9 @@
         "secrets"
       ],
       "defaultSurface": "cursor",
-      "fallbackSurface": "chatgpt",
-      "defaultProvider": "Cursor selected provider",
-      "defaultModelOrModelClass": "project-approved default; escalate only if checkpoint incomplete",
+      "fallbackSurface": "chatgpt_desktop_codex",
+      "defaultProvider": "Cursor selected provider or OpenAI Codex",
+      "defaultModelOrModelClass": "Composer 2.5 for a clear accepted continuation; GPT-5.6-Terra with Medium reasoning when checkpoint or evidence reconstruction needs reasoning",
       "defaultReasoning": "medium",
       "defaultSpeed": "standard",
       "defaultContextMode": "explicit_refs_only",
@@ -519,11 +527,11 @@
         "duplicate_side_effect_risk",
         "implicit_ide_context_unscoped"
       ],
-      "compactHintTemplate": "Resume: Working State/checkpoint/mandatory refs first; do not reconstruct from chat memory.",
+      "compactHintTemplate": "Resume: use checkpoint/mandatory refs; Cursor/Composer for clear continuation, Codex Terra Medium for evidence reconstruction.",
       "implicitIdeContextPolicy": "forbidden_for_scope_expansion",
       "defaultCostClass": "standard",
       "defaultCapabilityNeed": "bounded",
-      "cheaperAlternative": "Composer/project default medium; escalate only if trigger exists",
+      "cheaperAlternative": "Composer 2.5 for a complete mechanical continuation",
       "premiumRequiresExplicitReason": true,
       "premiumEscalationTriggers": [
         "cross_subsystem_root_cause",
@@ -534,9 +542,10 @@
         "owner_explicitly_requests_max_quality_after_cost_tradeoff"
       ],
       "modelSnapshotRequiredWhenAskedForSettings": true,
-      "providerSnapshotRef": "context_advisor/cursor_provider_model_snapshot_2026-06-10.yaml",
-      "providerSnapshotCapturedAt": "2026-06-10T00:00:00Z",
-      "modelSetPolicy": "core_models_first_optional_models_only_with_gap"
+      "providerSnapshotRef": "context_advisor/provider_surface_routing_snapshot_2026-07-10.yaml",
+      "providerSnapshotCapturedAt": "2026-07-10T12:28:20+02:00",
+      "modelSetPolicy": "core_models_first_optional_models_only_with_gap",
+      "defaultDelegation": "off"
     },
     {
       "profile": "research_external",
@@ -558,10 +567,10 @@
       "forbiddenContextClasses": [
         "secrets"
       ],
-      "defaultSurface": "web",
+      "defaultSurface": "gpt_web",
       "fallbackSurface": "deep_research",
-      "defaultProvider": "web-capable provider",
-      "defaultModelOrModelClass": "research-capable model",
+      "defaultProvider": "Current source-capable research provider",
+      "defaultModelOrModelClass": "current research-capable model selected from fresh provider evidence",
       "defaultReasoning": "high",
       "defaultSpeed": "standard",
       "defaultContextMode": "explicit_refs_only",
@@ -571,11 +580,11 @@
       "blockingConditions": [
         "secret_ref_detected"
       ],
-      "compactHintTemplate": "Research: external docs stay research_output until promoted by project evidence or owner decision.",
+      "compactHintTemplate": "Research: GPT web with current citations; external facts remain research output until valid promotion.",
       "implicitIdeContextPolicy": "advisory_only",
       "defaultCostClass": "standard",
       "defaultCapabilityNeed": "bounded",
-      "cheaperAlternative": "standard research-capable model with current sources",
+      "cheaperAlternative": "standard source-capable research route before premium/deep research",
       "premiumRequiresExplicitReason": true,
       "premiumEscalationTriggers": [
         "cross_subsystem_root_cause",
@@ -586,9 +595,10 @@
         "owner_explicitly_requests_max_quality_after_cost_tradeoff"
       ],
       "modelSnapshotRequiredWhenAskedForSettings": true,
-      "providerSnapshotRef": "context_advisor/cursor_provider_model_snapshot_2026-06-10.yaml",
-      "providerSnapshotCapturedAt": "2026-06-10T00:00:00Z",
-      "modelSetPolicy": "core_models_first_optional_models_only_with_gap"
+      "providerSnapshotRef": "context_advisor/provider_surface_routing_snapshot_2026-07-10.yaml",
+      "providerSnapshotCapturedAt": "2026-07-10T12:28:20+02:00",
+      "modelSetPolicy": "core_models_first_optional_models_only_with_gap",
+      "defaultDelegation": "off"
     },
     {
       "profile": "prompt_token_optimize",
@@ -608,10 +618,10 @@
       "forbiddenContextClasses": [
         "secrets"
       ],
-      "defaultSurface": "chatgpt",
+      "defaultSurface": "chatgpt_desktop_codex",
       "fallbackSurface": "cursor",
-      "defaultProvider": "OpenAI or current project-approved provider",
-      "defaultModelOrModelClass": "reasoning model for synthesis; smaller model for simple rewriting",
+      "defaultProvider": "OpenAI Codex or current project-approved provider",
+      "defaultModelOrModelClass": "GPT-5.6-Luna with Low/Medium reasoning for clear rewriting; GPT-5.6-Terra with Medium reasoning for structural synthesis",
       "defaultReasoning": "medium",
       "defaultSpeed": "standard",
       "defaultContextMode": "explicit_refs_only",
@@ -621,11 +631,11 @@
       "blockingConditions": [
         "secret_ref_detected"
       ],
-      "compactHintTemplate": "OPT: optimize context first, wording second; ask settings?/scope?/fuel? for expanded advice.",
+      "compactHintTemplate": "OPT: Luna for clear rewriting, Terra Medium for structural synthesis; optimize context first.",
       "implicitIdeContextPolicy": "advisory_only",
       "defaultCostClass": "standard",
       "defaultCapabilityNeed": "bounded",
-      "cheaperAlternative": "cheapest project-approved default or medium reasoning",
+      "cheaperAlternative": "Luna Low/Medium for clear repeatable rewriting",
       "premiumRequiresExplicitReason": true,
       "premiumEscalationTriggers": [
         "cross_subsystem_root_cause",
@@ -636,9 +646,10 @@
         "owner_explicitly_requests_max_quality_after_cost_tradeoff"
       ],
       "modelSnapshotRequiredWhenAskedForSettings": true,
-      "providerSnapshotRef": "context_advisor/cursor_provider_model_snapshot_2026-06-10.yaml",
-      "providerSnapshotCapturedAt": "2026-06-10T00:00:00Z",
-      "modelSetPolicy": "core_models_first_optional_models_only_with_gap"
+      "providerSnapshotRef": "context_advisor/provider_surface_routing_snapshot_2026-07-10.yaml",
+      "providerSnapshotCapturedAt": "2026-07-10T12:28:20+02:00",
+      "modelSetPolicy": "core_models_first_optional_models_only_with_gap",
+      "defaultDelegation": "off"
     },
     {
       "profile": "handoff_package_update",
@@ -662,10 +673,10 @@
       "forbiddenContextClasses": [
         "secrets"
       ],
-      "defaultSurface": "chatgpt",
-      "fallbackSurface": "cursor",
-      "defaultProvider": "OpenAI or current project-approved provider",
-      "defaultModelOrModelClass": "Composer 2.5 or GPT-5.5 Medium for mechanical package update; GPT-5.5 High only for behavior/schema/router/eval contract changes",
+      "defaultSurface": "cursor",
+      "fallbackSurface": "chatgpt_desktop_codex",
+      "defaultProvider": "Cursor selected provider or OpenAI Codex",
+      "defaultModelOrModelClass": "Composer 2.5 for mechanical package/version/checksum work; GPT-5.6-Sol with High reasoning for behavior/schema/router/eval/protocol changes",
       "defaultReasoning": "medium",
       "defaultSpeed": "standard",
       "defaultContextMode": "explicit_refs_only",
@@ -677,11 +688,11 @@
         "secret_ref_detected",
         "implicit_ide_context_unscoped"
       ],
-      "compactHintTemplate": "Package update: medium for mechanical merge/version/checksum; high only with behavior/schema/router/eval contract changes.",
+      "compactHintTemplate": "Package: Cursor/Composer for mechanical work; ChatGPT Codex / Sol / High / Standard for behavior/schema/router/eval/protocol changes.",
       "implicitIdeContextPolicy": "forbidden_for_scope_expansion",
       "defaultCostClass": "standard",
       "defaultCapabilityNeed": "complex",
-      "cheaperAlternative": "Composer/project default medium for mechanical merge; high only for behavior/schema/router/eval changes",
+      "cheaperAlternative": "Composer 2.5 for mechanical merge; Terra Medium before Sol when behavior contracts are bounded",
       "premiumRequiresExplicitReason": true,
       "premiumEscalationTriggers": [
         "cross_subsystem_root_cause",
@@ -693,9 +704,10 @@
       ],
       "modelSnapshotRequiredWhenAskedForSettings": true,
       "defaultCursorModelPreference": "composer_2_5",
-      "providerSnapshotRef": "context_advisor/cursor_provider_model_snapshot_2026-06-10.yaml",
-      "providerSnapshotCapturedAt": "2026-06-10T00:00:00Z",
-      "modelSetPolicy": "core_models_first_optional_models_only_with_gap"
+      "providerSnapshotRef": "context_advisor/provider_surface_routing_snapshot_2026-07-10.yaml",
+      "providerSnapshotCapturedAt": "2026-07-10T12:28:20+02:00",
+      "modelSetPolicy": "core_models_first_optional_models_only_with_gap",
+      "defaultDelegation": "off"
     },
     {
       "profile": "project_map_update",
@@ -719,9 +731,9 @@
         "secrets"
       ],
       "defaultSurface": "cursor",
-      "fallbackSurface": "chatgpt",
-      "defaultProvider": "Cursor selected provider or project-approved default",
-      "defaultModelOrModelClass": "Composer 2.5 standard or project-approved medium; avoid GPT-5.5 High/Opus/Fable unless policy/schema/router/eval behavior changes",
+      "fallbackSurface": "chatgpt_desktop_codex",
+      "defaultProvider": "Cursor selected provider or OpenAI Codex",
+      "defaultModelOrModelClass": "Composer 2.5 standard for owner-provided facts and narrow Project Map edits; GPT-5.6-Terra with Medium reasoning for conflict analysis",
       "defaultReasoning": "medium",
       "defaultSpeed": "standard",
       "defaultContextMode": "explicit_refs_only",
@@ -734,11 +746,11 @@
         "secret_ref_detected",
         "implicit_ide_context_unscoped"
       ],
-      "compactHintTemplate": "Project Map update: Composer 2.5 standard/medium first, Max off, IDE context off; premium/high only with schema/policy conflict trigger.",
+      "compactHintTemplate": "Project Map: Cursor/Composer first; Terra Medium for evidence conflict; Sol only for a schema/router/eval trigger.",
       "implicitIdeContextPolicy": "forbidden_for_scope_expansion",
       "defaultCostClass": "standard",
       "defaultCapabilityNeed": "bounded",
-      "cheaperAlternative": "Composer 2.5 standard/Fast OFF; low/fast only for formatting/index-only cleanup",
+      "cheaperAlternative": "Composer 2.5 standard; Luna only for index-only extraction",
       "premiumRequiresExplicitReason": true,
       "premiumEscalationTriggers": [
         "cross_subsystem_root_cause",
@@ -750,31 +762,35 @@
       ],
       "modelSnapshotRequiredWhenAskedForSettings": true,
       "defaultCursorModelPreference": "composer_2_5",
-      "providerSnapshotRef": "context_advisor/cursor_provider_model_snapshot_2026-06-10.yaml",
-      "providerSnapshotCapturedAt": "2026-06-10T00:00:00Z",
-      "modelSetPolicy": "core_models_first_optional_models_only_with_gap"
+      "providerSnapshotRef": "context_advisor/provider_surface_routing_snapshot_2026-07-10.yaml",
+      "providerSnapshotCapturedAt": "2026-07-10T12:28:20+02:00",
+      "modelSetPolicy": "core_models_first_optional_models_only_with_gap",
+      "defaultDelegation": "off"
     }
   ],
   "providerModelSnapshotPolicy": {
-    "currentSnapshotRef": "context_advisor/cursor_provider_capability_snapshot_2026-06-10.yaml",
-    "routingMatrixRef": "context_advisor/cursor_model_routing_matrix.v1.json",
-    "collectedAt": "2026-06-10",
-    "expiresAfterDays": 30,
+    "currentCodexSnapshotRef": "context_advisor/codex_provider_capability_snapshot_2026-07-10.yaml",
+    "currentSurfaceSnapshotRef": "context_advisor/provider_surface_routing_snapshot_2026-07-10.yaml",
+    "codexCollectedAt": "2026-07-10",
+    "cursorSnapshotRef": "context_advisor/cursor_provider_capability_snapshot_2026-06-10.yaml",
+    "cursorSnapshotStatus": "expired_pending_refresh",
+    "cursorRoutingMatrixRef": "context_advisor/cursor_model_routing_matrix.v1.json",
     "factsAreVolatile": true,
     "refreshBefore": [
-      "model/pricing/context-window decision",
-      "premium/frontier/high/pro route",
-      "Cursor model picker changes",
+      "exact model, pricing, context-window, effort, speed, or availability advice",
+      "premium, High, XHigh, Max, or Ultra route",
+      "Cursor model picker or provider controls change",
       "new project bootstrap",
-      "monthly release refresh"
+      "snapshot expiration"
     ]
   },
   "providerSnapshotPolicy": {
     "requiresCapturedAtForExactModelAdvice": true,
-    "snapshotTtlDays": 7,
-    "currentExampleRef": "context_advisor/cursor_provider_model_snapshot_2026-06-10.yaml",
+    "snapshotTtlDays": 30,
+    "currentExampleRef": "context_advisor/provider_surface_routing_snapshot_2026-07-10.yaml",
     "exactCursorModelAdviceMustShowSnapshotDate": true,
-    "coreModelSetSufficient": true,
+    "cursorSnapshotStatus": "expired_pending_refresh",
+    "codexAndCursorAvailabilityMustRemainSeparate": true,
     "optionalModelsRequireCapabilityGapAndOwnerApproval": true
   },
   "coreCursorModelSet": [
@@ -788,5 +804,10 @@
   "optionalCursorModels": [
     "gemini_3_1_pro",
     "grok_4_3_or_grok_build"
+  ],
+  "currentCodexModelSet": [
+    "gpt_5_6_sol",
+    "gpt_5_6_terra",
+    "gpt_5_6_luna"
   ]
 }

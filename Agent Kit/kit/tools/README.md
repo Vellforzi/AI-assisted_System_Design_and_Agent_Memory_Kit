@@ -77,20 +77,33 @@ python3 "Agent Kit/kit/tools/context_advisor_preflight.py" \
   --verification "pytest"
 ```
 
-## v3.9.3 ContextAdvisor model routing flags
+## v3.11.1 ContextAdvisor model routing flags
 
 `context_advisor_preflight.py` accepts optional flags for dated provider/model routing checks:
 
 ```bash
 python3 Agent\ Kit/kit/tools/context_advisor_preflight.py \
-  --intent project_map_update \
+  --intent analyze \
   --have project_map_core,source_authority,memory_relevant \
+  --surface chatgpt_desktop_codex \
   --settings-requested \
-  --provider-snapshot-date 2026-06-10 \
-  --model-name "Composer 2.5"
+  --provider-snapshot-date 2026-07-10 \
+  --provider-snapshot-current \
+  --model-display-label "GPT-5.6-Terra" \
+  --model-config-slug gpt-5.6-terra \
+  --reasoning-effort medium
 ```
 
-Use `--fast-mode`, `--large-context`, `--optional-model`, and `--optional-model-gap` to test routing warnings.
+Use `--reasoning-effort`, `--delegation-mode`, `--independent-subscopes`,
+`--subscope-stop-conditions`, and `--fuel-justification` to validate Max/Ultra
+semantics. Use `--fast-mode` and `--fast-credit-multiplier` to expose the
+GPT-5.6 public-doc/local-cache conflict and reject unsupported fixed multipliers.
+
+`chatgpt_desktop_codex` is current for ChatGPT desktop Codex. `codex_app` is a
+compatibility alias; `codex_ide`, `codex_cli`, and `codex_web` are distinct
+current clients. Compact owner advice contains only surface/model/reasoning/speed.
+Exact Cursor GPT-5.6 advice is rejected while the bundled Cursor snapshot is
+stale and no current Cursor evidence exists.
 
 ## `generate_chatgpt_project_sources.py`
 

@@ -5,27 +5,29 @@ globs:
 alwaysApply: false
 ---
 
-# Context Advisor Preflight — AMK v3.9.6
+# Context Advisor Preflight - AMK v3.11.1
 
-Use this rule before answering or applying changes in the Option Profit / Agent Memory Kit workspace.
+Use this rule before answering or applying changes in an Agent Memory Kit workspace.
 
 ## Default mode
 
-Start read-only unless the owner explicitly requests apply mode. Questions, analysis, patch construction, planning, and compaction discussion do not imply permission to edit live files or Project Map.
+Start read-only unless the owner explicitly requests apply mode. Questions,
+analysis, patch construction, planning, and compaction discussion do not imply
+permission to edit live files or Project Map.
 
 ## Read order
 
-1. `PROJECT_AI_BRIEF.md` if present.
+1. `AGENTS.md` or the repository's canonical agent router.
 2. `Project Map/current_state.md` and `Project Map/working_state.yaml`.
 3. `Project Map/source_authority.yaml`.
 4. `Project Map/memory/index.yaml`, then only relevant memory units.
 5. Active workstream matching the task, if any.
-6. `docs/.agent-progress.json` active tasks and top `docs/WORKLOG.md` entry, if present.
-7. Task-scoped files only.
+6. Task-scoped files only.
 
 ## Eval suite authority check
 
-Before using `Project Map/eval_suite` as current eval truth, compare it with `Agent Kit/kit/eval_suite`:
+Before using `Project Map/eval_suite` as current eval truth, compare it with
+`Agent Kit/kit/eval_suite`:
 
 - `suite_id` must match.
 - `kit_version` must match.
@@ -33,7 +35,8 @@ Before using `Project Map/eval_suite` as current eval truth, compare it with `Ag
 - required case schema fields must exist.
 - smoke categories must come from `eval_trigger_policy.yaml`.
 
-If parity fails, mark it as stale mirror in the answer/task plan and do not grade against it as authoritative current truth.
+If parity fails, mark it as a stale mirror and do not grade against it as
+authoritative current truth.
 
 ## Live Cursor adoption check
 
@@ -42,18 +45,20 @@ When the task concerns Cursor integration, check the live target paths explicitl
 - `.cursor/rules/context_advisor_preflight.mdc`
 - `.cursor/commands/*`
 
-Do not assume the live repo adopted kit rules/commands just because they exist under `Agent Kit/kit/cursor_integration/`.
+Do not assume the live repository adopted kit rules or commands just because
+they exist under `Agent Kit/kit/cursor_integration/`.
 
 ## Context compaction control
 
-When the owner asks to summarize/compact/trim/shrink context, visible context usage decreases unexpectedly, the session is long, or old tool outputs dominate context:
+When the owner asks to summarize/compact/trim context, visible context usage
+decreases unexpectedly, the session is long, or old tool outputs dominate context:
 
 1. Treat platform summaries and compressed chat history as non-authoritative hints.
 2. Do not use summary-only data to establish project facts, approvals, completed actions, or durable memory.
 3. Produce a `context_compaction_plan` before summarizing or compacting replay-critical project state.
 4. The plan must list `trigger`, `keep`, `drop_or_do_not_reinclude`, `evidence_refs`, `missing_evidence`, `owner_approval_required`, and `post_compaction_recovery`.
 5. Ask owner approval before agent-created summary/compact/checkpoint unless already inside an approved checkpoint/update task.
-6. Prefer clearing/excluding old re-fetchable tool outputs before whole-transcript compaction.
+6. Prefer clearing or excluding old re-fetchable tool outputs before whole-transcript compaction.
 7. Preserve Working State refs, source authority, accepted decisions with evidence, validation summaries, side-effect receipts, unsafe-to-repeat actions, and the next safe step.
 8. Never store secrets, full raw logs, unsupported claims, stale facts as current truth, or hidden chain-of-thought in the summary payload.
 
@@ -61,36 +66,57 @@ The command `/amk-context-compact` is the live Cursor prompt for this workflow.
 
 ## Shell reliability gate
 
-Before any shell-dependent audit/apply/commit decision, run:
+Before a shell-dependent audit, apply, or commit decision, run a harmless health
+probe appropriate to the current shell and verify output plus exit status.
+Unknown or missing output/exit status is a hard failure, not PASS. Do not invent
+a terminal profile or shell selector as part of the owner's model recommendation.
 
-`echo AMK_SHELL_OK; pwd; git rev-parse HEAD`
+## Model and settings label fidelity
 
-Unknown/no-output/no-exit-code shell result is a hard failure, not PASS.
-If sandbox transport is unreliable, route to Run Mode `Allowlist` with explicit command allowlist. Do not use Run Everything.
+Use exact owner/provider UI labels from current dated evidence or explicit owner
+confirmation. Model names, availability, UI controls, pricing, and speed labels
+are volatile.
 
-## Model/settings label fidelity
+Current Codex routing evidence:
 
-Use exact owner/provider UI labels from a dated snapshot or explicit owner confirmation.
-Do not invent combined labels and do not use contradictory tuples.
+- `context_advisor/provider_surface_routing_snapshot_2026-07-10.yaml`
+- `context_advisor/codex_provider_capability_snapshot_2026-07-10.yaml`
 
-Required tuple:
+The bundled 2026-06-10 Cursor snapshot is historical. Refresh Cursor evidence
+before giving exact current Cursor model/control advice.
 
-- surface: Cursor Agent
-- work_mode: Agent/apply
-- model: Codex 5.3
-- reasoning: medium
-- run_mode: Allowlist
-- terminal_profile: Debian WSL
-- snapshot_ref: owner-observed Cursor controls captured 2026-06-10
+For an owner-facing recommendation, list only controls selectable before prompt
+submission on the named surface:
 
-Forbidden example: `Model: Codex 5.3 High` with `Reasoning: Medium`.
+- surface;
+- model;
+- reasoning effort;
+- speed, only when that surface exposes a prompt-time speed selector.
+
+Do not pad the tuple with derived negative states, application configuration,
+IDE context, shell, terminal profile, or controls belonging to another surface.
+`Standard` and `Fast` are speed choices, not additional on/off fields.
+
+ChatGPT desktop Codex, Codex IDE extension, Codex CLI, Codex web, GPT web, and
+Cursor Agent are distinct surfaces. `codex_app` may be accepted as a backward-
+compatible alias for ChatGPT desktop Codex; it is not an alias for Codex IDE.
+
+Composer, ChatGPT Codex models, or another evidence-supported executor may be
+recommended by task fit. Do not make one executor the only implementation route
+without task-class evidence.
 
 ## Model escalation
 
-The user is not expected to predict model insufficiency. Start with the lowest sufficient route. Escalate only after reporting a concrete trigger: validation failure, schema/router conflict, insufficient context window, missing model control, repeated scoped failure, or task reclassification to audit/repair/protocol design.
+Use the lowest sufficient route first. Escalate only after reporting a concrete
+trigger: validation failure, schema/router conflict, insufficient context window,
+missing model control, repeated scoped failure, or task reclassification to
+audit, repair, protocol, or cross-system work.
 
-Provider/model capability observations must be dated and must not be treated as permanent project truth.
+Provider/model capability observations must be dated and must not be treated as
+permanent project truth.
 
 ## Safety and scope
 
-Do not copy secrets into answers. Do not push, deploy, write DB state, or update Project Map unless the owner explicitly asks for that apply action. Release ZIP artifacts must not remain in the working repo after merge.
+Do not copy secrets into answers. Do not push, deploy, write DB state, or update
+Project Map unless the owner explicitly asks for that apply action. Release ZIP
+artifacts must not remain in the working repository after publication.

@@ -1,5 +1,10 @@
 # Cursor Agent Settings Guide
 
+Provider evidence notice: the bundled Cursor model picker snapshot was captured
+on 2026-06-10 and expired on 2026-07-10. Its model list below is historical and
+must not be expanded with GPT-5.6 from Codex evidence. Refresh current Cursor
+evidence before exact model/settings advice.
+
 This guide defines the recommended Cursor Agent settings for owner-controlled projects that use Agent Memory Kit.
 
 The goal is not maximum autonomy. The goal is controlled implementation work: explicit task, explicit scope, visible context usage, protected tools, and reviewable diffs.
@@ -50,7 +55,8 @@ Use this profile when Cursor is the primary local implementation agent.
 
 ## v3.9.3 dated Cursor model routing snapshot
 
-Collected at: `2026-06-10T00:00:00+02:00`. Treat this as volatile provider evidence, not durable project truth. Refresh when Cursor model picker, pricing, context choices, or docs change.
+Collected at: `2026-06-10T00:00:00+02:00`. Status: `expired_pending_refresh`.
+Treat this as historical volatile provider evidence, not current provider truth.
 
 Owner-observed Cursor model controls:
 
@@ -76,7 +82,7 @@ Agent Kit/kit/context_advisor/cursor_provider_model_snapshot_2026-06-10.yaml
 captured_at=2026-06-10
 ```
 
-As of that owner-observed snapshot, the core Cursor Agent set is enough with surplus:
+On that capture date, the core Cursor Agent set was enough with surplus:
 
 - Composer 2.5: default working horse for small/medium scoped Cursor Agent work.
 - GPT-5.3 Codex: code/test/repair loop executor.

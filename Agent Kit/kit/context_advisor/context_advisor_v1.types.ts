@@ -1,5 +1,5 @@
 // Context / Scope / Model Advisor v1
-// Portable contract for Agent Memory Kit v3.9.3. No runtime dependencies.
+// Portable contract for Agent Memory Kit v3.11.1. No runtime dependencies.
 
 export type AdvisorIntent =
   | 'answer'
@@ -56,9 +56,12 @@ export type ContextClass =
   | 'side_effect_receipts'
   | 'secrets';
 
-export type Surface = 'chatgpt' | 'cursor' | 'codex_ide' | 'deep_research' | 'web' | 'other';
-export type ReasoningEffort = 'none' | 'low' | 'medium' | 'high' | 'extra' | 'extra_high' | 'max' | 'pro' | 'xhigh' | 'provider_default';
+export type Surface = 'chatgpt' | 'chatgpt_pro_web' | 'gpt_web' | 'cursor' | 'cursor_agent' | 'chatgpt_desktop_codex' | 'chatgpt_codex' | 'codex_app' | 'codex_ide' | 'codex_cli' | 'codex_web' | 'deep_research' | 'web' | 'other';
+export type ReasoningEffort = 'none' | 'low' | 'medium' | 'high' | 'extra' | 'extra_high' | 'max' | 'ultra' | 'pro' | 'xhigh' | 'provider_default';
 export type SpeedMode = 'standard' | 'fast' | 'auto' | 'provider_default';
+export type DelegationMode = 'off' | 'requested' | 'proactive' | 'provider_default';
+export type ProviderEvidenceState = 'current_public' | 'current_owner_environment' | 'source_conflict' | 'stale' | 'missing' | 'provider_default';
+export type CodexModelId = 'gpt_5_6_sol' | 'gpt_5_6_terra' | 'gpt_5_6_luna' | 'other';
 export type CursorModelId = 'auto' | 'composer_2_5' | 'gpt_5_3_codex' | 'codex_5_3' | 'gpt_5_5' | 'sonnet_4_6' | 'opus_4_8' | 'fable_5' | 'gemini_3_1_pro' | 'grok_4_3_or_grok_build' | 'other';
 export type CursorModelControl = 'fast' | 'thinking' | 'context_200k' | 'context_272k' | 'context_300k' | 'context_1m' | 'reasoning' | 'effort' | 'none';
 export type ContextMode = 'explicit_refs_only' | 'implicit_ide_advisory' | 'ide_context' | 'max_mode' | 'full_repo_forbidden' | 'provider_default';
@@ -104,11 +107,16 @@ export interface ProviderCapabilitySnapshot {
 
 export interface SurfaceCapability {
   surface: Surface;
+  aliases?: Surface[];
   provider?: string;
   modelOrModelClass?: string;
+  modelDisplayLabel?: string;
+  modelConfigSlug?: string;
   supportsReasoning?: boolean;
   supportedReasoning?: ReasoningEffort[];
   supportsMaxMode?: boolean;
+  supportsDelegation?: boolean;
+  supportedDelegation?: DelegationMode[];
   maxContextTokens?: number;
   defaultContextTokens?: number;
   supportsFastMode?: boolean;
@@ -120,6 +128,7 @@ export interface SurfaceCapability {
   capturedAt?: string;
   expiresAt?: string;
   sourceRefIds?: string[];
+  evidenceState?: ProviderEvidenceState;
 }
 
 export type CursorModelRouterRole =
@@ -245,10 +254,18 @@ export interface RoutingRecommendation {
   surface: Surface;
   provider?: string;
   modelOrModelClass?: string;
+  modelDisplayLabel?: string;
+  modelConfigSlug?: string;
   reasoning: ReasoningEffort;
   speed: SpeedMode;
+  delegation: DelegationMode;
+  independentSubscopes?: string[];
+  fuelJustification?: string;
   contextMode: ContextMode;
+  /** Backward-compatible generic field. Do not use it to merge Cursor Max Mode with Codex Max reasoning. */
   maxMode: 'on' | 'off' | 'auto' | 'provider_default';
+  cursorMaxMode?: 'on' | 'off' | 'auto' | 'not_applicable' | 'provider_default';
+  codexMaxReasoning?: 'on' | 'off' | 'provider_default';
   includeIdeContext: 'on' | 'off' | 'only_exact_open_files' | 'provider_default';
   planMode: 'on' | 'off' | 'ask' | 'provider_default';
   approvalMode: 'chat' | 'agent' | 'agent_full_access' | 'read_only' | 'owner_approval_required' | 'provider_default';
@@ -262,6 +279,12 @@ export interface RoutingRecommendation {
   providerSnapshotCapturedAt?: string;
   modelControlsRef?: string;
   optionalModelGap?: string;
+  ownerPromptTuple?: {
+    surface: string;
+    model: string;
+    reasoning: string;
+    speed?: string;
+  };
 }
 
 export interface UserHint {
@@ -298,6 +321,18 @@ export interface PolicyViolation {
     | 'provider_model_snapshot_missing'
     | 'provider_model_snapshot_stale'
     | 'unsupported_model_control'
+    | 'unsupported_reasoning_effort'
+    | 'model_identity_conflict'
+    | 'codex_app_deprecated_alias'
+    | 'ultra_without_independent_subscopes'
+    | 'ultra_without_fuel_justification'
+    | 'luna_ultra_unsupported'
+    | 'max_delegation_semantics_conflict'
+    | 'ultra_delegation_semantics_conflict'
+    | 'cursor_gpt56_without_cursor_evidence'
+    | 'cursor_model_on_codex_surface'
+    | 'gpt56_fast_public_support_conflict'
+    | 'fast_multiplier_unverified'
     | 'context_window_over_escalated'
     | 'implicit_ide_context_unscoped'
     | 'unsafe_mutation_mode'
@@ -344,6 +379,7 @@ export interface AdvisorProfileSpec {
   defaultModelOrModelClass: string;
   defaultReasoning: ReasoningEffort;
   defaultSpeed: SpeedMode;
+  defaultDelegation?: DelegationMode;
   defaultContextMode: ContextMode;
   defaultCostClass: ModelCostClass;
   defaultCapabilityNeed: CapabilityNeed;
@@ -362,7 +398,7 @@ export interface AdvisorProfileSpec {
 }
 
 export interface ContextAdvisorPolicyV1 {
-  version: '1.0.0' | '1.0.1' | '1.0.2' | '1.0.3';
+  version: '1.0.0' | '1.0.1' | '1.0.2' | '1.0.3' | '1.1.0';
   profiles: AdvisorProfileSpec[];
   defaultHintMode: HintMode;
   expandedHintTriggers: string[];

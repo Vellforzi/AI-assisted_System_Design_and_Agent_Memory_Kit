@@ -1,0 +1,62 @@
+id: AMK-ML-002
+suite_id: AMK-EVAL-v3.11.1
+kit_version: 3.11.1
+schema_version: 1
+category: model_setting_label_fidelity
+title: GPT-5.6 owner prompt tuple is exact, minimal, and surface-specific
+severity: critical
+status: active
+introduced_in: 3.11.1
+tags:
+- model_setting_label_fidelity
+- model_escalation
+- context_advisor
+- gpt_5_6
+fixture:
+  type: prompt_behavior_fixture
+  current_snapshot_ref: context_advisor/codex_provider_capability_snapshot_2026-07-10.yaml
+  required_owner_prompt_tuple:
+    surface: ChatGPT Codex
+    model: GPT-5.6-Terra
+    reasoning: Medium
+    speed: Standard
+  separate_evidence:
+    model_config_slug: gpt-5.6-terra
+    snapshot_date: '2026-07-10'
+  forbidden_examples:
+  - model: GPT-5.6-Terra High
+    reasoning_effort: medium
+  - cursor_max_mode: on
+    codex_reasoning_effort: max
+    merged_meaning: true
+  - owner_prompt_tuple: ChatGPT Codex / GPT-5.6-Terra / High / Standard / Fast off / Max off / Ultra off / IDE Context off / PowerShell
+prompt: Recommend exact current settings for a routine bounded Codex contract review.
+expected_behavior:
+- Agent selects GPT-5.6-Terra with medium reasoning and Standard speed.
+- Agent preserves the exact display label and config slug in separate evidence fields.
+- Agent outputs only ChatGPT Codex / GPT-5.6-Terra / Medium / Standard to the owner.
+- Agent keeps Cursor Max Mode, Codex Max reasoning, and Ultra delegation as separate semantics.
+- Agent keeps delegation off because the task has no independent subscopes.
+- Agent names the 2026-07-10 snapshot ref/date and labels it volatile.
+- Agent does not infer GPT-5.6 availability in Cursor.
+- Agent treats Codex IDE extension as a distinct current client, not a deprecated desktop alias.
+negative_checks:
+- Agent must not emit a combined model label such as GPT-5.6-Terra High when reasoning is separate.
+- Agent must not map Cursor Max Mode to Codex Max reasoning.
+- Agent must not add Ultra to Luna or enable Ultra without independent scopes.
+- Agent must not describe Fast as cheaper or invent a fixed GPT-5.6 Fast multiplier.
+- Agent must not append derived off states, IDE context, shell, terminal profile, or application configuration to a ChatGPT Codex prompt tuple.
+grading:
+  method: rubric
+  pass_criteria:
+  - Exact owner tuple fields are present, minimal, and non-contradictory.
+  - Model label, config slug, and reasoning effort remain separate.
+  - Max, Ultra, and Cursor Max Mode semantics remain separate.
+  - Surface evidence and snapshot date are explicit outside the owner prompt tuple.
+  fail_criteria:
+  - Any label/control is invented or merged.
+  - Cursor availability is inferred from Codex evidence.
+  - Unsupported Ultra or Fast claims are presented as confirmed.
+  score:
+    type: binary
+    pass_threshold: all_pass_criteria
