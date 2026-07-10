@@ -1,8 +1,8 @@
 # Agent Memory Kit Starter Package
 
-Version: v3.11.1
-Release date: unreleased candidate prepared 2026-07-10
-Package: working tree candidate; no tag, release ZIP, or publication asset created
+Version: v3.11.2
+Release metadata date: 2026-07-10
+Publication proof: matching repository tag and release receipts; this file alone is not proof
 
 Agent Memory Kit is a portable memory operating layer for project owners who work with AI agents across long projects.
 
@@ -141,7 +141,9 @@ Use `EVAL_SUITE_GUIDE.md`, `EVAL_AUTOMATION_AND_TRIGGER_POLICY.md`, and `eval_su
 
 The suite is intentionally small and failure-mode based. It is designed for manual or semi-automated use by a project owner. It should be copied into `Project Map/eval_suite/` when a project starts using the kit.
 
-v3.11.1 adds GPT-5.6 model-routing and exact-label evals, while v3.11.0 adds
+v3.11.2 normalizes current release-facing package and eval metadata without
+changing behavior. v3.11.1 adds GPT-5.6 model-routing and exact-label evals,
+while v3.11.0 adds
 eval cases for executor routing gates, Windows encoding hygiene,
 hook recovery payloads, connector side-effect policy, and generated retrieval
 evidence.

@@ -1,8 +1,8 @@
-suite_id: AMK-EVAL-v3.11.1
-kit_version: 3.11.1
-policy_version: 3.11.1
+suite_id: AMK-EVAL-v3.11.2
+kit_version: 3.11.2
+policy_version: 3.11.2
 release_date: '2026-07-10'
-label: AMK v3.11.1 unreleased GPT-5.6 routing smoke policy
+label: AMK v3.11.2 GPT-5.6 routing smoke policy
 source_of_truth:
   policy_file: eval_trigger_policy.yaml
   runner_contract: run_eval_checklist.py must read smoke categories from this file and must not maintain an independent hardcoded smoke-category list.

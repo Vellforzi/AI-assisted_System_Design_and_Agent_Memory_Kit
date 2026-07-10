@@ -4,13 +4,20 @@ Package file: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.9.3_EN.zip`
 
 Package purpose: portable starter guide and memory operating layer for using AI agents with owner-controlled projects. Agent Memory Kit helps build a Project Map through structured, meaningful, interconnected duplication of project information supplied or verified by the owner.
 
-Current working-tree version: `v3.11.1` unreleased candidate. No release ZIP or publication asset has
-been created by this working tree. Older package-file lines are retained as
-historical manifest entries.
+Current package version: `v3.11.2`. Release publication is established only by
+the matching repository tag and release receipts, not by this file. Older
+package-file lines are retained as historical manifest entries.
 
-## v3.11.1 unreleased GPT-5.6 routing supplement
+## v3.11.2 release-metadata normalization supplement
 
-- `Agent Kit/kit/CHANGELOG_v3.11.1.md` - candidate change record; not release proof.
+- `Agent Kit/kit/CHANGELOG_v3.11.2.md` - patch release notes.
+- Current package/eval manifest, policy, and readme labels are normalized to
+  `v3.11.2` without changing routing behavior, provider snapshots, tools,
+  policies, or eval cases.
+
+## v3.11.1 GPT-5.6 routing supplement
+
+- `Agent Kit/kit/CHANGELOG_v3.11.1.md` - historical v3.11.1 change record.
 - `Agent Kit/kit/context_advisor/codex_provider_capability_snapshot_2026-07-10.yaml` - source-qualified Codex GPT-5.6 evidence.
 - `Agent Kit/kit/context_advisor/provider_surface_routing_snapshot_2026-07-10.yaml` - current generic surface and Codex model routing.
 - `Agent Kit/kit/eval_suite/cases/AMK-ML-002.yaml` - GPT-5.6 exact-label/control fidelity case.

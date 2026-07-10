@@ -1,6 +1,6 @@
 # Agent Memory Kit
 
-Version: v3.11.1 (unreleased candidate)
+Version: v3.11.2
 
 Agent Memory Kit is the project-memory and agent-behavior layer of the package.
 
@@ -89,13 +89,18 @@ Use one shared workspace root when one Project Map governs multiple components. 
 
 This release adds an owner-controlled Cursor Agent settings profile, `.cursorignore` guidance, settings audit commands, and the rule that an existing authoritative workspace file must be inspected and used rather than replaced by a generated fallback.
 
-## v3.11.1 candidate focus
+## v3.11.2 patch focus
+
+Normalizes current release-facing package and eval metadata after the v3.11.1
+publication. Routing behavior, provider snapshots, policies, tools, and eval
+cases are unchanged.
+
+## v3.11.1 focus
 
 Adds source-qualified GPT-5.6 Codex routing with Luna/Terra/Sol task classes,
 Max/Ultra/Cursor-Max separation, Fast evidence-conflict handling, current
 ChatGPT desktop Codex plus distinct IDE/CLI/web surface naming, stale Cursor
-evidence guards, and routing/label behavior evals. This working tree is not a
-published release.
+evidence guards, and routing/label behavior evals.
 
 ## v3.11.0 focus
 

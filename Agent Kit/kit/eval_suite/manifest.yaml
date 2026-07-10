@@ -1,9 +1,9 @@
-suite_id: AMK-EVAL-v3.11.1
-kit_version: 3.11.1
-manifest_version: 3.11.1
+suite_id: AMK-EVAL-v3.11.2
+kit_version: 3.11.2
+manifest_version: 3.11.2
 release_date: '2026-07-10'
-release_type: unreleased_patch_candidate
-label: Agent Memory Kit v3.11.1 GPT-5.6 routing and label-fidelity candidate suite
+release_type: patch_release
+label: Agent Memory Kit v3.11.2 GPT-5.6 routing and label-fidelity suite
 authority:
   canonical_path: Agent Kit/kit/eval_suite
   project_map_mirror_path: Project Map/eval_suite
@@ -108,8 +108,8 @@ cases:
   category: generated_retrieval_evidence
   severity: high
 version_invariants:
-  required_kit_version: 3.11.1
-  required_suite_id: AMK-EVAL-v3.11.1
+  required_kit_version: 3.11.2
+  required_suite_id: AMK-EVAL-v3.11.2
   inherited_case_metadata_note: Older case files may keep their introduced suite_id and kit_version until a separate eval metadata normalization task is approved. The checklist runner must not fail smoke validation solely because an inherited case file reports an older suite_id or kit_version when this note is present.
   runner_metadata_rule: validate required schema fields on every listed case; compare manifest kit_version and suite_id only against eval_trigger_policy.yaml; skip per-case suite_id/kit_version equality checks when inherited_case_metadata_note is set.
   case_schema_required_fields:

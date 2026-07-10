@@ -1,9 +1,10 @@
-# Agent Memory Kit Eval Suite - v3.11.1 Candidate
+# Agent Memory Kit Eval Suite - v3.11.2
 
-Status: authoritative working-tree candidate eval suite for v3.11.1 when located under
-`Agent Kit/kit/eval_suite`.
+Status: authoritative package eval suite for v3.11.2 when located under
+`Agent Kit/kit/eval_suite`. v3.11.2 normalizes release-facing metadata only.
 
-This is not release proof. v3.11.1 adds `AMK-ML-002` and `AMK-MR-001` for
+The suite itself is not publication proof. v3.11.1 added `AMK-ML-002` and
+`AMK-MR-001` for
 GPT-5.6 exact labels/slugs, cost-aware Luna/Terra/Sol routing, Max/Ultra/Cursor
 Max separation, Fast source conflict, stale Cursor evidence, cross-surface
 availability, and historical snapshot immutability.
@@ -52,7 +53,7 @@ Authoritative files:
 - `cases/*.yaml`
 
 The same-directory `eval_suite/run_eval_checklist.py` is a legacy compatibility
-helper and is not the manifest-selected v3.11.1 validator.
+helper and is not the manifest-selected v3.11.2 validator.
 
 Smoke selection contract:
 
