@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "scan_roots": ["src", "scripts"],
+  "layers": {
+    "runtime": ["src.runtime", "src.delivery"],
+    "foundation": ["src.foundation", "src.domain"],
+    "review": ["src.review", "src.evidence"],
+    "owner_only": ["src.owner_only"]
+  },
+  "forbidden_imports": [
+    {
+      "rule_id": "ARCH-IMPORT-001",
+      "from_layer": "runtime",
+      "to_layer": "owner_only",
+      "severity": "error"
+    },
+    {
+      "rule_id": "ARCH-IMPORT-002",
+      "from_layer": "foundation",
+      "to_layer": "runtime",
+      "severity": "error"
+    },
+    {
+      "rule_id": "ARCH-IMPORT-003",
+      "from_layer": "runtime",
+      "to_layer": "review",
+      "severity": "error"
+    }
+  ],
+  "forbidden_path_references": [
+    {
+      "rule_id": "ARCH-PATH-001",
+      "from_layer": "runtime",
+      "path_pattern": "docs/(archive|project_map|research|validation)/",
+      "severity": "error"
+    }
+  ]
+}

@@ -24,6 +24,7 @@ KIT_DIR = Path(__file__).resolve().parent.parent
 CONTRACT_DIR = KIT_DIR / "secondary_memory_governance" / "context_contract_v1"
 MANIFEST_PATH = CONTRACT_DIR / "fixtures" / "context-contract-v1-smoke.json"
 RETRIEVAL_POLICY_PATH = KIT_DIR / "secondary_memory_governance" / "retrieval_policy.yaml"
+CONTEXT_INDEX_PATH = KIT_DIR / "secondary_memory_governance" / "context_index.yaml"
 LEGACY_SMOKE_PATH = KIT_DIR / "secondary_memory_governance" / "context_selection_smoke_cases.yaml"
 
 
@@ -131,6 +132,30 @@ def _hard_excluded_statuses(profile: str) -> set[str]:
     return set()
 
 
+def _declared_mapping_keys(path: Path, section: str) -> set[str]:
+    keys: set[str] = set()
+    in_section = False
+    for raw_line in path.read_text(encoding="utf-8").splitlines():
+        if raw_line == f"{section}:":
+            in_section = True
+            continue
+        if not in_section:
+            continue
+        if raw_line and not raw_line.startswith(" "):
+            break
+        match = re.match(r"^  ([a-z][a-z0-9_]*):\s*$", raw_line)
+        if match:
+            keys.add(match.group(1))
+    return keys
+
+
+def _known_policy_profiles() -> set[str]:
+    return {
+        *_declared_mapping_keys(CONTEXT_INDEX_PATH, "task_profiles"),
+        *_declared_mapping_keys(RETRIEVAL_POLICY_PATH, "profiles"),
+    }
+
+
 def _matches_forbidden(path: str, patterns: Sequence[str]) -> bool:
     normalized = path.replace("\\", "/")
     return any(normalized == pattern or fnmatch.fnmatch(normalized, pattern) for pattern in patterns)
@@ -141,6 +166,9 @@ def evaluate_policy(request: dict[str, Any], bundle: dict[str, Any], reason_orde
     sources = bundle["sources"]
     source_paths = {source["path"] for source in sources}
     selection = request["selection"]
+
+    if request["profile"] not in _known_policy_profiles():
+        reasons.add("UNKNOWN_PROFILE")
 
     if len(sources) > selection["max_sources"]:
         reasons.add("OVER_RETRIEVAL")

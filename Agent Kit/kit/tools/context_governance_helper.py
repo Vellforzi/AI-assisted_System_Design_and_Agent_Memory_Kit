@@ -18,6 +18,7 @@ import fnmatch
 import json
 from pathlib import Path
 import re
+import sqlite3
 from typing import Sequence
 
 
@@ -45,6 +46,8 @@ DEFAULT_HIGH_RISK_GLOBS = (
 
 TRIGGERED_MODES = {"trigger_only", "secondary_memory_triggered", "never_default"}
 PROJECT_MAP_PROFILES = {"project_map_governance", "drift_analysis", "memory_update"}
+DEFAULT_TRIGGERED_READ_SET_PROFILES = {"research_promotion"}
+SEARCH_BACKENDS = ("lexical", "profile_filtered_semantic", "sqlite_fts")
 
 PROFILE_ALIASES = {
     "api-agent": "api_agent_design",
@@ -66,6 +69,8 @@ PROFILE_ALIASES = {
     "project_map": "project_map_governance",
     "project_map_governance": "project_map_governance",
     "research": "research",
+    "research-promotion": "research_promotion",
+    "research_promotion": "research_promotion",
     "review": "review",
     "startup": "startup",
     "validation": "validation",
@@ -105,7 +110,18 @@ class SmokeCase:
     max_sources: int
     required_paths: tuple[str, ...] = ()
     forbidden_paths: tuple[str, ...] = ()
+    forbidden_prefixes: tuple[str, ...] = ("data/", "output/", "docs/archive/")
+    required_skipped_paths: tuple[str, ...] = ()
     include_triggered: bool = False
+
+
+@dataclass(frozen=True)
+class SearchEvaluationScenario:
+    id: str
+    query: str
+    profile: str
+    expected_paths: tuple[str, ...] = ()
+    forbidden_prefixes: tuple[str, ...] = ()
 
 
 def build_read_set(
@@ -220,18 +236,17 @@ def build_api_context_bundle(
 ) -> dict[str, object]:
     if not request_id.strip():
         raise ValueError("request_id is required for API-agent context runs")
-    if not profile:
-        raise ValueError("profile is required for API-agent context runs")
+    root_path = Path(root).resolve()
+    normalized_profile = _require_explicit_api_profile(profile, root_path)
     if mutation_scope != "read-only":
         raise ValueError("API-agent context wrapper is read-only")
     if max_sources < 1:
         raise ValueError("max_sources must be at least 1 for API-agent context runs")
 
-    root_path = Path(root).resolve()
     read_set_result = build_read_set(
         root_path,
         task=task,
-        profile=profile,
+        profile=normalized_profile,
         max_sources=max_sources,
     )
     envelope = {
@@ -295,6 +310,221 @@ def build_api_context_bundle(
         "external_system_scope_expanded": False,
         "data_scope_expanded": False,
         "project_map_mutated": False,
+    }
+
+
+def search_context(
+    root: Path | str,
+    *,
+    query: str,
+    profile: str,
+    backend: str = "lexical",
+    max_results: int = 8,
+    include_triggered: bool = False,
+) -> dict[str, object]:
+    """Search only the profile-bounded, hard-gated read set.
+
+    All backends are local and ephemeral. ``sqlite_fts`` builds an in-memory
+    index for this call and never creates a database file.
+    """
+
+    if backend not in SEARCH_BACKENDS:
+        raise ValueError(f"unsupported search backend: {backend}")
+    if max_results < 1:
+        raise ValueError("max_results must be at least 1")
+    root_path = Path(root).resolve()
+    normalized_profile = _normalize_profile(profile)
+    if not normalized_profile or normalized_profile not in _known_task_profiles(root_path):
+        raise ValueError(f"unknown context profile: {normalized_profile or profile}")
+    bounded = build_read_set(
+        root_path,
+        profile=normalized_profile,
+        max_sources=10000,
+        include_triggered=include_triggered,
+    )
+    documents: list[tuple[dict[str, object], str]] = []
+    for source in bounded["read_set"]:
+        if not isinstance(source, dict):
+            continue
+        path = str(source["path"])
+        candidate = root_path / path
+        if candidate.is_file() and not _is_high_risk_path(path, root_path):
+            documents.append((source, _read_text(candidate)))
+
+    tokens = _tokenize(query)
+    if backend == "sqlite_fts":
+        scores = _sqlite_fts_scores(documents, query)
+    else:
+        scores = {
+            str(source["path"]): _search_score(
+                source,
+                text,
+                tokens,
+                semantic=(backend == "profile_filtered_semantic"),
+            )
+            for source, text in documents
+        }
+
+    results: list[dict[str, object]] = []
+    for source, body in documents:
+        path = str(source["path"])
+        score = scores.get(path, 0.0)
+        matched = sorted({token for token in tokens if token in body.lower() or token in path.lower()})
+        if score <= 0 or not matched:
+            continue
+        results.append({
+            **source,
+            "score": round(float(score), 6),
+            "matched_terms": matched,
+            "snippet": _snippet(body, matched),
+        })
+    results.sort(key=lambda item: (-float(item["score"]), str(item["path"])))
+    return {
+        "check_type": "context_search",
+        "backend": backend,
+        "profile": bounded["scope"]["profile"],
+        "query": query,
+        "candidate_count": len(documents),
+        "results": results[:max_results],
+        "persistent_index_created": False,
+        "scope_expanded": False,
+    }
+
+
+def compare_search_backends(
+    root: Path | str,
+    *,
+    scenarios: Sequence[SearchEvaluationScenario | dict[str, object]],
+    backends: Sequence[str] = SEARCH_BACKENDS,
+) -> dict[str, object]:
+    """Evaluate interchangeable local backends against shared scenarios."""
+
+    results: list[dict[str, object]] = []
+    failures: list[str] = []
+    for raw in scenarios:
+        scenario = raw if isinstance(raw, SearchEvaluationScenario) else SearchEvaluationScenario(
+            id=str(raw["id"]),
+            query=str(raw["query"]),
+            profile=str(raw["profile"]),
+            expected_paths=tuple(str(value) for value in raw.get("expected_paths", ())),
+            forbidden_prefixes=tuple(str(value) for value in raw.get("forbidden_prefixes", ())),
+        )
+        for backend in backends:
+            search = search_context(
+                root,
+                query=scenario.query,
+                profile=scenario.profile,
+                backend=backend,
+                max_results=max(8, len(scenario.expected_paths)),
+            )
+            paths = [str(item["path"]) for item in search["results"]]
+            missing = sorted(set(scenario.expected_paths) - set(paths))
+            forbidden = sorted(path for path in paths if path.startswith(scenario.forbidden_prefixes))
+            passed = not missing and not forbidden
+            if not passed:
+                failures.append(f"{scenario.id}/{backend}")
+            results.append({
+                "scenario_id": scenario.id,
+                "backend": backend,
+                "status": "passed" if passed else "failed",
+                "expected_hit_rate": (
+                    1.0 if not scenario.expected_paths
+                    else (len(scenario.expected_paths) - len(missing)) / len(scenario.expected_paths)
+                ),
+                "missing_expected_paths": missing,
+                "selected_forbidden_paths": forbidden,
+                "candidate_count": search["candidate_count"],
+                "result_paths": paths,
+            })
+    return {
+        "check_type": "search_backend_comparison",
+        "status": "failed" if failures else "passed",
+        "results": results,
+        "failures": failures,
+        "persistent_index_created": False,
+        "decision": "Backends remain local adapters; no persistent retrieval service is introduced.",
+    }
+
+
+def claim_check(
+    root: Path | str,
+    *,
+    claim: str,
+    profile: str,
+    max_results: int = 5,
+) -> dict[str, object]:
+    """Classify a claim and attach bounded supporting context when available."""
+
+    lowered = claim.lower()
+    if "project map" in lowered and any(word in lowered for word in ("override", "overrides", "wins")):
+        status = "contradicted"
+        evidence: list[dict[str, object]] = []
+    elif _claim_mentions_forbidden_scope(lowered):
+        status = "out_of_scope_or_forbidden"
+        evidence = []
+    else:
+        search = search_context(
+            root,
+            query=claim,
+            profile=profile,
+            max_results=max_results,
+        )
+        evidence = list(search["results"])
+        status = "supported" if evidence else "insufficient_evidence"
+    return {
+        "check_type": "claim_check",
+        "claim": claim,
+        "profile": profile,
+        "status": status,
+        "evidence": evidence,
+        "scope_expanded": False,
+    }
+
+
+def run_retrieval_fixture(
+    root: Path | str,
+    fixture: dict[str, object],
+    *,
+    backends: Sequence[str] = SEARCH_BACKENDS,
+) -> dict[str, object]:
+    """Run the language-neutral retrieval and claim fixture corpus."""
+
+    scenarios = fixture.get("scenarios", [])
+    if not isinstance(scenarios, list):
+        raise ValueError("retrieval fixture scenarios must be an array")
+    comparison = compare_search_backends(root, scenarios=scenarios, backends=backends)
+    claim_results: list[dict[str, object]] = []
+    claim_failures: list[str] = []
+    raw_claims = fixture.get("claim_cases", [])
+    if not isinstance(raw_claims, list):
+        raise ValueError("retrieval fixture claim_cases must be an array")
+    for raw in raw_claims:
+        if not isinstance(raw, dict):
+            raise ValueError("retrieval fixture claim case must be an object")
+        result = claim_check(
+            root,
+            claim=str(raw["claim"]),
+            profile=str(raw["profile"]),
+        )
+        expected = str(raw["expected_status"])
+        passed = result["status"] == expected
+        if not passed:
+            claim_failures.append(str(raw["id"]))
+        claim_results.append({
+            "case_id": str(raw["id"]),
+            "status": "passed" if passed else "failed",
+            "expected_status": expected,
+            "actual_status": result["status"],
+        })
+    failed = comparison["status"] == "failed" or bool(claim_failures)
+    return {
+        "check_type": "context_retrieval_fixture",
+        "suite_id": fixture.get("suite_id", "unnamed"),
+        "status": "failed" if failed else "passed",
+        "backend_comparison": comparison,
+        "claim_results": claim_results,
+        "persistent_index_created": False,
+        "runtime_service_started": False,
     }
 
 
@@ -410,7 +640,12 @@ def load_smoke_cases(root: Path | str) -> list[SmokeCase]:
         if ":" not in stripped:
             continue
         key, value = stripped.split(":", 1)
-        if key in {"required_paths", "forbidden_paths"} and not value.strip():
+        if key in {
+            "required_paths",
+            "forbidden_paths",
+            "forbidden_prefixes",
+            "required_skipped_paths",
+        } and not value.strip():
             current[key] = []
             current_list_key = key
             continue
@@ -455,12 +690,23 @@ def _run_smoke_case(root: Path, smoke_case: SmokeCase) -> dict[str, object]:
     selected_forbidden = sorted(set(smoke_case.forbidden_paths) & paths)
     if selected_forbidden:
         failures.append("task_scope_miss: selected forbidden paths " + ", ".join(selected_forbidden))
-    forbidden_prefixes = ("data/", "output/", "docs/archive/")
-    selected_forbidden_prefixes = sorted(path for path in paths if path.startswith(forbidden_prefixes))
+    selected_forbidden_prefixes = sorted(
+        path for path in paths if path.startswith(smoke_case.forbidden_prefixes)
+    )
     if selected_forbidden_prefixes:
         failures.append(
             "wrong_retrieval: selected forbidden path prefixes "
             + ", ".join(selected_forbidden_prefixes)
+        )
+    skipped_paths = {
+        str(item["path"])
+        for item in result["skipped_trigger_only_context"]
+        if isinstance(item, dict)
+    }
+    missing_skipped = sorted(set(smoke_case.required_skipped_paths) - skipped_paths)
+    if missing_skipped:
+        failures.append(
+            "scope_leak: required skipped paths were not reported " + ", ".join(missing_skipped)
         )
 
     return {
@@ -492,7 +738,9 @@ def _read_set_inclusion_reason(
         if include_triggered or profile in PROJECT_MAP_PROFILES:
             return f"explicit secondary-memory retrieval for profile '{profile}'"
         return None
-    if entry.default_retrieval_mode == "trigger_only" and include_triggered:
+    if entry.default_retrieval_mode == "trigger_only" and (
+        include_triggered or profile in DEFAULT_TRIGGERED_READ_SET_PROFILES
+    ):
         return f"explicit triggered retrieval for profile '{profile}'"
     return None
 
@@ -610,8 +858,29 @@ def _smoke_case_from_mapping(value: dict[str, object]) -> SmokeCase:
         max_sources=int(value.get("max_sources", 20)),
         required_paths=tuple(value.get("required_paths", ())),
         forbidden_paths=tuple(value.get("forbidden_paths", ())),
+        forbidden_prefixes=tuple(
+            value.get("forbidden_prefixes", ("data/", "output/", "docs/archive/"))
+        ),
+        required_skipped_paths=tuple(value.get("required_skipped_paths", ())),
         include_triggered=_parse_bool(value.get("include_triggered", False)),
     )
+
+
+def _require_explicit_api_profile(profile: str | None, root: Path) -> str:
+    normalized = _normalize_profile(profile)
+    if not normalized:
+        raise ValueError("profile is required for API-agent context runs")
+    if normalized not in _known_task_profiles(root):
+        raise ValueError(f"unknown API-agent profile: {normalized}")
+    return normalized
+
+
+def _known_task_profiles(root: Path) -> set[str]:
+    return {
+        profile
+        for entry in load_context_index(root)
+        for profile in entry.task_profiles
+    }
 
 
 def _context_index_excluded_globs(root: Path) -> list[str]:
@@ -641,6 +910,90 @@ def _skipped_high_risk_context(root: Path) -> list[dict[str, str]]:
 def _is_high_risk_path(path: str, root: Path) -> bool:
     normalized = path.replace("\\", "/").lower()
     return any(_matches_glob(normalized, glob) for glob in _dedupe([*DEFAULT_HIGH_RISK_GLOBS, *_context_index_excluded_globs(root)]))
+
+
+def _tokenize(value: str) -> tuple[str, ...]:
+    return tuple(token for token in re.findall(r"[a-zA-Z0-9_]+", value.lower()) if len(token) > 1)
+
+
+def _search_score(
+    source: dict[str, object],
+    body: str,
+    tokens: Sequence[str],
+    *,
+    semantic: bool,
+) -> float:
+    searchable = " ".join((
+        str(source.get("path", "")),
+        str(source.get("canonical_purpose", "")),
+        body,
+    )).lower()
+    score = sum(min(searchable.count(token), 5) for token in tokens)
+    if semantic:
+        purpose = str(source.get("canonical_purpose", "")).lower()
+        score += 1.5 * sum(token in purpose for token in tokens)
+        score += 0.5 * sum(token in str(source.get("path", "")).lower() for token in tokens)
+    return float(score)
+
+
+def _sqlite_fts_scores(
+    documents: Sequence[tuple[dict[str, object], str]],
+    query: str,
+) -> dict[str, float]:
+    tokens = _tokenize(query)
+    if not tokens:
+        return {}
+    connection = sqlite3.connect(":memory:")
+    try:
+        connection.execute("CREATE VIRTUAL TABLE context_docs USING fts5(path UNINDEXED, content)")
+        connection.executemany(
+            "INSERT INTO context_docs(path, content) VALUES (?, ?)",
+            [
+                (
+                    str(source["path"]),
+                    f"{source.get('canonical_purpose', '')} {body}",
+                )
+                for source, body in documents
+            ],
+        )
+        expression = " OR ".join(f'"{token}"' for token in tokens)
+        rows = connection.execute(
+            "SELECT path, bm25(context_docs) FROM context_docs WHERE context_docs MATCH ?",
+            (expression,),
+        ).fetchall()
+        return {str(path): max(0.000001, -float(rank) + 1.0) for path, rank in rows}
+    except sqlite3.OperationalError:
+        return {
+            str(source["path"]): _search_score(source, body, tokens, semantic=False)
+            for source, body in documents
+        }
+    finally:
+        connection.close()
+
+
+def _snippet(body: str, matched_terms: Sequence[str], max_chars: int = 320) -> str:
+    lines = [
+        line.strip()
+        for line in body.splitlines()
+        if any(term in line.lower() for term in matched_terms)
+    ][:3]
+    snippet = " ".join(lines) or " ".join(body.split())
+    return snippet if len(snippet) <= max_chars else snippet[: max_chars - 3].rstrip() + "..."
+
+
+def _claim_mentions_forbidden_scope(claim: str) -> bool:
+    normalized = claim.replace("\\", "/")
+    terms = (
+        "data/",
+        "output/",
+        ".env",
+        "secret",
+        "token",
+        "raw account",
+        "broker mutation",
+        "external-system mutation",
+    )
+    return any(term in normalized for term in terms)
 
 
 def _missing_existing_paths(root: Path, paths: Sequence[str]) -> list[str]:
@@ -811,6 +1164,25 @@ def main(argv: Sequence[str] | None = None) -> int:
     smoke_parser.add_argument("--case", action="append", default=[])
     smoke_parser.add_argument("--format", choices=("json", "markdown"), default="markdown")
 
+    search_parser = subparsers.add_parser("search")
+    search_parser.add_argument("--query", required=True)
+    search_parser.add_argument("--profile", required=True)
+    search_parser.add_argument("--backend", choices=SEARCH_BACKENDS, default="lexical")
+    search_parser.add_argument("--max-results", type=int, default=8)
+    search_parser.add_argument("--include-triggered", action="store_true")
+    search_parser.add_argument("--format", choices=("json", "markdown"), default="json")
+
+    compare_parser = subparsers.add_parser("compare-search")
+    compare_parser.add_argument("--fixture", type=Path, required=True)
+    compare_parser.add_argument("--backend", action="append", choices=SEARCH_BACKENDS, default=[])
+    compare_parser.add_argument("--format", choices=("json", "markdown"), default="json")
+
+    claim_parser = subparsers.add_parser("claim-check")
+    claim_parser.add_argument("--claim", required=True)
+    claim_parser.add_argument("--profile", required=True)
+    claim_parser.add_argument("--max-results", type=int, default=5)
+    claim_parser.add_argument("--format", choices=("json", "markdown"), default="json")
+
     args = parser.parse_args(argv)
     if args.command == "read-set":
         payload = build_read_set(
@@ -845,6 +1217,29 @@ def main(argv: Sequence[str] | None = None) -> int:
             api_parser.error(str(exc))
     elif args.command == "smoke-check":
         payload = run_smoke_checks(args.root, case_ids=args.case)
+    elif args.command == "search":
+        payload = search_context(
+            args.root,
+            query=args.query,
+            profile=args.profile,
+            backend=args.backend,
+            max_results=args.max_results,
+            include_triggered=args.include_triggered,
+        )
+    elif args.command == "compare-search":
+        fixture = json.loads(args.fixture.read_text(encoding="utf-8"))
+        payload = run_retrieval_fixture(
+            args.root,
+            fixture,
+            backends=args.backend or SEARCH_BACKENDS,
+        )
+    elif args.command == "claim-check":
+        payload = claim_check(
+            args.root,
+            claim=args.claim,
+            profile=args.profile,
+            max_results=args.max_results,
+        )
     else:
         parser.error("unknown command")
 

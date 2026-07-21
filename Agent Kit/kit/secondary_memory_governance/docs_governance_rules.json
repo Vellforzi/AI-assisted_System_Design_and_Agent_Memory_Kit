@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "roles": {
+    "spec": {
+      "directory": "docs/specs",
+      "index_path": "docs/specs/README.md",
+      "required_metadata": ["Status:", "Last aligned:", "Audience:", "Runtime impact:", "Authority:"]
+    },
+    "research": {
+      "directory": "docs/research",
+      "index_path": "docs/research/README.md",
+      "required_metadata": ["Status:", "Last aligned:", "Audience:", "Runtime impact:", "Authority:"]
+    },
+    "proposal": {
+      "directory": "docs/proposals",
+      "index_path": "README.md",
+      "required_metadata": ["Status:", "Last aligned:", "Audience:", "Runtime impact:", "Authority:"]
+    },
+    "archive": {
+      "directory": "docs/archive",
+      "index_path": "README.md",
+      "required_metadata": []
+    }
+  }
+}

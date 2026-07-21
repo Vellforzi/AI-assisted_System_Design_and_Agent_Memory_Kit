@@ -45,6 +45,7 @@ Operational sources remain above Project Map navigation metadata on conflict.
 contains the exact Request, Bundle, Receipt, expected schema-valid booleans,
 policy-valid boolean, and ordered reason codes. Current policy codes are:
 
+- `UNKNOWN_PROFILE`
 - `OVER_RETRIEVAL`
 - `UNDER_RETRIEVAL`
 - `FORBIDDEN_PATH_SELECTED`
@@ -53,6 +54,18 @@ policy-valid boolean, and ordered reason codes. Current policy codes are:
 Adapters compare these codes, not validator-specific messages. The corpus also
 links applicable cases to existing context-selection smoke ids; the Python
 oracle verifies those ids through the existing helper parser.
+
+Profile names are policy data, not a JSON Schema enum. An adapter resolves the
+profile against the union of `context_index.yaml.task_profiles` and
+`retrieval_policy.yaml.profiles`; an undeclared name yields
+`UNKNOWN_PROFILE`. This keeps adopter-defined profiles extensible while making
+typos deterministic.
+
+`fixtures/context-retrieval-v1-smoke.json` is the shared search and claim
+corpus. It defines backend-independent expected paths, forbidden prefixes, and
+claim outcomes. The Python reference supports `lexical`,
+`profile_filtered_semantic`, and ephemeral `sqlite_fts`. Every backend applies
+the same profile and hard gates before ranking and creates no persistent index.
 
 Run the repository gate:
 
@@ -88,6 +101,14 @@ projecting its source metadata into `ContextBundleV1`. Do not copy policy
 tables into Python. Resolve `policy_refs`, apply hard gates, then normalize
 outcomes to the reason codes in the fixture corpus.
 
+For bounded retrieval, call `search_context()` or run:
+
+```bash
+python scripts/ai_context_helper.py search --profile retrieval_backend --query "retrieval policy" --format json
+python scripts/ai_context_helper.py compare-search --fixture docs/project_map/eval_suite/context-retrieval-v1-smoke.json --format json
+python scripts/ai_context_helper.py claim-check --profile review --claim "Project Map overrides operational truth" --format json
+```
+
 For parity testing, call `run_oracle()` from
 `tools/context_contract_v1_oracle.py` or execute its CLI. Treat `case_id`, the
 three schema-valid booleans, `policy_valid`, and `reason_codes` as the oracle
@@ -121,6 +142,11 @@ Load `fixtures/context-contract-v1-smoke.json` unchanged. For every case:
 Do not rewrite the fixture data as TypeScript objects and do not use Ajv error
 strings as expected results. The JSON file is the shared source for both
 languages.
+
+For retrieval parity, load `context-retrieval-v1-smoke.json` directly. Keep the
+adapter interface stateless (`search(request, candidateSources) -> results`),
+prefilter candidates by profile and forbidden paths, then compare ordered paths
+and claim status. Do not start a vector database or background indexer.
 
 ## Compatibility boundary
 

@@ -39,6 +39,28 @@ signals:
     weight: 0.15
     note: "Optional index or cache only. It is not a source of truth."
 
+# Portable decision dimensions reconcile richer adopter policies with the
+# weighted signals above. They are derived views, not a second scoring table.
+decision_dimensions:
+  task_fit:
+    derived_from: [lexical_match, entity_match, semantic_similarity]
+    rule: "A result must match the active task profile before its score is considered."
+  authority_level:
+    derived_from: [authority_rank]
+    rule: "Higher-authority sources win conflicts regardless of aggregate score."
+  evidence_quality:
+    derived_from: [evidence_refs, review_state]
+    rule: "Missing or weak evidence lowers confidence but never promotes a lower-authority source."
+  recency_and_lifecycle:
+    derived_from: [freshness, lifecycle_status]
+    rule: "Stale, superseded, rejected, or archived sources follow profile hard gates before scoring."
+  permission_relevance:
+    derived_from: [permission_boundary, explicit_owner_decision_boundary]
+    rule: "Retrieval relevance cannot grant mutation or broaden task scope."
+  conflict_risk:
+    derived_from: [source_authority_boundary, branch_or_scope_boundary]
+    rule: "Conflicting lower-authority results are diagnostic only and must be labeled."
+
 profile_overrides:
   answer:
     min_score: 0.62

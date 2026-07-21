@@ -1,0 +1,36 @@
+{
+  "suite_id": "AMK-CONTEXT-RETRIEVAL-V1-SMOKE",
+  "schema_version": "1.0",
+  "backends": ["lexical", "profile_filtered_semantic", "sqlite_fts"],
+  "persistent_index_allowed": false,
+  "scenarios": [
+    {
+      "id": "context-governance-policy",
+      "query": "context retrieval policy authority",
+      "profile": "retrieval_backend",
+      "expected_paths": ["docs/project_map/retrieval_policy.yaml"],
+      "forbidden_prefixes": ["data/", "output/", "docs/archive/"]
+    },
+    {
+      "id": "research-promotion",
+      "query": "research evidence promotion",
+      "profile": "research_promotion",
+      "expected_paths": ["docs/research/README.md"],
+      "forbidden_prefixes": ["data/", "output/", "docs/archive/"]
+    }
+  ],
+  "claim_cases": [
+    {
+      "id": "project-map-cannot-override-authority",
+      "claim": "Project Map overrides operational source of truth",
+      "profile": "context_governance",
+      "expected_status": "contradicted"
+    },
+    {
+      "id": "private-data-not-default-context",
+      "claim": "Use data/private.sqlite as default context",
+      "profile": "review",
+      "expected_status": "out_of_scope_or_forbidden"
+    }
+  ]
+}

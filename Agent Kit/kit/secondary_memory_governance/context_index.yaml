@@ -88,6 +88,20 @@ task_profiles:
     description: "Non-runtime evidence collection, research synthesis, and promotion candidates."
   api_agent_design:
     description: "Future API-agent context-service design, request envelope, tool gates, and receipts."
+  retrieval_backend:
+    description: "Local stateless retrieval backend implementation and comparison."
+  retrieval_smoke:
+    description: "Context-selection, forbidden-path, required-skip, and adapter-parity checks."
+  documentation_harness:
+    description: "Documentation metadata, reachability, triage, and acceptance checks."
+  research_promotion:
+    description: "Explicit promotion review that loads trigger-only research but never_default remains closed."
+  drift_analysis:
+    description: "Read-only comparison of current authority, lifecycle, and navigation metadata."
+  security_review:
+    description: "Read-only security and privacy boundary inspection."
+  process_review:
+    description: "Read-only workflow and governance process inspection."
 
 entries:
   - path: "AGENTS.md"
@@ -95,7 +109,7 @@ entries:
     authority: "machine_first_repository_entrypoint"
     status: "active"
     layer: "root_entrypoint"
-    task_profiles: [startup, docs_governance, context_governance, project_map_governance, review, planning, implementation, validation, research, api_agent_design]
+    task_profiles: [startup, docs_governance, context_governance, project_map_governance, review, planning, implementation, validation, research, api_agent_design, retrieval_backend, retrieval_smoke, documentation_harness, research_promotion, drift_analysis, security_review, process_review]
     default_retrieval_mode: "startup_required"
     canonical_purpose: "Defines active priority, startup read order, task-local scope gate, and forbidden scope expansions for agents."
     mutation_boundary: "Edit only for repository-wide agent bootstrap rules; does not authorize runtime, external-system, data, or Project Map changes."
@@ -115,7 +129,7 @@ entries:
     authority: "source_authority_policy"
     status: "active"
     layer: "governance"
-    task_profiles: [startup, docs_governance, context_governance, project_map_governance, review, planning, implementation, research, api_agent_design]
+    task_profiles: [startup, docs_governance, context_governance, project_map_governance, review, planning, implementation, research, api_agent_design, retrieval_backend, retrieval_smoke, documentation_harness, research_promotion, drift_analysis, security_review, process_review]
     default_retrieval_mode: "startup_required"
     canonical_purpose: "Defines authority tiers, navigation order, operational docs, Project Map secondary status, archive/research limits, and reachability rules."
     mutation_boundary: "Update only for source-authority or navigation changes; operational docs remain above secondary memory."
@@ -135,7 +149,7 @@ entries:
     authority: "docs_context_governance_rule"
     status: "active"
     layer: "governance"
-    task_profiles: [docs_governance, context_governance, project_map_governance, review, planning, api_agent_design]
+    task_profiles: [docs_governance, context_governance, project_map_governance, review, planning, api_agent_design, retrieval_backend, retrieval_smoke, documentation_harness, research_promotion, drift_analysis, security_review, process_review]
     default_retrieval_mode: "task_triggered"
     canonical_purpose: "Defines task-local scope gate, minimal retrieval discipline, docs lifecycle, link lifecycle, session-context promotion, and next-step impact promotion rules."
     mutation_boundary: "Governance only; no runtime, Project Map memory, external-system, database, commit, push, deployment, or product scope expansion."
@@ -165,7 +179,7 @@ entries:
     authority: "navigation_metadata"
     status: "active_baseline"
     layer: "project_map"
-    task_profiles: [context_governance, project_map_governance, api_agent_design]
+    task_profiles: [context_governance, project_map_governance, api_agent_design, retrieval_backend, retrieval_smoke, documentation_harness, research_promotion, drift_analysis]
     default_retrieval_mode: "task_triggered"
     canonical_purpose: "Machine-readable routing metadata for conservative P0/P1 context selection."
     mutation_boundary: "Navigation metadata only; entries do not create source authority or mutation permission."
@@ -175,7 +189,7 @@ entries:
     authority: "project_map_entrypoint"
     status: "active"
     layer: "project_map"
-    task_profiles: [project_map_governance, context_governance]
+    task_profiles: [project_map_governance, context_governance, retrieval_backend, retrieval_smoke, research_promotion, drift_analysis]
     default_retrieval_mode: "secondary_memory_triggered"
     canonical_purpose: "Explains Project Map role, secondary-memory authority, file list, update rules, and mutation boundaries."
     mutation_boundary: "Project Map updates require explicit memory-update scope or an approved proposed delta."
@@ -209,6 +223,46 @@ entries:
     default_retrieval_mode: "secondary_memory_triggered"
     canonical_purpose: "Defines retrieval hard gates, task-type entrypoints, and result requirements for Project Map secondary-memory retrieval."
     mutation_boundary: "Retrieval policy only; cannot override AGENTS.md required read order or source-of-truth hierarchy."
+
+  - path: "docs/project_map/retrieval_scoring_policy.yaml"
+    priority: "P1"
+    authority: "retrieval_scoring_policy"
+    status: "active"
+    layer: "project_map"
+    task_profiles: [context_governance, project_map_governance, retrieval_backend, retrieval_smoke, drift_analysis]
+    default_retrieval_mode: "secondary_memory_triggered"
+    canonical_purpose: "Defines post-gate scoring signals, decision dimensions, profile overrides, and bounded top-k behavior."
+    mutation_boundary: "Scoring cannot override authority, lifecycle, privacy, permission, or explicit scope gates."
+
+  - path: "docs/project_map/eval_suite/context_selection_smoke_cases.yaml"
+    priority: "P1"
+    authority: "retrieval_acceptance_fixture"
+    status: "active"
+    layer: "project_map"
+    task_profiles: [context_governance, retrieval_backend, retrieval_smoke, drift_analysis]
+    default_retrieval_mode: "secondary_memory_triggered"
+    canonical_purpose: "Defines shared over/under-retrieval, forbidden-path, and required-skipped-path smoke expectations."
+    mutation_boundary: "Fixture data only; does not select or persist context by itself."
+
+  - path: "docs/project_map/docs_governance_rules.json"
+    priority: "P1"
+    authority: "documentation_placement_policy"
+    status: "active"
+    layer: "project_map"
+    task_profiles: [docs_governance, documentation_harness, process_review]
+    default_retrieval_mode: "secondary_memory_triggered"
+    canonical_purpose: "Configures role-based documentation placement and metadata proposals."
+    mutation_boundary: "The helper emits review-only unapplied patches."
+
+  - path: "docs/architecture/architecture_lint_rules.json"
+    priority: "P1"
+    authority: "architecture_boundary_policy"
+    status: "active"
+    layer: "architecture"
+    task_profiles: [review, implementation, validation, security_review, process_review]
+    default_retrieval_mode: "task_triggered"
+    canonical_purpose: "Defines project-specific import direction and forbidden path-reference rules."
+    mutation_boundary: "Lint rules report only and do not modify runtime code."
 
   - path: "docs/project_map/working_state.yaml"
     priority: "P1"
@@ -245,7 +299,7 @@ entries:
     authority: "research_directory_index"
     status: "active"
     layer: "research"
-    task_profiles: [research, planning, review]
+    task_profiles: [research, planning, review, research_promotion]
     default_retrieval_mode: "task_triggered"
     canonical_purpose: "Directory index and classification table for research files."
     mutation_boundary: "Research routing only; does not authorize runtime, product, external-system, data, or user-facing behavior changes."

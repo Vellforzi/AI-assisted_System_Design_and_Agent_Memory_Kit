@@ -125,12 +125,36 @@ def build_report(root: Path | str = Path.cwd()) -> dict[str, object]:
         for item in findings
         if item.get("severity") in {"warning", "error"}
     ]
+    triage_buckets = _triage_buckets(backlog_items)
+    actionable_count = sum(
+        triage_buckets[name]["count"]
+        for name in (
+            "p0_p1_source_of_truth_gaps",
+            "active_supporting_doc_backlog",
+            "retrieval_route_gaps",
+            "other_harness_findings",
+        )
+    )
+    acceptance_contract = {
+        "contract_version": "1.0",
+        "read_only": True,
+        "blocking_bucket_count": actionable_count,
+        "lower_authority_noise_is_blocking": False,
+        "project_map_mutation_allowed": False,
+        "accepted": actionable_count == 0,
+    }
+    scorecard = {
+        "metadata": "pass" if not any(item["id"].startswith("DOC-META") for item in findings) else "needs_review",
+        "reachability": "pass" if not any(item["id"].startswith("DOC-REACH") for item in findings) else "needs_review",
+        "authority_labels": "pass" if not any(item["id"].startswith("DOC-AUTH") for item in findings) else "needs_review",
+        "retrieval_routes": "pass" if triage_buckets["retrieval_route_gaps"]["count"] == 0 else "needs_review",
+    }
 
     return {
         "report_type": REPORT_TYPE,
         "helper": HELPER_NAME,
         "root": str(root_path),
-        "status": "needs_review" if backlog_items else "passed",
+        "status": "needs_review" if actionable_count else "passed",
         "read_only": True,
         "scope_flags": dict(SCOPE_FLAGS),
         "managed_docs_scanned": len(managed_paths),
@@ -142,11 +166,56 @@ def build_report(root: Path | str = Path.cwd()) -> dict[str, object]:
         "summary_by_authority": _summary_by_key(findings, "authority"),
         "summary_by_layer": _summary_by_key(findings, "layer"),
         "backlog_items": backlog_items,
+        "triage_buckets": triage_buckets,
+        "acceptance_contract": acceptance_contract,
+        "repository_quality_scorecard": scorecard,
+        "proposed_project_map_deltas": {
+            "applied": False,
+            "items": [
+                {
+                    "path": item.get("path"),
+                    "reason": item.get("summary"),
+                }
+                for item in triage_buckets["retrieval_route_gaps"]["items"]
+            ],
+        },
         "notes": [
             "Report-only diagnostic for secondary memory governance.",
             "Does not mutate runtime, external-system state, data artifacts, or Project Map.",
         ],
     }
+
+
+def _triage_buckets(backlog_items: Sequence[dict[str, object]]) -> dict[str, dict[str, object]]:
+    names = (
+        "p0_p1_source_of_truth_gaps",
+        "active_supporting_doc_backlog",
+        "legacy_archive_or_lower_authority_noise",
+        "retrieval_route_gaps",
+        "other_harness_findings",
+    )
+    buckets: dict[str, dict[str, object]] = {
+        name: {"count": 0, "items": []} for name in names
+    }
+    for item in backlog_items:
+        rule_id = str(item.get("id", ""))
+        authority = str(item.get("authority", ""))
+        priority = str(item.get("priority", ""))
+        if rule_id.startswith("DOC-REACH"):
+            bucket = "retrieval_route_gaps"
+        elif priority in {"P0", "P1"}:
+            bucket = "p0_p1_source_of_truth_gaps"
+        elif authority in {"archive", "secondary_memory", "research_context", "planning_or_proposal"}:
+            bucket = "legacy_archive_or_lower_authority_noise"
+        elif priority == "P2":
+            bucket = "active_supporting_doc_backlog"
+        else:
+            bucket = "other_harness_findings"
+        typed_items = buckets[bucket]["items"]
+        assert isinstance(typed_items, list)
+        typed_items.append(item)
+        buckets[bucket]["count"] = int(buckets[bucket]["count"]) + 1
+    return buckets
 
 
 def _managed_doc_paths(root: Path) -> list[str]:

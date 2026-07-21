@@ -62,6 +62,7 @@ Copy or adapt these files into the target project:
       permissions_policy.yaml
       retrieval_policy.yaml
       retrieval_scoring_policy.yaml
+      docs_governance_rules.json
       memory_lifecycle_policy.yaml
       tool_output_reference_template.yaml
       working_state.yaml
@@ -69,12 +70,17 @@ Copy or adapt these files into the target project:
       eval_suite/
         manual_smoke_cases.yaml
         context_selection_smoke_cases.yaml
+        context-retrieval-v1-smoke.json
+    architecture/
+      architecture_lint_rules.json
     rules/
       ai_development_rules.md
       codex_prompt_rules.md
   scripts/
     ai_context_helper.py
     documentation_harness.py
+    docs_governance_helper.py
+    architecture_lint.py
 ```
 
 Use `.cursorignore` only if Cursor is used.
@@ -146,13 +152,16 @@ background capture
   sets;
 - fails when required indexed files are missing from the installed project;
 - should be extended with domain-specific forbidden paths and boundaries.
+- supports per-case `forbidden_prefixes` and `required_skipped_paths` so an
+  adapter proves both selection and deliberate exclusion.
 
 `context_contract_v1/`
 
 - versioned Draft 2020-12 schemas for request, bundle, and receipt payloads;
 - valid and invalid examples for every contract;
-- one language-neutral fixture corpus covering over-retrieval,
-  under-retrieval, forbidden paths, and stale authority;
+- language-neutral fixture corpora covering unknown profiles, over-retrieval,
+  under-retrieval, forbidden paths, stale authority, backend parity, and claim
+  outcomes;
 - concise Python and TypeScript adapter guidance;
 - contracts and fixtures only, with no runtime service or hidden memory.
 
@@ -189,6 +198,29 @@ background capture
 - prevents similarity, entity links, or embeddings from overriding authority;
 - requires result metadata such as status, evidence refs, authority, freshness,
   and truncation state.
+- maps the existing weighted signals into portable task-fit, authority,
+  evidence-quality, lifecycle, permission-relevance, and conflict-risk
+  dimensions without introducing a second scoring table.
+
+`docs_governance_rules.json` and `tools/docs_governance_helper.py`
+
+- configure role-based documentation placement without project-specific paths
+  in Python;
+- report metadata and inbound-link gaps;
+- emit review-only unapplied create/index patches and never modify files.
+
+`architecture_lint_rules.json` and `tools/architecture_lint.py`
+
+- define adopter-owned module layers, forbidden imports, and forbidden path
+  references;
+- parse Python imports with the standard-library AST;
+- report deterministically without rewriting code or creating runtime hooks.
+
+`context_contract_v1/fixtures/context-retrieval-v1-smoke.json`
+
+- supplies shared backend expectations and claim outcomes for Python and
+  future TypeScript adapters;
+- forbids persistent indexes and keeps high-risk paths outside candidates.
 
 `memory_lifecycle_policy.yaml`
 
@@ -259,6 +291,11 @@ Reference scripts:
 ```text
 tools/context_governance_helper.py -> scripts/ai_context_helper.py
 tools/documentation_harness.py -> scripts/documentation_harness.py
+tools/docs_governance_helper.py -> scripts/docs_governance_helper.py
+tools/architecture_lint.py -> scripts/architecture_lint.py
+secondary_memory_governance/docs_governance_rules.json -> docs/project_map/docs_governance_rules.json
+secondary_memory_governance/architecture_lint_rules.json -> docs/architecture/architecture_lint_rules.json
+context_contract_v1/fixtures/context-retrieval-v1-smoke.json -> docs/project_map/eval_suite/context-retrieval-v1-smoke.json
 ```
 
 The helper scripts are local, read-only reference implementations. They are not
@@ -319,7 +356,10 @@ After installation in a target project:
 ```bash
 python scripts/ai_context_helper.py read-set --profile startup --format json
 python scripts/ai_context_helper.py smoke-check --format json
+python scripts/ai_context_helper.py compare-search --fixture docs/project_map/eval_suite/context-retrieval-v1-smoke.json --format json
 python scripts/documentation_harness.py --format json
+python scripts/docs_governance_helper.py report docs/NEXT_STEPS.md
+python scripts/architecture_lint.py --format json
 ```
 
 Pass means:
@@ -330,6 +370,9 @@ Pass means:
 - high-risk context is excluded by default;
 - source authority and status metadata are visible;
 - documentation harness is report-only;
+- search backends agree on the shared fixture without persistent storage;
+- docs governance proposals remain unapplied;
+- architecture lint reports configured boundary violations without rewriting code;
 - runtime, external-system, data, and Project Map scope are not expanded.
 
 These checks prove workflow reproducibility, not product correctness.
