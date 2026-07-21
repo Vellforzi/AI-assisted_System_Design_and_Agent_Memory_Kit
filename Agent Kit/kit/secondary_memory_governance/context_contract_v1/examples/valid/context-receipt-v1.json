@@ -1,0 +1,24 @@
+{
+  "contract_type": "ContextReceiptV1",
+  "contract_version": "1.0",
+  "receipt_id": "receipt-example-001",
+  "request_id": "req-example-001",
+  "bundle_id": "bundle-example-001",
+  "outcome": "pass",
+  "reason_codes": [],
+  "checks": [{"check_id": "context_selection", "status": "pass", "reason_codes": []}],
+  "counts": {"requested_max_sources": 8, "selected_sources": 2, "omitted_sources": 0},
+  "policy_refs": {
+    "context_index": "docs/project_map/context_index.yaml",
+    "retrieval_policy": "docs/project_map/retrieval_policy.yaml",
+    "retrieval_scoring_policy": "docs/project_map/retrieval_scoring_policy.yaml"
+  },
+  "tools": {"requested": [], "allowed": [], "denied": []},
+  "changed_paths": [],
+  "scope_expansion": {
+    "runtime": false,
+    "external_system": false,
+    "data": false,
+    "project_map_mutated": false
+  }
+}

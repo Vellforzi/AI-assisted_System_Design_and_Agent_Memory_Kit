@@ -1,0 +1,25 @@
+{
+  "contract_type": "ContextReceiptV1",
+  "contract_version": "1.0",
+  "receipt_id": "receipt-invalid-001",
+  "request_id": "req-invalid-001",
+  "bundle_id": "bundle-invalid-001",
+  "outcome": "fail",
+  "reason_codes": ["FORBIDDEN_PATH_SELECTED"],
+  "checks": [{"check_id": "context_selection", "status": "fail", "reason_codes": ["FORBIDDEN_PATH_SELECTED"]}],
+  "counts": {"requested_max_sources": 8, "selected_sources": 1, "omitted_sources": 0},
+  "policy_refs": {
+    "context_index": "docs/project_map/context_index.yaml",
+    "retrieval_policy": "docs/project_map/retrieval_policy.yaml",
+    "retrieval_scoring_policy": "docs/project_map/retrieval_scoring_policy.yaml"
+  },
+  "tools": {"requested": [], "allowed": [], "denied": []},
+  "changed_paths": [],
+  "scope_expansion": {
+    "runtime": false,
+    "external_system": false,
+    "data": false,
+    "project_map_mutated": false
+  },
+  "validator_error": "Validator-specific error prose is forbidden in the portable contract."
+}

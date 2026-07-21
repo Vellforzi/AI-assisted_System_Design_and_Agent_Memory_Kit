@@ -1,0 +1,20 @@
+{
+  "contract_type": "ContextRequestV1",
+  "contract_version": "1.0",
+  "request_id": "req-invalid-001",
+  "task": "Mutate project memory.",
+  "profile": "repair",
+  "mutation_scope": "write",
+  "selection": {
+    "max_sources": 8,
+    "include_triggered": true,
+    "required_paths": [],
+    "forbidden_paths": []
+  },
+  "requested_tools": ["write_file"],
+  "policy_refs": {
+    "context_index": "docs/project_map/context_index.yaml",
+    "retrieval_policy": "docs/project_map/retrieval_policy.yaml",
+    "retrieval_scoring_policy": "docs/project_map/retrieval_scoring_policy.yaml"
+  }
+}

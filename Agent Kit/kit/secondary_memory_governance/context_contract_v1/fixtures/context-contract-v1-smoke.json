@@ -1,0 +1,208 @@
+{
+  "suite_id": "AMK-CONTEXT-CONTRACT-V1-SMOKE",
+  "contract_version": "1.0",
+  "schema_dialect": "https://json-schema.org/draft/2020-12/schema",
+  "schemas": {
+    "ContextRequestV1": "../schemas/context-request-v1.schema.json",
+    "ContextBundleV1": "../schemas/context-bundle-v1.schema.json",
+    "ContextReceiptV1": "../schemas/context-receipt-v1.schema.json"
+  },
+  "canonical_policy_refs": {
+    "context_index": "../../context_index.yaml",
+    "retrieval_policy": "../../retrieval_policy.yaml",
+    "retrieval_scoring_policy": "../../retrieval_scoring_policy.yaml",
+    "legacy_smoke_cases": "../../context_selection_smoke_cases.yaml"
+  },
+  "reason_code_order": [
+    "OVER_RETRIEVAL",
+    "UNDER_RETRIEVAL",
+    "FORBIDDEN_PATH_SELECTED",
+    "STALE_AUTHORITY"
+  ],
+  "cases": [
+    {
+      "case_id": "over-retrieval",
+      "reuses_legacy_smoke_case": "startup_read_set",
+      "request": {
+        "contract_type": "ContextRequestV1",
+        "contract_version": "1.0",
+        "request_id": "req-over-001",
+        "task": "Start a bounded session.",
+        "profile": "startup",
+        "mutation_scope": "read_only",
+        "selection": {"max_sources": 1, "include_triggered": false, "required_paths": [], "forbidden_paths": []},
+        "requested_tools": [],
+        "policy_refs": {
+          "context_index": "docs/project_map/context_index.yaml",
+          "retrieval_policy": "docs/project_map/retrieval_policy.yaml",
+          "retrieval_scoring_policy": "docs/project_map/retrieval_scoring_policy.yaml"
+        }
+      },
+      "bundle": {
+        "contract_type": "ContextBundleV1",
+        "contract_version": "1.0",
+        "bundle_id": "bundle-over-001",
+        "request_id": "req-over-001",
+        "profile": "startup",
+        "policy_refs": {
+          "context_index": "docs/project_map/context_index.yaml",
+          "retrieval_policy": "docs/project_map/retrieval_policy.yaml",
+          "retrieval_scoring_policy": "docs/project_map/retrieval_scoring_policy.yaml"
+        },
+        "sources": [
+          {"path": "AGENTS.md", "priority": "P0", "authority": "machine_first_repository_entrypoint", "status": "active", "layer": "root_entrypoint", "retrieval_mode": "startup_required", "inclusion_reason": "startup_required from context index"},
+          {"path": "docs/NEXT_STEPS.md", "priority": "P0", "authority": "primary_operational_handoff", "status": "active", "layer": "governance", "retrieval_mode": "startup_required", "inclusion_reason": "startup_required from context index"}
+        ],
+        "selection": {"max_sources": 1, "selected_source_count": 2, "omitted_source_count": 0, "missing_required_paths": [], "skipped_trigger_only_context": [], "skipped_high_risk_context": [], "truncated": false},
+        "scope_expansion": {"runtime": false, "external_system": false, "data": false, "project_map_mutated": false}
+      },
+      "receipt": {
+        "contract_type": "ContextReceiptV1",
+        "contract_version": "1.0",
+        "receipt_id": "receipt-over-001",
+        "request_id": "req-over-001",
+        "bundle_id": "bundle-over-001",
+        "outcome": "fail",
+        "reason_codes": ["OVER_RETRIEVAL"],
+        "checks": [{"check_id": "context_selection", "status": "fail", "reason_codes": ["OVER_RETRIEVAL"]}],
+        "counts": {"requested_max_sources": 1, "selected_sources": 2, "omitted_sources": 0},
+        "policy_refs": {"context_index": "docs/project_map/context_index.yaml", "retrieval_policy": "docs/project_map/retrieval_policy.yaml", "retrieval_scoring_policy": "docs/project_map/retrieval_scoring_policy.yaml"},
+        "tools": {"requested": [], "allowed": [], "denied": []},
+        "changed_paths": [],
+        "scope_expansion": {"runtime": false, "external_system": false, "data": false, "project_map_mutated": false}
+      },
+      "expected": {"schema_valid": {"request": true, "bundle": true, "receipt": true}, "policy_valid": false, "reason_codes": ["OVER_RETRIEVAL"]}
+    },
+    {
+      "case_id": "under-retrieval",
+      "reuses_legacy_smoke_case": "docs_only_scope",
+      "request": {
+        "contract_type": "ContextRequestV1",
+        "contract_version": "1.0",
+        "request_id": "req-under-001",
+        "task": "Clarify a context governance rule.",
+        "profile": "docs_governance",
+        "mutation_scope": "read_only",
+        "selection": {"max_sources": 8, "include_triggered": false, "required_paths": ["AGENTS.md", "docs/source_of_truth_hierarchy.md"], "forbidden_paths": []},
+        "requested_tools": [],
+        "policy_refs": {"context_index": "docs/project_map/context_index.yaml", "retrieval_policy": "docs/project_map/retrieval_policy.yaml", "retrieval_scoring_policy": "docs/project_map/retrieval_scoring_policy.yaml"}
+      },
+      "bundle": {
+        "contract_type": "ContextBundleV1",
+        "contract_version": "1.0",
+        "bundle_id": "bundle-under-001",
+        "request_id": "req-under-001",
+        "profile": "docs_governance",
+        "policy_refs": {"context_index": "docs/project_map/context_index.yaml", "retrieval_policy": "docs/project_map/retrieval_policy.yaml", "retrieval_scoring_policy": "docs/project_map/retrieval_scoring_policy.yaml"},
+        "sources": [
+          {"path": "AGENTS.md", "priority": "P0", "authority": "machine_first_repository_entrypoint", "status": "active", "layer": "root_entrypoint", "retrieval_mode": "startup_required", "inclusion_reason": "startup_required from context index"}
+        ],
+        "selection": {"max_sources": 8, "selected_source_count": 1, "omitted_source_count": 0, "missing_required_paths": ["docs/source_of_truth_hierarchy.md"], "skipped_trigger_only_context": [], "skipped_high_risk_context": [], "truncated": false},
+        "scope_expansion": {"runtime": false, "external_system": false, "data": false, "project_map_mutated": false}
+      },
+      "receipt": {
+        "contract_type": "ContextReceiptV1",
+        "contract_version": "1.0",
+        "receipt_id": "receipt-under-001",
+        "request_id": "req-under-001",
+        "bundle_id": "bundle-under-001",
+        "outcome": "fail",
+        "reason_codes": ["UNDER_RETRIEVAL"],
+        "checks": [{"check_id": "context_selection", "status": "fail", "reason_codes": ["UNDER_RETRIEVAL"]}],
+        "counts": {"requested_max_sources": 8, "selected_sources": 1, "omitted_sources": 0},
+        "policy_refs": {"context_index": "docs/project_map/context_index.yaml", "retrieval_policy": "docs/project_map/retrieval_policy.yaml", "retrieval_scoring_policy": "docs/project_map/retrieval_scoring_policy.yaml"},
+        "tools": {"requested": [], "allowed": [], "denied": []},
+        "changed_paths": [],
+        "scope_expansion": {"runtime": false, "external_system": false, "data": false, "project_map_mutated": false}
+      },
+      "expected": {"schema_valid": {"request": true, "bundle": true, "receipt": true}, "policy_valid": false, "reason_codes": ["UNDER_RETRIEVAL"]}
+    },
+    {
+      "case_id": "forbidden-path-selected",
+      "reuses_legacy_smoke_case": "review_scope",
+      "request": {
+        "contract_type": "ContextRequestV1",
+        "contract_version": "1.0",
+        "request_id": "req-forbidden-001",
+        "task": "Review local changes without private data.",
+        "profile": "review",
+        "mutation_scope": "read_only",
+        "selection": {"max_sources": 8, "include_triggered": false, "required_paths": [], "forbidden_paths": ["data/**"]},
+        "requested_tools": [],
+        "policy_refs": {"context_index": "docs/project_map/context_index.yaml", "retrieval_policy": "docs/project_map/retrieval_policy.yaml", "retrieval_scoring_policy": "docs/project_map/retrieval_scoring_policy.yaml"}
+      },
+      "bundle": {
+        "contract_type": "ContextBundleV1",
+        "contract_version": "1.0",
+        "bundle_id": "bundle-forbidden-001",
+        "request_id": "req-forbidden-001",
+        "profile": "review",
+        "policy_refs": {"context_index": "docs/project_map/context_index.yaml", "retrieval_policy": "docs/project_map/retrieval_policy.yaml", "retrieval_scoring_policy": "docs/project_map/retrieval_scoring_policy.yaml"},
+        "sources": [
+          {"path": "data/example.db", "priority": "unindexed", "authority": "raw_local_data", "status": "current", "layer": "data", "retrieval_mode": "never_default", "inclusion_reason": "incorrectly selected forbidden path"}
+        ],
+        "selection": {"max_sources": 8, "selected_source_count": 1, "omitted_source_count": 0, "missing_required_paths": [], "skipped_trigger_only_context": [], "skipped_high_risk_context": [], "truncated": false},
+        "scope_expansion": {"runtime": false, "external_system": false, "data": false, "project_map_mutated": false}
+      },
+      "receipt": {
+        "contract_type": "ContextReceiptV1",
+        "contract_version": "1.0",
+        "receipt_id": "receipt-forbidden-001",
+        "request_id": "req-forbidden-001",
+        "bundle_id": "bundle-forbidden-001",
+        "outcome": "fail",
+        "reason_codes": ["FORBIDDEN_PATH_SELECTED"],
+        "checks": [{"check_id": "context_selection", "status": "fail", "reason_codes": ["FORBIDDEN_PATH_SELECTED"]}],
+        "counts": {"requested_max_sources": 8, "selected_sources": 1, "omitted_sources": 0},
+        "policy_refs": {"context_index": "docs/project_map/context_index.yaml", "retrieval_policy": "docs/project_map/retrieval_policy.yaml", "retrieval_scoring_policy": "docs/project_map/retrieval_scoring_policy.yaml"},
+        "tools": {"requested": [], "allowed": [], "denied": []},
+        "changed_paths": [],
+        "scope_expansion": {"runtime": false, "external_system": false, "data": false, "project_map_mutated": false}
+      },
+      "expected": {"schema_valid": {"request": true, "bundle": true, "receipt": true}, "policy_valid": false, "reason_codes": ["FORBIDDEN_PATH_SELECTED"]}
+    },
+    {
+      "case_id": "stale-authority",
+      "request": {
+        "contract_type": "ContextRequestV1",
+        "contract_version": "1.0",
+        "request_id": "req-stale-001",
+        "task": "Answer using current project facts.",
+        "profile": "answer",
+        "mutation_scope": "read_only",
+        "selection": {"max_sources": 8, "include_triggered": false, "required_paths": [], "forbidden_paths": []},
+        "requested_tools": [],
+        "policy_refs": {"context_index": "docs/project_map/context_index.yaml", "retrieval_policy": "docs/project_map/retrieval_policy.yaml", "retrieval_scoring_policy": "docs/project_map/retrieval_scoring_policy.yaml"}
+      },
+      "bundle": {
+        "contract_type": "ContextBundleV1",
+        "contract_version": "1.0",
+        "bundle_id": "bundle-stale-001",
+        "request_id": "req-stale-001",
+        "profile": "answer",
+        "policy_refs": {"context_index": "docs/project_map/context_index.yaml", "retrieval_policy": "docs/project_map/retrieval_policy.yaml", "retrieval_scoring_policy": "docs/project_map/retrieval_scoring_policy.yaml"},
+        "sources": [
+          {"path": "docs/project_map/current_map.md", "priority": "P1", "authority": "secondary_owner_memory", "status": "stale", "layer": "project_map", "retrieval_mode": "secondary_memory_triggered", "inclusion_reason": "incorrectly promoted stale authority", "freshness": {"temporal_kind": "stale"}}
+        ],
+        "selection": {"max_sources": 8, "selected_source_count": 1, "omitted_source_count": 0, "missing_required_paths": [], "skipped_trigger_only_context": [], "skipped_high_risk_context": [], "truncated": false},
+        "scope_expansion": {"runtime": false, "external_system": false, "data": false, "project_map_mutated": false}
+      },
+      "receipt": {
+        "contract_type": "ContextReceiptV1",
+        "contract_version": "1.0",
+        "receipt_id": "receipt-stale-001",
+        "request_id": "req-stale-001",
+        "bundle_id": "bundle-stale-001",
+        "outcome": "fail",
+        "reason_codes": ["STALE_AUTHORITY"],
+        "checks": [{"check_id": "authority_freshness", "status": "fail", "reason_codes": ["STALE_AUTHORITY"]}],
+        "counts": {"requested_max_sources": 8, "selected_sources": 1, "omitted_sources": 0},
+        "policy_refs": {"context_index": "docs/project_map/context_index.yaml", "retrieval_policy": "docs/project_map/retrieval_policy.yaml", "retrieval_scoring_policy": "docs/project_map/retrieval_scoring_policy.yaml"},
+        "tools": {"requested": [], "allowed": [], "denied": []},
+        "changed_paths": [],
+        "scope_expansion": {"runtime": false, "external_system": false, "data": false, "project_map_mutated": false}
+      },
+      "expected": {"schema_valid": {"request": true, "bundle": true, "receipt": true}, "policy_valid": false, "reason_codes": ["STALE_AUTHORITY"]}
+    }
+  ]
+}

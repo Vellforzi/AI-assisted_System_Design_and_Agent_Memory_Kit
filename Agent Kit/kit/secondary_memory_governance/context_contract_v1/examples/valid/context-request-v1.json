@@ -1,0 +1,20 @@
+{
+  "contract_type": "ContextRequestV1",
+  "contract_version": "1.0",
+  "request_id": "req-example-001",
+  "task": "Review current context-governance documentation.",
+  "profile": "review",
+  "mutation_scope": "read_only",
+  "selection": {
+    "max_sources": 8,
+    "include_triggered": false,
+    "required_paths": ["AGENTS.md", "docs/source_of_truth_hierarchy.md"],
+    "forbidden_paths": ["data/**", "output/**"]
+  },
+  "requested_tools": [],
+  "policy_refs": {
+    "context_index": "docs/project_map/context_index.yaml",
+    "retrieval_policy": "docs/project_map/retrieval_policy.yaml",
+    "retrieval_scoring_policy": "docs/project_map/retrieval_scoring_policy.yaml"
+  }
+}

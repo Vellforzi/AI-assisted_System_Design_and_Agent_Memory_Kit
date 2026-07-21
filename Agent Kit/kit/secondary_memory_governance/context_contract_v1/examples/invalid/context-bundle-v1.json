@@ -1,0 +1,27 @@
+{
+  "contract_type": "ContextBundleV1",
+  "contract_version": "1.0",
+  "bundle_id": "bundle-invalid-001",
+  "profile": "review",
+  "policy_refs": {
+    "context_index": "docs/project_map/context_index.yaml",
+    "retrieval_policy": "docs/project_map/retrieval_policy.yaml",
+    "retrieval_scoring_policy": "docs/project_map/retrieval_scoring_policy.yaml"
+  },
+  "sources": [],
+  "selection": {
+    "max_sources": 8,
+    "selected_source_count": 0,
+    "omitted_source_count": 0,
+    "missing_required_paths": [],
+    "skipped_trigger_only_context": [],
+    "skipped_high_risk_context": [],
+    "truncated": false
+  },
+  "scope_expansion": {
+    "runtime": false,
+    "external_system": false,
+    "data": false,
+    "project_map_mutated": false
+  }
+}

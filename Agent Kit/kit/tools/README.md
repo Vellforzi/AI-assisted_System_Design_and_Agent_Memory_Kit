@@ -57,6 +57,21 @@ python3 "Agent Kit/kit/tools/context_governance_helper.py" \
 
 The helper is read-only and uses only the Python standard library.
 
+## `context_contract_v1_oracle.py`
+
+Validates the language-independent Context Contract V1 schemas, examples, and
+canonical smoke corpus. It reuses `context_governance_helper.py` to parse the
+existing context-selection smoke ids and reads the existing retrieval policy
+for lifecycle exclusions. It uses only the Python standard library and does
+not start a service or persist context.
+
+```bash
+python3 "Agent Kit/kit/tools/context_contract_v1_oracle.py" --format json
+```
+
+See `secondary_memory_governance/context_contract_v1/README.md` for Python and
+TypeScript adapter guidance.
+
 ## `documentation_harness.py`
 
 Reference report-only harness for the `secondary_memory_governance/`

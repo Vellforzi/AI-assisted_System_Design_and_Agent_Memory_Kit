@@ -43,6 +43,10 @@ Package purpose: portable starter guide and memory operating layer for using AI 
 - `Agent Kit/kit/secondary_memory_governance/project_map_readme_template.md` - secondary Project Map entrypoint template.
 - `Agent Kit/kit/secondary_memory_governance/context_index.yaml` - machine-readable context index template for task-profile read sets.
 - `Agent Kit/kit/secondary_memory_governance/context_selection_smoke_cases.yaml` - copyable smoke-case suite for context-selection checks.
+- `Agent Kit/kit/secondary_memory_governance/context_contract_v1/README.md` - Context Contract V1 ownership, portability, and Python/TypeScript adapter guide.
+- `Agent Kit/kit/secondary_memory_governance/context_contract_v1/schemas/` - standalone Draft 2020-12 schemas for `ContextRequestV1`, `ContextBundleV1`, and `ContextReceiptV1`.
+- `Agent Kit/kit/secondary_memory_governance/context_contract_v1/examples/` - valid and invalid payload examples for all three V1 contracts.
+- `Agent Kit/kit/secondary_memory_governance/context_contract_v1/fixtures/context-contract-v1-smoke.json` - canonical cross-language fixture oracle for over/under retrieval, forbidden paths, and stale authority.
 - `Agent Kit/kit/secondary_memory_governance/codex_prompt_rules_template.md` - bounded Codex prompt contract template with receipt and handoff update requirements.
 - `Agent Kit/kit/secondary_memory_governance/ai_development_rules_template.md` - AI workflow rule template for scoped reads, mutation gates, conflict handling, and next-step promotion.
 - `Agent Kit/kit/secondary_memory_governance/research_readme_template.md` - research navigation template that keeps research as evidence/context until promotion.
@@ -153,6 +157,7 @@ Package purpose: portable starter guide and memory operating layer for using AI 
 - `Agent Kit/kit/tools/README.md` — helper script documentation.
 - `Agent Kit/kit/tools/run_eval_checklist.py` — creates a local eval run folder and Markdown checklist from YAML cases.
 - `Agent Kit/kit/tools/context_governance_helper.py` - read-only reference helper for context-index read sets, receipts, API-agent context bundles, and context smoke checks.
+- `Agent Kit/kit/tools/context_contract_v1_oracle.py` - standard-library oracle for V1 schemas, examples, policy fixtures, and legacy smoke-id reuse.
 - `Agent Kit/kit/tools/documentation_harness.py` - report-only documentation harness for metadata, reachability, and lower-authority reference checks.
 
 ChatGPT Project source generation lives under

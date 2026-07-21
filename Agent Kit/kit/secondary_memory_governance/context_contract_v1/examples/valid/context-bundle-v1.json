@@ -1,0 +1,49 @@
+{
+  "contract_type": "ContextBundleV1",
+  "contract_version": "1.0",
+  "bundle_id": "bundle-example-001",
+  "request_id": "req-example-001",
+  "profile": "review",
+  "policy_refs": {
+    "context_index": "docs/project_map/context_index.yaml",
+    "retrieval_policy": "docs/project_map/retrieval_policy.yaml",
+    "retrieval_scoring_policy": "docs/project_map/retrieval_scoring_policy.yaml"
+  },
+  "sources": [
+    {
+      "path": "AGENTS.md",
+      "priority": "P0",
+      "authority": "machine_first_repository_entrypoint",
+      "status": "active",
+      "layer": "root_entrypoint",
+      "retrieval_mode": "startup_required",
+      "inclusion_reason": "startup_required from context index",
+      "evidence_refs": ["docs/project_map/context_index.yaml"]
+    },
+    {
+      "path": "docs/source_of_truth_hierarchy.md",
+      "priority": "P0",
+      "authority": "source_authority_policy",
+      "status": "active",
+      "layer": "governance",
+      "retrieval_mode": "startup_required",
+      "inclusion_reason": "startup_required from context index",
+      "evidence_refs": ["docs/project_map/context_index.yaml"]
+    }
+  ],
+  "selection": {
+    "max_sources": 8,
+    "selected_source_count": 2,
+    "omitted_source_count": 0,
+    "missing_required_paths": [],
+    "skipped_trigger_only_context": [],
+    "skipped_high_risk_context": [{"path_glob": "data/**", "reason": "excluded by default"}],
+    "truncated": false
+  },
+  "scope_expansion": {
+    "runtime": false,
+    "external_system": false,
+    "data": false,
+    "project_map_mutated": false
+  }
+}

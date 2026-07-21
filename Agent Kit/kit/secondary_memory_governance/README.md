@@ -147,6 +147,15 @@ background capture
 - fails when required indexed files are missing from the installed project;
 - should be extended with domain-specific forbidden paths and boundaries.
 
+`context_contract_v1/`
+
+- versioned Draft 2020-12 schemas for request, bundle, and receipt payloads;
+- valid and invalid examples for every contract;
+- one language-neutral fixture corpus covering over-retrieval,
+  under-retrieval, forbidden paths, and stale authority;
+- concise Python and TypeScript adapter guidance;
+- contracts and fixtures only, with no runtime service or hidden memory.
+
 `project_map_readme_template.md`
 
 - template for `docs/project_map/README.md`;
