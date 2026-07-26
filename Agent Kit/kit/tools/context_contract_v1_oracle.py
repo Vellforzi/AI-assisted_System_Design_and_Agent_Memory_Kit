@@ -23,9 +23,13 @@ from context_governance_helper import load_smoke_cases
 KIT_DIR = Path(__file__).resolve().parent.parent
 CONTRACT_DIR = KIT_DIR / "secondary_memory_governance" / "context_contract_v1"
 MANIFEST_PATH = CONTRACT_DIR / "fixtures" / "context-contract-v1-smoke.json"
-RETRIEVAL_POLICY_PATH = KIT_DIR / "secondary_memory_governance" / "retrieval_policy.yaml"
-CONTEXT_INDEX_PATH = KIT_DIR / "secondary_memory_governance" / "context_index.yaml"
-LEGACY_SMOKE_PATH = KIT_DIR / "secondary_memory_governance" / "context_selection_smoke_cases.yaml"
+REQUIRED_CANONICAL_POLICY_REFS = (
+    "context_index",
+    "retrieval_policy",
+    "retrieval_scoring_policy",
+    "legacy_smoke_cases",
+    "context_retrieval_fixture",
+)
 
 
 def _load_json(path: Path) -> Any:
@@ -110,10 +114,10 @@ def _parse_inline_list(value: str) -> set[str]:
     return {item.strip().strip('"').strip("'") for item in stripped.split(",") if item.strip()}
 
 
-def _hard_excluded_statuses(profile: str) -> set[str]:
+def _hard_excluded_statuses(profile: str, retrieval_policy_path: Path) -> set[str]:
     in_profiles = False
     current_profile: str | None = None
-    for raw_line in RETRIEVAL_POLICY_PATH.read_text(encoding="utf-8").splitlines():
+    for raw_line in retrieval_policy_path.read_text(encoding="utf-8").splitlines():
         if raw_line == "profiles:":
             in_profiles = True
             continue
@@ -149,10 +153,10 @@ def _declared_mapping_keys(path: Path, section: str) -> set[str]:
     return keys
 
 
-def _known_policy_profiles() -> set[str]:
+def _known_policy_profiles(context_index_path: Path, retrieval_policy_path: Path) -> set[str]:
     return {
-        *_declared_mapping_keys(CONTEXT_INDEX_PATH, "task_profiles"),
-        *_declared_mapping_keys(RETRIEVAL_POLICY_PATH, "profiles"),
+        *_declared_mapping_keys(context_index_path, "task_profiles"),
+        *_declared_mapping_keys(retrieval_policy_path, "profiles"),
     }
 
 
@@ -161,13 +165,20 @@ def _matches_forbidden(path: str, patterns: Sequence[str]) -> bool:
     return any(normalized == pattern or fnmatch.fnmatch(normalized, pattern) for pattern in patterns)
 
 
-def evaluate_policy(request: dict[str, Any], bundle: dict[str, Any], reason_order: Sequence[str]) -> list[str]:
+def evaluate_policy(
+    request: dict[str, Any],
+    bundle: dict[str, Any],
+    reason_order: Sequence[str],
+    *,
+    context_index_path: Path,
+    retrieval_policy_path: Path,
+) -> list[str]:
     reasons: set[str] = set()
     sources = bundle["sources"]
     source_paths = {source["path"] for source in sources}
     selection = request["selection"]
 
-    if request["profile"] not in _known_policy_profiles():
+    if request["profile"] not in _known_policy_profiles(context_index_path, retrieval_policy_path):
         reasons.add("UNKNOWN_PROFILE")
 
     if len(sources) > selection["max_sources"]:
@@ -177,24 +188,73 @@ def evaluate_policy(request: dict[str, Any], bundle: dict[str, Any], reason_orde
     if any(_matches_forbidden(path, selection["forbidden_paths"]) for path in source_paths):
         reasons.add("FORBIDDEN_PATH_SELECTED")
 
-    hard_excluded = _hard_excluded_statuses(request["profile"])
+    hard_excluded = _hard_excluded_statuses(request["profile"], retrieval_policy_path)
     if any(source["status"] in hard_excluded for source in sources):
         reasons.add("STALE_AUTHORITY")
     return [reason for reason in reason_order if reason in reasons]
 
 
-def _legacy_smoke_ids() -> set[str]:
+def _legacy_smoke_ids(legacy_smoke_path: Path) -> set[str]:
     with tempfile.TemporaryDirectory(prefix="context-contract-v1-") as temporary:
         root = Path(temporary)
         destination = root / "docs" / "project_map" / "eval_suite" / "context_selection_smoke_cases.yaml"
         destination.parent.mkdir(parents=True)
-        shutil.copyfile(LEGACY_SMOKE_PATH, destination)
+        shutil.copyfile(legacy_smoke_path, destination)
         return {case.id for case in load_smoke_cases(root)}
 
 
 def _schema_paths(manifest: dict[str, Any]) -> dict[str, Path]:
     base = MANIFEST_PATH.parent
     return {name: (base / relative).resolve() for name, relative in manifest["schemas"].items()}
+
+
+def _canonical_policy_paths(manifest: dict[str, Any]) -> dict[str, Path]:
+    """Resolve every manifest-owned reference relative to the manifest itself."""
+
+    base = MANIFEST_PATH.parent
+    return {
+        name: (base / relative).resolve()
+        for name, relative in manifest["canonical_policy_refs"].items()
+    }
+
+
+def _shared_retrieval_ids(retrieval_fixture_path: Path) -> set[str]:
+    fixture = _load_json(retrieval_fixture_path)
+    return {
+        case["id"]
+        for section in ("scenarios", "claim_cases")
+        for case in fixture.get(section, [])
+    }
+
+
+def _parity_mismatches(case: dict[str, Any]) -> list[str]:
+    request = case["request"]
+    bundle = case["bundle"]
+    receipt = case["receipt"]
+    request_selection = request["selection"]
+    bundle_selection = bundle["selection"]
+    receipt_counts = receipt["counts"]
+    mismatches: list[str] = []
+
+    if request["policy_refs"] != bundle["policy_refs"]:
+        mismatches.append("request_bundle_policy_refs")
+    if request["policy_refs"] != receipt["policy_refs"]:
+        mismatches.append("request_receipt_policy_refs")
+    if request["profile"] != bundle["profile"]:
+        mismatches.append("request_bundle_profile")
+    if len({
+        request_selection["max_sources"],
+        bundle_selection["max_sources"],
+        receipt_counts["requested_max_sources"],
+    }) != 1:
+        mismatches.append("max_sources_mismatch")
+    if bundle_selection["selected_source_count"] != receipt_counts["selected_sources"]:
+        mismatches.append("selected_source_count_mismatch")
+    if len(bundle["sources"]) != bundle_selection["selected_source_count"] or len(bundle["sources"]) != receipt_counts["selected_sources"]:
+        mismatches.append("selected_source_length_mismatch")
+    if bundle_selection["omitted_source_count"] != receipt_counts["omitted_sources"]:
+        mismatches.append("omitted_source_count_mismatch")
+    return mismatches
 
 
 def _validate_examples(schemas: dict[str, dict[str, Any]]) -> tuple[list[dict[str, Any]], list[str]]:
@@ -229,6 +289,13 @@ def run_oracle() -> dict[str, Any]:
     schema_paths = _schema_paths(manifest)
     schemas = {name: _load_json(path) for name, path in schema_paths.items()}
     failures: list[str] = []
+    canonical_policy_paths = _canonical_policy_paths(manifest)
+    manifest_mismatches = [
+        f"CANONICAL_POLICY_REF_MISSING:{name}"
+        for name in dict.fromkeys((*REQUIRED_CANONICAL_POLICY_REFS, *canonical_policy_paths))
+        if name not in canonical_policy_paths or not canonical_policy_paths[name].is_file()
+    ]
+    failures.extend(manifest_mismatches)
 
     for name, schema in schemas.items():
         if schema.get("$schema") != manifest["schema_dialect"]:
@@ -238,7 +305,18 @@ def run_oracle() -> dict[str, Any]:
         if "$ref" in json.dumps(schema):
             failures.append(f"{name} must remain standalone in V1")
 
-    legacy_ids = _legacy_smoke_ids()
+    legacy_path = canonical_policy_paths.get("legacy_smoke_cases")
+    retrieval_fixture_path = canonical_policy_paths.get("context_retrieval_fixture")
+    legacy_ids = _legacy_smoke_ids(legacy_path) if legacy_path and legacy_path.is_file() else set()
+    retrieval_ids = (
+        _shared_retrieval_ids(retrieval_fixture_path)
+        if retrieval_fixture_path and retrieval_fixture_path.is_file()
+        else set()
+    )
+    policy_paths_available = all(
+        canonical_policy_paths.get(name, Path()).is_file()
+        for name in ("context_index", "retrieval_policy")
+    )
     reason_order = manifest["reason_code_order"]
     case_results: list[dict[str, Any]] = []
     for case in manifest["cases"]:
@@ -248,7 +326,17 @@ def run_oracle() -> dict[str, Any]:
             "receipt": validate_schema_subset(schemas["ContextReceiptV1"], case["receipt"]),
         }
         schema_valid = {name: not errors for name, errors in schema_errors.items()}
-        policy_reasons = evaluate_policy(case["request"], case["bundle"], reason_order)
+        policy_reasons = (
+            evaluate_policy(
+                case["request"],
+                case["bundle"],
+                reason_order,
+                context_index_path=canonical_policy_paths["context_index"],
+                retrieval_policy_path=canonical_policy_paths["retrieval_policy"],
+            )
+            if policy_paths_available
+            else []
+        )
         expected = case["expected"]
         mismatches: list[str] = []
         if schema_valid != expected["schema_valid"]:
@@ -265,12 +353,16 @@ def run_oracle() -> dict[str, Any]:
         legacy_id = case.get("reuses_legacy_smoke_case")
         if legacy_id and legacy_id not in legacy_ids:
             mismatches.append("legacy_smoke_case_missing")
+        retrieval_id = case.get("reuses_context_retrieval_case")
+        if retrieval_id and retrieval_id not in retrieval_ids:
+            mismatches.append("context_retrieval_case_missing")
         if case["bundle"]["request_id"] != case["request"]["request_id"]:
             mismatches.append("request_bundle_link")
         if case["receipt"]["request_id"] != case["request"]["request_id"]:
             mismatches.append("request_receipt_link")
         if case["receipt"]["bundle_id"] != case["bundle"]["bundle_id"]:
             mismatches.append("bundle_receipt_link")
+        mismatches.extend(_parity_mismatches(case))
         if mismatches:
             failures.append(f"{case['case_id']}: {', '.join(mismatches)}")
         case_results.append({
@@ -295,6 +387,8 @@ def run_oracle() -> dict[str, Any]:
         "cases": case_results,
         "examples": example_results,
         "legacy_smoke_case_ids": sorted(legacy_ids),
+        "context_retrieval_case_ids": sorted(retrieval_ids),
+        "manifest_mismatches": manifest_mismatches,
         "failures": failures,
         "runtime_service_started": False,
         "persistent_memory_created": False,

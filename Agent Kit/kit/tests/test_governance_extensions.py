@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+import subprocess
 import sys
 
 import pytest
@@ -214,6 +215,86 @@ def test_v1_oracle_rejects_unknown_profile_with_stable_reason_code() -> None:
     assert unknown["reason_codes"] == ["UNKNOWN_PROFILE"]
 
 
+def test_v1_oracle_resolves_every_canonical_reference_from_its_manifest_directory(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    manifest = context_contract_v1_oracle._load_json(context_contract_v1_oracle.MANIFEST_PATH)
+    assert "context_retrieval_fixture" in manifest["canonical_policy_refs"]
+    assert all(
+        (context_contract_v1_oracle.MANIFEST_PATH.parent / relative).resolve().is_file()
+        for relative in manifest["canonical_policy_refs"].values()
+    )
+    assert context_contract_v1_oracle._schema_paths(manifest) == {
+        name: (context_contract_v1_oracle.MANIFEST_PATH.parent / relative).resolve()
+        for name, relative in manifest["schemas"].items()
+    }
+
+    manifest["canonical_policy_refs"]["context_index"] = "missing-context-index.yaml"
+    original_load = context_contract_v1_oracle._load_json
+    monkeypatch.setattr(
+        context_contract_v1_oracle,
+        "_load_json",
+        lambda path: manifest if path == context_contract_v1_oracle.MANIFEST_PATH else original_load(path),
+    )
+    report = context_contract_v1_oracle.run_oracle()
+    assert report["manifest_mismatches"] == ["CANONICAL_POLICY_REF_MISSING:context_index"]
+    assert report["status"] == "failed"
+
+
+def test_v1_oracle_rejects_missing_shared_retrieval_case_id_with_stable_code(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    manifest = context_contract_v1_oracle._load_json(context_contract_v1_oracle.MANIFEST_PATH)
+    manifest["cases"][0]["reuses_context_retrieval_case"] = "missing-retrieval-case"
+    original_load = context_contract_v1_oracle._load_json
+    monkeypatch.setattr(
+        context_contract_v1_oracle,
+        "_load_json",
+        lambda path: manifest if path == context_contract_v1_oracle.MANIFEST_PATH else original_load(path),
+    )
+
+    report = context_contract_v1_oracle.run_oracle()
+    case = report["cases"][0]
+    assert case["mismatches"] == ["context_retrieval_case_missing"]
+    assert report["status"] == "failed"
+
+
+def test_v1_oracle_rejects_cross_payload_policy_profile_and_count_drift(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    manifest = context_contract_v1_oracle._load_json(context_contract_v1_oracle.MANIFEST_PATH)
+    case = manifest["cases"][0]
+    case["bundle"]["profile"] = "review"
+    case["bundle"]["policy_refs"]["context_index"] = "different-policy.yaml"
+    case["receipt"]["policy_refs"]["retrieval_policy"] = "other-policy.yaml"
+    case["bundle"]["selection"]["max_sources"] = 2
+    case["bundle"]["selection"]["selected_source_count"] = 1
+    case["bundle"]["selection"]["omitted_source_count"] = 3
+    case["receipt"]["counts"] = {
+        "requested_max_sources": 3,
+        "selected_sources": 4,
+        "omitted_sources": 5,
+    }
+    original_load = context_contract_v1_oracle._load_json
+    monkeypatch.setattr(
+        context_contract_v1_oracle,
+        "_load_json",
+        lambda path: manifest if path == context_contract_v1_oracle.MANIFEST_PATH else original_load(path),
+    )
+
+    report = context_contract_v1_oracle.run_oracle()
+    mismatches = report["cases"][0]["mismatches"]
+    assert set(mismatches) >= {
+        "request_bundle_policy_refs",
+        "request_receipt_policy_refs",
+        "request_bundle_profile",
+        "max_sources_mismatch",
+        "selected_source_count_mismatch",
+        "selected_source_length_mismatch",
+        "omitted_source_count_mismatch",
+    }
+
+
 def test_portable_tools_contain_no_stock_specific_rules_or_persistent_service() -> None:
     sources = "\n".join(
         (TOOLS / name).read_text(encoding="utf-8")
@@ -228,3 +309,43 @@ def test_portable_tools_contain_no_stock_specific_rules_or_persistent_service() 
         assert forbidden not in sources
     assert "sqlite3.connect(\":memory:\")" in sources
     assert "http.server" not in sources
+
+
+@pytest.mark.parametrize("profile", ["agent_workflow_governance", "review"])
+def test_repository_context_helper_entrypoint_returns_complete_existing_read_set(
+    profile: str,
+) -> None:
+    repository_root = Path(__file__).resolve().parents[3]
+    helper = repository_root / "scripts/ai_context_helper.py"
+    completed = subprocess.run(
+        [
+            sys.executable,
+            str(helper),
+            "--root",
+            str(repository_root),
+            "api-context",
+            "--request-id",
+            f"repository-helper-{profile}",
+            "--task",
+            "Validate repository context integration.",
+            "--profile",
+            profile,
+            "--max-sources",
+            "24",
+            "--format",
+            "json",
+        ],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    payload = json.loads(completed.stdout)
+
+    assert payload["profile"] == profile
+    assert payload["fallback_used"] is False
+    assert payload["missing_read_set_paths"] == []
+    assert payload["read_set"]
+    assert all(
+        (repository_root / source["path"]).is_file()
+        for source in payload["read_set"]
+    )

@@ -1,0 +1,73 @@
+# Machine-readable context routing for this source-distribution repository.
+
+schema_version: "1.0"
+project_id: "ai-assisted-system-design-and-agent-memory-kit"
+status: "active"
+
+excluded_by_default:
+  path_globs:
+    - ".git/**"
+    - ".pytest_cache/**"
+    - "**/__pycache__/**"
+    - "**/*.pyc"
+
+entries:
+  - path: "README.md"
+    priority: "P0"
+    authority: "repository_entrypoint"
+    status: "active"
+    layer: "root_entrypoint"
+    task_profiles: [startup, agent_workflow_governance, review]
+    default_retrieval_mode: "startup_required"
+    canonical_purpose: "Repository purpose, package layout, and adoption entry point."
+    mutation_boundary: "Documentation only; grants no runtime or external-system authority."
+
+  - path: "START_HERE.md"
+    priority: "P0"
+    authority: "repository_navigation"
+    status: "active"
+    layer: "root_entrypoint"
+    task_profiles: [startup, agent_workflow_governance, review]
+    default_retrieval_mode: "startup_required"
+    canonical_purpose: "Fast navigation through the bundled design and agent-memory materials."
+    mutation_boundary: "Navigation only; grants no mutation authority."
+
+  - path: "Agent Kit/kit/secondary_memory_governance/context_contract_v1/README.md"
+    priority: "P1"
+    authority: "context_contract_documentation"
+    status: "active"
+    layer: "agent_kit"
+    task_profiles: [agent_workflow_governance, review]
+    default_retrieval_mode: "task_triggered"
+    canonical_purpose: "Defines Context Contract v1 portability and compatibility behavior."
+    mutation_boundary: "Contract documentation only."
+
+  - path: "docs/project_map/context_index.yaml"
+    priority: "P1"
+    authority: "navigation_metadata"
+    status: "active"
+    layer: "project_map"
+    task_profiles: [agent_workflow_governance, review]
+    default_retrieval_mode: "task_triggered"
+    canonical_purpose: "Routes bounded repository context for Orchestrator tasks."
+    mutation_boundary: "Navigation metadata only."
+
+  - path: "docs/project_map/retrieval_policy.yaml"
+    priority: "P1"
+    authority: "retrieval_policy"
+    status: "active"
+    layer: "project_map"
+    task_profiles: [agent_workflow_governance, review]
+    default_retrieval_mode: "task_triggered"
+    canonical_purpose: "Defines fail-closed bounded retrieval rules."
+    mutation_boundary: "Retrieval policy only."
+
+  - path: "docs/project_map/retrieval_scoring_policy.yaml"
+    priority: "P1"
+    authority: "retrieval_scoring_policy"
+    status: "active"
+    layer: "project_map"
+    task_profiles: [agent_workflow_governance, review]
+    default_retrieval_mode: "task_triggered"
+    canonical_purpose: "Defines deterministic ordering after hard retrieval gates."
+    mutation_boundary: "Scoring metadata only."

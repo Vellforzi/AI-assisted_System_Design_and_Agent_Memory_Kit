@@ -1,0 +1,20 @@
+schema_version: "1.0"
+project_id: "ai-assisted-system-design-and-agent-memory-kit"
+
+core_rule: "Retrieve only the smallest indexed read set for the explicit task profile."
+hard_gates_before_selection:
+  - explicit_task_profile
+  - repository_relative_path
+  - existing_file
+  - high_risk_path_exclusion
+
+fallback:
+  allowed: true
+  entrypoints: [README.md, START_HERE.md]
+  observable: true
+
+scope:
+  mutation_allowed: false
+  runtime_expansion_allowed: false
+  external_system_expansion_allowed: false
+  data_expansion_allowed: false

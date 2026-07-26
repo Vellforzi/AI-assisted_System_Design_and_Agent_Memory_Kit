@@ -35,9 +35,12 @@ docs/project_map/retrieval_policy.yaml
 docs/project_map/retrieval_scoring_policy.yaml
 ```
 
-The existing `context_governance_helper.py` remains the Python reference for
-deterministic read-set construction and legacy context-selection smoke cases.
-Operational sources remain above Project Map navigation metadata on conflict.
+The fixture's `canonical_policy_refs` are package-owned references: the oracle
+resolves every one relative to `fixtures/context-contract-v1-smoke.json`, and
+each required reference must name an existing file. They deliberately point to the policy files,
+legacy selection corpus, and shared retrieval corpus used by this package;
+they are not adapter runtime paths. Operational sources remain above Project
+Map navigation metadata on conflict.
 
 ## Portable fixture oracle
 
@@ -52,8 +55,10 @@ policy-valid boolean, and ordered reason codes. Current policy codes are:
 - `STALE_AUTHORITY`
 
 Adapters compare these codes, not validator-specific messages. The corpus also
-links applicable cases to existing context-selection smoke ids; the Python
-oracle verifies those ids through the existing helper parser.
+links applicable cases to existing legacy context-selection ids and shared
+`context-retrieval-v1-smoke.json` scenario or claim-case ids. Missing links
+fail with the stable mismatch codes `legacy_smoke_case_missing` and
+`context_retrieval_case_missing`.
 
 Profile names are policy data, not a JSON Schema enum. An adapter resolves the
 profile against the union of `context_index.yaml.task_profiles` and
@@ -73,10 +78,11 @@ Run the repository gate:
 python "Agent Kit/kit/tools/context_contract_v1_oracle.py" --format json
 ```
 
-The gate is dependency-free. It validates the JSON Schema keywords used by
-the three checked-in schemas and evaluates cross-payload invariants against
-the named policy sources. Production adapters should additionally use a full
-Draft 2020-12 validator.
+The gate is dependency-free and read-only: it starts no service, database,
+network client, persistent index, or background process. It validates the JSON
+Schema keywords used by the three checked-in schemas (including `maxItems`)
+and evaluates policy only from the manifest-resolved canonical sources.
+Production adapters should additionally use a full Draft 2020-12 validator.
 
 ## Python adapter
 
@@ -110,9 +116,27 @@ python scripts/ai_context_helper.py claim-check --profile review --claim "Projec
 ```
 
 For parity testing, call `run_oracle()` from
-`tools/context_contract_v1_oracle.py` or execute its CLI. Treat `case_id`, the
-three schema-valid booleans, `policy_valid`, and `reason_codes` as the oracle
-comparison tuple.
+`tools/context_contract_v1_oracle.py` or execute its CLI. The exact per-case
+comparison surface is `case_id`; the three schema-valid booleans;
+`policy_valid`; ordered `reason_codes`; receipt reason codes and outcome;
+request/bundle/receipt identity links; optional legacy and retrieval fixture
+links; and the following parity values:
+
+- request, bundle, and receipt `policy_refs` must agree;
+- request and bundle `profile` must agree;
+- request `selection.max_sources`, bundle `selection.max_sources`, and receipt
+  `counts.requested_max_sources` must agree;
+- bundle source-array length, bundle `selected_source_count`, and receipt
+  `selected_sources` must agree;
+- bundle `omitted_source_count` and receipt `omitted_sources` must agree.
+
+Structural mismatches are stable machine-readable codes:
+`request_bundle_policy_refs`, `request_receipt_policy_refs`,
+`request_bundle_profile`, `max_sources_mismatch`,
+`selected_source_count_mismatch`, `selected_source_length_mismatch`, and
+`omitted_source_count_mismatch`. Missing manifest references use
+`CANONICAL_POLICY_REF_MISSING:<reference-name>`. Do not compare
+validator-specific messages.
 
 ## TypeScript adapter
 

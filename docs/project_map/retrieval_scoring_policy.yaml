@@ -1,0 +1,16 @@
+schema_version: "1.0"
+project_id: "ai-assisted-system-design-and-agent-memory-kit"
+
+core_rule: "Apply hard gates before deterministic ordering; score never grants authority."
+ordering:
+  - priority_ascending
+  - context_index_order
+
+limits:
+  respect_request_max_sources: true
+  report_selected_and_omitted_counts: true
+  report_truncation: true
+
+scope:
+  mutation_allowed: false
+  authority_expansion_allowed: false

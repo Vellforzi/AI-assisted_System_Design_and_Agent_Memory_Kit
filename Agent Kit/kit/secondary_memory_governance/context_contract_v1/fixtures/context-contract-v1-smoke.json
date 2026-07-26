@@ -11,7 +11,8 @@
     "context_index": "../../context_index.yaml",
     "retrieval_policy": "../../retrieval_policy.yaml",
     "retrieval_scoring_policy": "../../retrieval_scoring_policy.yaml",
-    "legacy_smoke_cases": "../../context_selection_smoke_cases.yaml"
+    "legacy_smoke_cases": "../../context_selection_smoke_cases.yaml",
+    "context_retrieval_fixture": "context-retrieval-v1-smoke.json"
   },
   "reason_code_order": [
     "UNKNOWN_PROFILE",
@@ -24,6 +25,7 @@
     {
       "case_id": "over-retrieval",
       "reuses_legacy_smoke_case": "startup_read_set",
+      "reuses_context_retrieval_case": "context-governance-policy",
       "request": {
         "contract_type": "ContextRequestV1",
         "contract_version": "1.0",
@@ -77,6 +79,7 @@
     {
       "case_id": "under-retrieval",
       "reuses_legacy_smoke_case": "docs_only_scope",
+      "reuses_context_retrieval_case": "project-map-cannot-override-authority",
       "request": {
         "contract_type": "ContextRequestV1",
         "contract_version": "1.0",
@@ -121,6 +124,7 @@
     {
       "case_id": "forbidden-path-selected",
       "reuses_legacy_smoke_case": "review_scope",
+      "reuses_context_retrieval_case": "private-data-not-default-context",
       "request": {
         "contract_type": "ContextRequestV1",
         "contract_version": "1.0",
