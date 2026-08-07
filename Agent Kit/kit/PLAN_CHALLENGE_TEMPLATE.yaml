@@ -1,0 +1,20 @@
+# Project Map/workflows/PC-0001.yaml
+schema_version: "1.0"
+challenge_id: "PC-0001"
+task_id: "TASK-0001"
+plan_ref: "Project Map/plans/PLAN-0001.md"
+risk_class: "high" # significant | high | irreversible
+status: "open" # open | accepted | rejected | cancelled
+current_question_id: "Q-0001"
+questions:
+  - id: "Q-0001"
+    issue: "<one decision needed now>"
+    recommendation: "<recommended option and tradeoff>"
+    fact_evidence_refs: ["<project evidence ref>"]
+    decision_owner: "owner"
+    resolution: "open" # open | closed | probe_required
+    owner_decision: null
+    design_probe_ref: null
+shared_understanding:
+  owner_attested: false
+  evidence_ref: null

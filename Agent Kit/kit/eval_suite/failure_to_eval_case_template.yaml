@@ -1,5 +1,14 @@
-schema_version: "1.0"
-template_id: "AMK-FAILURE-TO-EVAL-CASE-v3.8.0"
+schema_version: "2.0"
+template_id: "AMK-FAILURE-TO-EVAL-CASE-v5.0.0"
+
+candidate_lifecycle:
+  status: "captured" # captured | sanitized | reproducible | owner_accepted | rejected
+  incident_id: "INC-0001"
+  failure_id: "FAIL-0001"
+  evidence_refs: []
+  sanitization_receipt_ref: null
+  reproducibility_state: "not_attempted" # not_attempted | reproducible | not_reproducible
+  owner_acceptance_ref: null
 
 failure_trace:
   observed_at: ""
@@ -13,6 +22,7 @@ failure_trace:
   severity: "critical|high|normal"
   why_it_matters: ""
   secrets_removed: true
+  sensitive_fields_removed: []
 
 candidate_eval_case:
   id: "AMK-CUSTOM-000"
@@ -25,6 +35,9 @@ candidate_eval_case:
     - ""
   disallowed_behavior:
     - ""
+  expected_tools: []
+  forbidden_tools: []
+  oracle_type: "deterministic_contract" # deterministic_contract | mocked_trace | human_rubric | model_advisory
   grading:
     pass_if:
       - ""
@@ -32,6 +45,12 @@ candidate_eval_case:
       - ""
 
 owner_review:
-  status: "pending|accepted|rejected|needs_rewrite"
+  status: "pending" # pending | accepted | rejected | needs_rewrite
   notes: ""
   added_to_suite_at: ""
+
+invariants:
+  candidate_creation_closes_incident: false
+  candidate_creation_mutates_kit: false
+  candidate_creation_runs_eval: false
+  suite_admission_requires_status: "owner_accepted"

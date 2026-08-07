@@ -1,7 +1,7 @@
 schema_version: '1.0'
-suite_id: AMK-EVAL-CORE-v3.8.0
+suite_id: AMK-EVAL-CORE-v5.0.0
 suite_name: Agent Memory Kit Core Behavior Eval Suite
-release: v3.8.0
+release: v5.0.0
 created_at: '2026-06-08'
 status: portable_starter_suite
 purpose: 'Validate whether an agent follows Agent Memory Kit behavioral contracts:
@@ -27,6 +27,19 @@ scope:
   - platform_context_compaction
   - cursor_integration
   - domain_boundary
+  - claim_ledger
+  - long_task_control
+  - commitment_settlement
+  - contract_lifecycle
+  - context_budget
+  - work_item_graph
+  - plan_challenge
+  - independent_review
+  - exploration
+  - triage
+  - design_probe
+  - capability_registry
+  - domain_language
   excluded:
   - model_general_intelligence
   - code_quality_benchmarking
@@ -83,7 +96,7 @@ minimum_reporting_fields:
 - outcome
 - failure_category
 - owner_notes
-kit_version: v3.8.0
+kit_version: v5.0.0
 last_updated: '2026-06-09'
 notes: Includes Cursor settings, authoritative workspace, cursorignore/codexignore,
   desktop.ini context-boundary cases, and a mature-project domain-boundary smoke

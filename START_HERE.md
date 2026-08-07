@@ -1,8 +1,8 @@
 # START HERE — AI-assisted System Design and Agent Memory Kit
 
-Version: v3.8.0  
-Release date: 2026-06-09  
-Package: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.8.0_EN.zip`  
+Version: v5.0.0
+Release date: 2026-08-07
+Package: `AI-assisted_System_Design_and_Agent_Memory_Kit_v5.0.0_EN.zip`
 Status: portable project-owner kit for AI-assisted work and grounded project memory
 
 ---
@@ -218,3 +218,7 @@ This release adds an owner-controlled Cursor Agent settings profile, `.cursorign
 ## v3.8.0 focus
 
 v3.8.0 adds Cursor owner-controlled settings, authoritative existing workspace handling, `.cursorignore` / `.codexignore` context-boundary templates, and desktop metadata ignore patterns for Windows/Google Drive projects.
+
+## v5.0.0 focus
+
+Start new installations with Project Artifact Contract V2. Activate workflow artifacts only when `TaskContractV3.workflow_profile`, risk, or task scale requires them. Existing v4 artifacts require a read-only migration proposal and owner review. Context Contract V1 remains compatible. See `RELEASE_NOTES_v5.0.0.md`.

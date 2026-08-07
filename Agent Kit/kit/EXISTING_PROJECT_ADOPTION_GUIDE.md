@@ -1,5 +1,7 @@
 # Existing Project Context Governance Guide
 
+> v5 note: install `secondary_memory_governance/` as before, then adopt Project Artifact Contract V2 conditionally. Follow `MIGRATION_v4_TO_v5.md` for v4 artifacts; older v3.8 artifacts must first use the v4 migration. Never treat legacy artifacts as v5-valid without a reviewed transformation.
+
 Status: practical baseline for active repo-centric projects
 Purpose: add Agent Kit governance to an existing project without replacing its
 current documentation, runtime behavior, or project-specific agent rules.
@@ -313,3 +315,7 @@ Use optional integrations only after the core baseline passes.
 
 These modules must not become required startup context. They are project-tool
 adapters around the core baseline.
+
+## 10. Upgrade an existing v4 Project Map
+
+Keep `project_artifact_contract_v1/` available for historical validation. Use `MIGRATION_v4_TO_v5.md` and the read-only migration helper to propose V3 task/handoff/working-state and V2 commitment/verification artifacts. Review unknown workflow fields against operational evidence. Never synthesize graphs, challenges, reviews, probes, capability assessments, or domain terms merely to satisfy the new schema.

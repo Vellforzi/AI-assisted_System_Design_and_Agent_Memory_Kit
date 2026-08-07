@@ -1,0 +1,1 @@
+{"schema_version":"1.0","tools":[{"name":"local_reader","private_data":true,"untrusted_input":false,"external_communication":false,"mutating":false,"approval_sensitive":false},{"name":"web_fetch","private_data":false,"untrusted_input":true,"external_communication":false,"mutating":false,"approval_sensitive":false}]}

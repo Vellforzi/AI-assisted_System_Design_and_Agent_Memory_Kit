@@ -1,8 +1,13 @@
 # Agent Memory Kit Starter Package
 
-Version: v3.8.0  
+Version: v5.0.0
+Status: portable project-owner toolkit
+Last aligned: 2026-08-07
+Audience: project owners, adopters, and maintainers
+Runtime impact: none until explicitly adopted
+Authority: navigation index; operational project evidence and owner instructions remain authoritative
 Release date: 2026-06-09  
-Package: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.8.0_EN.zip`
+Package: `AI-assisted_System_Design_and_Agent_Memory_Kit_v5.0.0_EN.zip`
 
 Agent Memory Kit is a portable memory operating layer for project owners who work with AI agents across long projects.
 
@@ -82,6 +87,12 @@ Evals do not run automatically unless the owner wires them to a script, CI job, 
 | `RETRIEVAL_POLICY_TEMPLATE.yaml` | Machine-readable retrieval profile template. |
 | `RETRIEVAL_SCORING_POLICY_TEMPLATE.yaml` | Machine-readable hard-gated retrieval scoring template. |
 | `TASK_CONTRACT_TEMPLATE.yaml` | Long-task contract template. |
+| `project_artifact_contract_v2/` | Closed v5 schemas, valid/invalid examples, and the shared fixture corpus. |
+| `WORK_ITEM_GRAPH_TEMPLATE.yaml` | Vertical multi-session delivery DAG and derived frontier projection. |
+| `PLAN_CHALLENGE_TEMPLATE.yaml` | Owner-owned question and shared-understanding gate for risky work. |
+| `REVIEW_RECEIPT_TEMPLATE.yaml` | Fresh-context/adversarial review without mutation or repair authority. |
+| `EXPLORATION_MAP_TEMPLATE.yaml`, `TRIAGE_LEDGER_TEMPLATE.yaml`, `DESIGN_PROBE_TEMPLATE.yaml` | Non-delivery discovery, readiness, and disposable-probe contracts. |
+| `CAPABILITY_REGISTRY_TEMPLATE.yaml`, `DOMAIN_LANGUAGE_TEMPLATE.yaml` | Evidence-based capability health and bounded-context terminology. |
 | `CLAIM_LEDGER_TEMPLATE.yaml` | Claim support and final-answer gate template. |
 | `HANDOFF_TEMPLATE.yaml` | Clean-slate handoff packet template. |
 | `LONG_RUNNING_TASKS_GUIDE.md` | Design guide for long tasks without simulating consciousness. |
@@ -149,7 +160,7 @@ copying adopter-specific domain rules.
 
 The baseline includes:
 
-- `docs/project_map/context_index.yaml` task-profile routing;
+- secondary navigation metadata in `docs/project_map/context_index.yaml` for task-profile routing;
 - bounded read-set selection;
 - retrieval receipts;
 - API-agent context bundle shape;
@@ -179,6 +190,9 @@ Install these only after the core baseline is working:
   lowest sufficient model/settings class.
 - `optional_integrations/cursor_settings/` - Cursor settings integration that
   points to `CURSOR_AGENT_SETTINGS_GUIDE.md`.
+- `optional_integrations/workflow_evals_mocked_tools/` - recorded mock-trace checks.
+- `optional_integrations/tool_capability_governance/` - report-only risk classification.
+- `optional_integrations/policy_canary/` - offline policy comparison validation.
 
 These modules are intentionally outside `secondary_memory_governance/`. They
 must not become required startup context.
@@ -213,13 +227,13 @@ start from operational docs plus:
 3. `docs/source_of_truth_hierarchy.md`
 4. `docs/context_packs/current_status.md`
 5. `docs/context_governance_rules.md` when context routing, docs lifecycle, or memory promotion is in scope
-6. `docs/project_map/context_index.yaml`
-7. `docs/project_map/source_authority.yaml`
-8. `docs/project_map/permissions_policy.yaml`
-9. `docs/project_map/retrieval_policy.yaml`
-10. `docs/project_map/retrieval_scoring_policy.yaml`
-11. `docs/project_map/memory_lifecycle_policy.yaml`
-12. `docs/project_map/working_state.yaml`
+6. secondary navigation: `docs/project_map/context_index.yaml`
+7. secondary authority policy: `docs/project_map/source_authority.yaml`
+8. secondary permission policy: `docs/project_map/permissions_policy.yaml`
+9. secondary retrieval policy: `docs/project_map/retrieval_policy.yaml`
+10. secondary scoring policy: `docs/project_map/retrieval_scoring_policy.yaml`
+11. secondary lifecycle policy: `docs/project_map/memory_lifecycle_policy.yaml`
+12. secondary state pointer: `docs/project_map/working_state.yaml`
 
 Use the fuller flow below only when the project has explicitly adopted a full
 Project Map, task, handoff, or durable-memory profile:
@@ -276,6 +290,6 @@ This release includes a Codex Integration Pack under `codex/`. It provides:
 
 Use Codex as an independent reviewer, auditor, recovery assistant, or controlled executor. Do not use Codex memory, platform summaries, or compressed chat as project truth.
 
-## v3.8.0 focus
+## v5.0.0 focus
 
-v3.8.0 adds Cursor owner-controlled settings, authoritative existing workspace handling, `.cursorignore` / `.codexignore` context-boundary templates, and desktop metadata ignore patterns for Windows/Google Drive projects.
+v5.0.0 adds Project Artifact Contract V2 and conditionally activated workflow contracts for delivery graphs, plan challenge, clean-context review, exploration, triage, disposable design probes, capability health, and bounded-context terminology. Routine single-session work may use only TaskContractV3. Context Contract V1 and the file-based/provider-neutral architecture remain unchanged.

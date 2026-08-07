@@ -1,0 +1,23 @@
+{
+  "suite_id": "AMK-PROJECT-ARTIFACT-V1",
+  "schema_files": {
+    "TaskContractV2": "../schemas/task-contract-v2.schema.json",
+    "ClaimLedgerV2": "../schemas/claim-ledger-v2.schema.json",
+    "HandoffV2": "../schemas/handoff-v2.schema.json",
+    "WorkingStateV2": "../schemas/working-state-v2.schema.json",
+    "CommitmentLedgerV1": "../schemas/commitment-ledger-v1.schema.json",
+    "MemoryDeltaV1": "../schemas/memory-delta-v1.schema.json",
+    "SideEffectReceiptV1": "../schemas/side-effect-receipt-v1.schema.json",
+    "VerificationReceiptV1": "../schemas/verification-receipt-v1.schema.json",
+    "ArtifactDescriptorV1": "../schemas/artifact-descriptor-v1.schema.json",
+    "ArtifactExcerptV1": "../schemas/artifact-excerpt-v1.schema.json"
+  },
+  "valid_examples": "../examples/valid/project-artifacts-v1.json",
+  "invalid_examples": "../examples/invalid/project-artifacts-v1.json",
+  "semantic_cases": [
+    {"case_id":"settled-without-evidence","contract":"CommitmentLedgerV1","expected_reason_codes":["SETTLEMENT_EVIDENCE_REQUIRED","SELF_GRADE_CANNOT_APPROVE_MEMORY"]},
+    {"case_id":"verified-claim-without-support","contract":"ClaimLedgerV2","expected_reason_codes":["VERIFIED_CLAIM_SUPPORT_REQUIRED"]},
+    {"case_id":"excerpt-range-invalid","contract":"ArtifactExcerptV1","expected_reason_codes":["EXCERPT_RANGE_INVALID","EXCERPT_MUST_BE_NAVIGATION_ONLY"]},
+    {"case_id":"memory-delta-without-admissible-settlement","contract":"MemoryDeltaCross","expected_reason_codes":["MEMORY_DELTA_ADMISSIBLE_SETTLEMENT_REQUIRED"]}
+  ]
+}

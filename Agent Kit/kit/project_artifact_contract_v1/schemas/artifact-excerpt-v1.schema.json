@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:agent-memory-kit:project-artifact:v1:ArtifactExcerptV1",
+  "title": "ArtifactExcerptV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "artifact_id", "path", "start_line", "end_line", "byte_count", "content", "truncated", "authority", "navigation_only"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "artifact_id": {"type": "string", "minLength": 1},
+    "path": {"type": "string", "minLength": 1},
+    "start_line": {"type": "integer", "minimum": 1},
+    "end_line": {"type": "integer", "minimum": 1},
+    "byte_count": {"type": "integer", "minimum": 0},
+    "content": {"type": "string"},
+    "truncated": {"type": "boolean"},
+    "authority": {"type": "string", "minLength": 1},
+    "navigation_only": {"const": true}
+  }
+}

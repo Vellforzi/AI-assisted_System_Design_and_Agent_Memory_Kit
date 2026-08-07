@@ -277,3 +277,15 @@ Project Map/eval_suite/failure_to_eval_case_template.yaml
 ```
 
 This keeps the failure testable in future releases.
+
+---
+
+## 15. v4 reality gate
+
+The compiler may propose a `MemoryDeltaV1` only when a linked commitment has an admissible terminal settlement with outcome evidence. `settled_failure` is preserved as evidence and must not be rewritten as success. `self` provenance may produce a review candidate but never an approved promotion. Promotion is a separate owner-approved operation and the compiler never mutates durable memory automatically.
+
+Incident-derived eval candidates progress through `captured -> sanitized -> reproducible -> owner_accepted | rejected`. Creating a candidate does not close the incident, change the suite, or run an eval. Only `owner_accepted` cases enter the suite.
+
+## 16. v5 workflow evidence boundary
+
+Workflow artifacts are not durable-memory promotion shortcuts. Review findings remain findings until separately accepted; exploration decisions require evidence and owner acceptance; probe verdicts cannot promote the disposable artifact; capability passing requires an end-to-end receipt; DomainLanguage terms authorize terminology only. The compiler may propose links to valid workflow evidence but must not create owner decisions, capability facts, domain facts, or production tasks from them automatically.

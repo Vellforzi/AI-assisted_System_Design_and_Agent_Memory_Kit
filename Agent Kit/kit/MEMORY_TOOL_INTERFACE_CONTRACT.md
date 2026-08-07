@@ -46,6 +46,13 @@ It should help the agent:
 | `memory.record_tool_output_ref` | Record a compact reference to long raw tool output. |
 | `memory.receipt_check` | Check side-effect receipts before repeating actions. |
 | `memory.record_receipt` | Record completed external side effect. |
+| `commitment.open` | Record a planned action and expected outcome before execution. |
+| `commitment.settle` | Append terminal success, failure, or cancellation with provenance and outcome evidence. |
+| `artifact.describe` | Return ArtifactDescriptorV1 metadata without promoting content. |
+| `artifact.inspect_bounded` | Return ArtifactExcerptV1 within explicit byte/line caps. |
+| `verification.record_receipt` | Record a deterministic verification result linked to claims. |
+
+Unknown contract versions and unknown fields fail closed. Helpers must not rewrite terminal commitments. `self` provenance is advisory and cannot authorize automatic promotion. Full artifact loading requires an explicit profile or owner trigger; summaries and extracts remain navigation-only.
 
 These are conceptual operations. Implementations may use different names.
 
@@ -295,3 +302,9 @@ linked_task: "TASK-0001"
 ```
 
 Do not store secrets, tokens, private account IDs, raw external-system/account payloads, or raw private user data. If output is sensitive, store only a digest or summary and state the limitation.
+
+## 14. v5 workflow projections
+
+Workflow tools are report-only by default. They may derive a WorkItemGraph or ExplorationMap frontier, the latest valid CapabilityRegistry status, and TriageLedger readiness. Responses must include `read_only: true`, `navigation_only: true`, `activated: false`, and `files_modified: false`.
+
+A projection is not a scheduler, assignment, owner decision, review acceptance, repair permission, prototype promotion, or capability promotion. Mutating workflow artifacts requires an explicit TaskContractV3 apply scope and every activated owner/evidence gate.

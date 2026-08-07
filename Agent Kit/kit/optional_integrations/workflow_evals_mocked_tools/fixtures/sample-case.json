@@ -1,0 +1,1 @@
+{"schema_version":"1.0","id":"MOCK-001","expected_tools":["read_file"],"forbidden_tools":["send_email"],"argument_constraints":[{"tool":"read_file","path":"path","operator":"equals","value":"docs/spec.md"}],"expected_terminal_outcome":"completed","advisory_graders":[]}

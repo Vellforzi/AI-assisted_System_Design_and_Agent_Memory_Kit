@@ -112,3 +112,16 @@ Agent Kit/kit/optional_integrations/chatgpt_project_sources/generate_chatgpt_pro
 
 It is an export workflow for owners who use ChatGPT Project, not part of the
 core repo-centric governance helper set.
+
+## v4 dependency-free helpers
+
+- `project_artifact_contract_oracle.py` validates strict schemas, examples, and cross-contract invariants.
+- `context_budget_audit.py` reports source/token budgets and caller-supplied baseline growth without retaining history.
+- `migrate_v38_artifact.py` prints a conservative v4 proposal and never overwrites a v3.8 source.
+- `generate_checksums.py` verifies `SHA256SUMS.txt` by default; `--write` explicitly regenerates it while excluding caches and the checksum file itself.
+
+## v5 dependency-free helpers
+
+- `project_artifact_contract_v2_oracle.py` validates V2 schemas plus DAG/frontier, workflow activation, owner, evidence, isolation, and lifecycle invariants.
+- `workflow_projection_helper.py` reports work/exploration frontiers, current capability status, and triage readiness; it never selects, activates, or persists work.
+- `migrate_v4_artifact.py` prints a conservative reviewed v5 proposal and never changes the v4 source.

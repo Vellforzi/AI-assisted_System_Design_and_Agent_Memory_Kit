@@ -1,0 +1,8 @@
+schema_version: "1.0"
+artifact_id: "ART-0001"
+path: "<project-relative-path-or-stable-id>"
+media_type: "text/plain"
+byte_count: 0
+sha256: "<64-lowercase-hex-characters>"
+authority: "<source-authority-class>"
+access_strategy: "metadata_only" # metadata_only | bounded_excerpt | structured_extract | full_if_explicit

@@ -1,0 +1,19 @@
+# Project Map/domain_language.yaml
+schema_version: "1.0"
+language_id: "DL-0001"
+authority_scope: "terminology_only"
+contexts:
+  - id: "CTX-example"
+    name: "<bounded context>"
+    source_refs: ["<source-authority ref>"]
+terms:
+  - id: "TERM-0001"
+    context_id: "CTX-example"
+    canonical_term: "<canonical term>"
+    definition: "<context-bounded definition>"
+    do_not_use: ["<ambiguous synonym>"]
+    decision_refs: []
+    evidence_refs: ["<evidence ref>"]
+    status: "current" # current | deprecated
+relationships: []
+owner_review: "pending" # pending | accepted | rejected

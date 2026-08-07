@@ -55,6 +55,11 @@ non_authoritative_by_default:
   - "unreviewed candidate memory"
   - "raw tool output without source authority classification"
 
+bounded_contexts: []
+# When populated, a task that affects a declared context must reference an accepted
+# DomainLanguageV1 context. Terminology authority never proves implementation facts.
+# Item shape: {id: "CTX-example", path_patterns: ["src/example/**"], domain_language_ref: "DL-0001"}
+
 conflict_resolution:
   default_rule: "prefer_higher_authority_then_newer_verified"
   project_map_secondary_rule: "If Project Map conflicts with operational_truth_roots, operational truth wins and the drift must be reported."

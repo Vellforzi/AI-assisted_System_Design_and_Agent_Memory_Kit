@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:agent-memory-kit:project-artifact:v1:MemoryDeltaV1",
+  "title": "MemoryDeltaV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "delta_id", "task_id", "status", "operations", "commitment_refs", "owner_review"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "delta_id": {"type": "string", "pattern": "^MD-[A-Za-z0-9._-]+$"},
+    "task_id": {"type": "string"},
+    "status": {"enum": ["candidate", "approved", "rejected", "applied"]},
+    "operations": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["operation", "target", "evidence_refs"], "properties": {"operation": {"enum": ["add", "update", "supersede", "archive"]}, "target": {"type": "string"}, "evidence_refs": {"type": "array", "minItems": 1, "items": {"type": "string"}}}}},
+    "commitment_refs": {"type": "array", "items": {"type": "string"}},
+    "owner_review": {"enum": ["pending", "approved", "rejected"]}
+  }
+}

@@ -15,6 +15,7 @@ from __future__ import annotations
 import argparse
 from dataclasses import dataclass
 import fnmatch
+import hashlib
 import json
 from pathlib import Path
 import re
@@ -48,6 +49,7 @@ TRIGGERED_MODES = {"trigger_only", "secondary_memory_triggered", "never_default"
 PROJECT_MAP_PROFILES = {"project_map_governance", "drift_analysis", "memory_update"}
 DEFAULT_TRIGGERED_READ_SET_PROFILES = {"research_promotion"}
 SEARCH_BACKENDS = ("lexical", "profile_filtered_semantic", "sqlite_fts")
+ACCESS_STRATEGIES = ("metadata_only", "bounded_excerpt", "structured_extract", "full_if_explicit")
 
 PROFILE_ALIASES = {
     "api-agent": "api_agent_design",
@@ -1130,6 +1132,46 @@ def _to_markdown(payload: dict[str, object]) -> str:
     return "\n".join(lines)
 
 
+def inspect_artifact(root: Path, supplied_path: str, max_bytes: int, max_lines: int, access_strategy: str, explicit_full: bool) -> dict:
+    """Return ArtifactDescriptorV1 plus an optional bounded ArtifactExcerptV1."""
+    root = root.resolve()
+    rel = Path(supplied_path).as_posix()
+    if rel.startswith("./"):
+        rel = rel[2:]
+    if any(fnmatch.fnmatch(rel, pattern) for pattern in DEFAULT_HIGH_RISK_GLOBS):
+        return {"status": "rejected", "reason_code": "CTX_INSPECT_PATH_EXCLUDED", "path": rel, "read_only": True}
+    target = (root / rel).resolve()
+    try:
+        target.relative_to(root)
+    except ValueError:
+        return {"status": "rejected", "reason_code": "CTX_INSPECT_OUTSIDE_ROOT", "path": rel, "read_only": True}
+    if not target.is_file():
+        return {"status": "rejected", "reason_code": "CTX_INSPECT_NOT_FILE", "path": rel, "read_only": True}
+    raw = target.read_bytes()
+    descriptor = {
+        "schema_version": "1.0", "artifact_id": f"sha256:{hashlib.sha256(raw).hexdigest()[:16]}",
+        "path": rel, "media_type": "text/plain", "byte_count": len(raw),
+        "sha256": hashlib.sha256(raw).hexdigest(), "authority": "unspecified",
+        "access_strategy": access_strategy,
+    }
+    if access_strategy == "metadata_only":
+        return {"status": "ok", "descriptor": descriptor, "excerpt": None, "read_only": True}
+    full_allowed = access_strategy == "full_if_explicit" and explicit_full
+    byte_cap = len(raw) if full_allowed else max(0, max_bytes)
+    decoded = raw[:byte_cap].decode("utf-8", errors="replace")
+    lines = decoded.splitlines(keepends=True)
+    selected = lines if full_allowed else lines[:max(0, max_lines)]
+    content = "".join(selected)
+    consumed = len(content.encode("utf-8"))
+    truncated = consumed < len(raw)
+    excerpt = {
+        "schema_version": "1.0", "artifact_id": descriptor["artifact_id"], "path": rel,
+        "start_line": 1, "end_line": max(1, len(selected)), "byte_count": consumed,
+        "content": content, "truncated": truncated, "authority": "unspecified", "navigation_only": True,
+    }
+    return {"status": "ok", "descriptor": descriptor, "excerpt": excerpt, "reason_code": "CTX_FULL_LOAD_EXPLICIT" if full_allowed else ("CTX_EXCERPT_TRUNCATED" if truncated else "CTX_EXCERPT_COMPLETE"), "read_only": True}
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=Path.cwd())
@@ -1182,6 +1224,14 @@ def main(argv: Sequence[str] | None = None) -> int:
     claim_parser.add_argument("--profile", required=True)
     claim_parser.add_argument("--max-results", type=int, default=5)
     claim_parser.add_argument("--format", choices=("json", "markdown"), default="json")
+
+    inspect_parser = subparsers.add_parser("inspect")
+    inspect_parser.add_argument("--path", required=True)
+    inspect_parser.add_argument("--max-bytes", type=int, default=8192)
+    inspect_parser.add_argument("--max-lines", type=int, default=120)
+    inspect_parser.add_argument("--access-strategy", choices=ACCESS_STRATEGIES, default="bounded_excerpt")
+    inspect_parser.add_argument("--explicit-full", action="store_true")
+    inspect_parser.add_argument("--format", choices=("json", "markdown"), default="json")
 
     args = parser.parse_args(argv)
     if args.command == "read-set":
@@ -1240,6 +1290,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             profile=args.profile,
             max_results=args.max_results,
         )
+    elif args.command == "inspect":
+        payload = inspect_artifact(args.root, args.path, args.max_bytes, args.max_lines, args.access_strategy, args.explicit_full)
     else:
         parser.error("unknown command")
 

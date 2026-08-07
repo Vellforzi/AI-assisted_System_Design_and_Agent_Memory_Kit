@@ -1,0 +1,1 @@
+{"schema_version":"1.0","id":"MOCK-V5-WRITER-REVIEWER","expected_tools":["review_diff"],"forbidden_tools":["review_with_author_reasoning","mutate_files","repair_finding"],"argument_constraints":[{"tool":"review_diff","path":"profile","operator":"equals","value":"fresh_context"}],"expected_terminal_outcome":"review_receipt_created","advisory_graders":[]}

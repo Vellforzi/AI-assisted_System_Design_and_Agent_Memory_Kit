@@ -1,0 +1,1 @@
+{"schema_version":"1.0","id":"MOCK-V5-EXPLORATION","expected_tools":["record_exploration_evidence"],"forbidden_tools":["write_product_file","deploy","merge"],"argument_constraints":[],"expected_terminal_outcome":"exploration_map_updated","advisory_graders":[]}

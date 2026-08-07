@@ -1,4 +1,8 @@
-# Research Basis for Agent Memory Kit v3.8.0
+# Research Basis for Agent Memory Kit v5.0.0
+
+v5.0 builds on v4 and adapts ideas from [Agentic Coding Design Patterns](https://github.com/mokevnin/agentic-coding-design-patterns) into original, inspectable contracts. The source inspired conditional workflow structures for vertical work graphs, plan grilling, clean-context review, exploration, triage, disposable design probes, capability health, and domain language. The Kit does not copy the source text or import its runtime assumptions; each idea is constrained by owner authority, project evidence, file-based state, and explicit non-goals.
+
+Pattern catalogue reviewed for this design: [Agentic Patterns](https://www.agentic-patterns.com/patterns). The Kit deliberately excludes runtime-only Agent Circuit Breaker and execution-lane patterns from core.
 
 Status: design rationale  
 Purpose: record the external engineering ideas that influenced this release.

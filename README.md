@@ -1,8 +1,12 @@
 # AI-assisted System Design and Agent Memory Kit
 
-Version: v3.8.0  
-Release date: 2026-06-09  
+Version: v5.0.0
+Release date: 2026-08-07
 Status: portable project-owner toolkit
+Last aligned: 2026-08-07
+Audience: project owners, adopters, and maintainers
+Runtime impact: none until explicitly adopted
+Authority: navigation index; operational project evidence and owner instructions remain authoritative
 
 This package contains two complementary tools:
 
@@ -10,6 +14,8 @@ This package contains two complementary tools:
 2. **Agent Memory Kit** — a file-based operating layer for project memory, grounding, retrieval, task continuity, action gates, and behavior checks.
 
 The package is designed for owners who want high control over AI-assisted work. It does not assume autonomous long-running agents. The default mode is controlled, evidence-first, answer-only work unless the owner explicitly asks for a concrete action.
+
+Repository context routing is indexed in [`docs/project_map/context_index.yaml`](docs/project_map/context_index.yaml); it is secondary navigation, not project truth.
 
 ---
 
@@ -56,7 +62,7 @@ See `Agent Kit/kit/POSITIONING_AND_ALTERNATIVES.md`.
 AI-assisted System Design and Agent Memory Kit/
   README.md
   START_HERE.md
-  RELEASE_NOTES_v3.8.0.md
+  RELEASE_NOTES_v5.0.0.md
 
   AI-assisted System Design/
     README.md
@@ -131,3 +137,7 @@ This release adds an owner-controlled Cursor Agent settings profile, `.cursorign
 ## v3.8.0 focus
 
 v3.8.0 adds Cursor owner-controlled settings, authoritative existing workspace handling, `.cursorignore` / `.codexignore` context-boundary templates, and desktop metadata ignore patterns for Windows/Google Drive projects.
+
+## v5.0.0 focus
+
+v5.0.0 adds Project Artifact Contract V2 and eight conditionally activated coding-workflow contracts: work-item graphs, plan challenges, independent reviews, exploration maps, triage ledgers, design probes, capability registries, and bounded-context language. Simple routine tasks remain artifact-light. See `RELEASE_NOTES_v5.0.0.md` and `Agent Kit/kit/MIGRATION_v4_TO_v5.md`.

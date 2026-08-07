@@ -1,6 +1,6 @@
-# AI-assisted System Design and Agent Memory Kit v3.8.0 — Manifest
+# AI-assisted System Design and Agent Memory Kit v5.0.0 — Manifest
 
-Package file: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.8.0_EN.zip`
+Package file: `AI-assisted_System_Design_and_Agent_Memory_Kit_v5.0.0_EN.zip`
 
 Package purpose: portable starter guide and memory operating layer for using AI agents with owner-controlled projects. Agent Memory Kit helps build a Project Map through structured, meaningful, interconnected duplication of project information supplied or verified by the owner.
 
@@ -10,7 +10,7 @@ Package purpose: portable starter guide and memory operating layer for using AI 
 
 - `README.md` — concise repository/package README.
 - `START_HERE.md` — package router and first entry point.
-- `RELEASE_NOTES_v3.8.0.md` — what changed in this release.
+- `RELEASE_NOTES_v5.0.0.md` — what changed in this release.
 - `AI-assisted System Design/README.md` — overview of the system-design methodology.
 - `AI-assisted System Design/AI-assisted System Design.md` — methodology for operating AI-readable projects.
 - `Agent Kit/README.md` — overview of Agent Memory Kit.
@@ -29,6 +29,26 @@ Package purpose: portable starter guide and memory operating layer for using AI 
 - `Agent Kit/kit/PROJECT_MEMORY_STORAGE_GUIDE.md` — storage architecture: current state, working state, policies, tasks, claims, handoffs, memory cards, indexes, evals, raw sources, archive.
 - `Agent Kit/kit/PLAIN_LANGUAGE_GLOSSARY.md` — simple explanations for common terms.
 - `Agent Kit/kit/POSITIONING_AND_ALTERNATIVES.md` — comparison with provider memory, repo instruction files, memory frameworks, vector stores, and autonomous runtimes.
+
+## v5.0 contract and workflow files
+
+- `project_artifact_contract_v2/` — closed Draft 2020-12 schemas, examples, and semantic fixture corpus for Project Artifact Contract V2.
+- `tools/project_artifact_contract_v2_oracle.py` — dependency-free structural and cross-contract oracle, including DAG/frontier and activation checks.
+- `tools/workflow_projection_helper.py` — report-only work frontier, capability status, and triage readiness projections.
+- `WORK_ITEM_GRAPH_TEMPLATE.yaml`, `PLAN_CHALLENGE_TEMPLATE.yaml`, `REVIEW_RECEIPT_TEMPLATE.yaml`, `EXPLORATION_MAP_TEMPLATE.yaml`, `TRIAGE_LEDGER_TEMPLATE.yaml`, `DESIGN_PROBE_TEMPLATE.yaml`, `CAPABILITY_REGISTRY_TEMPLATE.yaml`, `DOMAIN_LANGUAGE_TEMPLATE.yaml` — conditionally activated workflow artifacts.
+- `MIGRATION_v4_TO_v5.md` and `tools/migrate_v4_artifact.py` — read-only reviewed migration proposal.
+
+## Preserved v4 contract and governance files
+
+- `project_artifact_contract_v1/` — closed Draft 2020-12 schemas, valid/invalid examples, and fixture corpus.
+- `tools/project_artifact_contract_oracle.py` — dependency-free structural and semantic oracle.
+- `COMMITMENT_LEDGER_TEMPLATE.yaml`, `MEMORY_DELTA_TEMPLATE.yaml`, `SIDE_EFFECT_RECEIPT_TEMPLATE.yaml`, `VERIFICATION_RECEIPT_TEMPLATE.yaml` — reality-gated artifact templates.
+- `ARTIFACT_DESCRIPTOR_TEMPLATE.yaml`, `ARTIFACT_EXCERPT_TEMPLATE.yaml` — progressive-disclosure projections.
+- `CONTEXT_BUDGET_POLICY_TEMPLATE.yaml` and `tools/context_budget_audit.py` — report-only context budget checks.
+- `MIGRATION_v3.8_TO_v4.0.md` and `tools/migrate_v38_artifact.py` — read-only migration proposal workflow.
+- `optional_integrations/workflow_evals_mocked_tools/` — deterministic recorded-trace evaluation.
+- `optional_integrations/tool_capability_governance/` — fail-closed capability manifest reporting.
+- `optional_integrations/policy_canary/` — offline canary validation without live traffic.
 
 ---
 

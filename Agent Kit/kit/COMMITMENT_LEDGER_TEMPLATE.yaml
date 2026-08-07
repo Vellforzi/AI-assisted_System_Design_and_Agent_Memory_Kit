@@ -1,0 +1,15 @@
+# Project Map/commitment_ledger.yaml — CommitmentLedgerV2
+schema_version: "2.0"
+project_id: "<project-id>"
+commitments:
+  - id: "COM-0001"
+    task_id: "TASK-0001"
+    workflow_mode: "standard"
+    subject_refs: []
+    goal: "<goal>"
+    retrieved_context_refs: []
+    planned_action: "<bounded action>"
+    expected_outcome: "<verifiable outcome>"
+    status: "open" # open | settled_success | settled_failure | cancelled
+    settlement: null
+    memory_credit_state: "pending" # pending | eligible_for_review | approved | rejected

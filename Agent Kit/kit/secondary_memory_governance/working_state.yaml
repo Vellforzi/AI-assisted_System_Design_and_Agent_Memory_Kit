@@ -1,35 +1,22 @@
-# docs/project_map/working_state.yaml
-# Compact replay root for fresh sessions. This is not a planning document.
-
-schema_version: "1.0"
-package_profile: "secondary_memory_governance"
-project_id: "<project-id>"
-last_updated: "<YYYY-MM-DD>"
-
-project_map_mode: "secondary_memory"
-
-current_priority: "<current-priority-or-none>"
-current_operational_entrypoint: "<current-roadmap-status-or-task-entrypoint>"
-current_status_pack: "<current-status-pack-or-null>"
-
-next_recommended_action:
-  source: "<current-source-of-truth-ref>"
-  summary: "<short-next-action-or-null>"
-
-known_drift:
-  - path: "<project-map-file-or-null>"
-    issue: "<known-drift-summary-or-none>"
-
-session_start_minimum_refs:
-  - "<AGENTS.md or equivalent>"
-  - "docs/project_map/source_authority.yaml"
-  - "docs/project_map/permissions_policy.yaml"
-  - "docs/project_map/retrieval_policy.yaml"
-  - "docs/project_map/working_state.yaml"
-
-must_preserve_boundaries:
-  - "Project Map remains secondary memory unless source_authority.yaml says otherwise."
-  - "Operational docs, code, tests, specs, issues, and current owner instructions win on conflicts."
-  - "Private, experimental, or internal context must not become public/user-facing truth without reviewed authority."
-  - "No mutation occurs without explicit intent, target, scope, and allowed permission mode."
-  - "External research remains context until promoted through valid source authority."
+# docs/project_map/working_state.yaml — WorkingStateV3
+schema_version: "3.0"
+active_task: null
+checkpoint: null
+cursor: "unknown"
+commitment_refs: []
+verification_receipt_refs: []
+side_effect_receipt_refs: []
+next_safe_step: "<one evidence-safe next step>"
+workflow_state:
+  mode: "standard"
+  active_work_item_ref: null
+  work_item_graph_ref: null
+  frontier_input_refs: []
+  plan_challenge_ref: null
+  exploration_map_ref: null
+  triage_item_ref: null
+  design_probe_ref: null
+  review_receipt_refs: []
+  capability_refs: []
+  domain_context_refs: []
+  blockers: []

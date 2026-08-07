@@ -1,0 +1,13 @@
+# Project Map/memory_deltas/MD-0001.yaml
+schema_version: "1.0"
+delta_id: "MD-0001"
+task_id: "TASK-0001"
+status: "candidate" # candidate | approved | rejected | applied
+operations:
+  - operation: "add" # add | update | supersede | archive
+    target: "FACT-0001"
+    evidence_refs:
+      - "VR-0001"
+commitment_refs:
+  - "COM-0001"
+owner_review: "pending" # pending | approved | rejected

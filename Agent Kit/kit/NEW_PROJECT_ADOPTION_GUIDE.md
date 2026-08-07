@@ -206,3 +206,7 @@ Optional integrations after the baseline passes:
   model/cost tradeoff guidance.
 - `optional_integrations/cursor_settings/` if Cursor is the local implementation
   surface.
+
+## v5 workflow adoption
+
+Begin with TaskContractV3 in `standard` mode. Do not pre-create all workflow artifacts. Add a WorkItemGraph only for multi-session delivery; add exploration, triage, probe, or review artifacts only for the matching mode; activate PlanChallenge and stronger review from risk. Add capability and DomainLanguage refs only when the task changes those governed subjects. Validate the reviewed artifact set with the V2 oracle before apply.

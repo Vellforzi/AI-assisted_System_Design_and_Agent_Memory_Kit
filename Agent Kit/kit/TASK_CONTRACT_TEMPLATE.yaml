@@ -1,86 +1,40 @@
-# Project Map/tasks/TASK-0001.yaml
-# Long-task contract. Use for any task that may span sessions or involve multiple steps.
-
-schema_version: "1.0"
+# Project Map/tasks/TASK-0001.yaml — TaskContractV3
+schema_version: "3.0"
+governance:
+  contract_version: "3.0"
+  supersedes: "TaskContractV2"
+  effective_from: "<YYYY-MM-DD>"
+  compatibility: "breaking"
+  migration_note: "Set workflow fields from evidence; leave unknowns unknown."
 task_id: "TASK-0001"
-title: "<short task title>"
-status: "active" # active | blocked | completed | cancelled | archived
-created_at: "<YYYY-MM-DD>"
-updated_at: "<YYYY-MM-DD>"
-owner: "<owner/user>"
-
+title: "<short title>"
+status: "active" # active | blocked | completed | cancelled
 intent: "plan" # answer | analyze | plan | retrieve_context | stage | apply
 permission_mode: "read-only" # explain-only | dry-run | read-only | apply
+goal: "<observable result>"
 scope:
-  project_map:
-    - "Project Map/current_state.md"
-    - "Project Map/working_state.yaml"
+  project_map: []
   project_files: []
   external_sources: []
-
-goal: "<what result should exist when the task is complete>"
-non_goals:
-  - "<what must not be done>"
-
-allowed_actions:
-  - "read scoped Project Map files"
-  - "produce grounded answer/proposal"
-forbidden_actions:
-  - "write files without explicit apply instruction"
-  - "update durable memory without owner approval"
-  - "run commands without explicit command approval"
-  - "use external research as project fact"
-
-allowed_external_research:
-  - "libraries"
-  - "frameworks"
-  - "public documentation"
-  - "general methods"
-forbidden_external_research:
-  - "guessing current project implementation"
-  - "inferring undocumented project facts"
-
-required_project_evidence:
-  - "current_state.md"
-  - "working_state.yaml"
-  - "source_authority.yaml"
-  - "permissions_policy.yaml"
-
-inputs:
-  user_request: "<summary of the owner request>"
-  mandatory_refs: []
-  optional_refs: []
-
-working_state:
-  checkpoint_id: "<CKPT-id-or-null>"
-  branch_scope: "main"
-  active_workstream: "<WS-id-or-null>"
-  cursor: "<current step>"
-  blockers: []
-  pending_owner_decisions: []
-  unsafe_to_repeat: []
-
-claim_policy:
-  require_claim_ledger: true
-  unsupported_project_claim_behavior: "mark_missing_evidence_or_remove"
-  inference_label_required: true
-
-done_definition:
-  - "The output answers the owner request."
-  - "Every project-specific claim is supported, labeled as inference, or marked missing evidence."
-  - "No forbidden action was taken."
-  - "Open questions and next steps are explicit."
-
-verification_recipe:
-  - "Check intent and permission mode."
-  - "Check source authority and conflicts."
-  - "Check claim ledger or final claim support."
-  - "Check side-effect receipts before any replay."
-
-handoff_policy:
-  create_handoff_when:
-    - "task remains active at session end"
-    - "context window is near limit"
-    - "owner decision is pending"
-    - "unsafe-to-repeat action exists"
-  handoff_target: "Project Map/handoffs/HO-0001.yaml"
+commitment_refs: []
+expected_outcomes: ["<owner/runtime-verifiable outcome>"]
+stop_conditions: ["Required evidence or authority is missing."]
+rollback_or_recovery: ["Return to the last verified checkpoint."]
+reversibility: "unknown" # reversible | partially_reversible | irreversible | unknown
+expected_side_effects: []
+done_definition: ["Acceptance claims and activated gates pass."]
+workflow_profile:
+  mode: "standard" # standard | delivery | exploration | triage | design_probe | review
+  task_scale: "unknown" # single_session | multi_session | unknown
+  risk_class: "unknown" # routine | significant | high | irreversible | unknown
+  delivery_strategy: "unknown" # single_step | tracer_graph | unknown
+  work_item_graph_ref: null
+  plan_challenge_ref: null
+  exploration_map_ref: null
+  triage_item_ref: null
+  design_probe_ref: null
+  review_policy: "unknown" # none | fresh_context | adversarial | owner_only | unknown
+  review_receipt_refs: []
+  capability_impact: "unknown" # none | adds | changes | unknown
+  capability_refs: []
+  domain_context_refs: []

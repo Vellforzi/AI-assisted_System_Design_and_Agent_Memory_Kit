@@ -1,7 +1,7 @@
 # Optional Integrations
 
 Status: optional integration index
-Last aligned: <YYYY-MM-DD>
+Last aligned: 2026-08-07
 Audience: project owners, AI/Codex sessions, maintainers
 Runtime impact: none unless an owner explicitly adopts and runs a module
 Authority: optional integration navigation; subordinate to core `secondary_memory_governance/`
@@ -26,5 +26,8 @@ Optional modules:
 - `cost_model_routing/` - owner-facing guide for choosing the lowest sufficient
   model/settings class.
 - `cursor_settings/` - Cursor Agent settings integration guide.
+- `workflow_evals_mocked_tools/` - deterministic validation of recorded mock traces, including v5 reviewer, exploration, and probe boundaries.
+- `tool_capability_governance/` - fail-closed, report-only capability risk checks.
+- `policy_canary/` - offline canary policy validation without live rollout.
 
 Adopt only the modules that match the project's actual tools.

@@ -1,0 +1,18 @@
+# Project Map/workflows/WIG-0001.yaml
+schema_version: "1.0"
+graph_id: "WIG-0001"
+task_id: "TASK-0001"
+items:
+  - id: "WI-0001"
+    title: "<independently verifiable vertical behavior>"
+    behavior: "<user-visible or system behavior>"
+    vertical_scope: ["<boundary crossed by this slice>"]
+    acceptance_claims: ["<claim that must become true>"]
+    verification_recipe: ["<deterministic check>"]
+    context_fit: "fresh_context" # fresh_context | requires_split | unknown
+    status: "accepted" # proposed | accepted | blocked | active | verified | failed | cancelled
+    blocked_by: []
+frontier_assertion:
+  item_ids: ["WI-0001"] # report-only projection; oracle recomputes it
+  navigation_only: true
+owner_review: "pending" # pending | accepted | rejected

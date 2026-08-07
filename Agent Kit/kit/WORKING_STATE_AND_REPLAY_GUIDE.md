@@ -198,3 +198,7 @@ If the host platform may have summarized or truncated the chat, Working State be
 The agent must not use platform summary as project truth. It should load the latest compatible Working State checkpoint, current Project Map state, Source Authority, active task/checkpoint/handoff, and only policy-allowed memory units.
 
 If this is not enough to continue safely, the correct answer is `missing evidence`, not reconstruction from chat recall.
+
+## v5 replay fields
+
+WorkingStateV3 and HandoffV3 carry the workflow mode and typed refs, graph frontier inputs, blockers, and one next safe step. The referenced artifacts preserve open challenge, probe, and review state. Stored frontier inputs are replay evidence, not a scheduler decision. On resume, recompute projections, validate receipts and terminal commitments, and never repeat a side effect or promote a probe artifact.

@@ -111,3 +111,5 @@ Owner approves.
 6. Owner approves map update.
 7. Eval trigger is checked.
 ```
+
+For v5 review work, the reviewer receives the result or diff, acceptance criteria, and intentional-decision refs, but not the author's reasoning history. The reviewer must not mutate or repair. Significant delivery uses a fresh-context receipt; high or irreversible delivery uses an adversarial receipt. Any repair is a separate owner-authorized task.

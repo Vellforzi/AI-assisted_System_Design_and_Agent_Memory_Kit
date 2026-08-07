@@ -1,0 +1,20 @@
+# Project Map/reviews/REV-0001.yaml
+schema_version: "1.0"
+review_id: "REV-0001"
+task_id: "TASK-0001"
+profile: "fresh_context" # fresh_context | adversarial
+result_refs: ["git:diff-or-result"]
+criteria_refs: ["TASK-0001#done_definition"]
+intentional_decision_refs: []
+author_reasoning_included: false
+mutation_performed: false
+repair_authorized: false
+status: "findings" # passed | findings | inconclusive
+findings:
+  - id: "FIND-0001"
+    category: "correctness" # correctness | scope | contract | style
+    severity: "advisory" # critical | high | normal | advisory
+    statement: "<finding>"
+    evidence_refs: ["<diff/test ref>"]
+    blocking: false
+owner_disposition: "pending" # pending | accepted | rejected

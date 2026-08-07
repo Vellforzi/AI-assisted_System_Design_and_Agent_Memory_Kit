@@ -458,3 +458,27 @@ If Project Map, `AGENTS.md`, `current_state`, or source authority references an 
 ## Cursor settings rule
 
 For owner-controlled projects, Cursor must not default to `Run Everything`. Prefer Auto-review or stricter mode with protections on, narrow allowlists, visible usage summary, and explicit apply scope for file changes.
+
+---
+
+## v4 commitment, verification, and context protocol
+
+1. Open a commitment before a consequential planned action and link it from TaskContractV2.
+2. Settle it exactly once as success, failure, or cancelled. A settlement requires outcome evidence and provenance (`self`, `runtime`, `external`, or `owner`).
+3. Preserve failures and terminal records. Never use self-grade to promote memory automatically.
+4. A verified claim requires direct evidence or a passing VerificationReceiptV1.
+5. Check side-effect receipts and open commitments before replay or handoff.
+6. Retrieve metadata first, then bounded excerpts or structured extracts. Full loading of a large source requires an explicit profile or owner trigger.
+7. Apply the context budget before assembly; compact while preserving owner instructions, authority, IDs, evidence, commitments, receipts, blockers, and the next safe step.
+8. Generated summaries and extracts are navigation-only and never become source of truth by themselves.
+
+## v5 conditionally activated workflow protocol
+
+1. Classify mode, task scale, risk, delivery strategy, review policy, capability impact, and bounded contexts in TaskContractV3. Leave unsupported values `unknown`.
+2. Keep routine single-session work artifact-light. Multi-session delivery requires a WorkItemGraph; the oracle derives its frontier and never activates it.
+3. Close all PlanChallenge questions and record owner-attested shared understanding before high/irreversible stage or apply.
+4. Use fresh-context review for significant delivery and adversarial review for high/irreversible work. Findings grant neither repair permission nor project-truth status.
+5. Exploration, triage, review, and design-probe modes do not perform product delivery mutations. Probe artifacts are disposable and cannot be reused in production.
+6. A capability can become passing only from an end-to-end VerificationReceiptV2. Later failing evidence appends an assessment and restores failing status.
+7. DomainLanguage authority is terminology-only. Conflicts block automatic normalization and require owner review.
+8. Preserve workflow refs, blockers, projection inputs, and one next safe step in HandoffV3 and WorkingStateV3.

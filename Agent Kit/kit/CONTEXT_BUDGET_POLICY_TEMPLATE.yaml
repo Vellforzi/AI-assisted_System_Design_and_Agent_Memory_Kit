@@ -1,0 +1,39 @@
+# Project Map/context_budget_policy.yaml
+# Report-only limits for deterministic context assembly. Values are examples.
+
+schema_version: "1.0"
+token_estimation_method: "utf8_bytes_div_4_ceiling"
+always_loaded:
+  max_sources: 6
+  max_estimated_tokens: 12000
+  sources:
+    - "AGENTS.md"
+    - "docs/NEXT_STEPS.md"
+retrieval_profiles:
+  startup:
+    max_sources: 8
+    max_estimated_tokens: 16000
+  implementation:
+    max_sources: 14
+    max_estimated_tokens: 32000
+  review:
+    max_sources: 16
+    max_estimated_tokens: 36000
+absolute_max_estimated_tokens: 48000
+relative_growth_threshold_percent: 20
+overflow_rule: "fail_and_report_largest_sources"
+compaction_preservation_rules:
+  - "Preserve owner instructions, source authority, open commitments, receipts, blockers, and next safe step."
+  - "Keep IDs and evidence references stable."
+  - "Treat generated summaries and extracts as navigation_only, never as source of truth."
+excluded_path_globs:
+  - ".git/**"
+  - ".env"
+  - ".env.*"
+  - "**/.env"
+  - "**/.env.*"
+  - "data/**"
+  - "output/**"
+  - "**/*.sqlite"
+  - "**/*.db"
+  - "**/*.log"

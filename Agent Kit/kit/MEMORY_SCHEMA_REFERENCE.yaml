@@ -1,7 +1,7 @@
-# Agent Memory Kit schema reference v3.8.0
+# Agent Memory Kit schema reference v5.0.0
 # This is a reference, not a strict runtime schema. Projects may adapt it.
 
-schema_version: "3.4.0"
+schema_version: "4.0.0"
 
 memory_unit:
   required_fields:
@@ -266,4 +266,43 @@ eval_result_gate:
   critical_failure_in_grounding: "hold_release"
   critical_failure_in_side_effect_safety: "hold_release"
   repeated_high_failure: "repair_before_trusting"
+
+project_artifact_contract:
+  schema_draft: "https://json-schema.org/draft/2020-12/schema"
+  location: "project_artifact_contract_v2/schemas"
+  previous_contract_location: "project_artifact_contract_v1/schemas"
+  fail_closed_on_unknown_version_or_field: true
+  context_contract_v1_compatibility: "unchanged"
+  artifacts:
+    - TaskContractV3
+    - ClaimLedgerV2
+    - HandoffV3
+    - WorkingStateV3
+    - CommitmentLedgerV2
+    - MemoryDeltaV1
+    - SideEffectReceiptV1
+    - VerificationReceiptV2
+    - WorkItemGraphV1
+    - PlanChallengeV1
+    - ReviewReceiptV1
+    - ExplorationMapV1
+    - TriageLedgerV1
+    - DesignProbeV1
+    - CapabilityRegistryV1
+    - DomainLanguageV1
+  preserved_v4_context_artifacts:
+    - ArtifactDescriptorV1
+    - ArtifactExcerptV1
+  activation:
+    routine_single_session: "no additional workflow artifact required"
+    delivery_multi_session: "WorkItemGraphV1 required"
+    high_or_irreversible: "accepted PlanChallengeV1 and adversarial ReviewReceiptV1 required"
+    significant_delivery: "fresh-context ReviewReceiptV1 required"
+    capability_adds_or_changes: "CapabilityRegistryV1 refs and evidence-based assessment required"
+  reality_gate:
+    terminal_commitment_states: [settled_success, settled_failure, cancelled]
+    terminal_records_rewritten: false
+    settlement_evidence_required: true
+    self_grade_allows_automatic_promotion: false
+    owner_approval_required_for_promotion: true
 

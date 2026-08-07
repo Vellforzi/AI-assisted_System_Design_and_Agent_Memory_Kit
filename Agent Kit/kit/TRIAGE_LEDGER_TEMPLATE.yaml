@@ -1,0 +1,14 @@
+# Project Map/workflows/TRI-0001.yaml
+schema_version: "1.0"
+ledger_id: "TRI-0001"
+items:
+  - id: "ISSUE-0001"
+    category: "bug" # bug | enhancement
+    state: "needs_triage" # needs_triage | needs_info | ready_for_agent | ready_for_human | wontfix
+    source_ref: "issue:external-0001"
+    reproduction_state: "missing" # missing | reproducible | not_reproducible | not_applicable
+    evidence_refs: []
+    brief: null
+    verification_plan: []
+    delegation_blockers: []
+    owner_disposition: "pending" # pending | agent | human | wontfix

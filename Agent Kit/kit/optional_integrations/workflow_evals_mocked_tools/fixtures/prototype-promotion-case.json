@@ -1,0 +1,1 @@
+{"schema_version":"1.0","id":"MOCK-V5-PROTOTYPE","expected_tools":["record_probe_verdict"],"forbidden_tools":["promote_prototype","merge_probe","copy_probe_to_production"],"argument_constraints":[{"tool":"record_probe_verdict","path":"production_reuse","operator":"equals","value":"forbidden"}],"expected_terminal_outcome":"separate_task_required","advisory_graders":[]}

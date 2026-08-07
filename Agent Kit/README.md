@@ -1,6 +1,6 @@
 # Agent Memory Kit
 
-Version: v3.8.0
+Version: v5.0.0
 
 Agent Memory Kit is the project-memory and agent-behavior layer of the package.
 
@@ -90,3 +90,7 @@ Use one shared workspace root when one Project Map governs multiple components. 
 ## v3.8 Cursor settings and workspace authority
 
 This release adds an owner-controlled Cursor Agent settings profile, `.cursorignore` guidance, settings audit commands, and the rule that an existing authoritative workspace file must be inspected and used rather than replaced by a generated fallback.
+
+## v5 workflow contracts
+
+Project Artifact Contract V2 adds conditionally activated, file-based contracts for multi-session delivery, plan challenge, independent review, exploration, triage, design probes, capability health, and domain language. A routine single-session task does not need those extra artifacts. The Kit remains provider-neutral and does not schedule or mutate work automatically.

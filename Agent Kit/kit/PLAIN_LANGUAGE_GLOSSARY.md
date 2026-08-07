@@ -42,6 +42,26 @@ Purpose: explain common terms in simple language.
 
 ## Additional v3.8 terms
 
+## Additional v4.0 terms
+
+- **Commitment** — a pre-action record connecting a goal and retrieved context to a planned action and expected outcome.
+- **Settlement** — immutable terminal evidence that a commitment succeeded, failed, or was cancelled.
+- **Verification receipt** — a structured record of a deterministic check supporting one or more claims.
+- **Context budget** — explicit source/token limits applied before assembling context.
+- **Progressive disclosure** — metadata-first access followed by bounded excerpts and explicit full loading.
+- **Policy canary** — an offline baseline/candidate comparison proposal; this Kit never sends live traffic.
+
+## Additional v5.0 terms
+
+- **Workflow profile** — the TaskContractV3 classification that activates only the contracts relevant to a task.
+- **Work-item graph** — vertical, independently verifiable work connected by blockers; its frontier is calculated, not scheduled.
+- **Plan challenge** — an owner decision gate that keeps only one unresolved question active at once.
+- **Fresh-context review** — result review without the author's reasoning history or mutation authority.
+- **Exploration map** — a bounded map of destination, decisions, fog, and investigations that cannot mutate the product.
+- **Design probe** — a disposable isolated artifact answering one design question; production reuse is forbidden.
+- **Capability assessment** — an append-only observation of capability health; passing requires end-to-end evidence.
+- **Bounded context** — a domain boundary within which terms have canonical meanings.
+
 ### Workspace
 
 The folder or workspace file the IDE opens. It defines what the agent can see as the current project area. It is not the same as permission.

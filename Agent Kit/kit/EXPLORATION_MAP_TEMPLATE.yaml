@@ -1,0 +1,25 @@
+# Project Map/workflows/EXP-0001.yaml
+schema_version: "1.0"
+map_id: "EXP-0001"
+task_id: "TASK-0001"
+destination: "<decision or delivery-ready destination>"
+status: "open" # open | ready_for_delivery | cancelled
+decisions: []
+out_of_scope: ["<explicit non-goal>"]
+fog:
+  - id: "FOG-0001"
+    statement: "<unresolved unknown>"
+    state: "unresolved" # unresolved | resolved | out_of_scope
+items:
+  - id: "INV-0001"
+    type: "research" # research | prototype | grilling | owner_task
+    question: "<bounded investigation question>"
+    status: "open" # open | blocked | active | resolved | cancelled
+    blocked_by: []
+    evidence_refs: []
+    decision_ref: null
+frontier_assertion:
+  item_ids: ["INV-0001"]
+  navigation_only: true
+product_mutation_allowed: false
+owner_acceptance: "pending"

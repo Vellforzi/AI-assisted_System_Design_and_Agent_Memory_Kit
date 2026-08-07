@@ -1,7 +1,13 @@
 # Project Map/claim_ledger.yaml
 # Runtime or review artifact for checking that final project claims are supported.
 
-schema_version: "1.0"
+schema_version: "2.0"
+governance:
+  contract_version: "2.0"
+  supersedes: "ClaimLedgerV1"
+  effective_from: "<YYYY-MM-DD>"
+  compatibility: "breaking"
+  migration_note: "Add verification_receipt_refs; verified claims require evidence or a passing receipt."
 project_id: "<project-id>"
 task_id: "<TASK-id-or-null>"
 created_at: "<YYYY-MM-DD>"
@@ -19,6 +25,8 @@ claims:
     status: "verified" # verified | inference | missing_evidence | conflict | rejected | removed
     evidence_refs:
       - "<FACT-0001 or file:line or tool-output-id>"
+    verification_receipt_refs:
+      - "VR-0001"
     source_authority_rank: 2
     confidence: "high" # low | medium | high
     allowed_in_final_answer: true
@@ -30,6 +38,7 @@ claims:
     claim_type: "project_fact"
     status: "missing_evidence"
     evidence_refs: []
+    verification_receipt_refs: []
     source_authority_rank: null
     confidence: "low"
     allowed_in_final_answer: false
@@ -39,6 +48,7 @@ claims:
 final_answer_gate:
   pass_conditions:
     - "No project_fact claim has empty evidence_refs."
+    - "Every verified claim has evidence_refs or verification_receipt_refs."
     - "No stale or superseded fact is used as current truth."
     - "No external research output is promoted to project fact without owner approval or project evidence."
     - "All inferences are labeled if they affect the recommendation."

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:agent-memory-kit:project-artifact:v1:ArtifactDescriptorV1",
+  "title": "ArtifactDescriptorV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "artifact_id", "path", "media_type", "byte_count", "sha256", "authority", "access_strategy"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "artifact_id": {"type": "string", "minLength": 1},
+    "path": {"type": "string", "minLength": 1},
+    "media_type": {"type": "string", "minLength": 1},
+    "byte_count": {"type": "integer", "minimum": 0},
+    "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "authority": {"type": "string", "minLength": 1},
+    "access_strategy": {"enum": ["metadata_only", "bounded_excerpt", "structured_extract", "full_if_explicit"]}
+  }
+}

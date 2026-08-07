@@ -1,0 +1,12 @@
+{
+  "TaskContractV2":{"schema_version":"1.0","task_id":"TASK-0001","status":"active","intent":"plan","permission_mode":"read-only","goal":"","scope":{"project_map":[],"project_files":[],"external_sources":[]},"commitment_refs":[],"expected_outcomes":[],"stop_conditions":[],"rollback_or_recovery":[],"reversibility":"maybe","expected_side_effects":[],"done_definition":[],"unknown":true},
+  "ClaimLedgerV2":{"schema_version":"2.0","project_id":"demo","claims":[{"id":"CLM-0001","statement":"Unsupported.","claim_type":"project_fact","status":"verified","evidence_refs":[],"verification_receipt_refs":[],"allowed_in_final_answer":true}],"final_answer_gate":{"if_gate_fails":"ignore"}},
+  "HandoffV2":{"schema_version":"9.0","unknown":true},
+  "WorkingStateV2":{"schema_version":"2.0","unknown":true},
+  "CommitmentLedgerV1":{"schema_version":"1.0","project_id":"demo","commitments":[{"id":"COM-0001","task_id":"TASK-0001","goal":"Act.","retrieved_context_refs":[],"planned_action":"Act.","expected_outcome":"Works.","status":"settled_success","settlement":{"provenance_tier":"self","outcome":"success","evidence_refs":[]},"memory_credit_state":"approved"}]},
+  "MemoryDeltaV1":{"schema_version":"1.0","delta_id":"MD-0001","task_id":"TASK-1","status":"approved","operations":[],"commitment_refs":[],"owner_review":"approved","unknown":true},
+  "SideEffectReceiptV1":{"schema_version":"2.0","receipt_id":"SE-1","task_id":"TASK-1","action_id":"A","idempotency_key":"x","status":"completed","target":"x","evidence_refs":[],"safe_to_repeat":false},
+  "VerificationReceiptV1":{"schema_version":"1.0","receipt_id":"VR-1","task_id":"TASK-1","claim_ids":[],"verifier_type":"self","status":"passed","evidence_refs":[],"verified_at":""},
+  "ArtifactDescriptorV1":{"schema_version":"2.0","artifact_id":"ART-1","path":"x","media_type":"text/plain","byte_count":-1,"sha256":"bad","authority":"unknown","access_strategy":"all"},
+  "ArtifactExcerptV1":{"schema_version":"1.0","artifact_id":"ART-1","path":"large.md","start_line":4,"end_line":2,"byte_count":10,"content":"bad","truncated":false,"authority":"summary","navigation_only":false}
+}

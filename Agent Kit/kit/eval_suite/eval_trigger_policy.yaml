@@ -1,5 +1,5 @@
 schema_version: "1.0"
-policy_id: "AMK-EVAL-TRIGGERS-v3.8.0"
+policy_id: "AMK-EVAL-TRIGGERS-v5.0.0"
 status: "starter_policy"
 
 principle: >
@@ -25,6 +25,37 @@ automation_levels:
     recommended_for_solo_owner: false
 
 triggers:
+  project_artifact_contract_changed:
+    paths:
+      - "Project Map/tasks/**"
+      - "Project Map/claim_ledger.yaml"
+      - "Project Map/permissions_policy.yaml"
+      - "Project Map/retrieval_policy.yaml"
+      - "Project Map/commitment_ledger.yaml"
+      - "Project Map/working_state.yaml"
+      - "Project Map/memory_lifecycle_policy.yaml"
+      - "Project Map/workflows/**"
+      - "Project Map/reviews/**"
+      - "Project Map/capability_registry.yaml"
+      - "Project Map/domain_language.yaml"
+    required_categories:
+      - "long_task_control"
+      - "claim_ledger"
+      - "owner_control"
+      - "retrieval"
+      - "side_effect_safety"
+      - "commitment_settlement"
+      - "contract_lifecycle"
+      - "context_budget"
+      - "work_item_graph"
+      - "plan_challenge"
+      - "independent_review"
+      - "exploration"
+      - "triage"
+      - "design_probe"
+      - "capability_registry"
+      - "domain_language"
+    minimum_run: "category_and_contract_suite"
   instruction_file_changed:
     examples:
       - "AGENTS.md"

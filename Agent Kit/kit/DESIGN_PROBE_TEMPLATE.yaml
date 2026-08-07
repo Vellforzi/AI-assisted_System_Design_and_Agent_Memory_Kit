@@ -1,0 +1,15 @@
+# Project Map/workflows/DP-0001.yaml
+schema_version: "1.0"
+probe_id: "DP-0001"
+task_id: "TASK-0001"
+question: "<one design question>"
+scenarios: ["<bounded scenario>"]
+artifact_ref: "scratch/probes/DP-0001"
+isolation_scope: "scratch_only"
+status: "planned" # planned | running | answered | inconclusive | cancelled
+verdict: null
+evidence_refs: []
+provenance_tier: "unknown" # self | runtime | external | owner | unknown
+production_reuse: "forbidden"
+production_task_ref: null
+cleanup_state: "not_started" # not_started | retained_as_evidence | removed | unknown

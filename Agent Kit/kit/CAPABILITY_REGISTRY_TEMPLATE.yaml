@@ -1,0 +1,14 @@
+# Project Map/capability_registry.yaml
+schema_version: "1.0"
+registry_id: "CAPREG-0001"
+definitions:
+  - id: "CAP-0001"
+    description: "<externally meaningful capability>"
+    verification_steps: ["<end-to-end verification step>"]
+    lifecycle: "current" # current | deprecated
+assessments: [] # append-only; passing requires an end_to_end VerificationReceiptV2
+current_status_assertion:
+  items:
+    - capability_id: "CAP-0001"
+      status: "unknown" # unknown | failing | passing | deprecated
+  navigation_only: true

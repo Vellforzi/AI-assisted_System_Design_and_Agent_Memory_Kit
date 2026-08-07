@@ -1,0 +1,12 @@
+# Project Map/receipts/VR-0001.yaml — VerificationReceiptV2
+schema_version: "2.0"
+receipt_id: "VR-0001"
+task_id: "TASK-0001"
+subject_refs: ["TASK-0001"]
+claim_ids: []
+verifier_type: "project_test" # project_test | tool_output | external_source | owner | human_oracle
+verification_level: "unit" # unit | integration | end_to_end | owner_observation | unknown
+environment_ref: null
+status: "inconclusive" # passed | failed | inconclusive | unsupported
+evidence_refs: []
+verified_at: "<ISO-8601 timestamp>"

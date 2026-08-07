@@ -1,0 +1,19 @@
+{
+  "suite_id":"AMK-PROJECT-ARTIFACT-V2",
+  "schema_files":{"TaskContractV3":"../schemas/task-contract-v3.schema.json","HandoffV3":"../schemas/handoff-v3.schema.json","WorkingStateV3":"../schemas/working-state-v3.schema.json","CommitmentLedgerV2":"../schemas/commitment-ledger-v2.schema.json","VerificationReceiptV2":"../schemas/verification-receipt-v2.schema.json","ClaimLedgerV2":"../../project_artifact_contract_v1/schemas/claim-ledger-v2.schema.json","MemoryDeltaV1":"../../project_artifact_contract_v1/schemas/memory-delta-v1.schema.json","SideEffectReceiptV1":"../../project_artifact_contract_v1/schemas/side-effect-receipt-v1.schema.json","WorkItemGraphV1":"../schemas/work-item-graph-v1.schema.json","PlanChallengeV1":"../schemas/plan-challenge-v1.schema.json","ReviewReceiptV1":"../schemas/review-receipt-v1.schema.json","ExplorationMapV1":"../schemas/exploration-map-v1.schema.json","TriageLedgerV1":"../schemas/triage-ledger-v1.schema.json","DesignProbeV1":"../schemas/design-probe-v1.schema.json","CapabilityRegistryV1":"../schemas/capability-registry-v1.schema.json","DomainLanguageV1":"../schemas/domain-language-v1.schema.json"},
+  "valid_examples":"../examples/valid/project-artifacts-v2.json",
+  "invalid_examples":"../examples/invalid/project-artifacts-v2.json",
+  "semantic_cases":[
+    {"case_id":"task-activation","contract":"TaskContractV3","expected_reason_codes":["TASK_CAPABILITY_REGISTRY_REQUIRED","TASK_HIGH_RISK_ADVERSARIAL_REVIEW_REQUIRED","TASK_HIGH_RISK_CHALLENGE_REQUIRED","TASK_MULTI_SESSION_GRAPH_REQUIRED","TASK_MULTI_SESSION_TRACER_GRAPH_REQUIRED"]},
+    {"case_id":"graph-invalid","contract":"WorkItemGraphV1","expected_reason_codes":["WORK_GRAPH_CYCLE","WORK_GRAPH_FRONTIER_MISMATCH","WORK_GRAPH_UNKNOWN_BLOCKER","WORK_ITEM_REQUIRES_SPLIT"]},
+    {"case_id":"challenge-invalid","contract":"PlanChallengeV1","expected_reason_codes":["PLAN_CHALLENGE_ACCEPTED_WITH_OPEN_QUESTIONS","PLAN_CHALLENGE_MULTIPLE_OPEN_QUESTIONS","PLAN_CHALLENGE_OWNER_ATTESTATION_REQUIRED"]},
+    {"case_id":"review-invalid","contract":"ReviewReceiptV1","expected_reason_codes":["REVIEW_AUTHOR_REASONING_FORBIDDEN","REVIEW_MUTATION_FORBIDDEN","REVIEW_REPAIR_AUTHORITY_FORBIDDEN"]},
+    {"case_id":"exploration-invalid","contract":"ExplorationMapV1","expected_reason_codes":["EXPLORATION_DELIVERY_MUTATION_FORBIDDEN","EXPLORATION_FRONTIER_MISMATCH","EXPLORATION_READY_WITH_OPEN_WORK","EXPLORATION_READY_WITH_UNRESOLVED_FOG","EXPLORATION_READY_WITHOUT_OWNER_ACCEPTANCE"]},
+    {"case_id":"triage-invalid","contract":"TriageLedgerV1","expected_reason_codes":["TRIAGE_AGENT_READY_BLOCKED","TRIAGE_AGENT_READY_EVIDENCE_REQUIRED","TRIAGE_AGENT_READY_OWNER_DISPOSITION_REQUIRED","TRIAGE_AGENT_READY_VERIFICATION_REQUIRED"]},
+    {"case_id":"probe-invalid","contract":"DesignProbeV1","expected_reason_codes":["DESIGN_PROBE_PRODUCTION_REUSE_FORBIDDEN","DESIGN_PROBE_TERMINAL_EVIDENCE_REQUIRED","DESIGN_PROBE_TERMINAL_PROVENANCE_REQUIRED"]},
+    {"case_id":"capability-invalid","contract":"CapabilityRegistryV1","expected_reason_codes":["CAPABILITY_END_TO_END_RECEIPT_REQUIRED","CAPABILITY_STATUS_ASSERTION_MISMATCH"]},
+    {"case_id":"domain-invalid","contract":"DomainLanguageV1","expected_reason_codes":["DOMAIN_CANONICAL_TERM_DUPLICATE","DOMAIN_CONFLICT_REQUIRES_OWNER_REVIEW","DOMAIN_CONTEXT_REFERENCE_UNKNOWN","DOMAIN_FORBIDDEN_SYNONYM_CONFLICT"]},
+    {"case_id":"commitment-invalid","contract":"CommitmentLedgerV2","expected_reason_codes":["SELF_GRADE_CANNOT_APPROVE_MEMORY","SETTLEMENT_EVIDENCE_REQUIRED","SETTLEMENT_OUTCOME_STATUS_MISMATCH"]},
+    {"case_id":"verification-invalid","contract":"VerificationReceiptV2","expected_reason_codes":["VERIFICATION_PASS_EVIDENCE_REQUIRED"]}
+  ]
+}

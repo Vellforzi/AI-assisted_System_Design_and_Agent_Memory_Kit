@@ -1,0 +1,11 @@
+# Project Map/receipts/SE-0001.yaml
+schema_version: "1.0"
+receipt_id: "SE-0001"
+task_id: "TASK-0001"
+action_id: "ACT-0001"
+idempotency_key: "<stable-task-action-key>"
+status: "completed" # completed | failed | ambiguous | void
+target: "<exact external or project target>"
+evidence_refs:
+  - "<tool-output-or-project-ref>"
+safe_to_repeat: false

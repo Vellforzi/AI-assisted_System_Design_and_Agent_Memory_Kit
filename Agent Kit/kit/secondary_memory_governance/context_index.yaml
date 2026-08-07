@@ -66,6 +66,13 @@ entry_schema:
     trigger_only: "Read only after explicit owner scope or a matching task trigger with include_triggered."
     secondary_memory_triggered: "Read only for Project Map, source-authority, retrieval-routing, memory-update, or drift-analysis tasks."
     never_default: "Do not read by default; use only for audit, repair, or explicit scope."
+  optional_fields:
+    access_strategy: "Progressive-disclosure strategy; omission means bounded_excerpt."
+  access_strategy_values:
+    metadata_only: "Return descriptor metadata without opening content."
+    bounded_excerpt: "Read only within explicit byte and line limits."
+    structured_extract: "Return a bounded structure-aware projection."
+    full_if_explicit: "Permit full content only after an explicit profile or owner trigger."
 
 task_profiles:
   startup:
