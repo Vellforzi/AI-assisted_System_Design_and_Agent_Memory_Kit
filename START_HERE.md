@@ -139,7 +139,10 @@ For an existing project with code, docs, and project-specific agent instructions
 5. treat Project Map as secondary memory unless the project's authority policy says otherwise;
 6. do not add runtime memory, task trees, handoff trees, vector databases, MCP servers, or a replacement `AGENTS.md` unless explicitly requested later.
 7. add `Agent Kit/kit/optional_integrations/` modules only when the project uses
-   ChatGPT Project sources, cost/model routing guidance, or Cursor settings.
+   ChatGPT Project sources, cost/model routing guidance, Cursor settings, or
+   an owner-approved documentation-governance policy. Optional modules can
+   bring their own tooling dependencies; the core Kit remains language-agnostic
+   and Python is optional.
 
 For a new empty project that lacks operational docs:
 

@@ -1,0 +1,3 @@
+#!/bin/sh
+# Full documentation gate; shared command logic lives in just.
+exec just pre-push

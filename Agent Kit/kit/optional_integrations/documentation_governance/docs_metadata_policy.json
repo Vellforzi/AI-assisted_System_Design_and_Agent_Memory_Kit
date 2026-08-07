@@ -1,0 +1,69 @@
+{
+  "policy_id": "documentation-governance-metadata-v1",
+  "status": "optional_advisory",
+  "default_activation": "off",
+  "runtime_impact": "none_until_explicit_owner_adoption",
+  "authority_principle": "Operational sources win; Project Map is secondary navigation.",
+  "zones": {
+    "docs": {
+      "knowledge_mode": "current_state",
+      "authority": "operational_documentation",
+      "conflict_rule": "Verify against current owner instructions, code, tests, and other operational sources."
+    },
+    "specs/active": {
+      "knowledge_mode": "current_requirements",
+      "authority": "approved_current_requirements",
+      "conflict_rule": "Governs intended scope, not unverified present runtime behavior."
+    },
+    "specs/archive": {
+      "knowledge_mode": "immutable_history",
+      "authority": "historical_record",
+      "mutation_rule": "Preserve; use a successor specification for later changes."
+    },
+    "docs/adr": {
+      "knowledge_mode": "immutable_history",
+      "authority": "accepted_decision_record",
+      "mutation_rule": "Preserve; use a linked successor ADR to supersede or clarify."
+    },
+    ".work": {
+      "knowledge_mode": "ephemeral_execution_state",
+      "authority": "non_authoritative_task_local_context",
+      "promotion_rule": "Explicitly review and promote durable facts to the appropriate current source."
+    },
+    "docs/project_map": {
+      "knowledge_mode": "secondary_navigation",
+      "authority": "secondary_memory_and_navigation_only",
+      "conflict_rule": "Cannot override operational sources, active requirements, code, tests, or owner instructions."
+    }
+  },
+  "metadata": {
+    "policy": "additive_and_document_role_appropriate",
+    "required_on_every_document": false,
+    "frontmatter_field_count_requirement": null,
+    "fields": {
+      "last_verified": {
+        "type": "date",
+        "format": "YYYY-MM-DD",
+        "meaning": "Date relevant claims were checked against required evidence.",
+        "required": false,
+        "limitations": "Does not prove correctness or replace cited evidence."
+      },
+      "source_refs": {
+        "type": "array_or_local_equivalent",
+        "meaning": "Evidence or authoritative sources used for a current-state claim.",
+        "required": false
+      },
+      "generated_by": {
+        "type": "string",
+        "meaning": "Authoritative generator identifier for a generated block or document.",
+        "required": false
+      }
+    }
+  },
+  "generated_block_ownership": {
+    "one_authoritative_generator": true,
+    "source_of_change": "generator_input_or_source_data",
+    "manual_edits_inside_generated_blocks": "non_durable_unless_reflected_in_generator_source",
+    "generated_output_authority": "derived_not_independent"
+  }
+}

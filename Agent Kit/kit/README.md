@@ -73,7 +73,7 @@ Evals do not run automatically unless the owner wires them to a script, CI job, 
 |---|---|
 | `OWNER_USAGE_GUIDE.md` | Day-to-day owner workflow and safe prompts. |
 | `secondary_memory_governance/` | Single repo-centric secondary-memory governance baseline: secondary Project Map, operational source authority, context index, receipts, smoke checks, and documentation harnesses. |
-| `optional_integrations/` | Optional modules for ChatGPT Project sources, cost/model routing, and Cursor settings. They do not change core behavior. |
+| `optional_integrations/` | Optional modules for ChatGPT Project sources, cost/model routing, Cursor settings, and owner-adopted documentation governance. They do not change core behavior or the baseline. |
 | `PLATFORM_CONTEXT_COMPACTION_BOUNDARY.md` | Platform summaries, compacted chat history, and provider memory are non-authoritative hints, not project truth. |
 | `CURSOR_INTEGRATION_OWNER_GUIDE.md` | How to use the kit with Cursor Rules, Commands, Skills, and Subagents. |
 | `cursor/` | Cursor Integration Pack: rules, commands, skills, and read-only subagents. |
@@ -193,9 +193,13 @@ Install these only after the core baseline is working:
 - `optional_integrations/workflow_evals_mocked_tools/` - recorded mock-trace checks.
 - `optional_integrations/tool_capability_governance/` - report-only risk classification.
 - `optional_integrations/policy_canary/` - offline policy comparison validation.
+- `optional_integrations/documentation_governance/` - owner-adopted policy and optional report-first tooling for documentation zones, generated blocks, and review boundaries. Read `ADOPTION_GUIDE.md` for adoption and rollback.
 
 These modules are intentionally outside `secondary_memory_governance/`. They
-must not become required startup context.
+must not become required startup context. Optional tooling may have its own
+dependencies; the core Kit remains language-agnostic and Python-optional. The
+documentation-governance checker is a dependency-free Python 3 convenience
+tool only for adopters who choose to run it.
 
 ---
 

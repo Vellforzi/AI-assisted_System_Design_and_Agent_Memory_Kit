@@ -1,0 +1,49 @@
+# Optional strict MkDocs profile. Copy to the adopting repository and adjust
+# site_name, repo_url, and nav deliberately; it is not active by default.
+site_name: Documentation
+docs_dir: docs
+site_dir: site
+strict: true
+
+theme:
+  name: material
+  custom_dir: overrides
+  features:
+    - content.code.copy
+    - content.code.annotate
+
+plugins:
+  - search
+  - exclude:
+      glob:
+        - .work/**
+        - '**/.work/**'
+        - '**/receipts/**'
+        - '**/*receipt*'
+        - '**/secrets/**'
+        - '**/.secrets/**'
+        - '**/*.secret.*'
+        - '**/*.tmp'
+        - '**/*.temp'
+        - '**/~*'
+  - git-revision-date-localized:
+      type: date
+      enable_creation_date: false
+      fallback_to_build_date: false
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+
+extra_javascript:
+  - https://unpkg.com/mermaid@10.9.3/dist/mermaid.min.js
+  - javascripts/mermaid-init.js

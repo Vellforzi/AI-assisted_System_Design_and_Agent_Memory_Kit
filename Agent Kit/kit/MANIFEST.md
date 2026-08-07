@@ -99,6 +99,13 @@ Package purpose: portable starter guide and memory operating layer for using AI 
 - `Agent Kit/kit/optional_integrations/chatgpt_project_sources/chatgpt_project_sources_policy.md` - safety and manifest policy for ChatGPT Project sources.
 - `Agent Kit/kit/optional_integrations/cost_model_routing/README.md` - optional cost/model routing guide.
 - `Agent Kit/kit/optional_integrations/cursor_settings/README.md` - optional Cursor settings integration guide.
+- `Agent Kit/kit/optional_integrations/documentation_governance/README.md` - optional, owner-adopted documentation-governance policy; it remains outside the core baseline.
+- `Agent Kit/kit/optional_integrations/documentation_governance/ADOPTION_GUIDE.md` - adoption, optional Python tooling, validation, and rollback guidance.
+- `Agent Kit/kit/optional_integrations/documentation_governance/` - optional policy, templates, report-first checker, automation examples, and isolated fixtures; its tooling dependencies apply only when an adopter chooses to use them.
+
+Optional integrations do not alter the core Kit's language-agnostic,
+Python-optional design. In particular, the documentation-governance checker is
+a dependency-free Python 3 convenience tool, not a core runtime dependency.
 
 ---
 

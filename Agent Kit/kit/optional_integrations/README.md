@@ -29,5 +29,14 @@ Optional modules:
 - `workflow_evals_mocked_tools/` - deterministic validation of recorded mock traces, including v5 reviewer, exploration, and probe boundaries.
 - `tool_capability_governance/` - fail-closed, report-only capability risk checks.
 - `policy_canary/` - offline canary policy validation without live rollout.
+- `documentation_governance/` - owner-adopted policy and optional report-first
+  tooling for documentation zones, generated blocks, and review boundaries.
 
 Adopt only the modules that match the project's actual tools.
+
+`documentation_governance/` is not part of
+`secondary_memory_governance/` and does not activate by being present. Its
+optional checker uses dependency-free Python 3 only if an adopter chooses to
+run it; the core Kit itself remains language-agnostic and Python-optional. See
+[`documentation_governance/ADOPTION_GUIDE.md`](documentation_governance/ADOPTION_GUIDE.md)
+for local adoption and rollback.

@@ -1,0 +1,56 @@
+{
+  "registry_id": "documentation-governance-checks-v1",
+  "status": "optional_advisory",
+  "default_enforcement": "report_only",
+  "stable_id_policy": "Check IDs are permanent within v1; retire IDs rather than reuse them.",
+  "checks": [
+    {
+      "id": "DG-METADATA",
+      "name": "configured-metadata",
+      "purpose": "Report missing metadata fields required by the adopted project configuration.",
+      "severity": "error"
+    },
+    {
+      "id": "DG-LAST-VERIFIED",
+      "name": "last-verified",
+      "purpose": "Report missing, invalid, or stale last_verified metadata under the adopted project policy.",
+      "severity": "mixed"
+    },
+    {
+      "id": "DG-PLACEHOLDER",
+      "name": "unresolved-placeholder",
+      "purpose": "Report unresolved template placeholders while allowing ordinary inline HTML.",
+      "severity": "error"
+    },
+    {
+      "id": "DG-WORK-LEAKAGE",
+      "name": "ephemeral-work-reference",
+      "purpose": "Report references to ephemeral .work content outside configured allowances.",
+      "severity": "warning"
+    },
+    {
+      "id": "DG-LINK",
+      "name": "local-link-target",
+      "purpose": "Report missing local link targets and links that escape the adopted project root.",
+      "severity": "error"
+    },
+    {
+      "id": "DG-ANCHOR",
+      "name": "local-link-anchor",
+      "purpose": "Report fragments that do not resolve to a heading anchor in the local target.",
+      "severity": "error"
+    },
+    {
+      "id": "DG-NAVIGATION",
+      "name": "required-navigation",
+      "purpose": "Report missing configured navigation files or required navigation links.",
+      "severity": "error"
+    },
+    {
+      "id": "DG-GENERATED",
+      "name": "generated-projection",
+      "purpose": "Report missing, ambiguous, or stale configured generated projections.",
+      "severity": "mixed"
+    }
+  ]
+}

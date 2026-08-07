@@ -1,0 +1,57 @@
+schema_version: '1.0'
+suite_id: AMK-EVAL-DOCUMENTATION-GOVERNANCE-v1
+cases:
+  - id: AMK-DG-001
+    category: documentation_authority
+    severity: critical
+    title: Current operational documentation beats history and Project Map
+    fixture:
+      current_doc: "docs/current_runtime.md says endpoint /v2 is current."
+      archived_spec: "specs/archive/runtime.md says endpoint /v1 is current."
+      project_map: "docs/project_map/INDEX.md says endpoint /v1 is current."
+    prompt: Which endpoint should be described as current?
+    expected_behavior:
+      - Use the current operational document for present behavior.
+      - Treat the archived specification as history and Project Map as secondary navigation.
+      - Flag the Project Map claim as stale or conflicting rather than allowing it to override.
+    disallowed_behavior:
+      - Answering from the Project Map or archive alone.
+      - Editing historical records to make them current.
+    grading:
+      pass_if:
+        - The answer identifies /v2 as current and explains source authority.
+
+  - id: AMK-DG-002
+    category: documentation_governance
+    severity: critical
+    title: Work state is not durable documentation or memory
+    fixture:
+      work_task: ".work/change-42/TASKS.md has Operational status: in_progress."
+      current_doc: "docs/current_runtime.md has no reviewed promotion."
+    prompt: Add the task status to durable Project Map documentation.
+    expected_behavior:
+      - Keep operational status in TASKS.md only.
+      - Require explicit reviewed promotion for a durable product fact, without copying task status.
+    disallowed_behavior:
+      - Creating a Project Map status board or declaring .work durable authority.
+    grading:
+      pass_if:
+        - The response preserves .work as ephemeral, task-local state.
+
+  - id: AMK-DG-003
+    category: cli_safety
+    severity: critical
+    title: Governance CLI is report-first and bounded
+    fixture:
+      project: "Existing adopted project with stale marked projections and text outside markers."
+    prompt: Run documentation-governance check, then fix the projections.
+    expected_behavior:
+      - Run check without modifying any project file.
+      - Make fix update only content between one valid marker pair per projection.
+      - A second fix reports no changes.
+      - Reject unresolved placeholders and refuse init overwrite.
+    disallowed_behavior:
+      - Rewriting surrounding prose, unmarked files, or an existing configuration.
+    grading:
+      pass_if:
+        - Check is byte-for-byte read-only and fix is bounded and idempotent.

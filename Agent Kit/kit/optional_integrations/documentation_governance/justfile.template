@@ -1,0 +1,22 @@
+# Copy this file to the adopting repository's justfile and set docs_root.
+docs_root := "."
+docs_tool := "Agent Kit/kit/optional_integrations/documentation_governance/tools/documentation_governance.py"
+python := "python"
+
+check: check-docs
+    {{python}} {{docs_tool}} --root {{docs_root}} check
+
+fix:
+    {{python}} {{docs_tool}} --root {{docs_root}} fix
+
+init:
+    {{python}} {{docs_tool}} --root {{docs_root}} init
+
+docs: check-docs
+
+check-docs:
+    {{python}} {{docs_tool}} --root {{docs_root}} check
+
+# Preserve the adopting repository's existing check-contracts, check-context,
+# and check-work recipes when merging this template. This optional module does
+# not invent passing substitutes for project-specific gates.

@@ -1,0 +1,14 @@
+# Merge these optional targets into the adopting repository's justfile.
+# They are the shared command surface for local hooks and CI templates.
+
+docs-site:
+    mkdocs build --strict --config-file mkdocs.strict.yml
+
+# Bounded local feedback: metadata, links, and generated-document checks only.
+pre-commit: check-docs
+
+# Full documentation gate, including the strict site build.
+pre-push: check-docs docs-site
+
+# CI deliberately uses the same full target as pre-push.
+ci: pre-push

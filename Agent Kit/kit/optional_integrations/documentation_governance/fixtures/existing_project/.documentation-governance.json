@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "document_globs": ["docs/**/*.md", "specs/active/**/*.md"],
+  "required_metadata": {
+    "docs/**/*.md": ["title"],
+    "specs/active/**/*.md": ["title"]
+  },
+  "last_verified": {
+    "required_for": ["docs/**/*.md", "specs/active/**/*.md"],
+    "max_age_days": 90
+  },
+  "navigation": {"required_links": {}},
+  "work_link_policy": {"allow_references_in": []},
+  "generated": {
+    "index": {"path": "docs/project_map/INDEX.md"},
+    "work-board": {"path": "docs/project_map/WORK_BOARD.md"},
+    "phase-status": {"path": "docs/project_map/PHASE_STATUS.md"},
+    "freshness-report": {"path": "docs/project_map/FRESHNESS.md"}
+  }
+}

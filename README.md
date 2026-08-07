@@ -87,7 +87,7 @@ AI-assisted System Design and Agent Memory Kit/
 5. Copy the baseline files into the project's operational docs, `docs/project_map/`, and `scripts/` locations.
 6. Add only the short `AGENTS_SNIPPET.md` rules to the existing project-specific instruction file. Do not replace `AGENTS.md` with a generic template.
 7. Use `Agent Kit/kit/NEW_PROJECT_ADOPTION_GUIDE.md` only for an empty project that lacks operational docs.
-8. Add modules from `Agent Kit/kit/optional_integrations/` only when the project actually uses ChatGPT Project, cost/model routing guidance, or Cursor settings.
+8. Add modules from `Agent Kit/kit/optional_integrations/` only when the project actually uses ChatGPT Project, cost/model routing guidance, Cursor settings, or an explicitly owner-adopted documentation-governance policy. Optional tooling may have its own dependencies; the core Kit remains language-agnostic and Python-optional.
 
 ---
 
