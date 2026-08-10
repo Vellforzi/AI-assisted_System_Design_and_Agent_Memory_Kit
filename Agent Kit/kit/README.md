@@ -11,6 +11,30 @@ Package: `AI-assisted_System_Design_and_Agent_Memory_Kit_v5.0.0_EN.zip`
 
 Agent Memory Kit is a portable memory operating layer for project owners who work with AI agents across long projects.
 
+## Adoption profiles
+
+Read `ADOPTION_PROFILES.md` before selecting material from this directory.
+
+- **Core** is a genuinely small, useful, dependency-free operating layer:
+  grounding, explicit action approval, and ordinary durable project notes. It
+  requires no Project Map, Python, evals, task contracts, `.work`, generated
+  projections, hooks, CI, or MkDocs.
+- **Standard** adds `secondary_memory_governance/` only when repeated sessions,
+  contributors, or a documented context-selection error need bounded routing.
+- **Workflow** adds only the particular v5 artifact activated by task scale,
+  risk, review/dependency need, or `TaskContractV3.workflow_profile`.
+- **Reference Lab** is for explicitly owned optional evals, helpers,
+  integrations, hooks, CI, or MkDocs work.
+
+The presence of a mechanism in the Kit is not a recommendation to install it.
+Greenfield removes migration cost, not operating cost. Optional artifacts
+require observable activation triggers, a named purpose, and an owner. For an
+existing project, preserve source authority: when Project Map is
+`secondary_memory`, operational docs, code, tests, specs, issues, and current
+owner instructions win. Context Contract V1 remains a compatible read-only
+projection, and v5 contracts retain their existing schema and migration
+boundaries.
+
 Its purpose is structured, meaningful, interconnected duplication of owner-provided and project-verified information so the project is less vulnerable to:
 
 - context loss;
@@ -25,7 +49,7 @@ Its purpose is structured, meaningful, interconnected duplication of owner-provi
 
 ---
 
-## Core rules
+## Operating rules for any adopted profile
 
 ### 1. Grounding
 
@@ -59,9 +83,12 @@ After meaningful project work, the agent should detect whether a Project Map upd
 
 It must not apply memory or rule changes unless the owner explicitly asks.
 
-### 4. Evals
+### 4. Evals when activated
 
-Evals are behavior checks, not intelligence tests. They help detect regressions in action intent, grounding, retrieval, memory compilation, side-effect safety, and owner control.
+Evals are behavior checks, not intelligence tests. Adopt them in Reference Lab
+only when a repeated or material failure mode has a concrete behavior to
+check. They help detect regressions in action intent, grounding, retrieval,
+memory compilation, side-effect safety, and owner control.
 
 Evals do not run automatically unless the owner wires them to a script, CI job, API harness, or agent runtime.
 
@@ -135,13 +162,19 @@ Evals do not run automatically unless the owner wires them to a script, CI job, 
 
 ---
 
-## Eval-suite
+## Eval-suite (Reference Lab only when activated)
 
-Use `EVAL_SUITE_GUIDE.md`, `EVAL_AUTOMATION_AND_TRIGGER_POLICY.md`, and `eval_suite/` to check whether an agent actually follows the kit.
+Use `EVAL_SUITE_GUIDE.md`, `EVAL_AUTOMATION_AND_TRIGGER_POLICY.md`, and
+`eval_suite/` only when a repeated or material failure mode supplies an
+observable behavior to check and the owner adopts that evaluation work. Evals
+are not part of Core.
 
-The suite is intentionally small and failure-mode based. It is designed for manual or semi-automated use by a project owner. It should be copied into `Project Map/eval_suite/` when a project starts using the kit.
+The suite is intentionally small and failure-mode based. It is designed for
+manual or semi-automated use by a project owner. An adopting Reference Lab
+owner may copy it into `Project Map/eval_suite/`; the Kit does not require that
+copy or a Project Map for Core.
 
-Optional checklist helper:
+Optional checklist helper for that adopted evaluation:
 
 ```bash
 python3 "Agent Kit/kit/tools/run_eval_checklist.py" \
@@ -154,9 +187,10 @@ python3 "Agent Kit/kit/tools/run_eval_checklist.py" \
 
 ## Repo-centric context governance
 
-For repo-centric projects, use `secondary_memory_governance/` as the single
-baseline behavior. It reproduces a standalone repo-centric workflow without
-copying adopter-specific domain rules.
+For repo-centric projects with the Standard profile's observable
+context-routing trigger, use `secondary_memory_governance/` as the
+secondary-memory baseline. It reproduces a standalone repo-centric workflow
+without copying adopter-specific domain rules.
 
 The baseline includes:
 
@@ -182,7 +216,8 @@ reference implementations, not runtime memory or security enforcement.
 
 ## Optional integrations
 
-Install these only after the core baseline is working:
+Install these only when their observable activation triggers are met and the
+owner approves the integration boundary:
 
 - `optional_integrations/chatgpt_project_sources/` - local generator for
   ChatGPT Project source manifests, context packs, and owner TODOs.
@@ -209,7 +244,8 @@ The owner provides:
 
 - where `Agent Kit/` is unpacked;
 - where the project is or should be located;
-- where `Project Map/` is or should be located;
+- where `Project Map/` is or should be located, if adopting Standard or a
+  higher profile;
 - where project materials live;
 - a free-form explanation of the project;
 - the current permission mode;
@@ -221,7 +257,9 @@ For command execution, the owner must also provide OS, shell/runtime, tools, sta
 
 ## Continuation rule
 
-A later work session should continue from documented Project Map state, not from undocumented chat memory.
+When a Project Map is adopted, a later work session should continue from its
+documented state rather than undocumented chat memory. Core can instead
+continue from its ordinary project documentation.
 
 For the `secondary_memory_governance` baseline in existing repo-centric projects,
 start from operational docs plus:
@@ -254,7 +292,9 @@ Project Map, task, handoff, or durable-memory profile:
 
 ## Recommended service setup
 
-Put the short runtime-core rules in service-level instructions. Keep project-specific facts in `Project Map/`.
+Put the short runtime-core rules in service-level instructions. For profiles
+that adopt Project Map, keep project-specific facts there; Core may keep them
+in ordinary project documentation.
 
 Do not put the only copy of project knowledge into ChatGPT Custom Instructions, Cursor Personal Rules, Claude Project Instructions, or another service-specific prompt.
 
@@ -263,12 +303,17 @@ Do not put the only copy of project knowledge into ChatGPT Custom Instructions, 
 
 ## Cursor Integration Pack
 
-Use `cursor/` to install small, explicit Cursor building blocks instead of pasting the whole kit into one prompt.
+Use `cursor/` only when the project actually uses Cursor and the owner adopts
+that integration boundary. Select small, explicit building blocks rather than
+pasting the whole kit into one prompt.
 
-Recommended minimum:
+Choose commands by profile and observable need:
 
-- Rules: core memory rule, platform context boundary, safety defaults.
-- Commands: `/answer`, `/plan`, `/apply`, `/checkpoint`, `/handoff`, `/map-apply`, `/recover`, `/eval-smoke`.
+- Core can use only grounding and safety rules, plus `/answer`, `/plan`, and
+  `/apply` if the owner chooses Cursor support.
+- Add `/checkpoint`, `/handoff`, `/map-apply`, or `/recover` only with the
+  adopted Project Map or workflow need that makes each command useful.
+- Add `/eval-smoke` only after the Reference Lab eval trigger is met.
 
 See `CURSOR_INTEGRATION_OWNER_GUIDE.md` and `cursor/README.md`.
 

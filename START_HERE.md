@@ -98,33 +98,26 @@ The owner may rename folders. Roles matter more than names.
 
 Read:
 
-1. `Agent Kit/README.md`
-2. `Agent Kit/START_HERE_AGENT_KIT_PROJECT_OWNER_GUIDE.md`
+1. `Agent Kit/kit/ADOPTION_PROFILES.md`
+2. `Agent Kit/README.md`
 3. `Agent Kit/kit/README.md`
-4. `Agent Kit/kit/OWNER_USAGE_GUIDE.md`
-5. `Agent Kit/kit/ACTION_INTENT_CONTRACT.md`
-6. `Agent Kit/kit/SIGNIFICANT_WORK_AND_CHECKPOINTS.md`
-7. `Agent Kit/kit/PROJECT_GROUNDING_CONTRACT.md`
-8. `Agent Kit/kit/PROJECT_MEMORY_OPERATING_PROTOCOL.md`
-9. `Agent Kit/kit/PROJECT_MEMORY_STORAGE_GUIDE.md`
-10. `Agent Kit/kit/EVAL_SUITE_GUIDE.md`
-11. `Agent Kit/kit/EVAL_AUTOMATION_AND_TRIGGER_POLICY.md`
-12. `Agent Kit/kit/PLAIN_LANGUAGE_GLOSSARY.md`
+4. Only the guide or module selected by the profile's observable activation trigger.
 
-For existing repo-centric projects that already have operational docs, use the
-repo-centric context governance baseline:
+Choose **Core** for a small, useful, dependency-free grounding and
+action-control layer. Core does not require a Project Map, Python, evals, task
+contracts, `.work`, generated projections, hooks, CI, or MkDocs. Choose
+**Standard** when repeated sessions, contributors, or a documented
+context-selection failure need the secondary-memory governance baseline.
+Choose **Workflow** only for the specific v5 workflow artifact required by
+task scale, risk, or `TaskContractV3.workflow_profile`. Choose **Reference
+Lab** only for explicitly owned evaluation, automation, or integrations.
 
-1. `Agent Kit/kit/EXISTING_PROJECT_ADOPTION_GUIDE.md`
-2. `Agent Kit/kit/secondary_memory_governance/README.md`
-3. `Agent Kit/kit/secondary_memory_governance/source_of_truth_hierarchy_template.md`
-4. `Agent Kit/kit/secondary_memory_governance/context_governance_rules_template.md`
-5. `Agent Kit/kit/secondary_memory_governance/context_index.yaml`
-6. `Agent Kit/kit/secondary_memory_governance/source_authority.yaml`
-7. `Agent Kit/kit/secondary_memory_governance/permissions_policy.yaml`
-8. `Agent Kit/kit/secondary_memory_governance/retrieval_policy.yaml`
-9. `Agent Kit/kit/secondary_memory_governance/working_state.yaml`
-10. `Agent Kit/kit/secondary_memory_governance/manual_smoke_cases.yaml`
-11. `Agent Kit/kit/secondary_memory_governance/context_selection_smoke_cases.yaml`
+The presence of a mechanism in the Kit is not a recommendation to install it,
+and greenfield removes migration cost, not operating cost. Optional artifacts
+require observable activation triggers. In existing projects, preserve the
+current authority system: Project Map is secondary memory when policy declares
+it so, while operational docs, code, tests, specs, issues, and current owner
+instructions remain authoritative.
 
 ---
 
@@ -132,25 +125,23 @@ repo-centric context governance baseline:
 
 For an existing project with code, docs, and project-specific agent instructions:
 
-1. read `Agent Kit/kit/EXISTING_PROJECT_ADOPTION_GUIDE.md`;
-2. use `Agent Kit/kit/secondary_memory_governance/` as the single baseline package;
-3. preserve the existing `AGENTS.md` and operational docs;
-4. add source hierarchy, context governance rules, context index, policy YAML, working state, helper scripts, ignore hygiene, and smoke cases;
-5. treat Project Map as secondary memory unless the project's authority policy says otherwise;
-6. do not add runtime memory, task trees, handoff trees, vector databases, MCP servers, or a replacement `AGENTS.md` unless explicitly requested later.
-7. add `Agent Kit/kit/optional_integrations/` modules only when the project uses
-   ChatGPT Project sources, cost/model routing guidance, Cursor settings, or
-   an owner-approved documentation-governance policy. Optional modules can
-   bring their own tooling dependencies; the core Kit remains language-agnostic
-   and Python is optional.
+1. start at Core and preserve the existing `AGENTS.md` and operational docs;
+2. move to Standard only when its context-routing trigger is observable;
+3. then read `Agent Kit/kit/EXISTING_PROJECT_ADOPTION_GUIDE.md` and adopt the
+   `secondary_memory_governance/` baseline as a secondary-memory overlay;
+4. treat Project Map as secondary memory unless the project's authority policy says otherwise;
+5. do not add runtime memory, task trees, handoff trees, vector databases,
+   MCP servers, a replacement `AGENTS.md`, or optional tooling without that
+   mechanism's activation trigger and owner adoption.
 
 For a new empty project that lacks operational docs:
 
-1. read `Agent Kit/kit/NEW_PROJECT_ADOPTION_GUIDE.md`;
-2. create Project Map before implementation;
-3. record owner-approved goals, constraints, and non-goals;
-4. avoid inventing architecture;
-5. run eval smoke after repository instruction files are created.
+1. start with Core and record owner-approved goals, constraints, and non-goals
+   in ordinary project documentation;
+2. read `Agent Kit/kit/NEW_PROJECT_ADOPTION_GUIDE.md` only when a deliberate
+   Project Map adoption is warranted;
+3. do not confuse lower migration cost with lower operating cost, and add
+   workflow/eval material only after its observable trigger appears.
 
 ---
 

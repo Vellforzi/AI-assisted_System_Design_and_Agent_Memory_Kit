@@ -3,37 +3,33 @@
 Version: v5.0.0
 
 Agent Memory Kit is the project-memory and agent-behavior layer of the package.
+Start with the smallest adoption profile that has an observable need; see
+`kit/ADOPTION_PROFILES.md`.
 
-It helps a project owner maintain a structured Project Map containing:
+- **Core** is useful without a Project Map or tools: grounding,
+  explicit-action control, and ordinary durable project notes.
+- **Standard** adds the repo-centric secondary-memory governance baseline for
+  observed context-routing needs.
+- **Workflow** adds only the v5 contracts activated by task scale, risk, or
+  `TaskContractV3.workflow_profile`.
+- **Reference Lab** contains explicitly owned eval, automation, and integration work.
 
-- current state;
-- working state;
-- source authority;
-- permissions policy;
-- retrieval policy;
-- decisions;
-- facts;
-- constraints;
-- risks;
-- open questions;
-- task contracts;
-- handoffs;
-- claim ledgers;
-- eval cases and eval run notes.
+Core has no Project Map, Python, evals, task contracts, `.work`, generated
+projections, hooks, CI, or MkDocs. The presence of a mechanism in the Kit is
+not a recommendation to install it. Greenfield removes migration cost, not
+operating cost; optional artifacts require observable activation triggers.
+
+For existing projects, the current authority system remains in force. Where
+Project Map is `secondary_memory`, operational docs, code, tests, specs,
+issues, and current owner instructions remain authoritative.
 
 ---
 
 ## Start here
 
-1. `START_HERE_AGENT_KIT_PROJECT_OWNER_GUIDE.md`
+1. `kit/ADOPTION_PROFILES.md`
 2. `kit/README.md`
-3. `kit/EXISTING_PROJECT_ADOPTION_GUIDE.md`
-4. `kit/secondary_memory_governance/README.md` for existing projects that already have strong operational docs and should be reinforced rather than replaced.
-5. `kit/OWNER_USAGE_GUIDE.md`
-6. `kit/ACTION_INTENT_CONTRACT.md`
-7. `kit/PROJECT_GROUNDING_CONTRACT.md`
-8. `kit/EVAL_SUITE_GUIDE.md`
-9. `kit/EVAL_AUTOMATION_AND_TRIGGER_POLICY.md`
+3. The selected profile's guide or module, only after its activation trigger is observable.
 
 ---
 
@@ -41,7 +37,10 @@ It helps a project owner maintain a structured Project Map containing:
 
 The agent must answer only unless the owner explicitly asks for a concrete action. Reading memory for context is not the same as permission to modify memory, files, database state, git state, cloud resources, or external systems.
 
-After meaningful work, the agent may propose a Project Map delta and identify whether evals should run. It must not apply memory or rule changes unless the owner explicitly asks.
+After meaningful work, the agent may propose a Project Map delta when Standard
+or a higher profile is adopted, and may identify whether an observable eval
+trigger is met. It must not apply memory or rule changes unless the owner
+explicitly asks.
 
 ---
 
@@ -65,7 +64,9 @@ Agent Memory Kit is useful when the owner wants a visible, editable, portable pr
 
 It is not a full agent runtime. The core value is the operating contract: what counts as project truth, what may be remembered, when the agent may act, and how failures become eval cases.
 
-For existing repo-centric projects, start with `kit/secondary_memory_governance/`.
+For existing repo-centric projects, start with Core. Adopt
+`kit/secondary_memory_governance/` as Standard only when its observable
+context-routing trigger is met.
 
 Optional tool-specific modules live in `kit/optional_integrations/`. Add them
 only after the core baseline works and only when the target project uses the

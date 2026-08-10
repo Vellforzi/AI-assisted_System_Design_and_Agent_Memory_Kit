@@ -3,18 +3,25 @@
 Copy this file into a target project as `scripts/documentation_harness.py` when
 using `secondary_memory_governance/`.
 
-The harness audits documentation metadata, reachability, and lower-authority
-references. It is intentionally read-only: it does not change Project Map,
-runtime behavior, data artifacts, external systems, or deployment state.
+The default Core profile checks bounded local Markdown links and heading
+anchors. Standard and Workflow opt into progressively broader governance
+diagnostics. Generated-content checks require either the generated-content
+profile or explicit local generated configuration. This harness is intentionally read-only: it does not change
+Project Map, runtime behavior, data artifacts, external systems, or deployment
+state, and it intentionally has no automatic repair command. The optional
+``documentation_governance.py`` CLI remains the separate Reference Lab tool
+for configured generated-projection comparison and controlled writes.
 """
 
 from __future__ import annotations
 
 import argparse
+import fnmatch
 import json
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 import re
-from typing import Sequence
+from urllib.parse import unquote
+from typing import Mapping, Sequence
 
 
 REPORT_TYPE = "documentation_harness"
@@ -71,6 +78,27 @@ LOWER_AUTHORITY_PATH_RE = re.compile(
     re.IGNORECASE,
 )
 INVENTORY_RE = re.compile(r"docs/documentation_inventory_\d{4}-\d{2}-\d{2}\.md$")
+MARKDOWN_LINK_RE = re.compile(
+    r"(?<!!)\[[^\]]*\]\(\s*(<[^>\n]+>|[^)\s]+)(?:\s+['\"][^)]*['\"])?\s*\)"
+)
+URI_SCHEME_RE = re.compile(r"^[A-Za-z][A-Za-z0-9+.-]*:")
+MARKDOWN_HEADING_RE = re.compile(r"^#{1,6}\s+(.+?)\s*#*\s*$", re.MULTILINE)
+PLACEHOLDER_RE = re.compile(r"\{\{[^}\n]+\}\}|<(?!(?:/?(?:a|abbr|article|aside|b|br|code|details|div|em|h[1-6]|i|img|kbd|li|ol|p|pre|span|strong|table|td|th|tr|ul)\b))[^>\n]+>", re.IGNORECASE)
+
+CHECKS_BY_PROFILE = {
+    "core": ("markdown_links",),
+    "standard": ("markdown_links", "metadata", "reachability", "authority"),
+    "workflow": (
+        "markdown_links",
+        "metadata",
+        "reachability",
+        "authority",
+        "placeholder",
+        "work_leakage",
+    ),
+    "generated-content": ("markdown_links", "generated"),
+}
+KNOWN_CHECKS = frozenset(check for checks in CHECKS_BY_PROFILE.values() for check in checks)
 
 PRIMARY_OPERATIONAL_SOURCE_PATHS = {
     "AGENTS.md",
@@ -99,17 +127,34 @@ SCOPE_FLAGS = {
 }
 
 
-def build_report(root: Path | str = Path.cwd()) -> dict[str, object]:
+def build_report(
+    root: Path | str = Path.cwd(),
+    *,
+    profiles: Sequence[str] | None = None,
+    config: Mapping[str, object] | None = None,
+) -> dict[str, object]:
     """Build a deterministic, read-only documentation harness report."""
 
     root_path = Path(root).resolve()
+    active_profiles, active_checks = _active_configuration(profiles, config)
     managed_paths = _managed_doc_paths(root_path)
     text_by_path = {rel: _read_text(root_path / rel) for rel in managed_paths}
     findings: list[dict[str, object]] = []
 
-    findings.extend(_metadata_findings(text_by_path))
-    findings.extend(_reachability_findings(text_by_path))
-    findings.extend(_authority_findings(text_by_path))
+    if "markdown_links" in active_checks:
+        findings.extend(_markdown_link_findings(root_path, text_by_path))
+    if "metadata" in active_checks:
+        findings.extend(_metadata_findings(text_by_path))
+    if "reachability" in active_checks:
+        findings.extend(_reachability_findings(text_by_path))
+    if "authority" in active_checks:
+        findings.extend(_authority_findings(text_by_path))
+    if "placeholder" in active_checks:
+        findings.extend(_placeholder_findings(text_by_path))
+    if "work_leakage" in active_checks:
+        findings.extend(_work_leakage_findings(text_by_path, config))
+    if "generated" in active_checks:
+        findings.extend(_generated_content_findings(root_path, config))
     _annotate_findings(findings)
     findings.sort(key=lambda item: (str(item["id"]), str(item.get("path", "")), int(item.get("line", 0))))
 
@@ -138,16 +183,21 @@ def build_report(root: Path | str = Path.cwd()) -> dict[str, object]:
     acceptance_contract = {
         "contract_version": "1.0",
         "read_only": True,
+        "automatic_fix_available": False,
         "blocking_bucket_count": actionable_count,
         "lower_authority_noise_is_blocking": False,
         "project_map_mutation_allowed": False,
         "accepted": actionable_count == 0,
     }
     scorecard = {
-        "metadata": "pass" if not any(item["id"].startswith("DOC-META") for item in findings) else "needs_review",
-        "reachability": "pass" if not any(item["id"].startswith("DOC-REACH") for item in findings) else "needs_review",
-        "authority_labels": "pass" if not any(item["id"].startswith("DOC-AUTH") for item in findings) else "needs_review",
-        "retrieval_routes": "pass" if triage_buckets["retrieval_route_gaps"]["count"] == 0 else "needs_review",
+        "markdown_links": _scorecard_status(findings, "DOC-LINK", "DOC-ANCHOR", active="markdown_links" in active_checks),
+        "metadata": _scorecard_status(findings, "DOC-META", active="metadata" in active_checks),
+        "reachability": _scorecard_status(findings, "DOC-REACH", active="reachability" in active_checks),
+        "authority_labels": _scorecard_status(findings, "DOC-AUTH", active="authority" in active_checks),
+        "retrieval_routes": _scorecard_status(findings, "DOC-REACH", active="reachability" in active_checks),
+        "placeholder": _scorecard_status(findings, "DOC-PLACEHOLDER", active="placeholder" in active_checks),
+        "work_leakage": _scorecard_status(findings, "DOC-WORK-LEAKAGE", active="work_leakage" in active_checks),
+        "generated_content": _scorecard_status(findings, "DOC-GENERATED", active="generated" in active_checks),
     }
 
     return {
@@ -156,6 +206,8 @@ def build_report(root: Path | str = Path.cwd()) -> dict[str, object]:
         "root": str(root_path),
         "status": "needs_review" if actionable_count else "passed",
         "read_only": True,
+        "profiles": list(active_profiles),
+        "active_checks": list(active_checks),
         "scope_flags": dict(SCOPE_FLAGS),
         "managed_docs_scanned": len(managed_paths),
         "finding_count": len(findings),
@@ -180,10 +232,52 @@ def build_report(root: Path | str = Path.cwd()) -> dict[str, object]:
             ],
         },
         "notes": [
-            "Report-only diagnostic for secondary memory governance.",
+            "Report-only diagnostic; Core is the default profile.",
             "Does not mutate runtime, external-system state, data artifacts, or Project Map.",
+            "The optional documentation-governance CLI is the Reference Lab surface for generated projection comparison and controlled writes.",
         ],
     }
+
+
+def _active_configuration(
+    profiles: Sequence[str] | None,
+    config: Mapping[str, object] | None,
+) -> tuple[tuple[str, ...], tuple[str, ...]]:
+    configured_profiles = _string_list(config.get("profiles"), "profiles") if config else []
+    selected = [profiles] if isinstance(profiles, str) else (list(profiles) if profiles is not None else configured_profiles)
+    selected = [profile.lower() for profile in selected]
+    if not selected:
+        selected = ["core"]
+    unknown_profiles = sorted(set(selected).difference(CHECKS_BY_PROFILE))
+    if unknown_profiles:
+        raise ValueError("unknown documentation profile(s): %s" % ", ".join(unknown_profiles))
+    configured_checks = _string_list(config.get("checks"), "checks") if config else []
+    unknown_checks = sorted(set(configured_checks).difference(KNOWN_CHECKS))
+    if unknown_checks:
+        raise ValueError("unknown documentation check(s): %s" % ", ".join(unknown_checks))
+    active_checks = {check for profile in selected for check in CHECKS_BY_PROFILE[profile]}
+    active_checks.update(configured_checks)
+    if config and "generated" in config:
+        # Declaring generated paths is itself an explicit local opt-in. The
+        # profile remains useful when configuration is supplied separately.
+        active_checks.add("generated")
+    return tuple(dict.fromkeys(selected)), tuple(sorted(active_checks))
+
+
+def _string_list(value: object, name: str) -> list[str]:
+    if value is None:
+        return []
+    if not isinstance(value, list) or not all(isinstance(item, str) for item in value):
+        raise ValueError("documentation harness config %s must be a list of strings" % name)
+    return value
+
+
+def _scorecard_status(
+    findings: Sequence[dict[str, object]], *prefixes: str, active: bool
+) -> str:
+    if not active:
+        return "not_checked"
+    return "pass" if not any(str(item["id"]).startswith(prefixes) for item in findings) else "needs_review"
 
 
 def _triage_buckets(backlog_items: Sequence[dict[str, object]]) -> dict[str, dict[str, object]]:
@@ -237,6 +331,183 @@ def _managed_doc_paths(root: Path) -> list[str]:
             paths.append(path)
 
     return sorted({_relative_path(path, root) for path in paths})
+
+
+def _markdown_link_findings(root: Path, text_by_path: Mapping[str, str]) -> list[dict[str, object]]:
+    """Validate only repository-local Markdown destinations and anchors."""
+
+    findings: list[dict[str, object]] = []
+    for rel_path, text in text_by_path.items():
+        if not rel_path.endswith(".md"):
+            continue
+        source = root / rel_path
+        for match in MARKDOWN_LINK_RE.finditer(text):
+            raw_target = match.group(1)
+            target, fragment, escaped = _resolve_local_markdown_link(root, source, raw_target)
+            line = text.count("\n", 0, match.start()) + 1
+            if escaped:
+                findings.append(
+                    _finding(
+                        "DOC-LINK-002",
+                        "warning",
+                        rel_path,
+                        "Markdown link escapes the repository and was not followed.",
+                        line=line,
+                        details={"target": raw_target},
+                    )
+                )
+                continue
+            if target is None:
+                continue
+            if not target.exists():
+                findings.append(
+                    _finding(
+                        "DOC-LINK-001",
+                        "warning",
+                        rel_path,
+                        "Markdown link target does not exist.",
+                        line=line,
+                        details={"target": raw_target},
+                    )
+                )
+                continue
+            if fragment and (not target.is_file() or fragment not in _markdown_anchor_set(_read_text(target))):
+                findings.append(
+                    _finding(
+                        "DOC-ANCHOR-001",
+                        "warning",
+                        rel_path,
+                        "Markdown link heading anchor does not exist in its local target.",
+                        line=line,
+                        details={"target": raw_target, "anchor": fragment},
+                    )
+                )
+    return findings
+
+
+def _resolve_local_markdown_link(root: Path, source: Path, raw_target: str) -> tuple[Path | None, str | None, bool]:
+    target = unquote(raw_target.strip().strip("<>"))
+    if URI_SCHEME_RE.match(target):
+        return None, None, False
+    destination, separator, fragment = target.partition("#")
+    destination = destination.partition("?")[0]
+    candidate = (source.parent / destination).resolve() if destination else source.resolve()
+    try:
+        candidate.relative_to(root.resolve())
+    except ValueError:
+        return None, fragment if separator else None, True
+    return candidate, fragment if separator else None, False
+
+
+def _markdown_anchor_set(text: str) -> set[str]:
+    anchors: set[str] = set()
+    used: dict[str, int] = {}
+    for heading in MARKDOWN_HEADING_RE.findall(text):
+        label = re.sub(r"`([^`]*)`", r"\1", heading).lower()
+        label = re.sub(r"[^\w\- ]", "", label, flags=re.UNICODE)
+        label = re.sub(r"\s+", "-", label.strip())
+        count = used.get(label, 0)
+        used[label] = count + 1
+        anchors.add(label if count == 0 else "%s-%d" % (label, count))
+    return anchors
+
+
+def _placeholder_findings(text_by_path: Mapping[str, str]) -> list[dict[str, object]]:
+    findings: list[dict[str, object]] = []
+    for rel_path, text in text_by_path.items():
+        if not rel_path.endswith(".md"):
+            continue
+        match = PLACEHOLDER_RE.search(re.sub(r"<!--.*?-->", "", text, flags=re.DOTALL))
+        if match:
+            findings.append(
+                _finding(
+                    "DOC-PLACEHOLDER-001",
+                    "warning",
+                    rel_path,
+                    "Markdown contains an unresolved placeholder.",
+                    line=text.count("\n", 0, match.start()) + 1,
+                )
+            )
+    return findings
+
+
+def _work_leakage_findings(
+    text_by_path: Mapping[str, str], config: Mapping[str, object] | None
+) -> list[dict[str, object]]:
+    allow_patterns: list[str] = []
+    if config:
+        policy = config.get("work_link_policy", {})
+        if not isinstance(policy, Mapping):
+            raise ValueError("documentation harness config work_link_policy must be an object")
+        allow_patterns = _string_list(policy.get("allow_references_in"), "work_link_policy.allow_references_in")
+    findings: list[dict[str, object]] = []
+    for rel_path, text in text_by_path.items():
+        if ".work/" not in text or any(_matches_path(rel_path, pattern) for pattern in allow_patterns):
+            continue
+        line = text.index(".work/")
+        findings.append(
+            _finding(
+                "DOC-WORK-LEAKAGE-001",
+                "warning",
+                rel_path,
+                "Documentation references ephemeral .work content outside its configured allowance.",
+                line=text.count("\n", 0, line) + 1,
+            )
+        )
+    return findings
+
+
+def _generated_content_findings(root: Path, config: Mapping[str, object] | None) -> list[dict[str, object]]:
+    """Check only locally declared generated paths and marker cardinality.
+
+    Projection freshness and every write path remain owned by the optional
+    Reference Lab CLI. The shared ``generated`` shape intentionally accepts
+    that CLI's configuration entries without executing it.
+    """
+
+    if not config or "generated" not in config:
+        return []
+    generated = config["generated"]
+    if not isinstance(generated, Mapping):
+        raise ValueError("documentation harness config generated must be an object")
+    findings: list[dict[str, object]] = []
+    for name, entry in sorted(generated.items()):
+        if not isinstance(name, str) or not isinstance(entry, Mapping) or not isinstance(entry.get("path"), str):
+            raise ValueError("documentation harness config generated entries need a string path")
+        path = (root / str(entry["path"])).resolve()
+        try:
+            relative = _relative_path(path, root)
+        except ValueError:
+            findings.append(
+                _finding("DOC-GENERATED-002", "warning", str(entry["path"]), "Configured generated path escapes the repository.")
+            )
+            continue
+        if not path.is_file():
+            findings.append(
+                _finding("DOC-GENERATED-001", "warning", relative, "Configured generated content file is missing.")
+            )
+            continue
+        start = "<!-- documentation-governance:%s:start -->" % name
+        end = "<!-- documentation-governance:%s:end -->" % name
+        text = _read_text(path)
+        if text.count(start) != 1 or text.count(end) != 1 or text.find(start) > text.find(end):
+            findings.append(
+                _finding(
+                    "DOC-GENERATED-003",
+                    "warning",
+                    relative,
+                    "Configured generated content lacks one ordered marker pair.",
+                    details={"name": name},
+                )
+            )
+    return findings
+
+
+def _matches_path(relative: str, pattern: str) -> bool:
+    pure = PurePosixPath(relative)
+    return pure.match(pattern) or fnmatch.fnmatchcase(relative, pattern) or (
+        pattern.startswith("**/") and fnmatch.fnmatchcase(relative, pattern[3:])
+    )
 
 
 def _metadata_findings(text_by_path: dict[str, str]) -> list[dict[str, object]]:
@@ -475,6 +746,8 @@ def _format_markdown(report: dict[str, object]) -> str:
         f"- status: `{report['status']}`",
         f"- helper: `{report['helper']}`",
         f"- read_only: `{report['read_only']}`",
+        f"- profiles: `{', '.join(report['profiles'])}`",
+        f"- active_checks: `{', '.join(report['active_checks'])}`",
         f"- managed_docs_scanned: `{report['managed_docs_scanned']}`",
         f"- finding_count: `{report['finding_count']}`",
         "",
@@ -502,14 +775,42 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=Path.cwd())
     parser.add_argument("--format", choices=("json", "markdown"), default="markdown")
+    parser.add_argument(
+        "--profile",
+        action="append",
+        type=str.lower,
+        choices=tuple(CHECKS_BY_PROFILE),
+        help="opt into a named read-only check profile; defaults to Core",
+    )
+    parser.add_argument(
+        "--config",
+        type=Path,
+        help="optional JSON configuration relative to --root; may add profiles, checks, generated paths, and .work allowances",
+    )
     args = parser.parse_args(argv)
 
-    report = build_report(args.root)
+    root = args.root.resolve()
+    try:
+        config = _load_config(root, args.config) if args.config else None
+        report = build_report(root, profiles=args.profile, config=config)
+    except ValueError as error:
+        parser.error(str(error))
     if args.format == "json":
         print(json.dumps(report, indent=2, sort_keys=True))
     else:
         print(_format_markdown(report), end="")
     return 0
+
+
+def _load_config(root: Path, config_path: Path) -> Mapping[str, object]:
+    path = config_path if config_path.is_absolute() else root / config_path
+    try:
+        value = json.loads(_read_text(path))
+    except (OSError, json.JSONDecodeError) as error:
+        raise ValueError("cannot read documentation harness config %s: %s" % (path, error)) from error
+    if not isinstance(value, Mapping):
+        raise ValueError("documentation harness config must be a JSON object")
+    return value
 
 
 if __name__ == "__main__":

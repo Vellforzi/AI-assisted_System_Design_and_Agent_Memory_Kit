@@ -7,4 +7,5 @@ date, and related task ID.
 
 Artifacts are supporting evidence, not a task-status authority and not durable
 documentation. Promote a durable fact through reviewed `docs/` or
-`specs/active/` content.
+`specs/active/` content. Do not treat an artifact as a substitute for current
+runtime evidence or current requirements.

@@ -28,6 +28,23 @@
     ".work": {
       "knowledge_mode": "ephemeral_execution_state",
       "authority": "non_authoritative_task_local_context",
+      "activation_triggers": [
+        "resumable_multi_session_work",
+        "multiple_executors",
+        "more_than_three_independently_verifiable_slices",
+        "high_risk_acceptance",
+        "audit_trail"
+      ],
+      "minimum_contents": [
+        "TASKS.md",
+        "ACCEPTANCE.md"
+      ],
+      "conditional_contents": [
+        "PLAN.md",
+        "DEVIATIONS.md",
+        "artifacts/"
+      ],
+      "operational_status_authority": "TASKS.md only when an activated .work change process uses this folder.",
       "promotion_rule": "Explicitly review and promote durable facts to the appropriate current source."
     },
     "docs/project_map": {
@@ -38,6 +55,8 @@
   },
   "metadata": {
     "policy": "additive_and_document_role_appropriate",
+    "role_specificity": "Choose fields according to the document's role; do not impose a universal frontmatter shape.",
+    "adoption_boundary": "A project may select metadata per document role; metadata never replaces the evidence required for a claim.",
     "required_on_every_document": false,
     "frontmatter_field_count_requirement": null,
     "fields": {
@@ -45,22 +64,35 @@
         "type": "date",
         "format": "YYYY-MM-DD",
         "meaning": "Date relevant claims were checked against required evidence.",
+        "appropriate_roles": [
+          "current_state",
+          "current_requirements"
+        ],
         "required": false,
         "limitations": "Does not prove correctness or replace cited evidence."
       },
       "source_refs": {
         "type": "array_or_local_equivalent",
         "meaning": "Evidence or authoritative sources used for a current-state claim.",
+        "appropriate_roles": [
+          "current_state",
+          "current_requirements"
+        ],
         "required": false
       },
       "generated_by": {
         "type": "string",
         "meaning": "Authoritative generator identifier for a generated block or document.",
+        "appropriate_roles": [
+          "separately_adopted_reference_lab_generated_content"
+        ],
         "required": false
       }
     }
   },
   "generated_block_ownership": {
+    "normal_install_path": false,
+    "usage_boundary": "Reference Lab example; evaluate separately from the compact policy layer.",
     "one_authoritative_generator": true,
     "source_of_change": "generator_input_or_source_data",
     "manual_edits_inside_generated_blocks": "non_durable_unless_reflected_in_generator_source",

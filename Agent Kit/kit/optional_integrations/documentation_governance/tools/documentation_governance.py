@@ -1,10 +1,15 @@
 #!/usr/bin/env python3
-"""Report-first checks and safe generated-document projections for documentation governance.
+"""Reference Lab checks and safe generated-document projections for documentation governance.
 
 This utility is intentionally dependency-free.  Adopt it by creating the
 configuration with ``init`` and then adding the generated markers to the files
 that own generated projections.  ``check`` never writes.  ``fix`` replaces
 only text strictly between paired markers that already exist.
+
+The portable ``tools/documentation_harness.py`` is the recommended Core /
+Standard / Workflow report-only surface. This optional Reference Lab retains
+its established configuration-driven ``check``, ``fix``, ``init``, and
+``self-test`` commands for adopters that explicitly own generated projections.
 """
 from __future__ import annotations
 
@@ -37,6 +42,7 @@ HTML_TAG = re.compile(
     re.IGNORECASE,
 )
 LINK = re.compile(r"(?<!!)\[[^\]]*\]\(([^)\s]+)(?:\s+['\"][^)]*['\"])?\)")
+URI_SCHEME_RE = re.compile(r"^[A-Za-z][A-Za-z0-9+.-]*:")
 HEADING = re.compile(r"^#{1,6}\s+(.+?)\s*#*\s*$", re.M)
 
 
@@ -155,7 +161,7 @@ def resolve_link(root: Path, source: Path, target: str):
     target = unquote(target.strip("<>"))
     if target.startswith("#"):
         return source.resolve(), target[1:]
-    if target.startswith(("http://", "https://", "mailto:", "tel:")):
+    if URI_SCHEME_RE.match(target):
         return None, None
     destination, separator, fragment = target.partition("#")
     candidate = (source.parent / destination).resolve() if destination else source.resolve()

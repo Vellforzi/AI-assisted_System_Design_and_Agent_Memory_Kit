@@ -13,4 +13,5 @@ Change ID: `<change-id>`
 For each recorded result, link the corresponding `VerificationReceiptV2` and
 identify its subject, verifier type, verification level, environment, evidence,
 status, and `verified_at`. Do not make this file a second operational-status
-register; task status stays in `TASKS.md`.
+register; when this `.work` process is activated, task status stays in
+`TASKS.md`.

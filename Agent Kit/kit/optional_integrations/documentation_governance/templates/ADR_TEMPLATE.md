@@ -23,8 +23,9 @@ superseded_by: null
 
 ## Evidence and related work
 
-<Links to evidence and optional `.work/<change-id>/`. The work link does not
-report operational task status; that authority remains in `TASKS.md`.>
+<Links to evidence and an optional activated `.work/<change-id>/` process. The
+work link does not report operational task status; only that activated
+process's `TASKS.md` holds it.>
 
 ## History rule
 

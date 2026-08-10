@@ -1,19 +1,24 @@
 # Existing Project Context Governance Guide
 
-> v5 note: install `secondary_memory_governance/` as before, then adopt Project Artifact Contract V2 conditionally. Follow `MIGRATION_v4_TO_v5.md` for v4 artifacts; older v3.8 artifacts must first use the v4 migration. Never treat legacy artifacts as v5-valid without a reviewed transformation.
+> v5 note: install the **Standard** `secondary_memory_governance/` baseline when its adoption trigger is met, then adopt Project Artifact Contract V2 conditionally. Follow `MIGRATION_v4_TO_v5.md` for v4 artifacts; older v3.8 artifacts must first use the v4 migration. Never treat legacy artifacts as v5-valid without a reviewed transformation.
 
-Status: practical baseline for active repo-centric projects
+Status: practical Standard baseline for active repo-centric projects
 Purpose: add Agent Kit governance to an existing project without replacing its
 current documentation, runtime behavior, or project-specific agent rules.
+
+This guide's current larger repo-centric baseline is named **Standard**. It is
+an optional secondary-memory overlay for an existing project, not a replacement
+for that project's operational sources or a wholesale migration of its files.
 
 Use this guide when the project already has useful operational docs such as
 `AGENTS.md`, roadmap/status docs, source-of-truth hierarchy, context packs,
 layer-specific specs, issues, or tests.
 
-The default system for this class of project is one repo-centric secondary-memory governance behavior:
+The Standard profile for this class of project is the repo-centric
+secondary-memory governance baseline:
 
 ```text
-Repo-Centric Context Governance Baseline
+Standard: Repo-Centric Context Governance Baseline
 ```
 
 Use `secondary_memory_governance/` as the package source.
@@ -39,9 +44,9 @@ Operational docs, code, tests, specs, issues, and current owner instructions win
 
 ---
 
-## 2. Target Baseline
+## 2. Target Standard Baseline
 
-Install the repo-centric context governance baseline. It keeps Project Map as
+Install the Standard repo-centric context governance baseline. It keeps Project Map as
 secondary memory while making context routing, receipts, and documentation
 checks reproducible.
 

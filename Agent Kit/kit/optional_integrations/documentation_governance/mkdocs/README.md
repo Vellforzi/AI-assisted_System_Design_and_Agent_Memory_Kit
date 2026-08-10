@@ -1,4 +1,7 @@
-# Optional strict MkDocs profile
+# Optional strict MkDocs profile (Reference Lab)
+
+This MkDocs variant is a Reference Lab example outside the normal installation
+path. It is not required to adopt the compact policy layer.
 
 Copy this directory's `mkdocs.strict.yml`, `overrides/`, and
 `docs/javascripts/` into the adopting repository. Install the exact optional

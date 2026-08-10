@@ -4,20 +4,22 @@ Status: optional integration index
 Last aligned: 2026-08-07
 Audience: project owners, AI/Codex sessions, maintainers
 Runtime impact: none unless an owner explicitly adopts and runs a module
-Authority: optional integration navigation; subordinate to core `secondary_memory_governance/`
+Authority: optional integration navigation; adoption boundaries are defined by
+`../ADOPTION_PROFILES.md`
 
 ---
 
 ## Role
 
-These modules extend the core repo-centric secondary-memory governance baseline
-without becoming part of the default behavior.
+These modules are advanced, opt-in additions and do not become default
+behavior merely by being present in the Kit.
 
-Core remains:
-
-- `Agent Kit/kit/secondary_memory_governance/`
-- `scripts/ai_context_helper.py`
-- `scripts/documentation_harness.py`
+Core is the small, dependency-free documentation baseline described in
+[`../ADOPTION_PROFILES.md`](../ADOPTION_PROFILES.md). It uses ordinary project
+documentation for grounding, explicit action approval, and durable notes.
+The `secondary_memory_governance/` overlay and Python helpers are opt-in
+additions; adopt them only when their observable activation triggers apply and
+the owner accepts their operating cost.
 
 Optional modules:
 
@@ -29,8 +31,11 @@ Optional modules:
 - `workflow_evals_mocked_tools/` - deterministic validation of recorded mock traces, including v5 reviewer, exploration, and probe boundaries.
 - `tool_capability_governance/` - fail-closed, report-only capability risk checks.
 - `policy_canary/` - offline canary policy validation without live rollout.
-- `documentation_governance/` - owner-adopted policy and optional report-first
-  tooling for documentation zones, generated blocks, and review boundaries.
+- `documentation_governance/` - owner-adopted compact policy for documentation
+  zones, evidence-aware requirements, immutable records, and deliberate
+  promotion from temporary work. Its hooks, CI variants, MkDocs, just recipes,
+  fixtures, generators, and full pilots are Reference Lab examples outside the
+  normal install path.
 
 Adopt only the modules that match the project's actual tools.
 

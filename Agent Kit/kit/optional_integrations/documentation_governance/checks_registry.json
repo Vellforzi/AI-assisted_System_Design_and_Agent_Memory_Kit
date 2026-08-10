@@ -2,18 +2,29 @@
   "registry_id": "documentation-governance-checks-v1",
   "status": "optional_advisory",
   "default_enforcement": "report_only",
+  "normal_install_path": false,
+  "usage_boundary": "Reference Lab examples only; an adopter may evaluate them separately without making them runtime enforcement.",
+  "reference_lab_examples": [
+    "hooks",
+    "CI variants",
+    "MkDocs",
+    "just recipes",
+    "fixtures",
+    "generators",
+    "full pilots"
+  ],
   "stable_id_policy": "Check IDs are permanent within v1; retire IDs rather than reuse them.",
   "checks": [
     {
       "id": "DG-METADATA",
       "name": "configured-metadata",
-      "purpose": "Report missing metadata fields required by the adopted project configuration.",
+      "purpose": "Report missing metadata fields only when an adopter explicitly configures them for the relevant document role; this remains report-only.",
       "severity": "error"
     },
     {
       "id": "DG-LAST-VERIFIED",
       "name": "last-verified",
-      "purpose": "Report missing, invalid, or stale last_verified metadata under the adopted project policy.",
+      "purpose": "Report configured last_verified metadata that is missing, invalid, or outside an adopter-defined review interval; it is report-only and does not prove current runtime behavior.",
       "severity": "mixed"
     },
     {
@@ -25,7 +36,7 @@
     {
       "id": "DG-WORK-LEAKAGE",
       "name": "ephemeral-work-reference",
-      "purpose": "Report references to ephemeral .work content outside configured allowances.",
+      "purpose": "Report references to ephemeral activated .work content outside configured allowances; it does not make .work product truth.",
       "severity": "warning"
     },
     {
@@ -49,7 +60,7 @@
     {
       "id": "DG-GENERATED",
       "name": "generated-projection",
-      "purpose": "Report missing, ambiguous, or stale configured generated projections.",
+      "purpose": "Reference Lab only: report missing, ambiguous, or stale configured generated projections without making them an independent authority.",
       "severity": "mixed"
     }
   ]

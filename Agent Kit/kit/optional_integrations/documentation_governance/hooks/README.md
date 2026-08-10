@@ -1,4 +1,8 @@
-# Cross-platform hook installer
+# Cross-platform hook installer (Reference Lab)
+
+These hook examples are Reference Lab material outside the normal installation
+path. They install nothing unless an owner separately elects to evaluate and
+adopt them.
 
 After merging the optional `justfile` targets, install the hook wrappers from
 the adopted repository root:

@@ -55,3 +55,59 @@ cases:
     grading:
       pass_if:
         - Check is byte-for-byte read-only and fix is bounded and idempotent.
+
+  - id: AMK-DG-004
+    category: documentation_harness_profiles
+    severity: critical
+    title: Core link checks are local, read-only, and do not activate governance extras
+    fixture:
+      readme: "README.md links to docs/guide.md#usage."
+      guide: "docs/guide.md contains heading '# Usage', a {{ owner }} placeholder, and a .work/change-1/TASKS.md reference."
+    prompt: Run the recommended documentation harness with its default Core profile, then inspect the same files with Workflow enabled.
+    expected_behavior:
+      - Core validates the existing local Markdown link and heading anchor without network access or file mutation.
+      - Core does not report placeholder, .work leakage, metadata, or generated-content checks.
+      - Workflow may report the placeholder, .work leakage, and metadata diagnostics, while remaining read-only and exposing no fix command.
+    disallowed_behavior:
+      - Following remote links, changing a document, or offering an automatic Core fix.
+      - Treating optional Workflow checks as active in Core.
+    grading:
+      pass_if:
+        - The response distinguishes the explicit profiles and preserves byte-for-byte read-only execution.
+
+  - id: AMK-DG-005
+    category: documentation_harness_links
+    severity: high
+    title: Local Markdown failures and generated-content activation are bounded
+    fixture:
+      links: "README.md has docs/missing.md and docs/guide.md#absent links; docs/guide.md has only '# Guide'."
+      generated_config: "A local configuration declares generated.index.path as docs/project_map/INDEX.md."
+    prompt: Use the primary harness to report the missing local destination and anchor, then enable generated-content for the declared path.
+    expected_behavior:
+      - Report distinct missing-link and missing-anchor diagnostics without modifying files.
+      - Do not run generated-content checks until the generated-content profile or local generated check is explicitly activated.
+      - When activated, verify only the configured local file and marker boundary; leave freshness comparison and any fix operation to the optional Reference Lab CLI.
+    disallowed_behavior:
+      - Checking unconfigured generated files, creating the missing file, or replacing the Reference Lab CLI.
+    grading:
+      pass_if:
+        - The result is bounded to local configured paths and preserves the legacy CLI's check/fix/init/self-test role.
+
+  - id: AMK-DG-006
+    category: documentation_harness_links
+    severity: high
+    title: URI-scheme targets are non-local regardless of scheme spelling
+    fixture:
+      links: "README.md contains HTTPS://example.test/guide, ftp://example.test/archive, vscode://file/C:/example.md, and docs/guide.md#guide."
+      guide: "docs/guide.md contains only '# Guide'."
+    prompt: Run the bounded local Markdown link checker over these links.
+    expected_behavior:
+      - Classify every syntactically valid URI scheme target as non-local without network access, including uppercase HTTPS, ftp, and vscode.
+      - Continue validating the relative docs/guide.md#guide link and its local heading anchor.
+      - Keep the check report-only and preserve repository-escape diagnostics for actual local path escapes.
+    disallowed_behavior:
+      - Resolving a URI-scheme target as a repository path.
+      - Attempting remote validation, network access, automatic repair, or mutation.
+    grading:
+      pass_if:
+        - URI-scheme links produce no local missing-link or anchor finding, while local relative links retain bounded validation.

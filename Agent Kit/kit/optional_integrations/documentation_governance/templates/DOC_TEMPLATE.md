@@ -8,6 +8,10 @@ generated_by: "<generator ID or omit>"
 
 # <Title>
 
+These fields are optional, additive metadata for a current-state document.
+Use only the fields that fit this document's role. `generated_by` applies only
+to separately adopted Reference Lab generated content.
+
 ## Purpose
 
 <What this current-state document explains.>
@@ -23,5 +27,6 @@ not a claim of freshness.>
 
 ## Related change work
 
-<Optional `.work/<change-id>/` link and task IDs. Do not state operational task
-status here; `TASKS.md` is the only status authority.>
+<Optional link and task IDs for an activated `.work/<change-id>/` process. Do
+not state operational task status here; only that activated process's
+`TASKS.md` is the status authority.>

@@ -9,7 +9,7 @@ adopting project's operational sources and to the Kit's
 ## Purpose
 
 This module supplies a compact, adoptable policy for separating current
-knowledge, current requirements, immutable history, and short-lived execution
+knowledge, current requirements, immutable history, and temporary execution
 state. It does not install hooks, change runtime behavior, replace the
 secondary-memory baseline, or grant write permission.
 
@@ -25,7 +25,7 @@ reference material.
 | `specs/active/` | Current requirements | The current approved requirement set. It governs intended change scope; reconcile it with operational evidence before claiming present runtime behavior. |
 | `specs/archive/` | Immutable history | Superseded or completed specifications. Preserve content and identity; do not revise it to reflect later understanding. |
 | `docs/adr/` | Immutable history | Accepted decision records. Amend only through a new ADR that supersedes or clarifies the old one; do not silently rewrite accepted history. |
-| `.work/` | Ephemeral execution state | Task-local notes, drafts, scratch output, and resumable execution context. It is non-authoritative and must be promoted deliberately before it informs durable documentation. |
+| `.work/` | Ephemeral execution state | An explicitly activated change process for task-local notes and resumable context. It is non-authoritative for product facts and requires deliberate promotion before informing durable documentation. |
 
 `docs/project_map/` (when present) is secondary navigation and memory. It may
 summarize, index, and route readers, but it cannot override an operational
@@ -39,12 +39,30 @@ source, active spec, code, test, or current owner instruction.
    evidence where applicable.
 3. Report unresolved conflicts; never resolve them by editing history or a
    Project Map summary.
-4. Promote durable facts from `.work/` only through an explicit, reviewed
-   update to the appropriate `docs/` or `specs/active/` source.
+4. Promote durable facts from activated `.work/` only through an explicit,
+   reviewed update to the appropriate `docs/` or `specs/active/` source.
 5. Preserve archive and ADR records as historical evidence; create a linked
    successor when a decision or requirement changes.
 
-## Generated blocks
+## Temporary-work activation
+
+Create `.work/<change-id>/` only when at least one observable need applies:
+resumable multi-session work, coordination among multiple executors, more than
+three independently verifiable slices, high-risk acceptance, or a requested
+audit trail. It is not a default task folder for routine single-session work.
+
+When this process is activated, `TASKS.md` is the sole authority for that
+change's operational task status. The minimal folder may contain only
+`TASKS.md` and `ACCEPTANCE.md`; add `PLAN.md`, `DEVIATIONS.md`, or `artifacts/`
+only when their specific purpose is needed. Outside an activated `.work`
+process, task status remains in the adopting project's existing operational
+system.
+
+## Reference Lab: generated blocks
+
+Generated-block patterns and generators are Reference Lab examples outside the
+normal policy install path. If an owner separately evaluates one, apply the
+following ownership rule:
 
 A generated block must have one named authoritative generator and a stable
 marker or equivalent local convention. The generator owns the block's content;
@@ -56,20 +74,26 @@ Do not treat generated output as a separate authority. The source data and the
 operational source it represents remain authoritative. A failed or unavailable
 generation is a review signal, not permission to overwrite the block manually.
 
-## Metadata and checks
+## Metadata and Reference Lab material
 
 Use [docs_metadata_policy.json](docs_metadata_policy.json) for optional,
-additive metadata rules. `last_verified` records when the document's relevant
-claims were last checked against its required evidence; it is not a freshness
-guarantee, a replacement for evidence, or a mandatory field on every document.
+additive, role-specific metadata rules. Choose fields only when they suit the
+document's role; no universal frontmatter shape is required. `last_verified`
+records when the document's relevant claims were last checked against its
+required evidence; it is not a freshness guarantee, a replacement for
+evidence, or a mandatory field on every document.
 
-Use [checks_registry.json](checks_registry.json) as the stable registry of
-checks emitted by the optional CLI. Stable check IDs allow an adopter to
-automate reporting without making this module a runtime dependency. Broader
-authority questions such as whether prose matches code or whether archived
-history was improperly rewritten remain policy-review concerns; the local CLI
-does not claim to prove them. Checks are report-only unless an owner explicitly
-adopts enforcement in that project.
+Use [checks_registry.json](checks_registry.json) as the stable registry for
+the report-only checker kept as a Reference Lab example. Stable check IDs allow
+an adopter to evaluate or automate local reporting without making this module
+a runtime dependency. Broader authority questions such as whether prose
+matches code or whether archived history was improperly rewritten remain
+policy-review concerns; the local CLI does not claim to prove them.
+
+Hooks, CI variants, MkDocs, just recipes, fixtures, generators, and full
+pilots are also Reference Lab examples. They remain available for a separately
+owned evaluation or integration decision, but are outside the normal policy
+install path and add no enforcement by their presence.
 
 ## Adoption boundary
 

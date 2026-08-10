@@ -24,15 +24,23 @@ The module defines these zones:
 - `.work/` is ephemeral execution state and never becomes durable authority by
   itself.
 
+The compact policy activates `.work/<change-id>/` only for resumable
+multi-session work, multiple executors, more than three independently
+verifiable slices, high-risk acceptance, or an audit trail. In that activated
+process, `TASKS.md` is the sole operational-status authority; it is not a
+universal task-status system.
+
 The explicit zone-to-authority mapping is maintained in
 `docs_metadata_policy.json`; the human-readable form is in the README. The
-module supplies a stable, report-only check registry and optional metadata
-policy, including `last_verified`.
+module supplies additive, role-specific metadata guidance, including
+`last_verified`, and a stable report-only check registry retained for Reference
+Lab evaluation.
 
-Generated blocks have a single authoritative generator. Their source is the
-durable point of change; manually editing generated content does not establish
-authority. The project must make block boundaries and generator ownership
-identifiable before relying on generated content.
+Generated-block patterns and generators are Reference Lab material. If a
+project separately evaluates one, it has a single authoritative generator:
+its source is the durable point of change, and manually editing generated
+content does not establish authority. The project must make block boundaries
+and generator ownership identifiable before relying on generated content.
 
 ## Consequences
 
@@ -47,6 +55,8 @@ identifiable before relying on generated content.
   reviewed before it changes a current-state or requirements source.
 - Adoption is owner-controlled. The module neither replaces
   `secondary_memory_governance/` nor becomes active by default.
+- Hooks, CI variants, MkDocs, just recipes, fixtures, generators, and full
+  pilots are Reference Lab examples outside the normal install path.
 
 ## Non-decisions
 

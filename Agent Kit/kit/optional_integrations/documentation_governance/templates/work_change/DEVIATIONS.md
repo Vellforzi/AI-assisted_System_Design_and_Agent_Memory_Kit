@@ -2,8 +2,10 @@
 
 Change ID: `<change-id>`
 
-Record material departures from `PLAN.md` append-only. A deviation does not
-change task status; update that only in `TASKS.md`.
+Create this file only when a material departure needs an append-only record.
+When `PLAN.md` exists, record material departures from it. A deviation does
+not change task status; in an activated `.work` process, update that only in
+`TASKS.md`.
 
 | Date | Deviation | Reason / evidence | Impact on acceptance | Owner disposition | Follow-up reference |
 | --- | --- | --- | --- | --- | --- |

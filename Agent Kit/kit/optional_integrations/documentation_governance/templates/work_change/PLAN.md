@@ -1,4 +1,4 @@
-# Plan: <change title>
+# Optional plan: <change title>
 
 Change ID: `<change-id>`
 TaskContractV3 reference: `<TASK-id or none>`
@@ -22,5 +22,7 @@ Workflow profile: `<mode / task_scale / risk_class / delivery_strategy / review_
 <References only to contracts activated by the workflow profile, scale, or
 risk—for example WorkItemGraphV1, VerificationReceiptV2, or ReviewReceiptV1.>
 
-Do not put task status, a frontier, or a next-step tracker here. Use `TASKS.md`
-for operational task state.
+Create this file only when an intended approach, scope record, or recovery
+notes are useful. Do not put task status, a frontier, or a next-step tracker
+here. In an activated `.work` process, use `TASKS.md` for operational task
+state.

@@ -21,5 +21,5 @@ understanding through a linked successor rather than rewriting this record.
 
 ## Related change work
 
-<Optional `.work/<change-id>/` link for navigation only. Do not record or
-reconstruct operational task status here.>
+<Optional activated `.work/<change-id>/` link for navigation only. Do not
+record or reconstruct that process's operational task status here.>

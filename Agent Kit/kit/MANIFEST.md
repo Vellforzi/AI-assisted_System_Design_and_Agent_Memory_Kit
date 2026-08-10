@@ -21,6 +21,7 @@ Package purpose: portable starter guide and memory operating layer for using AI 
 ## Agent Kit core files
 
 - `Agent Kit/kit/README.md` — package note and file map.
+- `Agent Kit/kit/ADOPTION_PROFILES.md` — Core, Standard, Workflow, and Reference Lab adoption boundaries and activation triggers.
 - `Agent Kit/kit/OWNER_USAGE_GUIDE.md` — day-to-day usage guide for a project owner.
 - `Agent Kit/kit/ACTION_INTENT_CONTRACT.md` — answer-only default intent and explicit-action gate.
 - `Agent Kit/kit/SIGNIFICANT_WORK_AND_CHECKPOINTS.md` — significant-work triggers, checkpoints, Project Map deltas, and eval triggers.
@@ -101,6 +102,7 @@ Package purpose: portable starter guide and memory operating layer for using AI 
 - `Agent Kit/kit/optional_integrations/cursor_settings/README.md` - optional Cursor settings integration guide.
 - `Agent Kit/kit/optional_integrations/documentation_governance/README.md` - optional, owner-adopted documentation-governance policy; it remains outside the core baseline.
 - `Agent Kit/kit/optional_integrations/documentation_governance/ADOPTION_GUIDE.md` - adoption, optional Python tooling, validation, and rollback guidance.
+- `Agent Kit/kit/optional_integrations/documentation_governance/SIMPLIFICATION_PILOT_REPORT.md` - report-only acceptance coverage for the four opt-in adoption profiles, with compatibility boundary, stated limitations, and no release claim.
 - `Agent Kit/kit/optional_integrations/documentation_governance/` - optional policy, templates, report-first checker, automation examples, and isolated fixtures; its tooling dependencies apply only when an adopter chooses to use them.
 
 Optional integrations do not alter the core Kit's language-agnostic,
@@ -181,6 +183,7 @@ a dependency-free Python 3 convenience tool, not a core runtime dependency.
 
 ## Optional tools
 
+- `Agent Kit/kit/tests/test_adoption_profiles.py` - dependency-free, report-only acceptance test for Core, Standard, Workflow, and Reference Lab boundaries; it exercises existing compatible documentation-harness behavior, records limitations in the pilot report, and makes no release claim.
 - `Agent Kit/kit/tools/README.md` — helper script documentation.
 - `Agent Kit/kit/tools/run_eval_checklist.py` — creates a local eval run folder and Markdown checklist from YAML cases.
 - `Agent Kit/kit/tools/context_governance_helper.py` - read-only reference helper for context-index read sets, receipts, API-agent context bundles, and context smoke checks.

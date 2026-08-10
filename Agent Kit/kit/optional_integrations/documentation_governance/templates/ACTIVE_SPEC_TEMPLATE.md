@@ -9,6 +9,10 @@ source_refs: []
 
 # <Title>
 
+`source_refs` is optional, additive metadata for this current-requirements
+role. Omit it when it adds no useful evidence navigation; it does not prove
+current runtime behavior.
+
 ## Intent and scope
 
 <Current approved requirement and boundaries.>
@@ -23,8 +27,9 @@ source_refs: []
 
 ## Related change work
 
-<Optional `.work/<change-id>/` link. Operational task status remains only in
-that change folder's `TASKS.md`; do not copy it here.>
+<Optional link to an activated `.work/<change-id>/` process. Only for that
+activated process, operational task status remains in its `TASKS.md`; do not
+copy it here.>
 
 ## Successor or archive link
 
