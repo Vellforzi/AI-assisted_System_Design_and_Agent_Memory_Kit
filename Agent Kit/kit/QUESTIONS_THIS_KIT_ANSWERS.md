@@ -25,6 +25,11 @@ Two coordinated layers in one repository:
 Together they are a **guide plus operating contract**, not a library that
 "does memory" in the background.
 
+Authorship follows the layer, not the last commit. See `AUTHORS.md` and
+root `README.md`. Host plugins (PStack, Cursor plugins, Codex skills) are
+optional host add-ons; they are not the kit and not Project Map truth.
+See `HOST_PLUGINS_GUIDE.md`.
+
 A library would give you files to import. This package tells you:
 
 - why those files exist;
@@ -206,6 +211,7 @@ them into one invented surface name.
 | How do I give agents a compact picture of a causal path? | `SCHEMES_AND_COVERAGE_ATLAS.md` |
 | What else from a live high-control method should I copy? | `WORKING_METHOD_CATALOG.md` |
 | Do I need to build my own orchestrator? | `ORCHESTRATION_CHOICE.md` |
+| What are PStack / Cursor / Codex plugins? | `HOST_PLUGINS_GUIDE.md` |
 | How do I keep limits as numbered facts? | `CONSTRAINT_CATALOG.md` |
 | Which hooks should I create? | `proposed_hooks/README.md` |
 

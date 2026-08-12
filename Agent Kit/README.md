@@ -1,6 +1,6 @@
 # Agent Memory Kit
 
-Version: v4.0.0
+Version: v4.1.0
 
 Agent Memory Kit is the project-memory and agent-behavior layer of the package.
 
@@ -97,6 +97,12 @@ Project Map = shared project truth
 Use one shared workspace root when one Project Map governs multiple components. Use task scope and permission gates for safety.
 
 
+
+## v4.1.0 focus
+
+Authors / layers on the landing page (`AUTHORS.md`). Host plugins guide
+(`HOST_PLUGINS_GUIDE.md`): PStack, Cursor plugins, and Codex skills are
+host add-ons, not kit identity. Eval `AMK-PL-001`.
 
 ## v4.0.0 focus
 

@@ -1,10 +1,21 @@
 # AI-assisted System Design and Agent Memory Kit
 
-Version: v4.0.0 published
-Release date: v4.0.0 published 2026-08-13; previous tag `v3.12.1` published 2026-08-13
-Status: portable project-owner toolkit. Published tag is `v4.0.0`.
+Version: v4.1.0 published
+Release date: v4.1.0 published 2026-08-13; previous tag `v4.0.0` published 2026-08-13
+Status: portable project-owner toolkit. Published tag is `v4.1.0`.
 
 This package is a **guide plus operating contract**, not a library that runs in the background.
+
+## Authors / layers
+
+Authorship follows the **layer**, not the last commit. See `AUTHORS.md`.
+
+| Layer | Path | Author |
+|---|---|---|
+| AI-assisted System Design | `AI-assisted System Design/` | [Alexander Lozovoy](https://github.com/All-fatherOdin) (All-fatherOdin) |
+| Agent Memory Kit | `Agent Kit/` | [Vellforzi](https://github.com/Vellforzi) |
+
+The GitHub repository belongs to Vellforzi. Alexander Lozovoy's additional line of work lives on branch [`new_version`](https://github.com/Vellforzi/AI-assisted_System_Design_and_Agent_Memory_Kit/tree/new_version) (adoption profiles, Context Contract V1, v5-style schemas). It is **not merged into `main`**. Compare [`main...new_version`](https://github.com/Vellforzi/AI-assisted_System_Design_and_Agent_Memory_Kit/compare/main...new_version).
 
 Two layers:
 
@@ -63,7 +74,8 @@ See `Agent Kit/kit/POSITIONING_AND_ALTERNATIVES.md`, `Agent Kit/kit/CAPABILITY_M
 AI-assisted System Design and Agent Memory Kit/
   README.md
   START_HERE.md
-  Agent Kit/kit/CHANGELOG_v4.0.0.md
+  AUTHORS.md
+  Agent Kit/kit/CHANGELOG_v4.1.0.md
   Agent Kit/
     README.md
     START_HERE_AGENT_KIT_PROJECT_OWNER_GUIDE.md
@@ -90,15 +102,15 @@ Earlier 3.x changelogs stay under `Agent Kit/kit/CHANGELOG_v3.*.md` and root `RE
 
 ---
 
-## What v4.0.0 published
+## What v4.1.0 published
 
-- Durable-truth role: Project Map is the recommended holder; folders are a recommendation; a checkout and "whatever is in git" are not automatically truth; in a team the map stays truth and only the owner writes it.
-- GitHub landing README rewritten for the current instrument.
-- Eval case `AMK-DT-001`. Suite id `AMK-EVAL-v4.0.0`.
+- Authors / layers block and `AUTHORS.md`: authorship by layer, not last commit.
+- `Agent Kit/kit/HOST_PLUGINS_GUIDE.md`: PStack, Cursor plugins, and Codex skills as host add-ons, not kit identity.
+- Eval case `AMK-PL-001`. Suite id `AMK-EVAL-v4.1.0`.
 
-See `Agent Kit/kit/CHANGELOG_v4.0.0.md`.
+See `Agent Kit/kit/CHANGELOG_v4.1.0.md`.
 
-The 3.x contour is still in the package: capability management, behavioral oracles, schemes, CN catalog, hooks, execution runtime, verified delivery, orchestration choice. Those were published as `v3.11.3`–`v3.12.1`. This major does not merge the diverged `new_version` branch.
+v4.0.0 added the durable-truth role and `AMK-DT-001`. The 3.x contour remains: capability management, behavioral oracles, schemes, CN catalog, hooks, execution runtime, verified delivery, orchestration choice. The diverged `new_version` branch is not merged.
 
 ---
 

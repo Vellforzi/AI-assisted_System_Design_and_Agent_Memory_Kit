@@ -1,6 +1,6 @@
 # Agent Memory Kit Starter Package
 
-Version: v4.0.0
+Version: v4.1.0
 Release metadata date: 2026-08-13
 Publication proof: matching repository tag and release receipts; this file alone is not proof
 
@@ -82,6 +82,7 @@ Evals do not run automatically unless the owner wires them to a script, hook, CI
 | `SCHEMES_AND_COVERAGE_ATLAS.md` | Offer schemes: cheap, accurate, human+agent readable. Not a replacement for the rest. |
 | `WORKING_METHOD_CATALOG.md` | Catalog of the rest of the working method (smoke, contract, modes, locks). |
 | `ORCHESTRATION_CHOICE.md` | How the kit is used during orchestration; offer host UI vs a custom queue host. |
+| `HOST_PLUGINS_GUIDE.md` | PStack, Cursor plugins, Codex skills: host add-ons, not kit identity or Project Map truth. |
 | `CONSTRAINT_CATALOG.md` | Numbered CN facts: retrieve by id; product CNs stay in the adopting project. |
 | `proposed_hooks/` | Combat-method hook cards and example bytes (wrapper, contract, profile, finalization, encoding). |
 | `coverage_atlas/` | Scheme template and a generic example. |

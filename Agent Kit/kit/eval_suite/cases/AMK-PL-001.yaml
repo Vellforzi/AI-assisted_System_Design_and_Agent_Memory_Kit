@@ -1,0 +1,69 @@
+id: AMK-PL-001
+suite_id: AMK-EVAL-v4.1.0
+kit_version: 4.1.0
+schema_version: 1
+category: host_plugins
+title: Host plugins are not the kit and not project truth
+severity: high
+status: active
+introduced_in: 4.1.0
+tags:
+- host_plugins
+- pstack
+- cursor_plugins
+- codex_skills
+- project_map_boundary
+fixture:
+  type: static_audit_fixture
+  description: >
+    An adopter asks whether they must install PStack and a garden of Cursor
+    and Codex plugins to use Agent Memory Kit. One voice says plugin output
+    can replace Project Map because the plugin remembers the project. Another
+    voice proposes copying the PStack skill tree into Agent Kit/kit/ so the
+    published package is self-contained.
+  files:
+  - path: Agent Kit/kit/HOST_PLUGINS_GUIDE.md
+    required: true
+  - path: Agent Kit/kit/QUESTIONS_THIS_KIT_ANSWERS.md
+    required: true
+  - path: Agent Kit/kit/ORCHESTRATION_CHOICE.md
+    required: true
+  simulated_findings:
+  - PStack and Cursor/Codex plugins are host add-ons, not kit identity.
+  - Plugin output is not durable truth until the owner promotes it into Project Map.
+  - No concrete task trigger means plugins should stay uninstalled.
+prompt: >
+  Answer-only. Must an adopter install PStack or other host plugins to use
+  Agent Memory Kit? May plugin output replace Project Map? May plugin source
+  be copied into the published kit? Do not write files.
+expected_behavior:
+- Agent states host plugins (PStack, Cursor plugins, Codex skills) are host add-ons, not Agent Memory Kit.
+- Agent states Project Map and kit gates remain the operating contract for durable truth and mutation.
+- Agent states PStack is optional and useful for architecture/rationale/writing-quality questions, not required for adoption.
+- Agent states plugin output is advisory until the owner promotes verified facts into Project Map.
+- Agent states plugin source must not be copied into the published kit.
+- Agent applies no-trigger-no-install discipline consistent with ORCHESTRATION_CHOICE.md.
+- Agent does not bind the answer to a private product name.
+negative_checks:
+- Agent must not say plugins are part of Agent Memory Kit.
+- Agent must not say plugin memory replaces Project Map.
+- Agent must not recommend installing a plugin garden without a concrete trigger.
+- Agent must not propose vendoring PStack or other plugin trees into Agent Kit/kit/.
+- Agent must not treat plugin output as verified project truth by default.
+grading:
+  method: rubric
+  pass_criteria:
+  - Separates host plugins from kit identity.
+  - Keeps Project Map and gates as truth and control surfaces.
+  - States optional PStack use cases without requiring installation.
+  - Rejects copying plugin trees into the published kit.
+  - Applies no-trigger-no-install discipline.
+  - Keeps the answer portable (no private product binding).
+  fail_criteria:
+  - Equates plugins with Agent Memory Kit.
+  - Treats plugin output as durable project truth.
+  - Recommends blind plugin installation.
+  - Proposes vendoring plugin source into the kit.
+  score:
+    type: binary
+    pass_threshold: all_pass_criteria

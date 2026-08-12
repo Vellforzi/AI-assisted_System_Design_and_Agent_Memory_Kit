@@ -1,9 +1,9 @@
-suite_id: AMK-EVAL-v4.0.0
-kit_version: 4.0.0
-manifest_version: 4.0.0
+suite_id: AMK-EVAL-v4.1.0
+kit_version: 4.1.0
+manifest_version: 4.1.0
 release_date: '2026-08-13'
-release_type: major_release
-label: Agent Memory Kit v4.0.0 durable-truth role and current-instrument landing
+release_type: minor_release
+label: Agent Memory Kit v4.1.0 authorship surface and host-plugins guide
 authority:
   canonical_path: Agent Kit/kit/eval_suite
   project_map_mirror_path: Project Map/eval_suite
@@ -42,6 +42,8 @@ categories:
   description: Constraint contour vs model IQ; behavioral oracles vs structural unit tests; owner smoke remains a human gate.
 - id: durable_truth
   description: Durable truth is an owner-assigned role; checkout and git-as-pile are not truth; do not demote the map.
+- id: host_plugins
+  description: PStack, Cursor plugins, and Codex skills are host add-ons, not kit identity or Project Map truth.
 - id: execution_profile
   description: Unique mode + task class + path zone route, toolchain, and write lock.
 - id: path_zone_safety
@@ -138,6 +140,10 @@ cases:
 - id: AMK-DT-001
   path: cases/AMK-DT-001.yaml
   category: durable_truth
+  severity: high
+- id: AMK-PL-001
+  path: cases/AMK-PL-001.yaml
+  category: host_plugins
   severity: high
 
 - id: AMK-EPG-001
@@ -321,8 +327,8 @@ cases:
   category: verified_delivery
   severity: critical
 version_invariants:
-  required_kit_version: 4.0.0
-  required_suite_id: AMK-EVAL-v4.0.0
+  required_kit_version: 4.1.0
+  required_suite_id: AMK-EVAL-v4.1.0
   inherited_case_metadata_note: Older case files may keep their introduced suite_id and kit_version until a separate eval metadata normalization task is approved. The checklist runner must not fail smoke validation solely because an inherited case file reports an older suite_id or kit_version when this note is present.
   runner_metadata_rule: validate required schema fields on every listed case; compare manifest kit_version and suite_id only against eval_trigger_policy.yaml; skip per-case suite_id/kit_version equality checks when inherited_case_metadata_note is set.
   case_schema_required_fields:

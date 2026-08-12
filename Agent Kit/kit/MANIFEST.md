@@ -4,10 +4,18 @@ Package file: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.9.3_EN.zip`
 
 Package purpose: portable starter guide and memory operating layer for using AI agents with owner-controlled projects. Agent Memory Kit helps build a Project Map through structured, meaningful, interconnected duplication of project information supplied or verified by the owner.
 
-Current package version: `v4.0.0` published. Previous tag: `v3.12.1`.
+Current package version: `v4.1.0` published. Previous tag: `v4.0.0`.
 Release publication is established only by the matching repository tag and
 release receipts, not by this file. Older package-file lines are retained
 as historical manifest entries.
+
+## v4.1.0 authorship and host-plugins minor
+
+- `AUTHORS.md` - layer authorship rule; friend branch pointer.
+- Root `README.md` - Authors / layers block on the GitHub landing page.
+- `Agent Kit/kit/CHANGELOG_v4.1.0.md` - release notes.
+- `Agent Kit/kit/HOST_PLUGINS_GUIDE.md` - PStack, Cursor plugins, Codex skills as host add-ons.
+- `Agent Kit/kit/eval_suite/cases/AMK-PL-001.yaml` - host-plugins boundary eval.
 
 ## v4.0.0 durable-truth major
 

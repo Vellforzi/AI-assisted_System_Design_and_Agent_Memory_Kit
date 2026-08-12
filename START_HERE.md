@@ -1,8 +1,8 @@
 # START HERE — AI-assisted System Design and Agent Memory Kit
 
-Version: v4.0.0 published
-Release date: v4.0.0 published 2026-08-13; previous tag `v3.12.1` published 2026-08-13
-Package: published tag is `v4.0.0`.
+Version: v4.1.0 published
+Release date: v4.1.0 published 2026-08-13; previous tag `v4.0.0` published 2026-08-13
+Package: published tag is `v4.1.0`.
 Status: portable project-owner kit for AI-assisted work and grounded project memory
 
 ---
@@ -16,7 +16,9 @@ This package contains two coordinated layers:
 | AI-assisted System Design | `AI-assisted System Design/` | A method for running a project as an AI-readable engineering system: scoped work, explicit contracts, small implementation chunks, verification, and documentation sync. |
 | Agent Memory Kit | `Agent Kit/` | A portable memory operating layer for preserving project meaning, decisions, constraints, current state, evidence, risks, continuity, and agent behavior checks. |
 
-The two layers are related but not identical.
+The two layers are related but not identical. Authorship follows the layer, not the last commit. See `AUTHORS.md` and the table in root `README.md`. Alexander Lozovoy's additional work is on branch [`new_version`](https://github.com/Vellforzi/AI-assisted_System_Design_and_Agent_Memory_Kit/tree/new_version); it is not merged into `main`.
+
+Host plugins (PStack, Cursor plugins, Codex skills) are optional host add-ons. They are not the kit and not Project Map truth. See `Agent Kit/kit/HOST_PLUGINS_GUIDE.md`.
 
 - Use **AI-assisted System Design** when you are designing or improving the project workflow, repository structure, technical delivery process, or implementation protocol.
 - Use **Agent Memory Kit** when you need the agent to remember, retrieve, ground, consolidate, continue, or evaluate project-specific work.
@@ -172,6 +174,16 @@ Read:
 3. the project's own `AGENTS.md`, `PROJECT_AI_BRIEF.md`, repository docs, or equivalent if the user explicitly grants read access.
 
 ---
+
+## What changed in v4.1.0
+
+Published minor; tag is `v4.1.0`.
+
+- Authors / layers: `AUTHORS.md`, root `README.md`
+- Host plugins guide: `Agent Kit/kit/HOST_PLUGINS_GUIDE.md`
+- Eval: `AMK-PL-001`
+
+See `Agent Kit/kit/CHANGELOG_v4.1.0.md`.
 
 ## What changed in v4.0.0
 
