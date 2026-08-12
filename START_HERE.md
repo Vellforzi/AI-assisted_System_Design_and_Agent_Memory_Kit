@@ -1,8 +1,8 @@
 # START HERE — AI-assisted System Design and Agent Memory Kit
 
-Version: v3.11.0
-Release date: 2026-07-05
-Package: working tree package; release asset not created by this implementation
+Version: v3.11.3 published
+Release date: v3.11.3 published 2026-08-12; previous tag `v3.11.2` published 2026-07-10
+Package: published tag is `v3.11.3`. No public v3.12.0 is claimed.
 Status: portable project-owner kit for AI-assisted work and grounded project memory
 
 ---
@@ -41,6 +41,8 @@ Its purpose is to help the owner and AI agents avoid project errors caused by:
 - forgetting to add eval cases for repeated failures.
 
 For project-specific claims, the model is only an execution engine. The valid project context comes from the owner, the Project Map, project files, tool outputs, and sources explicitly retrieved in the current run.
+
+This package is a guide plus operating contract, not a silent library. If you are asking what the tool is for, or whether "agents are just stupid", read `Agent Kit/kit/QUESTIONS_THIS_KIT_ANSWERS.md` and `Agent Kit/kit/CAPABILITY_MANAGEMENT.md` before installing files.
 
 ---
 
@@ -104,23 +106,34 @@ The owner may rename folders. Roles matter more than names.
 
 Read:
 
-1. `Agent Kit/README.md`
-2. `Agent Kit/START_HERE_AGENT_KIT_PROJECT_OWNER_GUIDE.md`
-3. `Agent Kit/kit/README.md`
-4. `Agent Kit/kit/OWNER_USAGE_GUIDE.md`
-5. `Agent Kit/kit/ACTION_INTENT_CONTRACT.md`
-6. `Agent Kit/kit/SIGNIFICANT_WORK_AND_CHECKPOINTS.md`
-7. `Agent Kit/kit/PROJECT_GROUNDING_CONTRACT.md`
-8. `Agent Kit/kit/PROJECT_MEMORY_OPERATING_PROTOCOL.md`
-9. `Agent Kit/kit/PROJECT_MEMORY_STORAGE_GUIDE.md`
-10. `Agent Kit/kit/EVAL_SUITE_GUIDE.md`
-11. `Agent Kit/kit/EVAL_AUTOMATION_AND_TRIGGER_POLICY.md`
-12. `Agent Kit/kit/PLAIN_LANGUAGE_GLOSSARY.md`
-13. `Agent Kit/kit/EXECUTOR_ROUTING_GATE.md`
-14. `Agent Kit/kit/WINDOWS_ENCODING_AND_SHELL_HYGIENE.md`
-15. `Agent Kit/kit/HOOK_RECOVERY_PLAYBOOK.md`
-16. `Agent Kit/kit/CODEX_CONNECTOR_POLICY.md`
-17. `Agent Kit/kit/GENERATED_RETRIEVAL_EVIDENCE_GUIDE.md`
+1. `Agent Kit/kit/MOTIVE_AND_ANALOGY.md`
+2. `Agent Kit/kit/QUESTIONS_THIS_KIT_ANSWERS.md`
+3. `Agent Kit/README.md`
+4. `Agent Kit/START_HERE_AGENT_KIT_PROJECT_OWNER_GUIDE.md`
+5. `Agent Kit/kit/README.md`
+6. `Agent Kit/kit/OWNER_USAGE_GUIDE.md`
+7. `Agent Kit/kit/CAPABILITY_MANAGEMENT.md`
+8. `Agent Kit/kit/BEHAVIORAL_ORACLES.md`
+9. `Agent Kit/kit/PROPOSED_SPECIALIST_FUNCTIONS.md`
+10. `Agent Kit/kit/SCHEMES_AND_COVERAGE_ATLAS.md`
+11. `Agent Kit/kit/WORKING_METHOD_CATALOG.md`
+12. `Agent Kit/kit/CONSTRAINT_CATALOG.md`
+13. `Agent Kit/kit/proposed_hooks/README.md`
+14. `Agent Kit/kit/ACTION_INTENT_CONTRACT.md`
+15. `Agent Kit/kit/SIGNIFICANT_WORK_AND_CHECKPOINTS.md`
+16. `Agent Kit/kit/PROJECT_GROUNDING_CONTRACT.md`
+17. `Agent Kit/kit/PROJECT_MEMORY_OPERATING_PROTOCOL.md`
+18. `Agent Kit/kit/PROJECT_MEMORY_STORAGE_GUIDE.md`
+19. `Agent Kit/kit/EVAL_SUITE_GUIDE.md`
+20. `Agent Kit/kit/EVAL_AUTOMATION_AND_TRIGGER_POLICY.md`
+21. `Agent Kit/kit/PLAIN_LANGUAGE_GLOSSARY.md`
+22. `Agent Kit/kit/EXECUTOR_ROUTING_GATE.md`
+23. `Agent Kit/kit/WINDOWS_ENCODING_AND_SHELL_HYGIENE.md`
+24. `Agent Kit/kit/HOOK_RECOVERY_PLAYBOOK.md`
+25. `Agent Kit/kit/CODEX_CONNECTOR_POLICY.md`
+26. `Agent Kit/kit/GENERATED_RETRIEVAL_EVIDENCE_GUIDE.md`
+27. `Agent Kit/kit/CURSOR_INTEGRATION_OWNER_GUIDE.md`
+28. `Agent Kit/kit/codex/README.md`
 
 ---
 
@@ -154,6 +167,23 @@ Read:
 3. the project's own `AGENTS.md`, `PROJECT_AI_BRIEF.md`, repository docs, or equivalent if the user explicitly grants read access.
 
 ---
+
+## What changed in v3.11.3
+
+Published guides; tag is `v3.11.3`. No public v3.12.0 is claimed.
+
+- Motive: `MOTIVE_AND_ANALOGY.md`
+- FAQ: `QUESTIONS_THIS_KIT_ANSWERS.md`
+- Thesis: `CAPABILITY_MANAGEMENT.md`
+- Oracles: `BEHAVIORAL_ORACLES.md`
+- Specialists: `PROPOSED_SPECIALIST_FUNCTIONS.md`
+- Schemes (offer, do not replace the rest): `SCHEMES_AND_COVERAGE_ATLAS.md`
+- Method catalog: `WORKING_METHOD_CATALOG.md`
+- Numbered CN facts: `CONSTRAINT_CATALOG.md`
+- Hook cards and example bytes: `proposed_hooks/`
+- Eval: `AMK-CM-001`
+
+See `Agent Kit/kit/CHANGELOG_v3.11.3.md`.
 
 ## What changed in v3.11.0
 

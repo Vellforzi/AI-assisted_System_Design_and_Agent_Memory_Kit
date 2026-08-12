@@ -83,14 +83,30 @@ Project Map stores truth.
 Owner approves.
 ```
 
+That is the **host** split. It is not enough for coupled work.
+
+On those hosts, install **specialist functions** (writer, reviewer,
+mapper, forensic, builder, deployer). One chat that writes, reviews,
+compiles, deploys, and grades itself is a contour hole.
+
+How to create those functions, and how they must be limited:
+`PROPOSED_SPECIALIST_FUNCTIONS.md`. Example cards:
+`cursor/subagents/`. Copy the method, not a private project's roster.
+
 ## Default interaction loop
 
 ```text
 1. GPT or Cursor creates a scoped task plan.
-2. Cursor applies a narrow change.
-3. Codex reviews the diff or context.
-4. Owner accepts/rejects.
-5. Agent proposes Project Map delta.
-6. Owner approves map update.
-7. Eval trigger is checked.
+2. Mapper impact-draft if more than one component will move.
+3. Writer applies a narrow change (or Cursor does, if no writer card).
+4. Independent reviewer reads the diff (Codex may fill this host role).
+5. Builder / deployer only if the contract names those gates.
+6. Forensic + owner smoke for runtime/UI.
+7. Owner accepts/rejects. Acceptance may flip after live look.
+8. Agent proposes Project Map delta.
+9. Owner approves map update.
+10. Eval trigger is checked.
 ```
+
+Skip unused gates. Do not skip review and owner smoke on coupled
+runtime/UI work because compile was green.

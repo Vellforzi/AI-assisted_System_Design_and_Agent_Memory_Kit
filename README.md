@@ -1,15 +1,19 @@
 # AI-assisted System Design and Agent Memory Kit
 
-Version: v3.11.1
-Release date: unreleased candidate prepared 2026-07-10
-Status: portable project-owner toolkit; working tree is not a published release
+Version: v3.11.3 published
+Release date: v3.11.3 published 2026-08-12; previous tag `v3.11.2` published 2026-07-10
+Status: portable project-owner toolkit. Published tag is `v3.11.3`. No public v3.12.0 is claimed.
 
 This package contains two complementary tools:
 
 1. **AI-assisted System Design** — a method for making a project readable and governable by AI assistants.
 2. **Agent Memory Kit** — a file-based operating layer for project memory, grounding, retrieval, task continuity, action gates, and behavior checks.
 
+The package is a **guide plus operating contract**, not a library that runs in the background. It exists so owners can manage agent capability (truth, gates, oracles, Cursor/Codex setup) instead of blaming "stupid models" when unconstrained chat produces junk.
+
 The package is designed for owners who want high control over AI-assisted work. It does not assume autonomous long-running agents. The default mode is controlled, evidence-first, answer-only work unless the owner explicitly asks for a concrete action.
+
+If you are asking what this tool is for, start with `Agent Kit/kit/QUESTIONS_THIS_KIT_ANSWERS.md`.
 
 ---
 
@@ -44,7 +48,7 @@ It is strongest when the owner wants:
 - checkpoints and handoffs across sessions;
 - behavior evals based on real failure modes.
 
-See `Agent Kit/kit/POSITIONING_AND_ALTERNATIVES.md`.
+See `Agent Kit/kit/POSITIONING_AND_ALTERNATIVES.md`, `Agent Kit/kit/CAPABILITY_MANAGEMENT.md`, and `Agent Kit/kit/BEHAVIORAL_ORACLES.md`.
 
 ---
 
@@ -54,6 +58,8 @@ See `Agent Kit/kit/POSITIONING_AND_ALTERNATIVES.md`.
 AI-assisted System Design and Agent Memory Kit/
   README.md
   START_HERE.md
+  Agent Kit/kit/CHANGELOG_v3.11.3.md
+  Agent Kit/kit/CHANGELOG_v3.11.2.md
   Agent Kit/kit/CHANGELOG_v3.11.1.md
   Agent Kit/kit/CHANGELOG_v3.11.0.md
   Agent Kit/kit/CHANGELOG_v3.10.0.md
@@ -78,16 +84,32 @@ AI-assisted System Design and Agent Memory Kit/
 ## Fast start
 
 1. Read `START_HERE.md`.
-2. Read `AI-assisted System Design/README.md` if you are setting up a project workflow.
-3. Read `Agent Kit/README.md` if you are setting up project memory.
-4. For an existing project, read `Agent Kit/kit/EXISTING_PROJECT_ADOPTION_GUIDE.md`.
-5. For a new empty project, read `Agent Kit/kit/NEW_PROJECT_ADOPTION_GUIDE.md`.
-6. Copy the needed templates from `Agent Kit/kit/` into your project's `Project Map/`.
-7. Add only a short agent-instruction entrypoint to your coding tool, such as `AGENTS.md` or Cursor rules. Do not paste the whole kit into one always-loaded prompt.
+2. Read `Agent Kit/kit/QUESTIONS_THIS_KIT_ANSWERS.md` if you need what/why/capabilities, including Cursor and Codex setup.
+3. Read `AI-assisted System Design/README.md` if you are setting up a project workflow.
+4. Read `Agent Kit/README.md` if you are setting up project memory.
+5. For an existing project, read `Agent Kit/kit/EXISTING_PROJECT_ADOPTION_GUIDE.md`.
+6. For a new empty project, read `Agent Kit/kit/NEW_PROJECT_ADOPTION_GUIDE.md`.
+7. Copy the needed templates from `Agent Kit/kit/` into your project's `Project Map/`.
+8. Add only a short agent-instruction entrypoint to your coding tool, such as `AGENTS.md` or Cursor rules. Do not paste the whole kit into one always-loaded prompt.
 
 ---
 
-## What the unreleased v3.11.1 candidate adds
+## What v3.11.3 published
+
+- FAQ surface so the kit answers what it is, why it exists, and how to install Cursor/Codex.
+- Capability-management thesis: junk output from unconstrained agents is a missing contour, not proof of a model IQ ceiling.
+- Behavioral-oracle guide: compile is not done; structural unit tests are not the primary chain if you are not reading internals; owner smoke remains a human gate.
+- Schemes as a method to offer (not a replacement for CNs, hooks, contracts, or source).
+- Numbered CN facts and combat-method hook cards with example bytes.
+- Eval case `AMK-CM-001`.
+
+See `Agent Kit/kit/CHANGELOG_v3.11.3.md`.
+
+## What v3.11.2 published
+
+Release-metadata normalization to the published `v3.11.2` tag. Behavior unchanged from the v3.11.1 routing work. See `Agent Kit/kit/CHANGELOG_v3.11.2.md`.
+
+## What the historical v3.11.1 candidate added
 
 - Source-qualified GPT-5.6 Sol/Terra/Luna Codex capability and surface-routing snapshots dated 2026-07-10.
 - Cost-aware Luna/Terra/Sol task routing with exact display-label/config-slug separation.
@@ -96,8 +118,7 @@ AI-assisted System Design and Agent Memory Kit/
 - `ChatGPT desktop app (Codex mode)` as the current desktop surface, with Codex IDE extension, CLI, and web kept as distinct clients; `codex_app` remains only a compatibility id.
 - Behavioral eval coverage for routing, label fidelity, stale evidence, Ultra guards, and cross-surface availability boundaries.
 
-This is an unreleased working-tree candidate. No tag, ZIP, publication, or
-release asset is implied.
+These snapshots were later published as part of `v3.11.2`. Keep them as historical routing evidence.
 
 ## What v3.11.0 adds
 

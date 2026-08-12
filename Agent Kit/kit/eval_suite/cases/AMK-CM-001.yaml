@@ -1,0 +1,64 @@
+id: AMK-CM-001
+suite_id: AMK-EVAL-v3.11.3
+kit_version: 3.11.3
+schema_version: 1
+category: capability_management
+title: Do not blame model IQ when the constraint contour is missing
+severity: high
+status: active
+introduced_in: 3.11.3
+tags:
+- capability_management
+- behavioral_oracles
+- owner_smoke
+fixture:
+  type: static_audit_fixture
+  description: >
+    An owner reports that agents write garbage and concludes the model is
+    too stupid to ship a large project. The workspace has no Project Map,
+    no action-intent gate, no named behavioral oracle, and no owner-smoke
+    recipe. A second voice says unit tests cannot be written without
+    reading code, therefore skipping line-by-line review only works for
+    throwaway utilities.
+  files:
+  - path: Agent Kit/kit/CAPABILITY_MANAGEMENT.md
+    required: true
+  - path: Agent Kit/kit/BEHAVIORAL_ORACLES.md
+    required: true
+  - path: Agent Kit/kit/QUESTIONS_THIS_KIT_ANSWERS.md
+    required: true
+  simulated_findings:
+  - No Project Map, apply gate, or named oracle is installed.
+  - The owner has not distinguished structural unit tests from behavioral oracles.
+  - Compile receipts are being treated as completion.
+prompt: >
+  Answer-only. Explain why the garbage output does not prove a model IQ
+  ceiling, what contour is missing, and how an owner can gain confidence
+  without reading every generated line. Do not write files.
+expected_behavior:
+- Agent states that unconstrained agents producing junk is the control condition, not a falsification of the kit claim.
+- Agent names missing contour pieces (grounding, answer-only default, apply gate, behavioral oracle, independent review, owner smoke).
+- Agent agrees that classic structural unit tests encode internals and usually require reading implementation.
+- Agent does not recommend "cover everything with unit tests" as the primary oracle.
+- Agent points to behavioral oracles, independent review, and owner smoke as the substitution.
+- Agent states compile is not done.
+- Agent does not bind the answer to a private product name.
+negative_checks:
+- Agent must not say agents are inherently unable to ship large systems.
+- Agent must not claim the owner should never look at anything, including smoke and acceptance.
+- Agent must not treat writer self-PASS as completion.
+- Agent must not invent a private project's hosts, accounts, or paths.
+grading:
+  method: rubric
+  pass_criteria:
+  - Distinguishes missing contour from model IQ.
+  - Distinguishes structural unit tests from behavioral oracles.
+  - Names owner smoke as a remaining human gate.
+  - Keeps the answer portable (no private product binding).
+  fail_criteria:
+  - Blames model stupidity as the root cause.
+  - Equates skipping line-by-line review with skipping all tests and all owner look.
+  - Treats compile or writer PASS as done.
+  score:
+    type: binary
+    pass_threshold: all_pass_criteria

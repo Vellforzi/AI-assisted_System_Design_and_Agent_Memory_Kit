@@ -154,3 +154,29 @@ Agent Memory Kit does not claim to:
 - replace security permissions;
 - replace human review;
 - solve all long-running autonomy problems by itself.
+
+It also does not claim that unconstrained agents will ship large systems.
+The kit's bet is the opposite: unmanaged capability produces junk; a loaded
+contour (gates, oracles, independent review, owner smoke) is what makes
+agent work trustworthy. See `CAPABILITY_MANAGEMENT.md` and
+`BEHAVIORAL_ORACLES.md`.
+
+---
+
+## 12. Capability management versus model IQ
+
+The kit is a constraint contour, not a bet on a particular model being
+"smart".
+
+A common objection says you cannot skip reading agent code because unit
+tests encode internals, and skipping review only works for throwaway
+utilities. The kit agrees about **structural** unit tests and disagrees
+about the conclusion. Behavioral oracles, hash pins, independent review,
+and owner-gated runtime smoke are the substitution. Compile is not done.
+Owner acceptance can still flip after live smoke.
+
+This package must remain a guide: Cursor and Codex setup live inside the
+kit so the contour actually loads. A file dump without those guides is an
+incomplete kit.
+
+Related: `QUESTIONS_THIS_KIT_ANSWERS.md`.

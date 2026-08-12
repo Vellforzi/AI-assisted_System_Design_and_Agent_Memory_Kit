@@ -20,8 +20,9 @@ The first response must be short and practical:
 4. State that generic model knowledge can support general reasoning, but cannot be used as evidence for what is true inside the project.
 5. State that the owner remains the project owner and authority.
 6. State that the agent will not read, analyze, modify, write, run, browse, or call external services without explicit mode and scope.
-7. Ask for a free-form project description only if the user has not provided one.
-8. If the user has already provided a description and a command, do not restate the user’s text and do not ask repeated questions. Perform only the requested next step in the specified mode.
+7. If they asked what the tool is, speak the analogy from `kit/MOTIVE_AND_ANALOGY.md` in those words, then point to `kit/QUESTIONS_THIS_KIT_ANSWERS.md`. The kit is a guide plus operating contract, not a claim that models are magically smart.
+8. Ask for a free-form project description only if the user has not provided one.
+9. If the user has already provided a description and a command, do not restate the user’s text and do not ask repeated questions. Perform only the requested next step in the specified mode.
 
 Forbidden in the starter response:
 
@@ -77,6 +78,9 @@ It is not:
 - a guarantee that the agent will be correct without owner review.
 
 It is a project-memory operating layer. Runtime implementation can be manual, file-based, IDE-based, database-backed, or tool-backed.
+
+It is also a setup guide. Cursor and Codex packs live inside the kit so a
+new user can load the contour. See `kit/QUESTIONS_THIS_KIT_ANSWERS.md`.
 
 ---
 
@@ -284,30 +288,35 @@ The eval-suite lives in `kit/eval_suite/`. Start with `kit/EVAL_SUITE_GUIDE.md`.
 
 ## 12. Recommended reading order
 
-1. `kit/README.md`
-2. `kit/ACTION_INTENT_CONTRACT.md`
-3. `kit/PROJECT_GROUNDING_CONTRACT.md`
-4. `kit/PROJECT_MEMORY_OPERATING_PROTOCOL.md`
-5. `kit/PROJECT_MEMORY_STORAGE_GUIDE.md`
-6. `kit/SOURCE_AUTHORITY_TEMPLATE.yaml`
-7. `kit/PERMISSIONS_POLICY_TEMPLATE.yaml`
-8. `kit/RETRIEVAL_POLICY_TEMPLATE.yaml`
-9. `kit/EVAL_SUITE_GUIDE.md`
-10. `kit/eval_suite/README.md`
-11. `kit/TASK_CONTRACT_TEMPLATE.yaml`
-12. `kit/CLAIM_LEDGER_TEMPLATE.yaml`
-13. `kit/HANDOFF_TEMPLATE.yaml`
-14. `kit/LONG_RUNNING_TASKS_GUIDE.md`
-15. `kit/EXISTING_PROJECT_ADOPTION_GUIDE.md`
-16. `kit/SOLO_OWNER_WORKFLOW_GUIDE.md`
-17. `kit/AGENT_INSTRUCTION_FILES_GUIDE.md`
-18. `kit/RETRIEVAL_POLICY_PROFILES.md`
-19. `kit/WORKING_STATE_AND_REPLAY_GUIDE.md`
-20. `kit/MEMORY_COMPILER_GUIDE.md`
-21. `kit/MEMORY_TOOL_INTERFACE_CONTRACT.md`
-22. `kit/PROVIDER_MEMORY_AND_RUNTIME_BOUNDARY.md`
-23. `kit/memory_card_examples.yaml`
-24. `kit/START_MESSAGE_TEMPLATES.md`
+1. `kit/QUESTIONS_THIS_KIT_ANSWERS.md`
+2. `kit/CAPABILITY_MANAGEMENT.md`
+3. `kit/BEHAVIORAL_ORACLES.md`
+4. `kit/README.md`
+5. `kit/ACTION_INTENT_CONTRACT.md`
+6. `kit/PROJECT_GROUNDING_CONTRACT.md`
+7. `kit/PROJECT_MEMORY_OPERATING_PROTOCOL.md`
+8. `kit/PROJECT_MEMORY_STORAGE_GUIDE.md`
+9. `kit/SOURCE_AUTHORITY_TEMPLATE.yaml`
+10. `kit/PERMISSIONS_POLICY_TEMPLATE.yaml`
+11. `kit/RETRIEVAL_POLICY_TEMPLATE.yaml`
+12. `kit/EVAL_SUITE_GUIDE.md`
+13. `kit/eval_suite/README.md`
+14. `kit/TASK_CONTRACT_TEMPLATE.yaml`
+15. `kit/CLAIM_LEDGER_TEMPLATE.yaml`
+16. `kit/HANDOFF_TEMPLATE.yaml`
+17. `kit/LONG_RUNNING_TASKS_GUIDE.md`
+18. `kit/EXISTING_PROJECT_ADOPTION_GUIDE.md`
+19. `kit/SOLO_OWNER_WORKFLOW_GUIDE.md`
+20. `kit/AGENT_INSTRUCTION_FILES_GUIDE.md`
+21. `kit/RETRIEVAL_POLICY_PROFILES.md`
+22. `kit/WORKING_STATE_AND_REPLAY_GUIDE.md`
+23. `kit/MEMORY_COMPILER_GUIDE.md`
+24. `kit/MEMORY_TOOL_INTERFACE_CONTRACT.md`
+25. `kit/PROVIDER_MEMORY_AND_RUNTIME_BOUNDARY.md`
+26. `kit/memory_card_examples.yaml`
+27. `kit/START_MESSAGE_TEMPLATES.md`
+28. `kit/CURSOR_INTEGRATION_OWNER_GUIDE.md`
+29. `kit/codex/README.md`
 
 ---
 

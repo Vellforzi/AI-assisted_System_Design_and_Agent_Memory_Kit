@@ -1,0 +1,27 @@
+# Constraint unit template
+# Copy into Project Map/memory/constraints.yaml. Assign the next CN-NNN.
+# See ../CONSTRAINT_CATALOG.md
+
+- id: CN-000
+  schema_version: "3.4.0"
+  class: constraint
+  status: current
+  review_state: owner_approved
+  scope: project.policy
+  branch_scope: main
+  title: "<one line limit>"
+  summary: "<what the agent must not skip>"
+  created_at: "YYYY-MM-DD"
+  updated_at: "YYYY-MM-DD"
+  last_verified_at: "YYYY-MM-DD"
+  confidence: high
+  owner_approved: true
+  evidence:
+  - kind: owner_statement
+    ref: "<current owner instruction or file>"
+  links:
+    related: []
+    supersedes: []
+    superseded_by: []
+  retrieval_tags:
+  - constraint

@@ -56,12 +56,20 @@ cursor/
     context_recovery_skill.md
 
   subagents/
+    README.md
     api_auditor.md
     scraper_auditor.md
     mt_auditor.md
     db_schema_auditor.md
     docs_drift_auditor.md
     memory_auditor.md
+    implementation_writer.md
+    independent_reviewer.md
+    coverage_mapper.md
+    runtime_forensic.md
+    native_builder.md
+    artifact_deployer.md
+    cheap_explorer.md
 
   hooks/
     README.md
@@ -82,7 +90,9 @@ cursor/
 2. Add Commands for common workflows.
 3. Add Skills for longer procedures.
 4. Add Hooks only after testing them locally.
-5. Add Subagents later, preferably read-only first.
+5. Add Subagents later, preferably read-only first. Treat
+   `subagents/` as proposed functions with limits, not a required roster.
+   See `../PROPOSED_SPECIALIST_FUNCTIONS.md`.
 
 ---
 

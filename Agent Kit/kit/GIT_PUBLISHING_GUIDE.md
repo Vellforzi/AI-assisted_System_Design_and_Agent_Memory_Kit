@@ -54,6 +54,23 @@ Keep the toolkit repository separate from private project repositories unless th
 
 ---
 
+## 2.1 Live extraction into the published kit
+
+The intended maintainer path is:
+
+1. a practice that worked in a private project;
+2. strip product names, hosts, account ids, owner-identifying paths, and secrets;
+3. keep the invariant, gate, oracle, and failure mode;
+4. write or update a kit guide so a stranger can use it;
+5. point `START_HERE.md` and `QUESTIONS_THIS_KIT_ANSWERS.md` at the new file;
+6. add an eval case if the failure is repeatable.
+
+Do not publish a private Project Map as the kit. Do not leave Cursor/Codex
+setup only in the private repo: those packs belong in the kit so the
+contour actually loads for other users.
+
+---
+
 ## 3. Versioning
 
 Use semantic-ish versions:

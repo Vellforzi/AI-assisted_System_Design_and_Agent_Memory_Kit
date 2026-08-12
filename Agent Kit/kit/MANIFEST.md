@@ -4,9 +4,25 @@ Package file: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.9.3_EN.zip`
 
 Package purpose: portable starter guide and memory operating layer for using AI agents with owner-controlled projects. Agent Memory Kit helps build a Project Map through structured, meaningful, interconnected duplication of project information supplied or verified by the owner.
 
-Current package version: `v3.11.2`. Release publication is established only by
-the matching repository tag and release receipts, not by this file. Older
-package-file lines are retained as historical manifest entries.
+Current package version: `v3.11.3` published. Previous tag: `v3.11.2`.
+Release publication is established only by the matching repository tag and
+release receipts, not by this file. Older package-file lines are retained
+as historical manifest entries. No public v3.12.0 is claimed.
+
+## v3.11.3 capability-management guide supplement
+
+- `Agent Kit/kit/CHANGELOG_v3.11.3.md` - release notes.
+- `Agent Kit/kit/QUESTIONS_THIS_KIT_ANSWERS.md` - FAQ for what/why/capabilities and Cursor/Codex setup.
+- `Agent Kit/kit/CAPABILITY_MANAGEMENT.md` - constraint contour vs model IQ.
+- `Agent Kit/kit/BEHAVIORAL_ORACLES.md` - oracles, pins, owner smoke, label vs pipeline.
+- `Agent Kit/kit/PROPOSED_SPECIALIST_FUNCTIONS.md` - proposed specialist functions and limits; example Cursor cards.
+- `Agent Kit/kit/MOTIVE_AND_ANALOGY.md` - standing analogy the agent must be able to say.
+- `Agent Kit/kit/SCHEMES_AND_COVERAGE_ATLAS.md` - schemes as a method to offer; not a replacement for CNs, hooks, contracts, or source.
+- `Agent Kit/kit/WORKING_METHOD_CATALOG.md` - rest of the working method as proposed functions.
+- `Agent Kit/kit/CONSTRAINT_CATALOG.md` - numbered CN facts; product CNs stay in the adopting project.
+- `Agent Kit/kit/constraint_catalog/` - CN unit template and method examples.
+- `Agent Kit/kit/proposed_hooks/` - combat-method hook cards and example bytes.
+- `Agent Kit/kit/eval_suite/cases/AMK-CM-001.yaml` - missing-contour vs model-IQ eval case.
 
 ## v3.11.2 release-metadata normalization supplement
 
@@ -69,6 +85,14 @@ snapshot wording, hook scripts, eval metadata, and checksums.
 
 - `Agent Kit/kit/README.md` — package note and file map.
 - `Agent Kit/kit/OWNER_USAGE_GUIDE.md` — day-to-day usage guide for a project owner.
+- `Agent Kit/kit/QUESTIONS_THIS_KIT_ANSWERS.md` — FAQ for what the kit is, why it exists, and Cursor/Codex setup.
+- `Agent Kit/kit/CAPABILITY_MANAGEMENT.md` — constraint contour versus model IQ.
+- `Agent Kit/kit/BEHAVIORAL_ORACLES.md` — behavioral oracles, hash pins, owner smoke.
+- `Agent Kit/kit/PROPOSED_SPECIALIST_FUNCTIONS.md` — how to create limited specialist agents.
+- `Agent Kit/kit/SCHEMES_AND_COVERAGE_ATLAS.md` — offer schemes; they do not replace CNs, hooks, contracts, or source.
+- `Agent Kit/kit/WORKING_METHOD_CATALOG.md` — catalog of smoke, contract, modes, locks.
+- `Agent Kit/kit/CONSTRAINT_CATALOG.md` — numbered CN facts; product CNs stay in the adopting project.
+- `Agent Kit/kit/proposed_hooks/` — combat-method hook cards and example bytes.
 - `Agent Kit/kit/ACTION_INTENT_CONTRACT.md` — answer-only default intent and explicit-action gate.
 - `Agent Kit/kit/SIGNIFICANT_WORK_AND_CHECKPOINTS.md` — significant-work triggers, checkpoints, Project Map deltas, and eval triggers.
 - `Agent Kit/kit/PROJECT_GROUNDING_CONTRACT.md` — strict evidence contract for project-specific claims.

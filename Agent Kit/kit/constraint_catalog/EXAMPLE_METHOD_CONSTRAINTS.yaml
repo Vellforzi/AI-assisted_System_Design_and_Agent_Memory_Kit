@@ -1,0 +1,130 @@
+# Example method constraints — copy and renumber in the adopting Project Map.
+# These are portable facts, not one private product's CN list.
+# See ../CONSTRAINT_CATALOG.md
+
+schema_version: "3.4.0"
+units:
+- id: CN-ENV-INCOMPLETE
+  schema_version: "3.4.0"
+  class: constraint
+  status: current
+  review_state: proposed
+  scope: project.policy
+  title: Missing toolchain is environment_incomplete, not compile_failed
+  summary: >
+    If a registered SDK, vendor header tree, or compiler isolate is absent,
+    the verdict is environment_incomplete. Do not file it as compile_failed
+    or as model IQ.
+  retrieval_tags: [constraint, compile, environment]
+
+- id: CN-HARNESS
+  schema_version: "3.4.0"
+  class: constraint
+  status: current
+  review_state: proposed
+  scope: project.policy
+  title: Harness failures stay in the same task
+  summary: >
+    Wrong argv, quoting, encoding, hybrid paste used as a contract,
+    dual-spawn of the same unit, or empty hook stdout are harness defects.
+    Repair them in the current task. Do not open a recovery task and do
+    not blame the product or the model.
+  retrieval_tags: [constraint, harness]
+
+- id: CN-TASK-IDENTITY
+  schema_version: "3.4.0"
+  class: constraint
+  status: current
+  review_state: proposed
+  scope: project.policy
+  title: One output root and one artifact glob
+  summary: >
+    A mutating task names one repository-relative output root and exactly
+    one allowed_task_artifacts glob equal to that root. Attachment name
+    and physical location do not determine identity.
+  retrieval_tags: [constraint, task_identity]
+
+- id: CN-HOOKS-UNPROVEN
+  schema_version: "3.4.0"
+  class: constraint
+  status: current
+  review_state: proposed
+  scope: project.policy
+  title: Unproven hooks are fail-closed for hook-dependent work
+  summary: >
+    A hook counts only when the current surface is proven to load and
+    trust it. Otherwise report the surface-specific unproven status and
+    enforce the same checks manually. Do not claim protection.
+  retrieval_tags: [constraint, hooks]
+
+- id: CN-OWNER-SMOKE
+  schema_version: "3.4.0"
+  class: constraint
+  status: current
+  review_state: proposed
+  scope: project.policy
+  title: Agent does not drive the live GUI
+  summary: >
+    Owner starts the interactive product and records the time window.
+    Agent slices logs. Compile and writer PASS are not smoke PASS.
+  retrieval_tags: [constraint, smoke]
+
+- id: CN-SCHEME-PARTIAL
+  schema_version: "3.4.0"
+  class: constraint
+  status: current
+  review_state: proposed
+  scope: project.policy
+  title: Schemes are offered; they do not hold the whole method
+  summary: >
+    Offer a scheme when a causal path fits. Do not treat a diagram as a
+    substitute for numbered constraints, hook bytes, contracts, or source.
+  retrieval_tags: [constraint, schemes]
+
+- id: CN-DB-SELECT
+  schema_version: "3.4.0"
+  class: constraint
+  status: current
+  review_state: proposed
+  scope: project.policy
+  title: Database is read-only by default
+  summary: >
+    SELECT-by-default. DDL, DML, and temp-table workflows need a current
+    owner allowance naming the target and action.
+  retrieval_tags: [constraint, database]
+
+- id: CN-ENCODING
+  schema_version: "3.4.0"
+  class: constraint
+  status: current
+  review_state: proposed
+  scope: project.policy
+  title: No host redirection that corrupts project text
+  summary: >
+    Do not write project files through PowerShell Set-Content / Out-File
+    or ad hoc shell replacement. Read back non-ASCII for U+FFFD and mojibake.
+  retrieval_tags: [constraint, encoding, windows]
+
+- id: CN-WRITE-LOCK
+  schema_version: "3.4.0"
+  class: constraint
+  status: current
+  review_state: proposed
+  scope: project.policy
+  title: One writer, one baseline, one scope
+  summary: >
+    Mutation needs one active lock bound to contract hash, git baseline,
+    and exact paths. Competing lock or stale baseline stops the write.
+  retrieval_tags: [constraint, write_lock]
+
+- id: CN-NO-NARROW
+  schema_version: "3.4.0"
+  class: constraint
+  status: current
+  review_state: proposed
+  scope: project.policy
+  title: Do not drop a coupled component to go faster
+  summary: >
+    If several components move together in one apply, keep them in that
+    apply. Do not drop a sibling "to go faster".
+  retrieval_tags: [constraint, scope]

@@ -1,6 +1,6 @@
 # Agent Memory Kit
 
-Version: v3.11.2
+Version: v3.11.3
 
 Agent Memory Kit is the project-memory and agent-behavior layer of the package.
 
@@ -25,23 +25,34 @@ It helps a project owner maintain a structured Project Map containing:
 
 ## Start here
 
-1. `START_HERE_AGENT_KIT_PROJECT_OWNER_GUIDE.md`
-2. `kit/README.md`
-3. `kit/OWNER_USAGE_GUIDE.md`
-4. `kit/PROJECT_MEMORY_STORAGE_GUIDE.md`
-5. `kit/ACTION_INTENT_CONTRACT.md`
-6. `kit/SIGNIFICANT_WORK_AND_CHECKPOINTS.md`
-7. `kit/EVAL_SUITE_GUIDE.md`
-8. `kit/EVAL_AUTOMATION_AND_TRIGGER_POLICY.md`
-9. `kit/SCOPE_CONTROL_AND_ALLOWED_SCOPE_GUIDE.md`
-10. `kit/WORKSPACE_SELECTION_GUIDE.md`
-11. `kit/CODEX_SANDBOX_AND_PERMISSION_PROFILES_GUIDE.md`
-12. `kit/AI_AGENT_ROLE_STACK_GUIDE.md`
-13. `kit/EXECUTOR_ROUTING_GATE.md`
-14. `kit/WINDOWS_ENCODING_AND_SHELL_HYGIENE.md`
-15. `kit/HOOK_RECOVERY_PLAYBOOK.md`
-16. `kit/CODEX_CONNECTOR_POLICY.md`
-17. `kit/GENERATED_RETRIEVAL_EVIDENCE_GUIDE.md`
+1. `kit/MOTIVE_AND_ANALOGY.md`
+2. `kit/QUESTIONS_THIS_KIT_ANSWERS.md`
+3. `START_HERE_AGENT_KIT_PROJECT_OWNER_GUIDE.md`
+4. `kit/README.md`
+5. `kit/OWNER_USAGE_GUIDE.md`
+6. `kit/CAPABILITY_MANAGEMENT.md`
+7. `kit/BEHAVIORAL_ORACLES.md`
+8. `kit/PROPOSED_SPECIALIST_FUNCTIONS.md`
+9. `kit/SCHEMES_AND_COVERAGE_ATLAS.md`
+10. `kit/WORKING_METHOD_CATALOG.md`
+11. `kit/CONSTRAINT_CATALOG.md`
+12. `kit/proposed_hooks/README.md`
+13. `kit/PROJECT_MEMORY_STORAGE_GUIDE.md`
+14. `kit/ACTION_INTENT_CONTRACT.md`
+15. `kit/SIGNIFICANT_WORK_AND_CHECKPOINTS.md`
+16. `kit/EVAL_SUITE_GUIDE.md`
+17. `kit/EVAL_AUTOMATION_AND_TRIGGER_POLICY.md`
+18. `kit/SCOPE_CONTROL_AND_ALLOWED_SCOPE_GUIDE.md`
+19. `kit/WORKSPACE_SELECTION_GUIDE.md`
+20. `kit/CODEX_SANDBOX_AND_PERMISSION_PROFILES_GUIDE.md`
+21. `kit/AI_AGENT_ROLE_STACK_GUIDE.md`
+22. `kit/EXECUTOR_ROUTING_GATE.md`
+23. `kit/WINDOWS_ENCODING_AND_SHELL_HYGIENE.md`
+24. `kit/HOOK_RECOVERY_PLAYBOOK.md`
+25. `kit/CODEX_CONNECTOR_POLICY.md`
+26. `kit/GENERATED_RETRIEVAL_EVIDENCE_GUIDE.md`
+27. `kit/CURSOR_INTEGRATION_OWNER_GUIDE.md`
+28. `kit/codex/README.md`
 
 ---
 
@@ -88,6 +99,13 @@ Use one shared workspace root when one Project Map governs multiple components. 
 ## v3.8 Cursor settings and workspace authority
 
 This release adds an owner-controlled Cursor Agent settings profile, `.cursorignore` guidance, settings audit commands, and the rule that an existing authoritative workspace file must be inspected and used rather than replaced by a generated fallback.
+
+## v3.11.3 focus
+
+Adds the capability-management guide layer: FAQ, motive, behavioral oracles,
+schemes as a method to offer, numbered CN facts, combat-method hook cards
+with example bytes, specialist function cards, and eval `AMK-CM-001`.
+Does not include JOB-local v3.12.0 runtime.
 
 ## v3.11.2 patch focus
 

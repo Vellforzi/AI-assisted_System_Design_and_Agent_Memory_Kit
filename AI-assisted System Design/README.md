@@ -19,6 +19,10 @@ Start with:
 
 For memory-specific implementation, use the sibling `Agent Kit/` folder.
 
+If the question is whether agents are "too stupid" to help, read
+`../Agent Kit/kit/CAPABILITY_MANAGEMENT.md` first. This methodology folder
+shapes the project so capability can be managed; it does not rank models.
+
 ## Recommended use
 
 For an existing software project, do not begin by asking an agent to rewrite everything. Begin by creating a Project Map, then connect it to a small repository instruction file. Let the agent answer, audit, and plan from evidence before allowing mutating work.

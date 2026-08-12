@@ -1,10 +1,16 @@
 # Agent Memory Kit Starter Package
 
-Version: v3.11.2
-Release metadata date: 2026-07-10
+Version: v3.11.3
+Release metadata date: 2026-08-12
 Publication proof: matching repository tag and release receipts; this file alone is not proof
 
 Agent Memory Kit is a portable memory operating layer for project owners who work with AI agents across long projects.
+
+The standing motive: you lay your knowledge and method out at the physical
+level (folders, files, schemes, gates). The more accurately you do that,
+the more accurately a capable agent looks like you — a copy that does not
+forget and does not get confused. Sub-agents multiply that copy. The tool
+is for models that can use the layout. See `MOTIVE_AND_ANALOGY.md`.
 
 Its purpose is structured, meaningful, interconnected duplication of owner-provided and project-verified information so the project is less vulnerable to:
 
@@ -63,7 +69,17 @@ Evals do not run automatically unless the owner wires them to a script, hook, CI
 
 | File | Purpose |
 |---|---|
+| `MOTIVE_AND_ANALOGY.md` | Standing analogy: lay your consciousness on disk; a capable model looks like you. |
 | `OWNER_USAGE_GUIDE.md` | Day-to-day owner workflow and safe prompts. |
+| `QUESTIONS_THIS_KIT_ANSWERS.md` | What the kit is, why it exists, capabilities, Cursor/Codex setup. |
+| `CAPABILITY_MANAGEMENT.md` | Output quality is a constraint contour, not model IQ. |
+| `BEHAVIORAL_ORACLES.md` | Confidence without reading every line: oracles, pins, owner smoke. |
+| `PROPOSED_SPECIALIST_FUNCTIONS.md` | How to create limited specialist agents; copy the method, not a private roster. |
+| `SCHEMES_AND_COVERAGE_ATLAS.md` | Offer schemes: cheap, accurate, human+agent readable. Not a replacement for the rest. |
+| `WORKING_METHOD_CATALOG.md` | Catalog of the rest of the working method (smoke, contract, modes, locks). |
+| `CONSTRAINT_CATALOG.md` | Numbered CN facts: retrieve by id; product CNs stay in the adopting project. |
+| `proposed_hooks/` | Combat-method hook cards and example bytes (wrapper, contract, profile, finalization, encoding). |
+| `coverage_atlas/` | Scheme template and a generic example. |
 | `PLATFORM_CONTEXT_COMPACTION_BOUNDARY.md` | Platform summaries, compacted chat history, and provider memory are non-authoritative hints, not project truth. |
 | `CURSOR_INTEGRATION_OWNER_GUIDE.md` | How to use the kit with Cursor Rules, Commands, Skills, Subagents, and Hooks. |
 | `cursor/` | Cursor Integration Pack: rules, commands, skills, read-only subagents, and optional hook examples. |
@@ -141,7 +157,8 @@ Use `EVAL_SUITE_GUIDE.md`, `EVAL_AUTOMATION_AND_TRIGGER_POLICY.md`, and `eval_su
 
 The suite is intentionally small and failure-mode based. It is designed for manual or semi-automated use by a project owner. It should be copied into `Project Map/eval_suite/` when a project starts using the kit.
 
-v3.11.2 normalizes current release-facing package and eval metadata without
+v3.11.3 adds the FAQ/thesis/oracle/scheme/CN/hook guides and eval
+`AMK-CM-001`. v3.11.2 normalizes current release-facing package and eval metadata without
 changing behavior. v3.11.1 adds GPT-5.6 model-routing and exact-label evals,
 while v3.11.0 adds
 eval cases for executor routing gates, Windows encoding hygiene,

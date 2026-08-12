@@ -22,6 +22,11 @@ It helps the owner keep control over:
 
 It is not a replacement for the model provider, IDE agent, tests, git, or security sandbox.
 
+If the question is "why does this tool exist" or "are agents just bad at
+code", read `QUESTIONS_THIS_KIT_ANSWERS.md` and `CAPABILITY_MANAGEMENT.md`
+before copying templates. Confidence without reading every generated line
+is `BEHAVIORAL_ORACLES.md`, not "skip all tests".
+
 ---
 
 ## 2. Daily workflow

@@ -1,8 +1,8 @@
-suite_id: AMK-EVAL-v3.11.2
-kit_version: 3.11.2
-policy_version: 3.11.2
-release_date: '2026-07-10'
-label: AMK v3.11.2 GPT-5.6 routing smoke policy
+suite_id: AMK-EVAL-v3.11.3
+kit_version: 3.11.3
+policy_version: 3.11.3
+release_date: '2026-08-12'
+label: AMK v3.11.3 capability-management smoke policy
 source_of_truth:
   policy_file: eval_trigger_policy.yaml
   runner_contract: run_eval_checklist.py must read smoke categories from this file and must not maintain an independent hardcoded smoke-category list.
@@ -60,6 +60,10 @@ smoke_policy:
       required: true
       min_cases: 1
       rationale: Generated retrieval output must remain candidate evidence until canonical readback.
+    capability_management:
+      required: true
+      min_cases: 1
+      rationale: Missing constraint contour must not be blamed on model IQ; AMK-CM-001 is required smoke.
   selection_rule: A case is selected for smoke when case.category is present in smoke_policy.categories or a case tag matches one of those categories.
   failure_rule: Smoke validation fails if any required category has fewer than min_cases selected cases, if any selected case lacks required schema fields, or if suite_id/kit_version drift is detected.
 trigger_matrix:

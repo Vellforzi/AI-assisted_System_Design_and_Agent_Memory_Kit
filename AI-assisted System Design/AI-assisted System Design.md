@@ -70,6 +70,19 @@ AI agents are more reliable when work is split into small units with:
 - documentation update target;
 - rollback or stop condition.
 
+### 2.5 Manage capability; do not rank model IQ
+
+Unconstrained agents produce plausible junk. That does not prove a model
+IQ ceiling. It proves the project has no contour: grounding, answer-only
+default, apply gates, behavioral oracles, independent review, and owner
+smoke.
+
+The methodology layer and the memory kit are that contour plus a guide for
+installing it on Cursor and Codex. Structural unit tests still encode
+internals; they are not the primary chain if the owner is not reading
+every generated line. See Agent Memory Kit files
+`CAPABILITY_MANAGEMENT.md` and `BEHAVIORAL_ORACLES.md`.
+
 ---
 
 ## 3. Recommended project operating loop
