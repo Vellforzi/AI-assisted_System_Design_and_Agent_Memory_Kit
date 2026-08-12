@@ -1,41 +1,47 @@
 # AI-assisted System Design and Agent Memory Kit
 
-Version: v3.12.1 published
-Release date: v3.12.1 published 2026-08-13; previous tag `v3.12.0` published 2026-08-12
-Status: portable project-owner toolkit. Published tag is `v3.12.1`.
+Version: v4.0.0 published
+Release date: v4.0.0 published 2026-08-13; previous tag `v3.12.1` published 2026-08-13
+Status: portable project-owner toolkit. Published tag is `v4.0.0`.
 
-This package contains two complementary tools:
+This package is a **guide plus operating contract**, not a library that runs in the background.
+
+Two layers:
 
 1. **AI-assisted System Design** — a method for making a project readable and governable by AI assistants.
-2. **Agent Memory Kit** — a file-based operating layer for project memory, grounding, retrieval, task continuity, action gates, and behavior checks.
+2. **Agent Memory Kit** — a file-based operating contract for project memory, grounding, retrieval, task continuity, action gates, and behavior checks.
 
-The package is a **guide plus operating contract**, not a library that runs in the background. It exists so owners can manage agent capability (truth, gates, oracles, Cursor/Codex setup) instead of blaming "stupid models" when unconstrained chat produces junk.
-
-The package is designed for owners who want high control over AI-assisted work. It does not assume autonomous long-running agents. The default mode is controlled, evidence-first, answer-only work unless the owner explicitly asks for a concrete action.
-
-If you are asking what this tool is for, start with `Agent Kit/kit/QUESTIONS_THIS_KIT_ANSWERS.md`.
+If you ask what this tool is, start with `Agent Kit/kit/MOTIVE_AND_ANALOGY.md`, then `Agent Kit/kit/QUESTIONS_THIS_KIT_ANSWERS.md`.
 
 ---
 
-## Core idea
+## What the instrument is
 
-A language model is not the source of truth for your project.
+You lay your knowledge and method out on disk: folders, files, schemes, gates. The more accurately you do that, the more accurately a capable model looks like you. A copy that does not forget and does not get confused. Sub-agents multiply that copy. The tool is for models that can use the layout. Stuffing folders around a weak model does not make a twin.
 
-The agent should operate from:
+It exists so owners manage agent **capability** (truth, gates, oracles, Cursor/Codex setup) instead of blaming "stupid models" when unconstrained chat produces junk.
 
-- current owner input;
-- the Project Map;
-- opened project files and tool outputs;
-- explicitly allowed external research;
-- explicit owner approval for mutating actions.
+Default mode is controlled, evidence-first, answer-only work unless the owner explicitly asks for a concrete action.
 
-The kit turns project context into structured, inspectable memory so that future sessions can restore the right context without relying on fragile chat history, hidden provider memory, or generic model guesses.
+---
+
+## Where durable truth lives
+
+Durable project truth is a **role** the owner of this instrument assigns. The recommended name is Project Map. The recommended folder is `Project Map/`. The path is a recommendation. A left or right step in folder names does not change efficiency if the role stays one place, owner-assigned, and agents do not invent a parallel truth.
+
+A programmer's local checkout is not team truth. The git repository as a pile of committed files is not truth. A file is not true because it is in git. Current owner instruction and current opened evidence in this run outrank stale map memory.
+
+Solo: the owner of the instrument is the owner of the project. Local map and project coincide.
+
+Team: the project does not belong to whoever has a clone. The map remains truth. Only the owner, or an owner-accepted team agreement, may write it. Do not demote the map so that unmarked repo docs win by default.
+
+See `Agent Kit/kit/MOTIVE_AND_ANALOGY.md` and `Agent Kit/kit/SOURCE_AUTHORITY_TEMPLATE.yaml`.
 
 ---
 
 ## What makes this different
 
-Agent Memory Kit is not mainly a vector database, not mainly a chat memory feature, and not mainly an autonomous agent runtime.
+Not a vector database. Not ChatGPT or Cursor "memory" with a nicer name. Not an autonomous runtime.
 
 It is strongest when the owner wants:
 
@@ -43,12 +49,11 @@ It is strongest when the owner wants:
 - source authority when project sources conflict;
 - answer-only default behavior;
 - explicit permission before any mutation;
-- small durable memory records instead of long chat summaries;
-- stale and superseded facts preserved but not used as current truth;
-- checkpoints and handoffs across sessions;
-- behavior evals based on real failure modes.
+- behavioral oracles, independent review, and owner smoke instead of "it compiled";
+- Cursor and Codex setup in the package so the contour actually loads;
+- orchestration as a choice, not a second product to build.
 
-See `Agent Kit/kit/POSITIONING_AND_ALTERNATIVES.md`, `Agent Kit/kit/CAPABILITY_MANAGEMENT.md`, and `Agent Kit/kit/BEHAVIORAL_ORACLES.md`.
+See `Agent Kit/kit/POSITIONING_AND_ALTERNATIVES.md`, `Agent Kit/kit/CAPABILITY_MANAGEMENT.md`, `Agent Kit/kit/BEHAVIORAL_ORACLES.md`, and `Agent Kit/kit/ORCHESTRATION_CHOICE.md`.
 
 ---
 
@@ -58,33 +63,24 @@ See `Agent Kit/kit/POSITIONING_AND_ALTERNATIVES.md`, `Agent Kit/kit/CAPABILITY_M
 AI-assisted System Design and Agent Memory Kit/
   README.md
   START_HERE.md
-  Agent Kit/kit/CHANGELOG_v3.11.3.md
-  Agent Kit/kit/CHANGELOG_v3.11.2.md
-  Agent Kit/kit/CHANGELOG_v3.11.1.md
-  Agent Kit/kit/CHANGELOG_v3.11.0.md
-  Agent Kit/kit/CHANGELOG_v3.10.0.md
-  RELEASE_NOTES_v3.9.3.md
-  RELEASE_NOTES_v3.9.1.md
-  RELEASE_NOTES_v3.9.0.md
-
-  AI-assisted System Design/
-    README.md
-    AI-assisted System Design.md
-
+  Agent Kit/kit/CHANGELOG_v4.0.0.md
   Agent Kit/
     README.md
     START_HERE_AGENT_KIT_PROJECT_OWNER_GUIDE.md
     kit/
-      README.md
-      ...contracts, templates, guides, eval suite, Cursor integration, Codex integration, optional tools...
+  AI-assisted System Design/
+    README.md
+    AI-assisted System Design.md
 ```
+
+Earlier 3.x changelogs stay under `Agent Kit/kit/CHANGELOG_v3.*.md` and root `RELEASE_NOTES_v3.*.md`.
 
 ---
 
 ## Fast start
 
 1. Read `START_HERE.md`.
-2. Read `Agent Kit/kit/QUESTIONS_THIS_KIT_ANSWERS.md` if you need what/why/capabilities, including Cursor and Codex setup.
+2. Read `Agent Kit/kit/MOTIVE_AND_ANALOGY.md`, then `Agent Kit/kit/QUESTIONS_THIS_KIT_ANSWERS.md`.
 3. Read `AI-assisted System Design/README.md` if you are setting up a project workflow.
 4. Read `Agent Kit/README.md` if you are setting up project memory.
 5. For an existing project, read `Agent Kit/kit/EXISTING_PROJECT_ADOPTION_GUIDE.md`.
@@ -94,77 +90,31 @@ AI-assisted System Design and Agent Memory Kit/
 
 ---
 
-## What v3.12.1 published
+## What v4.0.0 published
 
-- Orchestration as a choice: how the kit is used during orchestration; offer the host Agents window before building a custom queue/App Server host. See `Agent Kit/kit/ORCHESTRATION_CHOICE.md`.
+- Durable-truth role: Project Map is the recommended holder; folders are a recommendation; a checkout and "whatever is in git" are not automatically truth; in a team the map stays truth and only the owner writes it.
+- GitHub landing README rewritten for the current instrument.
+- Eval case `AMK-DT-001`. Suite id `AMK-EVAL-v4.0.0`.
 
-See `Agent Kit/kit/CHANGELOG_v3.12.1.md`.
+See `Agent Kit/kit/CHANGELOG_v4.0.0.md`.
 
-## What v3.12.0 published
+The 3.x contour is still in the package: capability management, behavioral oracles, schemes, CN catalog, hooks, execution runtime, verified delivery, orchestration choice. Those were published as `v3.11.3`–`v3.12.1`. This major does not merge the diverged `new_version` branch.
 
-- Execution Profile Gate, path/toolchain/scope registry templates, CAS write lock.
-- Verified-delivery pipeline templates and validators.
-- Windows command-launch hygiene and `/stage` `/review` mode commands.
-- Eval coverage for unique route, path-zone fail-closed, lease, archive provenance, and verified delivery.
-- Does not include private product evals or App Server controllers.
+---
 
-See `Agent Kit/kit/CHANGELOG_v3.12.0.md`.
+## Earlier 3.x (historical)
 
-## What v3.11.3 published
+| Tag | What it added |
+|---|---|
+| `v3.12.1` | Orchestration as a choice. `ORCHESTRATION_CHOICE.md` |
+| `v3.12.0` | Execution Profile Gate, leases, verified delivery, Windows command-launch hygiene |
+| `v3.11.3` | FAQ, motive, capability management, oracles, schemes, CN catalog, hook cards |
+| `v3.11.2` / `v3.11.1` | GPT-5.6 routing snapshots and label fidelity |
+| `v3.11.0` | Executor routing, encoding hygiene, hook recovery, connector policy |
+| `v3.10.0` | ChatGPT Project sources manifest workflow |
+| `v3.9.x` | Context Advisor, cost-aware routing, Cursor settings |
 
-- FAQ surface so the kit answers what it is, why it exists, and how to install Cursor/Codex.
-- Capability-management thesis: junk output from unconstrained agents is a missing contour, not proof of a model IQ ceiling.
-- Behavioral-oracle guide: compile is not done; structural unit tests are not the primary chain if you are not reading internals; owner smoke remains a human gate.
-- Schemes as a method to offer (not a replacement for CNs, hooks, contracts, or source).
-- Numbered CN facts and combat-method hook cards with example bytes.
-- Eval case `AMK-CM-001`.
-
-See `Agent Kit/kit/CHANGELOG_v3.11.3.md`.
-
-## What v3.11.2 published
-
-Release-metadata normalization to the published `v3.11.2` tag. Behavior unchanged from the v3.11.1 routing work. See `Agent Kit/kit/CHANGELOG_v3.11.2.md`.
-
-## What the historical v3.11.1 candidate added
-
-- Source-qualified GPT-5.6 Sol/Terra/Luna Codex capability and surface-routing snapshots dated 2026-07-10.
-- Cost-aware Luna/Terra/Sol task routing with exact display-label/config-slug separation.
-- Explicit Codex Max versus Ultra delegation semantics and Cursor Max Mode separation.
-- GPT-5.6 Fast public-doc/local-cache conflict handling without an invented fixed multiplier.
-- `ChatGPT desktop app (Codex mode)` as the current desktop surface, with Codex IDE extension, CLI, and web kept as distinct clients; `codex_app` remains only a compatibility id.
-- Behavioral eval coverage for routing, label fidelity, stale evidence, Ultra guards, and cross-surface availability boundaries.
-
-These snapshots were later published as part of `v3.11.2`. Keep them as historical routing evidence.
-
-## What v3.11.0 adds
-
-- **Executor Routing Gate** for evidence-based executor/service selection in
-  non-trivial contracts, bootstraps, task blocks, and model/service advice.
-- **Windows encoding and shell hygiene** for byte-safe edits, non-ASCII text,
-  and readback verification.
-- **Hook recovery playbook** with actionable recovery payload fields and
-  snake_case/camelCase compatibility.
-- **Codex connector policy**: connectors default forbidden, scoped reads,
-  explicit write gates, draft-first outbound messaging, and receipts.
-- **Generated retrieval evidence guide**: generated index/search output can
-  narrow candidates but requires canonical source re-read before claims.
-- New eval coverage for routing gates, encoding hygiene, hook recovery,
-  connector safety, and generated retrieval evidence.
-
-## What v3.10.0 adds
-
-- Generic ChatGPT Project sources manifest workflow: local, config-driven, and
-  deterministic.
-- Compact ChatGPT Project Instructions template, project operating contract
-  template, source policy, generator, fixture, and eval case `AMK-GPS-001`.
-
-## What v3.9.3 adds
-
-- **Cost-Aware Model Router**: the agent must recommend the lowest sufficient model/settings class, not the most expensive model by default.
-- Premium/frontier/high/pro reasoning recommendations require explicit escalation reasons and a cheaper alternative.
-- Narrow Project Map updates, owner-provided fact recording, version refs, and small docs/router edits default to medium reasoning with Max Mode and implicit IDE context off.
-- The `/settings` and `settings?` flow must show cost class, escalation triggers, and “why not cheaper” when a premium route is recommended.
-- v3.9.1 implicit IDE context boundary and v3.9.0 Context Advisor functionality remain included.
+Read the matching `Agent Kit/kit/CHANGELOG_v3.*.md` or root `RELEASE_NOTES_v3.*.md`. Do not treat those files as the current landing page.
 
 ---
 
@@ -182,19 +132,8 @@ This package is not:
 
 Use technical enforcement where possible: permissions, hooks, sandboxing, branch isolation, read-only modes, and review gates.
 
-
 ---
 
 ## Python is not required
 
-Agent Memory Kit is language-agnostic and file-based. Python helper scripts are optional examples only. They are included because the original owner works in Python. Replace them with another language if that fits your project better.
-
-
-## v3.9.3 Context Advisor focus
-
-This release clarifies cost-aware model routing. The agent should use the lowest sufficient model/settings class, escalate only with concrete reasons, and show a cheaper alternative when recommending premium/frontier/high/pro modes. v3.9.1 implicit IDE context boundary and v3.9.0 automatic/on-demand guidance remain included.
-
-
-## v3.9.3 Cursor provider model snapshot
-
-v3.9.3 adds a dated Cursor model-routing snapshot captured on 2026-06-10. Exact Cursor model/settings advice must show snapshot date/ref. The core Cursor Agent model set is considered sufficient with surplus; optional models require a concrete capability gap and owner approval before default routing.
+Agent Memory Kit is language-agnostic and file-based. Python helper scripts are optional examples only. Replace them with another language if that fits your project better.

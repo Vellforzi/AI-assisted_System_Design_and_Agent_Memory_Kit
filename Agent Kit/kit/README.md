@@ -1,6 +1,6 @@
 # Agent Memory Kit Starter Package
 
-Version: v3.12.1
+Version: v4.0.0
 Release metadata date: 2026-08-13
 Publication proof: matching repository tag and release receipts; this file alone is not proof
 
@@ -34,12 +34,16 @@ Its purpose is structured, meaningful, interconnected duplication of owner-provi
 For project-specific claims, the agent must use only:
 
 1. current user input;
-2. Project Map memory;
+2. Project Map memory (the recommended holder of the durable-truth role);
 3. project files or tool outputs opened in the current run;
 4. external sources explicitly retrieved in the current run and valid for the claim type;
 5. owner-approved durable memory.
 
 If evidence is missing, the agent must not guess.
+
+Durable truth is a role the owner assigns. The folder path is a
+recommendation. A checkout and "whatever is in git" are not automatically
+truth. See `MOTIVE_AND_ANALOGY.md`.
 
 Generic model knowledge may support general reasoning and language, but it is not evidence for the owner's project.
 
@@ -69,7 +73,7 @@ Evals do not run automatically unless the owner wires them to a script, hook, CI
 
 | File | Purpose |
 |---|---|
-| `MOTIVE_AND_ANALOGY.md` | Standing analogy: lay your consciousness on disk; a capable model looks like you. |
+| `MOTIVE_AND_ANALOGY.md` | Standing analogy, plus where durable truth lives (a role, not a folder name). |
 | `OWNER_USAGE_GUIDE.md` | Day-to-day owner workflow and safe prompts. |
 | `QUESTIONS_THIS_KIT_ANSWERS.md` | What the kit is, why it exists, capabilities, Cursor/Codex setup. |
 | `CAPABILITY_MANAGEMENT.md` | Output quality is a constraint contour, not model IQ. |

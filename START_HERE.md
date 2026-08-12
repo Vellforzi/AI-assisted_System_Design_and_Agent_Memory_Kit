@@ -1,8 +1,8 @@
 # START HERE — AI-assisted System Design and Agent Memory Kit
 
-Version: v3.12.1 published
-Release date: v3.12.1 published 2026-08-13; previous tag `v3.12.0` published 2026-08-12
-Package: published tag is `v3.12.1`.
+Version: v4.0.0 published
+Release date: v4.0.0 published 2026-08-13; previous tag `v3.12.1` published 2026-08-13
+Package: published tag is `v4.0.0`.
 Status: portable project-owner kit for AI-assisted work and grounded project memory
 
 ---
@@ -98,7 +98,10 @@ General model knowledge may be used for general concepts, general software pract
   Project Files/    # the actual project materials
 ```
 
-The owner may rename folders. Roles matter more than names.
+The owner may rename folders. Roles matter more than names. Durable
+truth is the role the owner assigns, usually Project Map. A programmer's
+checkout is not team truth. The repository as a pile of files is not
+truth. Say it from `Agent Kit/kit/MOTIVE_AND_ANALOGY.md`.
 
 ---
 
@@ -169,6 +172,16 @@ Read:
 3. the project's own `AGENTS.md`, `PROJECT_AI_BRIEF.md`, repository docs, or equivalent if the user explicitly grants read access.
 
 ---
+
+## What changed in v4.0.0
+
+Published major; tag is `v4.0.0`.
+
+- Durable-truth role: `MOTIVE_AND_ANALOGY.md`, `SOURCE_AUTHORITY_TEMPLATE.yaml`, `PROJECT_GROUNDING_CONTRACT.md`
+- GitHub landing README rewritten for the current instrument
+- Eval: `AMK-DT-001`
+
+See `Agent Kit/kit/CHANGELOG_v4.0.0.md`.
 
 ## What changed in v3.12.1
 

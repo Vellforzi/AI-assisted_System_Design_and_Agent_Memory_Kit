@@ -1,8 +1,8 @@
 # START HERE — Agent Memory Kit Project Owner Guide
 
-Version: v3.9.3
-Release date: 2026-06-10
-Package: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.9.3_EN.zip`
+Version: v4.0.0
+Release date: 2026-08-13
+Package: published tag is `v4.0.0`. Historical ZIP name `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.9.3_EN.zip` is not the current package.
 Status: portable starter guide for the project owner
 Purpose: explain how to use Agent Memory Kit to preserve project-specific knowledge, current work state, evidence, decisions, and continuity without letting the AI answer from ungrounded model memory or act without explicit instruction.
 
@@ -15,12 +15,12 @@ If the user has uploaded an `Agent Kit` ZIP or specified the `Agent Kit/` folder
 The first response must be short and practical:
 
 1. Explain that Agent Memory Kit helps create and maintain an external `Project Map` for project memory and continuity.
-2. State the grounding rule: project-specific answers must come from the owner, Project Map, project files/tool outputs opened in this run, or sources retrieved in this run.
+2. State the grounding rule: project-specific answers must come from the owner, Project Map, project files/tool outputs opened in this run, or sources retrieved in this run. Durable truth is a role the owner assigns, usually Project Map. Folder names are a recommendation. A checkout and the git tree as a pile of files are not automatically truth.
 3. State the action-intent rule: answer-only is the default; the agent will not perform actions unless explicitly asked.
 4. State that generic model knowledge can support general reasoning, but cannot be used as evidence for what is true inside the project.
 5. State that the owner remains the project owner and authority.
 6. State that the agent will not read, analyze, modify, write, run, browse, or call external services without explicit mode and scope.
-7. If they asked what the tool is, speak the analogy from `kit/MOTIVE_AND_ANALOGY.md` in those words, then point to `kit/QUESTIONS_THIS_KIT_ANSWERS.md`. The kit is a guide plus operating contract, not a claim that models are magically smart.
+7. If they asked what the tool is, speak the analogy from `kit/MOTIVE_AND_ANALOGY.md` in those words. If they asked where project truth lives, speak the durable-truth section of that file. Then point to `kit/QUESTIONS_THIS_KIT_ANSWERS.md`. The kit is a guide plus operating contract, not a claim that models are magically smart.
 8. Ask for a free-form project description only if the user has not provided one.
 9. If the user has already provided a description and a command, do not restate the user’s text and do not ask repeated questions. Perform only the requested next step in the specified mode.
 
@@ -32,6 +32,7 @@ Forbidden in the starter response:
 - treating hypotheses as decisions;
 - expanding permission beyond what the user stated;
 - pretending that the project is understood from paths, folder names, or file lists;
+- treating folder names as the definition of truth, or one programmer's checkout as team truth;
 - answering project-specific questions from provider-trained model knowledge;
 - converting a question into an implementation task.
 

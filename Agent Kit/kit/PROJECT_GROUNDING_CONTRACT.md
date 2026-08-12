@@ -20,12 +20,27 @@ It also does not grant permission to act. For action gating, see `ACTION_INTENT_
 For project-specific claims, the agent may use only:
 
 1. current user input;
-2. Project Map memory;
+2. Project Map memory (the recommended holder of the durable-truth role);
 3. project files, logs, screenshots, tool outputs, database results, or connector results opened in the current run;
 4. external sources explicitly retrieved in the current run and valid for the claim type;
 5. owner-approved durable memory.
 
 Everything else is not project evidence.
+
+Durable truth is a role the owner of this instrument assigns. The
+recommended name is Project Map. The recommended folder is `Project Map/`.
+The path is a recommendation. A left or right step in folder names does
+not change efficiency if the role stays one place, owner-assigned, and
+agents do not invent a parallel truth.
+
+A programmer's local checkout is not team truth. The git repository as a
+pile of committed files is not truth. A file is not true because it is in
+git. Current owner instruction and current opened evidence in this run
+outrank stale map memory. In a team, one clone does not own the project;
+the map remains truth and only the owner may write it. Do not demote the
+map so that unmarked repo docs win by default.
+
+See `MOTIVE_AND_ANALOGY.md` and `SOURCE_AUTHORITY_TEMPLATE.yaml`.
 
 ---
 

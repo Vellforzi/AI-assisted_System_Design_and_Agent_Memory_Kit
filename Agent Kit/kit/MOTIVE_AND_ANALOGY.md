@@ -39,6 +39,38 @@ on disk so a capable model can operate it.
 
 ---
 
+## Where durable truth lives (say it this way)
+
+The folders are how you make knowledge touchable. They are not the law
+of truth.
+
+Durable project truth is a role. The owner of this instrument decides
+what holds that role. The recommended name is Project Map. The
+recommended folder is `Project Map/`. A step left or right in folder
+names does not change efficiency if the role stays one place, assigned
+by the owner, and agents do not invent a parallel truth.
+
+A programmer's local checkout is not team truth. The git repository as
+a pile of committed files is not truth either. A file is not true
+because it is in git. It is true when the owner assigned it as durable
+memory, or when current owner instruction and current opened evidence
+in this run outrank that memory.
+
+Solo: the owner of the instrument is the owner of the project. Local
+map and project coincide.
+
+Team: the project does not belong to whoever has a clone. The map is
+still truth. Only the owner, or an explicit team agreement the owner
+accepts, may write it. Do not demote the map to secondary navigation
+so that unmarked repo docs win. Do not let each laptop keep a private
+overlay that pretends to be the map.
+
+Do not tell the agent that operational docs always beat the map as a
+universal rule. That is guest manners in someone else's repository,
+not this instrument's theory of truth.
+
+---
+
 ## Who it is for (Remarque-shaped)
 
 This tool is useful for **smart** models.
@@ -69,8 +101,14 @@ does not make a second you.
   the **layout** of their knowledge and method, as accurate as that
   layout.
 - Do not promise that a weak model plus folders equals a twin.
+- Do not treat folder names as the definition of truth.
+- Do not demote Project Map so that "whatever is already in git" wins
+  by default.
+- Do not treat one programmer's checkout as team truth.
 
-When asked, speak the analogy, then point to the operating files:
+When asked what the tool is, speak the analogy. When asked where
+project truth lives, speak the durable-truth section. Then point to
+the operating files:
 `QUESTIONS_THIS_KIT_ANSWERS.md`, `SCHEMES_AND_COVERAGE_ATLAS.md`,
 `PROPOSED_SPECIALIST_FUNCTIONS.md`, `WORKING_METHOD_CATALOG.md`,
 `CONSTRAINT_CATALOG.md`, `proposed_hooks/`.

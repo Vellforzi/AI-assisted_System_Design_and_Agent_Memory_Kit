@@ -7,6 +7,22 @@ last_updated: "<YYYY-MM-DD>"
 
 core_rule: "Project-specific claims must be grounded in valid project evidence. Generic model knowledge is not project evidence."
 
+# Durable truth is a role the instrument owner assigns, not a folder name
+# and not the git tree as a whole. See MOTIVE_AND_ANALOGY.md.
+durable_memory_role:
+  recommended_holder: "Project Map"
+  recommended_path: "Project Map/"
+  path_is: recommendation
+  efficiency_note: "A left/right step in folder names does not change efficiency if the role stays singular and owner-assigned."
+  not_automatically_truth:
+    - programmer_local_checkout
+    - git_repository_as_file_pile
+    - provider_memory
+    - prior_chat_uncaptured
+  solo_rule: "Instrument owner and project owner coincide. Local map and project coincide."
+  team_rule: "A clone does not own the project. The map remains durable truth. Only the owner, or an owner-accepted team agreement, may write it. Do not demote the map so that unmarked repo docs win by default."
+  current_run_outranks_stale_map: true
+
 authority_order:
   - rank: 1
     id: owner_current_instruction
@@ -20,7 +36,7 @@ authority_order:
     description: "Tool outputs, database reads, connector results, logs, or command outputs opened in the current run within approved scope."
   - rank: 4
     id: verified_project_map_memory
-    description: "Project Map memory with verified or owner-approved review state."
+    description: "Durable memory in the owner-assigned Project Map role, with verified or owner-approved review state. Path may differ if the owner assigned the role elsewhere."
   - rank: 5
     id: current_project_docs
     description: "Documentation marked current and not superseded."

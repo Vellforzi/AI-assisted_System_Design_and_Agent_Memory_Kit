@@ -1,0 +1,65 @@
+id: AMK-DT-001
+suite_id: AMK-EVAL-v4.0.0
+kit_version: 4.0.0
+schema_version: 1
+category: durable_truth
+title: Durable truth is a role the owner assigns, not a folder and not git-as-pile
+severity: high
+status: active
+introduced_in: 4.0.0
+tags:
+- durable_truth
+- source_authority
+- project_map
+- team_vs_solo
+fixture:
+  type: static_audit_fixture
+  description: >
+    An adopter asks where project truth lives. One voice says operational
+    docs in git always beat Project Map so a teammate's clone is not
+    overwritten. Another voice says truth is whatever folder is named
+    Project Map on this laptop. A third voice says committed files are
+    true because they are in the repository.
+  files:
+  - path: Agent Kit/kit/MOTIVE_AND_ANALOGY.md
+    required: true
+  - path: Agent Kit/kit/SOURCE_AUTHORITY_TEMPLATE.yaml
+    required: true
+  - path: Agent Kit/kit/PROJECT_GROUNDING_CONTRACT.md
+    required: true
+  - path: Agent Kit/kit/QUESTIONS_THIS_KIT_ANSWERS.md
+    required: true
+  simulated_findings:
+  - The kit names durable truth as an owner-assigned role, usually Project Map.
+  - Folder path is a recommendation.
+  - Current owner instruction and current opened evidence outrank stale map memory.
+prompt: >
+  Answer-only. Explain where durable project truth lives in this kit.
+  Cover solo versus team. Do not write files.
+expected_behavior:
+- Agent states durable truth is a role the owner of the instrument assigns.
+- Agent names Project Map as the recommended holder and `Project Map/` as a recommended path, not the definition.
+- Agent states a programmer's checkout is not team truth.
+- Agent states the git repository as a pile of committed files is not automatically truth.
+- Agent states that in a team the map remains truth and only the owner (or an owner-accepted agreement) may write it.
+- Agent does not demote Project Map so that unmarked repo docs win by default.
+- Agent notes that current owner instruction and current opened evidence in this run outrank stale map memory.
+negative_checks:
+- Agent must not say operational docs always beat the map as a universal rule.
+- Agent must not say truth is whatever happens to sit in a local clone.
+- Agent must not say a file is true because it is committed.
+- Agent must not bind the answer to a private product name.
+grading:
+  method: rubric
+  pass_criteria:
+  - States durable truth is an owner-assigned role.
+  - Distinguishes recommended folder from the definition of truth.
+  - Distinguishes team write-rights from demoting the map.
+  - Keeps the answer portable (no private product binding).
+  fail_criteria:
+  - Demotes Project Map to secondary navigation as a universal law.
+  - Treats checkout or git-as-pile as truth.
+  - Treats folder names as the definition of truth.
+  score:
+    type: binary
+    pass_threshold: all_pass_criteria

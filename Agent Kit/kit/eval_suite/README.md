@@ -1,10 +1,9 @@
-# Agent Memory Kit Eval Suite - v3.12.0
+# Agent Memory Kit Eval Suite - v4.0.0
 
-Status: authoritative package eval suite for v3.12.0 when located under
-`Agent Kit/kit/eval_suite`. v3.12.0 adds execution-runtime coverage
-(Execution Profile Gate, path zones, leases, archive provenance, verified
-delivery). v3.11.3 added capability-management coverage (`AMK-CM-001`) and
-keeps inherited case metadata for older files.
+Status: authoritative package eval suite for v4.0.0 when located under
+`Agent Kit/kit/eval_suite`. v4.0.0 adds durable-truth coverage
+(`AMK-DT-001`). Inherited 3.12 execution-runtime cases and 3.11.3
+capability-management coverage (`AMK-CM-001`) remain.
 
 The suite itself is not publication proof. v3.11.2 normalized release-facing
 metadata only. v3.11.1 added `AMK-ML-002` and

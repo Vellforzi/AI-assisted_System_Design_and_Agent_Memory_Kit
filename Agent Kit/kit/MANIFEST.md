@@ -4,10 +4,19 @@ Package file: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.9.3_EN.zip`
 
 Package purpose: portable starter guide and memory operating layer for using AI agents with owner-controlled projects. Agent Memory Kit helps build a Project Map through structured, meaningful, interconnected duplication of project information supplied or verified by the owner.
 
-Current package version: `v3.12.1` published. Previous tag: `v3.12.0`.
+Current package version: `v4.0.0` published. Previous tag: `v3.12.1`.
 Release publication is established only by the matching repository tag and
 release receipts, not by this file. Older package-file lines are retained
 as historical manifest entries.
+
+## v4.0.0 durable-truth major
+
+- `Agent Kit/kit/CHANGELOG_v4.0.0.md` - release notes.
+- `Agent Kit/kit/MOTIVE_AND_ANALOGY.md` - durable-truth role (say it this way).
+- `Agent Kit/kit/SOURCE_AUTHORITY_TEMPLATE.yaml` - `durable_memory_role`.
+- `Agent Kit/kit/PROJECT_GROUNDING_CONTRACT.md` - same rule in the grounding contract.
+- `Agent Kit/kit/eval_suite/cases/AMK-DT-001.yaml` - durable-truth eval.
+- Root `README.md` - GitHub landing for the current instrument.
 
 ## v3.12.1 orchestration-choice supplement
 

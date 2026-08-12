@@ -66,8 +66,13 @@ The public claim this package is built to test:
 
 ## 3. Essence in one paragraph
 
-The owner keeps intent and acceptance. Project truth lives in inspectable
-files (`Project Map/`, current source, current tool output). **Offer
+The owner keeps intent and acceptance. Durable project truth is a role
+the owner of this instrument assigns. The recommended holder is Project
+Map. The folder path is a recommendation, not the definition. Current
+owner instruction, opened project files, and current tool output in this
+run still outrank stale map memory. A local checkout and "whatever is in
+git" are not automatically truth. In a team, one clone does not own the
+project; the map remains truth and only the owner may write it. **Offer
 schemes** when a causal path fits a map — cheap, accurate, readable by
 human and agent. A scheme does not replace constraints, hooks, or
 contracts. The agent is an execution engine with an
@@ -191,7 +196,7 @@ them into one invented surface name.
 | Are agents just bad at code? | `CAPABILITY_MANAGEMENT.md` |
 | Can I trust output I did not read line by line? | `BEHAVIORAL_ORACLES.md` |
 | What may the agent do without asking? | `ACTION_INTENT_CONTRACT.md` |
-| What is project truth? | `PROJECT_GROUNDING_CONTRACT.md` |
+| What is project truth? | `MOTIVE_AND_ANALOGY.md` (durable-truth role), this file §3, `PROJECT_GROUNDING_CONTRACT.md`, `SOURCE_AUTHORITY_TEMPLATE.yaml` |
 | How do I install Cursor? | `CURSOR_INTEGRATION_OWNER_GUIDE.md` |
 | How do I install Codex? | `codex/README.md` |
 | How do I start on an existing repo? | `EXISTING_PROJECT_ADOPTION_GUIDE.md` |

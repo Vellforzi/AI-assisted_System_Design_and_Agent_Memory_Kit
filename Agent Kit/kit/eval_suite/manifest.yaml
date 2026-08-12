@@ -1,9 +1,9 @@
-suite_id: AMK-EVAL-v3.12.0
-kit_version: 3.12.0
-manifest_version: 3.12.0
-release_date: '2026-08-12'
-release_type: minor_release
-label: Agent Memory Kit v3.12.0 execution runtime and capability-management suite
+suite_id: AMK-EVAL-v4.0.0
+kit_version: 4.0.0
+manifest_version: 4.0.0
+release_date: '2026-08-13'
+release_type: major_release
+label: Agent Memory Kit v4.0.0 durable-truth role and current-instrument landing
 authority:
   canonical_path: Agent Kit/kit/eval_suite
   project_map_mirror_path: Project Map/eval_suite
@@ -40,6 +40,8 @@ categories:
   description: Generated search/index/cache output as candidate evidence requiring canonical source readback.
 - id: capability_management
   description: Constraint contour vs model IQ; behavioral oracles vs structural unit tests; owner smoke remains a human gate.
+- id: durable_truth
+  description: Durable truth is an owner-assigned role; checkout and git-as-pile are not truth; do not demote the map.
 - id: execution_profile
   description: Unique mode + task class + path zone route, toolchain, and write lock.
 - id: path_zone_safety
@@ -132,6 +134,10 @@ cases:
 - id: AMK-CM-001
   path: cases/AMK-CM-001.yaml
   category: capability_management
+  severity: high
+- id: AMK-DT-001
+  path: cases/AMK-DT-001.yaml
+  category: durable_truth
   severity: high
 
 - id: AMK-EPG-001
@@ -315,8 +321,8 @@ cases:
   category: verified_delivery
   severity: critical
 version_invariants:
-  required_kit_version: 3.12.0
-  required_suite_id: AMK-EVAL-v3.12.0
+  required_kit_version: 4.0.0
+  required_suite_id: AMK-EVAL-v4.0.0
   inherited_case_metadata_note: Older case files may keep their introduced suite_id and kit_version until a separate eval metadata normalization task is approved. The checklist runner must not fail smoke validation solely because an inherited case file reports an older suite_id or kit_version when this note is present.
   runner_metadata_rule: validate required schema fields on every listed case; compare manifest kit_version and suite_id only against eval_trigger_policy.yaml; skip per-case suite_id/kit_version equality checks when inherited_case_metadata_note is set.
   case_schema_required_fields:

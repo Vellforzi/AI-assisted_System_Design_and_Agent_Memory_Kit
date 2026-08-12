@@ -1,6 +1,6 @@
 # Agent Memory Kit
 
-Version: v3.12.1
+Version: v4.0.0
 
 Agent Memory Kit is the project-memory and agent-behavior layer of the package.
 
@@ -98,9 +98,17 @@ Use one shared workspace root when one Project Map governs multiple components. 
 
 
 
-## v3.8 Cursor settings and workspace authority
+## v4.0.0 focus
 
-This release adds an owner-controlled Cursor Agent settings profile, `.cursorignore` guidance, settings audit commands, and the rule that an existing authoritative workspace file must be inspected and used rather than replaced by a generated fallback.
+Durable project truth is a role the owner assigns, usually Project Map.
+Folder names are a recommendation. A checkout and the git tree as a pile
+of files are not automatically truth. In a team the map stays truth and
+only the owner writes it. GitHub landing README matches this instrument.
+Eval `AMK-DT-001`.
+
+## Historical v3.8 Cursor settings and workspace authority
+
+v3.8 added an owner-controlled Cursor Agent settings profile, `.cursorignore` guidance, settings audit commands, and the rule that an existing authoritative workspace file must be inspected and used rather than replaced by a generated fallback.
 
 ## v3.12.1 focus
 
@@ -150,14 +158,6 @@ Adds generic operational hardening:
 Adds the local deterministic ChatGPT Project sources manifest workflow and
 `AMK-GPS-001`.
 
-## v3.9.4 focus
+## Historical v3.9.4
 
-Adds eval parity, live Cursor adoption checks, and explicit model-escalation triggers. Start with the lowest sufficient route and escalate only after reporting a concrete trigger (validation failure, schema/router conflict, insufficient context window, missing model control, repeated scoped failure, or task reclassification to audit/repair/protocol design).
-
-## v3.9.4 Cursor provider model snapshot
-
-v3.9.4 keeps dated Cursor model-routing snapshots as volatile capability observations. Exact Cursor model/settings advice must show snapshot date/ref and must not treat provider/model data as permanent project truth.
-
-## v3.9.4
-
-Adds stale-mirror eval-suite authority checks and live `.cursor` adoption guidance for rules and commands.
+v3.9.4 added eval parity, live Cursor adoption checks, stale-mirror eval-suite authority, and explicit model-escalation triggers. Dated Cursor model-routing snapshots remain volatile capability observations, not durable project truth.

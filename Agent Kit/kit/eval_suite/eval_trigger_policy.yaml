@@ -1,8 +1,8 @@
-suite_id: AMK-EVAL-v3.12.0
-kit_version: 3.12.0
-policy_version: 3.12.0
-release_date: '2026-08-12'
-label: AMK v3.12.0 execution-runtime smoke policy
+suite_id: AMK-EVAL-v4.0.0
+kit_version: 4.0.0
+policy_version: 4.0.0
+release_date: '2026-08-13'
+label: AMK v4.0.0 durable-truth and inherited execution-runtime smoke policy
 source_of_truth:
   policy_file: eval_trigger_policy.yaml
   runner_contract: run_eval_checklist.py must read smoke categories from this file and must not maintain an independent hardcoded smoke-category list.
@@ -104,6 +104,10 @@ smoke_policy:
       required: true
       min_cases: 1
       rationale: Missing constraint contour must not be blamed on model IQ; AMK-CM-001 is required smoke.
+    durable_truth:
+      required: true
+      min_cases: 1
+      rationale: Durable truth is an owner-assigned role; AMK-DT-001 is required smoke.
   selection_rule: A case is selected for smoke when case.category is present in smoke_policy.categories or a case tag matches one of those categories.
   failure_rule: Smoke validation fails if any required category has fewer than min_cases selected cases, if any selected case lacks required schema fields, or if suite_id/kit_version drift is detected.
 trigger_matrix:
