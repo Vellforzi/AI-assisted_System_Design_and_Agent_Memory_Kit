@@ -15,7 +15,8 @@ Safe to commit:
 - example memory cards with fake data;
 - README files;
 - release notes;
-- checksums.
+- checksums;
+- `LICENSE`.
 
 Do not commit:
 
@@ -108,3 +109,26 @@ Project Map/**/*.secret.*
 ```
 
 Adjust per project. Some teams may intentionally commit parts of Project Map; solo owners may prefer private storage.
+
+---
+
+## 5. Windows Explorer and `.git` (`desktop.ini`)
+
+Windows Explorer can drop `desktop.ini` into `.git/refs/`, `.git/objects/`,
+and `.git/logs/` if those folders are opened in Explorer. Git then treats
+them as broken refs (`bad object refs/desktop.ini`) and fetch/repack can
+fail. These files are not git objects. They are not part of the kit.
+
+Do not browse `.git` in Explorer. `desktop.ini` is already in the kit
+`.gitignore` for the working tree; that does not protect files inside `.git`.
+
+If warnings appear, delete only files named `desktop.ini` under `.git`
+(never delete hex object files). From Git Bash at the repository root:
+
+```bash
+find .git -name desktop.ini -type f -delete
+```
+
+Then `git status` and `git log -1` must still work. Do not rewrite tags or
+history to "fix" this. Do not commit anything from `.git/`.
+

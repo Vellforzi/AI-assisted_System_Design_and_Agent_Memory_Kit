@@ -146,6 +146,13 @@ Use technical enforcement where possible: permissions, hooks, sandboxing, branch
 
 ---
 
+## License
+
+MIT. See `LICENSE`. Authorship of each layer is in `AUTHORS.md`. The license
+does not change who authored which layer.
+
+---
+
 ## Python is not required
 
 Agent Memory Kit is language-agnostic and file-based. Python helper scripts are optional examples only. Replace them with another language if that fits your project better.
