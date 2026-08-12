@@ -1,6 +1,6 @@
 # Agent Memory Kit
 
-Version: v3.12.0
+Version: v3.12.1
 
 Agent Memory Kit is the project-memory and agent-behavior layer of the package.
 
@@ -101,6 +101,11 @@ Use one shared workspace root when one Project Map governs multiple components. 
 ## v3.8 Cursor settings and workspace authority
 
 This release adds an owner-controlled Cursor Agent settings profile, `.cursorignore` guidance, settings audit commands, and the rule that an existing authoritative workspace file must be inspected and used rather than replaced by a generated fallback.
+
+## v3.12.1 focus
+
+Adds `ORCHESTRATION_CHOICE.md`: the kit during orchestration; offer the host
+Agents window before building a custom queue/App Server host.
 
 ## v3.12.0 focus
 

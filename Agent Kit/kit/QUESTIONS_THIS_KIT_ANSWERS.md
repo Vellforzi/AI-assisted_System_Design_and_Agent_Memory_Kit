@@ -114,6 +114,7 @@ the gate, and the oracle shape. See `GIT_PUBLISHING_GUIDE.md`.
 | Proposed specialist functions and limits | `PROPOSED_SPECIALIST_FUNCTIONS.md`, `cursor/subagents/` |
 | Schemes as a method to offer | `SCHEMES_AND_COVERAGE_ATLAS.md`, `coverage_atlas/` |
 | Rest of the working method | `WORKING_METHOD_CATALOG.md` |
+| Orchestration as a choice, not a second product | `ORCHESTRATION_CHOICE.md` |
 | Numbered CN facts | `CONSTRAINT_CATALOG.md`, `constraint_catalog/` |
 | Hook functions and example bytes | `proposed_hooks/` |
 
@@ -199,6 +200,7 @@ them into one invented surface name.
 | How do I create limited agents like a high-control owner? | `PROPOSED_SPECIALIST_FUNCTIONS.md` |
 | How do I give agents a compact picture of a causal path? | `SCHEMES_AND_COVERAGE_ATLAS.md` |
 | What else from a live high-control method should I copy? | `WORKING_METHOD_CATALOG.md` |
+| Do I need to build my own orchestrator? | `ORCHESTRATION_CHOICE.md` |
 | How do I keep limits as numbered facts? | `CONSTRAINT_CATALOG.md` |
 | Which hooks should I create? | `proposed_hooks/README.md` |
 

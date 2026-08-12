@@ -1,7 +1,7 @@
 # Agent Memory Kit Starter Package
 
-Version: v3.12.0
-Release metadata date: 2026-08-12
+Version: v3.12.1
+Release metadata date: 2026-08-13
 Publication proof: matching repository tag and release receipts; this file alone is not proof
 
 Agent Memory Kit is a portable memory operating layer for project owners who work with AI agents across long projects.
@@ -77,6 +77,7 @@ Evals do not run automatically unless the owner wires them to a script, hook, CI
 | `PROPOSED_SPECIALIST_FUNCTIONS.md` | How to create limited specialist agents; copy the method, not a private roster. |
 | `SCHEMES_AND_COVERAGE_ATLAS.md` | Offer schemes: cheap, accurate, human+agent readable. Not a replacement for the rest. |
 | `WORKING_METHOD_CATALOG.md` | Catalog of the rest of the working method (smoke, contract, modes, locks). |
+| `ORCHESTRATION_CHOICE.md` | How the kit is used during orchestration; offer host UI vs a custom queue host. |
 | `CONSTRAINT_CATALOG.md` | Numbered CN facts: retrieve by id; product CNs stay in the adopting project. |
 | `proposed_hooks/` | Combat-method hook cards and example bytes (wrapper, contract, profile, finalization, encoding). |
 | `coverage_atlas/` | Scheme template and a generic example. |

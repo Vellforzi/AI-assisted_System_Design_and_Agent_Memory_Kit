@@ -1,8 +1,8 @@
 # AI-assisted System Design and Agent Memory Kit
 
-Version: v3.12.0 published
-Release date: v3.12.0 published 2026-08-12; previous tag `v3.11.3` published 2026-08-12
-Status: portable project-owner toolkit. Published tag is `v3.12.0`.
+Version: v3.12.1 published
+Release date: v3.12.1 published 2026-08-13; previous tag `v3.12.0` published 2026-08-12
+Status: portable project-owner toolkit. Published tag is `v3.12.1`.
 
 This package contains two complementary tools:
 
@@ -93,6 +93,12 @@ AI-assisted System Design and Agent Memory Kit/
 8. Add only a short agent-instruction entrypoint to your coding tool, such as `AGENTS.md` or Cursor rules. Do not paste the whole kit into one always-loaded prompt.
 
 ---
+
+## What v3.12.1 published
+
+- Orchestration as a choice: how the kit is used during orchestration; offer the host Agents window before building a custom queue/App Server host. See `Agent Kit/kit/ORCHESTRATION_CHOICE.md`.
+
+See `Agent Kit/kit/CHANGELOG_v3.12.1.md`.
 
 ## What v3.12.0 published
 

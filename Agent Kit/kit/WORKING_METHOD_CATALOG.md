@@ -69,6 +69,10 @@ of *different* functions is allowed.
 
 **Must never claim:** runtime PASS, deploy PASS, or owner acceptance.
 
+A custom local queue / App Server host is **optional**. Offer the choice
+in `ORCHESTRATION_CHOICE.md`: current session, host-native Agents window,
+or a separate host. Do not build a garden because it looks serious.
+
 ---
 
 ## 4. Owner-gated live-surface smoke

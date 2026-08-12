@@ -1,8 +1,8 @@
 # START HERE — AI-assisted System Design and Agent Memory Kit
 
-Version: v3.12.0 published
-Release date: v3.12.0 published 2026-08-12; previous tag `v3.11.3` published 2026-08-12
-Package: published tag is `v3.12.0`.
+Version: v3.12.1 published
+Release date: v3.12.1 published 2026-08-13; previous tag `v3.12.0` published 2026-08-12
+Package: published tag is `v3.12.1`.
 Status: portable project-owner kit for AI-assisted work and grounded project memory
 
 ---
@@ -169,6 +169,14 @@ Read:
 3. the project's own `AGENTS.md`, `PROJECT_AI_BRIEF.md`, repository docs, or equivalent if the user explicitly grants read access.
 
 ---
+
+## What changed in v3.12.1
+
+Published guide; tag is `v3.12.1`.
+
+- Orchestration as a choice: `ORCHESTRATION_CHOICE.md`
+
+See `Agent Kit/kit/CHANGELOG_v3.12.1.md`.
 
 ## What changed in v3.12.0
 
