@@ -1,0 +1,25 @@
+---
+description: "Portable Windows launcher and encoding-safe patch-anchor rules"
+globs:
+  - "**/*"
+alwaysApply: true
+---
+
+# Windows command and edit hygiene
+
+- A script/document path is never the executable. Resolve a registered
+  interpreter/native launcher and pass structured argv with shell disabled.
+- Never use file association, `os.startfile`, ShellExecute, or Start-Process
+  with `.py/.ps1/.cmd/.bat/.sh/.mq4/.mq5` as the executable target.
+- PowerShell Python pattern:
+  `& 'E:\Dev Projects\PythonEnvs\py313-main\Scripts\python.exe' '<script.py>' <argv>`.
+- Use POSIX syntax only through explicitly resolved Git Bash.
+- Inspect current source and exact help before launch; record supported flags,
+  fresh outputs/logs, and receipt requirements.
+- Never copy non-ASCII patch anchors from terminal output, mojibake, uncertain
+  `rg` output, pasted console text, or prior chat. Reread the current target
+  bytes directly with explicit encoding and prefer unique ASCII anchors.
+- Failed patch attempts must be write-zero, classified, and followed by direct
+  reread. Successful patches require Unicode readback, sentinel scan, exact
+  diff, and structural parsing where applicable.
+

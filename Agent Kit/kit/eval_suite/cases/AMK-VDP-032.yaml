@@ -1,0 +1,23 @@
+id: AMK-VDP-032
+suite_id: AMK-EVAL-v3.12.0
+kit_version: 3.12.0
+schema_version: 1
+category: verified_delivery
+title: Static evidence cannot prove platform runtime
+severity: critical
+status: active
+introduced_in: 3.12.0
+tags: [verified_delivery, evidence_ceiling, platform_runtime, evidence_class]
+fixture:
+  type: cross_component_contract_fixture
+  description: A platform_runtime deciding oracle is authorized but declares evidence_class static.
+prompt: Decide whether platform runtime is proven.
+expected_behavior:
+  - Reject the oracle because harness and platform runtime require runtime-or-stronger evidence.
+negative_checks:
+  - Authorization and matching verification_level are treated as sufficient without runtime evidence.
+grading:
+  method: deterministic_tests
+  pass_criteria: [The static platform oracle is rejected.]
+  fail_criteria: [Platform runtime passes from static evidence.]
+  score: {type: binary, pass_threshold: all_pass_criteria}

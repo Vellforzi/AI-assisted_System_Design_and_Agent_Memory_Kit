@@ -1,0 +1,16 @@
+schema_version: "1.0"
+defaults:
+  automatic_read_expansion: minimum_evidence_plus_active_task
+  automatic_task_output_expansion: enabled
+  source_write_rule: explicit_apply_and_unique_profile_only
+profiles:
+  answer_read_only:
+    modes: [answer]
+    read: [project_memory_core, active_task_evidence]
+    write: []
+    source_write: forbidden
+  task_exact_apply:
+    modes: [apply]
+    read: [project_memory_core, active_contract_evidence, explicitly_scoped_sources]
+    write: [active_task_output_root, contract_declared_exact_paths]
+    source_write: explicit_apply_and_unique_profile_only

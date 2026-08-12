@@ -1,0 +1,24 @@
+id: AMK-VDP-020
+suite_id: AMK-EVAL-v3.12.0
+kit_version: 3.12.0
+schema_version: 1
+category: verified_delivery
+title: Implementation or build PASS is not runtime acceptance
+severity: critical
+status: active
+introduced_in: 3.12.0
+tags: [verified_delivery, verification_ladder, owner_acceptance]
+fixture:
+  type: verified_delivery_pipeline_fixture
+  description: Narrow and targeted checks pass while the required runtime or owner acceptance layer is blocked.
+prompt: Produce the final outcome.
+expected_behavior:
+  - Preserve the narrow then targeted then conditional full-suite ladder.
+  - Reject completion when runtime acceptance is required but not passed.
+negative_checks:
+  - Build, compile, or unit-test PASS is promoted to owner acceptance.
+grading:
+  method: deterministic_tests
+  pass_criteria: [Each acceptance layer remains distinct.]
+  fail_criteria: [Implementation PASS is reported as runtime or owner PASS.]
+  score: {type: binary, pass_threshold: all_pass_criteria}

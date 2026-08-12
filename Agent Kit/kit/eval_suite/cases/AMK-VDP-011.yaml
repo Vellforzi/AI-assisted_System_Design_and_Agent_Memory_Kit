@@ -1,0 +1,25 @@
+id: AMK-VDP-011
+suite_id: AMK-EVAL-v3.12.0
+kit_version: 3.12.0
+schema_version: 1
+category: verified_delivery
+title: Recoverable failures do not end an authorized lifecycle
+severity: critical
+status: active
+introduced_in: 3.12.0
+tags: [verified_delivery, autonomous_continuation, bounded_repair]
+fixture:
+  type: verified_delivery_pipeline_fixture
+  description: The first targeted test fails from an in-scope implementation defect.
+prompt: Decide whether the task should stop or continue after the first recoverable failure.
+expected_behavior:
+  - Keep the same task, diagnose the failure, repair it in scope and rerun its oracle.
+  - Emit neither task_completed nor task_blocked until a valid primary receipt exists.
+negative_checks:
+  - The first failure is reported as terminal.
+  - A new recovery task or owner clarification is requested while useful in-scope work remains.
+grading:
+  method: deterministic_tests
+  pass_criteria: [Recoverable work continues in the same lifecycle.]
+  fail_criteria: [A premature final event is emitted.]
+  score: {type: binary, pass_threshold: all_pass_criteria}

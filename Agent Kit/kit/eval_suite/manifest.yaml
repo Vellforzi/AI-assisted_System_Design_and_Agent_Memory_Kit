@@ -1,9 +1,9 @@
-suite_id: AMK-EVAL-v3.11.3
-kit_version: 3.11.3
-manifest_version: 3.11.3
+suite_id: AMK-EVAL-v3.12.0
+kit_version: 3.12.0
+manifest_version: 3.12.0
 release_date: '2026-08-12'
-release_type: patch_release
-label: Agent Memory Kit v3.11.3 capability-management and working-method suite
+release_type: minor_release
+label: Agent Memory Kit v3.12.0 execution runtime and capability-management suite
 authority:
   canonical_path: Agent Kit/kit/eval_suite
   project_map_mirror_path: Project Map/eval_suite
@@ -40,6 +40,26 @@ categories:
   description: Generated search/index/cache output as candidate evidence requiring canonical source readback.
 - id: capability_management
   description: Constraint contour vs model IQ; behavioral oracles vs structural unit tests; owner smoke remains a human gate.
+- id: execution_profile
+  description: Unique mode + task class + path zone route, toolchain, and write lock.
+- id: path_zone_safety
+  description: Most-specific path zone; secrets/backups/unknown fail closed.
+- id: scope_lease
+  description: Baseline-bound CAS mutation lease.
+- id: archive_provenance
+  description: Commit parity from Git blobs; worktree ZIP is not commit_parity.
+- id: mode_routing
+  description: Stage/review/recover/map mutation boundaries.
+- id: lean_control
+  description: Proportional R0-R4 control without dropping fail-closed gates.
+- id: windows_command_launcher
+  description: Registered interpreter, structured argv, no file-association launch.
+- id: runtime_acceptance
+  description: Orchestration completion is not runtime or owner acceptance.
+- id: codex_desktop_orchestration
+  description: Root ownership, read-only lanes, one writer, reset-before-reopen.
+- id: verified_delivery
+  description: Conditional verified-delivery pipeline, oracles, and receipts.
 cases:
 - id: AMK-ESS-001
   path: cases/AMK-ESS-001.yaml
@@ -113,9 +133,190 @@ cases:
   path: cases/AMK-CM-001.yaml
   category: capability_management
   severity: high
+
+- id: AMK-EPG-001
+  path: cases/AMK-EPG-001.yaml
+  category: execution_profile
+  severity: critical
+- id: AMK-PZ-001
+  path: cases/AMK-PZ-001.yaml
+  category: path_zone_safety
+  severity: critical
+- id: AMK-SL-001
+  path: cases/AMK-SL-001.yaml
+  category: scope_lease
+  severity: critical
+- id: AMK-ARC-001
+  path: cases/AMK-ARC-001.yaml
+  category: archive_provenance
+  severity: critical
+- id: AMK-MODE-001
+  path: cases/AMK-MODE-001.yaml
+  category: mode_routing
+  severity: high
+- id: AMK-LC-001
+  path: cases/AMK-LC-001.yaml
+  category: lean_control
+  severity: critical
+- id: AMK-WCL-001
+  path: cases/AMK-WCL-001.yaml
+  category: windows_command_launcher
+  severity: critical
+- id: AMK-RA-001
+  path: cases/AMK-RA-001.yaml
+  category: runtime_acceptance
+  severity: critical
+- id: AMK-RA-002
+  path: cases/AMK-RA-002.yaml
+  category: runtime_acceptance
+  severity: critical
+- id: AMK-CDO-001
+  path: cases/AMK-CDO-001.yaml
+  category: codex_desktop_orchestration
+  severity: critical
+- id: AMK-CDO-002
+  path: cases/AMK-CDO-002.yaml
+  category: codex_desktop_orchestration
+  severity: critical
+- id: AMK-VDP-001
+  path: cases/AMK-VDP-001.yaml
+  category: verified_delivery
+  severity: critical
+- id: AMK-VDP-002
+  path: cases/AMK-VDP-002.yaml
+  category: verified_delivery
+  severity: critical
+- id: AMK-VDP-003
+  path: cases/AMK-VDP-003.yaml
+  category: verified_delivery
+  severity: critical
+- id: AMK-VDP-004
+  path: cases/AMK-VDP-004.yaml
+  category: verified_delivery
+  severity: critical
+- id: AMK-VDP-005
+  path: cases/AMK-VDP-005.yaml
+  category: verified_delivery
+  severity: critical
+- id: AMK-VDP-006
+  path: cases/AMK-VDP-006.yaml
+  category: verified_delivery
+  severity: critical
+- id: AMK-VDP-007
+  path: cases/AMK-VDP-007.yaml
+  category: verified_delivery
+  severity: critical
+- id: AMK-VDP-008
+  path: cases/AMK-VDP-008.yaml
+  category: verified_delivery
+  severity: critical
+- id: AMK-VDP-009
+  path: cases/AMK-VDP-009.yaml
+  category: verified_delivery
+  severity: critical
+- id: AMK-VDP-010
+  path: cases/AMK-VDP-010.yaml
+  category: verified_delivery
+  severity: critical
+- id: AMK-VDP-011
+  path: cases/AMK-VDP-011.yaml
+  category: verified_delivery
+  severity: critical
+- id: AMK-VDP-012
+  path: cases/AMK-VDP-012.yaml
+  category: verified_delivery
+  severity: critical
+- id: AMK-VDP-013
+  path: cases/AMK-VDP-013.yaml
+  category: verified_delivery
+  severity: critical
+- id: AMK-VDP-014
+  path: cases/AMK-VDP-014.yaml
+  category: verified_delivery
+  severity: critical
+- id: AMK-VDP-015
+  path: cases/AMK-VDP-015.yaml
+  category: verified_delivery
+  severity: critical
+- id: AMK-VDP-016
+  path: cases/AMK-VDP-016.yaml
+  category: verified_delivery
+  severity: critical
+- id: AMK-VDP-017
+  path: cases/AMK-VDP-017.yaml
+  category: verified_delivery
+  severity: critical
+- id: AMK-VDP-018
+  path: cases/AMK-VDP-018.yaml
+  category: verified_delivery
+  severity: critical
+- id: AMK-VDP-019
+  path: cases/AMK-VDP-019.yaml
+  category: verified_delivery
+  severity: critical
+- id: AMK-VDP-020
+  path: cases/AMK-VDP-020.yaml
+  category: verified_delivery
+  severity: critical
+- id: AMK-VDP-021
+  path: cases/AMK-VDP-021.yaml
+  category: verified_delivery
+  severity: critical
+- id: AMK-VDP-022
+  path: cases/AMK-VDP-022.yaml
+  category: verified_delivery
+  severity: critical
+- id: AMK-VDP-023
+  path: cases/AMK-VDP-023.yaml
+  category: verified_delivery
+  severity: critical
+- id: AMK-VDP-024
+  path: cases/AMK-VDP-024.yaml
+  category: verified_delivery
+  severity: critical
+- id: AMK-VDP-025
+  path: cases/AMK-VDP-025.yaml
+  category: verified_delivery
+  severity: critical
+- id: AMK-VDP-026
+  path: cases/AMK-VDP-026.yaml
+  category: verified_delivery
+  severity: critical
+- id: AMK-VDP-027
+  path: cases/AMK-VDP-027.yaml
+  category: verified_delivery
+  severity: critical
+- id: AMK-VDP-028
+  path: cases/AMK-VDP-028.yaml
+  category: verified_delivery
+  severity: critical
+- id: AMK-VDP-029
+  path: cases/AMK-VDP-029.yaml
+  category: verified_delivery
+  severity: critical
+- id: AMK-VDP-030
+  path: cases/AMK-VDP-030.yaml
+  category: verified_delivery
+  severity: critical
+- id: AMK-VDP-031
+  path: cases/AMK-VDP-031.yaml
+  category: verified_delivery
+  severity: critical
+- id: AMK-VDP-032
+  path: cases/AMK-VDP-032.yaml
+  category: verified_delivery
+  severity: critical
+- id: AMK-VDP-033
+  path: cases/AMK-VDP-033.yaml
+  category: verified_delivery
+  severity: critical
+- id: AMK-VDP-034
+  path: cases/AMK-VDP-034.yaml
+  category: verified_delivery
+  severity: critical
 version_invariants:
-  required_kit_version: 3.11.3
-  required_suite_id: AMK-EVAL-v3.11.3
+  required_kit_version: 3.12.0
+  required_suite_id: AMK-EVAL-v3.12.0
   inherited_case_metadata_note: Older case files may keep their introduced suite_id and kit_version until a separate eval metadata normalization task is approved. The checklist runner must not fail smoke validation solely because an inherited case file reports an older suite_id or kit_version when this note is present.
   runner_metadata_rule: validate required schema fields on every listed case; compare manifest kit_version and suite_id only against eval_trigger_policy.yaml; skip per-case suite_id/kit_version equality checks when inherited_case_metadata_note is set.
   case_schema_required_fields:

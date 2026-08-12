@@ -1,0 +1,24 @@
+id: AMK-VDP-017
+suite_id: AMK-EVAL-v3.12.0
+kit_version: 3.12.0
+schema_version: 1
+category: verified_delivery
+title: Independent defects require task-unit decomposition
+severity: critical
+status: active
+introduced_in: 3.12.0
+tags: [verified_delivery, defect_decomposition]
+fixture:
+  type: verified_delivery_pipeline_fixture
+  description: Two acceptance failures have independent root causes.
+prompt: Compile the task contract.
+expected_behavior:
+  - Create separate task units or record one explicit coupling justification.
+  - Cover every acceptance criterion exactly once.
+negative_checks:
+  - Both defects are hidden inside one undecomposed repair unit.
+grading:
+  method: deterministic_tests
+  pass_criteria: [Decomposition or explicit coupling is machine-checkable.]
+  fail_criteria: [Independent defects remain undecomposed.]
+  score: {type: binary, pass_threshold: all_pass_criteria}

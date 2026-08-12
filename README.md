@@ -1,8 +1,8 @@
 # AI-assisted System Design and Agent Memory Kit
 
-Version: v3.11.3 published
-Release date: v3.11.3 published 2026-08-12; previous tag `v3.11.2` published 2026-07-10
-Status: portable project-owner toolkit. Published tag is `v3.11.3`. No public v3.12.0 is claimed.
+Version: v3.12.0 published
+Release date: v3.12.0 published 2026-08-12; previous tag `v3.11.3` published 2026-08-12
+Status: portable project-owner toolkit. Published tag is `v3.12.0`.
 
 This package contains two complementary tools:
 
@@ -93,6 +93,16 @@ AI-assisted System Design and Agent Memory Kit/
 8. Add only a short agent-instruction entrypoint to your coding tool, such as `AGENTS.md` or Cursor rules. Do not paste the whole kit into one always-loaded prompt.
 
 ---
+
+## What v3.12.0 published
+
+- Execution Profile Gate, path/toolchain/scope registry templates, CAS write lock.
+- Verified-delivery pipeline templates and validators.
+- Windows command-launch hygiene and `/stage` `/review` mode commands.
+- Eval coverage for unique route, path-zone fail-closed, lease, archive provenance, and verified delivery.
+- Does not include private product evals or App Server controllers.
+
+See `Agent Kit/kit/CHANGELOG_v3.12.0.md`.
 
 ## What v3.11.3 published
 

@@ -1,8 +1,10 @@
-# Agent Memory Kit Eval Suite - v3.11.3
+# Agent Memory Kit Eval Suite - v3.12.0
 
-Status: authoritative package eval suite for v3.11.3 when located under
-`Agent Kit/kit/eval_suite`. v3.11.3 adds capability-management coverage
-(`AMK-CM-001`) and keeps inherited case metadata for older files.
+Status: authoritative package eval suite for v3.12.0 when located under
+`Agent Kit/kit/eval_suite`. v3.12.0 adds execution-runtime coverage
+(Execution Profile Gate, path zones, leases, archive provenance, verified
+delivery). v3.11.3 added capability-management coverage (`AMK-CM-001`) and
+keeps inherited case metadata for older files.
 
 The suite itself is not publication proof. v3.11.2 normalized release-facing
 metadata only. v3.11.1 added `AMK-ML-002` and
@@ -55,7 +57,7 @@ Authoritative files:
 - `cases/*.yaml`
 
 The same-directory `eval_suite/run_eval_checklist.py` is a legacy compatibility
-helper and is not the manifest-selected v3.11.3 validator.
+helper and is not the manifest-selected v3.12.0 validator.
 
 Smoke selection contract:
 

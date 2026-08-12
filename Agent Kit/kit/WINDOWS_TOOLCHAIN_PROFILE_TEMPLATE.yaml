@@ -1,0 +1,48 @@
+schema_version: "1.0"
+profile_id: owner_workstation
+python:
+  stdlib_launcher:
+    executable: py
+    args: ["-3"]
+  yaml_launcher:
+    executable: "C:/absolute/path/to/yaml-capable/python.exe"
+    required_modules: {yaml: "<verified version>"}
+git:
+  executable: git
+  archive_source_contract: commit_blob_only_for_commit_parity
+launchers:
+  yaml: tools/launch_yaml_tool.py
+  commit_blob_archive: tools/commit_blob_archive.py
+windows_process_contract:
+  shell: false
+  use_shell_execute: false
+  noninteractive_window_policy: create_no_window_or_hidden_when_safe
+  file_association_for_scripts: forbidden
+  interface_evidence: [current_source, exact_help]
+  success_evidence: [expected_exit_code, fresh_output_or_log, receipt]
+interpreters:
+  python_stdlib:
+    executable: py
+    argv_prefix: ["-3"]
+    allowed_script_extensions: [".py"]
+  python_yaml_profile_lease:
+    executable: "C:/absolute/path/to/yaml-capable/python.exe"
+    argv_prefix: []
+    allowed_script_extensions: [".py"]
+  powershell:
+    executable: powershell.exe
+    argv_prefix: ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File"]
+    allowed_script_extensions: [".ps1"]
+  cmd:
+    executable: cmd.exe
+    argv_prefix: ["/d", "/c"]
+    allowed_script_extensions: [".cmd", ".bat"]
+  git_bash:
+    executable: "C:/Program Files/Git/bin/bash.exe"
+    argv_prefix: []
+    allowed_script_extensions: [".sh"]
+  native:
+    allowed_extensions: [".exe", ".com"]
+  mql:
+    launcher: tools/launch_mql.py
+    source_extensions: [".mq4", ".mq5"]

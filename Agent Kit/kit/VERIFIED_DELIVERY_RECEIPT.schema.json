@@ -1,0 +1,326 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agent-memory-kit.local/verified-delivery-receipt.schema.json",
+  "title": "Verified Delivery Primary Outcome Receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "task_id", "baseline", "acceptance_contract_sha256"],
+  "oneOf": [
+    {
+      "title": "Legacy completed receipt",
+      "properties": {"schema_version": {"enum": ["1.0", "1.1"]}},
+      "not": {"anyOf": [{"required": ["outcome"]}, {"required": ["blocker"]}, {"required": ["finalization"]}, {"required": ["repair_summary"]}]},
+      "required": ["candidate_state", "changed_paths", "active_gates", "checks", "independent_review", "unresolved_conditions", "rollback_readback", "scope_diff", "final_git"]
+    },
+    {
+      "title": "Schema 1.2 completed receipt",
+      "properties": {
+        "schema_version": {"const": "1.2"},
+        "outcome": {"const": "task_completed"},
+        "independent_review": {
+          "required": ["required", "status", "reviewer_id", "evidence_ref", "open_findings", "reviewer_role_count", "adjudication_ref", "open_confirmed_material_findings"]
+        }
+      },
+      "not": {"anyOf": [{"required": ["blocker"]}, {"required": ["finalization"]}]},
+      "required": ["outcome", "candidate_state", "changed_paths", "active_gates", "checks", "independent_review", "unresolved_conditions", "rollback_readback", "scope_diff", "final_git", "repair_summary"]
+    },
+    {
+      "title": "Schema 1.2 terminal blocked receipt",
+      "properties": {
+        "schema_version": {"const": "1.2"},
+        "outcome": {"const": "task_blocked"}
+      },
+      "not": {"anyOf": [{"required": ["candidate_state"]}, {"required": ["changed_paths"]}, {"required": ["active_gates"]}, {"required": ["checks"]}, {"required": ["independent_review"]}, {"required": ["unresolved_conditions"]}, {"required": ["rollback_readback"]}, {"required": ["environment_readiness"]}, {"required": ["scope_diff"]}, {"required": ["final_git"]}, {"required": ["repair_summary"]}]},
+      "required": ["outcome", "blocker", "finalization"]
+    },
+    {
+      "title": "Schema 1.3 completed receipt with conditional lifecycle evidence",
+      "properties": {
+        "schema_version": {"const": "1.3"},
+        "outcome": {"const": "task_completed"},
+        "independent_review": {
+          "required": ["required", "status", "reviewer_id", "evidence_ref", "open_findings", "reviewer_role_count", "adjudication_ref", "open_confirmed_material_findings"]
+        }
+      },
+      "not": {"anyOf": [{"required": ["blocker"]}, {"required": ["finalization"]}]},
+      "required": ["outcome", "candidate_state", "changed_paths", "active_gates", "checks", "independent_review", "unresolved_conditions", "rollback_readback", "scope_diff", "final_git", "repair_summary", "lifecycle_evidence"]
+    },
+    {
+      "title": "Schema 1.3 terminal blocked receipt",
+      "properties": {
+        "schema_version": {"const": "1.3"},
+        "outcome": {"const": "task_blocked"}
+      },
+      "not": {"anyOf": [{"required": ["candidate_state"]}, {"required": ["changed_paths"]}, {"required": ["active_gates"]}, {"required": ["checks"]}, {"required": ["independent_review"]}, {"required": ["unresolved_conditions"]}, {"required": ["rollback_readback"]}, {"required": ["environment_readiness"]}, {"required": ["scope_diff"]}, {"required": ["final_git"]}, {"required": ["repair_summary"]}]},
+      "required": ["outcome", "blocker", "finalization", "lifecycle_evidence"]
+    }
+  ],
+  "properties": {
+    "schema_version": {"enum": ["1.0", "1.1", "1.2", "1.3"]},
+    "task_id": {"type": "string", "minLength": 1},
+    "outcome": {"enum": ["task_completed", "task_blocked"]},
+    "candidate_state": {"const": "verified_delivery_candidate"},
+    "baseline": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "acceptance_contract_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "changed_paths": {
+      "type": "array",
+      "uniqueItems": true,
+      "description": "Git baseline..candidate paths excluding the primary receipt path itself.",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "active_gates": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": ["characterization", "targeted", "baseline", "scope_diff", "independent_review", "environment_readiness", "black_box", "build", "deploy", "rollback_readback", "finalization"]
+      }
+    },
+    "checks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "kind", "status", "evidence_ref"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "kind": {"enum": ["characterization", "static", "targeted", "baseline", "environment_readiness", "black_box", "build", "deploy", "scope_diff", "encoding", "finalization"]},
+          "status": {"const": "pass"},
+          "evidence_ref": {"type": "string", "minLength": 1},
+          "artifact_or_log_id": {"type": "string"}
+        }
+      }
+    },
+    "independent_review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required", "status", "reviewer_id", "evidence_ref", "open_findings"],
+      "properties": {
+        "required": {"type": "boolean"},
+        "status": {"enum": ["pass", "not_required"]},
+        "reviewer_id": {"type": "string"},
+        "evidence_ref": {"type": "string"},
+        "open_findings": {"type": "integer", "minimum": 0, "maximum": 0},
+        "reviewer_role_count": {"type": "integer", "minimum": 0, "maximum": 1},
+        "adjudication_ref": {"type": "string"},
+        "open_confirmed_material_findings": {"type": "integer", "minimum": 0, "maximum": 0}
+      }
+    },
+    "unresolved_conditions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "condition", "impact", "owner_or_external_gate"],
+        "properties": {
+          "id": {"type": "string"},
+          "condition": {"type": "string"},
+          "impact": {"type": "string"},
+          "owner_or_external_gate": {"type": "string"}
+        }
+      }
+    },
+    "rollback_readback": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required", "status", "evidence_ref"],
+      "properties": {
+        "required": {"type": "boolean"},
+        "status": {"enum": ["pass", "not_required"]},
+        "evidence_ref": {"type": "string"}
+      }
+    },
+    "environment_readiness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required", "status", "evidence_ref"],
+      "properties": {
+        "required": {"type": "boolean"},
+        "status": {"enum": ["pass", "not_required"]},
+        "evidence_ref": {"type": "string"}
+      }
+    },
+    "scope_diff": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "forbidden_paths", "diff_sha256"],
+      "properties": {
+        "status": {"const": "pass"},
+        "forbidden_paths": {"type": "array", "maxItems": 0},
+        "diff_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "final_git": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["candidate_tree", "candidate_diff_status", "worktree_status", "post_commit_receipt"],
+      "properties": {
+        "candidate_tree": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "candidate_diff_status": {"const": "pass"},
+        "worktree_status": {"enum": ["candidate_staged", "clean_after_commit"]},
+        "post_commit_receipt": {"type": "string", "minLength": 1}
+      }
+    },
+    "repair_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["iterations", "same_failure_repeats", "consecutive_no_progress"],
+      "properties": {
+        "iterations": {"type": "integer", "minimum": 0, "maximum": 3},
+        "same_failure_repeats": {"type": "integer", "minimum": 0, "maximum": 1},
+        "consecutive_no_progress": {"type": "integer", "minimum": 0, "maximum": 1}
+      }
+    },
+    "blocker": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "terminal", "recoverable", "summary", "why_unrecoverable", "evidence_ref", "required_owner_action", "repair_iterations", "recovery_attempts", "remaining_in_scope_actions"],
+      "properties": {
+        "code": {"enum": ["same_deterministic_failure_repeated", "two_no_progress_iterations", "scope_or_capability_expansion_required", "external_dependency_unavailable", "oracle_missing_or_contradictory", "owner_goal_or_protected_behavior_change_required", "total_repair_budget_exhausted", "authorization_or_integrity_gate"]},
+        "terminal": {"const": true},
+        "recoverable": {"const": false},
+        "summary": {"type": "string", "minLength": 1},
+        "why_unrecoverable": {"type": "string", "minLength": 1},
+        "evidence_ref": {"type": "string", "minLength": 1},
+        "required_owner_action": {"type": "string", "minLength": 1},
+        "repair_iterations": {"type": "integer", "minimum": 0, "maximum": 3},
+        "recovery_attempts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "failure_fingerprint", "action", "result", "evidence_ref"],
+            "properties": {
+              "id": {"type": "string", "minLength": 1},
+              "failure_fingerprint": {"type": "string", "minLength": 1},
+              "action": {"type": "string", "minLength": 1},
+              "result": {"type": "string", "minLength": 1},
+              "evidence_ref": {"type": "string", "minLength": 1}
+            }
+          }
+        },
+        "remaining_in_scope_actions": {"type": "array", "maxItems": 0}
+      }
+    },
+    "finalization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["lease_state", "worktree_status", "evidence_ref"],
+      "properties": {
+        "lease_state": {"const": "released"},
+        "worktree_status": {"enum": ["clean", "preserved_in_scope_changes"]},
+        "evidence_ref": {"type": "string", "minLength": 1}
+      }
+    },
+    "lifecycle_evidence": {"$ref": "#/$defs/artifactBinding"},
+    "evidence_ceiling": {"$ref": "#/$defs/evidenceCeiling"},
+    "pipeline_metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "wall_clock_seconds": {"type": "number", "minimum": 0},
+        "repair_iterations": {"type": "integer", "minimum": 0},
+        "active_gate_count": {"type": "integer", "minimum": 0},
+        "first_patch_passed": {"type": "boolean"},
+        "false_block_count": {"type": "integer", "minimum": 0},
+        "owner_wait_seconds": {"type": "number", "minimum": 0},
+        "human_touch_seconds": {"type": "number", "minimum": 0},
+        "agent_cost": {"type": "number", "minimum": 0}
+      }
+    }
+  },
+  "$defs": {
+    "artifactBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "evidenceLevelStatus": {
+      "enum": ["pass", "not_run", "failed", "blocked"]
+    },
+    "evidenceStep": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "oracle_ids", "evidence_refs"],
+      "properties": {
+        "status": {"$ref": "#/$defs/evidenceLevelStatus"},
+        "oracle_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "evidenceCeiling": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "requested_target", "levels", "level_oracle_results", "verified_claim", "residual_condition",
+        "production_path_evidence", "lifecycle_evidence", "boundary_evidence", "oracle_strength_evidence"
+      ],
+      "properties": {
+        "requested_target": {
+          "enum": [
+            "source_structure", "component_behavior", "cross_component_contract",
+            "harness_runtime", "platform_runtime", "owner_acceptance"
+          ]
+        },
+        "levels": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "source_structure", "component_behavior", "cross_component_contract",
+            "harness_runtime", "platform_runtime", "owner_acceptance"
+          ],
+          "properties": {
+            "source_structure": {"$ref": "#/$defs/evidenceLevelStatus"},
+            "component_behavior": {"$ref": "#/$defs/evidenceLevelStatus"},
+            "cross_component_contract": {"$ref": "#/$defs/evidenceLevelStatus"},
+            "harness_runtime": {"$ref": "#/$defs/evidenceLevelStatus"},
+            "platform_runtime": {"$ref": "#/$defs/evidenceLevelStatus"},
+            "owner_acceptance": {"$ref": "#/$defs/evidenceLevelStatus"}
+          }
+        },
+        "level_oracle_results": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "source_structure", "component_behavior", "cross_component_contract",
+            "harness_runtime", "platform_runtime", "owner_acceptance"
+          ],
+          "properties": {
+            "source_structure": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+            "component_behavior": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+            "cross_component_contract": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+            "harness_runtime": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+            "platform_runtime": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+            "owner_acceptance": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+          }
+        },
+        "verified_claim": {"type": "string", "minLength": 1},
+        "residual_condition": {"type": "string", "minLength": 1},
+        "production_path_evidence": {"$ref": "#/$defs/evidenceStep"},
+        "lifecycle_evidence": {"$ref": "#/$defs/evidenceStep"},
+        "boundary_evidence": {"$ref": "#/$defs/evidenceStep"},
+        "oracle_strength_evidence": {"$ref": "#/$defs/evidenceStep"}
+      }
+    },
+    "verificationStep": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "evidence_ref"],
+      "properties": {
+        "status": {"enum": ["pass", "not_required", "blocked"]},
+        "evidence_ref": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

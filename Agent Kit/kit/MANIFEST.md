@@ -4,10 +4,17 @@ Package file: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.9.3_EN.zip`
 
 Package purpose: portable starter guide and memory operating layer for using AI agents with owner-controlled projects. Agent Memory Kit helps build a Project Map through structured, meaningful, interconnected duplication of project information supplied or verified by the owner.
 
-Current package version: `v3.11.3` published. Previous tag: `v3.11.2`.
+Current package version: `v3.12.0` published. Previous tag: `v3.11.3`.
 Release publication is established only by the matching repository tag and
 release receipts, not by this file. Older package-file lines are retained
-as historical manifest entries. No public v3.12.0 is claimed.
+as historical manifest entries.
+
+## v3.12.0 execution-runtime supplement
+
+- `Agent Kit/kit/CHANGELOG_v3.12.0.md` - release notes.
+- `Agent Kit/kit/EXECUTION_PROFILE_GATE.md` - unique route and write lock.
+- `Agent Kit/kit/VERIFIED_DELIVERY_PIPELINE.md` - conditional verified delivery.
+- Registry templates for path zones, execution profiles, scope, and toolchain.
 
 ## v3.11.3 capability-management guide supplement
 

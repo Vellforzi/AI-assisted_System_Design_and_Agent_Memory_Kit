@@ -1,6 +1,6 @@
 # Agent Memory Kit
 
-Version: v3.11.3
+Version: v3.12.0
 
 Agent Memory Kit is the project-memory and agent-behavior layer of the package.
 
@@ -47,12 +47,14 @@ It helps a project owner maintain a structured Project Map containing:
 20. `kit/CODEX_SANDBOX_AND_PERMISSION_PROFILES_GUIDE.md`
 21. `kit/AI_AGENT_ROLE_STACK_GUIDE.md`
 22. `kit/EXECUTOR_ROUTING_GATE.md`
-23. `kit/WINDOWS_ENCODING_AND_SHELL_HYGIENE.md`
-24. `kit/HOOK_RECOVERY_PLAYBOOK.md`
-25. `kit/CODEX_CONNECTOR_POLICY.md`
-26. `kit/GENERATED_RETRIEVAL_EVIDENCE_GUIDE.md`
-27. `kit/CURSOR_INTEGRATION_OWNER_GUIDE.md`
-28. `kit/codex/README.md`
+23. `kit/EXECUTION_PROFILE_GATE.md`
+24. `kit/VERIFIED_DELIVERY_PIPELINE.md`
+25. `kit/WINDOWS_ENCODING_AND_SHELL_HYGIENE.md`
+26. `kit/HOOK_RECOVERY_PLAYBOOK.md`
+27. `kit/CODEX_CONNECTOR_POLICY.md`
+28. `kit/GENERATED_RETRIEVAL_EVIDENCE_GUIDE.md`
+29. `kit/CURSOR_INTEGRATION_OWNER_GUIDE.md`
+30. `kit/codex/README.md`
 
 ---
 
@@ -100,12 +102,19 @@ Use one shared workspace root when one Project Map governs multiple components. 
 
 This release adds an owner-controlled Cursor Agent settings profile, `.cursorignore` guidance, settings audit commands, and the rule that an existing authoritative workspace file must be inspected and used rather than replaced by a generated fallback.
 
+## v3.12.0 focus
+
+Adds the portable execution runtime: Execution Profile Gate, path/toolchain/scope
+templates, CAS write lock, verified-delivery pipeline, Windows command-launch
+hygiene, and matching evals. Does not include private product evals or App
+Server controllers.
+
 ## v3.11.3 focus
 
 Adds the capability-management guide layer: FAQ, motive, behavioral oracles,
 schemes as a method to offer, numbered CN facts, combat-method hook cards
 with example bytes, specialist function cards, and eval `AMK-CM-001`.
-Does not include JOB-local v3.12.0 runtime.
+Did not include the execution runtime (added in v3.12.0).
 
 ## v3.11.2 patch focus
 

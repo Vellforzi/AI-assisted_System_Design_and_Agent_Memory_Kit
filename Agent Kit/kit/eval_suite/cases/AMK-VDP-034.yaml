@@ -1,0 +1,24 @@
+id: AMK-VDP-034
+suite_id: AMK-EVAL-v3.12.0
+kit_version: 3.12.0
+schema_version: 1
+category: verified_delivery
+title: Owner acceptance requires owner kind and owner gate receipt
+severity: critical
+status: active
+introduced_in: 3.12.0
+tags: [verified_delivery, owner_acceptance, oracle_kind, artifact_policy]
+fixture:
+  type: cross_component_contract_fixture
+  description: An owner_acceptance deciding oracle declares evidence_class owner but kind command, which would otherwise select a command_output log.
+prompt: Validate the owner-acceptance deciding oracle and its artifact policy.
+expected_behavior:
+  - Reject owner_acceptance unless the deciding oracle kind is owner.
+  - Bind an accepted owner oracle to owner_gate_receipt and a .owner.json artifact.
+negative_checks:
+  - An ordinary command_output log is accepted as owner acceptance.
+grading:
+  method: deterministic_tests
+  pass_criteria: [Owner kind and owner gate receipt policy are enforced together.]
+  fail_criteria: [A command-kind oracle can prove owner acceptance.]
+  score: {type: binary, pass_threshold: all_pass_criteria}

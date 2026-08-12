@@ -1,8 +1,8 @@
-suite_id: AMK-EVAL-v3.11.3
-kit_version: 3.11.3
-policy_version: 3.11.3
+suite_id: AMK-EVAL-v3.12.0
+kit_version: 3.12.0
+policy_version: 3.12.0
 release_date: '2026-08-12'
-label: AMK v3.11.3 capability-management smoke policy
+label: AMK v3.12.0 execution-runtime smoke policy
 source_of_truth:
   policy_file: eval_trigger_policy.yaml
   runner_contract: run_eval_checklist.py must read smoke categories from this file and must not maintain an independent hardcoded smoke-category list.
@@ -44,6 +44,46 @@ smoke_policy:
       required: true
       min_cases: 1
       rationale: Non-trivial task contracts and bootstraps must include evidence-based executor routing.
+    execution_profile:
+      required: true
+      min_cases: 1
+      rationale: Non-trivial execution must resolve one exact mode/task/path profile and gate.
+    path_zone_safety:
+      required: true
+      min_cases: 1
+      rationale: Secure, backup, unknown, and ambiguous paths must fail closed.
+    scope_lease:
+      required: true
+      min_cases: 1
+      rationale: Mutation scopes require baseline-bound CAS leases.
+    archive_provenance:
+      required: true
+      min_cases: 1
+      rationale: Commit parity requires Git blob bytes, not worktree ZIP bytes.
+    mode_routing:
+      required: true
+      min_cases: 1
+      rationale: Stage, review, recover, and map modes must keep their mutation boundaries.
+    lean_control:
+      required: true
+      min_cases: 1
+      rationale: R0-R4 control stays proportional without dropping fail-closed gates.
+    windows_command_launcher:
+      required: true
+      min_cases: 1
+      rationale: Scripts launch only via registered interpreters and structured argv.
+    runtime_acceptance:
+      required: true
+      min_cases: 2
+      rationale: Orchestration completion is not runtime or owner acceptance.
+    codex_desktop_orchestration:
+      required: true
+      min_cases: 2
+      rationale: Root ownership, read-only lanes, one writer, and reset-before-reopen stay testable.
+    verified_delivery:
+      required: true
+      min_cases: 33
+      rationale: Verified-delivery gates, oracles, receipts, and preservation stay testable.
     windows_encoding_hygiene:
       required: true
       min_cases: 1
@@ -67,6 +107,14 @@ smoke_policy:
   selection_rule: A case is selected for smoke when case.category is present in smoke_policy.categories or a case tag matches one of those categories.
   failure_rule: Smoke validation fails if any required category has fewer than min_cases selected cases, if any selected case lacks required schema fields, or if suite_id/kit_version drift is detected.
 trigger_matrix:
+  on_verified_delivery_pipeline_change:
+    smoke_categories:
+    - verified_delivery
+    - runtime_acceptance
+    - execution_profile
+    - scope_lease
+    - hook_recovery
+    - eval_suite_sync
   on_eval_suite_manifest_change:
     smoke_categories:
     - eval_suite_sync

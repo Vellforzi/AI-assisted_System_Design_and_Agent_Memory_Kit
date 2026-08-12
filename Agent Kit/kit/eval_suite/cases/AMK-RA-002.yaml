@@ -1,0 +1,68 @@
+id: AMK-RA-002
+suite_id: AMK-EVAL-v3.12.0
+kit_version: 3.12.0
+schema_version: 1
+category: runtime_acceptance
+title: Second failed runtime smoke requires a same-task forensic reset before another edit
+severity: critical
+status: active
+introduced_in: 3.12.0
+tags:
+- runtime_acceptance
+- repeated_runtime_failure
+- forensic_reset
+- same_task_recovery
+- scope_lease
+- source_edit_gate
+fixture:
+  type: deterministic_task_run_state_fixture
+  task_id: JOB-RUNTIME-FAILURE-FIXTURE
+  lease_state: active_cas_valid
+  runtime_acceptance_required: true
+  events:
+  - type: runtime_smoke_failed
+    smoke_id: smoke-1
+  - type: source_edit_requested
+    expected_gate: allow_bounded_in_scope_repair
+  - type: runtime_smoke_failed
+    smoke_id: smoke-2
+  - type: source_edit_requested
+    expected_gate: forensic_reset_required
+  incomplete_forensic_reset:
+    timeline_ref: evidence/runtime-timeline.json
+    first_divergent_transition: expected ready, observed disconnected
+  complete_forensic_reset:
+    timeline_ref: evidence/runtime-timeline.json
+    first_divergent_transition: expected ready, observed disconnected
+    repair_hypothesis: The first disconnected transition is caused by stale artifact identity.
+    falsifier: Matching deployed and expected artifact identities with the same divergent transition.
+    regression_oracle: The transition is disconnected before repair and ready after repair under the same deterministic fixture.
+prompt: Process both failed runtime smokes and decide whether another source edit is allowed after each failure.
+expected_behavior:
+- Allow bounded in-scope repair after the first failed smoke when all other gates pass.
+- After the second failed smoke, reject another source edit before mutation unless every forensic-reset field is present and non-empty.
+- Report every missing forensic-reset field.
+- Accept the complete reset only inside the same task and active lease.
+- Keep read-only forensic work available while the edit gate is closed.
+- Do not create a recovery task, expand scope, authorize product execution, or infer permission for another live smoke.
+- Do not emit task_blocked solely because the forensic reset is pending while useful in-scope read-only work remains.
+negative_checks:
+- Failure count must not reset through a new task or cosmetic run-state rewrite.
+- An incomplete reset must not authorize mutation.
+- The reset must not expand source scope or lease capabilities.
+- Runtime failure must not be converted into owner acceptance or release evidence.
+grading:
+  method: deterministic_tests
+  pass_criteria:
+  - Failure one permits bounded repair.
+  - Failure two closes the source-edit gate.
+  - The incomplete reset remains blocked with exact missing-field evidence.
+  - The complete five-field reset reopens only the existing bounded source-edit gate.
+  - Task identity, lease, scope, and orchestration final-event vocabulary remain unchanged.
+  fail_criteria:
+  - A third speculative edit is allowed without the complete reset.
+  - A new recovery task or expanded lease is created.
+  - Useful forensic work is incorrectly finalized as task_blocked.
+  score:
+    type: binary
+    pass_threshold: all_pass_criteria

@@ -103,6 +103,8 @@ the gate, and the oracle shape. See `GIT_PUBLISHING_GUIDE.md`.
 | Retrieval profiles by mode | `RETRIEVAL_POLICY_PROFILES.md` |
 | Long-task contracts | `TASK_CONTRACT_TEMPLATE.yaml` |
 | Executor / surface routing | `EXECUTOR_ROUTING_GATE.md` |
+| Execution profile / write lock | `EXECUTION_PROFILE_GATE.md` |
+| Verified delivery | `VERIFIED_DELIVERY_PIPELINE.md` |
 | Checkpoints and handoffs | `SIGNIFICANT_WORK_AND_CHECKPOINTS.md`, `HANDOFF_TEMPLATE.yaml` |
 | Behavior evals from real failures | `eval_suite/`, `EVAL_SUITE_GUIDE.md` |
 | Cursor rules, commands, hooks | `cursor/`, `CURSOR_INTEGRATION_OWNER_GUIDE.md` |

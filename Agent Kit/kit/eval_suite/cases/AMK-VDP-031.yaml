@@ -1,0 +1,23 @@
+id: AMK-VDP-031
+suite_id: AMK-EVAL-v3.12.0
+kit_version: 3.12.0
+schema_version: 1
+category: verified_delivery
+title: Existing schema 1.3 tasks remain backward compatible
+severity: critical
+status: active
+introduced_in: 3.12.0
+tags: [verified_delivery, backward_compatibility, schema_1_3]
+fixture:
+  type: verified_delivery_pipeline_fixture
+  description: A valid pre-existing schema 1.3 contract and receipt omit verification_target and evidence_ceiling.
+prompt: Validate the legacy-open schema 1.3 task.
+expected_behavior:
+  - Preserve the existing schema 1.3 result without adding inactive cross-component ceremony.
+negative_checks:
+  - The optional profile becomes mandatory for every schema 1.3 task.
+grading:
+  method: deterministic_tests
+  pass_criteria: [The existing schema 1.3 fixture still validates.]
+  fail_criteria: [Backward compatibility is broken.]
+  score: {type: binary, pass_threshold: all_pass_criteria}

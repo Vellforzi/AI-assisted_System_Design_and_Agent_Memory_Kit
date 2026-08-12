@@ -1,0 +1,25 @@
+id: AMK-VDP-018
+suite_id: AMK-EVAL-v3.12.0
+kit_version: 3.12.0
+schema_version: 1
+category: verified_delivery
+title: Diff-budget excess forces replan before more mutation
+severity: critical
+status: active
+introduced_in: 3.12.0
+tags: [verified_delivery, diff_budget, replan]
+fixture:
+  type: verified_delivery_pipeline_fixture
+  description: The baseline-to-candidate diff exceeds product file or line limits, or adds an unplanned task-local framework.
+prompt: Continue the lifecycle.
+expected_behavior:
+  - Stop further mutation until a replan and scope confirmation are evidenced.
+  - Compute product file and added-plus-deleted line counts from Git.
+negative_checks:
+  - Reported diff totals are trusted without Git comparison.
+  - Mutation resumes before replan evidence.
+grading:
+  method: deterministic_tests
+  pass_criteria: [Threshold then replan then resumed mutation is ordered and evidenced.]
+  fail_criteria: [The excess diff completes without replan.]
+  score: {type: binary, pass_threshold: all_pass_criteria}

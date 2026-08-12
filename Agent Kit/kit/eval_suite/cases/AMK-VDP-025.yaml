@@ -1,0 +1,23 @@
+id: AMK-VDP-025
+suite_id: AMK-EVAL-v3.12.0
+kit_version: 3.12.0
+schema_version: 1
+category: verified_delivery
+title: Deferred timer or first-data initialization violates immediate lifecycle
+severity: critical
+status: active
+introduced_in: 3.12.0
+tags: [verified_delivery, cross_component_code_proof, deferred_trigger]
+fixture:
+  type: cross_component_contract_fixture
+  description: The second instance waits for a timer or first data request although immediate initialization is required.
+prompt: Grade deferred-trigger independence.
+expected_behavior:
+  - Fail the lifecycle invariant using the declared deferred-trigger oracle.
+negative_checks:
+  - Later eventual readiness is treated as immediate initialization.
+grading:
+  method: deterministic_tests
+  pass_criteria: [The delayed production path is rejected.]
+  fail_criteria: [Timer-dependent initialization is accepted.]
+  score: {type: binary, pass_threshold: all_pass_criteria}

@@ -1,0 +1,184 @@
+schema_version: "1.3"
+task_id: "TASK-ID"
+owner_goal: "Measurable owner-visible result"
+allowed_change: []
+protected_behavior: []
+write_scope:
+  allowed: []
+  forbidden: []
+acceptance_criteria:
+  - id: "criterion_id"
+    outcome: "Observable result"
+    oracle_id: "oracle_id"
+    mandatory: true
+    owner_visible: false
+    defect_id: "DEFECT-1"
+oracles:
+  - id: "oracle_id"
+    kind: "command"  # one of: command, state, trace, diff, visual, owner; owner_acceptance requires owner
+    evidence_class: "synthetic"  # one of: static, synthetic, runtime, owner
+    # verification_level is required when verification_target is declared.
+    # verification_level: "source_structure"
+    authorized: true
+    check: "Stable executable or inspectable check"
+    pass_condition: "Unambiguous pass condition"
+    evidence_ref: "receipt or artifact path"
+stop_condition:
+  - "Verified candidate or explicit terminal blocker"
+lifecycle_policy:
+  lifecycle_owner: primary_agent
+  autonomous_within_scope: true
+  resolve_discoverable_details_from_project_evidence: true
+  owner_gate_only_for_material_choice_or_new_authority: true
+  repair_only_confirmed_findings: true
+  final_outcomes: [task_completed, task_blocked]
+
+# Optional, selected by coupling/risk rather than filled with not_applicable.
+risk_tier: "R1"
+gate_profile:
+  active:
+    - targeted
+    - scope_diff
+    - finalization
+extensions:
+  dependency_neighborhood: []
+  characterization: []
+  baseline_regressions: []
+  black_box: []
+  environment_readiness: []
+  build: {}
+  deploy: {}
+  rollback_readback: []
+  independent_review: {}
+  unresolved_external_conditions: []
+repair_policy:
+  complexity_class: simple
+  max_total_iterations: 1
+  max_same_failure_repeats: 2
+  max_no_progress_iterations: 2
+  terminal_triggers:
+    - same_deterministic_failure_repeated
+    - two_no_progress_iterations
+    - scope_or_capability_expansion_required
+    - external_dependency_unavailable
+    - oracle_missing_or_contradictory
+    - owner_goal_or_protected_behavior_change_required
+    - total_repair_budget_exhausted
+    - authorization_or_integrity_gate
+metrics_policy:
+  enabled: false
+  record_only_measured_values: true
+
+# Conditional controls activate from task shape; inactive controls remain compact.
+conditional_controls:
+  task_shape:
+    kind: implementation  # simple, implementation, diagnostic, repair, runtime, owner_visible
+    product_mutation: false
+    coupled: false
+    high_risk: false
+  defect_decomposition:
+    strategy: single  # single, separate_task_units, explicit_coupling
+    coupling_justification: ""
+    units:
+      - id: "DEFECT-1"
+        root_cause: "Single bounded implementation unit"
+        criterion_ids: ["criterion_id"]
+        oracle_ids: ["oracle_id"]
+  forensic_before_code:
+    required: false
+    first_divergent_event: ""
+    execution_sequence_ref: ""
+    falsifiable_hypothesis: ""
+    oracle_id: ""
+  preimplementation_architecture_review:
+    required: false
+    reviewer_role_id: ""
+    evidence_ref: ""
+    covers: []
+    reuse_role_for_final_review: false
+  diff_budget:
+    max_product_files: 3
+    max_product_lines: 300
+    product_path_patterns: []
+    task_local_framework_patterns: []
+    planned_task_local_framework_patterns: []
+    replan_on_unplanned_task_local_framework: true
+  verification_escalation:
+    narrow_oracle_ids: ["oracle_id"]
+    targeted_after_narrow_pass: true
+    integration_or_dependency_risk: false
+    full_suite_trigger: final_integration_or_dependency_risk
+  runner_reuse:
+    registered_runners_required: true
+    task_local_replacement_only_for_capability_gap: true
+  runtime_acceptance:
+    required: false
+    authorized: false
+    available: false
+    owner_gate: ""
+
+# Optional evidence hierarchy. Activate only when the task needs an explicit
+# code-to-platform evidence ceiling. A cross_component_contract target also
+# requires extensions.cross_component_code_proof and oracle verification_level
+# fields. Lower levels never imply higher ones.
+# verification_target: cross_component_contract
+# extensions:
+#   cross_component_code_proof:
+#     required: true
+#     platform_runtime_required: false
+#     complex_state_machine: true
+#     production_path:
+#       production_entrypoint: "OnInit/attach"
+#       authoritative_initializer: "initialize_instance"
+#       actual_call_route: ["OnInit", "initialize_instance", "Bridge.reserve", "EA.register"]
+#       components: ["MQL adapter", "C# Bridge", "EA/UI registration"]
+#       production_artifact_refs: ["bin/production-component.dll"]
+#       oracle_ids: ["production_path_oracle"]
+#       executes_production_code: true
+#       test_only_reimplementation: false
+#     lifecycle_contract:
+#       typed_state: "InstanceIdentity"
+#       field_ownership: {suffix: "Bridge", ownerLease: "Bridge", registrationState: "EA"}
+#       allowed_transitions: ["provisional -> reserved -> registered -> ready"]
+#       success_invariants: ["instances 1/2/3 use the same initializer"]
+#       rollback_paths: ["reservation failure releases child state"]
+#       failure_paths: ["old instance remains valid"]
+#       concurrency_cases: ["parallel child creation"]
+#       instance_invariants: ["ownerLease and suffix are unique"]
+#       deferred_trigger_independence_required: true
+#       deferred_trigger_oracle_id: "lifecycle_oracle"
+#       oracle_ids: ["lifecycle_oracle"]
+#     boundary_contract:
+#       required: true
+#       interfaces: ["MQL import <-> C# export"]
+#       bindings:
+#         - id: "reserve_instance"
+#           import_name: "ReserveInstance"
+#           export_name: "ReserveInstance"
+#           import_parameters: [{name: "instanceId", type: "uint64", size_bytes: 8, position: 0}]
+#           export_parameters: [{name: "instanceId", type: "uint64", size_bytes: 8, position: 0}]
+#           import_return_type: "int32"
+#           export_return_type: "int32"
+#           import_calling_convention: "cdecl"
+#           export_calling_convention: "cdecl"
+#           import_architecture: "x64"
+#           export_architecture: "x64"
+#           import_protocol_version: "1"
+#           export_protocol_version: "1"
+#           compile_required: true
+#           compile_oracle_id: "boundary_oracle"
+#       verification_methods: ["compile", "call_route", "executable_contract_test"]
+#       regex_only: false
+#       authoritative_identity_fields: ["ownerLease", "suffix", "instanceToken"]
+#       downstream_reconstruction_forbidden: true
+#       oracle_ids: ["boundary_oracle"]
+#     oracle_strength:
+#       required: true
+#       method: combined
+#       mutations:
+#         - id: "initializer_bypass"
+#           production_target: "initialize_instance call"
+#           expected_failure: "production route oracle fails"
+#           oracle_id: "oracle_strength_oracle"
+#       proportional_justification: "Complex shared state machine"
+#       oracle_ids: ["oracle_strength_oracle"]

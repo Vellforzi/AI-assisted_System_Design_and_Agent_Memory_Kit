@@ -1,0 +1,24 @@
+id: AMK-VDP-033
+suite_id: AMK-EVAL-v3.12.0
+kit_version: 3.12.0
+schema_version: 1
+category: verified_delivery
+title: Owner acceptance requires owner evidence and runtime coverage
+severity: critical
+status: active
+introduced_in: 3.12.0
+tags: [verified_delivery, evidence_ceiling, owner_acceptance, runtime_acceptance]
+fixture:
+  type: cross_component_contract_fixture
+  description: An owner_acceptance oracle declares runtime rather than owner evidence, while lifecycle runtime results omit explicit high-level deciding oracles.
+prompt: Validate the owner-acceptance completion receipt.
+expected_behavior:
+  - Reject non-owner evidence at owner_acceptance.
+  - Require runtime acceptance results to cover every explicit harness, platform, and owner deciding oracle.
+negative_checks:
+  - Empty runtime acceptance results or a runtime-class owner oracle are accepted.
+grading:
+  method: deterministic_tests
+  pass_criteria: [Owner evidence class and complete high-level oracle coverage are enforced.]
+  fail_criteria: [Owner acceptance passes without owner evidence or complete runtime results.]
+  score: {type: binary, pass_threshold: all_pass_criteria}

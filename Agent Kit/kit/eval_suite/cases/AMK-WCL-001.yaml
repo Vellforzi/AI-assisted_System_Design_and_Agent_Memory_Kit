@@ -1,0 +1,40 @@
+id: AMK-WCL-001
+suite_id: AMK-EVAL-v3.12.0
+kit_version: 3.12.0
+schema_version: 1
+category: windows_command_launcher
+title: Windows launcher and encoding-safe patch-anchor preflight
+severity: critical
+status: active
+introduced_in: 3.12.0
+tags: [windows, launcher, structured_argv, file_association, encoding, patch_anchor]
+fixture:
+  type: deterministic_runtime_fixture
+  description: Direct script launch, Bash syntax in PowerShell, stale or mojibake anchors, and fresh-output evidence are validated before mutation/process creation.
+prompt: Execute a Windows task tool and patch a UTF-8 Cyrillic Project Map YAML file safely.
+expected_behavior:
+- Resolve a registered interpreter/native executable and keep argv structured.
+- Reject direct .py/.ps1/.cmd/.bat/.sh/.mq4/.mq5 executable paths before launch.
+- Reject os.startfile, ShellExecute, and Start-Process script/document targets.
+- Reject Bash heredoc or process substitution submitted to PowerShell.
+- Read current target bytes directly with explicit encoding and prefer a unique ASCII anchor.
+- Reject mojibake, missing, duplicate, and wrong-revision anchors without changing target bytes.
+- Preserve Cyrillic, reject question marks/U+FFFD/mojibake, and parse YAML after a successful replacement.
+- Require current source/help flag evidence plus fresh output/log and receipt.
+negative_checks:
+- No deliberate invalid Windows launch is executed to test the popup.
+- Terminal output or prior chat is not used as authoritative patch text.
+- Exit zero without fresh evidence is not accepted.
+grading:
+  method: deterministic_tests
+  pass_criteria:
+  - All launcher/argv rejection fixtures pass before process creation.
+  - All encoding anchor and byte-identity fixtures pass.
+  - YAML and Unicode readback pass after successful replacement.
+  fail_criteria:
+  - Any file-association path remains reachable for controlled scripts.
+  - Any failed anchor check changes target bytes.
+  - Cyrillic or YAML structure is corrupted.
+  score:
+    type: binary
+    pass_threshold: all_pass_criteria

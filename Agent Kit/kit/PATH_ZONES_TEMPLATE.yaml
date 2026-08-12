@@ -1,0 +1,27 @@
+schema_version: "1.0"
+resolution:
+  comparison: case_insensitive
+  match_rule: most_specific_root_then_highest_priority
+  equal_specificity_behavior: block_ambiguous
+  unknown_path_behavior: block_missing_zone
+zones:
+  - id: project_live_root
+    roots: ["C:/path/to/project"]
+    priority: 500
+    default_access: read_only
+    writes: explicit_owner_apply_and_concurrency_gate
+  - id: project_isolated_worktrees
+    roots: ["C:/path/to/worktrees/*/project"]
+    priority: 800
+    default_access: task_owned_only
+    writes: matching_task_lease_only
+  - id: secrets
+    roots: ["C:/path/to/secure"]
+    priority: 1000
+    default_access: forbidden
+    writes: forbidden
+  - id: catchall
+    roots: ["C:/"]
+    priority: 1
+    default_access: forbidden_until_registered
+    writes: forbidden

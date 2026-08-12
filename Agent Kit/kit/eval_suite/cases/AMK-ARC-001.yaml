@@ -1,0 +1,34 @@
+id: AMK-ARC-001
+suite_id: AMK-EVAL-v3.12.0
+kit_version: 3.12.0
+schema_version: 1
+category: archive_provenance
+title: Commit parity uses Git blobs and rejects worktree provenance
+severity: critical
+status: active
+introduced_in: 3.12.0
+tags: [archive_provenance, git_blob, crlf, checksum]
+fixture:
+  type: deterministic_git_fixture
+  files:
+  - lf_text_committed_with_lf
+  - binary_or_text_committed_with_crlf
+  post_commit_worktree_change: true
+prompt: Create a release ZIP and prove parity with the selected commit.
+expected_behavior:
+- Archive entries are read from the selected Git blob object ids.
+- Mixed LF/CRLF bytes match commit blobs exactly.
+- A changed worktree archive fails byte comparison and is ineligible for commit parity.
+- Duplicate ZIP entry names fail exact path parity.
+negative_checks:
+- Agent must not call clean worktree or tracked-path parity commit-byte parity.
+- Agent must not hide EOL/filter mismatches behind checksum regeneration.
+- Agent must not collapse duplicate archive entries into one dictionary key and certify parity.
+grading:
+  method: deterministic
+  pass_criteria:
+  - Commit-blob ZIP passes exact path and byte parity.
+  - Worktree source can never receive commit-parity verdict.
+  fail_criteria:
+  - Worktree bytes are certified as commit bytes.
+  score: {type: binary, pass_threshold: all_pass_criteria}

@@ -1,0 +1,26 @@
+id: AMK-VDP-013
+suite_id: AMK-EVAL-v3.12.0
+kit_version: 3.12.0
+schema_version: 1
+category: verified_delivery
+title: Total repair budget is proportional and bounded
+severity: critical
+status: active
+introduced_in: 3.12.0
+tags: [verified_delivery, repair_budget, stop_conditions]
+fixture:
+  type: verified_delivery_pipeline_fixture
+  description: Contracts declare simple, standard and complex-infrastructure repair classes.
+prompt: Validate the total number of full repair and reverification cycles.
+expected_behavior:
+  - Enforce one, two and three total iterations respectively.
+  - Require a new owner gate for any larger budget.
+  - Stop earlier on two repeated deterministic failures or two no-progress iterations.
+negative_checks:
+  - A contract silently declares four or more iterations.
+  - Individual commands are miscounted as full repair loops.
+grading:
+  method: deterministic_tests
+  pass_criteria: [Contract and receipt budgets agree and remain at most three.]
+  fail_criteria: [An unbounded or mismatched budget passes.]
+  score: {type: binary, pass_threshold: all_pass_criteria}

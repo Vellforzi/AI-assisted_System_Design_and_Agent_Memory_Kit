@@ -1,0 +1,24 @@
+id: AMK-VDP-022
+suite_id: AMK-EVAL-v3.12.0
+kit_version: 3.12.0
+schema_version: 1
+category: verified_delivery
+title: Every instance uses one production initializer
+severity: critical
+status: active
+introduced_in: 3.12.0
+tags: [verified_delivery, cross_component_code_proof, production_path, instance_identity]
+fixture:
+  type: cross_component_contract_fixture
+  description: Instances 1, 2, and 3 enter one production initializer and receive distinct authoritative identity fields.
+prompt: Decide whether the requested cross_component_contract is proven.
+expected_behavior:
+  - Bind the oracle to the real production initializer and component route.
+  - Require distinct owner lease, suffix, final name, and token invariants for all instances.
+negative_checks:
+  - A separate test model substitutes for the production route.
+grading:
+  method: deterministic_tests
+  pass_criteria: [All instances use the same bound production initializer and preserve unique identity.]
+  fail_criteria: [Any instance bypasses the production initializer.]
+  score: {type: binary, pass_threshold: all_pass_criteria}

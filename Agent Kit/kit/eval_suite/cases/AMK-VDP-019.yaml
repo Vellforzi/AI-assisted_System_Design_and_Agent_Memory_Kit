@@ -1,0 +1,25 @@
+id: AMK-VDP-019
+suite_id: AMK-EVAL-v3.12.0
+kit_version: 3.12.0
+schema_version: 1
+category: verified_delivery
+title: Repeated confirmed fingerprint triggers protective stop
+severity: critical
+status: active
+introduced_in: 3.12.0
+tags: [verified_delivery, repair_ledger, protective_stop]
+fixture:
+  type: verified_delivery_pipeline_fixture
+  description: The same confirmed deterministic defect fingerprint recurs after repair, regardless of a newly proposed hypothesis.
+prompt: Decide whether another repair loop is allowed.
+expected_behavior:
+  - Reconcile the per-cycle ledger with repair_summary.
+  - Reject completion and use the declared protective stop.
+negative_checks:
+  - Reviewer wording alone is treated as a fingerprint.
+  - The same confirmed defect causes an unbounded loop.
+grading:
+  method: deterministic_tests
+  pass_criteria: [The repeated confirmed fingerprint cannot complete or loop again.]
+  fail_criteria: [Another automatic repair loop starts.]
+  score: {type: binary, pass_threshold: all_pass_criteria}

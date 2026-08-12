@@ -1,8 +1,8 @@
 # START HERE — AI-assisted System Design and Agent Memory Kit
 
-Version: v3.11.3 published
-Release date: v3.11.3 published 2026-08-12; previous tag `v3.11.2` published 2026-07-10
-Package: published tag is `v3.11.3`. No public v3.12.0 is claimed.
+Version: v3.12.0 published
+Release date: v3.12.0 published 2026-08-12; previous tag `v3.11.3` published 2026-08-12
+Package: published tag is `v3.12.0`.
 Status: portable project-owner kit for AI-assisted work and grounded project memory
 
 ---
@@ -128,12 +128,14 @@ Read:
 20. `Agent Kit/kit/EVAL_AUTOMATION_AND_TRIGGER_POLICY.md`
 21. `Agent Kit/kit/PLAIN_LANGUAGE_GLOSSARY.md`
 22. `Agent Kit/kit/EXECUTOR_ROUTING_GATE.md`
-23. `Agent Kit/kit/WINDOWS_ENCODING_AND_SHELL_HYGIENE.md`
-24. `Agent Kit/kit/HOOK_RECOVERY_PLAYBOOK.md`
-25. `Agent Kit/kit/CODEX_CONNECTOR_POLICY.md`
-26. `Agent Kit/kit/GENERATED_RETRIEVAL_EVIDENCE_GUIDE.md`
-27. `Agent Kit/kit/CURSOR_INTEGRATION_OWNER_GUIDE.md`
-28. `Agent Kit/kit/codex/README.md`
+23. `Agent Kit/kit/EXECUTION_PROFILE_GATE.md`
+24. `Agent Kit/kit/VERIFIED_DELIVERY_PIPELINE.md`
+25. `Agent Kit/kit/WINDOWS_ENCODING_AND_SHELL_HYGIENE.md`
+26. `Agent Kit/kit/HOOK_RECOVERY_PLAYBOOK.md`
+27. `Agent Kit/kit/CODEX_CONNECTOR_POLICY.md`
+28. `Agent Kit/kit/GENERATED_RETRIEVAL_EVIDENCE_GUIDE.md`
+29. `Agent Kit/kit/CURSOR_INTEGRATION_OWNER_GUIDE.md`
+30. `Agent Kit/kit/codex/README.md`
 
 ---
 
@@ -168,9 +170,20 @@ Read:
 
 ---
 
+## What changed in v3.12.0
+
+Published execution runtime; tag is `v3.12.0`.
+
+- Execution Profile Gate: `EXECUTION_PROFILE_GATE.md`
+- Registries: `PATH_ZONES_TEMPLATE.yaml`, `AGENT_EXECUTION_PROFILES_TEMPLATE.yaml`, `SCOPE_PROFILES_TEMPLATE.yaml`
+- Verified delivery: `VERIFIED_DELIVERY_PIPELINE.md`
+- Eval: `AMK-EPG-001`, `AMK-VDP-001`–`034`, and related runtime cases
+
+See `Agent Kit/kit/CHANGELOG_v3.12.0.md`.
+
 ## What changed in v3.11.3
 
-Published guides; tag is `v3.11.3`. No public v3.12.0 is claimed.
+Published guides; tag is `v3.11.3`.
 
 - Motive: `MOTIVE_AND_ANALOGY.md`
 - FAQ: `QUESTIONS_THIS_KIT_ANSWERS.md`

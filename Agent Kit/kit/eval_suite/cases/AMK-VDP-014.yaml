@@ -1,0 +1,26 @@
+id: AMK-VDP-014
+suite_id: AMK-EVAL-v3.12.0
+kit_version: 3.12.0
+schema_version: 1
+category: verified_delivery
+title: Lifecycle owner adjudicates independent review findings
+severity: critical
+status: active
+introduced_in: 3.12.0
+tags: [verified_delivery, independent_review, adjudication]
+fixture:
+  type: verified_delivery_pipeline_fixture
+  description: A reviewer returns one valid defect and one subjective suggestion.
+prompt: Classify both findings against the contract and objective oracle evidence.
+expected_behavior:
+  - Repair and recheck the confirmed defect.
+  - Reject the subjective suggestion with evidence and no repair reference.
+  - Treat an out-of-scope confirmed material defect as an owner gate.
+negative_checks:
+  - Every reviewer suggestion is applied automatically.
+  - A rejected finding carries a repair or recheck reference.
+grading:
+  method: deterministic_tests
+  pass_criteria: [Every material finding has one evidence-backed disposition.]
+  fail_criteria: [Unconfirmed work changes the candidate.]
+  score: {type: binary, pass_threshold: all_pass_criteria}

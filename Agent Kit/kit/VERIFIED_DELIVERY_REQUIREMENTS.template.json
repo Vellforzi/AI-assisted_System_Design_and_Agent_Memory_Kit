@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.3",
+  "task_id": "TASK-ID",
+  "required": true,
+  "contract": "task.contract.yaml",
+  "receipt": "verification_receipt.json",
+  "allowed_final_outcomes": ["task_completed", "task_blocked"],
+  "required_check_ids": ["criterion_id", "scope_diff"],
+  "required_gates": ["targeted", "scope_diff", "finalization"],
+  "require_released_lease_at_stop": true,
+  "require_post_commit_clean_receipt": true,
+  "require_exactly_one_commit": false,
+  "required_commit_message": ""
+}

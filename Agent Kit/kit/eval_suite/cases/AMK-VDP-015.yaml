@@ -1,0 +1,25 @@
+id: AMK-VDP-015
+suite_id: AMK-EVAL-v3.12.0
+kit_version: 3.12.0
+schema_version: 1
+category: verified_delivery
+title: Conditional review uses one logical reviewer role
+severity: critical
+status: active
+introduced_in: 3.12.0
+tags: [verified_delivery, independent_review, review_churn]
+fixture:
+  type: verified_delivery_pipeline_fixture
+  description: A coupled task requires independent review and one re-review after repair.
+prompt: Select the reviewer topology for the bounded lifecycle.
+expected_behavior:
+  - Use one independent reviewer role and reuse it for re-review.
+  - Keep deterministic oracle evidence above reviewer agreement.
+negative_checks:
+  - A default chain of reviewers or reviewer voting is created.
+  - Additional reviewers are used to search for stylistic preferences.
+grading:
+  method: deterministic_tests
+  pass_criteria: [One logical reviewer role covers review and re-review.]
+  fail_criteria: [Reviewer count expands by default.]
+  score: {type: binary, pass_threshold: all_pass_criteria}

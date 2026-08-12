@@ -1,6 +1,6 @@
 # Agent Memory Kit Starter Package
 
-Version: v3.11.3
+Version: v3.12.0
 Release metadata date: 2026-08-12
 Publication proof: matching repository tag and release receipts; this file alone is not proof
 
@@ -97,6 +97,12 @@ Evals do not run automatically unless the owner wires them to a script, hook, CI
 | `RETRIEVAL_POLICY_TEMPLATE.yaml` | Machine-readable retrieval profile template. |
 | `TASK_CONTRACT_TEMPLATE.yaml` | Long-task contract template. |
 | `EXECUTOR_ROUTING_GATE.md` | Evidence-based executor/service routing gate for non-trivial contracts and bootstraps. |
+| `EXECUTION_PROFILE_GATE.md` | Unique mode + task class + path zone route, toolchain, and write lock. |
+| `PATH_ZONES_TEMPLATE.yaml` | Path-zone registry template (most-specific match, fail closed). |
+| `AGENT_EXECUTION_PROFILES_TEMPLATE.yaml` | Execution-profile registry template. |
+| `SCOPE_PROFILES_TEMPLATE.yaml` | Scope/lease profile template. |
+| `WINDOWS_TOOLCHAIN_PROFILE_TEMPLATE.yaml` | Registered launcher/toolchain template. |
+| `VERIFIED_DELIVERY_PIPELINE.md` | Conditional verified-delivery inspect/repair/oracle loop. |
 | `WINDOWS_ENCODING_AND_SHELL_HYGIENE.md` | Byte-safe file mutation and readback guide for Windows and non-ASCII text. |
 | `HOOK_RECOVERY_PLAYBOOK.md` | Generic recovery field contract for blocking hooks. |
 | `CODEX_CONNECTOR_POLICY.md` | Connector read/write scope, draft-first outbound workflow, and receipt policy. |
@@ -157,7 +163,8 @@ Use `EVAL_SUITE_GUIDE.md`, `EVAL_AUTOMATION_AND_TRIGGER_POLICY.md`, and `eval_su
 
 The suite is intentionally small and failure-mode based. It is designed for manual or semi-automated use by a project owner. It should be copied into `Project Map/eval_suite/` when a project starts using the kit.
 
-v3.11.3 adds the FAQ/thesis/oracle/scheme/CN/hook guides and eval
+v3.12.0 adds the execution runtime (Execution Profile Gate, registries,
+write lock, verified delivery, command-launch hygiene). v3.11.3 adds the FAQ/thesis/oracle/scheme/CN/hook guides and eval
 `AMK-CM-001`. v3.11.2 normalizes current release-facing package and eval metadata without
 changing behavior. v3.11.1 adds GPT-5.6 model-routing and exact-label evals,
 while v3.11.0 adds

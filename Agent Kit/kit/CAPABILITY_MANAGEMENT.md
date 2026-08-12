@@ -47,7 +47,7 @@ system the agent has to pass through:
 | Grounding | Project Map + `PROJECT_GROUNDING_CONTRACT.md` |
 | Intent | `ACTION_INTENT_CONTRACT.md` |
 | Scope | task contract, allowed-scope, path zones |
-| Routing | `EXECUTOR_ROUTING_GATE.md`, Context Advisor |
+| Routing | `EXECUTOR_ROUTING_GATE.md`, `EXECUTION_PROFILE_GATE.md`, Context Advisor |
 | Memory lifecycle | stale/superseded facts, checkpoints, handoffs |
 | Delivery evidence | `BEHAVIORAL_ORACLES.md` |
 | Regression memory | `eval_suite/` |

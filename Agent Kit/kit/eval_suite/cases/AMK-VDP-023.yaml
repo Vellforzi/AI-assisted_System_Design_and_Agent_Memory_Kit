@@ -1,0 +1,23 @@
+id: AMK-VDP-023
+suite_id: AMK-EVAL-v3.12.0
+kit_version: 3.12.0
+schema_version: 1
+category: verified_delivery
+title: Synthetic replica cannot prove a bypassed production route
+severity: critical
+status: active
+introduced_in: 3.12.0
+tags: [verified_delivery, cross_component_code_proof, synthetic_oracle]
+fixture:
+  type: cross_component_contract_fixture
+  description: A duplicated synthetic allocator passes while production never calls it.
+prompt: Grade the production-path claim.
+expected_behavior:
+  - Reject cross_component_contract completion because production code was not exercised or mechanically bound.
+negative_checks:
+  - Synthetic PASS is promoted to production behavior.
+grading:
+  method: deterministic_tests
+  pass_criteria: [The task fails with production-path evidence missing.]
+  fail_criteria: [The duplicated model is accepted as the production oracle.]
+  score: {type: binary, pass_threshold: all_pass_criteria}

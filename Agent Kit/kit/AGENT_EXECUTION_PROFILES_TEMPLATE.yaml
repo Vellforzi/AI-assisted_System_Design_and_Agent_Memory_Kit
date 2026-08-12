@@ -1,0 +1,30 @@
+schema_version: "1.0"
+resolution:
+  key: [mode, task_class, path_zone]
+  selection: highest_priority_unique_match
+  no_match: block_missing_execution_profile
+  equal_priority_match: block_ambiguous_execution_profile
+profiles:
+  project_answer:
+    modes: [answer]
+    task_classes: ["*"]
+    path_zones: [project_live_root, project_isolated_worktrees]
+    scope_profile: answer_read_only
+    toolchain_profile: owner_workstation
+    mutations: forbidden
+  project_bounded_apply:
+    modes: [apply]
+    task_classes: [bounded_repair, scoped_implementation]
+    path_zones: [project_isolated_worktrees]
+    scope_profile: task_exact_apply
+    toolchain_profile: owner_workstation
+    mutations: contract_declared_only
+routes:
+  - id: answer
+    priority: 100
+    match: {mode: answer, task_class: "*", path_zone: "*"}
+    profile: project_answer
+  - id: bounded_apply
+    priority: 500
+    match: {mode: apply, task_class: bounded_repair, path_zone: "*"}
+    profile: project_bounded_apply

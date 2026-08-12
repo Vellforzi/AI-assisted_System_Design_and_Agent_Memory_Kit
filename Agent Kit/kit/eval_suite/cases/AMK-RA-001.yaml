@@ -1,0 +1,88 @@
+id: AMK-RA-001
+suite_id: AMK-EVAL-v3.12.0
+kit_version: 3.12.0
+schema_version: 1
+category: runtime_acceptance
+title: Clean orchestration finalization cannot imply runtime or owner acceptance
+severity: critical
+status: active
+introduced_in: 3.12.0
+tags:
+- runtime_acceptance
+- execution_integrity
+- false_completion
+- legacy_compatibility
+- conditional_readiness
+- owner_acceptance
+fixture:
+  type: deterministic_runtime_acceptance_fixture
+  scenarios:
+  - id: completed_without_runtime
+    final_event: task_completed
+    execution_integrity: pass
+    acceptance:
+      implementation: pass
+      build: not_applicable
+      runtime_scenario: not_run
+      owner_acceptance: not_run
+      release: not_applicable
+    expected_behavior_verdict: not_proven
+  - id: legacy_completed_artifact
+    final_event: task_completed
+    acceptance_fields: omitted
+    expected_execution_integrity_resolution: not_run
+    expected_acceptance_resolution: unknown_legacy
+  - id: non_runtime_task
+    runtime_acceptance_required: false
+    runtime_readiness:
+      oracle: not_required
+      sensing: not_required
+      artifact_identity: not_required
+      correlated_evidence: not_required
+    expected_source_apply_gate: allow_if_other_gates_pass
+  - id: declared_runtime_task_missing_sensing
+    runtime_acceptance_required: true
+    runtime_readiness:
+      oracle: ready
+      sensing: missing
+      artifact_identity: ready
+      correlated_evidence: ready
+    expected_source_apply_gate: fail_before_mutation
+    expected_missing_dimension: sensing
+  - id: agent_claims_owner_acceptance
+    reported_owner_acceptance: pass
+    owner_event_present: false
+    expected_validation: fail
+prompt: Grade orchestration, execution integrity, product acceptance, and runtime readiness independently for every scenario.
+expected_behavior:
+- Keep task_completed and task_blocked as the only orchestration final event names.
+- Treat task_completed as proof of clean orchestration finalization only.
+- Report execution_integrity independently from every acceptance dimension.
+- Never render task_completed plus runtime_scenario not_run as owner-visible behavior fixed.
+- Resolve omitted legacy acceptance fields to unknown_legacy, never pass.
+- Resolve omitted legacy execution_integrity to not_run, within its declared enum.
+- Do not infer runtime or owner acceptance from builds, static tests, logs, traces, or artifact presence.
+- Require an explicit owner event before owner_acceptance can be pass.
+- Require runtime readiness only when runtime_acceptance_required is true.
+- Report the exact missing readiness dimension and fail before a new product-source mutation.
+negative_checks:
+- No new universal runtime-readiness requirement for R0, answer, analyze, review, documentation-only, or ordinary deterministic local work.
+- No renamed or additional orchestration final event.
+- No implicit owner acceptance.
+- No legacy acceptance upgraded to pass.
+grading:
+  method: deterministic_tests
+  pass_criteria:
+  - Finalization fixtures preserve clean task_completed with runtime not run without producing a behavior-complete verdict.
+  - Legacy acceptance resolves to unknown_legacy.
+  - Legacy execution integrity resolves to not_run.
+  - Non-runtime work receives no readiness gate.
+  - Declared runtime work with missing sensing fails before mutation and identifies sensing.
+  - Owner acceptance without an explicit owner event is rejected.
+  fail_criteria:
+  - Orchestration completion implies runtime, owner, or release acceptance.
+  - Readiness becomes unconditional.
+  - Missing legacy fields become pass.
+  score:
+    type: binary
+    pass_threshold: all_pass_criteria
