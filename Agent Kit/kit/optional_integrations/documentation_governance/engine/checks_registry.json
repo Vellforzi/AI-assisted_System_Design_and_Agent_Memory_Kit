@@ -1,0 +1,19 @@
+{
+  "schema_version": "documentation-governance-checks-registry.v1",
+  "checks": [
+    {"id": "DOC-ANCHOR-001", "severity": "error", "summary": "Local Markdown anchor does not exist."},
+    {"id": "DOC-EXCEPTION-001", "severity": "error", "summary": "A precise documentation exception has expired."},
+    {"id": "DOC-LIFECYCLE-001", "severity": "error", "summary": "Managed document has no lifecycle classification."},
+    {"id": "DOC-LIFECYCLE-002", "severity": "error", "summary": "Managed document has ambiguous lifecycle classification."},
+    {"id": "DOC-LINK-001", "severity": "error", "summary": "Local link target does not exist."},
+    {"id": "DOC-LINK-002", "severity": "error", "summary": "Local link escapes the repository."},
+    {"id": "DOC-MOVE-001", "severity": "error", "summary": "Moved-path source still exists."},
+    {"id": "DOC-MOVE-002", "severity": "error", "summary": "Moved-path destination does not exist."},
+    {"id": "DOC-NAV-001", "severity": "error", "summary": "Configured entrypoint does not exist."},
+    {"id": "DOC-NAV-002", "severity": "error", "summary": "Declared navigation route has a missing endpoint."},
+    {"id": "DOC-REACH-001", "severity": "error", "summary": "Active document is unreachable from approved entrypoints and routes."},
+    {"id": "DOC-SUCCESSOR-001", "severity": "error", "summary": "Superseded document has no registered successor."},
+    {"id": "DOC-SUCCESSOR-002", "severity": "error", "summary": "Registered successor does not exist."},
+    {"id": "DOC-SUCCESSOR-004", "severity": "error", "summary": "Successor mapping source is not superseded."}
+  ]
+}

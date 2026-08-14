@@ -47,6 +47,19 @@ operational sources.
    their scope and keep any checks report-only unless the owner later adopts
    local enforcement. If evaluating generated projections, identify their sole
    generator and use locally approved paired markers.
+5. Adopt [`engine/`](engine/) only when the repository has an observable need
+   for lifecycle enforcement: mixed active and historical corpora,
+   reachability drift, superseded documents without reliable successors, or
+   recurring scan cost dominated by history. Inventory Git-tracked documents,
+   approve entrypoints and authority sources, create repository-specific
+   policy/lifecycle/exception registries, and run `check --worktree --fail-on
+   never` before enabling a blocking gate.
+6. Promote enforcement in stages. First block only newly introduced
+   `DOC-REACH-001` through `delta`; then add staged pre-commit and merge-base PR
+   checks. Use committed `check --full` for the weekly active scan and
+   `check --full --include-history` for the monthly history scan. Never infer
+   lifecycle from age or filename, and migrate archives only as an explicit
+   `move + lifecycle + moved path + references + validation` change.
 
 ## Validate adoption
 
@@ -61,6 +74,10 @@ Record the local owner decision and verify that:
 - Any separately adopted generated block has one named generator and an
   identified source of change.
 - Optional tooling can be removed without changing core Kit behavior.
+- If the lifecycle engine is adopted, staged reports ignore unstaged content,
+  every managed document has exactly one lifecycle, every superseded document
+  has an existing registered successor, and repeated committed-snapshot JSON
+  is identical.
 
 ## Roll back safely
 

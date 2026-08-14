@@ -42,6 +42,12 @@ its source is the durable point of change, and manually editing generated
 content does not establish authority. The project must make block boundaries
 and generator ownership identifiable before relying on generated content.
 
+For mature repositories, a separate Reference Lab lifecycle engine may be
+adopted after an inventory and report-only pilot. It keeps authority zones and
+lifecycle as separate dimensions and provides repository-configured Git
+snapshots, active/history scans, deterministic findings, and delta gates. Its
+presence does not activate enforcement or change compact profile defaults.
+
 ## Consequences
 
 - `docs/project_map/` remains secondary navigation. Its summaries and indexes

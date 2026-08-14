@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agent-memory-kit.local/documentation-validation-exceptions-v1.json",
+  "title": "Documentation Validation Exceptions v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "exceptions"],
+  "properties": {
+    "schema_version": {"const": "documentation-validation-exceptions.v1"},
+    "exceptions": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["rule_id", "path", "message", "owner", "expires"],
+        "properties": {
+          "rule_id": {"type": "string", "minLength": 1},
+          "path": {"type": "string", "minLength": 1},
+          "message": {"type": "string", "minLength": 1},
+          "owner": {"type": "string", "minLength": 1},
+          "expires": {"type": "string", "format": "date"}
+        }
+      }
+    }
+  }
+}

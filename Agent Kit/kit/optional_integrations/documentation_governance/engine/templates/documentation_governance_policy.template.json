@@ -1,0 +1,12 @@
+{
+  "schema_version": "documentation-governance-policy.v1",
+  "document_roots": ["docs/"],
+  "root_documents": ["README.md"],
+  "entrypoints": ["README.md"],
+  "lifecycle_registry": "docs/documentation_lifecycle_registry.json",
+  "exceptions_registry": "docs/documentation_validation_exceptions.json",
+  "active_lifecycles": ["current-source", "active-support"],
+  "history_lifecycles": ["historical-record", "superseded"],
+  "delta_forbid": ["DOC-REACH-001"],
+  "document_suffixes": [".md", ".json", ".yaml", ".yml"]
+}

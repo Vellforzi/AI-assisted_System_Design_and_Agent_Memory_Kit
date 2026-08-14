@@ -103,6 +103,8 @@ Package purpose: portable starter guide and memory operating layer for using AI 
 - `Agent Kit/kit/optional_integrations/documentation_governance/README.md` - optional, owner-adopted documentation-governance policy; it remains outside the core baseline.
 - `Agent Kit/kit/optional_integrations/documentation_governance/ADOPTION_GUIDE.md` - adoption, optional Python tooling, validation, and rollback guidance.
 - `Agent Kit/kit/optional_integrations/documentation_governance/SIMPLIFICATION_PILOT_REPORT.md` - report-only acceptance coverage for the four opt-in adoption profiles, with compatibility boundary, stated limitations, and no release claim.
+- `Agent Kit/kit/optional_integrations/documentation_governance/engine/` - optional dependency-free lifecycle, Git-snapshot, successor, exception, and delta-gate engine with schemas and an Orchestrator adoption template.
+- `Agent Kit/kit/optional_integrations/documentation_governance/engine/PILOT_REPORT.md` - local acceptance receipt and explicit boundaries for the lifecycle engine.
 - `Agent Kit/kit/optional_integrations/documentation_governance/` - optional policy, templates, report-first checker, automation examples, and isolated fixtures; its tooling dependencies apply only when an adopter chooses to use them.
 
 Optional integrations do not alter the core Kit's language-agnostic,
@@ -184,6 +186,7 @@ a dependency-free Python 3 convenience tool, not a core runtime dependency.
 ## Optional tools
 
 - `Agent Kit/kit/tests/test_adoption_profiles.py` - dependency-free, report-only acceptance test for Core, Standard, Workflow, and Reference Lab boundaries; it exercises existing compatible documentation-harness behavior, records limitations in the pilot report, and makes no release claim.
+- `Agent Kit/kit/tests/test_documentation_lifecycle_engine.py` - contract coverage for lifecycle classification, active/history scans, Git snapshots, delta blocking, Unicode, successor/move invariants, exceptions, and deterministic CLI output.
 - `Agent Kit/kit/tools/README.md` — helper script documentation.
 - `Agent Kit/kit/tools/run_eval_checklist.py` — creates a local eval run folder and Markdown checklist from YAML cases.
 - `Agent Kit/kit/tools/context_governance_helper.py` - read-only reference helper for context-index read sets, receipts, API-agent context bundles, and context smoke checks.

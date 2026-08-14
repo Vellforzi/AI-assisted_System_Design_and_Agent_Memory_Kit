@@ -1,0 +1,10 @@
+{
+  "schema_version": "documentation-lifecycle-registry.v1",
+  "rules": [
+    {"id": "root-entrypoints", "lifecycle": "current-source", "paths": ["README.md"]},
+    {"id": "governance-files", "lifecycle": "current-source", "paths": ["docs/documentation_governance_policy.json", "docs/documentation_lifecycle_registry.json", "docs/documentation_validation_exceptions.json"]},
+    {"id": "active-docs", "lifecycle": "active-support", "globs": ["docs/active/**"]},
+    {"id": "history", "lifecycle": "historical-record", "globs": ["docs/archive/**"]}
+  ],
+  "navigation": {"routes": [], "superseded_successors": [], "moved_paths": []}
+}

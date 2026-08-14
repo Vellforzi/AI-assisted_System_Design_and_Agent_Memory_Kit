@@ -1,0 +1,14 @@
+documentationGovernance:
+  contractType: DocumentationGovernancePolicyV1
+  contractVersion: "1.0"
+  managedPaths:
+    - README.md
+    - docs/**
+  navigationPaths:
+    - README.md
+    - docs/documentation_lifecycle_registry.json
+  verificationCommands:
+    - >-
+      & $env:PYTHON_BIN scripts/documentation_governance_cli.py --root .
+      --policy docs/documentation_governance_policy.json
+      --format json delta --worktree --forbid DOC-REACH-001

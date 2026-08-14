@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agent-memory-kit.local/documentation-governance-policy-v1.json",
+  "title": "Documentation Governance Policy v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "document_roots", "entrypoints", "lifecycle_registry", "exceptions_registry", "active_lifecycles", "history_lifecycles", "delta_forbid"],
+  "properties": {
+    "schema_version": {"const": "documentation-governance-policy.v1"},
+    "document_roots": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "root_documents": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "entrypoints": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "lifecycle_registry": {"type": "string", "minLength": 1},
+    "exceptions_registry": {"type": "string", "minLength": 1},
+    "active_lifecycles": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"enum": ["current-source", "active-support", "historical-record", "superseded"]}},
+    "history_lifecycles": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"enum": ["current-source", "active-support", "historical-record", "superseded"]}},
+    "delta_forbid": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "document_suffixes": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^\\."}},
+    "registry_adapter": {"const": "baseline-prefix-v1"}
+  }
+}

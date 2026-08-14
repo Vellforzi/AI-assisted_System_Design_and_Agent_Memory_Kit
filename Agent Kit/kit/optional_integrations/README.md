@@ -35,7 +35,8 @@ Optional modules:
   zones, evidence-aware requirements, immutable records, and deliberate
   promotion from temporary work. Its hooks, CI variants, MkDocs, just recipes,
   fixtures, generators, and full pilots are Reference Lab examples outside the
-  normal install path.
+  normal install path. Its `engine/` subdirectory is a separately activated
+  lifecycle and Git-snapshot implementation for mature document corpora.
 
 Adopt only the modules that match the project's actual tools.
 

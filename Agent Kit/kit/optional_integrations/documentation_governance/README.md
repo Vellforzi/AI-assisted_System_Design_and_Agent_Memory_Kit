@@ -95,6 +95,27 @@ pilots are also Reference Lab examples. They remain available for a separately
 owned evaluation or integration decision, but are outside the normal policy
 install path and add no enforcement by their presence.
 
+## Lifecycle engine for mature corpora
+
+Repositories with observable navigation drift, mixed active/history corpora,
+or materially growing full-scan cost may separately adopt the portable
+[`engine/`](engine/) implementation. It adds four explicit lifecycle states,
+exactly-one classification, Git index and merge-base snapshots, active/history
+body selection, successor and moved-path invariants, expiring exceptions, and
+finding-delta gates.
+
+This is a higher-cost Reference Lab profile, not an upgrade silently applied to
+Core, Standard, or Workflow. Lifecycle is independent from authority: the
+zones above still determine how a document may be used, while the lifecycle
+registry determines whether it is current, supporting, historical, or
+superseded. Adoption starts with a repository-specific inventory and
+report-only pilot; another project's paths, counts, entrypoints, exceptions,
+and baseline values are never defaults.
+
+The engine includes an Orchestrator `DocumentationGovernancePolicyV1`
+template. Orchestrator owns task scoping and execution of required gates; the
+repository-owned engine remains the oracle that detects prohibited findings.
+
 ## Adoption boundary
 
 Keep the Kit's source-authority and mutation rules intact. This optional module
