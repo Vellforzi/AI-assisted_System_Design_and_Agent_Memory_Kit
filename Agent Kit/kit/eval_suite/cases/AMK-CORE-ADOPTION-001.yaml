@@ -1,0 +1,18 @@
+id: AMK-CORE-ADOPTION-001
+suite_id: AMK-PORTABLE-CORE
+kit_version: 4.2.0-dev
+schema_version: 1
+category: portable_adoption
+title: Adopt and update without losing local work
+severity: critical
+fixture:
+  type: executable_cli_tests
+  path: Agent Kit/portable/test_manage.py
+grading:
+  method: deterministic_tests
+  pass_criteria:
+    - Dry run creates no project files.
+    - Fresh CLI installation preserves existing entry bytes and source.
+    - Update changes unchanged core while preserving local edits and context.
+    - Invalid hashes and paths fail before any write.
+note: Run the test executable separately; schema validation is not test execution.

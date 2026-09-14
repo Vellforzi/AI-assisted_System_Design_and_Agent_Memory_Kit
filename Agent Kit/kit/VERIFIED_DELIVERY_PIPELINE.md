@@ -1,13 +1,15 @@
 # Verified Delivery Pipeline
 
-Status: canonical runtime-core protocol  
+Status: optional stronger delivery profile  
 Purpose: turn owner intent into one proportionate, evidence-backed delivery
 candidate without outsourcing technical discovery or internal repair to the
 owner.
 
-This file is the single canonical lifecycle and state-machine definition.
-Routers, templates, hooks, Project Map entries, and reports reference it; they
-must not define competing meanings of `verified` or `delivery_candidate`.
+The default process is `../portable/core/WORKFLOW.md`. This reference applies
+only when the adopting project selects stronger delivery proof for the current
+task. Selection never adds authority, overrides an explicit solo constraint,
+or requires another permission for already-authorized local work. The lifecycle
+below describes that optional profile.
 
 ## Responsibility split
 

@@ -1,6 +1,11 @@
-# AI-assisted System Design and Agent Memory Kit v3.9.3 — Manifest
+# Agent Kit manifest
 
-Package file: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.9.3_EN.zip`
+Current candidate: `4.2.0-dev`, unpublished; published base: `4.1.0`.
+Portable distribution is defined by `../portable/package.json` and checked by
+`../portable/build_manifest.py`. The following entries describe historical
+releases and optional reference material, not default installation requirements.
+
+Historical package file: `AI-assisted_System_Design_and_Agent_Memory_Kit_v3.9.3_EN.zip`
 
 Package purpose: portable starter guide and memory operating layer for using AI agents with owner-controlled projects. Agent Memory Kit helps build a Project Map through structured, meaningful, interconnected duplication of project information supplied or verified by the owner.
 

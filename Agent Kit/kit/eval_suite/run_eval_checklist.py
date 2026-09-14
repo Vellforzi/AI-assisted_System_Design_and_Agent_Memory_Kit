@@ -82,17 +82,31 @@ def extract_smoke_categories(policy: Dict[str, Any]) -> Dict[str, Dict[str, Any]
     return categories
 
 
-def iter_case_files(cases_dir: Path) -> Iterable[Path]:
-    if not cases_dir.exists():
-        raise FileNotFoundError(f"missing cases directory: {cases_dir}")
-    yield from sorted(p for p in cases_dir.rglob("*.yaml") if p.is_file())
-    yield from sorted(p for p in cases_dir.rglob("*.yml") if p.is_file())
-
-
-def load_cases(cases_dir: Path) -> List[Dict[str, Any]]:
+def load_cases(cases_dir: Path, manifest: Dict[str, Any], manifest_dir: Path) -> List[Dict[str, Any]]:
+    """Load exactly the manifest's active files; other schemas/archives stay separate."""
+    entries = manifest.get("cases")
+    if not isinstance(entries, list) or not entries:
+        raise ValueError("manifest.cases must be a non-empty list of paths or path mappings")
+    cases_dir = cases_dir.resolve()
+    seen_paths: set[Path] = set()
+    seen_ids: set[str] = set()
     cases: List[Dict[str, Any]] = []
-    for path in iter_case_files(cases_dir):
+    for entry in entries:
+        value = entry.get("path") if isinstance(entry, dict) else entry
+        if not isinstance(value, str) or not value.strip() or Path(value).is_absolute():
+            raise ValueError("Each manifest case must have a relative path")
+        path = (manifest_dir / value).resolve()
+        if not path.is_relative_to(cases_dir) or path.suffix.casefold() not in {".yaml", ".yml"}:
+            raise ValueError(f"Manifest case is outside its YAML cases directory: {value}")
+        if path in seen_paths:
+            raise ValueError(f"Duplicate manifest case path: {value}")
+        seen_paths.add(path)
         case = load_yaml(path)
+        case_id = case.get("id")
+        if isinstance(case_id, str):
+            if case_id in seen_ids:
+                raise ValueError(f"Duplicate case id: {case_id}")
+            seen_ids.add(case_id)
         case["_path"] = str(path)
         cases.append(case)
     return cases
@@ -155,6 +169,16 @@ def validate_category_contract(selected: List[Dict[str, Any]], categories: Dict[
     return errors
 
 
+def inherited_case_metadata_allowed(manifest: Dict[str, Any]) -> bool:
+    """Keep compatibility validation aligned with the canonical runner."""
+
+    invariants = manifest.get("version_invariants")
+    if not isinstance(invariants, dict):
+        return False
+    note = invariants.get("inherited_case_metadata_note")
+    return isinstance(note, str) and bool(note.strip())
+
+
 def check_suite_version(manifest: Dict[str, Any], policy: Dict[str, Any], cases: List[Dict[str, Any]]) -> List[str]:
     errors: List[str] = []
     manifest_suite = manifest.get("suite_id")
@@ -165,6 +189,8 @@ def check_suite_version(manifest: Dict[str, Any], policy: Dict[str, Any], cases:
         errors.append(f"suite_id mismatch: manifest={manifest_suite!r}, policy={policy_suite!r}")
     if manifest_version and policy_version and manifest_version != policy_version:
         errors.append(f"kit_version mismatch: manifest={manifest_version!r}, policy={policy_version!r}")
+    if inherited_case_metadata_allowed(manifest):
+        return errors
     for case in cases:
         if manifest_suite and case.get("suite_id") != manifest_suite:
             errors.append(f"{case.get('id')}: suite_id {case.get('suite_id')!r} != {manifest_suite!r}")
@@ -177,7 +203,8 @@ def render_markdown(manifest: Dict[str, Any], categories: Dict[str, Dict[str, An
     lines: List[str] = []
     lines.append(f"# Eval smoke checklist — {manifest.get('suite_id', '<unknown suite>')} / kit {manifest.get('kit_version', '<unknown>')}")
     lines.append("")
-    lines.append("Smoke categories are loaded from `eval_trigger_policy.yaml`.")
+    lines.append("Active files come from `manifest.yaml`; smoke categories come from `eval_trigger_policy.yaml`.")
+    lines.append("This validates case definitions and coverage only. It does not execute agent/model behavior.")
     lines.append("")
     lines.append("## Smoke categories")
     for name, contract in categories.items():
@@ -221,7 +248,7 @@ def main(argv: List[str] | None = None) -> int:
         policy = load_yaml(policy_path)
         manifest = load_yaml(manifest_path)
         categories = extract_smoke_categories(policy)
-        cases = load_cases(cases_dir)
+        cases = load_cases(cases_dir, manifest, manifest_path.parent)
         selected = selected_by_policy(cases, categories)
         for case in cases:
             errors.extend(validate_case_schema(case))
@@ -237,6 +264,8 @@ def main(argv: List[str] | None = None) -> int:
     if args.format == "json":
         payload = {
             "status": "pass" if not errors else "fail",
+            "validation_scope": "manifest_schema_and_category_coverage",
+            "behavior_executed": False,
             "suite_id": manifest.get("suite_id"),
             "kit_version": manifest.get("kit_version"),
             "smoke_categories": list(categories.keys()),
