@@ -1,20 +1,35 @@
 # Agent Kit reference library
 
-Candidate: 4.2.0-dev. The active default is `../portable/core/WORKFLOW.md`.
+Version: **4.2.0**. Active portable workflow:
+`../portable/core/WORKFLOW.md`.
 
-This directory preserves optional guidance and historical evolution. It is not
-a startup checklist. An optional protocol applies only after the adopting
-project selects it for a concrete need, within the current owner's authority.
+This directory contains optional templates, stronger workflows, eval material
+and historical references. It is not a mandatory startup checklist.
 
-| Need | Reference |
-|---|---|
-| Short working process and safe updates | `../portable/README.md` |
-| Significant multi-session work | `SIGNIFICANT_WORK_AND_CHECKPOINTS.md` |
-| Stronger delivery proof | `VERIFIED_DELIVERY_PIPELINE.md` |
-| Behavior measurement | `EVAL_SUITE_GUIDE.md` and `eval_suite/manifest.yaml` |
-| Host add-ons | `HOST_PLUGINS_GUIDE.md` |
-| Orchestration decision | `ORCHESTRATION_CHOICE.md` |
+## Current rule
 
-Model names and dated provider snapshots are historical evidence; verify current
-official client documentation when choosing a model or a feature. No optional
-guide overrides the selected core, current project rules or owner instructions.
+ChatGPT web, Codex, Cursor and other connected agents are first-class execution
+surfaces. Select from current owner authority, live capabilities and task fit.
+Do not use historical documents that label GPT web advisory-only as current
+policy.
+
+Useful current references:
+
+- `PROJECT_GPT_OPERATING_CONTRACT.template.md`;
+- `SOURCE_AUTHORITY_TEMPLATE.yaml`;
+- `EXECUTOR_ROUTING_GATE.md`;
+- `CONTEXT_SCOPE_MODEL_ADVISOR.md`;
+- `policies/chatgpt_project_sources_policy.md`;
+- `CHANGELOG_v4.2.0.md`.
+
+Optional stronger references include `VERIFIED_DELIVERY_PIPELINE.md`, eval guides,
+hook guidance and orchestration choices. They apply only when the adopting
+project selects them for a concrete need. They do not add permission or activate
+themselves.
+
+Expired provider/model snapshots are historical evidence only. Project-specific
+rules may add stronger boundaries, but they must not invent a duplicate approval
+for an action already requested by the owner.
+
+A release requires matching package files, main commit, tag and verifiable remote
+release state. A changelog or main-branch edit is not sufficient proof by itself.
