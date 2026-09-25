@@ -1,70 +1,68 @@
 # Executor Routing Gate
 
-Status: portable task-contract rule
-Purpose: make executor/service selection explicit, evidence-based, and owner
-reviewable before non-trivial work starts.
+Status: portable capability-based routing rule.
+Purpose: choose an execution surface from current evidence without turning a
+product name into authority or a mandatory intermediary.
 
----
+## Core rule
 
-## Core Rule
+Route by:
 
-Every non-trivial bootstrap prompt, task contract, task block, or owner-facing
-model/service recommendation should include an `Executor Routing Gate` block
-before task instructions.
+1. current owner outcome and authorized actions;
+2. current live tool/capability catalog;
+3. task fit, context and evidence needs;
+4. current repository/runtime boundaries.
 
-The gate is not a status badge. It is a decision record that states which
-executor should do the work, why that executor fits this task, what evidence was
-used, when to escalate, and where the owner gate is.
+ChatGPT web, Codex, Cursor and other connected agents are first-class execution
+surfaces. Any may analyze or execute owner-authorized work when its current tools
+support the task. External/current research is a ChatGPT strength, not a
+read-only role restriction. Tool identity never creates permission; owner
+instruction does.
 
-## Required Block
+Do not require an Executor Routing Gate for every trivial task. Use it when the
+surface materially affects capability, cost, evidence, side effects or handoff.
+
+## Recommended block
 
 ```yaml
 Executor Routing Gate:
-  recommended_executor: Composer 2.5 / Cursor Agent | ChatGPT Codex/current Codex coding model | GPT web | owner
-  confidence: high | medium | low
-  why_this_executor: <task-class reason>
-  why_not_default_executor: <why the normal route is not enough, or why this is the normal route>
-  evidence_used:
-    - <opened file, policy, task contract, owner input, or current tool output>
-  escalation_trigger: <condition that should stop or reroute the task>
-  stop_or_owner_gate: <where the executor stops and asks the owner>
+  candidate_surfaces:
+    - <surface and current live capabilities>
+  selected_surface: <one surface>
+  selection_reason: <task-fit reason>
+  capability_evidence:
+    - <current tool catalog, project file or owner input>
+  missing_capabilities: []
+  owner_authority: <current instruction/ref>
+  side_effect_boundary: <what is and is not in scope>
+  reroute_trigger: <specific condition>
 ```
 
-## Routing Defaults
+## Rules
 
-- Composer 2.5 / Cursor Agent: scoped mechanical implementation, exact write
-  scope, local build/test iteration, and package file edits.
-- ChatGPT Codex/current Codex coding model: analysis, planning, contract authoring,
-  review, execution-integrity checks, evidence-chain recovery, and repair loops.
-- GPT web: current external research, official documentation lookup, and
-  source-cited synthesis that is not project truth until promoted.
-- owner: deploy, DB writes, credentials, git push/tag/release, destructive
-  cleanup, external send/post actions, and ambiguous side-effect scope.
+- No surface is generally superior.
+- Do not hard-code that repository edits belong to Cursor/Codex or that GPT web
+  is advisory-only.
+- Do not route to another surface merely because an old template says so.
+- A missing capability on one surface is a reason to select another capable
+  surface, not a project-wide prohibition.
+- Use exactly one writer for overlapping state. Independent writers need truly
+  isolated scopes and explicit integration ownership.
+- Do not invent model names, context limits or UI controls from memory; use
+  current provider evidence when exact settings matter.
+- The owner gate is required only for an action outside authority already given,
+  not for a duplicate confirmation.
 
-These defaults are task-class guidance, not claims that one service is generally
-better. Composer is not the only implementation route: recommend ChatGPT Codex
-or both executors when current task evidence shows equal or better fit for a
-bounded implementation/repair loop.
+## Evidence layers
 
-## Prohibited Claims
+A selected executor must still distinguish source edit, test/check,
+build/compile, repository publication, deployment or tag-triggered rebuild,
+runtime smoke and owner acceptance. Routing to a capable surface does not prove
+success in any layer.
 
-Do not say an executor is superior in general.
+## Validation guidance
 
-Do not say another executor would fail unless you have a current task-class
-reason, a concrete prior failure, current provider evidence, or an active
-project policy.
-
-Do not hardcode volatile model names as current recommendations. Use dated
-snapshots or current owner/provider evidence.
-
-## Validation
-
-Use the included helper to check contract/bootstrap files:
-
-```bash
-python "Agent Kit/kit/tools/verify_executor_routing_gate.py" --path <contract-or-bootstrap> --json
-```
-
-Missing or malformed gates are blocking defects for non-trivial bootstraps and
-contracts. Result files, validation files, logs, inventories, and reports are
-normally excluded unless they are explicitly used as task contracts.
+A project-specific validator may verify that a routing block is syntactically
+present, but a missing block must not automatically block useful work when the
+surface and capability are already unambiguous. Validators are evidence tools,
+not independent permission gates.
