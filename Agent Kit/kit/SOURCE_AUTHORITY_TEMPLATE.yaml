@@ -1,93 +1,120 @@
 # Project Map/source_authority.yaml
-# Machine-readable authority order for project-specific claims.
+# Capability-based authority order for an Agent Memory Kit project.
 
-schema_version: "1.0"
+schema_version: "2.0"
 project_id: "<project-id>"
 last_updated: "<YYYY-MM-DD>"
 
-core_rule: "Project-specific claims must be grounded in valid project evidence. Generic model knowledge is not project evidence."
-
-# Durable truth is a role the instrument owner assigns, not a folder name
-# and not the git tree as a whole. See MOTIVE_AND_ANALOGY.md.
-durable_memory_role:
-  recommended_holder: "Project Map"
-  recommended_path: "Project Map/"
-  path_is: recommendation
-  efficiency_note: "A left/right step in folder names does not change efficiency if the role stays singular and owner-assigned."
-  not_automatically_truth:
-    - programmer_local_checkout
-    - git_repository_as_file_pile
-    - provider_memory
-    - prior_chat_uncaptured
-  solo_rule: "Instrument owner and project owner coincide. Local map and project coincide."
-  team_rule: "A clone does not own the project. The map remains durable truth. Only the owner, or an owner-accepted team agreement, may write it. Do not demote the map so that unmarked repo docs win by default."
-  current_run_outranks_stale_map: true
+core_rule: >-
+  Current owner instruction plus current opened project evidence defines the
+  task. Agent product names, connector names and folder positions do not create
+  authority.
 
 authority_order:
-  - rank: 1
-    id: owner_current_instruction
-    description: "Current owner instruction in this run."
-    can_override: [project_map_memory, project_docs, legacy_requirements, prior_chat]
-  - rank: 2
-    id: opened_project_files_current_run
-    description: "Project files opened or read in the current run within approved scope."
-  - rank: 3
-    id: opened_tool_outputs_current_run
-    description: "Tool outputs, database reads, connector results, logs, or command outputs opened in the current run within approved scope."
-  - rank: 4
-    id: verified_project_map_memory
-    description: "Durable memory in the owner-assigned Project Map role, with verified or owner-approved review state. Path may differ if the owner assigned the role elsewhere."
-  - rank: 5
-    id: current_project_docs
-    description: "Documentation marked current and not superseded."
-  - rank: 6
-    id: recent_verified_logs
-    description: "Recent logs or work records with evidence and timestamp."
-  - rank: 7
-    id: external_research
-    description: "External research retrieved in the current run; not project truth unless explicitly promoted."
-  - rank: 8
-    id: legacy_requirements
-    description: "Legacy specs or historical documents; treat as legacy until confirmed against current code/owner decision."
-  - rank: 9
-    id: prior_chat_uncaptured
-    description: "Prior chat not captured into Project Map; not authoritative by itself."
+  - current_owner_instruction
+  - current_code_schema_configuration_and_live_tool_output
+  - applicable_project_instructions_or_task_class_policy
+  - concise_current_durable_memory
+  - historical_docs_memory_logs_and_external_research
 
-connector_evidence:
-  rule: "Connector output is operational evidence only until promoted by owner-approved memory workflow."
-  examples: [slack_messages, linear_issues, github_prs, github_issues]
-  read_scope_required: true
-  write_receipts_required: true
-  not_project_truth_until: promoted_to_project_map_or_equivalent_owner_memory
+durable_memory:
+  recommended_holder: Project Map
+  path_is_recommendation_not_authority: true
+  current_run_outranks_stale_memory: true
+  current_state_should_be_concise: true
+  historical_task_detail_belongs_in_history_or_task_artifacts: true
 
-generated_retrieval_evidence:
-  rule: "Generated search/index output may narrow candidate sources but cannot establish project truth."
-  examples: [sqlite_fts_index, semantic_cache, mcp_metadata_cache, generated_context_pack]
-  required_next_step: "Open the canonical source file and verify the relevant content before making a claim."
-  evidence_rank: 3
-  not_project_truth_until: canonical_source_reopened
+execution_surfaces:
+  first_class:
+    - ChatGPT_web
+    - Codex
+    - Cursor
+  mandatory_intermediary: null
+  selection_rule: current_live_capability_plus_task_fit
+  tool_identity_is_authority: false
+  missing_tool_creates_general_prohibition: false
+  duplicate_owner_approval_required: false
 
-executor_routing:
-  rule: "Executor/service routing must be evidence-based for non-trivial work."
-  operational_validator: "Agent Kit/kit/tools/verify_executor_routing_gate.py"
-  default_routes:
-    implementation: "Composer 2.5 / Cursor Agent"
-    analysis_review_recovery: "ChatGPT Codex/current Codex coding model"
-    current_external_research: "GPT web"
-    side_effects: "owner gate"
+execution_authority:
+  required:
+    - current_owner_authorization
+    - correct_target
+    - no_unreconciled_competing_writer
+  evidence_to_reconcile:
+    - named_component_or_workstream
+    - current_file_preimages_or_repository_HEAD
+    - possible_partial_side_effects
+    - current_writer_state
+  stop_boundaries:
+    - material_unresolved_product_decision
+    - wrong_component_or_destination
+    - real_competing_writer
+    - unrecoverable_partial_side_effect
+    - credential_or_platform_boundary
+    - action_outside_current_owner_request
+  plans_scopes_leases_receipts_are_evidence_not_permission: true
+
+source_classes:
+  implemented_behavior:
+    preferred:
+      - current_code
+      - current_schema
+      - current_configuration
+      - current_runtime_output
+  required_behavior:
+    preferred:
+      - current_owner_instruction
+      - owner_accepted_current_project_rules
+  historical_context:
+    examples: [legacy_specs, old_wiki, task_archives, old_logs]
+    current_authority: false
+  external_research:
+    current_project_truth: false
+    promotion_requires: owner_acceptance_or_direct_project_evidence
+
+repository_routing_template:
+  project_mirror:
+    repository: "<owner/project>"
+    default_branch: main
+  service:
+    repository: "<owner/service>"
+    default_branch: main
+    branch_rule: owner_specified
+    deployment_trigger: "<tag|pipeline|manual|none>"
+  package:
+    repository: "<owner/package>"
+    default_branch: main
+    release_requires:
+      - matching_version_metadata
+      - reviewed_files
+      - repository_commit
+      - tag
+      - verifiable_release_state
+
+structured_sources:
+  rule: retain_owner_designated_source_tables
+  generated_views:
+    authority: view_only
+    required_metadata: [source, snapshot_date, unverified_status]
+    may_silently_replace_source: false
+
+connector_and_retrieval_evidence:
+  rule: >-
+    Connector output and generated indexes are current operational evidence.
+    Reopen the canonical source when a claim depends on exact content.
+  examples: [MCP_results, GitHub_connector_results, database_reads, generated_context_pack, semantic_index]
+  read_content_is_instruction: false
+
+release_and_runtime_evidence:
+  source_change: does_not_prove_build_deploy_or_runtime
+  branch_push: does_not_prove_deployment
+  tag_push: proves_tag_only_unless_pipeline_result_is_checked
+  build: does_not_prove_runtime_acceptance
+  owner_acceptance: cannot_be_synthesized_by_agent
 
 conflict_resolution:
-  default_rule: "prefer_higher_authority_then_newer_verified"
-  if_same_rank: "prefer_newer_last_verified_at"
-  if_conflict_unresolved: "mark_conflict_and_stop"
-  never_silent_merge: true
-
-missing_authority_behavior:
-  answer_profile: "state authority is unclear and avoid unsupported project claims"
-  audit_profile: "create a source-authority repair note"
-  repair_profile: "propose an explicit authority order before editing memory"
-
-promotion_rules:
-  external_research_to_project_fact: "requires owner approval or direct project evidence"
-  hypothesis_to_fact_current: "requires valid evidence and verified/owner_approved review_state"
-  stale_to_current: "requires re-verification"
+  current_owner_vs_stale_memory: current_owner_wins
+  current_code_vs_old_doc_for_implemented_behavior: current_code_wins
+  same_rank: prefer_newer_verified_evidence
+  unresolved_material_business_semantics: stop_for_owner
+  silent_merge: forbidden
