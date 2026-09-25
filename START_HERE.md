@@ -1,17 +1,27 @@
 # Start here
 
-Candidate: 4.2.0-dev; published base: 4.1.0. No new release is claimed.
+Published release: **4.2.0**.
 
 1. Read `Agent Kit/portable/core/WORKFLOW.md`.
-2. Keep your existing project instructions and known context.
-3. Preview: `python "Agent Kit/portable/manage.py" --project "your/project"`.
-4. Apply the same command with `--write` when installation is intended.
+2. Keep the adopting project's current instructions and source authority.
+3. Inspect current live tools before choosing ChatGPT, Codex, Cursor or another
+   execution surface.
+4. Preview adoption with:
 
-For updates, run the command from the newer inspected Kit copy. The installation
-manifest tracks baseline hashes and preserves local modifications. Review any
-reported local overrides. See `Agent Kit/portable/README.md` for the exact rules.
+```text
+python "Agent Kit/portable/manage.py" --project "your/project"
+```
 
-You may also use the workflow manually in an existing instruction system;
-Python is required only if you choose the installation helper.
-Optional reference material is selected by a concrete task need. It is not a
-mandatory reading list. No API key or model call is needed to start.
+5. Add `--write` only when installation/update is intended.
+
+The owner request defines action authority. Any capable surface may execute the
+owner-authorized work; no product name creates a mandatory intermediary. A
+missing tool is a routing fact, not a new permission gate.
+
+The installation manifest tracks managed baselines and preserves local
+modifications. Optional reference material is selected by a concrete task need,
+not loaded as a mandatory checklist. Python is required only when using the
+installation helper.
+
+See `Agent Kit/portable/README.md` for adoption/update rules and
+`Agent Kit/kit/CHANGELOG_v4.2.0.md` for this release.
