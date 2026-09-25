@@ -1,6 +1,7 @@
 # Portable adoption
 
-Candidate version: **4.2.0-dev**, based on published 4.1.0. No release is claimed.
+Version: **4.2.0**. Source is published on `main`; package tag/release state must
+be verified separately.
 
 Read [the core workflow](core/WORKFLOW.md), then inspect an adoption plan:
 
@@ -8,35 +9,32 @@ Read [the core workflow](core/WORKFLOW.md), then inspect an adoption plan:
 python "Agent Kit/portable/manage.py" --project "path/to/project"
 ```
 
-Apply that plan by adding `--write`. Run the same command from a newer Kit
-checkout to update. Python 3.11+ and its standard library are sufficient; no
-package installation, Git command, model call or global setting is involved.
+Apply that plan by adding `--write`. Run the same command from a newer inspected
+Kit checkout to update. Python 3.11+ and the standard library are sufficient; no
+package installation, Git command, model call or global setting is required.
 
-The default installs three small reference files, attribution, a short link in
-`AGENTS.md`, and a project-owned `Project Map/README.md` if it is absent. Existing
-entry instructions and project context keep their bytes. Installation does not
-enable hooks or change a client's trust settings. A client that does not load
-AGENTS.md needs an explicit link from its own project entry instructions.
+The portable core is capability-based: ChatGPT, Codex, Cursor and other connected
+agents may analyze or execute owner-authorized work when their current tools fit
+the task. Installation does not enable hooks, connectors, trust settings or
+side effects.
 
-`Agent Kit/INSTALLATION.json` records the exact package manifest hash, upstream
-base commit, installed file hashes and local overrides. On update:
+The default installs small managed core/attribution files, a short link in
+`AGENTS.md`, and a project-owned `Project Map/README.md` only if absent. Existing
+entry instructions and project context remain project-owned.
 
-- Unmodified Kit-owned files receive the new version.
-- Locally changed or colliding files are preserved and reported as overrides.
-- Removed upstream files are retained and reported for review.
-- Project context, other files and existing AGENTS.md text stay project-owned.
-- A default invocation writes nothing. Invalid paths or a changed preimage
-  stop the affected operation; no broad deletion or automatic conflict merge occurs.
+`Agent Kit/INSTALLATION.json` records the package manifest hash, baseline commit,
+installed file hashes and local overrides. On update:
 
-Review `preserved_local` entries after an update. Compare the reported source
-file with the local file and explicitly reconcile useful upstream changes.
-If a managed file is deliberately removed, the updater preserves that removal.
+- unmodified Kit-owned files receive the new version;
+- locally changed/colliding files are preserved and reported;
+- removed upstream files are retained for review;
+- project context and existing instructions keep their ownership;
+- preview writes nothing;
+- invalid paths or changed preimages stop the affected operation;
+- no broad deletion or silent conflict merge occurs.
 
-Only files in `package.json` are distributed by this installer. The full
-repository's optional guides and historical examples are not installed by
-default. `AUTHORS.md` and `LICENSE` retain their original authorship and terms.
+Review `preserved_local` entries explicitly. The manifest is integrity metadata,
+not a signature, action authority or release proof. Only files in `package.json`
+are installed; optional guides and historical examples remain in the repository.
 
-To vendor this helper, retain the entire `portable/` folder and the declared
-attribution files at their package-relative locations. Use `--package` only
-with an inspected package manifest. The manifest is integrity metadata, not a
-signature or a source of permission.
+Release notes: [v4.2.0](../kit/CHANGELOG_v4.2.0.md).
