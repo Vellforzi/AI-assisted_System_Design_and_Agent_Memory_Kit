@@ -1,6 +1,6 @@
 # Agent Memory Kit
 
-Published version: **4.2.0**.
+Source version **4.2.0** is published on `main`; Git tag and GitHub Release are pending.
 
 Use [the short workflow](portable/core/WORKFLOW.md) and
 [portable adoption](portable/README.md). `portable/package.json` lists the
@@ -28,4 +28,4 @@ not define current product roles.
 Kit quality is assessed through reproducible adoption/update checks and actual
 agent traces. File count and a passing schema alone do not measure behavior.
 
-Release notes: [v4.2.0](kit/CHANGELOG_v4.2.0.md).
+Release-source notes: [v4.2.0](kit/CHANGELOG_v4.2.0.md).
