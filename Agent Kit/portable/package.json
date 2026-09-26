@@ -27,13 +27,13 @@
       "source": "attribution/LICENSE",
       "target": "Agent Kit/core/LICENSE",
       "mode": "managed",
-      "sha256": "b28288e9fbada10c47d299b936d4431f212512474eab08298f6bba60c63b3fd6"
+      "sha256": "4330bfffc235305ff4b047359ed6341dabec55dd8d0abd5906add56ffec121c3"
     },
     {
       "source": "attribution/AUTHORS.md",
       "target": "Agent Kit/core/AUTHORS.md",
       "mode": "managed",
-      "sha256": "aa738e4e25267cecc1d103999b3a950bd226e7030cb7a68cbd5f67178112bd52"
+      "sha256": "713cf9ba7e31c34b319b32bb48648afe015eb6a1b074e734ff12135abb93e5f2"
     }
   ]
 }
