@@ -1,6 +1,6 @@
 schema_version: "2.0"
 suite_id: AMK-PORTABLE-CORE
-kit_version: 4.2.0-dev
+kit_version: 4.2.0
 smoke_policy:
   categories:
     owner_authority: {required: true, min_cases: 1}

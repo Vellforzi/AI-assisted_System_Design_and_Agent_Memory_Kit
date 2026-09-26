@@ -1,7 +1,6 @@
 # Agent Kit reference manifest
 
-Package source version: `4.2.0`.
-GitHub tag/release state must be verified separately.
+Published package: `4.2.0`.
 
 ## Active portable/current guidance
 
@@ -14,22 +13,20 @@ GitHub tag/release state must be verified separately.
 - `policies/chatgpt_project_sources_policy.md`
 - `CHANGELOG_v4.2.0.md`
 
-## Optional project-specific guidance
+## Optional guidance
 
 - `VERIFIED_DELIVERY_PIPELINE.md`
 - `AGENTS.md_TEMPLATE.md`
 - `AI_AGENT_ROLE_STACK_GUIDE.md`
-- task-class policies and eval material selected by the adopting project.
+- task-class policies, hooks and eval material selected by an adopting project.
 
 ## Historical/reference material
 
 Expired provider/model snapshots, old changelogs, legacy validators and prior
-workflow generations remain reference/history. They do not override the current
-portable workflow or an adopting project's current owner instruction and source
-authority.
+workflow generations remain reference/history. They do not override current
+owner instruction, current source or the adopting project's authority order.
 
-## Release rule
+## Release proof
 
-This manifest describes intended package content. Release proof requires a
-matching main commit, tag and verifiable remote release state. Do not infer a
-release from this file alone.
+The package version is not proven by this manifest alone. Verify the matching
+main commit, annotated `v4.2.0` tag and GitHub Release.

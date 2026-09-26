@@ -23,7 +23,7 @@ def generate(write=False):
         data = attribution[path] if path in attribution else path.read_bytes()
         files.append({'source':source, 'target':target, 'mode':mode, 'sha256':hashlib.sha256(data).hexdigest()})
     manifest = {'schema_version':1, 'package_id':'agent-memory-kit-core', 'version':version,
-                'base_commit':'557e340208d8661f00d76bdd9c4a4ea1a748ed59', 'release_status':'local_candidate_not_published', 'files':files}
+                'base_commit':'557e340208d8661f00d76bdd9c4a4ea1a748ed59', 'release_status':'published', 'files':files}
     outputs = {**attribution, ROOT / 'package.json':(json.dumps(manifest, ensure_ascii=False, indent=2)+'\n').encode('utf-8')}
     changed = [str(path.relative_to(ROOT)) for path, data in outputs.items() if not path.exists() or path.read_bytes() != data]
     if write:

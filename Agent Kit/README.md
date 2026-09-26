@@ -1,6 +1,6 @@
 # Agent Memory Kit
 
-Source version **4.2.0** is published on `main`; Git tag and GitHub Release are pending.
+Published release: **4.2.0**.
 
 Use [the short workflow](portable/core/WORKFLOW.md) and
 [portable adoption](portable/README.md). `portable/package.json` lists the

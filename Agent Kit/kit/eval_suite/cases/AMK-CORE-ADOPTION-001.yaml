@@ -1,6 +1,6 @@
 id: AMK-CORE-ADOPTION-001
 suite_id: AMK-PORTABLE-CORE
-kit_version: 4.2.0-dev
+kit_version: 4.2.0
 schema_version: 1
 category: portable_adoption
 title: Adopt and update without losing local work

@@ -1,6 +1,6 @@
 # Existing project adoption
 
-Candidate version: 4.2.0-dev.
+Candidate version: 4.2.0.
 
 Start with `../portable/core/WORKFLOW.md`. Reuse existing project instructions
 and context; do not invent a full project map before reading source.

@@ -50,6 +50,5 @@ owner authority and task fit.
 
 ## Release proof
 
-This changelog is source metadata, not proof by itself. A completed GitHub release
-requires the published main commit, tag `v4.2.0`, and verifiable remote release
-state. Those identities must be recorded after the tag/release operation.
+Tag `v4.2.0` points to the final release commit. The GitHub Release is published
+from that tag. Verify the remote tag, release URL and commit when auditing.

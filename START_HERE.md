@@ -1,6 +1,6 @@
 # Start here
 
-Source version **4.2.0** is published on `main`; Git tag and GitHub Release are pending.
+Published release: **4.2.0**.
 
 1. Read `Agent Kit/portable/core/WORKFLOW.md`.
 2. Keep the adopting project's current instructions and source authority.

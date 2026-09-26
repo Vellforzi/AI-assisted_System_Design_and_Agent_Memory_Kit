@@ -3,7 +3,7 @@
   "package_id": "agent-memory-kit-core",
   "version": "4.2.0",
   "base_commit": "557e340208d8661f00d76bdd9c4a4ea1a748ed59",
-  "release_status": "main_source_published_tag_pending",
+  "release_status": "published",
   "files": [
     {
       "source": "core/WORKFLOW.md",

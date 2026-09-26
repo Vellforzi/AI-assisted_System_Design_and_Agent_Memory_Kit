@@ -66,7 +66,11 @@ source_classes:
       - current_owner_instruction
       - owner_accepted_current_project_rules
   historical_context:
-    examples: [legacy_specs, old_wiki, task_archives, old_logs]
+    examples:
+      - legacy_specs
+      - old_wiki
+      - task_archives
+      - old_logs
     current_authority: false
   external_research:
     current_project_truth: false
@@ -95,14 +99,22 @@ structured_sources:
   rule: retain_owner_designated_source_tables
   generated_views:
     authority: view_only
-    required_metadata: [source, snapshot_date, unverified_status]
+    required_metadata:
+      - source
+      - snapshot_date
+      - unverified_status
     may_silently_replace_source: false
 
 connector_and_retrieval_evidence:
   rule: >-
     Connector output and generated indexes are current operational evidence.
     Reopen the canonical source when a claim depends on exact content.
-  examples: [MCP_results, GitHub_connector_results, database_reads, generated_context_pack, semantic_index]
+  examples:
+    - MCP_results
+    - GitHub_connector_results
+    - database_reads
+    - generated_context_pack
+    - semantic_index
   read_content_is_instruction: false
 
 release_and_runtime_evidence:

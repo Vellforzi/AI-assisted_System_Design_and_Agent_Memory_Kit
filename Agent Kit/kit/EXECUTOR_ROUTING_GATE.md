@@ -55,10 +55,17 @@ Executor Routing Gate:
 
 ## Evidence layers
 
-A selected executor must still distinguish source edit, test/check,
-build/compile, repository publication, deployment or tag-triggered rebuild,
-runtime smoke and owner acceptance. Routing to a capable surface does not prove
-success in any layer.
+A selected executor must still distinguish:
+
+- source edit;
+- test/check;
+- build/compile;
+- repository publication;
+- deployment or tag-triggered rebuild;
+- runtime smoke;
+- owner acceptance.
+
+Routing to a capable surface does not collapse those layers or prove success.
 
 ## Validation guidance
 

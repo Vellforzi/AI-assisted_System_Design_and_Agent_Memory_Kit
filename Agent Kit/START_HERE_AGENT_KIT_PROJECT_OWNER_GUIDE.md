@@ -1,6 +1,6 @@
 # Owner start
 
-Version: 4.2.0-dev (local candidate; published base 4.1.0).
+Published version: 4.2.0.
 
 Describe the outcome, important constraints and what would count as success.
 The agent inspects the relevant current source, implements the authorized local

@@ -1,6 +1,6 @@
 # AI-assisted System Design and Agent Memory Kit
 
-Source version **4.2.0** is published on `main`; Git tag and GitHub Release are pending.
+Published release: **4.2.0**.
 
 Agent Memory Kit is a portable operating and project-memory layer. It helps an
 owner ground work in current source, preserve concise durable decisions and
