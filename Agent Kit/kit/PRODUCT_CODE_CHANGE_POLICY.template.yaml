@@ -1,0 +1,191 @@
+schema_version: "1.0.0"
+
+policy:
+  id: "PRODUCT_CODE_CHANGE_POLICY"
+  version: "1.0.0"
+  status: "template"
+  purpose: >
+    Implement only the owner's required product behavior, preserve unrelated
+    behavior, prevent speculative product semantics, and verify impact across
+    the complete affected causal chain.
+
+  applies_to:
+    - "application_services"
+    - "data_collection_and_scheduled_jobs"
+    - "database_and_schema"
+    - "caches_queues_and_shared_state"
+    - "clients_integrations_and_runtime_components"
+    - "platform_specific_code_unless_a_more_specific_policy_matches"
+
+precedence:
+  - "current_explicit_owner_business_logic"
+  - "matching_task_class_policy"
+  - "current_production_behavior_to_preserve"
+  - "current_official_platform_documentation"
+  - "tests_docs_plans_and_agent_reports_as_evidence_only"
+
+semantic_authority:
+  owner_required_behavior: "binding"
+  current_code:
+    role: "implemented_behavior_and_integration_constraints"
+    preserve_by_default: true
+  tests:
+    role: "verification_evidence_only"
+    may_define_product_semantics: false
+  agent:
+    product_semantic_design_authority: "none_unless_explicitly_requested"
+    architecture_replacement_authority: "none_unless_explicitly_requested"
+
+absence_of_instruction:
+  rule: "preserve_current_behavior"
+  forbidden_inferences:
+    - "new_default"
+    - "new_fallback"
+    - "new_cross_component_relationship"
+    - "new_state_transition"
+    - "new_schedule_retry_timeout_or_freshness_rule"
+    - "new_cache_persistence_or_deletion_rule"
+    - "new_error_semantics"
+    - "new_user_visible_or_trading_behavior"
+    - "new_public_contract"
+    - "new_backward_compatibility_policy"
+
+mandatory_skills:
+  production-engineering-standard:
+    required_for: "code_logic_schema_api_cache_job_integration_runtime_tasks"
+  complete-technical-communication:
+    required_for: "owner_facing_reports_docs_comments_handoffs_and_release_notes"
+
+mandatory_pre_edit_analysis:
+  required:
+    - "owner_outcome_verbatim"
+    - "current_implemented_behavior"
+    - "exact_requested_delta"
+    - "acceptance_criteria"
+    - "preserved_invariants"
+    - "explicit_non_goals"
+    - "producer_storage_transport_consumer_map"
+    - "failure_and_recovery_behavior"
+    - "lifecycle_boundaries"
+    - "concurrency_and_shared_state"
+    - "performance_and_IO_impact"
+    - "unresolved_product_questions"
+  edit_gate:
+    unresolved_behavior_affecting_questions_must_be_empty: true
+
+ambiguity:
+  ask_owner_when:
+    - "multiple_observable_behaviors_are_possible"
+    - "data_meaning_or_source_precedence_is_not_proven"
+    - "failure_fallback_persistence_or_deletion_semantics_are_not_proven"
+    - "state_owner_or_component_responsibility_is_not_proven"
+    - "schedule_retry_timeout_or_freshness_is_not_proven"
+    - "lifecycle_recovery_compatibility_or_public_contract_is_not_proven"
+    - "correctness_performance_tradeoff_changes_product_behavior"
+  do_not_ask_owner_for:
+    - "syntax_only_choice"
+    - "local_internal_name"
+    - "internal_data_structure_with_identical_semantics"
+    - "mechanically_required_platform_safety"
+    - "minimal_causal_refactor_with_identical_behavior"
+
+scope:
+  causal_local_file_expansion: "allowed"
+  semantic_expansion: "forbidden"
+  unrelated_refactor: "forbidden"
+  speculative_cleanup: "forbidden"
+  future_use_abstraction: "forbidden"
+  new_dependency:
+    default: "forbidden"
+    allowed_only_when: "necessary_for_exact_owner_outcome_and_no_existing_safe_route"
+
+implementation:
+  required_properties:
+    - "minimal_complete_behavior"
+    - "smallest_coherent_diff"
+    - "preserve_unrelated_behavior"
+    - "reuse_existing_correct_project_primitives"
+    - "explicit_resource_cleanup"
+    - "bounded_error_retry_and_memory_paths"
+    - "no_hidden_production_side_effects"
+  optimization:
+    objective: "simplest_correct_maintainable_solution"
+    inspect:
+      - "algorithmic_complexity"
+      - "database_round_trips"
+      - "network_requests"
+      - "cache_operations"
+      - "browser_or_UI_actions"
+      - "allocations_copies_and_memory_lifetime"
+      - "locks_threads_timers_and_shared_state"
+      - "hot_path_frequency"
+      - "unbounded_loops_retries_or_log_volume"
+
+traceability:
+  every_changed_production_symbol_must_map_to:
+    - "owner_acceptance_criterion"
+    - "preserved_invariant"
+  unexplained_change: "remove_or_ask_owner"
+
+tests:
+  role: "secondary_evidence"
+  source_of_expected_behavior:
+    allowed:
+      - "current_owner_business_logic"
+      - "explicit_acceptance_criterion"
+      - "verified_existing_behavior_to_preserve"
+      - "authoritative_platform_contract"
+    forbidden:
+      - "new_implementation_output"
+      - "agent_preference"
+      - "test_convenience"
+  new_tests:
+    default: "do_not_add_without_a_distinct_need"
+    allowed_only_when:
+      - "a_named_acceptance_criterion_or_regression_requires_it"
+      - "existing_checks_cannot_prove_that_criterion"
+      - "the_test_has_an_independent_oracle"
+    each_test_must_state:
+      - "criterion_id"
+      - "oracle_source"
+      - "distinct_failure_mode"
+      - "why_existing_coverage_is_insufficient"
+  forbidden:
+    - "generate_expected_output_from_the_new_code"
+    - "snapshot_new_output_and_call_it_correct"
+    - "weaken_or_delete_a_test_only_to_make_the_patch_pass"
+    - "duplicate_equivalent_tests"
+    - "mock_the_same_logic_as_the_production_implementation"
+    - "treat_coverage_percentage_as_acceptance"
+
+verification:
+  semantic_review_required: true
+  inspect:
+    - "direct_callers_and_consumers"
+    - "shared_state_and_ownership"
+    - "database_schema_and_cache_contracts"
+    - "schedules_timezones_retries_timeouts_and_cancellation"
+    - "failure_fallback_partial_success_and_recovery"
+    - "initialization_shutdown_concurrency_and_multi_instance_behavior"
+    - "public_API_ABI_protocol_and_compatibility"
+    - "performance_sensitive_paths"
+  evidence_order:
+    - "semantic_walkthrough_against_owner_logic"
+    - "final_diff_and_traceability_review"
+    - "static_type_lint_build_ABI_or_compile_checks_when_applicable"
+    - "targeted_existing_checks"
+    - "minimal_justified_new_tests_when_needed"
+    - "authorized_integration_or_runtime_check"
+    - "owner_acceptance_when_owner_visible_behavior_requires_it"
+  full_repository_scan:
+    default: false
+    rule: "Review the complete affected causal chain, not unrelated product areas."
+
+completion:
+  required:
+    - "no_unresolved_behavior_affecting_assumptions"
+    - "all_changes_trace_to_owner_criteria_or_preserved_invariants"
+    - "non_goals_remain_unchanged"
+    - "affected_chain_reviewed"
+    - "verification_results_reported_honestly"
+    - "remaining_unverified_production_risks_named"

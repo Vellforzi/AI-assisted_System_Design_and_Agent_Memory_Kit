@@ -13,6 +13,42 @@ Purpose: route repository-aware agents to the Project Map and enforce safe defau
 - Encoding-sensitive or UI-visible text edits require byte-safe tooling and readback verification.
 - Blocking hooks should return actionable recovery fields, and agents should follow them.
 
+## Product semantics and production quality controls
+
+The owner's stated product behavior is the authority for required behavior.
+Current production code establishes existing behavior and integration constraints
+that must be preserved unless the owner explicitly changes them.
+
+Missing instruction means preserve current behavior. It does not authorize a new
+default, fallback, relationship, state transition, schedule, retry, cache rule,
+persistence rule, error behavior, user-visible result, trading action or public
+contract.
+
+Tests, documentation, comments, plans, previous agent reports and model inference
+are evidence only. They must not create, replace or silently reinterpret product
+semantics.
+
+For a project that adopts the production quality pack:
+
+- specialize `PRODUCT_CODE_CHANGE_POLICY.template.yaml` into a project policy;
+- create one task-local `CODE_CHANGE_CONTRACT.yaml` from the supplied template;
+- install and apply `$production-engineering-standard` before the first technical
+  decision and through implementation, diff review and verification;
+- install and apply `$complete-technical-communication` before every owner-facing
+  report, generated explanation, documentation page, comment, handoff or release
+  note;
+- allow causal file-scope expansion required by the exact owner outcome, but never
+  treat another file as permission for another behavior;
+- trace every changed production symbol to an owner acceptance criterion or a
+  preserved invariant;
+- ask the owner only when an unresolved assumption can change observable product
+  semantics; do not ask about internal choices with identical behavior;
+- complete semantic, causal-chain, failure, lifecycle, performance and resource
+  review before relying on tests or declaring completion.
+
+These quality controls do not authorize writes or external side effects. The
+current owner request and project policy remain the authority for action.
+
 ## Read order for project questions
 
 1. `Project Map/README.md`

@@ -1,6 +1,6 @@
 # AI-assisted System Design and Agent Memory Kit
 
-Published release: **4.2.0**.
+Published release: **4.3.0**.
 
 Agent Memory Kit is a portable operating and project-memory layer. It helps an
 owner ground work in current source, preserve concise durable decisions and
@@ -43,6 +43,14 @@ prohibition and not a reason to repeat an approval already supplied.
 - Package release proof requires matching version metadata, repository commit,
   tag and verifiable release state.
 
+## Production quality pack
+
+v4.3.0 adds a portable product-semantic quality pack: production engineering and
+complete technical communication skills, a generic code-change policy and
+contract, a reusable validator, hook wiring guidance and starter eval cases. The
+adoption guides now offer this pack to owners of production-code projects instead
+of silently imposing it.
+
 ## Authors and layers
 
 | Layer | Author |
@@ -61,4 +69,4 @@ Run `python "Agent Kit/portable/test_manage.py"` for adoption/update tests and
 consistency. Optional eval definitions do not substitute for captured behavioral
 runs and grading.
 
-Release-source notes: [v4.2.0](Agent%20Kit/kit/CHANGELOG_v4.2.0.md).
+Release-source notes: [v4.3.0](Agent%20Kit/kit/CHANGELOG_v4.3.0.md).

@@ -158,3 +158,10 @@ Key defaults:
 Install `rules/context_advisor_preflight.mdc` when you want Cursor to warn about insufficient scope, overbroad context, wrong Max/IDE context settings, or unsafe apply gates before work starts.
 
 Use `/context-advisor`, `/settings`, `/scope`, `/fuel`, and `/safe-apply` as on-demand commands. These commands analyze only; they do not authorize mutation.
+
+## Optional production quality skills
+
+`cursor/skills/production-engineering-standard/` and
+`cursor/skills/complete-technical-communication/` are ready-to-copy mirrors of
+the canonical skills under `skills/`. Adopt them together with the product-code
+policy and contract templates; skills define quality but do not grant permission.

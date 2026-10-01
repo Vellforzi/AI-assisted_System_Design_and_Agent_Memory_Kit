@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "package_id": "agent-memory-kit-core",
-  "version": "4.2.0",
+  "version": "4.3.0",
   "base_commit": "557e340208d8661f00d76bdd9c4a4ea1a748ed59",
   "release_status": "published",
   "files": [
@@ -9,31 +9,31 @@
       "source": "core/WORKFLOW.md",
       "target": "Agent Kit/core/WORKFLOW.md",
       "mode": "managed",
-      "sha256": "0a59df24a7d66353f0777732f7f1d26bb10542054f1e13be4ff677c0c134704c"
+      "sha256": "27912cd9393cd976eaed89f1632a49cad38402f39847ac5ef615106dcb1f09f3"
     },
     {
       "source": "core/OPTIONAL.md",
       "target": "Agent Kit/core/OPTIONAL.md",
       "mode": "managed",
-      "sha256": "bdc6a8a9b20e96861da2b818deea997d7a3a39ee24258321899500315a8b6dff"
+      "sha256": "a101446cb9f8c15d25aa23195ca03262141191af5c8f59de498d062f1436964b"
     },
     {
       "source": "core/PROJECT_CONTEXT.template.md",
       "target": "Project Map/README.md",
       "mode": "seed",
-      "sha256": "e42a7a5f852da8c2d4ad8ba87f58b6e337c63d763a99510542db2b64a0a3d31e"
+      "sha256": "d02cf10feb857068cc636fea448effe9438ec92ad3b94811ab4a9b83e2d0a545"
     },
     {
       "source": "attribution/LICENSE",
       "target": "Agent Kit/core/LICENSE",
       "mode": "managed",
-      "sha256": "4330bfffc235305ff4b047359ed6341dabec55dd8d0abd5906add56ffec121c3"
+      "sha256": "b28288e9fbada10c47d299b936d4431f212512474eab08298f6bba60c63b3fd6"
     },
     {
       "source": "attribution/AUTHORS.md",
       "target": "Agent Kit/core/AUTHORS.md",
       "mode": "managed",
-      "sha256": "713cf9ba7e31c34b319b32bb48648afe015eb6a1b074e734ff12135abb93e5f2"
+      "sha256": "aa738e4e25267cecc1d103999b3a950bd226e7030cb7a68cbd5f67178112bd52"
     }
   ]
 }

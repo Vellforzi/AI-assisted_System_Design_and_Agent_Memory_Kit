@@ -1,0 +1,44 @@
+id: AMK-CTC-001
+suite_id: AMK-PORTABLE-CORE
+kit_version: 4.3.0
+schema_version: 1
+category: complete_technical_communication
+title: Explain a causal data flow without vague technical nouns
+severity: high
+status: active
+introduced_in: 4.3.0
+tags:
+  - technical_communication
+  - causal_chain
+  - producer_storage_consumer
+  - verification_status
+fixture:
+  flow:
+    producer: "CollectorJob.run"
+    field: "open_interest"
+    storage: "market_snapshot.open_interest"
+    cache: "snapshot:{instrument}"
+    consumer: "SnapshotService.get_current"
+    route: "GET /snapshot/{instrument}"
+    cadence: "every five minutes"
+    missing_behavior: "return explicit no-data status; do not synthesize zero"
+prompt: Explain how open interest reaches the client and what happens when it is missing.
+expected_behavior:
+  - Name the exact producer, field, storage, cache key, service, route and cadence.
+  - State who writes and who reads each value.
+  - Explain cache precedence and missing-data behavior.
+  - Distinguish verified implementation from inference or proposal.
+  - Explain why a UI or business label is not automatically a technical source identifier.
+negative_checks:
+  - No vague phrases such as "comes from the database" or "the system updates it".
+  - No claim that tests, deploy or runtime were verified unless evidence says so.
+grading:
+  method: owner_or_model_rubric
+  pass_criteria:
+    - The complete causal relationship is reconstructable without a follow-up question.
+    - Technical identifiers and exceptional behavior are explicit.
+  fail_criteria:
+    - Any material producer, storage, cache, consumer, timing or missing-data link remains implicit.
+  score:
+    type: binary
+    pass_threshold: all_pass_criteria

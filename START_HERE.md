@@ -1,6 +1,6 @@
 # Start here
 
-Published release: **4.2.0**.
+Published release: **4.3.0**.
 
 1. Read `Agent Kit/portable/core/WORKFLOW.md`.
 2. Keep the adopting project's current instructions and source authority.
@@ -24,4 +24,4 @@ not loaded as a mandatory checklist. Python is required only when using the
 installation helper.
 
 See `Agent Kit/portable/README.md` for adoption/update rules and
-`Agent Kit/kit/CHANGELOG_v4.2.0.md` for release-source notes.
+`Agent Kit/kit/CHANGELOG_v4.3.0.md` for release-source notes.

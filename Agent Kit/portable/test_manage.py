@@ -35,7 +35,7 @@ class AdoptionTests(unittest.TestCase):
         path = self.package / source
         path.write_bytes(path.read_bytes()+suffix)
         manifest = json.loads((self.package / 'package.json').read_bytes())
-        manifest['version'] = '4.2.0-test-update'
+        manifest['version'] = '4.3.0-test-update'
         next(item for item in manifest['files'] if item['source']==source)['sha256'] = hashlib.sha256(path.read_bytes()).hexdigest()
         (self.package / 'package.json').write_bytes(json.dumps(manifest).encode('utf-8'))
 

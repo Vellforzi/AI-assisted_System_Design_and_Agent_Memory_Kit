@@ -1,6 +1,6 @@
 # Portable adoption
 
-Version: **4.2.0**. Source is published on `main`; package tag/release state must
+Version: **4.3.0**. Source is published on `main`; package tag/release state must
 be verified separately.
 
 Read [the core workflow](core/WORKFLOW.md), then inspect an adoption plan:
@@ -37,4 +37,4 @@ Review `preserved_local` entries explicitly. The manifest is integrity metadata,
 not a signature, action authority or release proof. Only files in `package.json`
 are installed; optional guides and historical examples remain in the repository.
 
-Release notes: [v4.2.0](../kit/CHANGELOG_v4.2.0.md).
+Release notes: [v4.3.0](../kit/CHANGELOG_v4.3.0.md).

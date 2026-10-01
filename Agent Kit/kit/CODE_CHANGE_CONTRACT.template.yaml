@@ -1,0 +1,93 @@
+schema_version: "1.0.0"
+policy_ref:
+  id: "PRODUCT_CODE_CHANGE_POLICY"
+  version: "1.0.0"
+
+mandatory_skills:
+  production-engineering-standard:
+    applied: false
+    version: "1.0.0"
+  complete-technical-communication:
+    applied: false
+    version: "1.0.0"
+
+task:
+  id: "<TASK_ID>"
+  component: "<COMPONENT>"
+  owner_request_verbatim: |
+    <ORIGINAL_OWNER_REQUEST_WITHOUT_SEMANTIC_REWRITING>
+
+business_logic:
+  required_behavior:
+    - id: "AC-01"
+      rule: "<EXACT_REQUIRED_BEHAVIOR>"
+      source: "current_owner_request"
+  preserved_behavior:
+    - id: "INV-01"
+      rule: "<BEHAVIOR_THAT_MUST_NOT_BREAK>"
+      evidence: "<CURRENT_CODE_OR_OWNER_SOURCE>"
+  non_goals:
+    - "<BEHAVIOR_THIS_TASK_DOES_NOT_CHANGE>"
+  unresolved_product_questions: []
+
+current_behavior:
+  producer: "<PATH_OR_SYMBOL>"
+  normalization_or_calculation: "<PATH_OR_SYMBOL>"
+  storage_or_state: "<TABLE_CACHE_FILE_OR_STATE_OWNER>"
+  transport: "<ROUTE_PROTOCOL_OR_INTERFACE>"
+  consumer: "<PATH_OR_SYMBOL>"
+  owner_visible_result: "<CURRENT_VISIBLE_RESULT>"
+  observed_problem: "<EXACT_MISMATCH>"
+
+exact_change:
+  changed_behavior:
+    - criterion: "AC-01"
+      files: []
+      symbols: []
+      required_logic: "<TECHNICAL_MAPPING_OF_THE_OWNER_RULE>"
+  forbidden_changes:
+    - "<DO_NOT_CHANGE_AN_UNRELATED_FALLBACK>"
+    - "<DO_NOT_CHANGE_SCHEDULE_OR_PUBLIC_CONTRACT>"
+
+impact_analysis:
+  callers: []
+  consumers: []
+  shared_state: []
+  database: []
+  cache_or_queue: []
+  schedules_and_timezones: []
+  lifecycle_and_recovery: []
+  concurrency: []
+  compatibility: []
+  performance: []
+
+implementation:
+  selected_approach: "<SOLUTION>"
+  why_minimal_and_correct: "<RATIONALE>"
+  alternatives_rejected: []
+  complexity_and_IO_effect: "<NO_CHANGE_OR_EXACT_EFFECT>"
+
+verification:
+  semantic_walkthrough: []
+  existing_checks: []
+  new_tests: []
+  build_or_compile: []
+  integration_or_runtime: []
+  owner_acceptance_required: false
+
+quality_review:
+  semantic_walkthrough_completed: false
+  final_diff_reviewed: false
+  causal_chain_reviewed: false
+  failure_paths_reviewed: false
+  performance_impact_reviewed: false
+  resource_lifecycle_reviewed: false
+  non_goals_preserved: false
+  unexplained_production_changes: []
+  tests_used_as_specification: false
+  remaining_unverified_risks: []
+
+final_traceability:
+  changed_symbols: []
+  unexplained_changes: []
+  remaining_risks: []

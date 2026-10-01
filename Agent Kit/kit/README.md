@@ -1,6 +1,6 @@
 # Agent Kit reference library
 
-Version: **4.2.0**. Active portable workflow:
+Version: **4.3.0**. Active portable workflow:
 `../portable/core/WORKFLOW.md`.
 
 This directory contains optional templates, stronger workflows, eval material
@@ -20,7 +20,7 @@ Useful current references:
 - `EXECUTOR_ROUTING_GATE.md`;
 - `CONTEXT_SCOPE_MODEL_ADVISOR.md`;
 - `policies/chatgpt_project_sources_policy.md`;
-- `CHANGELOG_v4.2.0.md`.
+- `CHANGELOG_v4.3.0.md`.
 
 Optional stronger references include `VERIFIED_DELIVERY_PIPELINE.md`, eval guides,
 hook guidance and orchestration choices. They apply only when the adopting
@@ -33,3 +33,11 @@ for an action already requested by the owner.
 
 A release requires matching package files, main commit, tag and verifiable remote
 release state. A changelog or main-branch edit is not sufficient proof by itself.
+
+## Production quality pack
+
+For projects with production code, start with `PRODUCTION_CODE_CHANGE_GUIDE.md`,
+then specialize `PRODUCT_CODE_CHANGE_POLICY.template.yaml` and
+`CODE_CHANGE_CONTRACT.template.yaml`. Canonical skills live under `skills/` and
+Cursor-ready mirrors under `cursor/skills/`. Optional mechanical validation is in
+`tools/validate_code_change_contract.py`.

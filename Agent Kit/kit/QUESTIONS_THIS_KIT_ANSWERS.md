@@ -235,3 +235,18 @@ When live work in a private project produces a durable practice:
 That is the intended update path: live diff → abstract projection → kit
 guide. A kit that only accumulates templates without explaining them has
 drifted into a library and should be repaired.
+
+## How do I stop an agent from inventing product behavior?
+
+Adopt `PRODUCT_CODE_CHANGE_POLICY.template.yaml`, one task-local
+`CODE_CHANGE_CONTRACT.yaml`, and `$production-engineering-standard`. The pack
+makes missing instruction mean preserve current behavior, treats tests as
+evidence rather than specification, and requires every changed production symbol
+to trace to an owner criterion or preserved invariant.
+
+## How do I require complete technical explanations instead of vague summaries?
+
+Install `$complete-technical-communication` and customize its
+`owner-writing-style.md` reference. It requires exact producer, storage, cache,
+consumer, timing, precedence, missing/stale/failure behavior, rationale, and a
+clear split between verified facts, implementation, inference and proposal.
