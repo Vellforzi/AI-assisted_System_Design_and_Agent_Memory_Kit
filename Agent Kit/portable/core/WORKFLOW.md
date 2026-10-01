@@ -7,6 +7,19 @@ Answer, analysis and plan-only requests remain read-only. Ask only when a
 material product choice or an external, destructive, credential or publication
 action is outside the current request.
 
+## Capability boundary
+
+Agent Memory Kit multiplies the capability and judgment already present; it does
+not manufacture either. Ask questions about the kit through the agent and require
+answers grounded in current package files. Choose a model for the required result
+and reasoning risk before optimizing cost. When the current model cannot preserve
+the owner's meaning, reconcile the evidence or use the installed controls, reroute
+to a capable model or surface instead of lowering the standard.
+
+The owner remains responsible for goals, product semantics, material trade-offs,
+durable truth and final acceptance. Easy onboarding reduces friction, not human
+responsibility. See `../../kit/HUMAN_MODEL_CAPABILITY_CONTRACT.md`.
+
 ## Execution surfaces
 
 ChatGPT, Codex, Cursor and other connected agents are execution surfaces, not

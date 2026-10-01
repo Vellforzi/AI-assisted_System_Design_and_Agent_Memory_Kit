@@ -84,17 +84,33 @@ Provider model names, prices, context limits, speed modes and UI controls are
 volatile. Use current provider/owner evidence or explicitly dated snapshots.
 Do not copy settings from one surface to another.
 
-Choose the least expensive setting that is sufficient for the actual reasoning
-and verification risk. Escalate only for a concrete trigger such as:
+Choose for the required result in this order: capability floor, task fit, live
+tools, then price and latency. The least expensive model is appropriate only
+after it has proved sufficient for the actual reasoning and verification risk.
+Do not lower the quality standard to fit a cheaper model.
+
+Planning and execution may use different models. For high-impact planning,
+semantic decomposition or contradictory evidence, select a model capable of
+holding the complete causal picture. For execution, select a model that can
+follow the resulting contract, preserve state and use the required tools.
+
+A dated owner example from 2026-10-01 is `Astra` for planning and `GPT-6 Sol` or
+`GPT-6.1 Sol` for execution when outcome quality matters more than price. This is
+not a permanent provider default: verify current labels and capabilities before
+repeating it as current advice.
+
+Escalate for a concrete trigger such as:
 
 - cross-component root-cause ambiguity;
 - protocol/schema/router/eval changes;
 - production-risk repair or uncertain side effects;
 - large contradictory evidence sets;
+- loss of owner qualifiers or causal-chain state;
 - repeated failure of the cheaper sufficient route.
 
-Report the trigger and why the cheaper route is insufficient. Do not recommend a
-premium model merely as ritual safety.
+Report the trigger and why the current route is insufficient. Do not recommend a
+premium model merely as ritual safety, and do not pretend an incapable model is
+sufficient because the kit is installed. See `HUMAN_MODEL_CAPABILITY_CONTRACT.md`.
 
 ## 6. Generated views and structured sources
 

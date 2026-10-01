@@ -1,11 +1,12 @@
 schema_version: '3.0'
 suite_id: AMK-PORTABLE-CORE
-kit_version: 4.3.0
+kit_version: 4.3.1
 release_status: published
 cases:
 - path: cases/AMK-CORE-OWNER-001.yaml
 - path: cases/AMK-CORE-ADOPTION-001.yaml
 - path: cases/AMK-PSE-001.yaml
 - path: cases/AMK-CTC-001.yaml
-note: These four cases are active. Historical cases are optional references. Schema
+- path: cases/AMK-HMC-001.yaml
+note: These five cases are active. Historical cases are optional references. Schema
   validation does not execute behavior.

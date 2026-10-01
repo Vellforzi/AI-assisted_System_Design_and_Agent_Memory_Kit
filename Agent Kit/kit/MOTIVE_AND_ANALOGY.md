@@ -37,6 +37,22 @@ yourself even more productive.
 That is the instrument. Not a library. A way to put your way of thinking
 on disk so a capable model can operate it.
 
+## The missing half: the model and the person
+
+Putting a method on disk does not create the ability to use it. The weaker the
+model is, the less of this layout it can understand and operate. A weak model plus
+more folders is still a weak model with more context to misunderstand.
+
+The same applies to the person. The kit is optimized for an easy entry, but the
+largest part remains with the user: defining the real goal, noticing when the
+agent narrowed it, deciding product semantics and trade-offs, choosing an
+adequate model, and accepting or rejecting the visible result. The person's brain
+remains with the person, not with the AI or a set of acronyms.
+
+Ask every question about the instrument through the agent using it. If the agent
+cannot explain the kit from its current files, the setup or capability is not
+ready. Do not replace the missing answer with a product pitch.
+
 ---
 
 ## Where durable truth lives (say it this way)

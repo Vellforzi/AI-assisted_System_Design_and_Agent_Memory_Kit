@@ -1,8 +1,8 @@
-# Capability Management, Not Model IQ
+# Capability Management: Model, Contour, and Operator
 
 Status: canonical positioning supplement
-Purpose: state the claim this kit is built to test, and answer the common
-objection that agents cannot write better than humans.
+Purpose: state the capability claim this kit is built to test without pretending
+that constraints can replace model reasoning or human judgment.
 
 Read with `MOTIVE_AND_ANALOGY.md`, `QUESTIONS_THIS_KIT_ANSWERS.md` and `BEHAVIORAL_ORACLES.md`.
 
@@ -14,8 +14,12 @@ the analogy in `MOTIVE_AND_ANALOGY.md`.
 
 ## 1. The claim
 
-Agent output quality is dominated by the **constraint contour** around the
-agent, not by a folk ranking of models as smart or stupid.
+Agent output quality is a weakest-link system, not a contest between model IQ
+and process. Use this qualitative model:
+
+```text
+result quality ~= model capability x constraint contour x current evidence x operator judgment
+```
 
 A constraint contour is the set of things the agent cannot skip:
 
@@ -28,12 +32,16 @@ A constraint contour is the set of things the agent cannot skip:
 - owner smoke / acceptance;
 - eval cases grown from real failures.
 
-The same model, unconstrained, produces plausible garbage. The same model,
-inside this contour, can move a messy codebase toward a working product
-while the owner never reads every generated line.
+A capable model, unconstrained, can produce plausible garbage. Inside a good
+contour it can move a messy codebase toward a working product while the owner
+avoids reading every generated line. But a contour cannot manufacture reasoning:
+a model below the task's capability floor will misunderstand or ignore the
+layout. More files then become more unread context.
 
-This is not a claim that models are magic. It is a claim that **mismanaged
-capability** is the usual cause of "agents write junk".
+The operator is the fourth factor. A strong model inside a strong contour can
+still build the wrong product when the person provides an ambiguous outcome,
+chooses an inadequate model to save money, or accepts a result without judgment.
+The kit manages capability; it does not replace the model or the person.
 
 ---
 
@@ -136,6 +144,11 @@ The owner still:
 That last point matters. A consistent internal story can still be the
 wrong product. Owner smoke outranks agent narrative.
 
+The kit may reduce the owner's clerical work, but it does not remove the
+owner's work of thinking. The owner still selects the capability level, defines
+meaning, resolves material trade-offs and owns acceptance. See
+`HUMAN_MODEL_CAPABILITY_CONTRACT.md`.
+
 ---
 
 ## 6. Specialist split
@@ -150,8 +163,10 @@ or black-box evidence independent of the writer. See
 `PROPOSED_SPECIALIST_FUNCTIONS.md` for functions you may create, with
 limits. Copy the method, not a private project's agent roster.
 
-Using one model for everything is a capability-management failure, not
-proof of a model IQ ceiling.
+Using one model for everything without checking task fit is a capability-management
+failure. Using a model below the task's capability floor is also a
+capability-management failure. Neither folders nor role names erase the model's
+actual limits.
 
 **Schemes** are a method to offer: cheap, accurate, human+agent readable
 when a causal path fits a map. They do not replace the contour. See

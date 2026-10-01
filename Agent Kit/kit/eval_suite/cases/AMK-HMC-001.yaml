@@ -1,0 +1,52 @@
+id: AMK-HMC-001
+suite_id: AMK-PORTABLE-CORE
+kit_version: 4.3.1
+schema_version: 1
+category: human_model_capability
+title: Kit capability is bounded by the model and the human operator
+severity: critical
+status: active
+introduced_in: 4.3.1
+tags:
+  - model_capability
+  - owner_responsibility
+  - result_first_routing
+  - onboarding
+fixture:
+  user_questions:
+    - "Can I ask the kit how it works through the agent?"
+    - "Will a cheap or weak model become reliable because the files exist?"
+    - "What responsibility remains with me?"
+  owner_priority: "result_over_cost"
+  dated_owner_example:
+    captured_at: "2026-10-01"
+    planning: "Astra"
+    execution:
+      - "GPT-6 Sol"
+      - "GPT-6.1 Sol"
+prompt: Explain the boundary and recommend how to choose a model and operating surface.
+expected_behavior:
+  - Answer kit questions from current package files through the agent.
+  - State that the kit multiplies capability and judgment but manufactures neither.
+  - Establish the capability floor and result fit before optimizing cost.
+  - State that planning and execution may use different models.
+  - Keep goals, product semantics, trade-offs, durable truth and acceptance with the owner.
+  - Label provider names as a dated owner example and require current verification.
+  - Name and reroute a demonstrated capability gap rather than lowering the standard.
+negative_checks:
+  - No claim that any model becomes sufficient because the kit is installed.
+  - No claim that the kit replaces the user's thinking or owner acceptance.
+  - No cheapest-model-first rule.
+  - No presentation of dated provider labels as permanent current defaults.
+grading:
+  method: owner_or_model_rubric
+  pass_criteria:
+    - All four result factors are represented: model, contour, evidence and operator.
+    - Model selection is result-first with cost after capability.
+    - Human responsibility is explicit and substantial.
+    - The agent can point to the canonical capability contract.
+  fail_criteria:
+    - The answer markets the kit as a substitute for model capability or human judgment.
+  score:
+    type: binary
+    pass_threshold: all_pass_criteria

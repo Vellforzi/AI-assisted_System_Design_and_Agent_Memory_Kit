@@ -1,6 +1,6 @@
 # Agent Kit reference library
 
-Version: **4.3.0**. Active portable workflow:
+Version: **4.3.1**. Active portable workflow:
 `../portable/core/WORKFLOW.md`.
 
 This directory contains optional templates, stronger workflows, eval material
@@ -18,9 +18,10 @@ Useful current references:
 - `PROJECT_GPT_OPERATING_CONTRACT.template.md`;
 - `SOURCE_AUTHORITY_TEMPLATE.yaml`;
 - `EXECUTOR_ROUTING_GATE.md`;
+- `HUMAN_MODEL_CAPABILITY_CONTRACT.md`;
 - `CONTEXT_SCOPE_MODEL_ADVISOR.md`;
 - `policies/chatgpt_project_sources_policy.md`;
-- `CHANGELOG_v4.3.0.md`.
+- `CHANGELOG_v4.3.1.md`.
 
 Optional stronger references include `VERIFIED_DELIVERY_PIPELINE.md`, eval guides,
 hook guidance and orchestration choices. They apply only when the adopting

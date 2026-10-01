@@ -1,7 +1,14 @@
-schema_version: "2.0"
+schema_version: '2.0'
 suite_id: AMK-PORTABLE-CORE
-kit_version: 4.3.0
+kit_version: 4.3.1
 smoke_policy:
   categories:
-    owner_authority: {required: true, min_cases: 1}
-    portable_adoption: {required: true, min_cases: 1}
+    owner_authority:
+      required: true
+      min_cases: 1
+    portable_adoption:
+      required: true
+      min_cases: 1
+    human_model_capability:
+      required: true
+      min_cases: 1

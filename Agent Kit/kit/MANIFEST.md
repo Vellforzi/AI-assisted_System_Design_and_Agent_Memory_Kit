@@ -1,6 +1,6 @@
 # Agent Kit reference manifest
 
-Published package: `4.3.0`.
+Published package: `4.3.1`.
 
 ## Active portable/current guidance
 
@@ -9,6 +9,7 @@ Published package: `4.3.0`.
 - `PROJECT_GPT_OPERATING_CONTRACT.template.md`
 - `SOURCE_AUTHORITY_TEMPLATE.yaml`
 - `EXECUTOR_ROUTING_GATE.md`
+- `HUMAN_MODEL_CAPABILITY_CONTRACT.md`
 - `CONTEXT_SCOPE_MODEL_ADVISOR.md`
 - `policies/chatgpt_project_sources_policy.md`
 - `PRODUCTION_CODE_CHANGE_GUIDE.md`
@@ -18,7 +19,7 @@ Published package: `4.3.0`.
 - `skills/production-engineering-standard/`
 - `skills/complete-technical-communication/`
 - `tools/validate_code_change_contract.py`
-- `CHANGELOG_v4.3.0.md`
+- `CHANGELOG_v4.3.1.md`
 
 ## Optional guidance
 
@@ -38,4 +39,4 @@ owner instruction, current source or the adopting project's authority order.
 ## Release proof
 
 The package version is not proven by this manifest alone. Verify the matching
-main commit, annotated `v4.3.0` tag and GitHub Release.
+main commit, annotated `v4.3.1` tag and GitHub Release.

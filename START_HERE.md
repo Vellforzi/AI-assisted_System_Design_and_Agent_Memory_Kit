@@ -1,6 +1,14 @@
 # Start here
 
-Published release: **4.3.0**.
+Published release: **4.3.1**.
+
+> [!IMPORTANT]
+> **Agent Memory Kit is a multiplier, not a brain.** A model that cannot reason
+> about the task will use the kit poorly; a person who stops thinking will
+> supervise it poorly. Ask questions about the kit through the agent. Select the
+> model for the required result first and consider cost only after the capability
+> floor is met. See
+> [`HUMAN_MODEL_CAPABILITY_CONTRACT.md`](Agent%20Kit/kit/HUMAN_MODEL_CAPABILITY_CONTRACT.md).
 
 1. Read `Agent Kit/portable/core/WORKFLOW.md`.
 2. Keep the adopting project's current instructions and source authority.
@@ -24,4 +32,4 @@ not loaded as a mandatory checklist. Python is required only when using the
 installation helper.
 
 See `Agent Kit/portable/README.md` for adoption/update rules and
-`Agent Kit/kit/CHANGELOG_v4.3.0.md` for release-source notes.
+`Agent Kit/kit/CHANGELOG_v4.3.1.md` for release-source notes.

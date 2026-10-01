@@ -5,7 +5,24 @@ Purpose: help the owner inspect whether the memory kit is working as intended. T
 
 ---
 
-## 1. Grounding review
+## 1. Human/model capability review
+
+Before trusting the installation, ask the agent about the kit itself.
+
+- Could the agent explain the kit from current files and cite the exact guide?
+- Did it distinguish a missing file, unloaded integration, model limitation and
+  missing tool instead of inventing an answer?
+- Was the model selected for the required result before cost optimization?
+- Did the agent escalate a demonstrated capability gap instead of lowering the
+  standard or hiding it behind confident prose?
+- Did the owner retain goals, product semantics, trade-offs, durable truth and
+  final acceptance?
+- Did anyone falsely imply that the kit transfers the human's judgment into the
+  model or makes every model sufficient?
+
+---
+
+## 2. Grounding review
 
 Check a sample project answer.
 
@@ -18,7 +35,7 @@ Check a sample project answer.
 
 ---
 
-## 2. Action-intent review
+## 3. Action-intent review
 
 Ask a question that should not cause work to be performed.
 
@@ -30,7 +47,7 @@ Ask a question that should not cause work to be performed.
 
 ---
 
-## 3. Retrieval review
+## 4. Retrieval review
 
 Check what the agent loaded.
 
@@ -45,7 +62,7 @@ Check what the agent loaded.
 
 ---
 
-## 4. Claim-ledger review
+## 5. Claim-ledger review
 
 Check a complex answer or proposal.
 
@@ -58,7 +75,7 @@ Check a complex answer or proposal.
 
 ---
 
-## 5. Lifecycle review
+## 6. Lifecycle review
 
 Check memory updates.
 
@@ -72,7 +89,7 @@ Check memory updates.
 
 ---
 
-## 6. Continuation review
+## 7. Continuation review
 
 Start a new session and ask the agent to resume.
 
@@ -86,7 +103,7 @@ Start a new session and ask the agent to resume.
 
 ---
 
-## 7. Failure-mode review
+## 8. Failure-mode review
 
 Manually test these situations:
 
@@ -105,7 +122,7 @@ Expected behavior: the agent should slow down, label uncertainty, retrieve or as
 
 ---
 
-## 8. Significant-work review
+## 9. Significant-work review
 
 After a meaningful task, check:
 
@@ -118,7 +135,7 @@ After a meaningful task, check:
 
 ---
 
-## 9. Scoring notes
+## 10. Scoring notes
 
 Use simple manual labels:
 
@@ -130,7 +147,7 @@ Record failures as project risks or memory repair tasks, not as hidden chat comp
 
 ---
 
-## 10. Eval-suite review
+## 11. Eval-suite review
 
 After changing the kit, Project Map, agent instruction files, model, or client settings:
 

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "package_id": "agent-memory-kit-core",
-  "version": "4.3.0",
+  "version": "4.3.1",
   "base_commit": "557e340208d8661f00d76bdd9c4a4ea1a748ed59",
   "release_status": "published",
   "files": [
@@ -9,7 +9,7 @@
       "source": "core/WORKFLOW.md",
       "target": "Agent Kit/core/WORKFLOW.md",
       "mode": "managed",
-      "sha256": "27912cd9393cd976eaed89f1632a49cad38402f39847ac5ef615106dcb1f09f3"
+      "sha256": "a140ec117558d87688de297ee3ff2239e5269f5928d12e0f51940b936f32d574"
     },
     {
       "source": "core/OPTIONAL.md",

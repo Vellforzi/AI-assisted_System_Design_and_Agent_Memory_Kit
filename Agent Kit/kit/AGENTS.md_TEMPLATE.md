@@ -13,6 +13,25 @@ Purpose: route repository-aware agents to the Project Map and enforce safe defau
 - Encoding-sensitive or UI-visible text edits require byte-safe tooling and readback verification.
 - Blocking hooks should return actionable recovery fields, and agents should follow them.
 
+## Human and model capability boundary
+
+Agent Memory Kit is a multiplier, not a brain. It does not make every model
+sufficient and it does not replace the project owner's judgment.
+
+- Answer questions about the kit through the agent from current kit files.
+- Choose the model for the required result and reasoning risk; optimize cost only
+  after the capability floor is met.
+- If the current model cannot preserve owner meaning, reconcile evidence or use
+  the installed controls, name the gap and reroute rather than lowering the
+  quality standard.
+- Keep goals, product semantics, material trade-offs, durable truth and final
+  acceptance with the human owner.
+- Treat provider model labels as volatile; dated owner examples are evidence, not
+  permanent defaults.
+
+Read `HUMAN_MODEL_CAPABILITY_CONTRACT.md` before material adoption or routing
+advice.
+
 ## Product semantics and production quality controls
 
 The owner's stated product behavior is the authority for required behavior.

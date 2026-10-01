@@ -11,6 +11,31 @@ If the user asks what this toolkit is for, answer from
 those words), then this file and the linked guides. Do not invent a
 product pitch. Do not bind the answer to one private project.
 
+## Read this first: three non-negotiable answers
+
+### Can I ask the kit how it works?
+
+Yes. Ask through the agent that is using the kit. The agent should answer from
+current package files, point to the exact policy or guide, and distinguish a
+missing file, unloaded host integration, model capability gap and missing tool.
+An agent that cannot explain the installed kit is not ready for material work.
+
+### Will the kit make a weak model strong?
+
+No. The kit externalizes method, context and control. It does not manufacture
+reasoning. A weaker model extracts less value from the same structure; below the
+task's capability floor, more folders mostly add context the model cannot use.
+Choose the model for the required result first and optimize cost second.
+
+### What remains the user's job?
+
+The user still defines the real outcome, preserves product meaning, resolves
+material trade-offs, chooses an adequate capability level, maintains or assigns
+durable truth, grants side effects and accepts or rejects the visible result.
+Easy onboarding removes setup friction, not the need to think.
+
+See `HUMAN_MODEL_CAPABILITY_CONTRACT.md`.
+
 ---
 
 ## 1. What is this package?
@@ -63,9 +88,9 @@ constraint contour**. See `CAPABILITY_MANAGEMENT.md`.
 
 The public claim this package is built to test:
 
-> Agent output quality is dominated by how capabilities are gated, grounded,
-> reviewed, and oracled — not by whether the current model is "smart" or
-> "dumb".
+> Agent output quality depends on model capability, the installed constraint
+> contour, current evidence and operator judgment. No one factor fully compensates
+> for a missing one.
 
 ---
 
