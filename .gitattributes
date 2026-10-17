@@ -1,0 +1,4 @@
+
+# The optional memory module binds raw file hashes; keep checkout bytes stable.
+"/Agent Kit/memory/**" text eol=lf
+"/Agent Kit/kit/MEMORY_COMPILER_GUIDE.md" text eol=lf

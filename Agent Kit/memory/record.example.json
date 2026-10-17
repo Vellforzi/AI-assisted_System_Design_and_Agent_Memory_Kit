@@ -1,0 +1,42 @@
+{
+  "applicability": "State the exact conditions and component boundary.",
+  "branch": "main",
+  "evidence": [
+    {
+      "freshness": "required",
+      "path": "replace-with-existing-evidence.md",
+      "role": "source",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    }
+  ],
+  "id": "MEM-EXAMPLE-001",
+  "kind": "fact",
+  "language": "en",
+  "not_applicable": [
+    "State important exclusions."
+  ],
+  "original": {
+    "event_id": "replace-with-source-event-id",
+    "kind": "source_observation",
+    "language": "en",
+    "ref": "replace-with-addressable-source-reference",
+    "text": "Preserve the exact source wording."
+  },
+  "relationships": [],
+  "scope": "project.example",
+  "search_keys": {
+    "en": [
+      "English search variant"
+    ],
+    "ru": [
+      "поиск на русском"
+    ]
+  },
+  "subject": "replace-with-stable-subject",
+  "summary": "State only a source-supported English claim.",
+  "title": "Example only: replace before staging",
+  "verification": {
+    "level": "source",
+    "note": "Source inspection only; no runtime or owner acceptance."
+  }
+}

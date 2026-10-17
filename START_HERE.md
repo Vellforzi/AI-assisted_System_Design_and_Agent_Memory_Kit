@@ -33,3 +33,13 @@ installation helper.
 
 See `Agent Kit/portable/README.md` for adoption/update rules and
 `Agent Kit/kit/CHANGELOG_v4.3.1.md` for release-source notes.
+
+## Optional local agent-authored memory module
+
+An independently versioned optional source module is available at
+`Agent Kit/memory/README.md`. It uses the current agent for semantic work and local
+Python for evidence-linked records, RU/EN search and lifecycle control; no model or
+API dependency is installed. Preview adoption with its `install.py`. The module
+has a separate manifest and does not change the core version or prior release
+claims above. Existing project instructions, evidence and customization remain
+project-owned.

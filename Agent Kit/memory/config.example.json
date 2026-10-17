@@ -1,0 +1,20 @@
+{
+  "cache_dir": ".generated/agent-memory",
+  "default_branch": "main",
+  "project_id": "replace-with-project-id",
+  "record_language": "en",
+  "records_dir": "Project Map/memory/records",
+  "reference_files": [],
+  "schema_version": 1,
+  "term_aliases": [
+    [
+      "память",
+      "memory"
+    ],
+    [
+      "подписка",
+      "subscription"
+    ]
+  ],
+  "write_enabled": false
+}

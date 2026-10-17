@@ -216,3 +216,11 @@ Project Map/eval_suite/failure_to_eval_case_template.yaml
 ```
 
 This keeps the failure testable in future releases.
+
+## Optional executable local backend
+
+`../memory/README.md` and `../memory/SKILL.md` implement an optional backend for
+this workflow. The active agent still selects and interprets the candidate;
+Python validates, persists and retrieves it without model/API calls. The module
+is separately versioned and is not an Agent Kit core release. Adoption is explicit and never
+replaces the adopting project's source authority or existing memory automatically.
