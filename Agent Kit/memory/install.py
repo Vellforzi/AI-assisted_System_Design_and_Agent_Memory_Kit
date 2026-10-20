@@ -9,7 +9,8 @@ from engine import MemoryError, atomic_write, digest, encoded, file_lock, load_j
 PACKAGE_FILES = {"engine.py", "cli.py", "install.py", "test_memory.py", "README.md", "SKILL.md", "config.example.json", "record.example.json", "manifest.json", "EVALUATION.md"}
 
 
-def install(source: Path, project: Path, write: bool = False) -> dict:
+def install(source: Path, project: Path, write: bool = False) -> dict[str, object]:
+    """Preserve local overrides and carry the source publication status into the receipt."""
     source = source.resolve(strict=True); project = project.resolve(strict=True)
     manifest = load_json(source / "manifest.json")
     if manifest.get("package_id") != "agent-authored-memory" or manifest.get("schema_version") != 1:
@@ -47,8 +48,11 @@ def install(source: Path, project: Path, write: bool = False) -> dict:
             operations.append((target, payloads[name], expected))
     blocked = any(r["state"].startswith("preserved_local") for r in rows)
     receipt = {"schema_version": 1, "package_id": manifest["package_id"], "module_version": manifest["version"],
-               "manifest_sha256": digest(payloads["manifest.json"]), "release_status": "local_unpublished",
+               "manifest_sha256": digest(payloads["manifest.json"]),
+               "release_status": manifest.get("release_status", "local_unpublished"),
                "files": {"Agent Kit/memory/" + name: digest(data) for name, data in payloads.items()}}
+    if "publication" in manifest:
+        receipt["publication"] = manifest["publication"]
     before_receipt = digest(read_bytes(receipt_path)) if receipt_path.exists() else None
     if write and not blocked:
         with file_lock(safe_path(project, ".generated/agent-memory-install/write.lock")):

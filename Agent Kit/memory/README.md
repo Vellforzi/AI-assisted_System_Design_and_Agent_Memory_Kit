@@ -1,6 +1,10 @@
 # Agent-authored memory (optional module)
 
-Version: `0.1.1-local`. Local source addition, not an Agent Kit release.
+Version: `0.1.1-local`. Module source published in Agent Kit `v4.4.0`;
+there is no separate module release tag. The manifest records the verified
+Kit release, commit and released manifest hash; the installer copies that
+publication evidence into `MEMORY_INSTALLATION.json`. Later local edits are
+not thereby published and must be compared with that released snapshot.
 Requires Python 3.11+ with SQLite FTS5. Uses only the standard library.
 No LLM API, embeddings, other models, GPU, WSL, network calls or background
 collection. The current owner-selected agent performs semantic work in its

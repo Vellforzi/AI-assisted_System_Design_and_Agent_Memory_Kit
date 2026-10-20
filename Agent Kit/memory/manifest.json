@@ -1,17 +1,28 @@
 {
   "files": {
     "EVALUATION.md": "a1d2f57a3475e55410a832b5174e107c43b4fc2d08fb7240547397abbc97c243",
-    "README.md": "96f499825b3b0c3fa76eff004b33e59040efdd2bd4d08bf9d5466494a7f80269",
+    "README.md": "474ac7b749ed07da7fd121cfba2ec4c22ac49406b366dca75f52d44babe37010",
     "SKILL.md": "540acbbcfd25ea6dcf042b5573cc46ebfacd02b57af55a7269a5457227f1c144",
     "cli.py": "474ba894028737d36ea2fb5d77f5ec1d974ab6d8f29443ebfb9df4a814c92856",
     "config.example.json": "d2646df4598c658e6ed0926e38dc1d9807941e53f8bd7425dd90885e2ab408d2",
     "engine.py": "94aeec6415ec603b75f18d6e7bab7abc43d828d23235f2d2e9073087cd385660",
-    "install.py": "0c8d2661c56865218c77ba226bd0eee62c3a3e9609a7fe5db7ca821da79a8fdd",
+    "install.py": "542a62a1a994836d96845a4e14cdc9d1217037b4ff517e6269c1e06792010d8f",
     "record.example.json": "7ffa4959b8d2ca49facfcb9ac9d98f52e0588ac0c5d21363ae067ece1a99314b",
-    "test_memory.py": "96d3fce910b79e9ac5298fd38412a1392ed5b1159dfd42544bb24ec01a6436a8"
+    "test_memory.py": "42f06799b02c732928892b263890dfb0040b6d395f1bc5be689e2c664c0d95d2"
   },
   "package_id": "agent-authored-memory",
-  "release_status": "local_unpublished",
+  "release_status": "published_in_agent_kit",
+  "publication": {
+    "kind": "bundled_source",
+    "repository": "https://github.com/Vellforzi/AI-assisted_System_Design_and_Agent_Memory_Kit",
+    "kit_version": "4.4.0",
+    "tag": "v4.4.0",
+    "commit": "e00f1e319a7c1fa926a2a6a9d541056072bbd67b",
+    "release_url": "https://github.com/Vellforzi/AI-assisted_System_Design_and_Agent_Memory_Kit/releases/tag/v4.4.0",
+    "published_at": "2026-10-20T09:57:06Z",
+    "released_manifest_sha256": "cf64d37de01b52e370c1ee6134b959318220acff6ef87c9f86c1788239b8ccd0",
+    "module_version": "0.1.1-local"
+  },
   "schema_version": 1,
   "version": "0.1.1-local"
 }

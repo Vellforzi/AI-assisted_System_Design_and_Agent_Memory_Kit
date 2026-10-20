@@ -385,6 +385,31 @@ class InstallTests(unittest.TestCase):
         self.assertFalse(result["applied"]); self.assertEqual(b"local change\n", target.read_bytes())
         self.assertEqual(b"fixture cli.py\n", (self.target / "Agent Kit/memory/cli.py").read_bytes())
 
+    def test_install_carries_manifest_publication_metadata(self) -> None:
+        """A published module must retain its release evidence across reinstall."""
+        manifest_path = self.source / "manifest.json"
+        manifest = json.loads(manifest_path.read_bytes())
+        publication = {"kind": "bundled_source", "kit_version": "4.4.0", "tag": "v4.4.0"}
+        manifest["release_status"] = "published_in_agent_kit"
+        manifest["publication"] = publication
+        manifest_path.write_bytes(encoded(manifest))
+        self.assertTrue(install(self.source, self.target, True)["applied"])
+        receipt_path = self.target / "Agent Kit/MEMORY_INSTALLATION.json"
+        receipt = json.loads(receipt_path.read_bytes())
+        self.assertEqual("published_in_agent_kit", receipt["release_status"])
+        self.assertEqual(publication, receipt["publication"])
+        self.assertEqual(digest(manifest_path.read_bytes()), receipt["manifest_sha256"])
+        before = receipt_path.read_bytes()
+        self.assertTrue(install(self.source, self.target, True)["applied"])
+        self.assertEqual(before, receipt_path.read_bytes())
+
+    def test_legacy_manifest_retains_local_status(self) -> None:
+        """Legacy manifests without publication fields keep the existing receipt."""
+        self.assertTrue(install(self.source, self.target, True)["applied"])
+        receipt = json.loads((self.target / "Agent Kit/MEMORY_INSTALLATION.json").read_bytes())
+        self.assertEqual("local_unpublished", receipt["release_status"])
+        self.assertNotIn("publication", receipt)
+
     def test_manifest_tamper_rejected(self):
         (self.source / "engine.py").write_bytes(b"changed after manifest")
         with self.assertRaises(MemoryError): install(self.source, self.target, True)
