@@ -21,6 +21,16 @@ Use this checklist before declaring code or logic work complete.
   boundaries were reviewed where applicable.
 - The review covers the complete affected chain, not unrelated repository areas.
 
+## Dependency contracts
+
+- Material dependency assumptions were checked against relevant-version
+  documentation and available implementation, including guards around old calls.
+- Relevant built-in capabilities were considered before adding wrappers or checks.
+- The actual call sequence, post-call states and subsequent consumer conditions
+  were traced, including special values and relevant lifecycle/error transitions.
+- Source/version and a dependent check or explicit gap support each material
+  assumption; names, analogies and test doubles were not treated as evidence.
+
 ## Design and code
 
 - The implementation is the smallest coherent complete change.
@@ -30,6 +40,18 @@ Use this checklist before declaring code or logic work complete.
 - Domain names, state ownership, units, time zones and empty/error semantics are
   explicit.
 - Resource ownership and cleanup are correct on success, failure and early exit.
+
+- Purpose comments/docstrings explain the materially changed code, remain
+  accurate, and follow the project's language policy without restating syntax.
+- Types preserve accepted inputs, actual output/absence states and collection
+  elements; Any/casts/suppressions have narrow, evidenced reasons.
+- Framework-visible annotations/docstrings preserve validation, serialization,
+  ORM and OpenAPI contracts.
+- Idioms match the actual compiler/runtime and local style; no unrelated
+  modernization, abstractions or formatting were introduced.
+- Each catch has a defined responsibility; finally/with/using reflect actual
+  ownership and preserve original failures, cancellation and partial state.
+- Trust-boundary validation, authorization and parameter binding were preserved.
 
 ## Performance
 
@@ -53,10 +75,21 @@ Use this checklist before declaring code or logic work complete.
 - Expected behavior came from owner criteria, preserved behavior or an
   authoritative platform contract, never from the new implementation output.
 - Existing checks were preferred.
+- Applicable type checks ran against the correct environment; baseline-aware
+  success is distinguished from full typing correctness and runtime proof.
+- A root-cause hypothesis has a discriminating observation where needed;
+  symptom suppression alone is not a causal explanation.
 - Every new test has a criterion, independent oracle and distinct failure mode.
+- Test doubles and fixtures preserve the real dependency's relevant states and
+  transitions; translated tests do not substitute for target-runtime semantics.
+- Review challenged assumptions shared by the implementation and test; remaining
+  uncertainty and unavailable target-environment checks are stated explicitly.
 - No assertion was weakened or duplicated merely to make the patch green.
 - Semantic walkthrough and final-diff review were completed before relying on
   tests.
+- Every affected preserved invariant has a result or a concrete verification gap.
+- Relevant generated/exported/packaged artifacts were checked after transformation.
+- A targeted check rejects the known failing artifact when one is available.
 - Static/build/compile/test/runtime/owner-acceptance evidence levels are reported
   separately.
 

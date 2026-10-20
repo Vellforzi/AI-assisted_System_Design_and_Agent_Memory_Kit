@@ -1,6 +1,6 @@
 # Start here
 
-Published release: **4.3.1**.
+Source version: **4.4.0**.
 
 > [!IMPORTANT]
 > **Agent Memory Kit is a multiplier, not a brain.** A model that cannot reason
@@ -32,7 +32,7 @@ not loaded as a mandatory checklist. Python is required only when using the
 installation helper.
 
 See `Agent Kit/portable/README.md` for adoption/update rules and
-`Agent Kit/kit/CHANGELOG_v4.3.1.md` for release-source notes.
+`Agent Kit/kit/CHANGELOG_v4.4.0.md` for release-source notes.
 
 ## Optional local agent-authored memory module
 

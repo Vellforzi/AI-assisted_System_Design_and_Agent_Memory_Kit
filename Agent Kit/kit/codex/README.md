@@ -32,7 +32,10 @@ codex/
 
 ## Recommended use
 
-Use Codex for read-only audit, review, recovery, and independent analysis. Keep Project Map as the only durable project-memory source.
+Use Codex for owner-authorized implementation, analysis, review or recovery when
+its current tools fit the task. Keep durable project context in the owner-selected
+source and verify recalled claims against current files. No fixed client role split
+or mandatory intermediary is required.
 
 ## Critical boundary
 
@@ -59,7 +62,7 @@ Codex integration now includes:
 - scope-control templates and helper;
 - guidance for `default_permissions` versus old `sandbox_mode` settings;
 - workspace selection guidance;
-- a default role split: Cursor implements, Codex reviews, GPT researches, Project Map stores truth;
+- historical role-split examples, superseded by current capability-based routing;
 - hook request workflow for generating project-local hook packages.
 
 See:
@@ -80,3 +83,16 @@ For current ChatGPT desktop Codex prompt choices and distinct Codex client
 boundaries, see `workflows/model-routing.md`. Prompt recommendations contain
 only surface, model, reasoning, and speed; app configuration is documented
 separately.
+
+
+## Optional production quality skills
+
+Adopt the two canonical skills under `../skills/` using
+[the quality-pack guide](../PRODUCTION_CODE_CHANGE_GUIDE.md). Version 4.4.0 adds
+purpose comments, truthful types, language/version idioms, justified handlers,
+owned-resource cleanup and causal-diagnosis references. The communication skill
+references the engineering policy rather than duplicating it.
+
+Verify the selected client's supported discovery path and explicit instruction
+links. A copied file is not proof that an already-open client loaded it.
+Comment language and exact analyzer versions belong to the adopting project.

@@ -1,6 +1,6 @@
 # Portable adoption
 
-Version: **4.3.1**. Source is published on `main`; package tag/release state must
+Version: **4.4.0**. Source is published on `main`; package tag/release state must
 be verified separately.
 
 > [!IMPORTANT]
@@ -41,4 +41,16 @@ Review `preserved_local` entries explicitly. The manifest is integrity metadata,
 not a signature, action authority or release proof. Only files in `package.json`
 are installed; optional guides and historical examples remain in the repository.
 
-Release notes: [v4.3.1](../kit/CHANGELOG_v4.3.1.md).
+Release notes: [v4.4.0](../kit/CHANGELOG_v4.4.0.md).
+
+
+## Optional coding standards and memory
+
+The [production quality pack](../kit/PRODUCTION_CODE_CHANGE_GUIDE.md) provides
+the existing engineering and communication skills. Version 4.4.0 expands their
+comment, typing, language-style, failure-handling and diagnostic guidance.
+The core installer does not install these optional skills or enable hooks.
+Choose the project's comment language and tools during explicit adoption.
+
+The [agent-authored memory module](../memory/README.md) has a separate installer,
+manifest and version. It is not silently installed by this core command.

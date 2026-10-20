@@ -161,7 +161,14 @@ Use `/context-advisor`, `/settings`, `/scope`, `/fuel`, and `/safe-apply` as on-
 
 ## Optional production quality skills
 
-`cursor/skills/production-engineering-standard/` and
-`cursor/skills/complete-technical-communication/` are ready-to-copy mirrors of
-the canonical skills under `skills/`. Adopt them together with the product-code
-policy and contract templates; skills define quality but do not grant permission.
+`skills/production-engineering-standard/` and
+`skills/complete-technical-communication/` in this directory mirror the canonical
+directories under `../skills/`. See [the quality-pack guide](../PRODUCTION_CODE_CHANGE_GUIDE.md).
+Version 4.4.0 adds useful comments, truthful types, supported-language idioms,
+justified error handling, owned-resource cleanup and causal diagnosis.
+
+Edit the canonical source first, synchronize registered mirrors, and verify
+the client's actual discovery and activation. The adopting project chooses
+comment language and checking tools. Skills, example settings, hooks and helper
+roles do not create new authority or require another approval for already
+authorized work. Install only the pieces the project needs.

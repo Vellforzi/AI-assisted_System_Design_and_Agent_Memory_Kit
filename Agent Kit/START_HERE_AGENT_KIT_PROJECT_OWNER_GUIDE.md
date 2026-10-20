@@ -1,6 +1,6 @@
 # Owner start
 
-Published version: 4.3.1.
+Source version: 4.4.0.
 
 > [!IMPORTANT]
 > **Agent Memory Kit is a multiplier, not a brain.** It lowers setup friction; it

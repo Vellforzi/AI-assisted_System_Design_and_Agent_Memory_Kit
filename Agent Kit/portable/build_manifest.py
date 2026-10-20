@@ -8,10 +8,15 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 REPO = ROOT.parents[1]
 
-def generate(write=False):
+def generate(write: bool = False) -> dict[str, object]:
+    """Bind portable payloads, normalizing attribution text across host checkouts."""
     version = (ROOT.parent / 'VERSION').read_text(encoding='utf-8').strip()
-    attribution = {ROOT / 'attribution/LICENSE': (REPO / 'LICENSE').read_bytes(),
-                   ROOT / 'attribution/AUTHORS.md': (REPO / 'AUTHORS.md').read_bytes()}
+    # Root documents may use CRLF; distributed attribution is always LF so its
+    # hash remains valid in Git archives and on hosts with different checkout rules.
+    attribution = {
+        ROOT / 'attribution' / name: (REPO / name).read_text(encoding='utf-8').encode('utf-8')
+        for name in ('LICENSE', 'AUTHORS.md')
+    }
     mappings = [('core/WORKFLOW.md', 'Agent Kit/core/WORKFLOW.md', 'managed'),
                 ('core/OPTIONAL.md', 'Agent Kit/core/OPTIONAL.md', 'managed'),
                 ('core/PROJECT_CONTEXT.template.md', 'Project Map/README.md', 'seed'),

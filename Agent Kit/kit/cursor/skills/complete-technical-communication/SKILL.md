@@ -40,6 +40,16 @@ because it is easier to implement or summarize.
 When paraphrasing the request, preserve the original wording beside the
 technical interpretation whenever a semantic loss is possible.
 
+When a material data gap or skipped item is discovered, check the current owner
+authorization before deciding what to do. If addressing it requires an
+unapproved change to products, dates, collection, copying or persistence, report
+the exact gap and downstream effect, propose a concrete bounded action, and ask
+the owner before that action. Do not silently exclude the gap, claim complete
+readiness, or treat discovery itself as permission to repair it. Continue work
+already authorized; do not request the same approval again. See
+`references/anti-patterns.md`, "Discovered gap treated as permission or silence".
+
+
 ## 2. Answer the actual question first
 
 Begin with the direct answer or the complete current flow being asked about.
@@ -189,27 +199,21 @@ Do not use "так сделано" or "так работает система" a
 
 ## 8. Code comments
 
-Code comments must be concise and local.
+Use the adopting project's chosen language for code comments and preserve
+identifiers. Do not infer the comment language from the conversation alone
+or translate unrelated existing comments.
 
-Comments explain:
+Make a comment understandable to a reader who did not write the code: begin with
+its purpose and explain material contracts, reasons and limitations. Keep the
+explanation concise, local and consistent with the implementation. Add the
+information the signature does not convey; avoid repeating names or syntax,
+unverified guarantees and architecture essays.
 
-- business invariant;
-- ownership boundary;
-- compatibility requirement;
-- non-obvious failure behavior;
-- performance-sensitive reason;
-- why an apparently simpler path is incorrect.
-
-Comments do not:
-
-- narrate obvious syntax;
-- repeat the method name;
-- make unverified promises;
-- substitute for readable code;
-- contain a full architecture essay.
-
-If a rule needs a long explanation, place the complete explanation in the
-appropriate documentation and keep a precise local reference in code.
+The scope, automatic addition of purpose explanations, language-specific forms
+and framework-visible documentation constraints are defined by
+$production-engineering-standard and its `references/code-quality.md`.
+Apply that policy rather than maintaining a second technical rule set here.
+For long reasoning, use relevant existing documentation and a precise local link.
 
 ## 9. Documentation and Space pages
 

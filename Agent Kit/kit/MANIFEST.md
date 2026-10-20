@@ -1,6 +1,6 @@
 # Agent Kit reference manifest
 
-Published package: `4.3.1`.
+Source package: `4.4.0`.
 
 ## Active portable/current guidance
 
@@ -19,7 +19,9 @@ Published package: `4.3.1`.
 - `skills/production-engineering-standard/`
 - `skills/complete-technical-communication/`
 - `tools/validate_code_change_contract.py`
-- `CHANGELOG_v4.3.1.md`
+- `CHANGELOG_v4.4.0.md`
+- `skills/production-engineering-standard/references/code-quality.md`
+- `skills/production-engineering-standard/references/diagnosis-and-properties.md`
 
 ## Optional guidance
 
@@ -38,5 +40,5 @@ owner instruction, current source or the adopting project's authority order.
 
 ## Release proof
 
-The package version is not proven by this manifest alone. Verify the matching
-main commit, annotated `v4.3.1` tag and GitHub Release.
+The package version is not proven by this manifest alone. Verify the main commit separately. Claim a tagged release only after verifying
+its matching tag and GitHub Release; source publication alone does not establish either.

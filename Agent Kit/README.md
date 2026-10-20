@@ -1,38 +1,51 @@
 # Agent Memory Kit
 
-Published release: **4.3.1**.
+Source version: **4.4.0**. [Change notes](kit/CHANGELOG_v4.4.0.md).
 
-> [!IMPORTANT]
-> **Agent Memory Kit is a multiplier, not a brain.** A weak model does not become
-> reliable because more files exist, and the owner does not outsource judgment to
-> the model or the toolkit. Ask questions about the kit through the agent; select
-> models by the required result first and cost second. Read
-> [`kit/HUMAN_MODEL_CAPABILITY_CONTRACT.md`](kit/HUMAN_MODEL_CAPABILITY_CONTRACT.md).
+This is the agent workflow and project-memory layer of the repository. It helps
+an owner keep concise decisions, recover ongoing work and require evidence for
+code changes. The owner retains product meaning and final acceptance; the model
+still needs sufficient reasoning and tool capability.
 
-Use [the short workflow](portable/core/WORKFLOW.md) and
-[portable adoption](portable/README.md). `portable/package.json` lists the
-managed distributable core and binds its bytes. An adopting project's
-`INSTALLATION.json` records the installed baseline and local overrides.
+## Start here
 
-## Execution rule
+1. Read [the capability contract](kit/HUMAN_MODEL_CAPABILITY_CONTRACT.md) and
+   [short workflow](portable/core/WORKFLOW.md).
+2. Preview [portable adoption](portable/README.md) in the actual project.
+3. For coding work, inspect [the production quality pack](kit/PRODUCTION_CODE_CHANGE_GUIDE.md).
+4. Add [local agent-authored memory](memory/README.md) if evidence-linked records
+   and search solve a real continuity problem.
+5. Use [the reference library](kit/README.md) for a specific task need.
 
-ChatGPT web, Codex, Cursor and other connected agents are first-class execution
-surfaces. Select by current live capabilities, owner authority and task fit. No
-surface is a mandatory intermediary by product name. External/current research
-is a ChatGPT strength, not its only permitted role.
+## What each part owns
 
-The current owner request authorizes the actions it explicitly or causally
-requires. Analysis-only requests remain read-only. Reference guides, scopes,
-leases and receipts are evidence/coordination, not duplicate permission gates.
+`portable/package.json` declares the small managed core. An adopting project's
+`Agent Kit/INSTALLATION.json` records its installed version, hashes and local
+overrides. The project keeps its own instructions, business logic and durable
+context. The core installer does not activate all skills, hooks or examples.
 
-## Library
+The independently versioned `memory/` module stores agent-authored records and
+provides local search. The current agent supplies meaning and bilingual search
+keys. The module validates structure and provenance without calling a model,
+embedding service or external API. Its manifest is separate from the core.
 
-The `kit/` directory is an optional reference library. Read only what the task
-needs: source authority, recovery, evidence, evals, hooks, routing or stronger
-delivery proof. Expired provider/model snapshots are historical evidence and do
-not define current product roles.
+The optional quality pack contains the existing
+`production-engineering-standard` and `complete-technical-communication` skills.
+Version 4.4.0 expands comments, types, language idioms, failure handling,
+resource ownership, causal diagnosis and property-based reasoning. Comment
+language and exact tool versions remain adopting-project decisions.
 
-Kit quality is assessed through reproducible adoption/update checks and actual
-agent traces. File count and a passing schema alone do not measure behavior.
+## Working rules
 
-Release-source notes: [v4.3.1](kit/CHANGELOG_v4.3.1.md).
+The current owner request authorizes its explicit and causally necessary work.
+Analysis-only requests remain read-only. Current source establishes existing
+behavior; an unspecified product rule must be preserved.
+
+Choose ChatGPT, Codex, Cursor or another execution surface by current tools and
+task fit. No client, helper agent, orchestration hierarchy or new worktree is a
+mandatory step. Adopt optional controls proportionally to the task.
+
+Separate source, tests, build, publication, deployment, runtime and owner
+acceptance. Documentation and integrity checks do not prove skill activation or
+future agent behavior. Tag and release state require separate repository
+readback; this source version is not a claim that a release object was created.

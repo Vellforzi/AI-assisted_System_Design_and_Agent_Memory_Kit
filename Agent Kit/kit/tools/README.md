@@ -2,6 +2,21 @@
 
 This folder contains optional helper scripts. They are not required to use the kit.
 
+## `validate_code_change_contract.py`
+
+Validates the structure and evidence references of the optional production-code
+change contract. Use it with the [quality-pack guide](../PRODUCTION_CODE_CHANGE_GUIDE.md)
+and the two existing engineering/communication skills. Version 4.4.0 expands
+their code-quality references; the validator does not judge product semantics,
+comments, type correctness or actual runtime behavior.
+
+## Package integrity helpers
+
+The portable core manifest and adoption helpers live under `../../portable/`,
+with their own [usage guide](../../portable/README.md). The independent local
+memory module has its own manifest and installer under `../../memory/`.
+Do not treat one module's passing checks as verification of another.
+
 ## `verify_executor_routing_gate.py`
 
 Checks non-trivial task contracts and bootstrap artifacts for a complete
@@ -16,8 +31,9 @@ python "Agent Kit/kit/tools/verify_executor_routing_gate.py" \
 
 ## `run_eval_checklist.py`
 
-Creates a local eval run folder and Markdown checklist from the v3.11.0 manifest
-suite or a legacy embedded cases YAML file.
+Creates a local eval run folder and Markdown checklist from the selected
+manifest suite or a legacy embedded cases YAML file. The active package suite
+is selected by `../eval_suite/manifest.yaml`; older cases are not all active.
 
 Requires Python with PyYAML available.
 
