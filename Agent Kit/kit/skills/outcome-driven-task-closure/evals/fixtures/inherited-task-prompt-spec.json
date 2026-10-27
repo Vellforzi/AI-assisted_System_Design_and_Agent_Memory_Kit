@@ -1,0 +1,26 @@
+{
+  "schema": "TASK_PROMPT_SPEC_V1",
+  "mode": "inherited",
+  "task_id": "EVAL-LEAN-PROMPT-001",
+  "tree": "C:\\worktrees\\example-task",
+  "baseline_head": "0123456789abcdef",
+  "continuation": true,
+  "owner_outcome": "Сохранить полный owner outcome без потерь при любом порядке действий: кириллица, ё, № и → должны пройти CLI побайтно точно.",
+  "task_state": [
+    "Задача остаётся открытой после неуспешного owner smoke.",
+    "Унаследованная матрица приёмки остаётся authoritative."
+  ],
+  "current_evidence": [
+    "Последний owner smoke опроверг прежнее заявление о локальном завершении."
+  ],
+  "active_slice": "Найти оставшийся blocker, не сужая исходную задачу.",
+  "authorization": {
+    "allowed": [
+      "Изменять только файлы, разрешённые унаследованной задачей."
+    ],
+    "forbidden": [
+      "Не запускать owner-operated runtime smoke.",
+      "Не выполнять commit или push."
+    ]
+  }
+}

@@ -135,3 +135,65 @@ concurrent use only where relevant to the resource's real lifecycle.
   [GetLastError](https://www.mql5.com/en/docs/check/getlasterror).
 
 These are platform references, not authority to change product semantics.
+
+
+## 4. Maintainability and readability
+
+Code must make the domain behavior visible.
+
+Use:
+
+- names that identify the business entity, state or action;
+- one authoritative implementation of each business rule;
+- explicit boundaries between collection, calculation, persistence, transport
+  and presentation;
+- focused functions with one coherent responsibility;
+- data structures that express valid states and make invalid states difficult;
+- explicit ownership of mutable state;
+- explicit units, time zones, scales and value meaning;
+- explicit error and empty-data semantics;
+- existing correct project primitives instead of parallel infrastructure.
+
+Avoid:
+
+- opaque abbreviations without an established project meaning;
+- boolean parameters whose meaning is unclear at the call site;
+- hidden mutation;
+- implicit global state;
+- duplicated condition trees;
+- deeply nested branches where guard clauses express the logic more clearly;
+- catch-all handling without an established boundary responsibility;
+- silent exception suppression;
+- magic values;
+- comments that merely restate the code;
+- comments that claim behavior the code does not enforce.
+
+### Comments, types and language idioms
+
+Automatically explain the purpose and material constraints of new and materially
+changed code. Keep explanations local to the changed behavior, truthful and
+current; do not repeat obvious syntax or require boilerplate for trivial helpers.
+Use the adopting project's comment-language policy.
+
+Give new/materially changed Python functions accurate input and return types and
+parameterized collections. Preserve real states, nullability and runtime
+contracts. Reuse appropriate domain types; do not silence errors with unchecked
+casts, broad Any, fake defaults or blanket suppressions.
+
+Write idiomatically for the actual supported language/compiler and surrounding
+module. Do not upgrade syntax, framework contracts or toolchains as a style fix.
+Read the relevant sections of [code quality](code-quality.md) when
+writing comments/types, choosing idioms or changing error/resource handling.
+
+Each catch must have a defined responsibility and outcome; keep try regions
+narrow. Broad handling is justified only at an established failure boundary.
+Use finally for real owned cleanup/state restoration, not as a template.
+Prefer matching language resource-management constructs; preserve the original
+failure, cancellation, partial state and ownership.
+
+For competing root-cause hypotheses or useful invariant-based tests, consult
+[diagnosis and properties](diagnosis-and-properties.md). These are
+conditional techniques, not extra mandatory workflows or dependencies.
+
+For project language/version and local type-check routing, read
+[project toolchains](project-toolchains.md).

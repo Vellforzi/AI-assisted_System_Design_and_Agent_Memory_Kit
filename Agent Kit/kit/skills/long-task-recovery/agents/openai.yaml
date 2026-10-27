@@ -1,0 +1,4 @@
+interface:
+  display_name: "Long Task Recovery"
+  short_description: "Recover long tasks after context compaction"
+  default_prompt: "Use $long-task-recovery to initialize compact recovery state for this multi-phase task."

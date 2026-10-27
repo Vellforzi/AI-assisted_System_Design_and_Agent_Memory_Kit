@@ -70,6 +70,19 @@ Use this checklist before declaring code or logic work complete.
 - Fallback was checked against the currently deployed producer/system behavior,
   not only the new producer.
 
+## Event-driven progress (when applicable)
+
+- The real initial state and callbacks before resource readiness were traced.
+- Each wait/pending state names the actual request, full dispatch route,
+  reachable next executor, ownership release and terminal outcomes.
+- Safety and progress were checked separately under explicit prerequisites;
+  ordinary probes do not continually reset the progress measure.
+- Event identity is validated before mutating current ownership; readiness,
+  queue occupancy and work revision are not conflated.
+- Relevant MQL4/MQL5 event/lifecycle work used $mql-event-lifecycle and verified
+  its platform-specific contracts; no new retry/recovery semantics were invented.
+- Sequence-model, native/runtime and owner-acceptance evidence remain distinct.
+
 ## Tests and verification
 
 - Expected behavior came from owner criteria, preserved behavior or an

@@ -4,7 +4,7 @@
 
 Bad:
 
-> Показатель добавляется из Dashboard.
+> Открытый интерес добавляется из Heatmap.
 
 Why it fails:
 
@@ -13,7 +13,7 @@ Why it fails:
 - table is unknown;
 - cache behavior is unknown;
 - cadence is unknown;
-- "Dashboard" may be a UI label rather than storage;
+- "Heatmap" may be a UI label rather than storage;
 - missing-data behavior is unknown;
 - source precedence is unknown.
 
@@ -72,7 +72,7 @@ it was checked.
 
 Bad:
 
-> Данные берутся из Sales Dashboard / Risk View / Vendor Portal.
+> Данные берутся из Price Sheet / Heatmap / QuikEDU.
 
 Why it fails:
 
@@ -173,3 +173,32 @@ Example for this incident:
 
 This is a communication rule, not permission to add pooling, a fallback or new
 overload behavior. Those changes still require the current owner's authority.
+
+
+## Vague phrasing examples
+
+The existing Heatmap example above covers ambiguous UI/source identity.
+
+Do not write vague phrases such as:
+
+- "данные идут из базы";
+- "используется кеш";
+- "система обновляет значения";
+- "модель рассчитывает данные";
+- "результат передаётся дальше";
+- "это сохраняется";
+- "логика подхватывает значение".
+
+## Explicit claim and evidence wording
+
+Use explicit wording:
+
+- "Владелец требует..."
+- "Текущий код делает..."
+- "Таблица хранит..."
+- "Redis-кеш содержит..."
+- "Локальный тест подтвердил..."
+- "На сервере не проверено..."
+- "Это вывод из..."
+- "Не найдено..."
+- "Требуется решение владельца..."

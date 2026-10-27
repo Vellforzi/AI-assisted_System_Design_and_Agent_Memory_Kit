@@ -1,0 +1,648 @@
+{
+  "schema": "agent-kit-skill-library/v1",
+  "source_date": "2026-10-27",
+  "hash_normalization": "CRLF-to-LF; all payloads are UTF-8 text; provenance hashes describe the raw source snapshot",
+  "activation": "optional-owner-selected",
+  "skills": [
+    {
+      "name": "production-engineering-standard",
+      "path": "skills/production-engineering-standard",
+      "files": [
+        "SKILL.md",
+        "references/engineering-review-checklist.md",
+        "references/code-quality.md",
+        "references/diagnosis-and-properties.md",
+        "references/contracts-and-lifecycle.md",
+        "references/performance-and-resources.md",
+        "references/testing-and-verification.md",
+        "references/project-toolchains.md"
+      ],
+      "conditional_dependencies": [
+        "mql-event-lifecycle"
+      ],
+      "client_catalog_dependencies": []
+    },
+    {
+      "name": "complete-technical-communication",
+      "path": "skills/complete-technical-communication",
+      "files": [
+        "SKILL.md",
+        "references/owner-writing-style.md",
+        "references/anti-patterns.md",
+        "references/technical-explanations.md"
+      ],
+      "conditional_dependencies": [
+        "production-engineering-standard"
+      ],
+      "client_catalog_dependencies": []
+    },
+    {
+      "name": "bounded-coupled-task",
+      "path": "skills/bounded-coupled-task",
+      "files": [
+        "SKILL.md",
+        "references/cursor-workers.md"
+      ],
+      "conditional_dependencies": [
+        "production-engineering-standard",
+        "complete-technical-communication",
+        "long-task-recovery",
+        "outcome-driven-task-closure"
+      ],
+      "client_catalog_dependencies": []
+    },
+    {
+      "name": "long-task-recovery",
+      "path": "skills/long-task-recovery",
+      "files": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "references/protocol.md",
+        "assets/RECOVERY_CAPSULE.template.md",
+        "scripts/recovery_tool.py",
+        "scripts/session_task_binding.py",
+        "scripts/test_recovery_tool.py"
+      ],
+      "conditional_dependencies": [
+        "outcome-driven-task-closure"
+      ],
+      "client_catalog_dependencies": []
+    },
+    {
+      "name": "outcome-driven-task-closure",
+      "path": "skills/outcome-driven-task-closure",
+      "files": [
+        "SKILL.md",
+        "assets/CAUSAL_PROOF.template.md",
+        "assets/TASK_PROMPT.template.md",
+        "scripts/task_prompt_tool.py",
+        "evals/run_prompt_compiler_evals.py",
+        "evals/fixtures/inherited-task-prompt-spec.json"
+      ],
+      "conditional_dependencies": [
+        "bounded-coupled-task",
+        "production-engineering-standard",
+        "complete-technical-communication",
+        "long-task-recovery"
+      ],
+      "client_catalog_dependencies": []
+    },
+    {
+      "name": "mql-event-lifecycle",
+      "path": "skills/mql-event-lifecycle",
+      "files": [
+        "SKILL.md",
+        "references/platform-contracts.md",
+        "references/temporal-verification.md",
+        "agents/openai.yaml"
+      ],
+      "conditional_dependencies": [
+        "production-engineering-standard",
+        "complete-technical-communication"
+      ],
+      "client_catalog_dependencies": []
+    },
+    {
+      "name": "create-skill",
+      "path": "skills/create-skill",
+      "files": [
+        "SKILL.md"
+      ],
+      "conditional_dependencies": [],
+      "client_catalog_dependencies": [
+        "skill-creator"
+      ]
+    },
+    {
+      "name": "select-effort",
+      "path": "skills/select-effort",
+      "files": [
+        "SKILL.md",
+        "references/basis.md",
+        "agents/openai.yaml"
+      ],
+      "conditional_dependencies": [],
+      "client_catalog_dependencies": []
+    },
+    {
+      "name": "create-hook",
+      "path": "skills/create-hook",
+      "files": [
+        "SKILL.md",
+        "references/cursor-hooks.md"
+      ],
+      "conditional_dependencies": [],
+      "client_catalog_dependencies": [
+        "openai-docs"
+      ]
+    },
+    {
+      "name": "create-subagent",
+      "path": "skills/create-subagent",
+      "files": [
+        "SKILL.md",
+        "references/cursor-subagents.md",
+        "agents/openai.yaml"
+      ],
+      "conditional_dependencies": [],
+      "client_catalog_dependencies": [
+        "openai-docs"
+      ]
+    },
+    {
+      "name": "create-rule",
+      "path": "skills/create-rule",
+      "files": [
+        "SKILL.md",
+        "references/cursor-rules.md"
+      ],
+      "conditional_dependencies": [],
+      "client_catalog_dependencies": [
+        "openai-docs"
+      ]
+    },
+    {
+      "name": "codex-worker-contract",
+      "path": "skills/codex-worker-contract",
+      "files": [
+        "SKILL.md"
+      ],
+      "conditional_dependencies": [],
+      "client_catalog_dependencies": []
+    }
+  ],
+  "profiles": [
+    "skill-profiles/option-profit"
+  ],
+  "mirrors": [
+    {
+      "source": "skills/production-engineering-standard/SKILL.md",
+      "mirror": "cursor/skills/production-engineering-standard/SKILL.md"
+    },
+    {
+      "source": "skills/production-engineering-standard/references/engineering-review-checklist.md",
+      "mirror": "cursor/skills/production-engineering-standard/references/engineering-review-checklist.md"
+    },
+    {
+      "source": "skills/production-engineering-standard/references/code-quality.md",
+      "mirror": "cursor/skills/production-engineering-standard/references/code-quality.md"
+    },
+    {
+      "source": "skills/production-engineering-standard/references/diagnosis-and-properties.md",
+      "mirror": "cursor/skills/production-engineering-standard/references/diagnosis-and-properties.md"
+    },
+    {
+      "source": "skills/production-engineering-standard/references/contracts-and-lifecycle.md",
+      "mirror": "cursor/skills/production-engineering-standard/references/contracts-and-lifecycle.md"
+    },
+    {
+      "source": "skills/production-engineering-standard/references/performance-and-resources.md",
+      "mirror": "cursor/skills/production-engineering-standard/references/performance-and-resources.md"
+    },
+    {
+      "source": "skills/production-engineering-standard/references/testing-and-verification.md",
+      "mirror": "cursor/skills/production-engineering-standard/references/testing-and-verification.md"
+    },
+    {
+      "source": "skills/production-engineering-standard/references/project-toolchains.md",
+      "mirror": "cursor/skills/production-engineering-standard/references/project-toolchains.md"
+    },
+    {
+      "source": "skills/complete-technical-communication/SKILL.md",
+      "mirror": "cursor/skills/complete-technical-communication/SKILL.md"
+    },
+    {
+      "source": "skills/complete-technical-communication/references/owner-writing-style.md",
+      "mirror": "cursor/skills/complete-technical-communication/references/owner-writing-style.md"
+    },
+    {
+      "source": "skills/complete-technical-communication/references/anti-patterns.md",
+      "mirror": "cursor/skills/complete-technical-communication/references/anti-patterns.md"
+    },
+    {
+      "source": "skills/complete-technical-communication/references/technical-explanations.md",
+      "mirror": "cursor/skills/complete-technical-communication/references/technical-explanations.md"
+    },
+    {
+      "source": "skills/bounded-coupled-task/SKILL.md",
+      "mirror": "cursor/skills/bounded-coupled-task/SKILL.md"
+    },
+    {
+      "source": "skills/bounded-coupled-task/references/cursor-workers.md",
+      "mirror": "cursor/skills/bounded-coupled-task/references/cursor-workers.md"
+    }
+  ],
+  "provenance": [
+    {
+      "skill": "production-engineering-standard",
+      "file": "SKILL.md",
+      "source_sha256": "36ebc5fa9c03b7e00aa0a178b1a92a1112c2c726bf38b245ee9f555998295cce",
+      "package_sha256": "7bfa3c40a5c54e542fff9b81a04d93c447ddbada007e43477ddf4c1625782be7",
+      "adaptations": [
+        "Project identity/toolchain routing generalized; MQL skill resolved through active catalog."
+      ]
+    },
+    {
+      "skill": "production-engineering-standard",
+      "file": "references/engineering-review-checklist.md",
+      "source_sha256": "bea9df5bef4c60272cbd119a9a4df1d02d91250c19a5cc0773d80069e4af755f",
+      "package_sha256": "bea9df5bef4c60272cbd119a9a4df1d02d91250c19a5cc0773d80069e4af755f",
+      "adaptations": []
+    },
+    {
+      "skill": "production-engineering-standard",
+      "file": "references/code-quality.md",
+      "source_sha256": "0330c81f31e10a062135583717c02768dc3475a31f00dfeab0a159994a3846ed",
+      "package_sha256": "4290b425a1b34783e07d2dc43ddcb19cb7ce41e8459e2c0cf238a0e67a319e63",
+      "adaptations": [
+        "Project identity/toolchain routing generalized; MQL skill resolved through active catalog."
+      ]
+    },
+    {
+      "skill": "production-engineering-standard",
+      "file": "references/diagnosis-and-properties.md",
+      "source_sha256": "6906068d09b6b6564992010def76f8c503c7e1935b0e8720e83e9ebb798c32b5",
+      "package_sha256": "6906068d09b6b6564992010def76f8c503c7e1935b0e8720e83e9ebb798c32b5",
+      "adaptations": []
+    },
+    {
+      "skill": "production-engineering-standard",
+      "file": "references/contracts-and-lifecycle.md",
+      "source_sha256": "ea0601230f30de205a6e0dc35eb4fec45135cd379ee5a95a14680fe70f6293f9",
+      "package_sha256": "c2cdc79fe6de7212afefb4a9324e07030a31862176509e32211808b1db00d96d",
+      "adaptations": [
+        "Project identity/toolchain routing generalized; MQL skill resolved through active catalog."
+      ]
+    },
+    {
+      "skill": "production-engineering-standard",
+      "file": "references/performance-and-resources.md",
+      "source_sha256": "74909f40adbe66f653b0d485ddf13b308810193367b947916a88e72d2c72f44f",
+      "package_sha256": "74909f40adbe66f653b0d485ddf13b308810193367b947916a88e72d2c72f44f",
+      "adaptations": []
+    },
+    {
+      "skill": "production-engineering-standard",
+      "file": "references/testing-and-verification.md",
+      "source_sha256": "ca2bebd082713f32fe3a2e7ec1e1615011b849d042039475a881a154023b6b7d",
+      "package_sha256": "ca2bebd082713f32fe3a2e7ec1e1615011b849d042039475a881a154023b6b7d",
+      "adaptations": []
+    },
+    {
+      "skill": "complete-technical-communication",
+      "file": "SKILL.md",
+      "source_sha256": "7af0ad0f6c28b9e610e8564c8d7a1de1446c1139b0eaae32f459adccb919f07b",
+      "package_sha256": "d1021f52a982b515a14bcec59d52d20b76251033c9f30fbf7f33f7784dbcf73b",
+      "adaptations": [
+        "Owner language and project comment language remain adoption choices."
+      ]
+    },
+    {
+      "skill": "complete-technical-communication",
+      "file": "references/owner-writing-style.md",
+      "source_sha256": "9bfd023c3c70630bdcdfa227da6de6fad51c77ddc6bdbb4fe871f1602c511dcf",
+      "package_sha256": "e9776c66e97b710236c3c6338bef9921b36738a76d3f606b673725212328158a",
+      "adaptations": [
+        "Retain the existing portable starter profile rather than importing a personal style identity."
+      ]
+    },
+    {
+      "skill": "complete-technical-communication",
+      "file": "references/anti-patterns.md",
+      "source_sha256": "7740ebdee46d118184a13ad738546a78b2c93e75b9828698e8556cb2373375b4",
+      "package_sha256": "7740ebdee46d118184a13ad738546a78b2c93e75b9828698e8556cb2373375b4",
+      "adaptations": []
+    },
+    {
+      "skill": "complete-technical-communication",
+      "file": "references/technical-explanations.md",
+      "source_sha256": "de39fcfb8f495a38564ea5a23807d3a0f89bdaeba482fc04c8b03f023073393e",
+      "package_sha256": "de39fcfb8f495a38564ea5a23807d3a0f89bdaeba482fc04c8b03f023073393e",
+      "adaptations": []
+    },
+    {
+      "skill": "bounded-coupled-task",
+      "file": "SKILL.md",
+      "source_sha256": "b88cb1527f5f87eba7ecefe289f1f03532811bee6f68b280e437c052ac6c5572",
+      "package_sha256": "b88cb1527f5f87eba7ecefe289f1f03532811bee6f68b280e437c052ac6c5572",
+      "adaptations": []
+    },
+    {
+      "skill": "bounded-coupled-task",
+      "file": "references/cursor-workers.md",
+      "source_sha256": "da395dff07c5e92b977a2c4a56147e5d4036227fa91265d29152a865c651a65a",
+      "package_sha256": "da395dff07c5e92b977a2c4a56147e5d4036227fa91265d29152a865c651a65a",
+      "adaptations": []
+    },
+    {
+      "skill": "long-task-recovery",
+      "file": "SKILL.md",
+      "source_sha256": "33f97855f837b9d4e071fa612b1cb0354c819b2a9f10a656bb75a25b38560dd0",
+      "package_sha256": "33f97855f837b9d4e071fa612b1cb0354c819b2a9f10a656bb75a25b38560dd0",
+      "adaptations": []
+    },
+    {
+      "skill": "long-task-recovery",
+      "file": "agents/openai.yaml",
+      "source_sha256": "8e729df539805b85a4d7e14fbb6fef25d8e3cdc63125c0d43cbf3ffbe6e57184",
+      "package_sha256": "8e729df539805b85a4d7e14fbb6fef25d8e3cdc63125c0d43cbf3ffbe6e57184",
+      "adaptations": []
+    },
+    {
+      "skill": "long-task-recovery",
+      "file": "references/protocol.md",
+      "source_sha256": "9e74922efbadf820a6410c496bcaa7c367cdeebe8d44138b3c084610cf0fed59",
+      "package_sha256": "9e74922efbadf820a6410c496bcaa7c367cdeebe8d44138b3c084610cf0fed59",
+      "adaptations": []
+    },
+    {
+      "skill": "long-task-recovery",
+      "file": "assets/RECOVERY_CAPSULE.template.md",
+      "source_sha256": "70d1f10c54903212e161a628fe43bba422064a7b5f5790df100ea43c212118a2",
+      "package_sha256": "70d1f10c54903212e161a628fe43bba422064a7b5f5790df100ea43c212118a2",
+      "adaptations": []
+    },
+    {
+      "skill": "long-task-recovery",
+      "file": "scripts/recovery_tool.py",
+      "source_sha256": "2bba71bf628752a14f9b682c89aa1c41e82c55e98e4226024ebaf0cc7ec5e6a6",
+      "package_sha256": "2bba71bf628752a14f9b682c89aa1c41e82c55e98e4226024ebaf0cc7ec5e6a6",
+      "adaptations": []
+    },
+    {
+      "skill": "long-task-recovery",
+      "file": "scripts/session_task_binding.py",
+      "source_sha256": "2065ed6f151646e39a6475cd708dd179c51f4728910b05965297b672f787cd5b",
+      "package_sha256": "2065ed6f151646e39a6475cd708dd179c51f4728910b05965297b672f787cd5b",
+      "adaptations": []
+    },
+    {
+      "skill": "long-task-recovery",
+      "file": "scripts/test_recovery_tool.py",
+      "source_sha256": "2367ab01f5e262542fbff05773c3381f97f088d24cc225c3ed9994e0b33b3a4b",
+      "package_sha256": "2367ab01f5e262542fbff05773c3381f97f088d24cc225c3ed9994e0b33b3a4b",
+      "adaptations": []
+    },
+    {
+      "skill": "outcome-driven-task-closure",
+      "file": "SKILL.md",
+      "source_sha256": "71d811484c0fb265ddfc145da776fb5278f3e46d0f77d48e3244f955d3b074ec",
+      "package_sha256": "71d811484c0fb265ddfc145da776fb5278f3e46d0f77d48e3244f955d3b074ec",
+      "adaptations": []
+    },
+    {
+      "skill": "outcome-driven-task-closure",
+      "file": "assets/CAUSAL_PROOF.template.md",
+      "source_sha256": "69b2e318356953e5457add8c39e030fa55f404c90226a45250a5aa5298cd130f",
+      "package_sha256": "69b2e318356953e5457add8c39e030fa55f404c90226a45250a5aa5298cd130f",
+      "adaptations": []
+    },
+    {
+      "skill": "outcome-driven-task-closure",
+      "file": "assets/TASK_PROMPT.template.md",
+      "source_sha256": "5d2eecbe80f11cc676934569e29ada76f005b5e31126615832ee0c57c6c2ddee",
+      "package_sha256": "5d2eecbe80f11cc676934569e29ada76f005b5e31126615832ee0c57c6c2ddee",
+      "adaptations": []
+    },
+    {
+      "skill": "outcome-driven-task-closure",
+      "file": "scripts/task_prompt_tool.py",
+      "source_sha256": "1832b9827b8f1a78b2fc81b84358c036e1d063f351c29a77c4da869ae412f343",
+      "package_sha256": "1832b9827b8f1a78b2fc81b84358c036e1d063f351c29a77c4da869ae412f343",
+      "adaptations": []
+    },
+    {
+      "skill": "outcome-driven-task-closure",
+      "file": "evals/run_prompt_compiler_evals.py",
+      "source_sha256": "ded2e42ae227961d50e34e471881923b12b167c0c65e89a47ca1eaa090d8a99a",
+      "package_sha256": "ded2e42ae227961d50e34e471881923b12b167c0c65e89a47ca1eaa090d8a99a",
+      "adaptations": []
+    },
+    {
+      "skill": "outcome-driven-task-closure",
+      "file": "evals/fixtures/inherited-task-prompt-spec.json",
+      "source_sha256": "26af236a89f7839db6fefb2c1b30179766e73db0a9f70e96096b83a76209c618",
+      "package_sha256": "26af236a89f7839db6fefb2c1b30179766e73db0a9f70e96096b83a76209c618",
+      "adaptations": []
+    },
+    {
+      "skill": "mql-event-lifecycle",
+      "file": "SKILL.md",
+      "source_sha256": "5eeda2550c3d47cd92b9bec073cab041e2b9450cee749fbb2048f2e7c47fd6a9",
+      "package_sha256": "5eeda2550c3d47cd92b9bec073cab041e2b9450cee749fbb2048f2e7c47fd6a9",
+      "adaptations": []
+    },
+    {
+      "skill": "mql-event-lifecycle",
+      "file": "references/platform-contracts.md",
+      "source_sha256": "793b51081a8ccaf8cdc0abd4b703141b5e412b77c8ecba13a30e897e3109a2de",
+      "package_sha256": "793b51081a8ccaf8cdc0abd4b703141b5e412b77c8ecba13a30e897e3109a2de",
+      "adaptations": []
+    },
+    {
+      "skill": "mql-event-lifecycle",
+      "file": "references/temporal-verification.md",
+      "source_sha256": "868121d0ac9ead33a3ebb000d8904a1d212c2d260da781f10b94c4ea634e4451",
+      "package_sha256": "868121d0ac9ead33a3ebb000d8904a1d212c2d260da781f10b94c4ea634e4451",
+      "adaptations": []
+    },
+    {
+      "skill": "mql-event-lifecycle",
+      "file": "agents/openai.yaml",
+      "source_sha256": "856478f1404741bf13602ee376fbeca2601d0cf10c5373c2998b80edf4501151",
+      "package_sha256": "856478f1404741bf13602ee376fbeca2601d0cf10c5373c2998b80edf4501151",
+      "adaptations": []
+    },
+    {
+      "skill": "create-skill",
+      "file": "SKILL.md",
+      "source_sha256": "eb819573b548725b584e88e82eb183aa34ac0ec492ec6c22adde753a5974b36b",
+      "package_sha256": "eb819573b548725b584e88e82eb183aa34ac0ec492ec6c22adde753a5974b36b",
+      "adaptations": []
+    },
+    {
+      "skill": "select-effort",
+      "file": "SKILL.md",
+      "source_sha256": "e56b847dc4946169da6130a4169a67f5c4b4119a7c1e1a1b77c7dbf3828ffe75",
+      "package_sha256": "895d746e5c17ceca51addfcaa6a698c5bacc536d621556fdbdb69546e6921b25",
+      "adaptations": [
+        "Remove owner-specific language default; preserve Sol/Astra selection and pause policy as explicit opt-in."
+      ]
+    },
+    {
+      "skill": "select-effort",
+      "file": "references/basis.md",
+      "source_sha256": "6d3c6686067918dae17b1ff2cf785a229fc39dbf75150d3697fd8945f2749c60",
+      "package_sha256": "6d3c6686067918dae17b1ff2cf785a229fc39dbf75150d3697fd8945f2749c60",
+      "adaptations": []
+    },
+    {
+      "skill": "select-effort",
+      "file": "agents/openai.yaml",
+      "source_sha256": "660f47d8ffeb95b731acfc3ed95ad94e5b59ae79e5d29dc69203384f1e226604",
+      "package_sha256": "660f47d8ffeb95b731acfc3ed95ad94e5b59ae79e5d29dc69203384f1e226604",
+      "adaptations": []
+    },
+    {
+      "skill": "create-hook",
+      "file": "SKILL.md",
+      "source_sha256": "47c8e4446d840d9cc128c4c00e3c47a275fc796ed62da16acfc2b00de0cb5fa8",
+      "package_sha256": "47c8e4446d840d9cc128c4c00e3c47a275fc796ed62da16acfc2b00de0cb5fa8",
+      "adaptations": []
+    },
+    {
+      "skill": "create-hook",
+      "file": "references/cursor-hooks.md",
+      "source_sha256": "256f8b5518f4f4c4e33ef8606a59880e4a4fbb7c1c1f04ee8a96d5c4c577840b",
+      "package_sha256": "256f8b5518f4f4c4e33ef8606a59880e4a4fbb7c1c1f04ee8a96d5c4c577840b",
+      "adaptations": []
+    },
+    {
+      "skill": "create-subagent",
+      "file": "SKILL.md",
+      "source_sha256": "28ae5b7b34dc4c31c59a90d40e79bcec336618072c033364e8b3d9556589e4d5",
+      "package_sha256": "28ae5b7b34dc4c31c59a90d40e79bcec336618072c033364e8b3d9556589e4d5",
+      "adaptations": []
+    },
+    {
+      "skill": "create-subagent",
+      "file": "references/cursor-subagents.md",
+      "source_sha256": "ed3ea241e220bddb9700ca6e19aa8e6c567f1c2b023434eb5b18056bf9cb839e",
+      "package_sha256": "ed3ea241e220bddb9700ca6e19aa8e6c567f1c2b023434eb5b18056bf9cb839e",
+      "adaptations": []
+    },
+    {
+      "skill": "create-subagent",
+      "file": "agents/openai.yaml",
+      "source_sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94",
+      "package_sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94",
+      "adaptations": []
+    },
+    {
+      "skill": "create-rule",
+      "file": "SKILL.md",
+      "source_sha256": "8fbd030070f2f41bb4c0abc4ad85d1689f049c41f1f78c02b67a4ffdd809bba1",
+      "package_sha256": "8fbd030070f2f41bb4c0abc4ad85d1689f049c41f1f78c02b67a4ffdd809bba1",
+      "adaptations": []
+    },
+    {
+      "skill": "create-rule",
+      "file": "references/cursor-rules.md",
+      "source_sha256": "850677a930134937998aec852e027d42eb3d67f40fa8a1c557e88703c340eb25",
+      "package_sha256": "850677a930134937998aec852e027d42eb3d67f40fa8a1c557e88703c340eb25",
+      "adaptations": []
+    },
+    {
+      "skill": "codex-worker-contract",
+      "file": "SKILL.md",
+      "source_sha256": "9a612617ea20d17db533134dc4283a4015eea96465e83b5b8e636f3a1c3f9a4a",
+      "package_sha256": "9a612617ea20d17db533134dc4283a4015eea96465e83b5b8e636f3a1c3f9a4a",
+      "adaptations": []
+    },
+    {
+      "skill": "job-combat-orchestrator-codex",
+      "file": "SKILL.md",
+      "source_sha256": "d3bed881f2d86a67320cccf4fda789ec37f26fdf21403a8a317224d3d789bd2b",
+      "package_sha256": "d3bed881f2d86a67320cccf4fda789ec37f26fdf21403a8a317224d3d789bd2b",
+      "adaptations": []
+    },
+    {
+      "skill": "job-combat-orchestrator-cursor",
+      "file": "SKILL.md",
+      "source_sha256": "c3d76a74fadac6e03edb449852019443fac044eb0d3ebeecf5d0f1df0027117e",
+      "package_sha256": "c3d76a74fadac6e03edb449852019443fac044eb0d3ebeecf5d0f1df0027117e",
+      "adaptations": []
+    },
+    {
+      "skill": "job-combat-orchestrator-cursor",
+      "file": "references/runtime-and-authority.md",
+      "source_sha256": "6a688816256f3b1344536d04bb8fc90c2aa85677cfe79857e62cc656187c8231",
+      "package_sha256": "6a688816256f3b1344536d04bb8fc90c2aa85677cfe79857e62cc656187c8231",
+      "adaptations": []
+    },
+    {
+      "skill": "job-combat-orchestrator-cursor",
+      "file": "references/strict-product-pipeline.md",
+      "source_sha256": "462489ea76a6499e71dda3b765e5a6d28fe48064acfeadf99d44c1930b26f756",
+      "package_sha256": "462489ea76a6499e71dda3b765e5a6d28fe48064acfeadf99d44c1930b26f756",
+      "adaptations": []
+    },
+    {
+      "skill": "job-combat-orchestrator-cursor",
+      "file": "references/task-execution.md",
+      "source_sha256": "29f50099d549ed9db7aa93470ee44d691f4c6914ddc473b8c237b26bc56cb40d",
+      "package_sha256": "29f50099d549ed9db7aa93470ee44d691f4c6914ddc473b8c237b26bc56cb40d",
+      "adaptations": []
+    }
+  ],
+  "files": {
+    "SKILL_LIBRARY.md": "ed6f5464fa350ca16240c5c6eafae4557e68c96263e4501dbeccc66e322cd560",
+    "SKILL_TRANSFER_REVIEW.md": "c0fda278b9f6c3ccc0ec247327f21ada6369c5a0fbbeb7f50ffbba497941f673",
+    "cursor/skills/bounded-coupled-task/SKILL.md": "a3303a6dfaf47e7fd9234b1f396d48d416db2908f2421e7a2d05f6275a003f29",
+    "cursor/skills/bounded-coupled-task/references/cursor-workers.md": "6b584822246467a96534986f0f7cec05a742286abeeab42ce81c315d2669c1c1",
+    "cursor/skills/complete-technical-communication/SKILL.md": "d1021f52a982b515a14bcec59d52d20b76251033c9f30fbf7f33f7784dbcf73b",
+    "cursor/skills/complete-technical-communication/references/anti-patterns.md": "7740ebdee46d118184a13ad738546a78b2c93e75b9828698e8556cb2373375b4",
+    "cursor/skills/complete-technical-communication/references/owner-writing-style.md": "e9776c66e97b710236c3c6338bef9921b36738a76d3f606b673725212328158a",
+    "cursor/skills/complete-technical-communication/references/technical-explanations.md": "de39fcfb8f495a38564ea5a23807d3a0f89bdaeba482fc04c8b03f023073393e",
+    "cursor/skills/production-engineering-standard/SKILL.md": "7bfa3c40a5c54e542fff9b81a04d93c447ddbada007e43477ddf4c1625782be7",
+    "cursor/skills/production-engineering-standard/references/code-quality.md": "4290b425a1b34783e07d2dc43ddcb19cb7ce41e8459e2c0cf238a0e67a319e63",
+    "cursor/skills/production-engineering-standard/references/contracts-and-lifecycle.md": "c2cdc79fe6de7212afefb4a9324e07030a31862176509e32211808b1db00d96d",
+    "cursor/skills/production-engineering-standard/references/diagnosis-and-properties.md": "6906068d09b6b6564992010def76f8c503c7e1935b0e8720e83e9ebb798c32b5",
+    "cursor/skills/production-engineering-standard/references/engineering-review-checklist.md": "b9cd14499b541089cf04411342cbf8472b42c85094dddb50ef2fdf2460a40f10",
+    "cursor/skills/production-engineering-standard/references/performance-and-resources.md": "74909f40adbe66f653b0d485ddf13b308810193367b947916a88e72d2c72f44f",
+    "cursor/skills/production-engineering-standard/references/project-toolchains.md": "28765360d294e7f709269c5c2d6156482b9d374351ffc9277ece9e24fb3b4596",
+    "cursor/skills/production-engineering-standard/references/testing-and-verification.md": "ca2bebd082713f32fe3a2e7ec1e1615011b849d042039475a881a154023b6b7d",
+    "skill-profiles/option-profit/README.md": "6aba20d51476029be874ebf2f012bfbd906531a96c6e76b53a3c22f5acfe60b2",
+    "skill-profiles/option-profit/codex/job-combat-orchestrator/SKILL.md": "d3bed881f2d86a67320cccf4fda789ec37f26fdf21403a8a317224d3d789bd2b",
+    "skill-profiles/option-profit/cursor/job-combat-orchestrator/SKILL.md": "c3d76a74fadac6e03edb449852019443fac044eb0d3ebeecf5d0f1df0027117e",
+    "skill-profiles/option-profit/cursor/job-combat-orchestrator/references/runtime-and-authority.md": "6a688816256f3b1344536d04bb8fc90c2aa85677cfe79857e62cc656187c8231",
+    "skill-profiles/option-profit/cursor/job-combat-orchestrator/references/strict-product-pipeline.md": "462489ea76a6499e71dda3b765e5a6d28fe48064acfeadf99d44c1930b26f756",
+    "skill-profiles/option-profit/cursor/job-combat-orchestrator/references/task-execution.md": "29f50099d549ed9db7aa93470ee44d691f4c6914ddc473b8c237b26bc56cb40d",
+    "skill-profiles/option-profit/references/option-profit-toolchains.md": "fa1026a731a95383c47ac66e6952c953884bb4aac772298636d20a976310cdc6",
+    "skills/bounded-coupled-task/SKILL.md": "a3303a6dfaf47e7fd9234b1f396d48d416db2908f2421e7a2d05f6275a003f29",
+    "skills/bounded-coupled-task/references/cursor-workers.md": "6b584822246467a96534986f0f7cec05a742286abeeab42ce81c315d2669c1c1",
+    "skills/codex-worker-contract/SKILL.md": "9a612617ea20d17db533134dc4283a4015eea96465e83b5b8e636f3a1c3f9a4a",
+    "skills/complete-technical-communication/SKILL.md": "d1021f52a982b515a14bcec59d52d20b76251033c9f30fbf7f33f7784dbcf73b",
+    "skills/complete-technical-communication/references/anti-patterns.md": "7740ebdee46d118184a13ad738546a78b2c93e75b9828698e8556cb2373375b4",
+    "skills/complete-technical-communication/references/owner-writing-style.md": "e9776c66e97b710236c3c6338bef9921b36738a76d3f606b673725212328158a",
+    "skills/complete-technical-communication/references/technical-explanations.md": "de39fcfb8f495a38564ea5a23807d3a0f89bdaeba482fc04c8b03f023073393e",
+    "skills/create-hook/SKILL.md": "47c8e4446d840d9cc128c4c00e3c47a275fc796ed62da16acfc2b00de0cb5fa8",
+    "skills/create-hook/references/cursor-hooks.md": "256f8b5518f4f4c4e33ef8606a59880e4a4fbb7c1c1f04ee8a96d5c4c577840b",
+    "skills/create-rule/SKILL.md": "8fbd030070f2f41bb4c0abc4ad85d1689f049c41f1f78c02b67a4ffdd809bba1",
+    "skills/create-rule/references/cursor-rules.md": "850677a930134937998aec852e027d42eb3d67f40fa8a1c557e88703c340eb25",
+    "skills/create-skill/SKILL.md": "eb819573b548725b584e88e82eb183aa34ac0ec492ec6c22adde753a5974b36b",
+    "skills/create-subagent/SKILL.md": "28ae5b7b34dc4c31c59a90d40e79bcec336618072c033364e8b3d9556589e4d5",
+    "skills/create-subagent/agents/openai.yaml": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94",
+    "skills/create-subagent/references/cursor-subagents.md": "ed3ea241e220bddb9700ca6e19aa8e6c567f1c2b023434eb5b18056bf9cb839e",
+    "skills/long-task-recovery/SKILL.md": "33f97855f837b9d4e071fa612b1cb0354c819b2a9f10a656bb75a25b38560dd0",
+    "skills/long-task-recovery/agents/openai.yaml": "8e729df539805b85a4d7e14fbb6fef25d8e3cdc63125c0d43cbf3ffbe6e57184",
+    "skills/long-task-recovery/assets/RECOVERY_CAPSULE.template.md": "70d1f10c54903212e161a628fe43bba422064a7b5f5790df100ea43c212118a2",
+    "skills/long-task-recovery/references/protocol.md": "9e74922efbadf820a6410c496bcaa7c367cdeebe8d44138b3c084610cf0fed59",
+    "skills/long-task-recovery/scripts/recovery_tool.py": "2bba71bf628752a14f9b682c89aa1c41e82c55e98e4226024ebaf0cc7ec5e6a6",
+    "skills/long-task-recovery/scripts/session_task_binding.py": "2065ed6f151646e39a6475cd708dd179c51f4728910b05965297b672f787cd5b",
+    "skills/long-task-recovery/scripts/test_recovery_tool.py": "2367ab01f5e262542fbff05773c3381f97f088d24cc225c3ed9994e0b33b3a4b",
+    "skills/mql-event-lifecycle/SKILL.md": "5eeda2550c3d47cd92b9bec073cab041e2b9450cee749fbb2048f2e7c47fd6a9",
+    "skills/mql-event-lifecycle/agents/openai.yaml": "856478f1404741bf13602ee376fbeca2601d0cf10c5373c2998b80edf4501151",
+    "skills/mql-event-lifecycle/references/platform-contracts.md": "793b51081a8ccaf8cdc0abd4b703141b5e412b77c8ecba13a30e897e3109a2de",
+    "skills/mql-event-lifecycle/references/temporal-verification.md": "868121d0ac9ead33a3ebb000d8904a1d212c2d260da781f10b94c4ea634e4451",
+    "skills/outcome-driven-task-closure/SKILL.md": "71d811484c0fb265ddfc145da776fb5278f3e46d0f77d48e3244f955d3b074ec",
+    "skills/outcome-driven-task-closure/assets/CAUSAL_PROOF.template.md": "69b2e318356953e5457add8c39e030fa55f404c90226a45250a5aa5298cd130f",
+    "skills/outcome-driven-task-closure/assets/TASK_PROMPT.template.md": "5d2eecbe80f11cc676934569e29ada76f005b5e31126615832ee0c57c6c2ddee",
+    "skills/outcome-driven-task-closure/evals/fixtures/inherited-task-prompt-spec.json": "26af236a89f7839db6fefb2c1b30179766e73db0a9f70e96096b83a76209c618",
+    "skills/outcome-driven-task-closure/evals/run_prompt_compiler_evals.py": "ded2e42ae227961d50e34e471881923b12b167c0c65e89a47ca1eaa090d8a99a",
+    "skills/outcome-driven-task-closure/scripts/task_prompt_tool.py": "1832b9827b8f1a78b2fc81b84358c036e1d063f351c29a77c4da869ae412f343",
+    "skills/production-engineering-standard/SKILL.md": "7bfa3c40a5c54e542fff9b81a04d93c447ddbada007e43477ddf4c1625782be7",
+    "skills/production-engineering-standard/references/code-quality.md": "4290b425a1b34783e07d2dc43ddcb19cb7ce41e8459e2c0cf238a0e67a319e63",
+    "skills/production-engineering-standard/references/contracts-and-lifecycle.md": "c2cdc79fe6de7212afefb4a9324e07030a31862176509e32211808b1db00d96d",
+    "skills/production-engineering-standard/references/diagnosis-and-properties.md": "6906068d09b6b6564992010def76f8c503c7e1935b0e8720e83e9ebb798c32b5",
+    "skills/production-engineering-standard/references/engineering-review-checklist.md": "b9cd14499b541089cf04411342cbf8472b42c85094dddb50ef2fdf2460a40f10",
+    "skills/production-engineering-standard/references/performance-and-resources.md": "74909f40adbe66f653b0d485ddf13b308810193367b947916a88e72d2c72f44f",
+    "skills/production-engineering-standard/references/project-toolchains.md": "28765360d294e7f709269c5c2d6156482b9d374351ffc9277ece9e24fb3b4596",
+    "skills/production-engineering-standard/references/testing-and-verification.md": "ca2bebd082713f32fe3a2e7ec1e1615011b849d042039475a881a154023b6b7d",
+    "skills/select-effort/SKILL.md": "895d746e5c17ceca51addfcaa6a698c5bacc536d621556fdbdb69546e6921b25",
+    "skills/select-effort/agents/openai.yaml": "660f47d8ffeb95b731acfc3ed95ad94e5b59ae79e5d29dc69203384f1e226604",
+    "skills/select-effort/references/basis.md": "6d3c6686067918dae17b1ff2cf785a229fc39dbf75150d3697fd8945f2749c60",
+    "tools/check_skill_library.py": "b0eddd47bebf0875099e6fb1fe2149efc28e694d91c04fa567e0bbfb5eb74554",
+    "tools/test_skill_library.py": "1410b05a05475ba1d8e5806a81f8061498976f7e2ffd53aea350cbb96ac2d0b7"
+  }
+}

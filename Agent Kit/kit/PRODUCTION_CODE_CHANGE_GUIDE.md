@@ -25,8 +25,13 @@ communication standard independently.
 
 ## Adoption
 
-1. Copy both canonical skill directories into `<project>/skills/`.
-2. Copy the Cursor mirrors into `<project>/.cursor/skills/` when Cursor is used.
+1. Select the engineering and communication directories and applicable
+   dependencies using [the optional skill library](SKILL_LIBRARY.md). Preserve
+   their complete support files and existing project specializations.
+2. Resolve actual client discovery: normally `<project>/.agents/skills/` for
+   Codex and `<project>/.cursor/skills/` for Cursor. A separate `<project>/skills/`
+   source requires explicit discovery/mirror wiring; copying there alone is not
+   proof of activation. Preserve client-specific invocation metadata.
 3. Copy and specialize `PRODUCT_CODE_CHANGE_POLICY.template.yaml` into the
    project's policy location. Replace generic component classes with real roots.
 4. Use one task-local `CODE_CHANGE_CONTRACT.yaml`, created from the template, for

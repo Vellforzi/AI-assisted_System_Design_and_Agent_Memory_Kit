@@ -15,6 +15,7 @@ Read the [human/model capability contract](HUMAN_MODEL_CAPABILITY_CONTRACT.md).
 | --- | --- |
 | Adopt or update the core | [Portable adoption](../portable/README.md) |
 | Understand owner and model responsibilities | [Capability contract](HUMAN_MODEL_CAPABILITY_CONTRACT.md) |
+| Adopt compact skills and their complete dependencies | [Optional skill library](SKILL_LIBRARY.md) |
 | Govern production-code changes | [Production quality pack](PRODUCTION_CODE_CHANGE_GUIDE.md) |
 | Write and review code | [Engineering standard](skills/production-engineering-standard/SKILL.md) |
 | Explain code and system behavior clearly | [Communication standard](skills/complete-technical-communication/SKILL.md) |
@@ -72,3 +73,11 @@ schema validator does not execute the agent scenarios. A hash manifest verifies
 content identity, not semantic correctness, permissions or runtime acceptance.
 Python is needed for Python helpers; reading and applying the written method
 does not depend on a particular language, host or model API.
+
+## Skill source update, 2026-10-27
+
+The [optional library](SKILL_LIBRARY.md) includes twelve reusable skills and
+separate Codex/Cursor OPTION_PROFIT orchestration profiles. See the
+[transfer review](SKILL_TRANSFER_REVIEW.md) for retained protections, portable
+adaptations and verification limits. This source update does not change the
+five-file core installer or claim a new tagged release.

@@ -1,0 +1,6 @@
+interface:
+  display_name: "MQL Event Lifecycle"
+  short_description: "Trace MQL readiness, event ownership and progress"
+  default_prompt: "Use $mql-event-lifecycle to trace the affected MQL callbacks from initial state through completion and check both safety and progress."
+policy:
+  allow_implicit_invocation: true

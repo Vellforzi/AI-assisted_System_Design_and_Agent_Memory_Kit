@@ -1,296 +1,130 @@
 ---
 name: complete-technical-communication
-description: Mandatory communication standard for every owner-facing answer and every generated comment, documentation page, workspace page, README, architecture description, business-logic explanation, task report, review, handoff and release note in the adopting project.
+description: Mandatory communication standard for every owner-facing answer and every generated comment, documentation page, Space page, README, architecture description, business-logic explanation, task report, review, handoff and release note in the adopting project.
 ---
 
 # Complete technical communication
 
-Communicate so that the owner can reconstruct the complete relevant logic
-without having to guess what a vague noun, relationship or transition means.
+Make the complete relevant meaning recoverable without guessing.
+Concision is useful only when it preserves that meaning.
 
-The goal is not maximum length. The goal is complete meaning with no hidden
-semantic gaps.
+Use the owner's requested language for owner-facing communication. Preserve technical identifiers exactly.
 
-Use the owner's requested language for owner-facing communication. Preserve
-technical identifiers exactly.
+## 1. Answer directly and preserve the owner's meaning
 
-Read `references/owner-writing-style.md` and
-`references/anti-patterns.md` when producing substantial architecture,
-business-logic, Space or completion documentation.
+Begin with the answer or the current flow being asked about. Then explain
+the supporting evidence, mechanics, implications and remaining uncertainty.
+Do not substitute a progress statement, file list, tooling detail or claim
+of completion for the answer.
 
-## 1. Preserve the owner's meaning
+Preserve conditions, exceptions, relationships, sequence, sources, timing,
+failure behavior, reasons, boundaries, requested verification and non-goals.
+Do not narrow the request because a simpler interpretation is easier to
+implement or summarize. Keep the original wording beside a paraphrase
+when meaning could otherwise be lost.
 
-Do not simplify the owner's request by removing:
+## 2. Surface gaps without inventing authority
 
-- conditions;
-- exceptions;
-- relationships;
-- sequencing;
-- data sources;
-- timing;
-- failure behavior;
-- reasons;
-- boundaries;
-- requested verification;
-- explicit non-goals.
+When a material data gap or skipped item is found, state the exact gap,
+its cause when established, and the downstream effect. Check existing
+authorization before choosing a remedy.
 
-Do not replace the owner's formulation with a narrower interpretation merely
-because it is easier to implement or summarize.
+If the remedy requires an unapproved change to products, dates, collection,
+copying or persistence, propose a concrete bounded action and obtain the
+owner's decision before that action. Discovery alone is not permission.
 
-When paraphrasing the request, preserve the original wording beside the
-technical interpretation whenever a semantic loss is possible.
+Do not silently exclude the gap or claim complete readiness. Continue
+independent authorized work without requesting the same approval again.
 
-When a material data gap or skipped item is discovered, check the current owner
-authorization before deciding what to do. If addressing it requires an
-unapproved change to products, dates, collection, copying or persistence, report
-the exact gap and downstream effect, propose a concrete bounded action, and ask
-the owner before that action. Do not silently exclude the gap, claim complete
-readiness, or treat discovery itself as permission to repair it. Continue work
-already authorized; do not request the same approval again. See
-`references/anti-patterns.md`, "Discovered gap treated as permission or silence".
+## 3. Explain entities, relationships and reasons precisely
 
+Identify each material actor, value and technical source as applicable:
+component/job/class/method/service, field, table, cache/key, API route/payload,
+producer, consumer, storage and current implementation status.
 
-## 2. Answer the actual question first
+For each material relationship, explain who acts on which data, where it
+comes from and is stored, who consumes it next, when and under what conditions,
+which source takes precedence, and whether a cache is involved.
+State missing, stale, invalid, delayed and failure behavior.
 
-Begin with the direct answer or the complete current flow being asked about.
+Explain why the responsibility, source, cache path, fallback and relationship
+exist, why an alternative is unsafe when relevant, and what would break
+if the rule changed. "That is how it works" is not an explanation.
 
-Do not begin with:
+A UI label, business name or document heading is not automatically a technical
+identity. State both names and their mapping when they differ.
+Use actual identifiers, not placeholders, in real documentation.
 
-- a generic progress statement;
-- a list of files;
-- a claim that documentation was updated;
-- a high-level summary that hides the mechanics;
-- tool or process details unrelated to the owner's question.
+Do not compress away ownership, source, storage, timing, precedence, fallback
+or meaning. Prefer a complete paragraph to disconnected fragments.
+A vague noun or arrow cannot stand in for a material participating component.
 
-After the direct answer, provide the evidence, mechanics, implications and
-remaining uncertainty.
+## 4. Separate claims from evidence
 
-## 3. Resolve every important noun
+Distinguish owner-required behavior, implemented code behavior, database
+contracts, runtime observations, test results, deployment state, inference,
+open questions and proposed behavior. Do not merge them into one confident
+narrative. State what is verified and what remains unknown.
 
-Do not write vague phrases such as:
+For progress and completion reports, explain:
+- the exact changed and preserved behavior;
+- involved components and affected source/storage/cache paths;
+- checks actually run, what they establish and what they do not;
+- whether deployment, runtime observation and owner acceptance occurred;
+- remaining uncertainty.
 
-- "данные берутся из Dashboard";
-- "данные идут из базы";
-- "используется кеш";
-- "система обновляет значения";
-- "модель рассчитывает данные";
-- "результат передаётся дальше";
-- "это сохраняется";
-- "логика подхватывает значение".
+"Updated", "tested" or "everything works" is not a sufficient report.
 
-For every material entity or relationship, identify as applicable:
+## 5. Make documents and comments independently understandable
 
-- exact component;
-- exact job, class, method or service;
-- exact field;
-- exact table;
-- exact Redis key or cache layer;
-- exact API route or payload;
-- exact producer;
-- exact consumer;
-- exact timing or cadence;
-- exact condition;
-- exact precedence;
-- exact fallback;
-- exact storage location;
-- exact current implementation status.
-
-Never use a UI tab name, product label, document heading or business nickname
-as if it were automatically a table name, component name or technical source.
-
-When a UI name and a technical entity differ, state both and explain the mapping.
-
-## 4. Explain relationships as complete causal statements
-
-Every relationship must answer:
-
-1. Who performs the action?
-2. What exact data is involved?
-3. Where does it come from?
-4. Where is it stored?
-5. Who reads it next?
-6. When does this happen?
-7. Under which condition?
-8. Which source has priority?
-9. Is a cache involved?
-10. What happens when the data is missing, stale, invalid or delayed?
-11. Why is this path used?
-12. Which parts are verified and which are inferred?
-
-Bad:
-
-> Показатель добавляется из Dashboard.
-
-Required form:
-
-> `<consumer>` reads `<field>` through `<repository/service>` from
-> `<table or cache key>`. That value is written by `<producer/job>` at
-> `<cadence or event>`. `<cache>` is used/not used on this path because
-> `<reason>`. The name `Dashboard` refers to `<UI/source meaning>` and is not
-> the technical storage identifier. When the value is missing or stale,
-> `<exact behavior>` occurs.
-
-Use actual project identifiers instead of placeholders in real documentation.
-
-## 5. End-to-end business-logic explanations
-
-When explaining a complete business process, use this order where applicable:
-
-1. Purpose and final owner-visible result.
-2. Participating components and their responsibilities.
-3. Trigger and schedule.
-4. Inputs and exact sources.
-5. Calculations and transformations.
-6. Storage and database tables.
-7. Redis/cache behavior.
-8. Producer-consumer relationships.
-9. API or transport behavior.
-10. Client consumption and display.
-11. Failure, missing-data and stale-data behavior.
-12. Recovery and retry.
-13. Lifecycle and concurrency.
-14. Current limitations.
-15. Verified versus unverified behavior.
-
-Do not call an explanation "complete" if one of the material participating
-components is represented only by a vague arrow or noun.
-
-## 6. Distinguish different kinds of truth
-
-Clearly label:
-
-- owner-required business behavior;
-- currently implemented code behavior;
-- database contract;
-- runtime observation;
-- test result;
-- deployment state;
-- inference;
-- open question;
-- proposed behavior.
-
-Do not merge these into one confident narrative.
-
-Use explicit wording:
-
-- "Владелец требует..."
-- "Текущий код делает..."
-- "Таблица хранит..."
-- "Redis-кеш содержит..."
-- "Локальный тест подтвердил..."
-- "На сервере не проверено..."
-- "Это вывод из..."
-- "Не найдено..."
-- "Требуется решение владельца..."
-
-## 7. Explain why, not only what
-
-For material rules, explain:
-
-- why the component owns the behavior;
-- why that data source is authoritative;
-- why a cache is or is not used;
-- why a particular fallback exists;
-- why an alternative is unsafe;
-- why a relationship is necessary;
-- what would break if the rule changed.
-
-Do not use "так сделано" or "так работает система" as an explanation.
-
-## 8. Code comments
-
-Use the adopting project's chosen language for code comments and preserve
-identifiers. Do not infer the comment language from the conversation alone
-or translate unrelated existing comments.
-
-Make a comment understandable to a reader who did not write the code: begin with
-its purpose and explain material contracts, reasons and limitations. Keep the
-explanation concise, local and consistent with the implementation. Add the
-information the signature does not convey; avoid repeating names or syntax,
-unverified guarantees and architecture essays.
-
-The scope, automatic addition of purpose explanations, language-specific forms
-and framework-visible documentation constraints are defined by
-$production-engineering-standard and its `references/code-quality.md`.
-Apply that policy rather than maintaining a second technical rule set here.
-For long reasoning, use relevant existing documentation and a precise local link.
-
-## 9. Documentation and Space pages
-
-Documentation must remain usable without the chat that created it.
-
-Every substantial page must state:
-
-- scope;
-- source date or source revision where relevant;
-- implemented versus required behavior;
-- exact components;
-- exact technical identifiers;
-- data flow;
-- conditions and precedence;
-- failure and recovery behavior;
-- known limitations;
-- verification status.
-
-A diagram must not replace the detailed written explanation. A table must not
-hide dependencies behind abbreviated cells. A summary must link to or contain
-the complete logic it summarizes.
+Documentation must remain usable without the originating chat.
+A diagram cannot replace the detailed explanation; a table cannot hide
+dependencies in abbreviations. A summary must contain or link to the
+complete logic it summarizes.
 
 For substantial owner-facing architecture or business-logic documentation,
-when the Writing Style connector is available, retrieve one or two relevant
-owner-authored technical samples before drafting. Treat them as style evidence,
-not product truth. Do not block the task when the connector is unavailable.
+retrieve one or two relevant owner-authored technical samples through the
+Writing Style connector when available, before drafting. Use them as style
+evidence, not product truth. Its absence must not block the task.
 
-## 10. Progress and completion reports
+Use the adopting project's comment-language policy for new comments and docstrings.
+Do not translate unrelated existing comments. Explain purpose, material
+contracts, reasons and limitations locally and truthfully for a new reader.
+Add what the signature does not convey; avoid syntax repetition,
+unverified guarantees and architecture essays.
 
-A completion report must not merely say:
+For comment scope, automatic purpose explanations, language-specific forms
+and framework-visible effects, apply $production-engineering-standard and
+its references/code-quality.md. Keep those implementation rules there.
+Put long reasoning in relevant existing documentation with a precise link.
 
-- "обновлено";
-- "реализовано";
-- "проверено";
-- "всё работает";
-- "логика теперь такая".
+## Required references
 
-State:
+Read applicable guidance before drafting; these are retained requirements,
+not optional suggestions.
 
-- what exact behavior changed;
-- what did not change;
-- which components were involved;
-- which source/storage/cache paths are used;
-- which checks were actually run;
-- what those checks prove;
-- what they do not prove;
-- whether deployment occurred;
-- whether runtime behavior was observed;
-- whether owner acceptance occurred;
-- what remains uncertain.
+- For a technical relationship or end-to-end business-process explanation,
+  read the relevant sections of
+  [Technical explanations](references/technical-explanations.md).
+- For a substantial standalone document or Space page, also read that
+  reference's documentation checklist.
+- For substantial architecture, business-logic, Space or completion
+  documentation, read
+  [Owner writing style](references/owner-writing-style.md) and
+  [Anti-patterns](references/anti-patterns.md).
 
-## 11. No false compression
+Reuse guidance already read while it remains current. Examples illustrate
+the rules; they do not authorize product changes or prescribe unrelated work.
 
-Do not compress a detailed technical relationship into a short phrase when the
-compression creates a new question about source, ownership, storage, cache,
-timing, fallback or meaning.
+## Final self-check
 
-Conciseness is allowed only after the complete meaning remains recoverable.
+Before sending, confirm that the answer:
+- addresses the actual question and preserves every material qualifier;
+- identifies the actors, values, sources, storage and consumers;
+- explains timing, conditions, precedence, failures and reasons;
+- distinguishes business/UI names from technical identities;
+- separates requirements, implementation, evidence, inference and proposals;
+- states actual verification and its limits.
 
-Prefer one complete paragraph over five short but semantically incomplete
-statements.
-
-## 12. Final self-check
-
-Before sending an owner-facing result, silently ask:
-
-- Did I answer the exact question?
-- Can every important noun be mapped to a real component or identifier?
-- Did I name who writes and who reads each important value?
-- Did I distinguish database, cache, UI labels and external sources?
-- Did I explain timing and conditions?
-- Did I explain missing, stale and failure behavior?
-- Did I explain why the relationship exists?
-- Did I preserve the owner's qualifiers?
-- Did I distinguish fact, implementation, requirement, inference and proposal?
-- Did I state what was and was not verified?
-- Would the owner need to ask "из какой таблицы?", "кто это записывает?",
-  "почему не из кеша?" or "что именно имеется в виду?"
-
-If the last answer is yes, the explanation is not complete.
+If a material "who?", "from where?", "when?", "why?" or "what happens on
+failure?" remains unanswered, complete the explanation before sending.

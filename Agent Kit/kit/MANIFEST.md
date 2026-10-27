@@ -16,6 +16,10 @@ Source package: `4.4.0`.
 - `PRODUCT_CODE_CHANGE_POLICY.template.yaml`
 - `CODE_CHANGE_CONTRACT.template.yaml`
 - `PRODUCT_CODE_QUALITY_HOOK_GUIDE.md`
+- `SKILL_LIBRARY.md`
+- `SKILL_TRANSFER_REVIEW.md`
+- `skills/library.json`
+- `tools/check_skill_library.py`
 - `skills/production-engineering-standard/`
 - `skills/complete-technical-communication/`
 - `tools/validate_code_change_contract.py`
@@ -42,3 +46,11 @@ owner instruction, current source or the adopting project's authority order.
 
 The package version is not proven by this manifest alone. Verify the main commit separately. Claim a tagged release only after verifying
 its matching tag and GitHub Release; source publication alone does not establish either.
+
+## Optional skill source update, 2026-10-27
+
+`skills/library.json` inventories the twelve reusable directories, exact payload
+hashes, conditional dependencies and three Cursor mirrors. The separate
+`skill-profiles/option-profit/` contains the two project-specific orchestration
+variants and local toolchain reference. These are owner-selected source assets,
+not automatically activated configuration. The core installer is unchanged.

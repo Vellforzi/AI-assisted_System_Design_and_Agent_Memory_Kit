@@ -1,0 +1,7 @@
+interface:
+  display_name: "Выбор модели и effort: Sol или Astra"
+  short_description: "Модель и effort; пауза при рекомендации смены режима"
+  default_prompt: "Используй $select-effort: порекомендуй модель и effort, отдельно укажи пару для реализации плана, а при необходимости смены режима объясни причину и приостановись до моего решения."
+
+policy:
+  allow_implicit_invocation: true
