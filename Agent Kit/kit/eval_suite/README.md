@@ -1,6 +1,6 @@
 # Agent Memory Kit evaluation suite
 
-Package source version: **4.4.0**. The active suite is `AMK-PORTABLE-CORE`,
+Package source version: **4.5.0**. The active suite is `AMK-PORTABLE-CORE`,
 selected by [manifest.yaml](manifest.yaml). Its five active cases are:
 
 | Case | Behavior |

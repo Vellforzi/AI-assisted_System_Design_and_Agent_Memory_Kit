@@ -1,6 +1,6 @@
 # Agent Memory Kit reference library
 
-Source version: **4.4.0**. Source date: 2026-10-20.
+Source version: **4.5.0**. Source date: 2026-10-27.
 Start with [the small portable core](../portable/core/WORKFLOW.md).
 This directory holds optional packs, templates and historical reference material.
 
@@ -22,7 +22,7 @@ Read the [human/model capability contract](HUMAN_MODEL_CAPABILITY_CONTRACT.md).
 | Add local records and search | [Optional memory module](../memory/README.md) |
 | Adapt a client integration | [Cursor](cursor/README.md), [Codex](codex/README.md) |
 | Evaluate agent behavior | [Active evaluation suite](eval_suite/README.md) |
-| Review the package contents and history | [Manifest](MANIFEST.md), [4.4.0 changes](CHANGELOG_v4.4.0.md) |
+| Review the package contents and history | [Manifest](MANIFEST.md), [4.5.0 changes](CHANGELOG_v4.5.0.md) |
 
 ## Engineering and communication standards
 

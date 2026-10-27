@@ -1,6 +1,6 @@
 # Agent Memory Kit
 
-Source version: **4.4.0**. [Change notes](kit/CHANGELOG_v4.4.0.md).
+Source version: **4.5.0**. [Change notes](kit/CHANGELOG_v4.5.0.md).
 
 This is the agent workflow and project-memory layer of the repository. It helps
 an owner keep concise decisions, recover ongoing work and require evidence for

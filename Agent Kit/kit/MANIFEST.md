@@ -1,6 +1,6 @@
 # Agent Kit reference manifest
 
-Source package: `4.4.0`.
+Source package: `4.5.0`.
 
 ## Active portable/current guidance
 
@@ -23,7 +23,7 @@ Source package: `4.4.0`.
 - `skills/production-engineering-standard/`
 - `skills/complete-technical-communication/`
 - `tools/validate_code_change_contract.py`
-- `CHANGELOG_v4.4.0.md`
+- `CHANGELOG_v4.5.0.md`
 - `skills/production-engineering-standard/references/code-quality.md`
 - `skills/production-engineering-standard/references/diagnosis-and-properties.md`
 

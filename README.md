@@ -1,6 +1,6 @@
 # AI-assisted System Design and Agent Memory Kit
 
-Source version: **4.4.0**. See [what changed](Agent%20Kit/kit/CHANGELOG_v4.4.0.md).
+Source version: **4.5.0**. See [what changed](Agent%20Kit/kit/CHANGELOG_v4.5.0.md).
 Source publication, a version tag and a GitHub Release are separate states.
 
 Agent Memory Kit gives developers and project owners an inspectable, portable
@@ -40,6 +40,15 @@ See [installation and updates](Agent%20Kit/portable/README.md).
 
 The core installer installs only its declared files. Optional skills, hooks and
 memory are adopted separately; downloading the repository does not activate them.
+
+## Compact skills in 4.5.0
+
+The [optional skill library](Agent%20Kit/kit/SKILL_LIBRARY.md) now includes twelve
+reusable skills and separate Codex/Cursor OPTION_PROFIT orchestration profiles.
+Compact entrypoints retain their required references, templates, helpers and
+invocation metadata. A payload manifest and executable checks cover dependencies,
+mirrors and helper regressions. Project profiles are explicitly separated from
+portable defaults; the five-file core installer remains unchanged.
 
 ## Code quality in 4.4.0
 
